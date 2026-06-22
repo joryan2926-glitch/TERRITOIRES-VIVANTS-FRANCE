@@ -24,6 +24,11 @@ Cette architecture prépare les phases 3 à 7 de la plateforme collaborative. El
 - `projet_documents` : documents rattachés aux projets.
 - `contributions` : table tampon pour formulaires transversaux à modérer.
 - `biens_candidats` : biens proposés au programme Bien Solidaire à Usage Partagé, avec confidentialité et validation.
+- `projets_financement` : projets proposés au fonds, budgets prévisionnels et états d'avancement.
+- `investisseurs` : citoyens, entreprises, fondations ou investisseurs à impact intéressés.
+- `mecenes` : mécènes financiers, matériels, immobiliers ou de compétences.
+- `contributions` : contributions affectées aux projets ou au fonds.
+- `impact_projets` : indicateurs d'impact vérifiés par projet financé.
 - `documents` : PDF, études, guides et fiches techniques envoyés via Storage.
 - `actualites` : contenus publiables après validation.
 

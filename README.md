@@ -63,6 +63,11 @@ Site vitrine de TERRITOIRES VIVANTS FRANCE, association nationale en création p
   - Carte des biens candidats
   - Projets réalisés Bien Solidaire
   - Devenir propriétaire partenaire
+  - Fonds Territoires Vivants Investissement Solidaire
+  - Devenir investisseur solidaire
+  - Devenir mécène
+  - Projets à financer
+  - Impact investisseurs
 - Nos 5 pôles
   - Habitat Vivant
   - Matériauthèque Solidaire
@@ -136,6 +141,17 @@ Dispositif stratégique ajouté au site :
 - parcours "Devenir propriétaire partenaire".
 
 Le programme est intégré dans Nos Actions, Habitat Vivant, Plateforme Opérationnelle, Espace Collectivités et Espace Entreprises.
+
+## Fonds Territoires Vivants Investissement Solidaire
+
+Programme national préparé pour mobiliser citoyens, entreprises, fondations, mécènes et investisseurs à impact :
+
+- page de présentation du fonds ;
+- parcours investisseur solidaire ;
+- parcours mécène et entreprise ;
+- espace projets à financer sans projet fictif ;
+- mesure d'impact investisseurs sans chiffres fictifs ;
+- tables préparatoires `projets_financement`, `investisseurs`, `mecenes`, `contributions` et `impact_projets`.
 
 Variables Vercel nécessaires :
 

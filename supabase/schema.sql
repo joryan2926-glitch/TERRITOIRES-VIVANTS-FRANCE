@@ -268,8 +268,72 @@ create table if not exists contributions (
   type_contribution text not null,
   user_id uuid references users(id),
   territoire_id uuid references territoires(id),
+  projet_financement_id uuid,
+  contributeur_nom text,
+  contributeur_type text,
+  montant_previsionnel numeric,
+  nature_contribution text,
   payload jsonb default '{}'::jsonb,
   statut_validation text default 'a_moderer',
+  created_at timestamptz default now(),
+  updated_at timestamptz default now()
+);
+
+create table if not exists projets_financement (
+  id uuid primary key default gen_random_uuid(),
+  territoire_id uuid references territoires(id),
+  projet_id uuid references projets(id),
+  titre text not null,
+  localisation text,
+  description text,
+  type_projet text,
+  budget_previsionnel numeric,
+  etat_avancement text default 'idee',
+  photos jsonb default '[]'::jsonb,
+  partenaires_valides jsonb default '[]'::jsonb,
+  statut_publication text default 'brouillon',
+  statut_validation text default 'a_moderer',
+  created_by uuid,
+  created_at timestamptz default now(),
+  updated_at timestamptz default now()
+);
+
+create table if not exists investisseurs (
+  id uuid primary key default gen_random_uuid(),
+  nom text,
+  categorie text,
+  organisation text,
+  territoire_interet text,
+  contact text,
+  motivation text,
+  statut text default 'a_contacter',
+  created_by uuid,
+  created_at timestamptz default now(),
+  updated_at timestamptz default now()
+);
+
+create table if not exists mecenes (
+  id uuid primary key default gen_random_uuid(),
+  nom_structure text,
+  type_mecenat text,
+  contribution_envisagee text,
+  territoire_interet text,
+  contact text,
+  statut text default 'a_contacter',
+  created_by uuid,
+  created_at timestamptz default now(),
+  updated_at timestamptz default now()
+);
+
+create table if not exists impact_projets (
+  id uuid primary key default gen_random_uuid(),
+  projet_financement_id uuid references projets_financement(id) on delete cascade,
+  indicateur text not null,
+  valeur text,
+  unite text,
+  source text,
+  statut_validation text default 'a_verifier',
+  date_mesure date,
   created_at timestamptz default now(),
   updated_at timestamptz default now()
 );
@@ -340,6 +404,9 @@ create index if not exists materiaux_type_idx on materiaux(type);
 create index if not exists materiaux_categorie_idx on materiaux(categorie);
 create index if not exists signalements_type_idx on signalements(type_signalement);
 create index if not exists projets_statut_idx on projets(statut);
+create index if not exists projets_financement_statut_idx on projets_financement(statut_validation, statut_publication);
+create index if not exists contributions_projet_financement_idx on contributions(projet_financement_id);
+create index if not exists impact_projets_projet_idx on impact_projets(projet_financement_id);
 create index if not exists biens_candidats_commune_idx on biens_candidats(commune);
 create index if not exists biens_candidats_type_idx on biens_candidats(type_bien);
 create index if not exists documents_type_idx on documents(type_document);
@@ -352,6 +419,11 @@ alter table projets enable row level security;
 alter table territoires enable row level security;
 alter table antennes enable row level security;
 alter table partenaires enable row level security;
+alter table projets_financement enable row level security;
+alter table investisseurs enable row level security;
+alter table mecenes enable row level security;
+alter table impact_projets enable row level security;
+alter table contributions enable row level security;
 alter table biens_candidats enable row level security;
 alter table documents enable row level security;
 alter table actualites enable row level security;
@@ -387,6 +459,21 @@ drop policy if exists "public_partenaires_valides" on partenaires;
 create policy "public_partenaires_valides" on partenaires for select using (statut = 'valide');
 drop policy if exists "authenticated_partenaires_insert" on partenaires;
 create policy "authenticated_partenaires_insert" on partenaires for insert to authenticated with check (true);
+
+drop policy if exists "public_projets_financement_valides" on projets_financement;
+create policy "public_projets_financement_valides" on projets_financement for select using (statut_validation = 'valide' and statut_publication = 'publie');
+drop policy if exists "authenticated_projets_financement_insert" on projets_financement;
+create policy "authenticated_projets_financement_insert" on projets_financement for insert to authenticated with check (true);
+
+drop policy if exists "authenticated_investisseurs_insert" on investisseurs;
+create policy "authenticated_investisseurs_insert" on investisseurs for insert to authenticated with check (true);
+drop policy if exists "authenticated_mecenes_insert" on mecenes;
+create policy "authenticated_mecenes_insert" on mecenes for insert to authenticated with check (true);
+drop policy if exists "authenticated_contributions_insert" on contributions;
+create policy "authenticated_contributions_insert" on contributions for insert to authenticated with check (true);
+
+drop policy if exists "public_impact_projets_valides" on impact_projets;
+create policy "public_impact_projets_valides" on impact_projets for select using (statut_validation = 'valide');
 
 drop policy if exists "public_biens_candidats_valides" on biens_candidats;
 create policy "public_biens_candidats_valides" on biens_candidats for select using (statut_validation = 'valide' and confidentialite = 'public');
