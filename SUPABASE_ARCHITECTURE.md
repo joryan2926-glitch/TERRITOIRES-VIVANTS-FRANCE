@@ -23,6 +23,7 @@ Cette architecture prépare les phases 3 à 7 de la plateforme collaborative. El
 - `projet_etapes` : pipeline idée, étude, mobilisation, financement, réalisation, terminé.
 - `projet_documents` : documents rattachés aux projets.
 - `contributions` : table tampon pour formulaires transversaux à modérer.
+- `biens_candidats` : biens proposés au programme Bien Solidaire à Usage Partagé, avec confidentialité et validation.
 - `documents` : PDF, études, guides et fiches techniques envoyés via Storage.
 - `actualites` : contenus publiables après validation.
 

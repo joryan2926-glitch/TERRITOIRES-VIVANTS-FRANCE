@@ -58,6 +58,11 @@ Site vitrine de TERRITOIRES VIVANTS FRANCE, association nationale en création p
   - Admin bêta
   - Centre documentaire bêta
   - API publique
+  - Bien Solidaire à Usage Partagé
+  - Proposer un bien
+  - Carte des biens candidats
+  - Projets réalisés Bien Solidaire
+  - Devenir propriétaire partenaire
 - Nos 5 pôles
   - Habitat Vivant
   - Matériauthèque Solidaire
@@ -118,6 +123,19 @@ La phase 7 active une bêta connectable à Supabase :
 - tableau de bord administrateur pour validation ;
 - espaces collectivités, entreprises et centre documentaire ;
 - statistiques automatiques via la vue `dashboard_national`.
+
+## Programme Bien Solidaire à Usage Partagé
+
+Dispositif stratégique ajouté au site :
+
+- page programme dédiée ;
+- FAQ dédiée ;
+- formulaire "Proposer un bien" ;
+- carte préparatoire des biens candidats ;
+- page "Projets réalisés" sans projet fictif ;
+- parcours "Devenir propriétaire partenaire".
+
+Le programme est intégré dans Nos Actions, Habitat Vivant, Plateforme Opérationnelle, Espace Collectivités et Espace Entreprises.
 
 Variables Vercel nécessaires :
 

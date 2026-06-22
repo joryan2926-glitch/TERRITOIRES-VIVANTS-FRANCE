@@ -274,6 +274,28 @@ create table if not exists contributions (
   updated_at timestamptz default now()
 );
 
+create table if not exists biens_candidats (
+  id uuid primary key default gen_random_uuid(),
+  territoire_id uuid references territoires(id),
+  type_bien text not null,
+  commune text,
+  adresse_ou_secteur text,
+  etat_general text,
+  surface_approximative text,
+  situation_proprietaire text,
+  usage_souhaite text,
+  formule_envisagee text,
+  duree_envisagee text,
+  contact_proprietaire text,
+  latitude numeric,
+  longitude numeric,
+  statut_validation text default 'a_moderer',
+  confidentialite text default 'prive',
+  created_by uuid,
+  created_at timestamptz default now(),
+  updated_at timestamptz default now()
+);
+
 create table if not exists documents (
   id uuid primary key default gen_random_uuid(),
   titre text not null,
@@ -318,6 +340,8 @@ create index if not exists materiaux_type_idx on materiaux(type);
 create index if not exists materiaux_categorie_idx on materiaux(categorie);
 create index if not exists signalements_type_idx on signalements(type_signalement);
 create index if not exists projets_statut_idx on projets(statut);
+create index if not exists biens_candidats_commune_idx on biens_candidats(commune);
+create index if not exists biens_candidats_type_idx on biens_candidats(type_bien);
 create index if not exists documents_type_idx on documents(type_document);
 create index if not exists actualites_slug_idx on actualites(slug);
 
@@ -328,6 +352,7 @@ alter table projets enable row level security;
 alter table territoires enable row level security;
 alter table antennes enable row level security;
 alter table partenaires enable row level security;
+alter table biens_candidats enable row level security;
 alter table documents enable row level security;
 alter table actualites enable row level security;
 
@@ -362,6 +387,11 @@ drop policy if exists "public_partenaires_valides" on partenaires;
 create policy "public_partenaires_valides" on partenaires for select using (statut = 'valide');
 drop policy if exists "authenticated_partenaires_insert" on partenaires;
 create policy "authenticated_partenaires_insert" on partenaires for insert to authenticated with check (true);
+
+drop policy if exists "public_biens_candidats_valides" on biens_candidats;
+create policy "public_biens_candidats_valides" on biens_candidats for select using (statut_validation = 'valide' and confidentialite = 'public');
+drop policy if exists "authenticated_biens_candidats_insert" on biens_candidats;
+create policy "authenticated_biens_candidats_insert" on biens_candidats for insert to authenticated with check (true);
 
 drop policy if exists "public_documents_valides" on documents;
 create policy "public_documents_valides" on documents for select using (statut_validation = 'valide');
