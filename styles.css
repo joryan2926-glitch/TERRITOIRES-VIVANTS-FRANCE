@@ -1174,6 +1174,184 @@ svg {
   font-weight: 700;
 }
 
+.strategy-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin: 20px 0 34px;
+}
+
+.strategy-card {
+  display: grid;
+  gap: 12px;
+  min-height: 190px;
+  padding: 22px;
+  background: #fff;
+  border: 1px solid rgba(8, 36, 61, 0.1);
+  border-radius: 8px;
+  box-shadow: 0 12px 26px rgba(8, 36, 61, 0.07);
+}
+
+.strategy-card h2,
+.strategy-card h3 {
+  margin: 0;
+  color: var(--green);
+  font-size: 20px;
+  text-transform: uppercase;
+}
+
+.strategy-card p {
+  margin: 0;
+  font-weight: 650;
+}
+
+.strategy-card .button {
+  align-self: end;
+  justify-self: start;
+}
+
+.map-panel {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 22px;
+  align-items: stretch;
+  margin: 22px 0 34px;
+}
+
+.map-placeholder {
+  position: relative;
+  min-height: 330px;
+  overflow: hidden;
+  background:
+    linear-gradient(135deg, rgba(237, 243, 246, 0.96), rgba(244, 241, 233, 0.92)),
+    radial-gradient(circle at 28% 30%, rgba(63, 113, 21, 0.24) 0 3px, transparent 4px),
+    radial-gradient(circle at 58% 42%, rgba(22, 113, 124, 0.24) 0 3px, transparent 4px),
+    radial-gradient(circle at 72% 68%, rgba(239, 157, 16, 0.24) 0 3px, transparent 4px);
+  border: 1px dashed rgba(8, 36, 61, 0.26);
+  border-radius: 8px;
+}
+
+.map-placeholder::before {
+  position: absolute;
+  inset: 34px;
+  content: "";
+  background:
+    linear-gradient(rgba(8, 36, 61, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(8, 36, 61, 0.08) 1px, transparent 1px);
+  background-size: 34px 34px;
+  border-radius: 8px;
+}
+
+.map-placeholder div {
+  position: absolute;
+  right: 24px;
+  bottom: 24px;
+  left: 24px;
+  padding: 18px;
+  color: #fff;
+  background: rgba(8, 36, 61, 0.92);
+  border-radius: 8px;
+}
+
+.map-placeholder strong {
+  display: block;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+}
+
+.indicator-table {
+  display: grid;
+  gap: 10px;
+  margin: 18px 0 34px;
+}
+
+.indicator-row {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1.6fr;
+  gap: 12px;
+  align-items: center;
+  padding: 14px 16px;
+  background: #fff;
+  border: 1px solid rgba(8, 36, 61, 0.1);
+  border-left: 5px solid var(--green);
+  border-radius: 0 8px 8px 0;
+  font-weight: 700;
+}
+
+.indicator-row span:first-child {
+  color: var(--green);
+  text-transform: uppercase;
+}
+
+.timeline {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin: 18px 0 34px;
+}
+
+.timeline-item {
+  padding: 20px;
+  background: var(--sand);
+  border-top: 5px solid var(--green);
+  border-radius: 0 0 8px 8px;
+}
+
+.timeline-item strong {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--green);
+  text-transform: uppercase;
+}
+
+.timeline-item p {
+  margin: 0;
+  font-weight: 650;
+}
+
+.form-stack {
+  display: grid;
+  gap: 18px;
+}
+
+.form-card {
+  padding: 20px;
+  background: #fff;
+  border: 1px solid rgba(8, 36, 61, 0.1);
+  border-radius: 8px;
+}
+
+.form-card h3 {
+  margin: 0 0 12px;
+  color: var(--green);
+  text-transform: uppercase;
+}
+
+.strategic-nav {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin: 22px 0 34px;
+}
+
+.strategic-nav a {
+  display: flex;
+  align-items: center;
+  min-height: 58px;
+  padding: 12px 14px;
+  color: var(--ink);
+  background: #fff;
+  border: 1px solid rgba(8, 36, 61, 0.12);
+  border-radius: 8px;
+  font-weight: 800;
+}
+
+.strategic-nav a:hover,
+.strategic-nav a:focus {
+  color: var(--green);
+  border-color: rgba(63, 113, 21, 0.36);
+}
+
 .document-block {
   display: grid;
   gap: 18px;
@@ -1410,6 +1588,9 @@ svg {
   .submenu-grid,
   .poles-links,
   .metrics-grid,
+  .strategy-grid,
+  .strategic-nav,
+  .timeline,
   .gallery-grid,
   .act-grid,
   .site-footer {
@@ -1418,8 +1599,13 @@ svg {
 
   .page-hero,
   .two-column,
+  .map-panel,
   .donation-band,
   .contact-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .indicator-row {
     grid-template-columns: 1fr;
   }
 
@@ -1562,6 +1748,9 @@ svg {
   .submenu-grid,
   .poles-links,
   .metrics-grid,
+  .strategy-grid,
+  .strategic-nav,
+  .timeline,
   .gallery-grid,
   .before-after-grid,
   .field-row,
@@ -1571,6 +1760,18 @@ svg {
   .priorities,
   .ambition,
   .identity-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .map-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .map-placeholder {
+    min-height: 260px;
+  }
+
+  .indicator-row {
     grid-template-columns: 1fr;
   }
 

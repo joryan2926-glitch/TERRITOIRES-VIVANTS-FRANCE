@@ -13,14 +13,25 @@ Site vitrine de TERRITOIRES VIVANTS FRANCE, association nationale en création p
   - Espaces abandonnés
   - Solidarité & Insertion
   - Antennes locales
+  - Observatoire du patrimoine vacant
+  - Banque de matériaux
+  - Nos projets pilotes
+  - Impact & résultats
 - Nos 5 pôles
   - Habitat Vivant
   - Matériauthèque Solidaire
   - Solidarité & Insertion
   - Friches & Terrains Vivants
   - Observatoire du patrimoine vacant
+- Agir avec nous
+  - Devenir bénévole
+  - Devenir adhérent
+  - Faire un don
+  - Devenir partenaire
+  - Créer une antenne locale
+  - Espace collectivités
+  - Espace entreprises
 - Nos statuts
-- Faire un don
 - Contact
 - Mentions légales
 
