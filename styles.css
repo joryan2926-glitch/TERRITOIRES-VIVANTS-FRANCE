@@ -90,7 +90,8 @@ svg {
   white-space: nowrap;
 }
 
-.main-nav a::after {
+.main-nav a::after,
+.nav-drop-toggle::after {
   position: absolute;
   right: 0;
   bottom: 17px;
@@ -101,13 +102,81 @@ svg {
   border-radius: 2px;
 }
 
-.main-nav a.active {
+.main-nav a.active,
+.nav-dropdown.active .nav-drop-toggle {
   color: var(--green);
 }
 
 .main-nav a.active::after,
-.main-nav a:hover::after {
+.main-nav a:hover::after,
+.nav-dropdown.active .nav-drop-toggle::after,
+.nav-dropdown:hover .nav-drop-toggle::after,
+.nav-dropdown:focus-within .nav-drop-toggle::after {
   background: var(--green);
+}
+
+.nav-dropdown {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.nav-drop-toggle {
+  position: relative;
+}
+
+.nav-drop-toggle::before {
+  position: absolute;
+  right: -14px;
+  top: 50%;
+  content: "⌄";
+  transform: translateY(-52%);
+  color: var(--green);
+  font-size: 13px;
+}
+
+.nav-dropdown-menu {
+  position: absolute;
+  top: calc(100% - 9px);
+  left: 50%;
+  z-index: 30;
+  display: grid;
+  min-width: 300px;
+  padding: 10px;
+  visibility: hidden;
+  opacity: 0;
+  background: rgba(255, 253, 248, 0.98);
+  border: 1px solid rgba(8, 36, 61, 0.12);
+  border-radius: 8px;
+  box-shadow: 0 18px 36px rgba(8, 36, 61, 0.16);
+  transform: translate(-50%, 8px);
+  transition: opacity 160ms ease, transform 160ms ease, visibility 160ms ease;
+}
+
+.nav-dropdown:hover .nav-dropdown-menu,
+.nav-dropdown:focus-within .nav-dropdown-menu {
+  visibility: visible;
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.nav-dropdown-menu a {
+  padding: 11px 12px;
+  border-radius: 6px;
+  color: var(--ink);
+  line-height: 1.15;
+  text-transform: none;
+  white-space: normal;
+}
+
+.nav-dropdown-menu a::after {
+  display: none;
+}
+
+.nav-dropdown-menu a:hover,
+.nav-dropdown-menu a:focus {
+  color: var(--green);
+  background: rgba(63, 113, 21, 0.08);
 }
 
 .donate-button,
@@ -763,6 +832,155 @@ svg {
   font-weight: 650;
 }
 
+.info-card .button {
+  margin-top: 18px;
+}
+
+.pole-hub-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 16px;
+  margin: 20px 0 34px;
+}
+
+.pole-hub-card {
+  display: grid;
+  grid-template-rows: 170px auto;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid rgba(8, 36, 61, 0.08);
+  border-radius: 8px;
+  box-shadow: 0 12px 28px rgba(8, 36, 61, 0.08);
+}
+
+.pole-hub-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.pole-hub-card div {
+  display: grid;
+  align-content: start;
+  padding: 20px;
+}
+
+.pole-hub-card h2 {
+  margin: 0 0 10px;
+  color: var(--green);
+  font-size: 19px;
+  line-height: 1.08;
+  text-transform: uppercase;
+}
+
+.pole-hub-card p {
+  margin: 0;
+  font-weight: 650;
+}
+
+.pole-hub-card .button {
+  align-self: end;
+  margin-top: 18px;
+}
+
+.submenu-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin: 20px 0 34px;
+}
+
+.submenu-card {
+  min-height: 145px;
+  padding: 22px;
+  background: #fff;
+  border: 1px solid rgba(63, 113, 21, 0.16);
+  border-radius: 8px;
+  box-shadow: 0 10px 24px rgba(8, 36, 61, 0.07);
+}
+
+.submenu-card h2,
+.submenu-card h3 {
+  margin: 0 0 10px;
+  color: var(--green);
+  font-size: 19px;
+  line-height: 1.12;
+  text-transform: uppercase;
+}
+
+.submenu-card p {
+  margin: 0;
+  font-weight: 650;
+}
+
+.materials-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 18px 0 0;
+}
+
+.material-tag {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  padding: 0 14px;
+  color: var(--green);
+  background: rgba(63, 113, 21, 0.09);
+  border: 1px solid rgba(63, 113, 21, 0.18);
+  border-radius: 999px;
+  font-weight: 800;
+}
+
+.poles-links {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.poles-links a {
+  display: flex;
+  align-items: center;
+  min-height: 58px;
+  padding: 12px;
+  color: var(--ink);
+  background: #fff;
+  border: 1px solid rgba(8, 36, 61, 0.12);
+  border-radius: 8px;
+  font-weight: 800;
+}
+
+.poles-links a:hover,
+.poles-links a:focus {
+  color: var(--green);
+  border-color: rgba(63, 113, 21, 0.36);
+}
+
+.working-together {
+  margin: 34px 0;
+  padding: clamp(24px, 4vw, 42px);
+  color: #fff;
+  background:
+    linear-gradient(135deg, rgba(6, 36, 59, 0.94), rgba(6, 60, 85, 0.9)),
+    url("assets/photos/neighborhood-renovation.jpg") center / cover;
+  border-radius: 8px;
+}
+
+.working-together h2 {
+  margin: 0 0 14px;
+  color: #fff;
+  font-size: clamp(24px, 3vw, 38px);
+  text-transform: uppercase;
+}
+
+.working-together p {
+  max-width: 1080px;
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+}
+
 .steps-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -1020,8 +1238,11 @@ svg {
 
   .poles-strip,
   .dashboard,
+  .pole-hub-grid,
   .cards-grid,
   .steps-grid,
+  .submenu-grid,
+  .poles-links,
   .act-grid,
   .site-footer {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1091,6 +1312,16 @@ svg {
     bottom: 3px;
   }
 
+  .nav-drop-toggle::before {
+    right: -11px;
+  }
+
+  .nav-dropdown-menu {
+    top: calc(100% + 2px);
+    left: 50%;
+    min-width: min(330px, 88vw);
+  }
+
   .donate-button {
     grid-column: auto;
     justify-self: stretch;
@@ -1149,8 +1380,11 @@ svg {
   }
 
   .dashboard,
+  .pole-hub-grid,
   .cards-grid,
   .steps-grid,
+  .submenu-grid,
+  .poles-links,
   .field-row,
   .act-grid,
   .site-footer,

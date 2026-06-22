@@ -8,6 +8,11 @@ Site vitrine de TERRITOIRES VIVANTS FRANCE, association nationale en création p
 - Qui sommes-nous ?
 - Nos actions
 - Nos 5 pôles
+  - Habitat Vivant
+  - Matériauthèque Solidaire
+  - Solidarité & Insertion
+  - Friches & Terrains Vivants
+  - Observatoire du patrimoine vacant
 - Nos statuts
 - Faire un don
 - Contact
