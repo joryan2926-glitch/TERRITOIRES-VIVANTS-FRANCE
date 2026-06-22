@@ -283,6 +283,72 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://territoiresvivantsfrance.fr/plateforme-operationnelle.html</loc>
+    <lastmod>2026-06-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://territoiresvivantsfrance.fr/carte-interactive-nationale.html</loc>
+    <lastmod>2026-06-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://territoiresvivantsfrance.fr/banque-materiaux-collaborative.html</loc>
+    <lastmod>2026-06-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://territoiresvivantsfrance.fr/tableau-bord-national.html</loc>
+    <lastmod>2026-06-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://territoiresvivantsfrance.fr/comptes-utilisateurs.html</loc>
+    <lastmod>2026-06-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://territoiresvivantsfrance.fr/formulaires-supabase.html</loc>
+    <lastmod>2026-06-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://territoiresvivantsfrance.fr/espace-projet.html</loc>
+    <lastmod>2026-06-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://territoiresvivantsfrance.fr/observatoire-temps-reel.html</loc>
+    <lastmod>2026-06-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://territoiresvivantsfrance.fr/tvf-mobile.html</loc>
+    <lastmod>2026-06-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://territoiresvivantsfrance.fr/feuille-route-2026-2035.html</loc>
+    <lastmod>2026-06-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://territoiresvivantsfrance.fr/architecture-multi-territoires.html</loc>
+    <lastmod>2026-06-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://territoiresvivantsfrance.fr/nos-poles.html</loc>
     <lastmod>2026-06-22</lastmod>
     <changefreq>monthly</changefreq>

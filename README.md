@@ -40,6 +40,17 @@ Site vitrine de TERRITOIRES VIVANTS FRANCE, association nationale en création p
   - Association nationale
   - Partenariats stratégiques
   - Transparence
+  - Plateforme opérationnelle
+  - Carte interactive nationale
+  - Banque de matériaux collaborative
+  - Tableau de bord national
+  - Comptes utilisateurs
+  - Formulaires Supabase
+  - Espace projet
+  - Observatoire temps réel
+  - TVF Mobile
+  - Feuille de route 2026-2035
+  - Architecture multi-territoires
 - Nos 5 pôles
   - Habitat Vivant
   - Matériauthèque Solidaire
@@ -73,6 +84,20 @@ La phase 5 crédibilise la dimension nationale :
 - pages dédiées aux partenariats stratégiques : collectivités, entreprises, associations, écoles, universités, bailleurs et fondations ;
 - mesure d'impact avec indicateurs prêts à renseigner, sans chiffres fictifs ;
 - gouvernance, transparence et organisation nationale en structuration.
+
+## Phase 6
+
+La phase 6 prépare le passage du site vitrine à une plateforme opérationnelle :
+
+- hub `plateforme-operationnelle.html` pour centraliser les outils ;
+- carte interactive nationale avec signalement préparé pour Supabase ;
+- banque de matériaux collaborative avec filtres et modèle de fiche ;
+- tableau de bord national sans chiffres fictifs ;
+- comptes utilisateurs et rôles : citoyen, bénévole, entreprise, collectivité, administrateur ;
+- formulaires prêts à connecter : matériaux, lieu vacant, bénévole, partenaire, antenne locale ;
+- espace projet avec pipeline idée, étude, mobilisation, financement, réalisation, terminé ;
+- observatoire temps réel, TVF Mobile, feuille de route 2026-2035 et architecture multi-territoires ;
+- schéma `supabase/schema.sql` enrichi pour les tables, photos, réservations, projets et vue dashboard.
 
 ## Phase 2
 
