@@ -17,6 +17,12 @@ Site vitrine de TERRITOIRES VIVANTS FRANCE, association nationale en création p
   - Banque de matériaux
   - Nos projets pilotes
   - Impact & résultats
+  - Carte des territoires
+  - Signalement citoyen
+  - Ressources
+  - FAQ générale
+  - Vision 2035
+  - Transparence
 - Nos 5 pôles
   - Habitat Vivant
   - Matériauthèque Solidaire
@@ -31,9 +37,19 @@ Site vitrine de TERRITOIRES VIVANTS FRANCE, association nationale en création p
   - Créer une antenne locale
   - Espace collectivités
   - Espace entreprises
+  - Espace bénévoles
+  - Espace adhérents
+  - Espace partenaires
+  - Recrutement
 - Nos statuts
 - Contact
 - Mentions légales
+
+## Phase 2
+
+La phase 2 prépare une plateforme nationale évolutive autour de la carte des territoires, du signalement citoyen, des espaces bénévoles/adhérents/partenaires, des ressources, de la transparence et de la vision 2035.
+
+Les pages restent statiques à ce stade. Les formulaires, cartes, documents et espaces membres sont préparés pour une future connexion à Supabase, sans stockage ni authentification active dans cette version.
 
 ## Déploiement
 
