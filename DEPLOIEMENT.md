@@ -31,6 +31,19 @@ Fichiers production déjà présents :
 - `assets/apple-touch-icon.png`
 - `assets/icon-512.png`
 
+Variables Vercel à configurer pour la bêta Supabase :
+
+- `SUPABASE_URL`
+- `SUPABASE_ANON_KEY`
+- `SUPABASE_SERVICE_ROLE_KEY`
+
+À créer dans Supabase avant ouverture bêta :
+
+- exécuter `supabase/schema.sql` après revue ;
+- vérifier les politiques RLS ;
+- vérifier les buckets Storage `signalements`, `materiaux` et `documents` ;
+- créer au moins un profil `administrateur` dans `user_profiles`.
+
 Contrôles réalisés :
 
 - pages desktop et mobile sans débordement horizontal ;

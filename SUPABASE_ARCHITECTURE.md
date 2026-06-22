@@ -1,6 +1,6 @@
 # Architecture Supabase - Territoires Vivants France
 
-Cette architecture prépare les phases 3 à 6 de la plateforme collaborative. Elle n'est pas connectée au site statique actuel et ne contient aucune donnée réelle.
+Cette architecture prépare les phases 3 à 7 de la plateforme collaborative. Elle n'est pas connectée à des données réelles tant que les variables Supabase ne sont pas configurées dans Vercel.
 
 ## Tables prévues
 
@@ -23,10 +23,20 @@ Cette architecture prépare les phases 3 à 6 de la plateforme collaborative. El
 - `projet_etapes` : pipeline idée, étude, mobilisation, financement, réalisation, terminé.
 - `projet_documents` : documents rattachés aux projets.
 - `contributions` : table tampon pour formulaires transversaux à modérer.
+- `documents` : PDF, études, guides et fiches techniques envoyés via Storage.
+- `actualites` : contenus publiables après validation.
 
 ## Vues prévues
 
 - `dashboard_national` : agrégation publique des lignes validées pour le tableau de bord.
+
+## Phase 7 bêta
+
+- Les pages bêta utilisent `beta-supabase.js` et les fonctions Vercel dans `api/`.
+- Les écritures applicatives passent par les endpoints serveur et nécessitent une session Supabase.
+- Les uploads utilisent les buckets Storage `signalements`, `materiaux` et `documents`.
+- Les routes publiques `/signalements`, `/materiaux`, `/projets` et `/territoires` sont réécrites vers les fonctions API par `vercel.json`.
+- L'administration nécessite un profil `user_profiles.role = 'administrateur'`.
 
 ## Principes
 

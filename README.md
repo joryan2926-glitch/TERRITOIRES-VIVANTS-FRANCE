@@ -51,6 +51,13 @@ Site vitrine de TERRITOIRES VIVANTS FRANCE, association nationale en création p
   - TVF Mobile
   - Feuille de route 2026-2035
   - Architecture multi-territoires
+  - Plateforme bêta
+  - Authentification
+  - Carte connectée
+  - Matériaux réels
+  - Admin bêta
+  - Centre documentaire bêta
+  - API publique
 - Nos 5 pôles
   - Habitat Vivant
   - Matériauthèque Solidaire
@@ -98,6 +105,25 @@ La phase 6 prépare le passage du site vitrine à une plateforme opérationnelle
 - espace projet avec pipeline idée, étude, mobilisation, financement, réalisation, terminé ;
 - observatoire temps réel, TVF Mobile, feuille de route 2026-2035 et architecture multi-territoires ;
 - schéma `supabase/schema.sql` enrichi pour les tables, photos, réservations, projets et vue dashboard.
+
+## Phase 7
+
+La phase 7 active une bêta connectable à Supabase :
+
+- authentification Supabase : inscription, connexion, mot de passe oublié et profil ;
+- rôles : citoyen, bénévole, entreprise, collectivité, administrateur ;
+- fonctions API Vercel pour `/signalements`, `/materiaux`, `/projets`, `/territoires` ;
+- carte connectée avec dépôt de signalements en base ;
+- banque de matériaux avec upload photo via Supabase Storage ;
+- tableau de bord administrateur pour validation ;
+- espaces collectivités, entreprises et centre documentaire ;
+- statistiques automatiques via la vue `dashboard_national`.
+
+Variables Vercel nécessaires :
+
+- `SUPABASE_URL`
+- `SUPABASE_ANON_KEY`
+- `SUPABASE_SERVICE_ROLE_KEY`
 
 ## Phase 2
 

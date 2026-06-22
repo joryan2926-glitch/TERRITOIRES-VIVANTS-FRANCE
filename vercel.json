@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    { "source": "/signalements", "destination": "/api/signalements" },
+    { "source": "/materiaux", "destination": "/api/materiaux" },
+    { "source": "/projets", "destination": "/api/projets" },
+    { "source": "/territoires", "destination": "/api/territoires" }
+  ]
+}

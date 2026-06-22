@@ -380,6 +380,58 @@ svg {
   font-weight: 800;
 }
 
+.form-status.error,
+.error {
+  color: #9f241e;
+}
+
+.beta-shell {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
+  gap: 20px;
+  align-items: start;
+}
+
+.beta-panel {
+  padding: 24px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: 0 10px 24px rgba(8, 36, 61, 0.08);
+}
+
+.beta-panel h2 {
+  margin-top: 0;
+}
+
+.beta-status {
+  margin: 0 0 18px;
+  padding: 14px 16px;
+  color: var(--ink-soft);
+  background: var(--mist);
+  border: 1px solid rgba(8, 36, 61, 0.1);
+  border-radius: 8px;
+}
+
+.admin-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.admin-row:last-child {
+  border-bottom: 0;
+}
+
+.beta-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
 .donate-button,
 .button {
   display: inline-flex;
@@ -2198,6 +2250,8 @@ svg {
   .operational-grid,
   .platform-grid-2,
   .platform-grid-3,
+  .beta-shell,
+  .beta-list,
   .database-layout,
   .record-grid,
   .dashboard-grid,

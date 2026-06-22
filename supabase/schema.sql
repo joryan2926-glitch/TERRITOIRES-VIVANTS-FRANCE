@@ -30,7 +30,7 @@ create table if not exists users (
 
 create table if not exists user_profiles (
   id uuid primary key default gen_random_uuid(),
-  auth_user_id uuid,
+  auth_user_id uuid unique,
   user_id uuid references users(id),
   role text default 'citoyen',
   structure text,
@@ -71,6 +71,7 @@ create table if not exists logements_vacants (
   description text,
   statut_validation text default 'a_verifier',
   source text,
+  created_by uuid,
   created_at timestamptz default now(),
   updated_at timestamptz default now()
 );
@@ -89,6 +90,7 @@ create table if not exists commerces_fermes (
   surface_estimee text,
   description text,
   statut_validation text default 'a_verifier',
+  created_by uuid,
   created_at timestamptz default now(),
   updated_at timestamptz default now()
 );
@@ -107,6 +109,7 @@ create table if not exists friches (
   potentiel_usage text,
   description text,
   statut_validation text default 'a_verifier',
+  created_by uuid,
   created_at timestamptz default now(),
   updated_at timestamptz default now()
 );
@@ -125,6 +128,7 @@ create table if not exists batiments_abandonnes (
   etat text,
   description text,
   statut_validation text default 'a_verifier',
+  created_by uuid,
   created_at timestamptz default now(),
   updated_at timestamptz default now()
 );
@@ -144,6 +148,7 @@ create table if not exists materiaux (
   disponibilite text default 'a_verifier',
   statut_validation text default 'a_verifier',
   contact_source text,
+  created_by uuid,
   created_at timestamptz default now(),
   updated_at timestamptz default now()
 );
@@ -178,6 +183,7 @@ create table if not exists signalements (
   photo_url text,
   contact_facultatif text,
   statut_validation text default 'a_moderer',
+  created_by uuid,
   created_at timestamptz default now(),
   updated_at timestamptz default now()
 );
@@ -190,6 +196,7 @@ create table if not exists partenaires (
   contact text,
   intention text,
   statut text default 'prospect',
+  created_by uuid,
   created_at timestamptz default now(),
   updated_at timestamptz default now()
 );
@@ -215,6 +222,7 @@ create table if not exists candidatures_antennes (
   motivations text,
   besoins text,
   statut text default 'recue',
+  created_by uuid,
   created_at timestamptz default now(),
   updated_at timestamptz default now()
 );
@@ -229,6 +237,8 @@ create table if not exists projets (
   description text,
   besoins text,
   statut text default 'idee',
+  statut_validation text default 'a_moderer',
+  created_by uuid,
   created_at timestamptz default now(),
   updated_at timestamptz default now()
 );
@@ -264,11 +274,38 @@ create table if not exists contributions (
   updated_at timestamptz default now()
 );
 
+create table if not exists documents (
+  id uuid primary key default gen_random_uuid(),
+  titre text not null,
+  type_document text,
+  territoire text,
+  description text,
+  storage_path text,
+  statut_validation text default 'a_moderer',
+  created_by uuid,
+  created_at timestamptz default now(),
+  updated_at timestamptz default now()
+);
+
+create table if not exists actualites (
+  id uuid primary key default gen_random_uuid(),
+  titre text not null,
+  slug text unique,
+  resume text,
+  contenu text,
+  image_url text,
+  statut text default 'brouillon',
+  published_at timestamptz,
+  created_by uuid,
+  created_at timestamptz default now(),
+  updated_at timestamptz default now()
+);
+
 create or replace view dashboard_national as
 select
   (select count(*) from signalements where statut_validation = 'valide') as signalements_valides,
-  (select count(*) from materiaux where statut_validation = 'valide') as materiaux_valides,
-  (select count(*) from projets where statut not in ('termine', 'archive')) as projets_en_cours,
+  (select count(*) from materiaux where statut_validation = 'valide' and disponibilite = 'disponible') as materiaux_valides,
+  (select count(*) from projets where statut not in ('termine', 'archive') and statut_validation = 'valide') as projets_en_cours,
   (select count(*) from territoires where statut = 'actif') as territoires_actifs,
   (select count(*) from antennes where statut = 'active') as antennes_actives;
 
@@ -281,3 +318,62 @@ create index if not exists materiaux_type_idx on materiaux(type);
 create index if not exists materiaux_categorie_idx on materiaux(categorie);
 create index if not exists signalements_type_idx on signalements(type_signalement);
 create index if not exists projets_statut_idx on projets(statut);
+create index if not exists documents_type_idx on documents(type_document);
+create index if not exists actualites_slug_idx on actualites(slug);
+
+alter table user_profiles enable row level security;
+alter table signalements enable row level security;
+alter table materiaux enable row level security;
+alter table projets enable row level security;
+alter table territoires enable row level security;
+alter table antennes enable row level security;
+alter table partenaires enable row level security;
+alter table documents enable row level security;
+alter table actualites enable row level security;
+
+drop policy if exists "user_profiles_own_select" on user_profiles;
+create policy "user_profiles_own_select" on user_profiles for select to authenticated using (auth_user_id = auth.uid());
+drop policy if exists "user_profiles_own_insert" on user_profiles;
+create policy "user_profiles_own_insert" on user_profiles for insert to authenticated with check (auth_user_id = auth.uid());
+drop policy if exists "user_profiles_own_update" on user_profiles;
+create policy "user_profiles_own_update" on user_profiles for update to authenticated using (auth_user_id = auth.uid()) with check (auth_user_id = auth.uid());
+
+drop policy if exists "public_signalements_valides" on signalements;
+create policy "public_signalements_valides" on signalements for select using (statut_validation = 'valide');
+drop policy if exists "authenticated_signalements_insert" on signalements;
+create policy "authenticated_signalements_insert" on signalements for insert to authenticated with check (true);
+
+drop policy if exists "public_materiaux_valides" on materiaux;
+create policy "public_materiaux_valides" on materiaux for select using (statut_validation = 'valide');
+drop policy if exists "authenticated_materiaux_insert" on materiaux;
+create policy "authenticated_materiaux_insert" on materiaux for insert to authenticated with check (true);
+
+drop policy if exists "public_projets_valides" on projets;
+create policy "public_projets_valides" on projets for select using (statut_validation = 'valide');
+drop policy if exists "authenticated_projets_insert" on projets;
+create policy "authenticated_projets_insert" on projets for insert to authenticated with check (true);
+
+drop policy if exists "public_territoires_read" on territoires;
+create policy "public_territoires_read" on territoires for select using (true);
+drop policy if exists "public_antennes_actives" on antennes;
+create policy "public_antennes_actives" on antennes for select using (statut = 'active');
+
+drop policy if exists "public_partenaires_valides" on partenaires;
+create policy "public_partenaires_valides" on partenaires for select using (statut = 'valide');
+drop policy if exists "authenticated_partenaires_insert" on partenaires;
+create policy "authenticated_partenaires_insert" on partenaires for insert to authenticated with check (true);
+
+drop policy if exists "public_documents_valides" on documents;
+create policy "public_documents_valides" on documents for select using (statut_validation = 'valide');
+drop policy if exists "authenticated_documents_insert" on documents;
+create policy "authenticated_documents_insert" on documents for insert to authenticated with check (true);
+
+drop policy if exists "public_actualites_publiees" on actualites;
+create policy "public_actualites_publiees" on actualites for select using (statut = 'publie');
+
+insert into storage.buckets (id, name, public)
+values ('signalements', 'signalements', false), ('materiaux', 'materiaux', false), ('documents', 'documents', false)
+on conflict (id) do nothing;
+
+drop policy if exists "authenticated_storage_upload" on storage.objects;
+create policy "authenticated_storage_upload" on storage.objects for insert to authenticated with check (bucket_id in ('signalements', 'materiaux', 'documents'));
