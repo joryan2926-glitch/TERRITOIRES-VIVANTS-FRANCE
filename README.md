@@ -7,6 +7,12 @@ Site vitrine de TERRITOIRES VIVANTS FRANCE, association nationale en création p
 - Accueil
 - Qui sommes-nous ?
 - Nos actions
+  - Logements vacants
+  - Commerces inoccupés
+  - Matériaux de réemploi
+  - Espaces abandonnés
+  - Solidarité & Insertion
+  - Antennes locales
 - Nos 5 pôles
   - Habitat Vivant
   - Matériauthèque Solidaire

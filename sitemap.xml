@@ -19,6 +19,42 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://territoiresvivantsfrance.fr/action-logements-vacants.html</loc>
+    <lastmod>2026-06-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://territoiresvivantsfrance.fr/action-commerces-inoccupes.html</loc>
+    <lastmod>2026-06-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://territoiresvivantsfrance.fr/action-materiaux-reemploi.html</loc>
+    <lastmod>2026-06-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://territoiresvivantsfrance.fr/action-espaces-abandonnes.html</loc>
+    <lastmod>2026-06-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://territoiresvivantsfrance.fr/action-solidarite-insertion.html</loc>
+    <lastmod>2026-06-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://territoiresvivantsfrance.fr/action-antennes-locales.html</loc>
+    <lastmod>2026-06-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://territoiresvivantsfrance.fr/nos-poles.html</loc>
     <lastmod>2026-06-22</lastmod>
     <changefreq>monthly</changefreq>

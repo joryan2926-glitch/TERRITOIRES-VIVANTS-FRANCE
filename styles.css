@@ -981,6 +981,171 @@ svg {
   font-weight: 700;
 }
 
+.action-hub-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin: 20px 0 34px;
+}
+
+.action-card {
+  display: grid;
+  grid-template-rows: 180px auto;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid rgba(8, 36, 61, 0.08);
+  border-radius: 8px;
+  box-shadow: 0 12px 28px rgba(8, 36, 61, 0.08);
+}
+
+.action-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.action-card div {
+  display: grid;
+  align-content: start;
+  padding: 22px;
+}
+
+.action-card h2,
+.action-card h3 {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin: 0 0 10px;
+  color: var(--green);
+  font-size: 21px;
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+.action-icon {
+  display: inline-grid;
+  flex: 0 0 34px;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  color: #fff;
+  background: var(--green);
+  border-radius: 50%;
+  font-size: 17px;
+  font-weight: 900;
+}
+
+.action-card p {
+  margin: 0;
+  font-weight: 650;
+}
+
+.action-card .button {
+  align-self: end;
+  margin-top: 18px;
+}
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin: 18px 0 34px;
+}
+
+.metric-card {
+  min-height: 130px;
+  padding: 20px;
+  background: var(--sand);
+  border-left: 5px solid var(--green);
+  border-radius: 0 8px 8px 0;
+}
+
+.metric-card strong {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--green);
+  text-transform: uppercase;
+}
+
+.metric-card p {
+  margin: 0;
+  font-weight: 700;
+}
+
+.faq-grid {
+  display: grid;
+  gap: 12px;
+  margin: 20px 0 34px;
+}
+
+.faq-item {
+  padding: 20px;
+  background: #fff;
+  border: 1px solid rgba(8, 36, 61, 0.1);
+  border-radius: 8px;
+}
+
+.faq-item h3 {
+  margin: 0 0 8px;
+  color: var(--green);
+  text-transform: uppercase;
+}
+
+.faq-item p {
+  margin: 0;
+  font-weight: 650;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin: 20px 0 34px;
+}
+
+.gallery-grid img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.before-after-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin: 20px 0 34px;
+}
+
+.before-after-card {
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid rgba(8, 36, 61, 0.08);
+  border-radius: 8px;
+  box-shadow: 0 10px 24px rgba(8, 36, 61, 0.07);
+}
+
+.before-after-card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
+.before-after-card div {
+  padding: 20px;
+}
+
+.before-after-card h3 {
+  margin: 0 0 8px;
+  color: var(--green);
+  text-transform: uppercase;
+}
+
+.before-after-card p {
+  margin: 0;
+  font-weight: 650;
+}
+
 .steps-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -1239,10 +1404,13 @@ svg {
   .poles-strip,
   .dashboard,
   .pole-hub-grid,
+  .action-hub-grid,
   .cards-grid,
   .steps-grid,
   .submenu-grid,
   .poles-links,
+  .metrics-grid,
+  .gallery-grid,
   .act-grid,
   .site-footer {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1296,6 +1464,7 @@ svg {
   }
 
   .main-nav {
+    position: relative;
     justify-content: center;
     flex-wrap: wrap;
     gap: 8px 16px;
@@ -1316,10 +1485,16 @@ svg {
     right: -11px;
   }
 
+  .nav-dropdown {
+    position: static;
+  }
+
   .nav-dropdown-menu {
     top: calc(100% + 2px);
     left: 50%;
-    min-width: min(330px, 88vw);
+    width: calc(100vw - 28px);
+    min-width: 0;
+    max-width: calc(100vw - 28px);
   }
 
   .donate-button {
@@ -1381,10 +1556,14 @@ svg {
 
   .dashboard,
   .pole-hub-grid,
+  .action-hub-grid,
   .cards-grid,
   .steps-grid,
   .submenu-grid,
   .poles-links,
+  .metrics-grid,
+  .gallery-grid,
+  .before-after-grid,
   .field-row,
   .act-grid,
   .site-footer,
@@ -1393,6 +1572,20 @@ svg {
   .ambition,
   .identity-grid {
     grid-template-columns: 1fr;
+  }
+
+  .gallery-grid {
+    display: flex;
+    overflow-x: auto;
+    gap: 10px;
+    padding-bottom: 4px;
+    scroll-snap-type: x mandatory;
+  }
+
+  .gallery-grid img {
+    flex: 0 0 82%;
+    height: 150px;
+    scroll-snap-align: start;
   }
 
   .page-hero {
