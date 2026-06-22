@@ -28,8 +28,17 @@ Site vitrine de TERRITOIRES VIVANTS FRANCE, association nationale en création p
   - Antennes locales
   - Architecture Supabase
   - Ressources
+  - Publications & études
+  - Centre de ressources
+  - Observatoire national avancé
+  - Mesure d'impact
+  - Espace presse
+  - Gouvernance
   - FAQ générale
   - Vision 2035
+  - Devenir antenne locale
+  - Association nationale
+  - Partenariats stratégiques
   - Transparence
 - Nos 5 pôles
   - Habitat Vivant
@@ -52,6 +61,18 @@ Site vitrine de TERRITOIRES VIVANTS FRANCE, association nationale en création p
 - Nos statuts
 - Contact
 - Mentions légales
+
+## Phase 5
+
+La phase 5 crédibilise la dimension nationale :
+
+- publications et études, centre de ressources et espace presse préparés sans faux documents ;
+- observatoire national avancé avec carte, fiches territoires et préparation Supabase ;
+- projets pilotes structurés pour Saint-Étienne, Martinique, Guadeloupe, Réunion et Guyane ;
+- parcours "Devenir antenne locale" et préparation de l'association nationale ;
+- pages dédiées aux partenariats stratégiques : collectivités, entreprises, associations, écoles, universités, bailleurs et fondations ;
+- mesure d'impact avec indicateurs prêts à renseigner, sans chiffres fictifs ;
+- gouvernance, transparence et organisation nationale en structuration.
 
 ## Phase 2
 
