@@ -7,6 +7,9 @@ Site vitrine de TERRITOIRES VIVANTS FRANCE, association nationale en création p
 - Accueil
 - Qui sommes-nous ?
 - Nos actions
+  - Notre méthode
+  - Comment financer les projets
+  - Vision France 2035
   - Logements vacants
   - Commerces inoccupés
   - Matériaux de réemploi
@@ -67,6 +70,14 @@ La phase 3 prépare la plateforme collaborative :
 - carte interactive, tableau de bord, fiches d'antennes locales ;
 - espaces collectivités et entreprises enrichis pour les dépôts de projets, diagnostics, mécénat et mise à disposition de locaux ;
 - architecture Supabase documentée dans `SUPABASE_ARCHITECTURE.md` et `supabase/schema.sql`.
+
+## Phase 4
+
+La phase 4 professionnalise le contenu :
+
+- enrichissement des cinq pôles avec problèmes, objectifs, méthode, résultats attendus, exemples de projets et FAQ ;
+- création des pages `notre-methode.html`, `financer-projets.html` et `vision-france-2035.html` ;
+- ajout d'une section "Rejoindre le mouvement" pour les bénévoles, collectivités, entreprises, artisans, architectes, urbanistes, associations et habitants.
 
 ## Déploiement
 

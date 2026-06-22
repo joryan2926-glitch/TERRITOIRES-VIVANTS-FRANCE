@@ -19,6 +19,24 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://territoiresvivantsfrance.fr/notre-methode.html</loc>
+    <lastmod>2026-06-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://territoiresvivantsfrance.fr/financer-projets.html</loc>
+    <lastmod>2026-06-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://territoiresvivantsfrance.fr/vision-france-2035.html</loc>
+    <lastmod>2026-06-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://territoiresvivantsfrance.fr/action-logements-vacants.html</loc>
     <lastmod>2026-06-22</lastmod>
     <changefreq>monthly</changefreq>
