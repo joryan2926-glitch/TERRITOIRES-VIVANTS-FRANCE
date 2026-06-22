@@ -14,11 +14,16 @@ Site vitrine de TERRITOIRES VIVANTS FRANCE, association nationale en création p
   - Solidarité & Insertion
   - Antennes locales
   - Observatoire du patrimoine vacant
+  - Observatoire national du patrimoine vacant
   - Banque de matériaux
+  - Proposer des matériaux
   - Nos projets pilotes
   - Impact & résultats
+  - Tableau de bord
   - Carte des territoires
   - Signalement citoyen
+  - Antennes locales
+  - Architecture Supabase
   - Ressources
   - FAQ générale
   - Vision 2035
@@ -50,6 +55,18 @@ Site vitrine de TERRITOIRES VIVANTS FRANCE, association nationale en création p
 La phase 2 prépare une plateforme nationale évolutive autour de la carte des territoires, du signalement citoyen, des espaces bénévoles/adhérents/partenaires, des ressources, de la transparence et de la vision 2035.
 
 Les pages restent statiques à ce stade. Les formulaires, cartes, documents et espaces membres sont préparés pour une future connexion à Supabase, sans stockage ni authentification active dans cette version.
+
+## Phase 3
+
+La phase 3 prépare la plateforme collaborative :
+
+- observatoire national filtrable par région, département, commune et type de bien ;
+- banque nationale de matériaux avec fiches structurées ;
+- signalement de lieux avec photo, adresse, géolocalisation et description ;
+- proposition de matériaux avec type, quantité, état, localisation et photo ;
+- carte interactive, tableau de bord, fiches d'antennes locales ;
+- espaces collectivités et entreprises enrichis pour les dépôts de projets, diagnostics, mécénat et mise à disposition de locaux ;
+- architecture Supabase documentée dans `SUPABASE_ARCHITECTURE.md` et `supabase/schema.sql`.
 
 ## Déploiement
 

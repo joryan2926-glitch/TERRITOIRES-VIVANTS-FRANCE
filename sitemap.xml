@@ -61,10 +61,22 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://territoiresvivantsfrance.fr/observatoire-national.html</loc>
+    <lastmod>2026-06-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://territoiresvivantsfrance.fr/banque-materiaux.html</loc>
     <lastmod>2026-06-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://territoiresvivantsfrance.fr/proposer-materiaux.html</loc>
+    <lastmod>2026-06-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://territoiresvivantsfrance.fr/projets-pilotes.html</loc>
@@ -83,6 +95,24 @@
     <lastmod>2026-06-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://territoiresvivantsfrance.fr/tableau-de-bord.html</loc>
+    <lastmod>2026-06-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://territoiresvivantsfrance.fr/antennes-locales.html</loc>
+    <lastmod>2026-06-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://territoiresvivantsfrance.fr/supabase-architecture.html</loc>
+    <lastmod>2026-06-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://territoiresvivantsfrance.fr/signalement.html</loc>
