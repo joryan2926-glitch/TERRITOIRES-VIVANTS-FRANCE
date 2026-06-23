@@ -157,7 +157,7 @@ async function loadStats() {
       "Matériaux disponibles": data.materiaux_valides,
       "Projets actifs": data.projets_en_cours,
       "Territoires couverts": data.territoires_actifs
-    }).map(([label, value]) => `<article class="metric-card"><span class="dashboard-number">${value ?? "À venir"}</span><strong>${label}</strong></article>`).join("");
+    }).map(([label, value]) => `<article class="metric-card"><span class="dashboard-number">${value ?? "Non publié"}</span><strong>${label}</strong></article>`).join("");
   } catch {
     container.innerHTML = `<article class="empty-state"><p>Statistiques indisponibles tant que Supabase n'est pas configuré.</p></article>`;
   }

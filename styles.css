@@ -564,6 +564,56 @@ svg {
   border-radius: 8px;
 }
 
+.editorial-section {
+  margin: 28px 0;
+  padding: 28px;
+  background: #fff;
+  border: 1px solid rgba(8, 36, 61, 0.1);
+  border-radius: 12px;
+  box-shadow: 0 14px 30px rgba(8, 36, 61, 0.07);
+}
+
+.editorial-section h2 {
+  margin: 0 0 12px;
+  color: var(--green);
+  font-size: clamp(22px, 2vw, 30px);
+  line-height: 1.15;
+}
+
+.editorial-section > p {
+  max-width: 980px;
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+.editorial-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 22px;
+}
+
+.editorial-card {
+  padding: 20px;
+  background: linear-gradient(180deg, #fbfdf8, #fff);
+  border: 1px solid rgba(63, 113, 21, 0.14);
+  border-radius: 12px;
+}
+
+.editorial-card h3 {
+  margin: 0 0 8px;
+  color: var(--ink);
+  font-size: 17px;
+}
+
+.editorial-card p {
+  margin: 0;
+  color: var(--ink-soft);
+  line-height: 1.62;
+}
+
 .admin-row {
   display: grid;
   grid-template-columns: 1fr auto;
@@ -880,7 +930,7 @@ svg {
 
 .panel h2,
 .act-band h2,
-.placeholder-section h2 {
+.news-section h2 {
   margin: 0 0 12px;
   color: var(--green);
   font-size: 24px;
@@ -1056,13 +1106,13 @@ svg {
   text-transform: uppercase;
 }
 
-.placeholder-section {
+.news-section {
   width: min(92vw, 1780px);
   margin: 18px auto 0;
   padding: 24px 0 36px;
 }
 
-.placeholder-section p {
+.news-section p {
   max-width: 760px;
   margin: 0;
   font-weight: 700;
@@ -1638,7 +1688,7 @@ svg {
   margin: 22px 0 34px;
 }
 
-.map-placeholder {
+.map-preview {
   position: relative;
   min-height: 330px;
   overflow: hidden;
@@ -1651,7 +1701,7 @@ svg {
   border-radius: 8px;
 }
 
-.map-placeholder::before {
+.map-preview::before {
   position: absolute;
   inset: 34px;
   content: "";
@@ -1662,7 +1712,7 @@ svg {
   border-radius: 8px;
 }
 
-.map-placeholder div {
+.map-preview div {
   position: absolute;
   right: 24px;
   bottom: 24px;
@@ -1673,7 +1723,7 @@ svg {
   border-radius: 8px;
 }
 
-.map-placeholder strong {
+.map-preview strong {
   display: block;
   margin-bottom: 6px;
   text-transform: uppercase;
@@ -2249,6 +2299,7 @@ svg {
   .submenu-grid,
   .poles-links,
   .metrics-grid,
+  .editorial-grid,
   .strategy-grid,
   .strategic-nav,
   .platform-grid,
@@ -2540,7 +2591,7 @@ svg {
     grid-template-columns: 1fr;
   }
 
-  .map-placeholder {
+  .map-preview {
     min-height: 260px;
   }
 
@@ -2634,7 +2685,7 @@ svg {
   .dashboard,
   .page-wrap,
   .act-band,
-  .placeholder-section {
+  .news-section {
     width: calc(100vw - 28px);
   }
 
