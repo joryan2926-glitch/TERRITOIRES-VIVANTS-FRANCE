@@ -223,7 +223,7 @@ svg {
 
 .nav-dropdown-menu .mega-link {
   display: grid;
-  grid-template-columns: 40px minmax(0, 1fr);
+  grid-template-columns: 40px minmax(0, 1fr) 16px;
   gap: 11px;
   align-items: center;
   min-height: 62px;
@@ -235,6 +235,7 @@ svg {
   background: rgba(255, 255, 255, 0.64);
   border: 1px solid rgba(8, 36, 61, 0.055);
   border-radius: 12px;
+  align-self: stretch;
   box-shadow: 0 1px 0 rgba(255, 255, 255, 0.7) inset;
   transition:
     color 220ms ease,
@@ -242,6 +243,24 @@ svg {
     border-color 220ms ease,
     box-shadow 220ms ease,
     transform 220ms ease;
+}
+
+.actions-menu {
+  width: min(920px, calc(100vw - 56px));
+  min-width: 760px;
+  grid-template-rows: auto repeat(4, minmax(76px, auto));
+}
+
+.actions-menu .action-mega-link {
+  min-height: 76px;
+}
+
+.mega-card-chevron {
+  width: 13px;
+  height: 13px;
+  color: rgba(8, 36, 61, 0.42);
+  justify-self: end;
+  transition: color 220ms ease, transform 220ms ease;
 }
 
 .nav-dropdown-menu a::after {
@@ -285,6 +304,13 @@ svg {
   line-height: 1.35;
 }
 
+.actions-menu .mega-copy small {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
 .nav-dropdown-menu .mega-link:hover,
 .nav-dropdown-menu .mega-link:focus {
   color: var(--green);
@@ -299,6 +325,12 @@ svg {
   color: var(--green);
   background: rgba(46, 125, 50, 0.12);
   transform: translateY(-1px) scale(1.025);
+}
+
+.nav-dropdown-menu .mega-link:hover .mega-card-chevron,
+.nav-dropdown-menu .mega-link:focus .mega-card-chevron {
+  color: var(--green);
+  transform: translateX(2px);
 }
 
 .platform-hero-note {
@@ -2341,6 +2373,7 @@ svg {
   .nav-dropdown-menu {
     position: static;
     grid-template-columns: 1fr;
+    grid-template-rows: none;
     width: 100%;
     min-width: 0;
     max-width: none;
@@ -2376,10 +2409,19 @@ svg {
   }
 
   .nav-dropdown-menu .mega-link {
-    grid-template-columns: 34px minmax(0, 1fr);
+    grid-template-columns: 34px minmax(0, 1fr) 13px;
     min-height: auto;
     padding: 9px;
     background: rgba(255, 255, 255, 0.64);
+  }
+
+  .actions-menu .action-mega-link {
+    min-height: 70px;
+  }
+
+  .mega-card-chevron {
+    width: 12px;
+    height: 12px;
   }
 
   .mega-icon {
