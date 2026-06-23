@@ -122,7 +122,7 @@ La phase 7 active une bêta connectable à Supabase :
 
 - authentification Supabase : inscription, connexion, mot de passe oublié et profil ;
 - rôles : citoyen, bénévole, entreprise, collectivité, administrateur ;
-- fonctions API Vercel pour `/signalements`, `/materiaux`, `/projets`, `/territoires` ;
+- fonction API Vercel dynamique `/api/[resource].js` pour `/signalements`, `/materiaux`, `/projets`, `/territoires` et les autres collections publiques ;
 - carte connectée avec dépôt de signalements en base ;
 - banque de matériaux avec upload photo via Supabase Storage ;
 - tableau de bord administrateur pour validation ;

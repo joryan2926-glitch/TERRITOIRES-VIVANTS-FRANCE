@@ -1,4 +1,4 @@
-const { isConfigured, sendJson, supabaseFetch } = require("./_supabase");
+const { isConfigured, sendJson, supabaseFetch } = require("../lib/supabase");
 
 module.exports = async function handler(req, res) {
   if (req.method !== "GET") return sendJson(res, 405, { error: "Méthode non autorisée" });

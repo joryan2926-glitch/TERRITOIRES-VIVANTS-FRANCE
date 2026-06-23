@@ -6,14 +6,18 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (page === "signalements") setupSignalements();
   if (page === "materiaux") setupMateriaux();
   if (page === "admin") setupAdmin();
-  if (page === "collectivites") setupSimplePost("collectivite-form", "/api/projets");
-  if (page === "entreprises") setupSimplePost("entreprise-form", "/api/partenaires");
-  if (page === "bien-solidaire") setupSimplePost("bien-form", "/api/biens-candidats");
-  if (page === "investisseur") setupSimplePost("investisseur-form", "/api/investisseurs");
-  if (page === "mecene") setupSimplePost("mecene-form", "/api/mecenes");
+  if (page === "collectivites") setupSimplePost("collectivite-form", dataEndpoint("projets"));
+  if (page === "entreprises") setupSimplePost("entreprise-form", dataEndpoint("partenaires"));
+  if (page === "bien-solidaire") setupSimplePost("bien-form", dataEndpoint("biens-candidats"));
+  if (page === "investisseur") setupSimplePost("investisseur-form", dataEndpoint("investisseurs"));
+  if (page === "mecene") setupSimplePost("mecene-form", dataEndpoint("mecenes"));
   if (page === "documents") setupDocuments();
   if (page === "dashboard") loadStats();
 });
+
+function dataEndpoint(resource) {
+  return `/api/${encodeURIComponent(resource)}`;
+}
 
 function renderList(container, rows, emptyText) {
   if (!container) return;
@@ -95,7 +99,7 @@ function setupAuth() {
 async function setupSignalements() {
   const list = document.querySelector("[data-signalements-list]");
   try {
-    const response = await fetch("/api/signalements");
+    const response = await fetch(dataEndpoint("signalements"));
     const json = await response.json();
     renderList(list, json.data, "Aucun signalement validé n'est publié pour le moment.");
   } catch {
@@ -108,7 +112,7 @@ async function setupSignalements() {
       const data = window.TVF.formToObject(form);
       const file = new FormData(form).get("photo");
       if (file?.size) data.photo_url = await window.TVF.uploadFile("signalements", file, "photos");
-      await window.TVF.authFetch("/api/signalements", { method: "POST", body: JSON.stringify(data) });
+      await window.TVF.authFetch(dataEndpoint("signalements"), { method: "POST", body: JSON.stringify(data) });
       window.TVF.setStatus(form, "Signalement enregistré. Il sera publié après validation.");
       form.reset();
     } catch (error) {
@@ -120,7 +124,7 @@ async function setupSignalements() {
 async function setupMateriaux() {
   const list = document.querySelector("[data-materiaux-list]");
   try {
-    const response = await fetch("/api/materiaux");
+    const response = await fetch(dataEndpoint("materiaux"));
     const json = await response.json();
     renderList(list, json.data, "Aucun matériau validé n'est publié pour le moment.");
   } catch {
@@ -133,7 +137,7 @@ async function setupMateriaux() {
       const data = window.TVF.formToObject(form);
       const file = new FormData(form).get("photo");
       if (file?.size) data.photo_url = await window.TVF.uploadFile("materiaux", file, "photos");
-      await window.TVF.authFetch("/api/materiaux", { method: "POST", body: JSON.stringify(data) });
+      await window.TVF.authFetch(dataEndpoint("materiaux"), { method: "POST", body: JSON.stringify(data) });
       window.TVF.setStatus(form, "Matériau enregistré. Il sera publié après validation.");
       form.reset();
     } catch (error) {
@@ -181,7 +185,7 @@ function setupDocuments() {
       const data = window.TVF.formToObject(form);
       const file = new FormData(form).get("document");
       if (file?.size) data.storage_path = await window.TVF.uploadFile("documents", file, "pdf");
-      await window.TVF.authFetch("/api/documents", { method: "POST", body: JSON.stringify(data) });
+      await window.TVF.authFetch(dataEndpoint("documents"), { method: "POST", body: JSON.stringify(data) });
       window.TVF.setStatus(form, "Document envoyé pour validation.");
       form.reset();
     } catch (error) {

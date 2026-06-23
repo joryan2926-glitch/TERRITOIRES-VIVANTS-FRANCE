@@ -42,7 +42,7 @@ Cette architecture prépare les phases 3 à 7 de la plateforme collaborative. El
 - Les pages bêta utilisent `beta-supabase.js` et les fonctions Vercel dans `api/`.
 - Les écritures applicatives passent par les endpoints serveur et nécessitent une session Supabase.
 - Les uploads utilisent les buckets Storage `signalements`, `materiaux` et `documents`.
-- Les routes publiques `/signalements`, `/materiaux`, `/projets`, `/territoires`, `/biens-candidats`, `/investisseurs` et `/mecenes` sont réécrites vers les fonctions API par `vercel.json`.
+- Les routes publiques `/signalements`, `/materiaux`, `/projets`, `/territoires`, `/biens-candidats`, `/investisseurs` et `/mecenes` sont réécrites par `vercel.json` vers une seule fonction dynamique `/api/[resource].js`.
 - L'administration nécessite un profil `user_profiles.role = 'administrateur'` et permet la validation des signalements, matériaux, partenaires, antennes, biens candidats, projets, projets de financement, investisseurs et mécènes.
 
 ## Principes

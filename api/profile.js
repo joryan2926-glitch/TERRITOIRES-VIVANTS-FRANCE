@@ -1,4 +1,4 @@
-const { isConfigured, sendJson, readBody, supabaseFetch, requireUser, isAdmin, pick } = require("./_supabase");
+const { isConfigured, sendJson, readBody, supabaseFetch, requireUser, isAdmin, pick } = require("../lib/supabase");
 
 module.exports = async function handler(req, res) {
   if (!isConfigured()) return sendJson(res, 503, { error: "Supabase n'est pas configuré sur Vercel." });

@@ -1,4 +1,4 @@
-const { isConfigured, sendJson, readBody, supabaseFetch, requireUser, isAdmin, pick, logActivity } = require("./_supabase");
+const { isConfigured, sendJson, readBody, supabaseFetch, requireUser, isAdmin, pick, logActivity } = require("../lib/supabase");
 
 const TABLES = {
   signalements: ["statut_validation"],
