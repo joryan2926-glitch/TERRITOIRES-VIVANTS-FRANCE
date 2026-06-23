@@ -83,7 +83,7 @@ svg {
   color: #0a2036;
   font-family: "Aptos", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
   font-size: 15px;
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: 0.01em;
   text-transform: none;
 }
@@ -101,15 +101,16 @@ svg {
 .main-nav a::after,
 .nav-drop-toggle::after {
   position: absolute;
-  right: 0;
-  bottom: 9px;
-  left: 0;
+  right: auto;
+  bottom: 8px;
+  left: 50%;
+  width: 28px;
   height: 1px;
   content: "";
   background: rgba(46, 125, 50, 0.72);
   border-radius: 1px;
-  transform: scaleX(0);
-  transform-origin: left center;
+  transform: translateX(-50%) scaleX(0);
+  transform-origin: center;
   transition: transform 260ms ease, background 260ms ease;
 }
 
@@ -123,7 +124,7 @@ svg {
 .nav-dropdown.active .nav-drop-toggle::after,
 .nav-dropdown:hover .nav-drop-toggle::after,
 .nav-dropdown:focus-within .nav-drop-toggle::after {
-  transform: scaleX(1);
+  transform: translateX(-50%) scaleX(1);
 }
 
 .nav-dropdown {
@@ -134,27 +135,32 @@ svg {
 
 .nav-drop-toggle {
   position: relative;
-  padding-right: 16px;
+  gap: 7px;
 }
 
-.nav-drop-toggle::before {
-  position: absolute;
-  right: 0;
-  top: 50%;
-  width: 6px;
-  height: 6px;
-  content: "";
-  border-right: 1.35px solid rgba(46, 125, 50, 0.82);
-  border-bottom: 1.35px solid rgba(46, 125, 50, 0.82);
-  transform: translateY(-58%) rotate(45deg);
+.nav-label {
+  display: inline-flex;
+  align-items: center;
+}
+
+.nav-chevron {
+  width: 13px;
+  height: 13px;
+  flex: 0 0 13px;
+  color: currentColor;
+  transform: translateY(0.5px) rotate(0deg);
   transform-origin: center;
-  transition: transform 240ms ease, border-color 240ms ease;
+  transition: transform 240ms ease, color 220ms ease;
 }
 
-.nav-dropdown:hover .nav-drop-toggle::before,
-.nav-dropdown:focus-within .nav-drop-toggle::before {
-  border-color: var(--green-soft);
-  transform: translateY(-35%) rotate(225deg);
+.nav-dropdown:hover .nav-drop-toggle,
+.nav-dropdown:focus-within .nav-drop-toggle {
+  color: var(--green);
+}
+
+.nav-dropdown:hover .nav-chevron,
+.nav-dropdown:focus-within .nav-chevron {
+  transform: translateY(0.5px) rotate(180deg);
 }
 
 .nav-dropdown-menu {
@@ -201,7 +207,7 @@ svg {
 .mega-menu-heading strong {
   color: var(--green);
   font-size: 13px;
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: 0.055em;
   text-transform: uppercase;
 }
@@ -209,7 +215,7 @@ svg {
 .mega-menu-heading span {
   color: rgba(8, 36, 61, 0.58);
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 500;
   text-transform: uppercase;
 }
 
@@ -246,7 +252,7 @@ svg {
   place-items: center;
   color: var(--green);
   font-size: 13px;
-  font-weight: 700;
+  font-weight: 600;
   background: rgba(46, 125, 50, 0.075);
   border-radius: 10px;
   transition: color 220ms ease, background 220ms ease, transform 220ms ease;
@@ -260,7 +266,7 @@ svg {
 .mega-copy strong {
   color: #0a2036;
   font-size: 13.5px;
-  font-weight: 650;
+  font-weight: 600;
 }
 
 .mega-copy small {
@@ -556,7 +562,7 @@ svg {
   color: #fff;
   font-family: "Aptos", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
   font-size: 13.5px;
-  font-weight: 650;
+  font-weight: 600;
   letter-spacing: 0.018em;
   text-transform: none;
   background: linear-gradient(135deg, #256f2d, var(--green));
@@ -2285,7 +2291,7 @@ svg {
     overflow: visible;
     padding-bottom: 0;
     font-size: 12px;
-    font-weight: 550;
+    font-weight: 500;
   }
 
   .main-nav > a,
@@ -2304,15 +2310,19 @@ svg {
   .main-nav > a::after,
   .nav-drop-toggle::after {
     bottom: 0;
-    right: 14px;
-    left: 14px;
+    right: auto;
+    left: 50%;
+    width: 24px;
   }
 
-  .nav-drop-toggle::before {
-    right: 12px;
-    width: 6px;
-    height: 6px;
-    transform: translateY(-45%) rotate(225deg);
+  .nav-drop-toggle {
+    gap: 6px;
+  }
+
+  .nav-chevron {
+    width: 12px;
+    height: 12px;
+    flex-basis: 12px;
   }
 
   .nav-dropdown {
