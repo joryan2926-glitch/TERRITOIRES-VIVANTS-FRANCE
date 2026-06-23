@@ -8,6 +8,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (page === "admin") setupAdmin();
   if (page === "collectivites") setupSimplePost("collectivite-form", "/api/projets");
   if (page === "entreprises") setupSimplePost("entreprise-form", "/api/partenaires");
+  if (page === "bien-solidaire") setupSimplePost("bien-form", "/api/biens-candidats");
+  if (page === "investisseur") setupSimplePost("investisseur-form", "/api/investisseurs");
+  if (page === "mecene") setupSimplePost("mecene-form", "/api/mecenes");
   if (page === "documents") setupDocuments();
   if (page === "dashboard") loadStats();
 });
@@ -197,8 +200,8 @@ async function setupAdmin() {
         <h2>${escapeHtml(table)}</h2>
         ${(rows || []).length ? rows.map((row) => `
           <article class="admin-row">
-            <span>${escapeHtml(row.type_signalement || row.type || row.nom || row.titre || row.commune || row.id)}</span>
-            <button class="button secondary" type="button" data-admin-validate data-table="${table}" data-id="${row.id}">Valider</button>
+            <span>${escapeHtml(row.type_signalement || row.type || row.type_bien || row.nom || row.nom_structure || row.titre || row.commune || row.action || row.id)}</span>
+            ${table === "activity_log" ? "" : `<button class="button secondary" type="button" data-admin-validate data-table="${table}" data-id="${row.id}">Valider</button>`}
           </article>
         `).join("") : "<p>Aucun élément en attente.</p>"}
       </section>
@@ -213,6 +216,17 @@ async function setupAdmin() {
     const body = { table, id: button.dataset.id };
     if (table === "partenaires") body.statut = "valide";
     else if (table === "antennes") body.statut = "active";
+    else if (table === "investisseurs" || table === "mecenes") body.statut = "valide";
+    else if (table === "projets") {
+      body.statut_validation = "valide";
+      body.statut = "mobilisation";
+    } else if (table === "projets_financement") {
+      body.statut_validation = "valide";
+      body.statut_publication = "publie";
+    } else if (table === "biens_candidats") {
+      body.statut_validation = "valide";
+      body.confidentialite = "public";
+    }
     else body.statut_validation = "valide";
     try {
       await window.TVF.authFetch("/api/admin", { method: "PATCH", body: JSON.stringify(body) });

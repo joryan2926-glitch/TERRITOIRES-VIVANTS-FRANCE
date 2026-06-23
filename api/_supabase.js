@@ -43,10 +43,11 @@ async function readBody(req) {
 
 async function supabaseFetch(path, options = {}) {
   const key = options.token || serviceKey();
+  const apiKey = options.token ? SUPABASE_ANON_KEY : serviceKey();
   const response = await fetch(`${SUPABASE_URL}${path}`, {
     method: options.method || "GET",
     headers: {
-      apikey: SUPABASE_ANON_KEY,
+      apikey: apiKey,
       Authorization: `Bearer ${key}`,
       "Content-Type": "application/json",
       Prefer: options.prefer || "return=representation",
@@ -100,6 +101,23 @@ function pick(input, allowed) {
   }, {});
 }
 
+async function logActivity({ actorAuthUserId, action, tableName, recordId, metadata }) {
+  try {
+    await supabaseFetch("/rest/v1/activity_log", {
+      method: "POST",
+      body: {
+        actor_auth_user_id: actorAuthUserId,
+        action,
+        table_name: tableName,
+        record_id: recordId || null,
+        metadata: metadata || {}
+      }
+    });
+  } catch {
+    // Le journal ne doit jamais bloquer une contribution utilisateur.
+  }
+}
+
 async function handleCollection(req, res, table, config) {
   if (!isConfigured()) return sendJson(res, 503, { error: "Supabase n'est pas configuré sur Vercel." });
   try {
@@ -117,6 +135,13 @@ async function handleCollection(req, res, table, config) {
       };
       if (config.defaultStatus) row[config.statusField || "statut_validation"] = config.defaultStatus;
       const inserted = await supabaseFetch(`/rest/v1/${table}`, { method: "POST", body: row });
+      await logActivity({
+        actorAuthUserId: user.id,
+        action: "create",
+        tableName: table,
+        recordId: inserted?.[0]?.id,
+        metadata: { endpoint: table }
+      });
       return sendJson(res, 201, { data: inserted?.[0] || inserted });
     }
     return sendJson(res, 405, { error: "Méthode non autorisée" });
@@ -135,5 +160,6 @@ module.exports = {
   requireUser,
   isAdmin,
   pick,
+  logActivity,
   handleCollection
 };

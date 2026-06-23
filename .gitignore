@@ -2,3 +2,6 @@
 desktop-check.png
 mobile-check.png
 *.log
+.env
+.env.*
+!.env.example

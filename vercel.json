@@ -3,6 +3,9 @@
     { "source": "/signalements", "destination": "/api/signalements" },
     { "source": "/materiaux", "destination": "/api/materiaux" },
     { "source": "/projets", "destination": "/api/projets" },
-    { "source": "/territoires", "destination": "/api/territoires" }
+    { "source": "/territoires", "destination": "/api/territoires" },
+    { "source": "/biens-candidats", "destination": "/api/biens-candidats" },
+    { "source": "/investisseurs", "destination": "/api/investisseurs" },
+    { "source": "/mecenes", "destination": "/api/mecenes" }
   ]
 }

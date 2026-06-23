@@ -387,6 +387,16 @@ create table if not exists actualites (
   updated_at timestamptz default now()
 );
 
+create table if not exists activity_log (
+  id uuid primary key default gen_random_uuid(),
+  actor_auth_user_id uuid,
+  action text not null,
+  table_name text,
+  record_id uuid,
+  metadata jsonb default '{}'::jsonb,
+  created_at timestamptz default now()
+);
+
 create or replace view dashboard_national as
 select
   (select count(*) from signalements where statut_validation = 'valide') as signalements_valides,
@@ -411,6 +421,8 @@ create index if not exists biens_candidats_commune_idx on biens_candidats(commun
 create index if not exists biens_candidats_type_idx on biens_candidats(type_bien);
 create index if not exists documents_type_idx on documents(type_document);
 create index if not exists actualites_slug_idx on actualites(slug);
+create index if not exists activity_log_created_at_idx on activity_log(created_at desc);
+create index if not exists activity_log_table_idx on activity_log(table_name);
 
 alter table user_profiles enable row level security;
 alter table signalements enable row level security;
@@ -427,6 +439,7 @@ alter table contributions enable row level security;
 alter table biens_candidats enable row level security;
 alter table documents enable row level security;
 alter table actualites enable row level security;
+alter table activity_log enable row level security;
 
 drop policy if exists "user_profiles_own_select" on user_profiles;
 create policy "user_profiles_own_select" on user_profiles for select to authenticated using (auth_user_id = auth.uid());
@@ -487,6 +500,17 @@ create policy "authenticated_documents_insert" on documents for insert to authen
 
 drop policy if exists "public_actualites_publiees" on actualites;
 create policy "public_actualites_publiees" on actualites for select using (statut = 'publie');
+
+drop policy if exists "authenticated_activity_log_insert" on activity_log;
+create policy "authenticated_activity_log_insert" on activity_log for insert to authenticated with check (actor_auth_user_id = auth.uid());
+drop policy if exists "admin_activity_log_select" on activity_log;
+create policy "admin_activity_log_select" on activity_log for select to authenticated using (
+  exists (
+    select 1 from user_profiles
+    where user_profiles.auth_user_id = auth.uid()
+      and user_profiles.role = 'administrateur'
+  )
+);
 
 insert into storage.buckets (id, name, public)
 values ('signalements', 'signalements', false), ('materiaux', 'materiaux', false), ('documents', 'documents', false)

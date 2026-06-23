@@ -153,6 +153,17 @@ Programme national préparé pour mobiliser citoyens, entreprises, fondations, m
 - mesure d'impact investisseurs sans chiffres fictifs ;
 - tables préparatoires `projets_financement`, `investisseurs`, `mecenes`, `contributions` et `impact_projets`.
 
+## Activation opérationnelle Supabase
+
+La plateforme bêta dispose maintenant des endpoints réels pour :
+
+- les signalements, matériaux, projets, territoires et documents ;
+- les biens candidats du programme Bien Solidaire à Usage Partagé ;
+- les demandes investisseur solidaire et mécénat ;
+- le tableau de bord administrateur et le journal d'activité.
+
+Les buckets Storage attendus sont `signalements`, `materiaux` et `documents`. Les tables et politiques RLS sont décrites dans `supabase/schema.sql`.
+
 Variables Vercel nécessaires :
 
 - `SUPABASE_URL`
