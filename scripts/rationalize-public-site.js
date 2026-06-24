@@ -173,6 +173,7 @@ for (const file of fs.readdirSync(root).filter((name) => name.endsWith(".html"))
   let html = fs.readFileSync(full, "utf8");
   html = html.replace(/<header class="site-header">[\s\S]*?<\/header>/i, header);
   html = html.replace(/\s*<nav class="breadcrumb"[\s\S]*?<\/nav>/i, "");
+  html = html.replace(/\s*<script\s+defer\s+src="navigation\.js"><\/script>/gi, "");
 
   const isPublic = publicSet.has(file);
   const meta = pageMeta[file] || ["Espace interne", stripTags(((html.match(/<title>(.*?)<\/title>/i) || [])[1] || file).split("|")[0])];
@@ -199,6 +200,7 @@ for (const file of fs.readdirSync(root).filter((name) => name.endsWith(".html"))
     };
     html = html.replace("</head>", `    <script id="global-structured-data" type="application/ld+json">${JSON.stringify(structured)}</script>\n  </head>`);
   }
+  html = html.replace(/\s*<\/body>/i, `\n    <script defer src="navigation.js"></script>\n  </body>`);
   fs.writeFileSync(full, html, "utf8");
 }
 

@@ -217,7 +217,9 @@ img[src*="assets/photos/"] {
   min-width: min(520px, calc(100vw - 56px));
   max-height: min(78vh, 620px);
   overflow-y: auto;
+  overscroll-behavior: contain;
   padding: 18px;
+  pointer-events: none;
   visibility: hidden;
   opacity: 0;
   background:
@@ -226,15 +228,17 @@ img[src*="assets/photos/"] {
   border: 1px solid rgba(8, 36, 61, 0.085);
   border-radius: 16px;
   box-shadow: 0 20px 48px rgba(8, 36, 61, 0.12);
-  transform: translate(-50%, 10px);
+  transform: translate(calc(-50% + var(--nav-menu-shift, 0px)), 10px);
   transition: opacity 240ms ease, transform 240ms ease, visibility 240ms ease;
+  scrollbar-gutter: stable;
 }
 
 .nav-dropdown:hover .nav-dropdown-menu,
 .nav-dropdown:focus-within .nav-dropdown-menu {
+  pointer-events: auto;
   visibility: visible;
   opacity: 1;
-  transform: translate(-50%, 0);
+  transform: translate(calc(-50% + var(--nav-menu-shift, 0px)), 0);
 }
 
 .mega-menu-heading {
@@ -4335,6 +4339,7 @@ img[src$="documents-resources.jpg"] {
     padding: 10px;
     visibility: visible;
     opacity: 1;
+    pointer-events: auto;
     border-radius: 14px;
     box-shadow: 0 10px 22px rgba(8, 36, 61, 0.075);
     transform: none;
