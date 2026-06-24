@@ -2,7 +2,7 @@
 
 Mise a jour : 24 juin 2026.
 
-- Pages publiques indexables : 39
+- Pages publiques indexables : 40
 - Anciennes URL redirigees : 42
 - Autres pages : interfaces internes, techniques ou evolutions futures en noindex.
 
@@ -10,6 +10,7 @@ Mise a jour : 24 juin 2026.
 
 - index.html
 - qui-sommes-nous.html
+- pourquoi-tvf-existe.html
 - nos-actions.html
 - notre-methode.html
 - vision-france-2035.html

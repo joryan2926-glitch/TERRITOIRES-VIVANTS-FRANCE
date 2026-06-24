@@ -2437,6 +2437,104 @@ img[src$="documents-resources.jpg"] {
   border-color: transparent;
 }
 
+.clear-summary,
+.institutional-reference {
+  position: relative;
+}
+
+.clear-summary {
+  padding-top: 42px;
+}
+
+.summary-lines {
+  display: grid;
+  gap: 10px;
+  max-width: 1120px;
+  margin: 20px 0 22px;
+  counter-reset: summary-line;
+}
+
+.summary-lines p {
+  position: relative;
+  margin: 0;
+  padding: 15px 18px 15px 54px;
+  color: var(--ink-soft);
+  background: #fff;
+  border: 1px solid rgba(8, 36, 61, 0.08);
+  border-radius: 8px;
+  box-shadow: 0 10px 22px rgba(8, 36, 61, 0.055);
+  line-height: 1.58;
+}
+
+.summary-lines p::before {
+  position: absolute;
+  top: 14px;
+  left: 16px;
+  display: grid;
+  width: 24px;
+  height: 24px;
+  place-items: center;
+  color: #fff;
+  background: var(--green);
+  border-radius: 50%;
+  counter-increment: summary-line;
+  content: counter(summary-line);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.summary-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.institutional-reference {
+  padding-top: 42px;
+  padding-bottom: 52px;
+}
+
+.institutional-reference + .institutional-reference {
+  border-top: 1px solid rgba(8, 36, 61, 0.09);
+}
+
+.compact-strip {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.compact-strip .indicator-block {
+  min-height: 142px;
+}
+
+.status-ledger {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.status-ledger article {
+  padding: 20px;
+  background: #fff;
+  border: 1px solid rgba(8, 36, 61, 0.1);
+  border-radius: 8px;
+  box-shadow: 0 12px 24px rgba(8, 36, 61, 0.055);
+}
+
+.status-ledger strong {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--green);
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.status-ledger p {
+  margin: 0;
+  color: var(--ink-soft);
+  line-height: 1.58;
+}
+
 .map-panel {
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
@@ -4096,7 +4194,9 @@ img[src$="documents-resources.jpg"] {
   }
 
   .flow-steps,
-  .impact-audiences {
+  .impact-audiences,
+  .compact-strip,
+  .status-ledger {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -4396,7 +4496,9 @@ img[src$="documents-resources.jpg"] {
   .ambition,
   .identity-grid,
   .flow-steps,
-  .impact-audiences {
+  .impact-audiences,
+  .compact-strip,
+  .status-ledger {
     grid-template-columns: 1fr;
   }
 
