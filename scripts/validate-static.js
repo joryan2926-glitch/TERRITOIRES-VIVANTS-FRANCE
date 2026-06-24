@@ -28,6 +28,12 @@ const broken = [];
 const missingSeo = [];
 const enrichmentIssues = [];
 const imageIssues = [];
+const architectureIssues = [];
+
+const architecturePath = path.join(root, "PUBLIC_ARCHITECTURE.md");
+const publicPages = fs.existsSync(architecturePath)
+  ? new Set([...fs.readFileSync(architecturePath, "utf8").matchAll(/^- ([^\r\n]+\.html)$/gm)].map((match) => match[1]))
+  : null;
 
 for (const file of htmlFiles) {
   const html = fs.readFileSync(path.join(root, file), "utf8");
@@ -43,6 +49,17 @@ for (const file of htmlFiles) {
 
   const markers = (html.match(/data-professional-enrichment=/g) || []).length;
   if (markers !== 1) enrichmentIssues.push({ file, markers });
+
+  if (publicPages) {
+    if (publicPages.has(file)) {
+      if (!/name="robots"\s+content="index, follow"/i.test(html)) architectureIssues.push({ file, issue: "public page is not indexable" });
+      if (!/rel="canonical"\s+href="https:\/\/www\.territoiresvivantsfrance\.fr/i.test(html)) architectureIssues.push({ file, issue: "canonical is not on www" });
+      if ((html.match(/class="breadcrumb"/g) || []).length !== 1) architectureIssues.push({ file, issue: "breadcrumb count" });
+      if (!/id="global-structured-data"/i.test(html)) architectureIssues.push({ file, issue: "missing global structured data" });
+    } else if (!/name="robots"\s+content="noindex, nofollow"/i.test(html)) {
+      architectureIssues.push({ file, issue: "internal page is not noindex" });
+    }
+  }
 
   for (const match of html.matchAll(/\shref="([^"]+)"/g)) {
     const issue = checkLocalTarget(file, match[1], "href");
@@ -60,4 +77,6 @@ console.log(JSON.stringify({
   missingSeo,
   brokenLinks: broken,
   missingImages: imageIssues,
+  publicPages: publicPages?.size || null,
+  architectureIssues,
 }, null, 2));
