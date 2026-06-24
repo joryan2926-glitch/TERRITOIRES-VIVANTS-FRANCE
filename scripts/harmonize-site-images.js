@@ -5,6 +5,87 @@ const { execFileSync } = require("child_process");
 const root = process.cwd();
 const photoDir = path.join(root, "assets", "photos");
 
+const photos = {
+  housing: ["abandoned-house-reunion.jpg", "Maison vacante à La Réunion, représentative des enjeux de remise en usage"],
+  closedShop: ["abandoned-shop-paris.jpg", "Local commercial fermé à Paris en attente d'un nouvel usage"],
+  oldGrocery: ["old-grocery-jura.jpg", "Ancienne épicerie fermée dans le Jura, exemple de vacance commerciale rurale"],
+  localCommerce: ["local-commerce.jpg", "Commerce de proximité en activité dans un centre-ville"],
+  materials: ["salvage-warehouse.jpg", "Lieu de collecte et de valorisation de matériaux issus du bâtiment"],
+  brownfield: ["brownfield-lille.jpg", "Friche urbaine à Lille observée avant sa transformation"],
+  garden: ["community-garden-paris.jpg", "Jardin partagé aménagé au cœur d'un quartier parisien"],
+  volunteers: ["solidarity-volunteers.jpg", "Bénévoles réunis pour participer à une action collective"],
+  worksite: ["construction-team.jpg", "Équipe professionnelle mobilisée sur un chantier de construction"],
+  method: ["construction-reuse.jpg", "Plans de rénovation étudiés avant l'engagement d'un projet"],
+  institution: ["institutional-meeting.jpg", "Réunion de travail entre acteurs d'un projet territorial"],
+  documents: ["documents-resources.jpg", "Documents de travail préparés pour instruire un projet"],
+  saintEtienne: ["saint-etienne-design.jpg", "Cité du Design à Saint-Étienne, territoire de préfiguration de TVF"],
+};
+
+const pageThemes = {
+  "qui-sommes-nous.html": "institution",
+  "pourquoi-tvf-existe.html": "brownfield",
+  "nos-actions.html": "worksite",
+  "notre-methode.html": "method",
+  "vision-france-2035.html": "saintEtienne",
+  "action-logements-vacants.html": "housing",
+  "action-commerces-inoccupes.html": "closedShop",
+  "action-materiaux-reemploi.html": "materials",
+  "action-espaces-abandonnes.html": "brownfield",
+  "action-solidarite-insertion.html": "volunteers",
+  "nos-poles.html": "worksite",
+  "pole-habitat-vivant.html": "housing",
+  "pole-materiautheque-solidaire.html": "materials",
+  "pole-commerce-vivant.html": "localCommerce",
+  "pole-friches-terrains-vivants.html": "garden",
+  "pole-solidarite-insertion.html": "volunteers",
+  "observatoire-national.html": "saintEtienne",
+  "carte-territoires.html": "saintEtienne",
+  "impact-resultats.html": "institution",
+  "dossier-saint-etienne.html": "saintEtienne",
+  "banque-materiaux.html": "materials",
+  "bien-solidaire-usage-partage.html": "housing",
+  "financer-projets.html": "institution",
+  "projets-pilotes.html": "saintEtienne",
+  "agir-avec-nous.html": "volunteers",
+  "signalement.html": "oldGrocery",
+  "proprietaires.html": "housing",
+  "parcours-demande.html": "method",
+  "antennes-locales.html": "saintEtienne",
+  "espace-collectivites.html": "institution",
+  "espace-entreprises.html": "materials",
+  "espace-benevoles.html": "volunteers",
+  "partenariats-strategiques.html": "institution",
+  "ressources.html": "documents",
+  "sources-donnees.html": "documents",
+  "faq.html": "institution",
+  "gouvernance.html": "institution",
+  "transparence.html": "institution",
+  "documents-officiels.html": "documents",
+  "ce-que-tvf-ne-fait-pas.html": "materials",
+  "statuts.html": "documents",
+  "faire-un-don.html": "institution",
+  "contact.html": "saintEtienne",
+  "mentions-legales.html": "documents",
+  "politique-confidentialite.html": "documents",
+};
+
+const fallbackRules = [
+  [/logement|habitat|proprietaire|proposer-un-bien|bien-solidaire|bailleur/, "housing"],
+  [/commerce/, "closedShop"],
+  [/materiau|materiautheque|reemploi|banque-materiaux/, "materials"],
+  [/friche|terrain|espace-abandonne/, "brownfield"],
+  [/jardin|biodiversite|ferme-urbaine/, "garden"],
+  [/benevole|solidarite|insertion|recrutement/, "volunteers"],
+  [/observatoire|carte|territoire|tableau|statistique|impact/, "saintEtienne"],
+  [/collectivite|gouvernance|transparence|partenariat|association/, "institution"],
+  [/financ|investisseur|mecene|faire-un-don/, "institution"],
+  [/entreprise/, "materials"],
+  [/document|ressource|statut|mention|faq|presse|publication|etude/, "documents"],
+  [/methode|diagnostic|parcours/, "method"],
+  [/projet|pilote|chantier/, "worksite"],
+  [/vision|antenne|national/, "saintEtienne"],
+];
+
 const imageDimensions = new Map();
 try {
   const python = "C:\\Users\\jowst\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe";
@@ -22,116 +103,67 @@ for p in Path("assets/photos").glob("*.jpg"):
     if (src && width && height) imageDimensions.set(src, { width, height });
   }
 } catch {
-  // Dimensions are an enhancement. The script still harmonizes image choices if PIL is unavailable.
+  // The selected image and alt text are still applied if dimensions cannot be read.
 }
 
-const themeImages = [
-  {
-    image: "assets/photos/housing-renovation.jpg",
-    keywords: ["logement", "habitat", "proprietaire", "propriétaire", "bien-solidaire", "bien", "bailleurs"]
-  },
-  {
-    image: "assets/photos/local-commerce.jpg",
-    keywords: ["commerce", "commerces", "commercial"]
-  },
-  {
-    image: "assets/photos/materials-warehouse.jpg",
-    keywords: ["materiau", "materiaux", "matériau", "matériaux", "materiautheque", "matériauthèque", "reemploi", "réemploi", "banque-materiaux"]
-  },
-  {
-    image: "assets/photos/urban-garden-community.jpg",
-    keywords: ["friche", "friches", "terrain", "terrains", "espaces-abandonnes", "biodiversite", "biodiversité"]
-  },
-  {
-    image: "assets/photos/community-volunteers.jpg",
-    keywords: ["benevole", "bénévole", "benevoles", "bénévoles", "solidarite", "solidarité", "insertion", "recrutement"]
-  },
-  {
-    image: "assets/photos/territorial-map.jpg",
-    keywords: ["observatoire", "carte", "cartographie", "territoire", "territoires", "tableau", "statistique", "impact", "resultats", "résultats"]
-  },
-  {
-    image: "assets/photos/institutional-meeting.jpg",
-    keywords: ["collectivite", "collectivité", "collectivites", "collectivités", "gouvernance", "transparence", "partenariat", "partenariats", "association", "qui-sommes-nous"]
-  },
-  {
-    image: "assets/photos/construction-reuse.jpg",
-    keywords: ["financer", "finance", "investisseur", "mecene", "mécène", "fonds", "projet", "projets", "pilote"]
-  },
-  {
-    image: "assets/photos/documents-resources.jpg",
-    keywords: ["document", "documents", "ressources", "statuts", "mentions", "faq", "presse", "publication", "etudes", "études"]
-  },
-  {
-    image: "assets/photos/urban-renewal-street.jpg",
-    keywords: ["vision", "methode", "méthode", "antennes", "nationale", "plateforme", "mobile"]
-  }
-];
-
-const fallbackImage = "assets/photos/urban-renewal-street.jpg";
-
-function imageFor(file) {
-  const key = file.toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, "");
-  for (const theme of themeImages) {
-    if (theme.keywords.some((word) => key.includes(word.normalize("NFD").replace(/\p{Diacritic}/gu, "")))) {
-      return theme.image;
-    }
-  }
-  return fallbackImage;
+function themeFor(file) {
+  if (pageThemes[file]) return pageThemes[file];
+  const normalized = file.toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, "");
+  return fallbackRules.find(([pattern]) => pattern.test(normalized))?.[1] || "saintEtienne";
 }
 
-function withDimensions(tag, src) {
+function applyPhoto(tag, theme) {
+  const [name, alt] = photos[theme];
+  const src = `assets/photos/${name}`;
   const dims = imageDimensions.get(src);
-  if (!dims) return tag;
-  let next = tag.replace(/\swidth="[^"]*"/i, "").replace(/\sheight="[^"]*"/i, "");
-  return next.replace(/\s\/?>$/, ` width="${dims.width}" height="${dims.height}"$&`);
-}
-
-function replacePhotoSrcs(html, file) {
-  const selected = imageFor(file);
-  return html.replace(/<img\b([^>]*?)src="assets\/photos\/[^"]+\.jpg"([^>]*)>/gi, (tag, before, after) => {
-    const isLogo = /logo/i.test(tag);
-    if (isLogo) return tag;
-    let src = selected;
-    if (/page-hero-photo|panel-photo|priority-photo|ambition-photo|photo-panel|gallery-grid/i.test(tag)) {
-      src = selected;
-    } else if (/pole-photo/i.test(tag)) {
-      const context = `${before} ${after}`.toLowerCase();
-      if (context.includes("materiaux") || context.includes("matériaux")) src = "assets/photos/materials-warehouse.jpg";
-      else src = selected;
-    }
-    return withDimensions(tag.replace(/src="assets\/photos\/[^"]+\.jpg"/i, `src="${src}"`), src);
-  });
+  let next = tag
+    .replace(/src="assets\/photos\/[^"]+\.jpg"/i, `src="${src}"`)
+    .replace(/\salt="[^"]*"/i, ` alt="${alt}"`)
+    .replace(/\swidth="[^"]*"/i, "")
+    .replace(/\sheight="[^"]*"/i, "");
+  if (!/\salt=/i.test(next)) next = next.replace(/\s\/?>$/, ` alt="${alt}"$&`);
+  if (dims) next = next.replace(/\s\/?>$/, ` width="${dims.width}" height="${dims.height}"$&`);
+  return next;
 }
 
 function tuneHome(html) {
-  const homeReplacements = [
-    ["assets/photos/neighborhood-renovation.jpg", "assets/photos/urban-renewal-street.jpg"],
-    ["assets/photos/local-shop.jpg", "assets/photos/local-commerce.jpg"],
-    ["assets/photos/reuse-materials.jpg", "assets/photos/materials-warehouse.jpg"],
-    ["assets/photos/urban-green.jpg", "assets/photos/urban-garden-community.jpg"],
-    ["assets/photos/renovated-building.jpg", "assets/photos/housing-renovation.jpg"],
-    ["assets/photos/volunteers.jpg", "assets/photos/community-volunteers.jpg"]
+  const sequence = [
+    "saintEtienne",
+    "closedShop",
+    "materials",
+    "garden",
+    "housing",
+    "materials",
+    "localCommerce",
+    "garden",
+    "volunteers",
+    "worksite",
+    "saintEtienne",
+    "institution",
   ];
-  for (const [from, to] of homeReplacements) {
-    html = html.split(from).join(to);
-  }
-  html = html
-    .replace(/class="pole-photo" src="assets\/photos\/local-commerce\.jpg"/i, 'class="pole-photo" src="assets/photos/territorial-map.jpg"')
-    .replace(/class="panel-photo" src="assets\/photos\/urban-renewal-street\.jpg"/i, 'class="panel-photo" src="assets/photos/urban-renewal-street.jpg"')
-    .replace(/class="priority-photo" src="assets\/photos\/urban-garden-community\.jpg"/i, 'class="priority-photo" src="assets/photos/territorial-map.jpg"')
-    .replace(/class="ambition-photo" src="assets\/photos\/community-volunteers\.jpg"/i, 'class="ambition-photo" src="assets/photos/institutional-meeting.jpg"');
+  let index = 0;
   return html.replace(/<img\b[^>]*src="assets\/photos\/[^"]+\.jpg"[^>]*>/gi, (tag) => {
-    const src = (tag.match(/src="([^"]+)"/i) || [])[1];
-    return src ? withDimensions(tag, src) : tag;
+    const theme = sequence[index] || "saintEtienne";
+    index += 1;
+    return applyPhoto(tag, theme);
   });
 }
 
+function updateSocialImage(html, theme) {
+  const [name] = photos[theme];
+  const absolute = `https://www.territoiresvivantsfrance.fr/assets/photos/${name}`;
+  return html.replace(/(<meta\s+property="og:image"\s+content=")[^"]+("\s*\/?>)/i, `$1${absolute}$2`);
+}
+
 let changed = 0;
-for (const filePath of fs.readdirSync(root).filter((name) => name.endsWith(".html"))) {
-  const full = path.join(root, filePath);
+for (const file of fs.readdirSync(root).filter((name) => name.endsWith(".html"))) {
+  const full = path.join(root, file);
   const before = fs.readFileSync(full, "utf8");
-  let html = filePath === "index.html" ? tuneHome(before) : replacePhotoSrcs(before, filePath);
+  const theme = themeFor(file);
+  let html = file === "index.html"
+    ? tuneHome(before)
+    : before.replace(/<img\b[^>]*src="assets\/photos\/[^"]+\.jpg"[^>]*>/gi, (tag) => applyPhoto(tag, theme));
+  html = updateSocialImage(html, file === "index.html" ? "saintEtienne" : theme);
   if (html !== before) {
     fs.writeFileSync(full, html, "utf8");
     changed += 1;

@@ -2192,7 +2192,7 @@ img[src$="documents-resources.jpg"] {
   color: #fff;
   background:
     linear-gradient(135deg, rgba(6, 36, 59, 0.94), rgba(6, 60, 85, 0.9)),
-    url("assets/photos/neighborhood-renovation.jpg") center / cover;
+    url("assets/photos/construction-team.jpg") center 42% / cover;
   border-radius: 8px;
 }
 
