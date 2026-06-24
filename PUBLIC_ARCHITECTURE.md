@@ -2,8 +2,8 @@
 
 Mise a jour : 24 juin 2026.
 
-- Pages publiques indexables : 40
-- Anciennes URL redirigees : 42
+- Pages publiques indexables : 46
+- Anciennes URL redirigees : 41
 - Autres pages : interfaces internes, techniques ou evolutions futures en noindex.
 
 ## Pages publiques
@@ -35,16 +35,22 @@ Mise a jour : 24 juin 2026.
 - projets-pilotes.html
 - agir-avec-nous.html
 - signalement.html
+- proprietaires.html
+- parcours-demande.html
 - antennes-locales.html
 - espace-collectivites.html
 - espace-entreprises.html
 - espace-benevoles.html
 - partenariats-strategiques.html
 - ressources.html
+- sources-donnees.html
+- faq.html
 - gouvernance.html
 - transparence.html
 - documents-officiels.html
+- ce-que-tvf-ne-fait-pas.html
 - statuts.html
 - faire-un-don.html
 - contact.html
 - mentions-legales.html
+- politique-confidentialite.html

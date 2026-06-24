@@ -31,19 +31,25 @@ const publicPages = [
   "projets-pilotes.html",
   "agir-avec-nous.html",
   "signalement.html",
+  "proprietaires.html",
+  "parcours-demande.html",
   "antennes-locales.html",
   "espace-collectivites.html",
   "espace-entreprises.html",
   "espace-benevoles.html",
   "partenariats-strategiques.html",
   "ressources.html",
+  "sources-donnees.html",
+  "faq.html",
   "gouvernance.html",
   "transparence.html",
   "documents-officiels.html",
+  "ce-que-tvf-ne-fait-pas.html",
   "statuts.html",
   "faire-un-don.html",
   "contact.html",
-  "mentions-legales.html"
+  "mentions-legales.html",
+  "politique-confidentialite.html"
 ];
 
 const publicSet = new Set(publicPages);
@@ -80,15 +86,21 @@ const pageMeta = {
   "projets-pilotes.html": ["Dispositifs", "Projets pilotes"],
   "agir-avec-nous.html": ["Agir", "Agir avec nous"],
   "signalement.html": ["Agir", "Signaler un lieu"],
+  "proprietaires.html": ["Par public", "Propri&eacute;taires"],
+  "parcours-demande.html": ["Agir", "Parcours d'une demande"],
   "antennes-locales.html": ["Agir", "Antennes locales"],
   "espace-benevoles.html": ["Agir", "Espace b&eacute;n&eacute;voles"],
   "espace-collectivites.html": ["Partenariats", "Collectivit&eacute;s"],
   "espace-entreprises.html": ["Partenariats", "Entreprises"],
   "partenariats-strategiques.html": ["Partenariats", "Coop&eacute;rations"],
   "ressources.html": ["Ressources", "Centre de ressources"],
+  "sources-donnees.html": ["Ressources", "Sources et donn&eacute;es"],
+  "faq.html": ["Informations", "Questions fr&eacute;quentes"],
+  "ce-que-tvf-ne-fait-pas.html": ["Association", "Ce que TVF ne fait pas"],
   "faire-un-don.html": ["Agir", "Faire un don"],
   "contact.html": ["Contact", "Contact"],
-  "mentions-legales.html": ["Informations", "Mentions l&eacute;gales"]
+  "mentions-legales.html": ["Informations", "Mentions l&eacute;gales"],
+  "politique-confidentialite.html": ["Informations", "Politique de confidentialit&eacute;"]
 };
 
 const statusMeta = {
@@ -98,7 +110,8 @@ const statusMeta = {
   "carte-territoires.html": ["experimental", "Cartographie exp&eacute;rimentale"],
   "banque-materiaux.html": ["experimental", "Dispositif exp&eacute;rimental"],
   "bien-solidaire-usage-partage.html": ["experimental", "Programme en pr&eacute;figuration"],
-  "financer-projets.html": ["experimental", "Cadre en pr&eacute;figuration"]
+  "financer-projets.html": ["experimental", "Cadre en pr&eacute;figuration"],
+  "proprietaires.html": ["experimental", "Parcours propri&eacute;taires en structuration"]
 };
 
 const redirects = {
@@ -121,10 +134,10 @@ const redirects = {
   "/materiaux-reels.html": "/banque-materiaux.html",
   "/proposer-materiaux.html": "/banque-materiaux.html#contribuer",
   "/faq-bien-solidaire.html": "/bien-solidaire-usage-partage.html#faq",
-  "/proposer-un-bien.html": "/bien-solidaire-usage-partage.html#proposer",
+  "/proposer-un-bien.html": "/proprietaires.html",
   "/carte-biens-candidats.html": "/bien-solidaire-usage-partage.html",
   "/projets-realises-bien-solidaire.html": "/projets-pilotes.html",
-  "/devenir-proprietaire-partenaire.html": "/bien-solidaire-usage-partage.html",
+  "/devenir-proprietaire-partenaire.html": "/proprietaires.html",
   "/fonds-investissement-solidaire.html": "/financer-projets.html",
   "/devenir-investisseur-solidaire.html": "/financer-projets.html#contribuer",
   "/devenir-mecene.html": "/financer-projets.html#mecenat",
@@ -141,7 +154,6 @@ const redirects = {
   "/centre-ressources.html": "/ressources.html",
   "/espace-presse.html": "/ressources.html#presse",
   "/mesure-impact.html": "/impact-resultats.html",
-  "/faq.html": "/agir-avec-nous.html#faq",
   "/plateforme-operationnelle.html": "/nos-actions.html",
   "/tvf-mobile.html": "/vision-france-2035.html"
 };
@@ -151,7 +163,8 @@ const iconPaths = {
   action: '<path d="M4 19V5M4 19h16M8 16v-5M12 16V8M16 16v-7"/>',
   pole: '<path d="M4 9.5 12 5l8 4.5-8 4.5-8-4.5Z"/><path d="M4 9.5V16l8 4.5 8-4.5V9.5"/>',
   observe: '<circle cx="11" cy="11" r="7"/><path d="m16.5 16.5 4 4"/>',
-  engage: '<path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10Z"/>'
+  engage: '<path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10Z"/>',
+  audience: '<circle cx="9" cy="8" r="3"/><circle cx="17" cy="10" r="2"/><path d="M3 20a6 6 0 0 1 12 0M14 20a4 4 0 0 1 7 0"/>'
 };
 
 function megaLink(href, title, description, icon) {
@@ -164,6 +177,36 @@ function dropdown(label, href, heading, description, links) {
 
 const header = `<header class="site-header"><a class="brand" href="index.html" aria-label="Territoires Vivants France - Accueil"><img decoding="async" fetchpriority="high" src="assets/logo-territoires-vivants-france.png" alt="Logo Territoires Vivants France" /></a><nav class="main-nav" aria-label="Navigation principale"><a href="index.html">Accueil</a>${dropdown("Association", "qui-sommes-nous.html", "Association", "Comprendre l'identit&eacute;, la raison d'&ecirc;tre, la gouvernance et les engagements de TVF.", [megaLink("qui-sommes-nous.html", "Qui sommes-nous ?", "Mission, origine et positionnement.", "institution"),megaLink("pourquoi-tvf-existe.html", "Pourquoi TVF existe", "Le probl&egrave;me public, les causes et la r&eacute;ponse TVF.", "institution"),megaLink("gouvernance.html", "Gouvernance", "Responsabilit&eacute;s et d&eacute;cisions.", "institution"),megaLink("transparence.html", "Transparence", "Documents et informations confirm&eacute;es.", "institution"),megaLink("documents-officiels.html", "Documents et conventions", "R&egrave;gles, crit&egrave;res et mod&egrave;les.", "institution"),megaLink("vision-france-2035.html", "Vision France 2035", "Trajectoire nationale progressive.", "institution")])}${dropdown("Nos actions", "nos-actions.html", "Nos actions", "Des dossiers th&eacute;matiques pour comprendre les enjeux et les solutions propos&eacute;es.", [megaLink("nos-actions.html", "Vue d'ensemble", "Les leviers d'intervention de TVF.", "action"),megaLink("notre-methode.html", "Notre m&eacute;thode", "Identifier, qualifier, mobiliser et suivre.", "action"),megaLink("action-logements-vacants.html", "Logements vacants", "Rep&eacute;rer et accompagner la remise en usage.", "action"),megaLink("action-commerces-inoccupes.html", "Commerces inoccup&eacute;s", "R&eacute;activer les rez-de-chauss&eacute;e utiles.", "action"),megaLink("action-materiaux-reemploi.html", "Mat&eacute;riaux de r&eacute;emploi", "Pr&eacute;server la valeur des ressources.", "action"),megaLink("action-espaces-abandonnes.html", "Espaces abandonn&eacute;s", "Qualifier friches et terrains d&eacute;laiss&eacute;s.", "action"),megaLink("action-solidarite-insertion.html", "Solidarit&eacute; et insertion", "Relier projets, comp&eacute;tences et emploi.", "action")])}${dropdown("Nos p&ocirc;les", "nos-poles.html", "Nos p&ocirc;les", "Les expertises appel&eacute;es &agrave; structurer l'action nationale.", [megaLink("nos-poles.html", "Vue d'ensemble", "Comment les cinq p&ocirc;les coop&egrave;rent.", "pole"),megaLink("pole-habitat-vivant.html", "Habitat Vivant", "Logements vacants et habitat digne.", "pole"),megaLink("pole-materiautheque-solidaire.html", "Mat&eacute;riauth&egrave;que Solidaire", "R&eacute;emploi et ressources territoriales.", "pole"),megaLink("pole-commerce-vivant.html", "Commerce Vivant", "Locaux et activit&eacute;s de proximit&eacute;.", "pole"),megaLink("pole-friches-terrains-vivants.html", "Friches et Terrains Vivants", "Usages sobres et biodiversit&eacute;.", "pole"),megaLink("pole-solidarite-insertion.html", "Solidarit&eacute; et Insertion", "Parcours et engagement citoyen.", "pole")])}${dropdown("Observatoire", "observatoire-national.html", "Observatoire", "Des donn&eacute;es sourc&eacute;es, dat&eacute;es et territorialis&eacute;es.", [megaLink("observatoire-national.html", "Observatoire national", "Logements, commerces, friches et mat&eacute;riaux.", "observe"),megaLink("dossier-saint-etienne.html", "Dossier Saint-&Eacute;tienne", "Premier diagnostic territorial pilote.", "observe"),megaLink("carte-territoires.html", "Carte des territoires", "Visualisation et couches th&eacute;matiques.", "observe"),megaLink("impact-resultats.html", "Impact et r&eacute;sultats", "Indicateurs r&eacute;els et m&eacute;thode de mesure.", "observe")])}${dropdown("Agir", "agir-avec-nous.html", "Agir avec TVF", "Signaler, contribuer, coop&eacute;rer ou soutenir l'association.", [megaLink("agir-avec-nous.html", "Toutes les formes d'engagement", "Trouver le parcours adapt&eacute;.", "engage"),megaLink("signalement.html", "Signaler un lieu", "Transmettre une situation &agrave; qualifier.", "engage"),megaLink("banque-materiaux.html", "Proposer une ressource", "Contribuer &agrave; la Banque de Mat&eacute;riaux.", "engage"),megaLink("bien-solidaire-usage-partage.html", "Proposer un bien", "&Eacute;tudier un bien vacant ou inutilis&eacute;.", "engage"),megaLink("antennes-locales.html", "Antennes locales", "Pr&eacute;parer une implantation territoriale.", "engage"),megaLink("faire-un-don.html", "Faire un don", "Soutenir la structuration de TVF.", "engage")])}</nav><a class="donate-button" href="contact.html">Nous contacter <span aria-hidden="true">&rarr;</span></a></header>`;
 
+const audienceMenu = dropdown("Par public", "agir-avec-nous.html", "Votre profil", "Acc&eacute;der directement aux informations, services et parcours correspondant &agrave; votre situation.", [
+  megaLink("proprietaires.html", "Propri&eacute;taires", "Proposer un bien et &eacute;tudier une remise en usage.", "audience"),
+  megaLink("espace-collectivites.html", "Collectivit&eacute;s", "Diagnostic, cartographie et coop&eacute;ration territoriale.", "audience"),
+  megaLink("espace-entreprises.html", "Entreprises", "Mat&eacute;riaux, comp&eacute;tences, locaux et m&eacute;c&eacute;nat.", "audience"),
+  megaLink("espace-benevoles.html", "Citoyens et b&eacute;n&eacute;voles", "Missions, signalements et engagement local.", "audience"),
+  megaLink("financer-projets.html", "M&eacute;c&egrave;nes et financeurs", "Soutenir des projets qualifi&eacute;s et suivis.", "audience"),
+  megaLink("partenariats-strategiques.html", "Partenaires", "Construire une coop&eacute;ration dans un cadre clair.", "audience")
+]);
+
+const observatoryMenu = dropdown("Observatoire", "observatoire-national.html", "Observatoire", "Des donn&eacute;es sourc&eacute;es, dat&eacute;es et territorialis&eacute;es.", [
+  megaLink("observatoire-national.html", "Observatoire national", "Logements, commerces, friches et mat&eacute;riaux.", "observe"),
+  megaLink("dossier-saint-etienne.html", "Dossier Saint-&Eacute;tienne", "Premier diagnostic territorial pilote.", "observe"),
+  megaLink("carte-territoires.html", "Carte des territoires", "Visualisation et couches th&eacute;matiques.", "observe"),
+  megaLink("impact-resultats.html", "Impact et r&eacute;sultats", "Indicateurs r&eacute;els et m&eacute;thode de mesure.", "observe")
+]);
+
+const engagementMenu = dropdown("Agir", "agir-avec-nous.html", "Agir avec TVF", "Signaler, contribuer, coop&eacute;rer ou soutenir l'association.", [
+  megaLink("agir-avec-nous.html", "Toutes les formes d'engagement", "Trouver le parcours adapt&eacute;.", "engage"),
+  megaLink("signalement.html", "Signaler un lieu", "Transmettre une situation &agrave; qualifier.", "engage"),
+  megaLink("banque-materiaux.html", "Proposer une ressource", "Contribuer &agrave; la Banque de Mat&eacute;riaux.", "engage"),
+  megaLink("bien-solidaire-usage-partage.html", "Proposer un bien", "&Eacute;tudier un bien vacant ou inutilis&eacute;.", "engage"),
+  megaLink("antennes-locales.html", "Antennes locales", "Pr&eacute;parer une implantation territoriale.", "engage"),
+  megaLink("faire-un-don.html", "Faire un don", "Soutenir la structuration de TVF.", "engage")
+]);
+
+const completeHeader = header.replace(
+  `${observatoryMenu}${engagementMenu}`,
+  `${audienceMenu}${engagementMenu}${observatoryMenu}`
+);
+
 function stripTags(value) {
   return value.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
 }
@@ -171,7 +214,7 @@ function stripTags(value) {
 for (const file of fs.readdirSync(root).filter((name) => name.endsWith(".html"))) {
   const full = path.join(root, file);
   let html = fs.readFileSync(full, "utf8");
-  html = html.replace(/<header class="site-header">[\s\S]*?<\/header>/i, header);
+  html = html.replace(/<header class="site-header"[^>]*>[\s\S]*?<\/header>/i, completeHeader);
   html = html.replace(/\s*<nav class="breadcrumb"[\s\S]*?<\/nav>/i, "");
   html = html.replace(/\s*<script\s+defer\s+src="navigation\.js"><\/script>/gi, "");
 

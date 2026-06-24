@@ -127,7 +127,7 @@
     },
     {
       "source": "/proposer-un-bien.html",
-      "destination": "/bien-solidaire-usage-partage.html#proposer",
+      "destination": "/proprietaires.html",
       "permanent": true
     },
     {
@@ -142,7 +142,7 @@
     },
     {
       "source": "/devenir-proprietaire-partenaire.html",
-      "destination": "/bien-solidaire-usage-partage.html",
+      "destination": "/proprietaires.html",
       "permanent": true
     },
     {
@@ -223,11 +223,6 @@
     {
       "source": "/mesure-impact.html",
       "destination": "/impact-resultats.html",
-      "permanent": true
-    },
-    {
-      "source": "/faq.html",
-      "destination": "/agir-avec-nous.html#faq",
       "permanent": true
     },
     {
