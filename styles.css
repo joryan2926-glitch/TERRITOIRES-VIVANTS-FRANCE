@@ -76,6 +76,11 @@ svg {
   max-width: 100%;
 }
 
+img[src*="assets/photos/"] {
+  background: var(--mist);
+  color: transparent;
+}
+
 .sr-only {
   position: absolute;
   width: 1px;
@@ -1417,7 +1422,7 @@ svg {
   height: 100%;
   min-height: 0;
   object-fit: cover;
-  filter: saturate(0.92) contrast(1.02);
+  filter: saturate(1.04) contrast(1.04);
   box-shadow: 0 22px 40px rgba(8, 36, 61, 0.18);
 }
 
@@ -1464,6 +1469,7 @@ svg {
   height: 104px;
   object-fit: cover;
   border-radius: 6px;
+  filter: saturate(1.04) contrast(1.03);
 }
 
 .pole-card:last-child {
@@ -1558,6 +1564,7 @@ svg {
   width: 100%;
   object-fit: cover;
   border-radius: 6px;
+  filter: saturate(1.04) contrast(1.03);
 }
 
 .panel-photo {
@@ -1788,10 +1795,45 @@ svg {
 }
 
 .page-hero-photo {
+  width: 100%;
   height: clamp(280px, 34vw, 460px);
+  aspect-ratio: 16 / 10;
   object-fit: cover;
+  object-position: center;
   border-radius: 8px;
   box-shadow: var(--shadow);
+  filter: saturate(1.04) contrast(1.03);
+}
+
+img[src$="territorial-map.jpg"] {
+  object-position: center;
+}
+
+img[src$="materials-warehouse.jpg"] {
+  object-position: center 46%;
+}
+
+img[src$="housing-renovation.jpg"] {
+  object-position: center 54%;
+}
+
+img[src$="local-commerce.jpg"] {
+  object-position: center 50%;
+}
+
+img[src$="community-volunteers.jpg"],
+img[src$="solidarity-training.jpg"] {
+  object-position: center 42%;
+}
+
+img[src$="urban-garden-community.jpg"],
+img[src$="green-urban-space.jpg"] {
+  object-position: center 45%;
+}
+
+img[src$="institutional-meeting.jpg"],
+img[src$="documents-resources.jpg"] {
+  object-position: center 45%;
 }
 
 .page-wrap {
