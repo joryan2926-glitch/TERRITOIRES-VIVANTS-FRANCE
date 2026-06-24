@@ -116,6 +116,10 @@ img[src*="assets/photos/"] {
   object-position: left center;
 }
 
+.mobile-menu-toggle {
+  display: none;
+}
+
 .main-nav {
   display: flex;
   justify-content: center;
@@ -4264,7 +4268,7 @@ img[src$="documents-resources.jpg"] {
 @media (max-width: 860px) {
   .site-header {
     position: static;
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr) auto;
     gap: 12px;
     min-height: auto;
     padding: 14px 18px 16px;
@@ -4272,14 +4276,43 @@ img[src$="documents-resources.jpg"] {
   }
 
   .brand img {
-    width: 214px;
-    height: 72px;
-    margin: 0 auto;
+    width: 198px;
+    height: 66px;
+    margin: 0;
+  }
+
+  .mobile-menu-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 42px;
+    padding: 0 14px;
+    color: #0a2036;
+    font: 600 13px/1 "Aptos", "Segoe UI", Arial, sans-serif;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(8, 36, 61, 0.12);
+    border-radius: 999px;
+    box-shadow: 0 8px 20px rgba(8, 36, 61, 0.08);
+    cursor: pointer;
+    transition: border-color 200ms ease, color 200ms ease, background 200ms ease, transform 200ms ease;
+  }
+
+  .mobile-menu-toggle svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .mobile-menu-toggle[aria-expanded="true"] {
+    color: #2e7d32;
+    background: rgba(46, 125, 50, 0.08);
+    border-color: rgba(46, 125, 50, 0.28);
   }
 
   .main-nav {
     position: relative;
-    display: grid;
+    display: none;
+    grid-column: 1 / -1;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     justify-content: stretch;
     align-items: start;
@@ -4289,6 +4322,10 @@ img[src$="documents-resources.jpg"] {
     padding-bottom: 0;
     font-size: 12px;
     font-weight: 500;
+  }
+
+  .mobile-nav-open .main-nav {
+    display: grid;
   }
 
   .main-nav > a,
@@ -4431,9 +4468,13 @@ img[src$="documents-resources.jpg"] {
   }
 
   .donate-button {
-    grid-column: auto;
+    grid-column: 1 / -1;
     justify-self: stretch;
     margin-top: 4px;
+  }
+
+  body:not(.mobile-nav-open) .donate-button {
+    display: none;
   }
 
   .hero {

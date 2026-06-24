@@ -50,3 +50,20 @@ Contrôles réalisés :
 - images et logo chargés ;
 - liens internes vérifiés ;
 - balises SEO, Open Graph, favicon et manifeste ajoutés.
+
+Contrôles à lancer avant chaque push production :
+
+```bash
+node scripts/scan-secrets.js
+node scripts/validate-static.js
+node scripts/check-expanded-copy.js
+node --check navigation.js
+```
+
+Point de sécurité important :
+
+- si une clé `SUPABASE_SERVICE_ROLE_KEY` a été partagée hors Vercel ou Supabase, la régénérer immédiatement ;
+- ne jamais placer de clé réelle dans le dépôt Git ;
+- conserver uniquement `.env.example` comme modèle public.
+
+Voir aussi `PRODUCTION_RESTANT.md` pour la liste des actions qui nécessitent un accès aux comptes Supabase, Vercel ou aux informations officielles de l'association.
