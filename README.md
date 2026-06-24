@@ -201,3 +201,19 @@ La phase 4 professionnalise le contenu :
 Le site est statique et peut être déployé sur Vercel depuis la branche `main`.
 
 Voir `DEPLOIEMENT.md` pour les points à compléter avant mise en production définitive.
+
+
+## Objet de l'association
+
+Territoires Vivants France a pour objet de contribuer à la revitalisation des territoires par le repérage, la qualification, la réhabilitation, le réemploi et la remise en usage de biens, d'espaces et de ressources inutilisés, notamment les logements vacants, commerces fermés, bâtiments abandonnés, friches, terrains délaissés et matériaux réemployables, au bénéfice des habitants, des collectivités, des associations et des acteurs locaux.
+
+### Missions principales
+
+- **Identifier** : Repérer et documenter les logements vacants, commerces fermés, bâtiments abandonnés, friches, terrains inutilisés et ressources encore utiles.
+- **Qualifier** : Analyser les contraintes juridiques, techniques, sociales, environnementales et territoriales avant toute orientation.
+- **Accompagner** : Aider les propriétaires, collectivités, associations, entreprises et habitants à transformer une ressource inutilisée en projet utile.
+- **Réemployer** : Organiser la valorisation des matériaux disponibles dans une logique d'économie circulaire et de coopération territoriale.
+- **Mobiliser** : Structurer l'engagement citoyen, le bénévolat, les compétences, les partenariats et les financements effectivement confirmés.
+- **Transmettre** : Produire des données, des outils, des méthodes et des retours d'expérience pour aider les territoires à agir avec rigueur.
+
+Cette formulation reste modifiable après déclaration officielle, validation des statuts et publication des informations administratives définitives.
