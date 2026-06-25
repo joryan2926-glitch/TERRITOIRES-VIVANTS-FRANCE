@@ -7314,3 +7314,425 @@ img[src$="documents-resources.jpg"] {
     width: 100%;
   }
 }
+
+/* Institutionnalisation globale : typographie plus sobre, titres moins massifs,
+   largeur maîtrisée et composants harmonisés sur l'ensemble du site. */
+:root {
+  --ink: #10283d;
+  --ink-soft: #425466;
+  --green: #2f6f35;
+  --green-soft: #5b8f45;
+  --paper: #fbfaf6;
+  --sand: #f4f1ea;
+  --mist: #eef3f1;
+  --line: rgba(16, 40, 61, 0.13);
+  --shadow: 0 16px 34px rgba(16, 40, 61, 0.1);
+  --page-gutter: clamp(18px, 3.6vw, 56px);
+  --max-width: 1180px;
+  --wide-max-width: 1280px;
+  --title-xl: clamp(29px, 2.65vw, 42px);
+  --title-lg: clamp(25px, 2.15vw, 34px);
+  --title-md: clamp(20px, 1.65vw, 27px);
+  --display-title: clamp(34px, 3.55vw, 56px);
+  --display-title-sm: clamp(30px, 2.95vw, 44px);
+}
+
+body {
+  color: var(--ink);
+  font-family: "Aptos", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.58;
+}
+
+h1,
+h2,
+h3 {
+  letter-spacing: 0;
+}
+
+.site-header {
+  min-height: 88px;
+  padding-block: 6px;
+  box-shadow: 0 8px 22px rgba(16, 40, 61, 0.052);
+}
+
+.brand img {
+  width: 244px;
+  height: 78px;
+}
+
+.main-nav {
+  gap: clamp(20px, 2vw, 36px);
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+
+.main-nav a {
+  min-height: 52px;
+}
+
+.main-nav a::after,
+.nav-drop-toggle::after {
+  bottom: 9px;
+  width: 22px;
+  background: rgba(47, 111, 53, 0.55);
+}
+
+.nav-dropdown-menu {
+  border-color: rgba(16, 40, 61, 0.08);
+  box-shadow: 0 24px 58px rgba(16, 40, 61, 0.14);
+}
+
+.nav-dropdown:nth-last-of-type(-n + 2) .nav-dropdown-menu,
+.main-nav .nav-dropdown:last-of-type .nav-dropdown-menu {
+  right: 0;
+  left: auto;
+  transform: translateY(10px);
+}
+
+.nav-dropdown:nth-last-of-type(-n + 2):hover .nav-dropdown-menu,
+.nav-dropdown:nth-last-of-type(-n + 2):focus-within .nav-dropdown-menu,
+.main-nav .nav-dropdown:last-of-type:hover .nav-dropdown-menu,
+.main-nav .nav-dropdown:last-of-type:focus-within .nav-dropdown-menu {
+  transform: translateY(0);
+}
+
+.mega-menu-heading strong,
+.dossier-kicker,
+.doc-kicker {
+  letter-spacing: 0.075em;
+}
+
+.mega-copy strong {
+  font-weight: 650;
+}
+
+.page-hero {
+  gap: clamp(24px, 3.6vw, 48px);
+  padding-block: clamp(34px, 4.4vw, 58px);
+}
+
+.page-hero h1 {
+  max-width: 920px;
+  margin-bottom: 16px;
+  font-size: var(--title-xl);
+  font-weight: 720;
+  line-height: 1.12;
+  text-transform: none;
+}
+
+.page-hero p {
+  max-width: 720px;
+  color: var(--ink-soft);
+  font-size: clamp(16px, 1.2vw, 17px);
+  font-weight: 520;
+  line-height: 1.68;
+}
+
+.page-hero-photo {
+  height: clamp(260px, 30vw, 410px);
+  border-radius: 10px;
+  box-shadow: 0 18px 38px rgba(16, 40, 61, 0.12);
+}
+
+.hero h1,
+.actions-hero-overlay h1,
+.poles-hero-label + h1,
+.impact-hero-panel h1 {
+  font-size: clamp(32px, 3.25vw, 50px);
+  font-weight: 730;
+  line-height: 1.08;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.section-heading,
+.content-panel h2,
+.content-panel h3,
+.strategy-card h2,
+.strategy-card h3,
+.pole-card h3,
+.dashboard h2,
+.dashboard h3,
+.ambition h2,
+.act-band h2,
+.news-section h2,
+.case-card h3,
+.faq-item h3,
+.doc-card h3,
+.data-card span,
+.home-object-section .objective-list strong {
+  text-transform: none;
+}
+
+.section-heading {
+  margin-bottom: 16px;
+  color: var(--ink);
+  font-size: var(--title-md);
+  font-weight: 720;
+  line-height: 1.2;
+}
+
+.lead-block {
+  max-width: 920px;
+  color: var(--ink-soft);
+  font-size: clamp(16px, 1.25vw, 18px);
+  font-weight: 520;
+  line-height: 1.72;
+}
+
+.dossier-intro h2,
+.dossier-section h2,
+.document-section h2,
+.actions-feature-copy h2,
+.poles-feature-copy h2,
+.tvf-difference-header h2,
+.tvf-difference-copy h2,
+.coordination-diagram-section > h2,
+.differentiation-comparison > h2,
+.differentiation-ecosystem > h2,
+.impact-section h2 {
+  font-size: var(--title-lg);
+  font-weight: 720;
+  line-height: 1.18;
+  text-transform: none;
+}
+
+.content-panel,
+.strategy-card,
+.dossier-card,
+.document-card,
+.opportunity-card,
+.method-register article,
+.flow-steps article,
+.audience-card,
+.case-card,
+.doc-card,
+.data-card,
+.faq-item {
+  border-color: rgba(16, 40, 61, 0.09);
+  border-radius: 10px;
+  box-shadow: 0 10px 24px rgba(16, 40, 61, 0.055);
+}
+
+.content-panel,
+.strategy-card,
+.dossier-card,
+.document-card,
+.opportunity-card,
+.method-register article {
+  padding: clamp(20px, 2vw, 26px);
+}
+
+.strategy-card {
+  min-height: 166px;
+}
+
+.strategy-card h2,
+.strategy-card h3,
+.dossier-card h3,
+.document-card h3,
+.opportunity-card h3,
+.method-register h3,
+.case-card h3,
+.faq-item h3,
+.doc-card h3 {
+  color: var(--ink);
+  font-size: clamp(17px, 1.25vw, 20px);
+  font-weight: 700;
+  line-height: 1.26;
+}
+
+.pole-card h3,
+.dashboard h2,
+.ambition h2,
+.act-band h2,
+.news-section h2 {
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.dashboard h2,
+.ambition h2,
+.act-band h2,
+.news-section h2 {
+  font-size: clamp(20px, 1.6vw, 26px);
+}
+
+.strategy-card p,
+.content-panel p,
+.dossier-card p,
+.document-card p,
+.opportunity-card p,
+.method-register p,
+.case-card p,
+.doc-card p,
+.faq-item p {
+  color: var(--ink-soft);
+  font-weight: 500;
+  line-height: 1.68;
+}
+
+.button,
+.donate-button,
+button.button {
+  border-radius: 999px;
+  font-weight: 650;
+  letter-spacing: 0;
+  box-shadow: 0 8px 18px rgba(47, 111, 53, 0.12);
+}
+
+.button.primary,
+.donate-button {
+  background: linear-gradient(135deg, #2f6f35, #4f8f42);
+}
+
+.button:hover,
+.donate-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 28px rgba(47, 111, 53, 0.16);
+}
+
+.content-panel.blue,
+.flow-note,
+.cta-band,
+.institutional-callout {
+  background: linear-gradient(135deg, #10283d, #1d5a54);
+}
+
+.page-wrap {
+  padding-block: 32px 54px;
+}
+
+.dossier-section,
+.document-section {
+  margin-bottom: clamp(48px, 5vw, 66px);
+}
+
+.strategy-grid,
+.dossier-grid,
+.document-grid,
+.opportunity-grid,
+.method-register,
+.case-study-grid,
+.doc-grid,
+.data-grid {
+  gap: clamp(14px, 1.7vw, 20px);
+}
+
+.stat-comparison {
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.stat-comparison th {
+  font-weight: 700;
+}
+
+.breadcrumb {
+  color: rgba(16, 40, 61, 0.68);
+  font-size: 13px;
+}
+
+.page-status,
+.status-chip,
+.document-status {
+  border-radius: 999px;
+  font-weight: 650;
+  letter-spacing: 0.035em;
+}
+
+@media (max-width: 1260px) {
+  .site-header {
+    min-height: 92px;
+  }
+
+  .brand img {
+    width: 230px;
+    height: 74px;
+  }
+
+  .main-nav {
+    gap: 16px;
+    font-size: 13.5px;
+  }
+}
+
+@media (max-width: 900px) {
+  :root {
+    --title-xl: clamp(28px, 7vw, 38px);
+    --title-lg: clamp(24px, 5.6vw, 32px);
+    --title-md: clamp(20px, 4.8vw, 26px);
+    --display-title: clamp(32px, 9vw, 46px);
+    --display-title-sm: clamp(28px, 7.5vw, 40px);
+  }
+
+  .page-hero {
+    padding-block: 30px;
+  }
+
+  .page-hero h1 {
+    line-height: 1.13;
+  }
+
+  .page-hero-photo {
+    height: clamp(230px, 56vw, 340px);
+  }
+
+  .strategy-grid,
+  .dossier-grid,
+  .document-grid,
+  .opportunity-grid,
+  .method-register,
+  .case-study-grid,
+  .doc-grid,
+  .data-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 520px) {
+  body {
+    font-size: 15.5px;
+  }
+
+  .site-header {
+    min-height: 78px;
+  }
+
+  .brand img {
+    width: 198px;
+    height: 64px;
+  }
+
+  .page-hero {
+    padding-inline: 18px;
+  }
+
+  .page-hero h1,
+  .actions-hero-overlay h1,
+  .impact-hero-panel h1 {
+    font-size: clamp(30px, 9vw, 40px);
+  }
+
+  .actions-feature-copy h2,
+  .poles-feature-copy h2,
+  .impact-section h2,
+  .tvf-difference-header h2,
+  .tvf-difference-copy h2,
+  .coordination-diagram-section > h2,
+  .differentiation-comparison > h2,
+  .differentiation-ecosystem > h2 {
+    font-size: clamp(24px, 7vw, 31px);
+  }
+
+  .content-panel,
+  .strategy-card,
+  .dossier-card,
+  .document-card,
+  .opportunity-card,
+  .method-register article {
+    padding: 18px;
+  }
+}
