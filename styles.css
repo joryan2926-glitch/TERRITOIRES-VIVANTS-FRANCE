@@ -4216,6 +4216,226 @@ img[src$="documents-resources.jpg"] {
   color: rgba(255, 255, 255, 0.82);
 }
 
+/* Premium "Nos poles" page */
+.poles-premium {
+  background: #fffdfa;
+}
+
+.poles-hero-label {
+  display: inline-flex;
+  align-items: center;
+  min-height: 38px;
+  padding: 0 16px;
+  margin-top: 16px;
+  color: #0b2d28;
+  background: rgba(255, 253, 248, 0.92);
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.poles-intro,
+.poles-keyfigures,
+.poles-feature-list,
+.poles-flow-section,
+.poles-comparison,
+.poles-map-section,
+.poles-faq,
+.poles-final-cta {
+  width: min(92vw, 1500px);
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.poles-feature-list {
+  padding: clamp(54px, 7vw, 98px) 0 0;
+}
+
+.poles-feature {
+  display: grid;
+  grid-template-columns: minmax(0, 0.94fr) minmax(0, 1.06fr);
+  gap: clamp(24px, 4vw, 64px);
+  align-items: center;
+  padding: clamp(34px, 5vw, 76px) 0;
+  border-top: 1px solid rgba(8, 36, 61, 0.08);
+}
+
+.poles-feature.is-reversed {
+  grid-template-columns: minmax(0, 1.06fr) minmax(0, 0.94fr);
+}
+
+.poles-feature.is-reversed .poles-feature-media {
+  order: 2;
+}
+
+.poles-feature-media {
+  overflow: hidden;
+  margin: 0;
+  border-radius: 8px;
+  box-shadow: 0 22px 44px rgba(8, 36, 61, 0.14);
+}
+
+.poles-feature-media img {
+  display: block;
+  width: 100%;
+  height: clamp(340px, 38vw, 560px);
+  object-fit: cover;
+  transition: transform 420ms ease, filter 420ms ease;
+}
+
+.poles-feature:hover .poles-feature-media img {
+  transform: scale(1.025);
+  filter: saturate(1.06) contrast(1.03);
+}
+
+.poles-feature-copy {
+  display: grid;
+  gap: 18px;
+}
+
+.poles-feature-copy h2 {
+  margin: 0;
+  color: var(--ink);
+  font-size: clamp(32px, 3.7vw, 56px);
+  line-height: 1.04;
+  letter-spacing: 0;
+}
+
+.poles-feature-copy > p {
+  max-width: 760px;
+  margin: 0;
+  color: rgba(8, 36, 61, 0.75);
+  font-size: 17px;
+  font-weight: 620;
+  line-height: 1.72;
+}
+
+.poles-statline {
+  display: grid;
+  gap: 6px;
+  padding: 16px 18px;
+  background: #edf4e7;
+  border-left: 4px solid var(--green);
+  border-radius: 8px;
+}
+
+.poles-statline strong {
+  color: var(--green);
+  font-size: 13px;
+  font-weight: 820;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.poles-statline span {
+  color: rgba(8, 36, 61, 0.76);
+  font-size: 15px;
+  font-weight: 680;
+  line-height: 1.5;
+}
+
+.poles-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.poles-detail-grid article {
+  min-height: 160px;
+  padding: 18px;
+  background: #fff;
+  border: 1px solid rgba(8, 36, 61, 0.09);
+  border-radius: 8px;
+  box-shadow: 0 10px 22px rgba(8, 36, 61, 0.05);
+}
+
+.poles-detail-grid strong {
+  display: block;
+  margin-bottom: 9px;
+  color: var(--ink);
+}
+
+.poles-detail-grid p,
+.poles-detail-grid li {
+  margin: 0;
+  color: rgba(8, 36, 61, 0.68);
+  font-size: 14px;
+  font-weight: 630;
+  line-height: 1.55;
+}
+
+.poles-detail-grid ul {
+  display: grid;
+  gap: 6px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.poles-detail-grid li::before {
+  margin-right: 8px;
+  color: var(--green);
+  content: "•";
+}
+
+.poles-flow-section,
+.poles-comparison {
+  padding: clamp(54px, 7vw, 94px) 0;
+}
+
+.poles-flow {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  overflow: hidden;
+  background: rgba(8, 36, 61, 0.1);
+  border: 1px solid rgba(8, 36, 61, 0.1);
+  border-radius: 8px;
+  box-shadow: 0 18px 34px rgba(8, 36, 61, 0.08);
+}
+
+.poles-flow article {
+  display: grid;
+  gap: 10px;
+  min-height: 190px;
+  padding: 24px;
+  background: #fff;
+}
+
+.poles-flow span {
+  display: inline-grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  color: #fff;
+  background: var(--green);
+  border-radius: 50%;
+  font-weight: 820;
+}
+
+.poles-flow strong {
+  color: var(--ink);
+  font-size: 18px;
+  line-height: 1.2;
+}
+
+.poles-flow p {
+  margin: 0;
+  color: rgba(8, 36, 61, 0.66);
+  font-size: 14px;
+  font-weight: 620;
+  line-height: 1.55;
+}
+
+.poles-comparison h2 {
+  margin: 8px 0 22px;
+  color: var(--ink);
+  font-size: var(--title-md);
+  line-height: 1.12;
+}
+
 /* Institutional dossiers and public information architecture */
 .breadcrumb {
   display: flex;
@@ -5407,6 +5627,24 @@ img[src$="documents-resources.jpg"] {
     padding-right: 22px;
     padding-left: 22px;
   }
+
+  .poles-feature,
+  .poles-feature.is-reversed {
+    grid-template-columns: 1fr;
+  }
+
+  .poles-feature.is-reversed .poles-feature-media {
+    order: 0;
+  }
+
+  .poles-detail-grid,
+  .poles-flow {
+    grid-template-columns: 1fr;
+  }
+
+  .poles-feature-media img {
+    height: clamp(270px, 70vw, 390px);
+  }
 }
 
 @media (max-width: 520px) {
@@ -5426,6 +5664,17 @@ img[src$="documents-resources.jpg"] {
 
   .actions-feature-copy h2 {
     font-size: 30px;
+  }
+
+  .poles-feature-copy h2 {
+    font-size: 31px;
+  }
+
+  .poles-hero-label {
+    align-items: center;
+    min-height: 34px;
+    padding: 0 12px;
+    font-size: 11px;
   }
 
   .hero h1 {
