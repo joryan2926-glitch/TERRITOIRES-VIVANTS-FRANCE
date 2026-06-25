@@ -1,8 +1,8 @@
 # Architecture publique TVF
 
-Mise a jour : 24 juin 2026.
+Mise a jour : 25 juin 2026.
 
-- Pages publiques indexables : 46
+- Pages publiques indexables : 47
 - Anciennes URL redirigees : 41
 - Autres pages : interfaces internes, techniques ou evolutions futures en noindex.
 
@@ -11,6 +11,7 @@ Mise a jour : 24 juin 2026.
 - index.html
 - qui-sommes-nous.html
 - pourquoi-tvf-existe.html
+- ce-que-fait-tvf.html
 - nos-actions.html
 - notre-methode.html
 - vision-france-2035.html
