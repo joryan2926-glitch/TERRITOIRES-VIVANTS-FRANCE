@@ -2,7 +2,7 @@
 
 Mise a jour : 25 juin 2026.
 
-- Pages publiques indexables : 49
+- Pages publiques indexables : 50
 - Anciennes URL redirigees : 41
 - Autres pages : interfaces internes, techniques ou evolutions futures en noindex.
 
@@ -50,6 +50,7 @@ Mise a jour : 25 juin 2026.
 - faq.html
 - gouvernance.html
 - transparence.html
+- charte-ethique.html
 - documents-officiels.html
 - ce-que-tvf-ne-fait-pas.html
 - statuts.html
