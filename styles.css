@@ -8370,3 +8370,360 @@ button.button {
     min-width: 720px;
   }
 }
+
+/* Energie jeune et dynamique, sans perdre la posture institutionnelle */
+:root {
+  --dynamic-green: #2f8f46;
+  --dynamic-green-dark: #1f6f38;
+  --dynamic-teal: #16858a;
+  --dynamic-blue: #174766;
+  --dynamic-orange: #f0a51a;
+  --dynamic-mint: #edf8f0;
+  --dynamic-sky: #edf8f9;
+  --dynamic-cream: #fff8e8;
+  --dynamic-shadow: 0 18px 42px rgba(11, 35, 53, 0.12);
+  --dynamic-shadow-soft: 0 10px 24px rgba(11, 35, 53, 0.08);
+}
+
+body {
+  background:
+    linear-gradient(180deg, #ffffff 0, #fbfdf9 420px, #f7faf6 100%);
+}
+
+a,
+button,
+.button,
+.donate-button,
+.mega-link,
+.document-card,
+.strategy-card,
+.dossier-card,
+.opportunity-card,
+.case-card,
+.doc-card,
+.data-card,
+.pole-card,
+.action-card,
+.dashboard-card,
+.project-card,
+.content-card,
+.impact-card,
+.method-register article,
+.decision-flow article,
+.flow-steps article,
+.actions-feature,
+.poles-feature,
+.page-hero-photo img {
+  transition:
+    color 0.22s ease,
+    background-color 0.22s ease,
+    border-color 0.22s ease,
+    box-shadow 0.22s ease,
+    transform 0.22s ease,
+    opacity 0.22s ease,
+    filter 0.22s ease;
+}
+
+.site-header {
+  background: rgba(255, 255, 255, 0.95);
+  border-bottom: 1px solid rgba(31, 111, 56, 0.1);
+  box-shadow: 0 10px 28px rgba(11, 35, 53, 0.055);
+  backdrop-filter: blur(14px);
+}
+
+.main-nav a,
+.main-nav button,
+.nav-dropdown-trigger {
+  color: rgba(11, 35, 53, 0.88);
+  font-weight: 560;
+}
+
+.main-nav a:hover,
+.main-nav button:hover,
+.nav-dropdown:hover > .nav-dropdown-trigger,
+.nav-dropdown.is-open > .nav-dropdown-trigger {
+  color: var(--dynamic-green-dark);
+}
+
+.main-nav a::after,
+.nav-dropdown-trigger::after {
+  height: 2px;
+  background: linear-gradient(90deg, var(--dynamic-green), var(--dynamic-teal));
+  border-radius: 999px;
+}
+
+.donate-button,
+.button.primary,
+a.button.primary {
+  color: #fff;
+  background: linear-gradient(135deg, var(--dynamic-green-dark), var(--dynamic-green) 58%, var(--dynamic-teal));
+  border-color: transparent;
+  box-shadow: 0 10px 22px rgba(47, 143, 70, 0.2);
+}
+
+.donate-button:hover,
+.button.primary:hover,
+a.button.primary:hover {
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(47, 143, 70, 0.28);
+}
+
+.button.secondary,
+a.button.secondary,
+.button.ghost,
+a.button.ghost {
+  color: var(--dynamic-green-dark);
+  background: rgba(255, 255, 255, 0.82);
+  border-color: rgba(47, 143, 70, 0.24);
+}
+
+.button.secondary:hover,
+a.button.secondary:hover,
+.button.ghost:hover,
+a.button.ghost:hover {
+  background: var(--dynamic-mint);
+  border-color: rgba(47, 143, 70, 0.44);
+  transform: translateY(-2px);
+}
+
+.nav-dropdown-menu {
+  background: linear-gradient(180deg, #ffffff 0%, #fbfdf9 100%);
+  border: 1px solid rgba(31, 111, 56, 0.12);
+  box-shadow: 0 26px 58px rgba(11, 35, 53, 0.15);
+}
+
+.mega-link {
+  border-color: rgba(31, 111, 56, 0.08);
+}
+
+.mega-link:hover {
+  background: linear-gradient(135deg, var(--dynamic-mint), #ffffff);
+  border-color: rgba(47, 143, 70, 0.2);
+  box-shadow: var(--dynamic-shadow-soft);
+  transform: translateY(-2px);
+}
+
+.mega-link:hover .mega-icon,
+.mega-link:hover svg {
+  color: var(--dynamic-green);
+  transform: scale(1.04);
+}
+
+.page-hero,
+.content-hero,
+.actions-hero,
+.poles-hero,
+.impact-hero-panel {
+  position: relative;
+  background: linear-gradient(135deg, #ffffff 0%, #f4fbf3 48%, #edf8f9 100%);
+  border-color: rgba(47, 143, 70, 0.14);
+  box-shadow: var(--dynamic-shadow-soft);
+}
+
+.page-hero::before,
+.content-hero::before,
+.impact-hero-panel::before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 4px;
+  content: "";
+  background: linear-gradient(90deg, var(--dynamic-green), var(--dynamic-teal), var(--dynamic-orange));
+}
+
+.page-hero h1,
+.content-hero h1,
+.actions-hero-overlay h1,
+.poles-hero-label + h1,
+.impact-hero-panel h1 {
+  color: #09283d;
+  letter-spacing: 0;
+}
+
+.page-hero .lead,
+.content-hero .lead,
+.actions-hero-overlay p,
+.poles-hero-copy,
+.impact-hero-panel p {
+  color: rgba(11, 35, 53, 0.78);
+}
+
+.page-hero-photo,
+.actions-hero-media,
+.poles-hero-media,
+.feature-image,
+.section-image,
+.card-image {
+  overflow: hidden;
+  border-radius: 14px;
+}
+
+.page-hero-photo img,
+.actions-hero-media img,
+.poles-hero-media img,
+.feature-image img,
+.section-image img,
+.card-image img {
+  filter: saturate(1.06) contrast(1.02);
+}
+
+.page-hero-photo:hover img,
+.actions-hero-media:hover img,
+.poles-hero-media:hover img,
+.feature-image:hover img,
+.section-image:hover img,
+.card-image:hover img {
+  transform: scale(1.025);
+}
+
+.document-card,
+.strategy-card,
+.dossier-card,
+.opportunity-card,
+.case-card,
+.doc-card,
+.data-card,
+.pole-card,
+.action-card,
+.dashboard-card,
+.project-card,
+.content-card,
+.impact-card,
+.method-register article,
+.decision-flow article,
+.flow-steps article {
+  border-color: rgba(31, 111, 56, 0.1);
+}
+
+.document-card:hover,
+.strategy-card:hover,
+.dossier-card:hover,
+.opportunity-card:hover,
+.case-card:hover,
+.doc-card:hover,
+.data-card:hover,
+.pole-card:hover,
+.action-card:hover,
+.dashboard-card:hover,
+.project-card:hover,
+.content-card:hover,
+.impact-card:hover,
+.method-register article:hover,
+.decision-flow article:hover,
+.flow-steps article:hover {
+  border-color: rgba(47, 143, 70, 0.22);
+  box-shadow: var(--dynamic-shadow);
+  transform: translateY(-3px);
+}
+
+.document-card::before,
+.strategy-card::before,
+.dossier-card::before,
+.opportunity-card::before,
+.case-card::before,
+.doc-card::before,
+.method-register article::before,
+.decision-flow article::before {
+  height: 4px;
+  background: linear-gradient(90deg, var(--dynamic-green), var(--dynamic-teal), rgba(240, 165, 26, 0.74));
+}
+
+.data-card {
+  background: linear-gradient(135deg, #ffffff, var(--dynamic-mint));
+}
+
+.data-card strong,
+.stat-number,
+.kpi-number,
+.impact-number {
+  color: var(--dynamic-green-dark);
+}
+
+.eyebrow,
+.section-kicker,
+.page-kicker,
+.tag,
+.badge {
+  color: var(--dynamic-green-dark);
+  background: rgba(47, 143, 70, 0.1);
+  border-color: rgba(47, 143, 70, 0.2);
+}
+
+.cta-strip,
+.cta-band,
+.institutional-callout,
+.content-panel.blue,
+.flow-note {
+  background: linear-gradient(135deg, #0f2b40 0%, #17605e 58%, #2f8f46 100%);
+  box-shadow: 0 18px 42px rgba(11, 35, 53, 0.16);
+}
+
+.cta-strip .button,
+.cta-band .button,
+.institutional-callout .button,
+.content-panel.blue .button,
+.flow-note .button {
+  background: #fff;
+  color: var(--dynamic-green-dark);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.cta-strip .button:hover,
+.cta-band .button:hover,
+.institutional-callout .button:hover,
+.content-panel.blue .button:hover,
+.flow-note .button:hover {
+  background: var(--dynamic-cream);
+  transform: translateY(-2px);
+}
+
+.impact-data-table th,
+.stat-comparison th {
+  background: linear-gradient(135deg, #14354d, #17605e);
+}
+
+.impact-data-table tbody tr,
+.stat-comparison tbody tr {
+  transition: background-color 0.18s ease;
+}
+
+.impact-data-table tbody tr:hover,
+.stat-comparison tbody tr:hover {
+  background: rgba(47, 143, 70, 0.075);
+}
+
+.timeline-item,
+.step-card,
+.process-step,
+.method-step {
+  border-color: rgba(47, 143, 70, 0.13);
+}
+
+.timeline-item:hover,
+.step-card:hover,
+.process-step:hover,
+.method-step:hover {
+  background: linear-gradient(135deg, #ffffff, var(--dynamic-sky));
+  box-shadow: var(--dynamic-shadow-soft);
+}
+
+.site-footer {
+  background: linear-gradient(135deg, #08253a 0%, #0e3843 54%, #155a45 100%);
+}
+
+.site-footer a:hover {
+  color: #bde8c2;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
