@@ -9114,3 +9114,300 @@ a.button,
     min-width: 620px;
   }
 }
+
+/* Compactage global : pages moins longues, images mieux cadencees */
+:root {
+  --page-gutter: clamp(16px, 3vw, 48px);
+  --max-width: 1200px;
+  --wide-max-width: 1280px;
+  --section-gap: clamp(24px, 3.6vw, 56px);
+  --block-gap: clamp(16px, 2.4vw, 34px);
+}
+
+main > section:not(.hero):not(.actions-hero-premium):not(.actions-hero):not(.poles-hero) {
+  margin-block: var(--section-gap);
+}
+
+.page-wrap,
+.home-object-section,
+.document-section,
+.impact-section,
+.dossier-section,
+.method-section,
+.resources-section,
+.public-section,
+.territory-section,
+.actions-intro-panel,
+.actions-keyfigures,
+.actions-process,
+.actions-map-section,
+.actions-scenarios,
+.actions-faq,
+.actions-final-cta,
+.actions-feature-list,
+.poles-vision,
+.poles-flow-section,
+.poles-comparison {
+  margin-block: var(--section-gap);
+}
+
+.page-hero,
+.content-hero,
+.impact-hero-panel {
+  padding-top: clamp(24px, 4vw, 48px);
+  padding-bottom: clamp(24px, 4vw, 48px);
+}
+
+.hero,
+.actions-hero,
+.poles-hero {
+  min-height: clamp(380px, 56vh, 580px);
+}
+
+.hero-content {
+  padding-block: clamp(42px, 7vw, 82px);
+}
+
+.hero p {
+  margin-bottom: 18px;
+}
+
+.hero-photo-grid {
+  gap: 8px;
+  padding: 22px 0 30px 18px;
+}
+
+.page-hero-photo {
+  height: clamp(200px, 22vw, 320px);
+  max-height: 340px;
+}
+
+.materials-bank-hero .page-hero-photo,
+.page-hero.compact-hero .page-hero-photo {
+  height: clamp(190px, 21vw, 300px);
+}
+
+.actions-hero-premium {
+  min-height: clamp(390px, 55vh, 560px);
+}
+
+.actions-hero-overlay {
+  padding: clamp(42px, 6vw, 72px) 0;
+}
+
+.actions-hero-overlay p {
+  max-width: 700px;
+  font-size: clamp(16px, 1.35vw, 20px);
+  line-height: 1.55;
+}
+
+.actions-intro-panel,
+.actions-keyfigures,
+.actions-process,
+.actions-map-section,
+.actions-scenarios,
+.actions-faq,
+.actions-final-cta {
+  padding-block: clamp(24px, 4vw, 46px);
+}
+
+.actions-feature-list {
+  padding-top: clamp(30px, 5vw, 58px);
+}
+
+.actions-feature {
+  gap: clamp(20px, 3vw, 42px);
+  padding: clamp(22px, 3.6vw, 48px) 0;
+}
+
+.actions-feature-media img,
+.poles-feature-media img {
+  height: clamp(220px, 27vw, 360px);
+}
+
+.feature-image,
+.section-image,
+.card-image,
+.actions-feature-media,
+.poles-feature-media {
+  max-height: 380px;
+}
+
+.feature-image img,
+.section-image img,
+.card-image img {
+  max-height: 380px;
+}
+
+.poles-strip {
+  margin-top: clamp(-72px, -5vw, -46px);
+  margin-bottom: 8px;
+  padding: 18px 14px;
+}
+
+.pole-card {
+  grid-template-columns: 78px minmax(0, 1fr);
+  min-height: 112px;
+  padding: 4px 12px;
+}
+
+.pole-photo {
+  width: 78px;
+  height: 86px;
+}
+
+.pole-card h3 {
+  margin-bottom: 4px;
+  font-size: 15.5px;
+}
+
+.pole-card p {
+  font-size: 12.5px;
+  line-height: 1.45;
+}
+
+.dashboard {
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.panel {
+  min-height: auto;
+  padding: 20px;
+}
+
+.panel-photo,
+.priority-photo,
+.ambition-photo {
+  max-height: 150px;
+}
+
+.panel-photo {
+  height: 92px;
+  margin-bottom: 14px;
+}
+
+.panel h2,
+.act-band h2,
+.news-section h2 {
+  margin-bottom: 10px;
+  font-size: clamp(20px, 1.8vw, 23px);
+}
+
+.document-card,
+.strategy-card,
+.dossier-card,
+.opportunity-card,
+.case-card,
+.doc-card,
+.data-card,
+.content-card,
+.impact-card,
+.project-card,
+.actions-method-strip article,
+.actions-figure-grid article,
+.actions-mini-grid article {
+  min-height: auto;
+  padding: clamp(15px, 2vw, 24px);
+}
+
+.actions-method-strip {
+  margin-bottom: clamp(24px, 4vw, 52px);
+}
+
+.actions-method-strip article {
+  gap: 8px;
+}
+
+.actions-figure-grid article,
+.actions-mini-grid article {
+  min-height: 126px;
+}
+
+.data-card strong,
+.actions-figure-grid strong {
+  font-size: clamp(26px, 3vw, 40px);
+}
+
+.cta-strip,
+.cta-band,
+.institutional-callout,
+.content-panel.blue,
+.flow-note {
+  padding: clamp(22px, 3.5vw, 40px);
+}
+
+.site-footer {
+  margin-top: var(--section-gap);
+}
+
+@media (max-width: 1100px) {
+  .page-hero-photo,
+  .actions-feature-media img,
+  .poles-feature-media img {
+    height: clamp(200px, 36vw, 320px);
+  }
+
+  .poles-strip {
+    margin-top: 0;
+  }
+
+  .pole-card {
+    border-right: 0;
+  }
+}
+
+@media (max-width: 720px) {
+  :root {
+    --section-gap: clamp(20px, 6vw, 36px);
+    --block-gap: clamp(14px, 4vw, 24px);
+  }
+
+  main > section:not(.hero):not(.actions-hero-premium):not(.actions-hero):not(.poles-hero),
+  .page-wrap,
+  .document-section,
+  .impact-section,
+  .dossier-section,
+  .method-section,
+  .resources-section,
+  .public-section,
+  .territory-section {
+    margin-block: var(--section-gap);
+  }
+
+  .hero,
+  .actions-hero-premium,
+  .actions-hero,
+  .poles-hero {
+    min-height: auto;
+  }
+
+  .hero-content,
+  .actions-hero-overlay {
+    padding-block: clamp(30px, 9vw, 52px);
+  }
+
+  .page-hero-photo,
+  .actions-feature-media img,
+  .poles-feature-media img,
+  .feature-image,
+  .section-image,
+  .card-image {
+    height: clamp(180px, 52vw, 280px);
+    max-height: 290px;
+  }
+
+  .pole-card {
+    grid-template-columns: 70px minmax(0, 1fr);
+    min-height: auto;
+  }
+
+  .pole-photo {
+    width: 70px;
+    height: 76px;
+  }
+
+  .panel-photo {
+    height: 82px;
+  }
+}
