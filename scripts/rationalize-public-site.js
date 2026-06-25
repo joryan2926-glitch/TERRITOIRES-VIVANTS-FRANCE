@@ -88,17 +88,17 @@ const pageMeta = {
   "impact-resultats.html": ["Observatoire", "Impact et r&eacute;sultats"],
   "banque-materiaux.html": ["Dispositifs", "Banque de Mat&eacute;riaux TVF"],
   "bien-solidaire-usage-partage.html": ["Dispositifs", "Bien Solidaire &agrave; Usage Partag&eacute;"],
-  "financer-projets.html": ["Dispositifs", "Financer les projets"],
+  "financer-projets.html": ["Par public", "M&eacute;c&egrave;nes et financeurs"],
   "projets-pilotes.html": ["Dispositifs", "Projets pilotes"],
   "agir-avec-nous.html": ["Agir", "Agir avec nous"],
   "signalement.html": ["Agir", "Signaler un lieu"],
   "proprietaires.html": ["Par public", "Propri&eacute;taires"],
   "parcours-demande.html": ["Agir", "Parcours d'une demande"],
   "antennes-locales.html": ["Agir", "Antennes locales"],
-  "espace-benevoles.html": ["Agir", "Espace b&eacute;n&eacute;voles"],
-  "espace-collectivites.html": ["Partenariats", "Collectivit&eacute;s"],
-  "espace-entreprises.html": ["Partenariats", "Entreprises"],
-  "partenariats-strategiques.html": ["Partenariats", "Coop&eacute;rations"],
+  "espace-benevoles.html": ["Par public", "Citoyens et b&eacute;n&eacute;voles"],
+  "espace-collectivites.html": ["Par public", "Collectivit&eacute;s"],
+  "espace-entreprises.html": ["Par public", "Entreprises"],
+  "partenariats-strategiques.html": ["Par public", "Partenaires"],
   "ressources.html": ["Ressources", "Centre de ressources"],
   "sources-donnees.html": ["Ressources", "Sources et donn&eacute;es"],
   "faq.html": ["Informations", "Questions fr&eacute;quentes"],
@@ -191,13 +191,13 @@ const headerWithMenuButton = header.replace(
   `${mobileMenuButton}<nav id="main-navigation" class="main-nav" aria-label="Navigation principale">`
 );
 
-const audienceMenu = dropdown("Par public", "agir-avec-nous.html", "Votre profil", "Acc&eacute;der directement aux informations, services et parcours correspondant &agrave; votre situation.", [
-  megaLink("proprietaires.html", "Propri&eacute;taires", "Proposer un bien et &eacute;tudier une remise en usage.", "audience"),
-  megaLink("espace-collectivites.html", "Collectivit&eacute;s", "Diagnostic, cartographie et coop&eacute;ration territoriale.", "audience"),
-  megaLink("espace-entreprises.html", "Entreprises", "Mat&eacute;riaux, comp&eacute;tences, locaux et m&eacute;c&eacute;nat.", "audience"),
-  megaLink("espace-benevoles.html", "Citoyens et b&eacute;n&eacute;voles", "Missions, signalements et engagement local.", "audience"),
-  megaLink("financer-projets.html", "M&eacute;c&egrave;nes et financeurs", "Soutenir des projets qualifi&eacute;s et suivis.", "audience"),
-  megaLink("partenariats-strategiques.html", "Partenaires", "Construire une coop&eacute;ration dans un cadre clair.", "audience")
+const audienceMenu = dropdown("Par public", "agir-avec-nous.html", "Par public : votre r&ocirc;le", "Comprendre votre parcours : besoin trait&eacute;, contribution possible, cadre de convention, responsabilit&eacute;s et suivi.", [
+  megaLink("proprietaires.html", "Propri&eacute;taires", "Bien vacant, dur&eacute;e d'usage, travaux, charges, restitution et valorisation patrimoniale.", "audience"),
+  megaLink("espace-collectivites.html", "Collectivit&eacute;s", "Diagnostic, donn&eacute;es, gouvernance, biens publics, livrables et b&eacute;n&eacute;fices territoriaux.", "audience"),
+  megaLink("espace-entreprises.html", "Entreprises", "Mat&eacute;riaux, locaux, comp&eacute;tences ou m&eacute;c&eacute;nat avec tra&ccedil;abilit&eacute; et cadre RSE.", "audience"),
+  megaLink("espace-benevoles.html", "Citoyens et b&eacute;n&eacute;voles", "Signaler, aider, documenter ou rejoindre une mission encadr&eacute;e et s&eacute;curis&eacute;e.", "audience"),
+  megaLink("financer-projets.html", "M&eacute;c&egrave;nes et financeurs", "Projet qualifi&eacute;, budget, affectation, preuves, reporting et impact v&eacute;rifiable.", "audience"),
+  megaLink("partenariats-strategiques.html", "Partenaires", "Objectifs, r&ocirc;les, moyens, communication, gouvernance et fin de convention.", "audience")
 ]);
 
 const observatoryMenu = dropdown("Observatoire", "observatoire-national.html", "Observatoire", "Des donn&eacute;es sourc&eacute;es, dat&eacute;es et territorialis&eacute;es.", [
@@ -266,7 +266,7 @@ for (const file of fs.readdirSync(root).filter((name) => name.endsWith(".html"))
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${publicPages.map((file) => {
   const loc = file === "index.html" ? "https://www.territoiresvivantsfrance.fr/" : `https://www.territoiresvivantsfrance.fr/${file}`;
   const priority = file === "index.html" ? "1.0" : ["observatoire-national.html", "dossier-saint-etienne.html", "etude-impact-saint-etienne.html", "nos-actions.html", "banque-materiaux.html"].includes(file) ? "0.9" : "0.7";
-  return `  <url><loc>${loc}</loc><lastmod>2026-06-24</lastmod><changefreq>monthly</changefreq><priority>${priority}</priority></url>`;
+  return `  <url><loc>${loc}</loc><lastmod>2026-06-25</lastmod><changefreq>monthly</changefreq><priority>${priority}</priority></url>`;
 }).join("\n")}\n</urlset>\n`;
 fs.writeFileSync(path.join(root, "sitemap.xml"), sitemap, "utf8");
 
@@ -277,6 +277,6 @@ const vercel = JSON.parse(fs.readFileSync(vercelPath, "utf8"));
 vercel.redirects = Object.entries(redirects).map(([source, destination]) => ({ source, destination, permanent: true }));
 fs.writeFileSync(vercelPath, `${JSON.stringify(vercel, null, 2)}\n`, "utf8");
 
-fs.writeFileSync(path.join(root, "PUBLIC_ARCHITECTURE.md"), `# Architecture publique TVF\n\nMise a jour : 24 juin 2026.\n\n- Pages publiques indexables : ${publicPages.length}\n- Anciennes URL redirigees : ${Object.keys(redirects).length}\n- Autres pages : interfaces internes, techniques ou evolutions futures en noindex.\n\n## Pages publiques\n\n${publicPages.map((file) => `- ${file}`).join("\n")}\n`, "utf8");
+fs.writeFileSync(path.join(root, "PUBLIC_ARCHITECTURE.md"), `# Architecture publique TVF\n\nMise a jour : 25 juin 2026.\n\n- Pages publiques indexables : ${publicPages.length}\n- Anciennes URL redirigees : ${Object.keys(redirects).length}\n- Autres pages : interfaces internes, techniques ou evolutions futures en noindex.\n\n## Pages publiques\n\n${publicPages.map((file) => `- ${file}`).join("\n")}\n`, "utf8");
 
 console.log(JSON.stringify({ publicPages: publicPages.length, redirects: Object.keys(redirects).length, processedHtml: fs.readdirSync(root).filter((name) => name.endsWith(".html")).length }, null, 2));
