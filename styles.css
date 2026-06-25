@@ -1953,6 +1953,15 @@ img[src$="documents-resources.jpg"] {
   box-shadow: 0 14px 30px rgba(8, 36, 61, 0.08);
 }
 
+.panel-inline-photo {
+  width: 100%;
+  height: clamp(180px, 20vw, 260px);
+  margin: 0 0 22px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 14px 28px rgba(8, 36, 61, 0.12);
+}
+
 .content-panel.tint {
   background: var(--sand);
 }
