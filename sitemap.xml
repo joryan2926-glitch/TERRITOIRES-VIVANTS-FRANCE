@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://www.territoiresvivantsfrance.fr/</loc><lastmod>2026-06-25</lastmod><changefreq>monthly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://www.territoiresvivantsfrance.fr/index.html</loc><lastmod>2026-06-25</lastmod><changefreq>monthly</changefreq><priority>1.0</priority></url>
   <url><loc>https://www.territoiresvivantsfrance.fr/qui-sommes-nous.html</loc><lastmod>2026-06-25</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://www.territoiresvivantsfrance.fr/pourquoi-tvf-existe.html</loc><lastmod>2026-06-25</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://www.territoiresvivantsfrance.fr/ce-que-fait-tvf.html</loc><lastmod>2026-06-25</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://www.territoiresvivantsfrance.fr/ce-que-fait-tvf.html</loc><lastmod>2026-06-25</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://www.territoiresvivantsfrance.fr/nos-actions.html</loc><lastmod>2026-06-25</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
   <url><loc>https://www.territoiresvivantsfrance.fr/notre-methode.html</loc><lastmod>2026-06-25</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://www.territoiresvivantsfrance.fr/vision-france-2035.html</loc><lastmod>2026-06-25</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
@@ -12,7 +12,7 @@
   <url><loc>https://www.territoiresvivantsfrance.fr/action-materiaux-reemploi.html</loc><lastmod>2026-06-25</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://www.territoiresvivantsfrance.fr/action-espaces-abandonnes.html</loc><lastmod>2026-06-25</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://www.territoiresvivantsfrance.fr/action-solidarite-insertion.html</loc><lastmod>2026-06-25</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://www.territoiresvivantsfrance.fr/nos-poles.html</loc><lastmod>2026-06-25</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://www.territoiresvivantsfrance.fr/nos-poles.html</loc><lastmod>2026-06-25</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://www.territoiresvivantsfrance.fr/pole-habitat-vivant.html</loc><lastmod>2026-06-25</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://www.territoiresvivantsfrance.fr/pole-materiautheque-solidaire.html</loc><lastmod>2026-06-25</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://www.territoiresvivantsfrance.fr/pole-commerce-vivant.html</loc><lastmod>2026-06-25</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
@@ -22,6 +22,8 @@
   <url><loc>https://www.territoiresvivantsfrance.fr/carte-territoires.html</loc><lastmod>2026-06-25</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://www.territoiresvivantsfrance.fr/impact-resultats.html</loc><lastmod>2026-06-25</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://www.territoiresvivantsfrance.fr/dossier-saint-etienne.html</loc><lastmod>2026-06-25</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://www.territoiresvivantsfrance.fr/etude-impact-saint-etienne.html</loc><lastmod>2026-06-25</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://www.territoiresvivantsfrance.fr/sources-etude-saint-etienne.html</loc><lastmod>2026-06-25</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://www.territoiresvivantsfrance.fr/banque-materiaux.html</loc><lastmod>2026-06-25</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
   <url><loc>https://www.territoiresvivantsfrance.fr/bien-solidaire-usage-partage.html</loc><lastmod>2026-06-25</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://www.territoiresvivantsfrance.fr/financer-projets.html</loc><lastmod>2026-06-25</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
