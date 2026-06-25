@@ -2,7 +2,7 @@
 
 Mise a jour : 25 juin 2026.
 
-- Pages publiques indexables : 50
+- Pages publiques indexables : 51
 - Anciennes URL redirigees : 41
 - Autres pages : interfaces internes, techniques ou evolutions futures en noindex.
 
@@ -30,6 +30,7 @@ Mise a jour : 25 juin 2026.
 - carte-territoires.html
 - impact-resultats.html
 - dossier-saint-etienne.html
+- tvf-enjeux-saint-etienne.html
 - etude-impact-saint-etienne.html
 - sources-etude-saint-etienne.html
 - banque-materiaux.html
