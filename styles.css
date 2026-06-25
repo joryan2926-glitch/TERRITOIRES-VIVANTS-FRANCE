@@ -1054,6 +1054,36 @@ img[src*="assets/photos/"] {
   line-height: 1.35;
 }
 
+.fragmented-model span,
+.tvf-hub-model span,
+.tvf-hub-model small {
+  display: block;
+  color: var(--ink-soft);
+  line-height: 1.5;
+}
+
+.fragmented-model span {
+  padding: 8px 11px;
+  background: #f7faf3;
+  border-radius: 10px;
+  font-size: 14px;
+}
+
+.fragmented-model span + span {
+  margin-top: 8px;
+}
+
+.tvf-hub-model span {
+  color: var(--ink);
+  font-weight: 750;
+}
+
+.tvf-hub-model small {
+  margin-top: 6px;
+  color: rgba(8, 36, 61, 0.68);
+  font-size: 13px;
+}
+
 .fragmented-model li span {
   color: #789064;
   font-size: 13px;
