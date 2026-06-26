@@ -12672,3 +12672,107 @@ button.button,
     padding-inline: 13px;
   }
 }
+
+/* Audit final lisibilite/couleurs : garder chaque composant lisible et actionnable */
+:where(.page-wrap, .content-panel:not(.blue), .document-card, .dossier-card, .opportunity-card, .case-card, .doc-card, .data-card, .content-card, .impact-card, .project-card, .strategy-card, .resource-card, .resources-card, .metric-card, .audience-card, .journey-card, .faq-card, .tvf-page-faq, .audit-quick-read) {
+  color: var(--ink);
+}
+
+:where(.page-wrap, .content-panel:not(.blue), .document-card, .dossier-card, .opportunity-card, .case-card, .doc-card, .data-card, .content-card, .impact-card, .project-card, .strategy-card, .resource-card, .resources-card, .metric-card, .audience-card, .journey-card, .faq-card, .tvf-page-faq, .audit-quick-read) :where(p, li, small, span:not(.button span):not(.mega-icon):not(.mini-icon):not(.page-status):not(.status-chip):not(.document-status)) {
+  color: var(--ink-soft);
+}
+
+:where(.page-wrap, .content-panel:not(.blue), .document-card, .dossier-card, .opportunity-card, .case-card, .doc-card, .data-card, .content-card, .impact-card, .project-card, .strategy-card, .resource-card, .resources-card, .metric-card, .audience-card, .journey-card, .faq-card, .tvf-page-faq, .audit-quick-read) :where(h1, h2, h3, h4, strong, summary) {
+  color: var(--ink);
+}
+
+main :where(p, li, td, .source-list, .source-card) a:not(.button):not(.mega-link):not(.brand):not(.donate-button):not(.footer-logo-link) {
+  color: #1f6f38;
+  text-decoration: underline;
+  text-decoration-color: rgba(31, 111, 56, 0.34);
+  text-underline-offset: 3px;
+}
+
+main :where(p, li, td, .source-list, .source-card) a:not(.button):not(.mega-link):not(.brand):not(.donate-button):hover {
+  color: #134d28;
+  text-decoration-color: currentColor;
+}
+
+.button.secondary,
+a.button.secondary,
+button.button.secondary {
+  color: #12344a;
+  background: #fff;
+  border-color: rgba(11, 35, 53, 0.22);
+}
+
+.button.secondary:hover,
+a.button.secondary:hover,
+button.button.secondary:hover {
+  color: #063019;
+  background: #f5fbf3;
+  border-color: rgba(46, 111, 62, 0.36);
+}
+
+.content-panel.blue .button.secondary,
+.cta-strip .button.secondary,
+.cta-band .button.secondary,
+.flow-note .button.secondary,
+.institutional-callout .button.secondary {
+  color: #0b2335;
+  background: #fff;
+  border-color: rgba(255, 255, 255, 0.72);
+}
+
+:where(button, a, summary, input, textarea, select):focus-visible {
+  outline: 3px solid rgba(46, 111, 62, 0.38);
+  outline-offset: 3px;
+}
+
+.tvf-page-faq details,
+.materials-faq details {
+  background: #fff;
+  border-color: rgba(11, 35, 53, 0.12);
+}
+
+.tvf-page-faq summary,
+.materials-faq summary {
+  color: var(--ink);
+}
+
+.tvf-page-faq details p,
+.materials-faq details p {
+  color: var(--ink-soft);
+}
+
+.impact-data-table,
+.stat-comparison,
+.funding-table,
+.comparison-table,
+.data-table {
+  color: var(--ink);
+  background: #fff;
+}
+
+.impact-data-table th,
+.stat-comparison th,
+.funding-table th,
+.comparison-table th,
+.data-table th {
+  color: #fff;
+  background: #12344a;
+}
+
+.impact-data-table td,
+.stat-comparison td,
+.funding-table td,
+.comparison-table td,
+.data-table td {
+  color: var(--ink-soft);
+}
+
+.metric-card strong,
+.data-card strong,
+.impact-card strong {
+  color: var(--ink);
+}
