@@ -208,9 +208,6 @@ const allHtmlFiles = fs.readdirSync(root).filter((name) => name.endsWith(".html"
 for (const file of allHtmlFiles) {
   let html = read(file);
   html = addAssociationLink(html);
-  if (file !== newPage && publicPages.includes(file) && !html.includes('data-strategic-differentiation="true"')) {
-    html = html.replace(/<\/main>/i, `${differenceBlock}\n    </main>`);
-  }
   write(file, html);
 }
 
