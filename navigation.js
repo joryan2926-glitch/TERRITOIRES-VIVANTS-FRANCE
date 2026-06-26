@@ -152,4 +152,120 @@ document.addEventListener("DOMContentLoaded", () => {
       counters.forEach(animateCounter);
     }
   }
+
+  document.documentElement.classList.add("js-enabled");
+
+  const progressBar = document.createElement("div");
+  progressBar.className = "site-progress-bar";
+  progressBar.setAttribute("aria-hidden", "true");
+  document.body.appendChild(progressBar);
+
+  const updateReadingProgress = () => {
+    const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = scrollable > 0 ? window.scrollY / scrollable : 0;
+    progressBar.style.transform = `scaleX(${Math.min(Math.max(progress, 0), 1)})`;
+  };
+
+  updateReadingProgress();
+  window.addEventListener("scroll", updateReadingProgress, { passive: true });
+  window.addEventListener("resize", updateReadingProgress);
+
+  const backToTop = document.createElement("button");
+  backToTop.type = "button";
+  backToTop.className = "back-to-top";
+  backToTop.innerHTML = `
+    <span class="sr-only">Revenir en haut de page</span>
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path d="M12 5 5.5 11.5l1.4 1.4 4.1-4.08V20h2V8.82l4.1 4.08 1.4-1.4L12 5Z" fill="currentColor"/>
+    </svg>
+  `;
+  document.body.appendChild(backToTop);
+
+  const toggleBackToTop = () => {
+    backToTop.classList.toggle("is-visible", window.scrollY > 520);
+  };
+
+  toggleBackToTop();
+  window.addEventListener("scroll", toggleBackToTop, { passive: true });
+  backToTop.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+
+  const revealTargets = Array.from(
+    document.querySelectorAll(
+      [
+        ".submenu-card",
+        ".strategy-card",
+        ".case-card",
+        ".data-card",
+        ".indicator-card",
+        ".document-card",
+        ".dossier-card",
+        ".workflow-step",
+        ".map-layer-card",
+        ".material-record",
+        ".territory-map-card",
+        ".territory-process li",
+        ".analysis-note",
+        ".impact-section",
+        ".doc-section",
+        ".faq-item",
+        ".doc-faq article",
+      ].join(", "),
+    ),
+  );
+
+  revealTargets.forEach((target) => target.classList.add("reveal-on-scroll"));
+
+  if ("IntersectionObserver" in window && revealTargets.length) {
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("is-visible");
+          revealObserver.unobserve(entry.target);
+        });
+      },
+      { rootMargin: "0px 0px -8% 0px", threshold: 0.12 },
+    );
+    revealTargets.forEach((target) => revealObserver.observe(target));
+  } else {
+    revealTargets.forEach((target) => target.classList.add("is-visible"));
+  }
+
+  const faqItems = Array.from(document.querySelectorAll(".faq-item, .doc-faq article"));
+  if (faqItems.length) {
+    document.documentElement.classList.add("js-enhanced-faq");
+    faqItems.forEach((item, index) => {
+      const heading = item.querySelector("h2, h3, h4, strong");
+      if (!heading) return;
+      item.setAttribute("role", "button");
+      item.setAttribute("tabindex", "0");
+      item.setAttribute("aria-expanded", "false");
+      item.classList.add("is-collapsed");
+      if (index === 0) {
+        item.classList.remove("is-collapsed");
+        item.classList.add("is-open");
+        item.setAttribute("aria-expanded", "true");
+      }
+
+      const toggleItem = () => {
+        const willOpen = !item.classList.contains("is-open");
+        item.classList.toggle("is-open", willOpen);
+        item.classList.toggle("is-collapsed", !willOpen);
+        item.setAttribute("aria-expanded", String(willOpen));
+      };
+
+      item.addEventListener("click", (event) => {
+        if (event.target.closest("a, button")) return;
+        toggleItem();
+      });
+
+      item.addEventListener("keydown", (event) => {
+        if (event.key !== "Enter" && event.key !== " ") return;
+        event.preventDefault();
+        toggleItem();
+      });
+    });
+  }
 });
