@@ -1,6 +1,6 @@
 # Crédits photographiques
 
-Les photographies sont utilisées comme illustrations documentaires. Elles ne présentent pas des projets réalisés par Territoires Vivants France.
+Les photographies sont utilisées comme illustrations documentaires. Elles ne présentent pas des projets réalisés par Territoires Vivants France, sauf mention explicite contraire.
 
 ## Wikimedia Commons
 
@@ -14,7 +14,7 @@ Les photographies sont utilisées comme illustrations documentaires. Elles ne pr
 
 Les licences et auteurs applicables sont indiqués sur chaque fiche Wikimedia Commons liée ci-dessus.
 
-## Unsplash
+## Unsplash et sources historiques du projet
 
 - `construction-team.jpg` : [photo de chantier](https://images.unsplash.com/photo-1504307651254-35680f356dfd)
 - `solidarity-volunteers.jpg` : [mobilisation bénévole](https://images.unsplash.com/photo-1559027615-cd4628902d4a)
