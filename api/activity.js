@@ -1,11 +1,11 @@
 const { isConfigured, sendJson, readBody, supabaseFetch, requireUser, isAdmin, logActivity } = require("../lib/supabase");
 
 module.exports = async function handler(req, res) {
-  if (!isConfigured()) return sendJson(res, 503, { error: "Supabase n'est pas configurÃ© sur Vercel." });
+  if (!isConfigured()) return sendJson(res, 503, { error: "Supabase n'est pas configuré sur Vercel." });
   try {
     const { user } = await requireUser(req);
     if (req.method === "GET") {
-      if (!(await isAdmin(user.id))) return sendJson(res, 403, { error: "AccÃ¨s administrateur requis" });
+      if (!(await isAdmin(user.id))) return sendJson(res, 403, { error: "Accès administrateur requis" });
       const rows = await supabaseFetch("/rest/v1/activity_log?select=*&order=created_at.desc&limit=100", { prefer: "" });
       return sendJson(res, 200, { data: rows });
     }
@@ -20,7 +20,7 @@ module.exports = async function handler(req, res) {
       });
       return sendJson(res, 201, { data: { recorded: true } });
     }
-    return sendJson(res, 405, { error: "MÃ©thode non autorisÃ©e" });
+    return sendJson(res, 405, { error: "Méthode non autorisée" });
   } catch (error) {
     return sendJson(res, error.status || 500, { error: error.message, details: error.details });
   }

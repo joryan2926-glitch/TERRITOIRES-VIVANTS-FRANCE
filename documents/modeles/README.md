@@ -16,6 +16,9 @@ Un projet TVF ne doit jamais demarrer uniquement sur une idee ou une intention. 
 
 ## Fichiers principaux
 
+- note-rendez-vous-collectivite.md
+- matrice-besoin-dispositif-reponse-tvf.md
+- grille-decision-presentation-collectivite.md
 - fiche-00-reperage-terrain.md
 - fiche-01-pre-projet-territorial.md
 - fiche-02-projet-complet.md
@@ -31,3 +34,17 @@ Un projet TVF ne doit jamais demarrer uniquement sur une idee ou une intention. 
 ## Regle de prudence
 
 Aucun projet ne doit etre annonce comme valide, finance, conventionne ou realise tant que les preuves correspondantes ne sont pas disponibles.
+
+## Kit avant presentation a une collectivite
+
+Avant tout rendez-vous avec une commune, un EPCI, un departement ou une region, TVF doit preparer un dossier court et verifiable :
+
+- une note de cadrage en 2 a 4 pages ;
+- une matrice reliant les besoins du territoire aux dispositifs existants et a la reponse TVF ;
+- une ou deux fiches projet territorialisables ;
+- une premiere grille budgetaire sans financement fictif ;
+- une liste de pieces a demander a la collectivite ;
+- une proposition de gouvernance et de convention de cooperation ;
+- une liste claire de ce que TVF ne promet pas encore.
+
+Le dossier doit montrer que TVF aide la collectivite a accelerer ses propres objectifs sans se substituer aux dispositifs publics, aux bureaux d'etudes, aux maitres d'oeuvre ou aux financeurs.
