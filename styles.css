@@ -9467,3 +9467,279 @@ main > section:not(.hero):not(.actions-hero-premium):not(.actions-hero):not(.pol
     grid-template-columns: 1fr;
   }
 }
+
+/* Garde-fous contraste : textes lisibles sur fonds sombres et clairs */
+.objectives,
+.cta-strip,
+.cta-band,
+.institutional-callout,
+.content-panel.blue,
+.flow-note,
+.actions-proof-card,
+.actions-hero-overlay,
+.poles-hero-content,
+.site-footer {
+  color: #fff;
+}
+
+.objectives h1,
+.objectives h2,
+.objectives h3,
+.objectives h4,
+.cta-strip h1,
+.cta-strip h2,
+.cta-strip h3,
+.cta-strip h4,
+.cta-band h1,
+.cta-band h2,
+.cta-band h3,
+.cta-band h4,
+.institutional-callout h1,
+.institutional-callout h2,
+.institutional-callout h3,
+.institutional-callout h4,
+.content-panel.blue h1,
+.content-panel.blue h2,
+.content-panel.blue h3,
+.content-panel.blue h4,
+.flow-note h1,
+.flow-note h2,
+.flow-note h3,
+.flow-note h4,
+.actions-proof-card h1,
+.actions-proof-card h2,
+.actions-proof-card h3,
+.actions-proof-card h4,
+.actions-hero-overlay h1,
+.actions-hero-overlay h2,
+.actions-hero-overlay h3,
+.poles-hero-content h1,
+.poles-hero-content h2,
+.poles-hero-content h3,
+.site-footer h1,
+.site-footer h2,
+.site-footer h3,
+.site-footer h4 {
+  color: #fff;
+}
+
+.objectives p,
+.objectives li,
+.objectives span:not(.mini-icon),
+.objectives small,
+.cta-strip p,
+.cta-strip li,
+.cta-strip span:not(.button span),
+.cta-strip small,
+.cta-band p,
+.cta-band li,
+.cta-band span:not(.button span),
+.cta-band small,
+.institutional-callout p,
+.institutional-callout li,
+.institutional-callout span:not(.button span),
+.institutional-callout small,
+.content-panel.blue p,
+.content-panel.blue li,
+.content-panel.blue span:not(.button span),
+.content-panel.blue small,
+.flow-note p,
+.flow-note li,
+.flow-note span:not(.button span),
+.flow-note small,
+.actions-proof-card p,
+.actions-proof-card li,
+.actions-proof-card span,
+.actions-proof-card small,
+.actions-hero-overlay p,
+.actions-hero-overlay li,
+.actions-hero-overlay span:not(.button span),
+.actions-hero-overlay small,
+.poles-hero-content p,
+.poles-hero-content li,
+.poles-hero-content span:not(.button span),
+.poles-hero-content small,
+.site-footer p,
+.site-footer li,
+.site-footer span,
+.site-footer small {
+  color: rgba(255, 255, 255, 0.86);
+}
+
+.objectives a:not(.button),
+.cta-strip a:not(.button),
+.cta-band a:not(.button),
+.institutional-callout a:not(.button),
+.content-panel.blue a:not(.button),
+.flow-note a:not(.button),
+.actions-proof-card a:not(.button),
+.actions-hero-overlay a:not(.button),
+.poles-hero-content a:not(.button),
+.site-footer a {
+  color: #e7f6e8;
+  text-decoration-color: rgba(231, 246, 232, 0.62);
+  text-underline-offset: 3px;
+}
+
+.objectives a:not(.button):hover,
+.cta-strip a:not(.button):hover,
+.cta-band a:not(.button):hover,
+.institutional-callout a:not(.button):hover,
+.content-panel.blue a:not(.button):hover,
+.flow-note a:not(.button):hover,
+.actions-proof-card a:not(.button):hover,
+.actions-hero-overlay a:not(.button):hover,
+.poles-hero-content a:not(.button):hover,
+.site-footer a:hover {
+  color: #fff;
+}
+
+.objectives .button,
+.cta-strip .button,
+.cta-band .button,
+.institutional-callout .button,
+.content-panel.blue .button,
+.flow-note .button,
+.actions-proof-card .button,
+.actions-hero-overlay .button,
+.poles-hero-content .button {
+  color: #12344a;
+  background: #fff;
+  border-color: rgba(255, 255, 255, 0.72);
+}
+
+.objectives .button.primary,
+.cta-strip .button.primary,
+.cta-band .button.primary,
+.institutional-callout .button.primary,
+.content-panel.blue .button.primary,
+.flow-note .button.primary,
+.actions-proof-card .button.primary,
+.actions-hero-overlay .button.primary,
+.poles-hero-content .button.primary {
+  color: #fff;
+  background: linear-gradient(135deg, var(--dynamic-green-dark), var(--dynamic-green));
+  border-color: transparent;
+}
+
+.objectives .button.accent,
+.cta-strip .button.accent,
+.cta-band .button.accent,
+.institutional-callout .button.accent,
+.content-panel.blue .button.accent,
+.flow-note .button.accent,
+.actions-proof-card .button.accent,
+.actions-hero-overlay .button.accent,
+.poles-hero-content .button.accent {
+  color: #08243d;
+  background: #ffd66b;
+  border-color: rgba(255, 214, 107, 0.8);
+}
+
+.page-hero,
+.content-hero,
+.audit-quick-read,
+.document-card,
+.strategy-card,
+.dossier-card,
+.opportunity-card,
+.case-card,
+.doc-card,
+.data-card,
+.content-card,
+.impact-card,
+.project-card,
+.actions-mini-grid article,
+.actions-figure-grid article,
+.actions-method-strip article,
+.source-list,
+.table-scroll {
+  color: var(--ink);
+}
+
+.page-hero h1,
+.page-hero h2,
+.page-hero h3,
+.content-hero h1,
+.content-hero h2,
+.content-hero h3,
+.audit-quick-read h1,
+.audit-quick-read h2,
+.audit-quick-read h3,
+.document-card h1,
+.document-card h2,
+.document-card h3,
+.strategy-card h1,
+.strategy-card h2,
+.strategy-card h3,
+.dossier-card h1,
+.dossier-card h2,
+.dossier-card h3,
+.opportunity-card h1,
+.opportunity-card h2,
+.opportunity-card h3,
+.case-card h1,
+.case-card h2,
+.case-card h3,
+.doc-card h1,
+.doc-card h2,
+.doc-card h3,
+.data-card h1,
+.data-card h2,
+.data-card h3,
+.content-card h1,
+.content-card h2,
+.content-card h3,
+.impact-card h1,
+.impact-card h2,
+.impact-card h3,
+.project-card h1,
+.project-card h2,
+.project-card h3 {
+  color: var(--ink);
+}
+
+.page-hero p,
+.page-hero li,
+.content-hero p,
+.content-hero li,
+.audit-quick-read p,
+.audit-quick-read li,
+.document-card p,
+.document-card li,
+.strategy-card p,
+.strategy-card li,
+.dossier-card p,
+.dossier-card li,
+.opportunity-card p,
+.opportunity-card li,
+.case-card p,
+.case-card li,
+.doc-card p,
+.doc-card li,
+.data-card p,
+.data-card li,
+.content-card p,
+.content-card li,
+.impact-card p,
+.impact-card li,
+.project-card p,
+.project-card li {
+  color: rgba(11, 35, 53, 0.76);
+}
+
+.impact-data-table th,
+.stat-comparison th,
+.funding-table th,
+.comparison-table th,
+.data-table th {
+  color: #fff;
+}
+
+.impact-data-table td,
+.stat-comparison td,
+.funding-table td,
+.comparison-table td,
+.data-table td {
+  color: rgba(11, 35, 53, 0.82);
+}
