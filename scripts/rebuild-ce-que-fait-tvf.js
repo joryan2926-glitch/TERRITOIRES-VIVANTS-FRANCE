@@ -18,11 +18,11 @@ const main = `    <main class="differentiation-page" data-professional-enrichmen
         <img decoding="async" fetchpriority="high" src="assets/photos/institutional-meeting.jpg" alt="R&eacute;union de coordination entre collectivit&eacute;, association et acteurs territoriaux" width="1800" height="1200" />
         <div class="actions-hero-overlay">
           <span class="page-status" data-status="public">Positionnement strat&eacute;gique</span>
-          <h1>Pourquoi TERRITOIRES VIVANTS FRANCE&nbsp;?</h1>
-          <p>Une plateforme nationale qui relie ce qui est aujourd'hui dispers&eacute; : biens vacants, mat&eacute;riaux, propri&eacute;taires, collectivit&eacute;s, associations, entreprises, financeurs et habitants.</p>
+          <h1>Ce que fait TERRITOIRES VIVANTS FRANCE</h1>
+          <p>TVF organise la rencontre entre ressources inutilis&eacute;es, besoins locaux et acteurs capables d'agir, afin de transformer des biens vacants ou des mat&eacute;riaux disponibles en projets utiles.</p>
           <div class="actions-hero-buttons">
-            <a class="button primary" href="#role-tvf">Comprendre le r&ocirc;le de TVF</a>
-            <a class="button secondary" href="#comparatif">Voir le comparatif</a>
+            <a class="button primary" href="#schema-tvf">Voir le sch&eacute;ma</a>
+            <a class="button secondary" href="#comparatif">Comparer les r&ocirc;les</a>
           </div>
         </div>
       </section>
@@ -30,13 +30,13 @@ const main = `    <main class="differentiation-page" data-professional-enrichmen
       <section id="role-tvf" class="actions-intro-panel differentiation-intro" aria-labelledby="role-title">
         <div>
           <span class="dossier-kicker">Notre diff&eacute;rence</span>
-          <h2 id="role-title">TVF ne remplace pas les dispositifs existants : elle les rend plus lisibles et plus faciles &agrave; mobiliser</h2>
-          <p>En France, les comp&eacute;tences existent d&eacute;j&agrave; : politiques publiques, ing&eacute;nierie, financement, transition &eacute;cologique, r&eacute;emploi, action sociale, propri&eacute;taires priv&eacute;s, entreprises et associations. Le point fragile se situe souvent entre ces mondes : les informations sont dispers&eacute;es, les responsabilit&eacute;s difficiles &agrave; lire et les ressources locales rarement reli&eacute;es dans un parcours unique.</p>
-          <p>Territoires Vivants France se positionne comme une plateforme associative de coordination. Son r&ocirc;le est d'identifier une ressource inutilis&eacute;e, de qualifier son potentiel, de mobiliser les bons acteurs, de pr&eacute;parer un cadre de convention, d'orienter les mat&eacute;riaux vers des projets valid&eacute;s et de suivre les r&eacute;sultats r&eacute;els sans inventer de chiffres ni de partenaires.</p>
+          <h2 id="role-title">Une fonction de coordination au service des projets locaux</h2>
+          <p>Les outils publics, techniques et financiers existent d&eacute;j&agrave;, mais ils ne se rencontrent pas toujours au bon moment. TVF intervient dans cet espace de coordination : elle aide &agrave; passer d'une information isol&eacute;e &agrave; un dossier compr&eacute;hensible, partageable et suivi.</p>
+          <p>La m&eacute;thode reste volontairement prudente : observer une situation, qualifier le besoin, identifier les acteurs concern&eacute;s, pr&eacute;parer un cadre de coop&eacute;ration, orienter les ressources disponibles et documenter les r&eacute;sultats r&eacute;els.</p>
         </div>
         <div class="actions-proof-card">
-          <strong>Ce que TVF apporte</strong>
-          <p>Une m&eacute;thode transversale : patrimoine vacant, commerces ferm&eacute;s, friches, mat&eacute;riaux de r&eacute;emploi, engagement citoyen, collectivit&eacute;s, entreprises et financeurs dans un m&ecirc;me cadre de travail.</p>
+          <strong>Positionnement</strong>
+          <p>TVF agit en compl&eacute;ment des acteurs existants. L'association ne revendique aucun mandat, financement ou partenariat officiel sans validation formelle.</p>
         </div>
       </section>
 
