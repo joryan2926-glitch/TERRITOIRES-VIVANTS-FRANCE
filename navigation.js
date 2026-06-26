@@ -211,6 +211,8 @@ document.addEventListener("DOMContentLoaded", () => {
         ".doc-section",
         ".faq-item",
         ".doc-faq article",
+        ".tvf-page-faq",
+        ".tvf-page-faq details",
       ].join(", "),
     ),
   );

@@ -10461,6 +10461,112 @@ main > section:not(.hero):not(.actions-hero-premium):not(.actions-hero):not(.pol
   opacity: 0;
 }
 
+.tvf-page-faq {
+  width: var(--section-width);
+  max-width: var(--max-width);
+  margin: clamp(44px, 6vw, 78px) auto;
+  padding: clamp(28px, 4vw, 48px);
+  color: var(--ink-strong);
+  background:
+    linear-gradient(135deg, rgba(46, 125, 50, 0.06), rgba(22, 113, 124, 0.07)),
+    #fff;
+  border: 1px solid rgba(8, 36, 61, 0.08);
+  border-radius: 18px;
+  box-shadow: 0 18px 44px rgba(8, 36, 61, 0.08);
+}
+
+.tvf-page-faq-header {
+  display: grid;
+  gap: 10px;
+  max-width: 860px;
+  margin-bottom: 24px;
+}
+
+.tvf-page-faq h2 {
+  margin: 0;
+  color: var(--ink);
+  font-size: var(--title-md);
+  font-weight: 720;
+  line-height: 1.16;
+}
+
+.tvf-page-faq-header p {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 16px;
+  font-weight: 520;
+  line-height: 1.72;
+}
+
+.tvf-page-faq-list {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.tvf-page-faq details {
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(8, 36, 61, 0.09);
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(8, 36, 61, 0.045);
+}
+
+.tvf-page-faq summary {
+  position: relative;
+  display: block;
+  padding: 19px 58px 19px 22px;
+  color: var(--ink);
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 680;
+  line-height: 1.35;
+  list-style: none;
+}
+
+.tvf-page-faq summary::-webkit-details-marker {
+  display: none;
+}
+
+.tvf-page-faq summary::after {
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  display: grid;
+  width: 28px;
+  height: 28px;
+  place-items: center;
+  color: var(--green);
+  content: "+";
+  background: rgba(46, 125, 50, 0.08);
+  border: 1px solid rgba(46, 125, 50, 0.18);
+  border-radius: 50%;
+  font-size: 18px;
+  font-weight: 600;
+  transform: translateY(-50%);
+  transition: transform 220ms ease, background-color 220ms ease, color 220ms ease;
+}
+
+.tvf-page-faq details[open] summary::after {
+  color: #fff;
+  content: "-";
+  background: var(--green);
+  transform: translateY(-50%) rotate(180deg);
+}
+
+.tvf-page-faq details p {
+  margin: 0;
+  padding: 0 58px 20px 22px;
+  color: var(--ink-soft);
+  font-size: 15.5px;
+  font-weight: 500;
+  line-height: 1.72;
+}
+
+.tvf-page-faq .button {
+  width: fit-content;
+}
+
 @media (hover: hover) and (pointer: fine) {
   :where(
     .submenu-card,
@@ -10506,6 +10612,19 @@ main > section:not(.hero):not(.actions-hero-premium):not(.actions-hero):not(.pol
 
   .js-enhanced-faq :where(.faq-item, .doc-faq article) {
     padding-right: 46px;
+  }
+
+  .tvf-page-faq {
+    padding: 24px 18px;
+    border-radius: 14px;
+  }
+
+  .tvf-page-faq summary {
+    padding: 17px 50px 17px 16px;
+  }
+
+  .tvf-page-faq details p {
+    padding: 0 18px 18px 16px;
   }
 }
 
