@@ -2,7 +2,7 @@
 
 Mise a jour : 25 juin 2026.
 
-- Pages publiques indexables : 52
+- Pages publiques indexables : 53
 - Anciennes URL redirigees : 41
 - Autres pages : interfaces internes, techniques ou evolutions futures en noindex.
 
@@ -46,6 +46,7 @@ Mise a jour : 25 juin 2026.
 - espace-collectivites.html
 - espace-entreprises.html
 - espace-benevoles.html
+- partenaires.html
 - partenariats-strategiques.html
 - ressources.html
 - sources-donnees.html
