@@ -1,60 +1,36 @@
-# Fiche proposition - Materiaux ou equipements reutilisables
+# Fiche de proposition de materiaux
 
-Statut : modele de travail a adapter.  
-La Banque de Materiaux TVF n'est pas une plateforme de distribution gratuite. Les ressources sont qualifiees puis affectees a des projets valides.
+Statut : modele de travail TVF a adapter.
+Ce document ne vaut pas conseil juridique, fiscal, comptable, technique ou assurantiel.
+Toute action doit etre validee par les parties concernees et, si necessaire, par des professionnels competents.
+
+Statut : fichier conserve pour compatibilite avec les anciens liens du site.
+Modele recommande : modele-convention-valorisation-materiaux.md
 
 ## 1. Contributeur
 
-- Nom ou structure :
-- Type : particulier, entreprise, collectivite, association.
+- Nom :
+- Statut : particulier / entreprise / collectivite / association / autre
 - Contact :
 - Commune :
+- Adresse de retrait ou stockage :
 
-## 2. Ressource proposee
+## 2. Materiaux proposes
 
-- Categorie : bois, portes, fenetres, sanitaires, mobilier, luminaires, carrelage, metal, autre.
+- Categorie :
 - Quantite :
-- Dimensions :
 - Etat :
 - Photos :
-- Localisation :
-- Disponibilite :
 - Contraintes de retrait :
+- Delai :
+- Risques ou reserves :
 
-## 3. Origine
+## 3. Cadre TVF
 
-- Chantier ;
-- Renovation ;
-- Surplus ;
-- Invendu ;
-- Mobilier inutilise ;
-- Equipement public ;
-- Autre.
+Les materiaux proposes ne sont pas distribues automatiquement. TVF qualifie leur etat, accepte ou refuse la contribution, puis peut les affecter a un projet valide dans le cadre d'une convention de valorisation.
 
-## 4. Verification
+## 4. Suite recommandee
 
-- Ressource reutilisable :
-- Risque sanitaire ou technique :
-- Transport possible :
-- Stockage possible :
-- Projet destinataire :
-- Decision TVF :
-
-## 5. Affectation
-
-TVF peut accepter, refuser, differer ou affecter la ressource selon :
-
-- utilite territoriale ;
-- securite ;
-- etat ;
-- logistique ;
-- besoins des projets ;
-- capacite de suivi.
-
-## 6. Suivi
-
-- Date de retrait :
-- Projet concerne :
-- Quantite reutilisee :
-- Quantite non retenue :
-- Bilan :
+- Completer la convention de valorisation de materiaux :
+- Verifier transport, stockage, assurance et tracabilite :
+- Identifier le projet destinataire :

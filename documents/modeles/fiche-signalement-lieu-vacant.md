@@ -1,52 +1,36 @@
-# Fiche signalement - Lieu vacant ou abandonne
+# Fiche de signalement d'un lieu vacant
 
-Statut : modele de travail a adapter.  
-Cette fiche sert a qualifier une situation. Elle ne doit pas conduire a publier une adresse sensible sans verification.
+Statut : modele de travail TVF a adapter.
+Ce document ne vaut pas conseil juridique, fiscal, comptable, technique ou assurantiel.
+Toute action doit etre validee par les parties concernees et, si necessaire, par des professionnels competents.
 
-## 1. Type de signalement
+Statut : fichier conserve pour compatibilite avec les anciens liens du site.
+Modele recommande : fiche-00-reperage-terrain.md
 
-- Logement vacant ;
-- Commerce ferme ;
-- Batiment abandonne ;
-- Terrain delaisse ;
-- Friche ;
-- Depot sauvage ;
-- Materiaux disponibles.
+## 1. Signalement
 
-## 2. Localisation
-
-- Adresse :
+- Date :
+- Nom du signalant :
+- Contact facultatif :
 - Commune :
-- Departement :
-- Coordonnees GPS si disponibles :
-- Quartier ou secteur :
+- Adresse ou repere :
+- Type : logement vacant / commerce ferme / batiment abandonne / terrain abandonne / friche / autre
+- Description factuelle :
 
-## 3. Description
+## 2. Elements disponibles
 
-- Etat apparent :
-- Depuis quand le lieu semble-t-il vacant ?
+- Photos :
+- Coordonnees GPS :
 - Risques visibles :
-- Acces public ou prive :
-- Photos disponibles :
-- Informations complementaires :
+- Proprietaire connu :
+- Occupation apparente :
+- Informations publiques deja trouvees :
 
-## 4. Contact facultatif
+## 3. Orientation TVF
 
-- Nom :
-- Email :
-- Telephone :
-- Lien avec le lieu :
+- A qualifier :
+- A transmettre a un acteur competent :
+- Hors cadre TVF :
+- Informations manquantes :
 
-## 5. Verification TVF
-
-- Signalement recu :
-- Informations suffisantes :
-- Donnees sensibles :
-- Qualification a faire :
-- Suite possible :
-
-## 6. Regles de prudence
-
-Ne pas entrer dans un lieu ferme, prive, dangereux ou interdit.  
-Ne pas publier d'adresse precise sans validation.  
-Ne pas presenter le signalement comme un projet TVF tant qu'il n'a pas ete qualifie.
+Pour aller plus loin, completer la fiche 00 de reperage terrain.

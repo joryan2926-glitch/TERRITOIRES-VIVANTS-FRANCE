@@ -1,83 +1,57 @@
-# Fiche projet TVF - Modele de qualification
+# Fiche projet TVF - Modele historique conserve
 
-Statut : modele de travail a adapter.  
-Objectif : qualifier un projet avant toute annonce publique, recherche de financement ou mobilisation de partenaires.
+Statut : modele de travail TVF a adapter.
+Ce document ne vaut pas conseil juridique, fiscal, comptable, technique ou assurantiel.
+Toute action doit etre validee par les parties concernees et, si necessaire, par des professionnels competents.
 
-## 1. Identification
+Statut : fichier conserve pour compatibilite avec les anciens liens du site.
+Modele recommande : fiche-02-projet-complet.md
+
+## Utilisation
+
+Cette fiche peut servir de version courte lorsqu'un projet est encore au stade de l'idee. Pour un dossier presentable a une collectivite, un proprietaire, une entreprise, un financeur ou un partenaire, utiliser la fiche complete.
+
+## 1. Identification rapide
 
 - Nom du projet :
 - Commune :
 - Adresse ou secteur :
-- Type : logement, commerce, friche, materiaux, insertion, autre.
+- Type : logement / commerce / friche / terrain / materiaux / insertion / autre
 - Porteur pressenti :
 - Referent TVF :
+- Date :
 
 ## 2. Probleme traite
 
 - Situation actuelle :
-- Causes identifiees :
+- Besoin territorial :
 - Publics concernes :
-- Consequences territoriales :
+- Consequences locales :
 - Urgence ou priorite :
 
 ## 3. Solution envisagee
 
 - Usage futur :
 - Beneficiaires :
-- Partenaires a mobiliser :
+- Acteurs a mobiliser :
 - Ressources necessaires :
 - Freins connus :
 
-## 4. Faisabilite
+## 4. Points a verifier avant suite
 
-- Situation juridique :
-- Autorisations :
-- Diagnostics :
+- Proprietaire ou responsable identifie :
+- Droit d'acces :
 - Securite :
-- Budget previsionnel :
-- Financements recherches :
-- Calendrier :
+- Urbanisme :
+- Assurance :
+- Budget :
+- Convention :
+- Communication :
 
-## 5. Ressources de reemploi
+## 5. Suite recommandee
 
-- Materiaux disponibles :
-- Origine :
-- Etat :
-- Stockage :
-- Affectation possible :
-- Contraintes :
-
-## 6. Impact attendu
-
-Les indicateurs ci-dessous sont des objectifs a suivre, pas des resultats acquis.
-
-- Bien remis en usage :
-- Surface concernee :
-- Materiaux reutilises :
-- Dechets evites :
-- Personnes accompagnees :
-- Benevoles mobilises :
-- Activites creees :
-- Duree d'usage :
-
-## 7. Statut du projet
-
-- Idee ;
-- Etude ;
-- Mobilisation ;
-- Financement ;
-- Convention ;
-- Realisation ;
-- Terminé ;
-- Suspendu.
-
-## 8. Pieces jointes
-
-- Photos ;
-- Plans ;
-- Diagnostics ;
-- Devis ;
-- Courriers ;
-- Autorisations ;
-- Convention ;
-- Bilan.
+- Completer fiche-00-reperage-terrain.md :
+- Completer fiche-01-pre-projet-territorial.md :
+- Completer fiche-02-projet-complet.md :
+- Passer la checklist avant action :
+- Choisir une trame de convention :
