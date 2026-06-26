@@ -12395,3 +12395,16 @@ body:has(.clear-summary) .hero-photo-grid {
 .cta-strip p {
   color: #fff;
 }
+
+.site-footer .footer-contact-button,
+.site-footer .footer-contact-button:visited {
+  color: #063019;
+  background: #fff;
+  border-color: rgba(255, 255, 255, 0.42);
+}
+
+.site-footer .footer-contact-button:hover,
+.site-footer .footer-contact-button:focus-visible {
+  color: #063019;
+  background: #f4fff0;
+}
