@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", () => {
+﻿document.addEventListener("DOMContentLoaded", () => {
   const margin = 18;
   const desktopQuery = window.matchMedia("(min-width: 861px)");
   const dropdowns = Array.from(document.querySelectorAll(".nav-dropdown"));
@@ -204,6 +204,31 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  document.querySelectorAll(".interactive-france-card").forEach((card) => {
+    const tooltip = card.querySelector(".map-tooltip");
+    const nodes = Array.from(card.querySelectorAll(".map-node"));
+    if (!tooltip || !nodes.length) return;
+    nodes.forEach((node) => {
+      const label = node.dataset.label || "Territoire &agrave; qualifier";
+      const activate = () => {
+        nodes.forEach((item) => item.classList.remove("active"));
+        node.classList.add("active");
+        tooltip.textContent = label;
+      };
+      node.setAttribute("tabindex", "0");
+      node.setAttribute("role", "button");
+      node.setAttribute("aria-label", label);
+      node.addEventListener("mouseenter", activate);
+      node.addEventListener("focus", activate);
+      node.addEventListener("click", activate);
+      node.addEventListener("keydown", (event) => {
+        if (event.key !== "Enter" && event.key !== " ") return;
+        event.preventDefault();
+        activate();
+      });
+    });
+  });
+
   const revealTargets = Array.from(
     document.querySelectorAll(
       [
@@ -226,6 +251,11 @@ document.addEventListener("DOMContentLoaded", () => {
         ".doc-faq article",
         ".tvf-page-faq",
         ".tvf-page-faq details",
+        "[data-engagement-upgrade='true']",
+        ".journey-card",
+        ".engagement-action-grid article",
+        ".future-counter-grid article",
+        ".trust-placeholder-grid article",
       ].join(", "),
     ),
   );
