@@ -10124,7 +10124,7 @@ main > section:not(.hero):not(.actions-hero-premium):not(.actions-hero):not(.pol
 }
 
 @media (max-width: 640px) {
-  .territory-map-canvas {
+.territory-map-canvas {
     min-height: 360px;
   }
 
@@ -10142,4 +10142,42 @@ main > section:not(.hero):not(.actions-hero-premium):not(.actions-hero):not(.pol
   .point-c { right: 7%; top: 36%; }
   .point-d { left: 16%; bottom: 20%; }
   .point-e { right: 6%; bottom: 9%; }
+}
+
+/* Regroupement logique du menu Observatoire */
+.mega-group-title {
+  grid-column: 1 / -1;
+  display: grid;
+  gap: 4px;
+  margin-top: 4px;
+  padding: 12px 10px 6px;
+  border-top: 1px solid rgba(11, 35, 53, 0.08);
+}
+
+.mega-menu-heading + .mega-group-title {
+  margin-top: 0;
+  padding-top: 4px;
+  border-top: 0;
+}
+
+.mega-group-title strong {
+  color: var(--dynamic-green-dark, #1f6f38);
+  font-size: 12px;
+  font-weight: 760;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.mega-group-title span {
+  max-width: 640px;
+  color: rgba(65, 83, 100, 0.82);
+  font-size: 12.5px;
+  font-weight: 520;
+  line-height: 1.38;
+}
+
+@media (max-width: 900px) {
+  .mega-group-title {
+    padding: 10px 12px 4px;
+  }
 }
