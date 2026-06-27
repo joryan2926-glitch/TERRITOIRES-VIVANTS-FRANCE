@@ -13658,3 +13658,200 @@ body.site-streamlined .tvf-page-faq {
     grid-template-columns: 1fr;
   }
 }
+
+/* Cadrage institutionnel : site moins large, contours visibles et meilleure lecture desktop */
+:root {
+  --max-width: 1020px;
+  --wide-max-width: 1120px;
+  --site-frame-width: min(1180px, calc(100% - 28px));
+  --site-frame-line: rgba(8, 36, 61, 0.13);
+  --site-frame-bg: rgba(255, 253, 248, 0.96);
+}
+
+body.site-streamlined {
+  background:
+    linear-gradient(90deg, rgba(46, 125, 50, 0.08), transparent 17%, transparent 83%, rgba(46, 125, 50, 0.08)),
+    linear-gradient(180deg, #eef5e9 0%, #f8faf4 36%, #eef5e9 100%);
+}
+
+body.site-streamlined .site-header {
+  width: var(--site-frame-width);
+  margin: 10px auto 0;
+  padding-right: clamp(16px, 2.6vw, 34px);
+  padding-left: clamp(16px, 2.6vw, 34px);
+  border: 1px solid var(--site-frame-line);
+  border-radius: 20px;
+  box-shadow: 0 16px 34px rgba(8, 36, 61, 0.075);
+}
+
+body.site-streamlined > main {
+  width: var(--site-frame-width);
+  margin: 14px auto 0;
+  overflow: hidden;
+  background: var(--site-frame-bg);
+  border: 1px solid var(--site-frame-line);
+  border-radius: 24px;
+  box-shadow: 0 18px 46px rgba(8, 36, 61, 0.075);
+}
+
+body.site-streamlined .breadcrumb,
+body.site-streamlined .quick-journey-bar {
+  width: var(--site-frame-width);
+  margin-right: auto;
+  margin-left: auto;
+  border-right: 1px solid var(--site-frame-line);
+  border-left: 1px solid var(--site-frame-line);
+}
+
+body.site-streamlined .quick-journey-bar {
+  margin-top: 8px;
+  border-top: 1px solid var(--site-frame-line);
+  border-radius: 18px;
+}
+
+body.site-streamlined .page-hero,
+body.site-streamlined .actions-hero-premium,
+body.site-streamlined .poles-hero-premium,
+body.site-streamlined .differentiation-hero {
+  border-bottom: 1px solid rgba(8, 36, 61, 0.1);
+}
+
+body.site-streamlined .page-brief,
+body.site-streamlined .page-wrap,
+body.site-streamlined .dossier-section,
+body.site-streamlined .method-section,
+body.site-streamlined .resources-section,
+body.site-streamlined .impact-section,
+body.site-streamlined .document-section,
+body.site-streamlined .territory-section,
+body.site-streamlined .public-section,
+body.site-streamlined .actions-intro-panel,
+body.site-streamlined .actions-method-strip,
+body.site-streamlined .actions-keyfigures,
+body.site-streamlined .actions-feature-list,
+body.site-streamlined .poles-feature-list,
+body.site-streamlined .coordination-diagram-section,
+body.site-streamlined .differentiation-ecosystem,
+body.site-streamlined .home-direct-map,
+body.site-streamlined .home-priority-routes,
+body.site-streamlined .home-pilot-strip,
+body.site-streamlined .home-start-hub,
+body.site-streamlined .home-profile-switch {
+  width: min(1020px, calc(100% - 34px));
+}
+
+body.site-streamlined .page-brief,
+body.site-streamlined .content-panel,
+body.site-streamlined .document-card,
+body.site-streamlined .dossier-card,
+body.site-streamlined .opportunity-card,
+body.site-streamlined .case-card,
+body.site-streamlined .doc-card,
+body.site-streamlined .data-card,
+body.site-streamlined .content-card,
+body.site-streamlined .impact-card,
+body.site-streamlined .project-card,
+body.site-streamlined .strategy-card,
+body.site-streamlined .resource-card,
+body.site-streamlined .resources-card,
+body.site-streamlined .audience-card,
+body.site-streamlined .journey-card,
+body.site-streamlined .faq-card,
+body.site-streamlined .metric-card,
+body.site-streamlined .platform-card,
+body.site-streamlined .workflow-step,
+body.site-streamlined .map-layer-card,
+body.site-streamlined .material-record,
+body.site-streamlined .info-card,
+body.site-streamlined .tvf-page-faq,
+body.site-streamlined .cta-band,
+body.site-streamlined .cta-strip,
+body.site-streamlined .institutional-callout {
+  border-color: rgba(8, 36, 61, 0.13);
+}
+
+body.site-streamlined .home-start-hub,
+body.site-streamlined .home-profile-switch,
+body.site-streamlined .home-direct-map,
+body.site-streamlined .home-pilot-strip,
+body.site-streamlined .actions-intro-panel,
+body.site-streamlined .actions-method-strip,
+body.site-streamlined .actions-keyfigures,
+body.site-streamlined .tvf-page-faq {
+  padding-inline: clamp(2px, 0.8vw, 10px);
+}
+
+body.site-streamlined .site-footer {
+  width: var(--site-frame-width);
+  margin: 16px auto 18px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 24px;
+}
+
+@media (max-width: 900px) {
+  :root {
+    --site-frame-width: min(100% - 18px, 1120px);
+  }
+
+  body.site-streamlined .site-header {
+    top: 6px;
+    margin-top: 6px;
+    border-radius: 16px;
+  }
+
+  body.site-streamlined > main,
+  body.site-streamlined .site-footer {
+    border-radius: 18px;
+  }
+
+  body.site-streamlined .page-brief,
+  body.site-streamlined .page-wrap,
+  body.site-streamlined .dossier-section,
+  body.site-streamlined .method-section,
+  body.site-streamlined .resources-section,
+  body.site-streamlined .impact-section,
+  body.site-streamlined .document-section,
+  body.site-streamlined .territory-section,
+  body.site-streamlined .public-section,
+  body.site-streamlined .actions-intro-panel,
+  body.site-streamlined .actions-method-strip,
+  body.site-streamlined .actions-keyfigures,
+  body.site-streamlined .actions-feature-list,
+  body.site-streamlined .poles-feature-list,
+  body.site-streamlined .coordination-diagram-section,
+  body.site-streamlined .differentiation-ecosystem,
+  body.site-streamlined .home-direct-map,
+  body.site-streamlined .home-priority-routes,
+  body.site-streamlined .home-pilot-strip,
+  body.site-streamlined .home-start-hub,
+  body.site-streamlined .home-profile-switch {
+    width: min(100% - 22px, 1020px);
+  }
+}
+
+@media (max-width: 560px) {
+  :root {
+    --site-frame-width: min(100% - 10px, 1120px);
+  }
+
+  body.site-streamlined .site-header {
+    margin-top: 4px;
+    border-radius: 14px;
+  }
+
+  body.site-streamlined > main {
+    margin-top: 8px;
+    border-radius: 15px;
+  }
+
+  body.site-streamlined .breadcrumb,
+  body.site-streamlined .quick-journey-bar {
+    width: min(100% - 10px, 1120px);
+  }
+
+  body.site-streamlined .site-footer {
+    margin-bottom: 8px;
+    border-radius: 15px;
+  }
+}
