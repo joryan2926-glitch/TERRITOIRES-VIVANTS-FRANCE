@@ -68,21 +68,23 @@
               Pendant la phase de création, les demandes peuvent être préparées avec les informations essentielles :
               identité, organisation, territoire concerné, type de contribution et message.
             </p>
-            <form class="contact-form">
+            <form class="contact-form" data-public-contact-form>
+              <input type="hidden" name="profil" value="contact" />
+              <input type="hidden" name="source_page" value="contact.html" />
               <div class="field-row">
                 <label>
                   Nom / organisation
-                  <input type="text" name="name" autocomplete="name" />
+                  <input type="text" name="nom" autocomplete="name" />
                 </label>
                 <label>
                   Territoire concerné
-                  <input type="text" name="territory" autocomplete="address-level2" />
+                  <input type="text" name="territoire" autocomplete="address-level2" />
                 </label>
               </div>
               <div class="field-row">
                 <label>
                   Type de demande
-                  <select name="topic">
+                  <select name="sujet">
                     <option>Adhésion</option>
                     <option>Bénévolat</option>
                     <option>Partenariat</option>
@@ -93,18 +95,23 @@
                 </label>
                 <label>
                   Coordonnée de réponse
-                  <input type="text" name="reply" autocomplete="email" />
+                  <input type="text" name="email" autocomplete="email" required />
                 </label>
               </div>
               <label>
                 Message
-                <textarea name="message"></textarea>
+                <textarea name="message" required></textarea>
+              </label>
+              <label class="checkbox-line">
+                <input type="checkbox" name="consentement" required />
+                J'accepte que TVF utilise ces informations pour qualifier ma demande et me répondre.
               </label>
               <p class="form-note">
-                Ce formulaire prépare les informations de contact. Le raccordement technique d'envoi sera finalisé avec
-                les supports officiels de l'association.
+                Les informations transmises ne sont pas publiées. Elles servent uniquement à qualifier la demande,
+                préparer une réponse et, si nécessaire, proposer un échange.
               </p>
-              <button class="button primary" type="button">Préparer la demande</button>
+              <button class="button primary" type="submit">Transmettre la demande</button>
+              <p class="form-status" data-form-status>Renseignez les informations utiles ; elles seront transmises pour qualification et validation.</p>
             </form>
           </section>
         </section>
@@ -208,6 +215,8 @@
         <p>&copy; 2026 TERRITOIRES VIVANTS FRANCE - Tous droits r&eacute;serv&eacute;s</p>
       </div>
     </footer>
+    <script defer src="platform.js"></script>
+    <script defer src="analytics.js"></script>
     <script defer src="navigation.js"></script>
   </body>
 </html>

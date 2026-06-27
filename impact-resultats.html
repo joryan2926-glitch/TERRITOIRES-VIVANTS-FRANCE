@@ -41,6 +41,14 @@
         </section>
       </div>
     <section class="dossier-section" id="registre-indicateurs"><span class="dossier-kicker">Registre d'indicateurs</span><h2>Mesurer sans inventer</h2><p class="lead-block">Le tableau d'impact TVF doit partir de z&eacute;ro et progresser uniquement avec des actions v&eacute;rifi&eacute;es. Les indicateurs ci-dessous pr&eacute;parent la future connexion Supabase et la publication de r&eacute;sultats auditables.</p><div class="table-scroll"><table class="stat-comparison"><thead><tr><th>Indicateur</th><th>D&eacute;finition TVF</th><th>Preuve minimale</th><th>Statut actuel</th></tr></thead><tbody><tr><td>Signalements qualifi&eacute;s</td><td>Signalements v&eacute;rifi&eacute;s avec localisation, type et statut de recevabilit&eacute;.</td><td>Fiche en base, date, source et mod&eacute;ration.</td><td>&Agrave; connecter.</td></tr><tr><td>Logements remis en usage</td><td>Logements vacants ayant retrouv&eacute; un usage document&eacute; gr&acirc;ce &agrave; une action TVF.</td><td>Convention, photos, date de remise en usage, justificatif.</td><td>Aucun chiffre publi&eacute;.</td></tr><tr><td>Commerces accompagn&eacute;s</td><td>Locaux commerciaux qualifi&eacute;s, orient&eacute;s ou r&eacute;activ&eacute;s avec contribution TVF.</td><td>Dossier, porteur, commune, statut d'ouverture.</td><td>Aucun chiffre publi&eacute;.</td></tr><tr><td>Mat&eacute;riaux r&eacute;employ&eacute;s</td><td>Ressources accept&eacute;es puis affect&eacute;es &agrave; un projet valid&eacute;.</td><td>Fiche mat&eacute;riau, quantit&eacute;, photos, destination, date.</td><td>M&eacute;thode &agrave; stabiliser.</td></tr><tr><td>D&eacute;chets &eacute;vit&eacute;s</td><td>Estimation issue de quantit&eacute;s r&eacute;elles et facteurs document&eacute;s.</td><td>Pes&eacute;e ou &eacute;quivalence justifi&eacute;e, source de calcul.</td><td>Non publi&eacute;.</td></tr><tr><td>Personnes accompagn&eacute;es</td><td>B&eacute;n&eacute;voles, publics en insertion ou habitants participant &agrave; une action encadr&eacute;e.</td><td>Inscription, mission, date, consentement donn&eacute;es.</td><td>&Agrave; connecter.</td></tr><tr><td>Territoires actifs</td><td>Communes ou intercommunalit&eacute;s avec action, convention ou diagnostic r&eacute;el.</td><td>Convention, note de mission ou livrable valid&eacute;.</td><td>Saint-&Eacute;tienne en territoire pilote.</td></tr></tbody></table></div></section>
+
+      <section class="impact-section" id="formules-kpi-tvf">
+        <span class="dossier-kicker">M?thode de calcul</span>
+        <h2>Formules KPI pr?tes pour Supabase</h2>
+        <p class="lead-block">Les indicateurs TVF doivent ?tre calculables, auditables et r?visables. Les formules ci-dessous sont pr?paratoires : elles serviront ? automatiser le tableau de bord lorsque les donn?es r?elles seront valid?es.</p>
+        <div class="table-scroll"><table class="stat-comparison"><thead><tr><th>KPI</th><th>Formule de principe</th><th>Source</th><th>Publication</th></tr></thead><tbody><tr><td>Signalements qualifi?s</td><td>Nombre de signalements avec statut valid? et source renseign?e.</td><td>Table signalements.</td><td>Apr?s mod?ration.</td></tr><tr><td>Mat?riaux disponibles</td><td>Somme des fiches mat?riaux valid?es avec disponibilit? confirm?e.</td><td>Table mat?riaux + photos + date de contr?le.</td><td>Apr?s v?rification logistique.</td></tr><tr><td>D?chets ?vit?s</td><td>Quantit? r?elle r?employ?e ? facteur de conversion document?.</td><td>Pes?e, volume, fiche mat?riau, facteur ADEME ou source technique.</td><td>Avec m?thode affich?e.</td></tr><tr><td>CO2 ?vit? estim?</td><td>Quantit? r?employ?e ? facteur d'?mission sourc?.</td><td>Facteur ? valider selon mat?riau.</td><td>Uniquement comme estimation.</td></tr><tr><td>Logements remis en usage</td><td>Nombre de logements avec convention, travaux ou usage document?.</td><td>Fiche projet, convention, preuve d'occupation ou livraison.</td><td>Apr?s preuve.</td></tr><tr><td>Heures d'insertion</td><td>Somme des heures encadr?es par mission et participant.</td><td>Feuilles de pr?sence ou outil de suivi.</td><td>Agr?g?e, sans donn?es personnelles.</td></tr></tbody></table></div>
+      </section>
+
 <section class="tvf-page-faq" aria-labelledby="faq-impact-resultats-html">
         <div class="tvf-page-faq-header">
           <span class="dossier-kicker">FAQ</span>
@@ -98,6 +106,8 @@
         <p>&copy; 2026 TERRITOIRES VIVANTS FRANCE - Tous droits r&eacute;serv&eacute;s</p>
       </div>
     </footer>
+    <script defer src="platform.js"></script>
+    <script defer src="analytics.js"></script>
     <script defer src="navigation.js"></script>
   </body>
 </html>

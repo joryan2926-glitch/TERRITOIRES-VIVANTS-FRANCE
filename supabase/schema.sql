@@ -201,6 +201,22 @@ create table if not exists partenaires (
   updated_at timestamptz default now()
 );
 
+create table if not exists contacts (
+  id uuid primary key default gen_random_uuid(),
+  profil text,
+  nom text,
+  organisation text,
+  email text,
+  telephone text,
+  territoire text,
+  sujet text,
+  message text not null,
+  source_page text,
+  consentement boolean not null default false,
+  statut text not null default 'a_traiter',
+  created_at timestamptz default now()
+);
+
 create table if not exists benevoles (
   id uuid primary key default gen_random_uuid(),
   user_id uuid references users(id),
@@ -414,6 +430,8 @@ create index if not exists materiaux_type_idx on materiaux(type);
 create index if not exists materiaux_categorie_idx on materiaux(categorie);
 create index if not exists signalements_type_idx on signalements(type_signalement);
 create index if not exists projets_statut_idx on projets(statut);
+create index if not exists contacts_statut_idx on contacts(statut);
+create index if not exists contacts_created_at_idx on contacts(created_at desc);
 create index if not exists projets_financement_statut_idx on projets_financement(statut_validation, statut_publication);
 create index if not exists contributions_projet_financement_idx on contributions(projet_financement_id);
 create index if not exists impact_projets_projet_idx on impact_projets(projet_financement_id);
@@ -431,6 +449,7 @@ alter table projets enable row level security;
 alter table territoires enable row level security;
 alter table antennes enable row level security;
 alter table partenaires enable row level security;
+alter table contacts enable row level security;
 alter table projets_financement enable row level security;
 alter table investisseurs enable row level security;
 alter table mecenes enable row level security;
@@ -472,6 +491,15 @@ drop policy if exists "public_partenaires_valides" on partenaires;
 create policy "public_partenaires_valides" on partenaires for select using (statut = 'valide');
 drop policy if exists "authenticated_partenaires_insert" on partenaires;
 create policy "authenticated_partenaires_insert" on partenaires for insert to authenticated with check (true);
+
+drop policy if exists "admin_contacts_select" on contacts;
+create policy "admin_contacts_select" on contacts for select to authenticated using (
+  exists (
+    select 1 from user_profiles
+    where user_profiles.auth_user_id = auth.uid()
+      and user_profiles.role = 'administrateur'
+  )
+);
 
 drop policy if exists "public_projets_financement_valides" on projets_financement;
 create policy "public_projets_financement_valides" on projets_financement for select using (statut_validation = 'valide' and statut_publication = 'publie');

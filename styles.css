@@ -592,6 +592,41 @@ img[src*="assets/photos/"] {
   color: #9f241e;
 }
 
+.checkbox-line {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.92rem;
+  line-height: 1.45;
+  color: var(--muted);
+}
+
+.checkbox-line input {
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+  flex: 0 0 auto;
+  accent-color: var(--green);
+}
+
+.contact-form button:disabled {
+  cursor: progress;
+  opacity: 0.72;
+}
+
+.data-gap {
+  margin-top: 18px;
+  padding: 16px 18px;
+  border-left: 4px solid rgba(63, 113, 21, 0.45);
+  border-radius: 10px;
+  background: rgba(246, 249, 243, 0.92);
+  color: var(--ink);
+}
+
+.data-gap strong {
+  color: var(--green-dark);
+}
+
 .beta-shell {
   display: grid;
   grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);

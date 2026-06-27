@@ -81,13 +81,14 @@ Le dossier `api/` a été rationalisé pour rester sous la limite Hobby de Verce
 Fonctions principales :
 
 - `api/[resource].js`
+- `api/contact.js`
 - `api/admin.js`
 - `api/profile.js`
 - `api/stats.js`
 - `api/activity.js`
 - `api/config.js`
 
-Les routes publiques sont réécrites dans `vercel.json`.
+Les routes publiques sont réécrites dans `vercel.json`. Les formulaires publics non authentifiés utilisent `api/contact.js` et enregistrent des demandes à traiter dans la table `contacts`, sans publication automatique des données personnelles.
 
 ## Documents opérationnels
 

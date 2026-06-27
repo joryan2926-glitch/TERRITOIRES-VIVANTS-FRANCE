@@ -204,7 +204,7 @@ async function setupAdmin() {
         <h2>${escapeHtml(table)}</h2>
         ${(rows || []).length ? rows.map((row) => `
           <article class="admin-row">
-            <span>${escapeHtml(row.type_signalement || row.type || row.type_bien || row.nom || row.nom_structure || row.titre || row.commune || row.action || row.id)}</span>
+            <span>${escapeHtml(row.type_signalement || row.type || row.type_bien || row.nom || row.nom_structure || row.titre || row.sujet || row.email || row.commune || row.action || row.id)}</span>
             ${table === "activity_log" ? "" : `<button class="button secondary" type="button" data-admin-validate data-table="${table}" data-id="${row.id}">Valider</button>`}
           </article>
         `).join("") : "<p>Aucun élément en attente.</p>"}
@@ -219,6 +219,7 @@ async function setupAdmin() {
     const table = button.dataset.table;
     const body = { table, id: button.dataset.id };
     if (table === "partenaires") body.statut = "valide";
+    else if (table === "contacts") body.statut = "traite";
     else if (table === "antennes") body.statut = "active";
     else if (table === "investisseurs" || table === "mecenes") body.statut = "valide";
     else if (table === "projets") {

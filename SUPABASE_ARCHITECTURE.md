@@ -17,6 +17,7 @@ Cette architecture prépare les phases 3 à 7 de la plateforme collaborative. El
 - `reservations_materiaux` : demandes de réservation et suivi des disponibilités.
 - `signalements` : dépôts citoyens à modérer.
 - `partenaires` : collectivités, associations, entreprises, bailleurs, écoles et universités.
+- `contacts` : demandes publiques issues des formulaires du site, non publiées, à traiter par l'administration.
 - `benevoles` : disponibilités, compétences et rattachement territorial.
 - `candidatures_antennes` : demandes de création d'antennes locales.
 - `projets` : projets TVF en préparation, en cours ou clôturés.
@@ -41,9 +42,10 @@ Cette architecture prépare les phases 3 à 7 de la plateforme collaborative. El
 
 - Les pages bêta utilisent `beta-supabase.js` et les fonctions Vercel dans `api/`.
 - Les écritures applicatives passent par les endpoints serveur et nécessitent une session Supabase.
+- Les formulaires publics simples passent par `/api/contact`, écrivent dans `contacts` côté serveur et ne publient aucune donnée personnelle.
 - Les uploads utilisent les buckets Storage `signalements`, `materiaux` et `documents`.
 - Les routes publiques `/signalements`, `/materiaux`, `/projets`, `/territoires`, `/biens-candidats`, `/investisseurs` et `/mecenes` sont réécrites par `vercel.json` vers une seule fonction dynamique `/api/[resource].js`.
-- L'administration nécessite un profil `user_profiles.role = 'administrateur'` et permet la validation des signalements, matériaux, partenaires, antennes, biens candidats, projets, projets de financement, investisseurs et mécènes.
+- L'administration nécessite un profil `user_profiles.role = 'administrateur'` et permet la validation ou le traitement des signalements, matériaux, contacts, partenaires, antennes, biens candidats, projets, projets de financement, investisseurs et mécènes.
 
 ## Principes
 
