@@ -13,8 +13,6 @@
       <a href="signalement.html"><span>Signaler</span><strong>un lieu vacant</strong></a>
       <a href="bien-solidaire-usage-partage.html"><span>Proposer</span><strong>un bien</strong></a>
       <a href="banque-materiaux.html"><span>Valoriser</span><strong>des matériaux</strong></a>
-      <a href="espace-collectivites.html"><span>Collectivité</span><strong>territoire partenaire</strong></a>
-      <a href="espace-entreprises.html"><span>Entreprise</span><strong>s'engager</strong></a>
       <a href="contact.html"><span>Contact</span><strong>parler à TVF</strong></a>
     `;
     siteHeader.insertAdjacentElement("afterend", quickJourney);

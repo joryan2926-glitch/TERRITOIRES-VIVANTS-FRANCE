@@ -3,8 +3,8 @@
 Mise à jour : 27 juin 2026.
 
 - Pages publiques indexables : 53
-- Anciennes URL redirigees : 41
-- Autres pages : interfaces internes, techniques ou evolutions futures en noindex.
+- Anciennes URL redirigées : 41
+- Autres pages : interfaces internes, techniques ou évolutions futures en noindex.
 
 ## Pages publiques
 
