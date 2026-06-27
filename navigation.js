@@ -3,6 +3,22 @@
   const desktopQuery = window.matchMedia("(min-width: 861px)");
   const dropdowns = Array.from(document.querySelectorAll(".nav-dropdown"));
   const mobileMenuToggle = document.querySelector(".mobile-menu-toggle");
+  const siteHeader = document.querySelector(".site-header");
+
+  if (siteHeader && !document.querySelector(".quick-journey-bar")) {
+    const quickJourney = document.createElement("nav");
+    quickJourney.className = "quick-journey-bar";
+    quickJourney.setAttribute("aria-label", "Acces rapides Territoires Vivants France");
+    quickJourney.innerHTML = `
+      <a href="signalement.html"><span>Signaler</span><strong>un lieu vacant</strong></a>
+      <a href="bien-solidaire-usage-partage.html"><span>Proposer</span><strong>un bien</strong></a>
+      <a href="banque-materiaux.html"><span>Valoriser</span><strong>des matériaux</strong></a>
+      <a href="espace-collectivites.html"><span>Collectivité</span><strong>territoire partenaire</strong></a>
+      <a href="espace-entreprises.html"><span>Entreprise</span><strong>s'engager</strong></a>
+      <a href="contact.html"><span>Contact</span><strong>parler à TVF</strong></a>
+    `;
+    siteHeader.insertAdjacentElement("afterend", quickJourney);
+  }
 
   function reset(menu) {
     menu.style.setProperty("--nav-menu-shift", "0px");
