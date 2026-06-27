@@ -1,6 +1,6 @@
 # Architecture publique TVF
 
-Mise a jour : 25 juin 2026.
+Mise à jour : 27 juin 2026.
 
 - Pages publiques indexables : 53
 - Anciennes URL redirigees : 41

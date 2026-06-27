@@ -1,219 +1,136 @@
-# Territoires-Vivants-France
+# Territoires Vivants France
 
-Site vitrine de TERRITOIRES VIVANTS FRANCE, association nationale en création pour la revitalisation des territoires.
+Site officiel de **TERRITOIRES VIVANTS FRANCE**, association nationale en création dédiée à la revitalisation des territoires par la remise en usage des logements, commerces, bâtiments, friches, terrains et matériaux inutilisés.
 
-## Pages
+Le site est conçu comme une plateforme publique progressive : vitrine institutionnelle, observatoire territorial, parcours par public, documentation opérationnelle et préparation d'une future connexion Supabase.
 
-- Accueil
-- Qui sommes-nous ?
-- Nos actions
-  - Notre méthode
-  - Comment financer les projets
-  - Vision France 2035
-  - Logements vacants
-  - Commerces inoccupés
-  - Matériaux de réemploi
-  - Espaces abandonnés
-  - Solidarité & Insertion
-  - Antennes locales
-  - Observatoire du patrimoine vacant
-  - Observatoire national du patrimoine vacant
-  - Banque de matériaux
-  - Proposer des matériaux
-  - Nos projets pilotes
-  - Impact & résultats
-  - Tableau de bord
-  - Carte des territoires
-  - Signalement citoyen
-  - Antennes locales
-  - Architecture Supabase
-  - Ressources
-  - Publications & études
-  - Centre de ressources
-  - Observatoire national avancé
-  - Mesure d'impact
-  - Espace presse
-  - Gouvernance
-  - FAQ générale
-  - Vision 2035
-  - Devenir antenne locale
-  - Association nationale
-  - Partenariats stratégiques
-  - Transparence
-  - Plateforme opérationnelle
-  - Carte interactive nationale
-  - Banque de matériaux collaborative
-  - Tableau de bord national
-  - Comptes utilisateurs
-  - Formulaires Supabase
-  - Espace projet
-  - Observatoire temps réel
-  - TVF Mobile
-  - Feuille de route 2026-2035
-  - Architecture multi-territoires
-  - Plateforme bêta
-  - Authentification
-  - Carte connectée
-  - Matériaux réels
-  - Admin bêta
-  - Centre documentaire bêta
-  - API publique
-  - Bien Solidaire à Usage Partagé
-  - Proposer un bien
-  - Carte des biens candidats
-  - Projets réalisés Bien Solidaire
-  - Devenir propriétaire partenaire
-  - Fonds Territoires Vivants Investissement Solidaire
-  - Devenir investisseur solidaire
-  - Devenir mécène
-  - Projets à financer
-  - Impact investisseurs
-- Nos 5 pôles
-  - Habitat Vivant
-  - Matériauthèque Solidaire
-  - Solidarité & Insertion
-  - Friches & Terrains Vivants
-  - Observatoire du patrimoine vacant
-- Agir avec nous
-  - Devenir bénévole
-  - Devenir adhérent
-  - Faire un don
-  - Devenir partenaire
-  - Créer une antenne locale
-  - Espace collectivités
-  - Espace entreprises
-  - Espace bénévoles
-  - Espace adhérents
-  - Espace partenaires
-  - Recrutement
-- Nos statuts
-- Contact
-- Mentions légales
+## Positionnement
 
-## Phase 5
+Territoires Vivants France ne se présente pas comme un dispositif public existant, ni comme un organisme qui remplace les acteurs déjà compétents. Le site positionne TVF comme une plateforme de coordination capable de relier :
 
-La phase 5 crédibilise la dimension nationale :
+- propriétaires ;
+- collectivités ;
+- entreprises ;
+- associations ;
+- bénévoles ;
+- mécènes et financeurs ;
+- habitants ;
+- ressources et biens vacants.
 
-- publications et études, centre de ressources et espace presse préparés sans faux documents ;
-- observatoire national avancé avec carte, fiches territoires et préparation Supabase ;
-- projets pilotes structurés pour Saint-Étienne, Martinique, Guadeloupe, Réunion et Guyane ;
-- parcours "Devenir antenne locale" et préparation de l'association nationale ;
-- pages dédiées aux partenariats stratégiques : collectivités, entreprises, associations, écoles, universités, bailleurs et fondations ;
-- mesure d'impact avec indicateurs prêts à renseigner, sans chiffres fictifs ;
-- gouvernance, transparence et organisation nationale en structuration.
+Les projets, partenaires, chiffres d'impact et soutiens ne sont affichés que lorsqu'ils sont vérifiés ou explicitement présentés comme des estimations, scénarios ou éléments préparatoires.
 
-## Phase 6
+## Architecture publique
 
-La phase 6 prépare le passage du site vitrine à une plateforme opérationnelle :
+Le site conserve une architecture publique resserrée autour d'environ 50 pages indexables, listées dans `PUBLIC_ARCHITECTURE.md` et `sitemap.xml`.
 
-- hub `plateforme-operationnelle.html` pour centraliser les outils ;
-- carte interactive nationale avec signalement préparé pour Supabase ;
-- banque de matériaux collaborative avec filtres et modèle de fiche ;
-- tableau de bord national sans chiffres fictifs ;
-- comptes utilisateurs et rôles : citoyen, bénévole, entreprise, collectivité, administrateur ;
-- formulaires prêts à connecter : matériaux, lieu vacant, bénévole, partenaire, antenne locale ;
-- espace projet avec pipeline idée, étude, mobilisation, financement, réalisation, terminé ;
-- observatoire temps réel, TVF Mobile, feuille de route 2026-2035 et architecture multi-territoires ;
-- schéma `supabase/schema.sql` enrichi pour les tables, photos, réservations, projets et vue dashboard.
+Rubriques principales :
 
-## Phase 7
+- Accueil ;
+- Association ;
+- Nos actions ;
+- Nos 5 pôles ;
+- Par public ;
+- Agir avec TVF ;
+- Observatoire ;
+- Saint-Étienne, territoire pilote ;
+- Ressources ;
+- Gouvernance et transparence ;
+- Contact.
 
-La phase 7 active une bêta connectable à Supabase :
+Les pages techniques, anciennes pages de phase, pages Supabase, pages bêta et pages d'administration sont conservées en noindex ou redirigées selon `vercel.json`.
 
-- authentification Supabase : inscription, connexion, mot de passe oublié et profil ;
-- rôles : citoyen, bénévole, entreprise, collectivité, administrateur ;
-- fonction API Vercel dynamique `/api/[resource].js` pour `/signalements`, `/materiaux`, `/projets`, `/territoires` et les autres collections publiques ;
-- carte connectée avec dépôt de signalements en base ;
-- banque de matériaux avec upload photo via Supabase Storage ;
-- tableau de bord administrateur pour validation ;
-- espaces collectivités, entreprises et centre documentaire ;
-- statistiques automatiques via la vue `dashboard_national`.
+## Pages stratégiques
 
-## Programme Bien Solidaire à Usage Partagé
+- `index.html` : page d'accueil, mission, méthode, priorités, engagement et carte nationale préparée.
+- `qui-sommes-nous.html` : identité, gouvernance en création, posture et cadre de confiance.
+- `nos-actions.html` : actions opérationnelles, parcours d'intervention, scénarios et appels à l'action.
+- `nos-poles.html` : architecture en cinq pôles et coopération entre expertises.
+- `banque-materiaux.html` : Banque de Matériaux TVF, sans distribution libre ni promesse automatique.
+- `bien-solidaire-usage-partage.html` : programme propriétaire et convention d'usage temporaire.
+- `dossier-saint-etienne.html` : diagnostic territorial public du territoire pilote.
+- `tvf-enjeux-saint-etienne.html` : alignement avec les priorités publiques locales.
+- `fiches-projets-territorialisees.html` : logique de fiches projet prêtes à l'instruction.
+- `espace-collectivites.html`, `espace-entreprises.html`, `proprietaires.html`, `espace-benevoles.html` : parcours par public.
+- `gouvernance.html`, `transparence.html`, `charte-ethique.html`, `documents-officiels.html` : crédibilité institutionnelle.
 
-Dispositif stratégique ajouté au site :
+## Supabase
 
-- page programme dédiée ;
-- FAQ dédiée ;
-- formulaire "Proposer un bien" ;
-- carte préparatoire des biens candidats ;
-- page "Projets réalisés" sans projet fictif ;
-- parcours "Devenir propriétaire partenaire".
+L'architecture Supabase est préparée mais les données réelles doivent être connectées et validées avant production opérationnelle complète.
 
-Le programme est intégré dans Nos Actions, Habitat Vivant, Plateforme Opérationnelle, Espace Collectivités et Espace Entreprises.
-
-## Fonds Territoires Vivants Investissement Solidaire
-
-Programme national préparé pour mobiliser citoyens, entreprises, fondations, mécènes et investisseurs à impact :
-
-- page de présentation du fonds ;
-- parcours investisseur solidaire ;
-- parcours mécène et entreprise ;
-- espace projets à financer sans projet fictif ;
-- mesure d'impact investisseurs sans chiffres fictifs ;
-- tables préparatoires `projets_financement`, `investisseurs`, `mecenes`, `contributions` et `impact_projets`.
-
-## Activation opérationnelle Supabase
-
-La plateforme bêta dispose maintenant des endpoints réels pour :
-
-- les signalements, matériaux, projets, territoires et documents ;
-- les biens candidats du programme Bien Solidaire à Usage Partagé ;
-- les demandes investisseur solidaire et mécénat ;
-- le tableau de bord administrateur et le journal d'activité.
-
-Les buckets Storage attendus sont `signalements`, `materiaux` et `documents`. Les tables et politiques RLS sont décrites dans `supabase/schema.sql`.
-
-Variables Vercel nécessaires :
+Variables attendues dans Vercel :
 
 - `SUPABASE_URL`
 - `SUPABASE_ANON_KEY`
 - `SUPABASE_SERVICE_ROLE_KEY`
 
-## Phase 2
+Schéma :
 
-La phase 2 prépare une plateforme nationale évolutive autour de la carte des territoires, du signalement citoyen, des espaces bénévoles/adhérents/partenaires, des ressources, de la transparence et de la vision 2035.
+- `supabase/schema.sql`
+- `SUPABASE_ARCHITECTURE.md`
 
-Les pages restent statiques à ce stade. Les formulaires, cartes, documents et espaces membres sont préparés pour une future connexion à Supabase, sans stockage ni authentification active dans cette version.
+Buckets attendus :
 
-## Phase 3
+- `signalements`
+- `materiaux`
+- `documents`
 
-La phase 3 prépare la plateforme collaborative :
+## API Vercel
 
-- observatoire national filtrable par région, département, commune et type de bien ;
-- banque nationale de matériaux avec fiches structurées ;
-- signalement de lieux avec photo, adresse, géolocalisation et description ;
-- proposition de matériaux avec type, quantité, état, localisation et photo ;
-- carte interactive, tableau de bord, fiches d'antennes locales ;
-- espaces collectivités et entreprises enrichis pour les dépôts de projets, diagnostics, mécénat et mise à disposition de locaux ;
-- architecture Supabase documentée dans `SUPABASE_ARCHITECTURE.md` et `supabase/schema.sql`.
+Le dossier `api/` a été rationalisé pour rester sous la limite Hobby de Vercel.
 
-## Phase 4
+Fonctions principales :
 
-La phase 4 professionnalise le contenu :
+- `api/[resource].js`
+- `api/admin.js`
+- `api/profile.js`
+- `api/stats.js`
+- `api/activity.js`
+- `api/config.js`
 
-- enrichissement des cinq pôles avec problèmes, objectifs, méthode, résultats attendus, exemples de projets et FAQ ;
-- création des pages `notre-methode.html`, `financer-projets.html` et `vision-france-2035.html` ;
-- ajout d'une section "Rejoindre le mouvement" pour les bénévoles, collectivités, entreprises, artisans, architectes, urbanistes, associations et habitants.
+Les routes publiques sont réécrites dans `vercel.json`.
+
+## Documents opérationnels
+
+Des modèles de documents sont disponibles dans :
+
+- `documents/modeles/`
+- `output/documents/pack-fondateur-tvf/`
+- `output/documents/pack-institutionnel-tvf/`
+
+Ces documents sont destinés à être adaptés avant signature ou transmission officielle : conventions, fiches projet, registres, grilles de priorisation, pièces à fournir, procédures et dossiers de présentation.
+
+## Réseaux sociaux
+
+Deux séries de visuels Instagram ont été préparées :
+
+- `output/social/instagram-exemples-tvf/` : direction institutionnelle.
+- `output/social/instagram-startup-tvf/` : direction plus dynamique, style startup.
 
 ## Déploiement
 
 Le site est statique et peut être déployé sur Vercel depuis la branche `main`.
 
-Voir `DEPLOIEMENT.md` pour les points à compléter avant mise en production définitive.
+Avant présentation à une collectivité ou à un financeur :
 
+1. Vérifier les informations administratives définitives de l'association.
+2. Confirmer les coordonnées publiques à afficher.
+3. Ne publier aucun partenaire sans accord écrit.
+4. Tester les formulaires Supabase en production.
+5. Valider les politiques RLS et les buckets Storage.
+6. Relire les pages Saint-Étienne avec les millésimes de données les plus récents.
 
-## Objet de l'association
+## Contrôles disponibles
 
-Territoires Vivants France a pour objet de contribuer à la revitalisation des territoires par le repérage, la qualification, la réhabilitation, le réemploi et la remise en usage de biens, d'espaces et de ressources inutilisés, notamment les logements vacants, commerces fermés, bâtiments abandonnés, friches, terrains délaissés et matériaux réemployables, au bénéfice des habitants, des collectivités, des associations et des acteurs locaux.
+Validation statique :
 
-### Missions principales
+```bash
+node scripts/validate-static.js
+```
 
-- **Identifier** : Repérer et documenter les logements vacants, commerces fermés, bâtiments abandonnés, friches, terrains inutilisés et ressources encore utiles.
-- **Qualifier** : Analyser les contraintes juridiques, techniques, sociales, environnementales et territoriales avant toute orientation.
-- **Accompagner** : Aider les propriétaires, collectivités, associations, entreprises et habitants à transformer une ressource inutilisée en projet utile.
-- **Réemployer** : Organiser la valorisation des matériaux disponibles dans une logique d'économie circulaire et de coopération territoriale.
-- **Mobiliser** : Structurer l'engagement citoyen, le bénévolat, les compétences, les partenariats et les financements effectivement confirmés.
-- **Transmettre** : Produire des données, des outils, des méthodes et des retours d'expérience pour aider les territoires à agir avec rigueur.
+Scan de secrets :
 
-Cette formulation reste modifiable après déclaration officielle, validation des statuts et publication des informations administratives définitives.
+```bash
+node scripts/scan-secrets.js
+```
+
+Le projet ne dépend pas d'un build frontend : les fichiers HTML, CSS, JS et assets sont servis directement.

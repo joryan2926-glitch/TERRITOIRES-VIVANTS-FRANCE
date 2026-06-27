@@ -5,3 +5,8 @@ mobile-check.png
 .env
 .env.*
 !.env.example
+output/
+tmp/
+scripts/__pycache__/
+scripts/create_*.py
+*.pyc
