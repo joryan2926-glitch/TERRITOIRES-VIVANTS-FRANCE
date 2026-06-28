@@ -16,6 +16,7 @@ const nav = [
   ["Observatoire", "observatoire.html"],
   ["Saint-Étienne", "saint-etienne.html"],
   ["Agir", "agir-avec-nous.html"],
+  ["Partenaires", "partenaires.html"],
   ["Contact", "contact.html"],
 ];
 
@@ -29,44 +30,44 @@ const pages = [
     eyebrow: "Association nationale en création",
     h1: "Redonner vie aux lieux utiles aux habitants.",
     intro:
-      "Territoires Vivants France agit comme une plateforme de coopération : repérer les ressources inutilisées, mobiliser les bons acteurs, organiser les conventions, faciliter les projets et suivre leur impact.",
+      "Territoires Vivants France structure une méthode de coopération pour repérer les ressources inutilisées, mobiliser les bons acteurs, préparer les conventions et accompagner des projets utiles aux territoires.",
     ctas: [
       ["Comprendre TVF", "qui-sommes-nous.html"],
-      ["Proposer un bien", "agir-avec-nous.html#proposer"],
+      ["Agir avec nous", "agir-avec-nous.html"],
       ["Nous contacter", "contact.html"],
     ],
     sections: [
       sectionIntro(
-        "Une mission simple, un cadre clair",
-        "TVF part d'un constat : des logements restent vacants, des commerces ferment, des matériaux encore utiles sont jetés et des terrains restent inutilisés. L'association veut transformer ces situations en projets locaux utiles, sans promettre de résultats non mesurés et sans se substituer aux acteurs publics existants.",
+        "Une mission lisible",
+        "TVF part d'un constat simple : des logements restent vacants, des commerces ferment, des friches demeurent inutilisées et des matériaux encore utiles sortent des circuits de projet. L'association veut transformer ces situations en opportunités locales, avec un cadre clair et traçable.",
         [
-          ["Observer", "Identifier les biens, matériaux et besoins territoriaux à partir de signalements et de données vérifiables."],
-          ["Qualifier", "Analyser la faisabilité, les contraintes, les propriétaires concernés et les usages possibles."],
-          ["Coordonner", "Réunir collectivités, propriétaires, entreprises, associations, financeurs et habitants autour d'un cadre commun."],
+          ["Observer", "Identifier les lieux, besoins et ressources à partir de signalements, visites et données vérifiables."],
+          ["Qualifier", "Analyser la faisabilité, les contraintes, les responsabilités et les usages possibles."],
+          ["Coordonner", "Réunir propriétaires, collectivités, entreprises, associations, financeurs, bénévoles et habitants."],
         ]
       ),
       cards(
-        "Les portes d'entrée",
-        "Chaque public doit comprendre rapidement comment agir avec TVF.",
+        "À chacun son entrée",
+        "Le site doit permettre à chaque public de savoir quoi faire en moins de deux minutes.",
         [
-          ["Collectivité", "Structurer un diagnostic, identifier des biens vacants, préparer une coopération territoriale.", "agir-avec-nous.html#collectivite"],
-          ["Propriétaire", "Proposer un logement, un commerce, un bâtiment ou un terrain inutilisé.", "agir-avec-nous.html#proprietaire"],
-          ["Entreprise", "Valoriser matériaux, compétences, locaux ou mécénat dans un projet utile au territoire.", "agir-avec-nous.html#entreprise"],
-          ["Citoyen", "Signaler un lieu, devenir bénévole ou participer à une démarche locale.", "agir-avec-nous.html#citoyen"],
+          ["Collectivité", "Préparer un diagnostic, une expérimentation ou une coopération territoriale.", "agir-avec-nous.html#collectivite"],
+          ["Propriétaire", "Présenter un logement, un commerce, un bâtiment ou un terrain inutilisé.", "agir-avec-nous.html#proprietaire"],
+          ["Entreprise", "Valoriser des matériaux, compétences, locaux ou mécénat dans un projet utile.", "agir-avec-nous.html#entreprise"],
+          ["Citoyen", "Signaler un lieu, participer à une action locale ou rejoindre une mission bénévole.", "agir-avec-nous.html#citoyen"],
         ]
       ),
       timeline(
         "Le parcours TVF",
         [
-          ["1", "Repérage", "Un lieu, un besoin ou une ressource est signalé."],
-          ["2", "Diagnostic", "TVF vérifie la situation, les contraintes et les acteurs à réunir."],
-          ["3", "Convention", "Les engagements sont formalisés avant toute action de terrain."],
-          ["4", "Mise en usage", "Le projet est coordonné, suivi et documenté."],
+          ["1", "Repérage", "Un lieu, un besoin ou une ressource est identifié."],
+          ["2", "Diagnostic", "La situation est qualifiée avant toute annonce ou engagement."],
+          ["3", "Convention", "Les rôles, responsabilités, usages et limites sont formalisés."],
+          ["4", "Mise en usage", "Le projet est coordonné, documenté puis suivi dans le temps."],
         ]
       ),
       highlight(
-        "Territoire pilote : Saint-Étienne",
-        "Le siège national est situé à Saint-Étienne. Le territoire pilote doit permettre de tester la méthode TVF sur des sujets concrets : habitat vacant, commerces inoccupés, matériaux de réemploi, friches et mobilisation citoyenne.",
+        "Saint-Étienne comme territoire pilote",
+        "Le siège national est situé à Saint-Étienne. Le territoire pilote permet de tester la méthode TVF sur des enjeux concrets : habitat vacant, commerces fermés, friches, matériaux de réemploi et mobilisation citoyenne.",
         "Découvrir le pilote",
         "saint-etienne.html",
         "assets/photos/france-saint-etienne-jean-jaures.jpg"
@@ -82,22 +83,22 @@ const pages = [
     eyebrow: "L'association",
     h1: "Une plateforme de coopération territoriale.",
     intro:
-      "TVF rassemble les acteurs qui peuvent transformer un bien inutilisé en ressource pour les habitants : propriétaires, collectivités, entreprises, associations, bénévoles, financeurs et citoyens.",
-    ctas: [["Notre méthode", "nos-actions.html"], ["Contact", "contact.html"]],
+      "TVF rassemble les acteurs capables de transformer un bien inutilisé en ressource pour les habitants : propriétaires, collectivités, entreprises, associations, bénévoles, financeurs et citoyens.",
+    ctas: [["Notre méthode", "nos-actions.html"], ["Transparence", "transparence.html"]],
     sections: [
       textBlock(
-        "Notre raison d'être",
-        "Un bâtiment fermé, un logement dégradé, un commerce vide ou un stock de matériaux oublié ne sont pas seulement des problèmes immobiliers. Ce sont aussi des occasions manquées pour le logement, l'activité locale, l'insertion, la transition écologique et la qualité de vie. TVF veut créer le cadre qui permet de passer du constat à l'action."
+        "Notre rôle",
+        "TVF ne remplace ni les collectivités, ni les dispositifs publics, ni les professionnels du bâtiment. L'association cherche à rendre les coopérations plus simples : repérer les situations, préparer les dossiers, mettre les acteurs autour de la même table et suivre ce qui est décidé."
       ),
       split(
         "Une association en création",
-        "Le projet est porté depuis Saint-Étienne avec une ambition nationale progressive. Cette phase demande de bâtir une méthode crédible, des documents solides, des conventions claires et des premiers partenariats réels avant toute communication de résultats.",
+        "La priorité est de construire une méthode crédible avant de communiquer des résultats. Cela signifie : des documents propres, des conventions adaptées, des critères de sélection, une traçabilité des décisions et une distinction nette entre objectifs, projets en instruction et actions réalisées.",
         "assets/photos/community-garden-paris.webp"
       ),
       cards("Nos engagements", "TVF avance avec prudence et exigence.", [
         ["Clarté", "Ne pas annoncer de chiffres d'impact tant qu'ils ne sont pas mesurés."],
         ["Traçabilité", "Documenter les décisions, conventions, ressources et projets."],
-        ["Complémentarité", "Aider les politiques publiques et les acteurs locaux sans les remplacer."],
+        ["Complémentarité", "Aider les acteurs existants sans se substituer à eux."],
         ["Utilité", "Orienter chaque action vers un bénéfice concret pour le territoire."],
       ]),
     ],
@@ -129,10 +130,12 @@ const pages = [
         ["D", "Contractualiser", "Convention de coopération, règles d'usage et responsabilités."],
         ["E", "Suivre", "Indicateurs, documentation, retour d'expérience et transparence."],
       ]),
-      textBlock(
-        "Ce que TVF ne promet pas",
-        "TVF ne présente pas de faux projets réalisés, ne revendique pas de financeurs non engagés et ne communique pas de chiffres non vérifiés. Les objectifs sont distingués des résultats mesurés."
-      ),
+      tableSection("De l'idée à l'action", "Chaque action doit pouvoir être comprise, instruite et suivie.", [
+        ["Sujet", "Ce que TVF prépare", "Résultat attendu"],
+        ["Bien vacant", "Diagnostic, propriétaire, contraintes, usage possible", "Dossier de décision"],
+        ["Matériaux", "Nature, état, quantité, stockage, affectation", "Ressource orientée vers un projet validé"],
+        ["Projet local", "Acteurs, budget, convention, calendrier", "Cadre de coopération partagé"],
+      ]),
     ],
   },
   {
@@ -145,7 +148,7 @@ const pages = [
     h1: "Cinq pôles pour couvrir tout le cycle de revitalisation.",
     intro:
       "Les pôles structurent l'action de TVF : du repérage d'un bien à son nouvel usage, en intégrant les matériaux, les acteurs et l'impact social.",
-    ctas: [["Nos actions", "nos-actions.html"], ["Devenir partenaire", "agir-avec-nous.html#partenaire"]],
+    ctas: [["Nos actions", "nos-actions.html"], ["Devenir partenaire", "partenaires.html"]],
     sections: [
       cards("Les pôles TVF", "Chaque pôle répond à un enjeu précis.", [
         ["Habitat Vivant", "Logements vacants, habitat dégradé, propriétaires, usages solidaires."],
@@ -180,9 +183,15 @@ const pages = [
         ["Friches et terrains", "Espaces délaissés pouvant accueillir un projet utile."],
         ["Matériaux disponibles", "Ressources réemployables proposées ou identifiées."],
       ]),
+      tableSection("Qualité des données", "L'observatoire doit distinguer signalement, vérification et décision.", [
+        ["Niveau", "Statut", "Usage"],
+        ["Signalé", "Information reçue", "À vérifier"],
+        ["Qualifié", "Adresse, type, état et contraintes documentés", "À instruire"],
+        ["Orienté", "Acteurs identifiés et piste d'usage crédible", "À conventionner"],
+      ]),
       textBlock(
-        "Données et responsabilité",
-        "Les données publiques, les signalements citoyens et les diagnostics de terrain doivent être vérifiés avant publication opérationnelle. L'observatoire n'a pas vocation à stigmatiser des propriétaires, mais à créer les conditions d'une solution."
+        "Responsabilité",
+        "L'observatoire n'a pas vocation à stigmatiser des propriétaires. Il sert à créer les conditions d'une solution avec des données vérifiées, des démarches respectueuses et un cadre de dialogue."
       ),
     ],
   },
@@ -209,6 +218,12 @@ const pages = [
         "Pourquoi un pilote local ?",
         "Un dispositif national doit d'abord prouver sa méthode sur un territoire concret. Saint-Étienne permet de travailler sur des sujets représentatifs : reconversion, patrimoine existant, centres-villes, transition écologique, économie circulaire et solidarité."
       ),
+      tableSection("Premiers travaux à cadrer", "Le pilote doit avancer par dossiers courts, vérifiables et utiles.", [
+        ["Dossier", "Objectif", "Livrable"],
+        ["Habitat vacant", "Comprendre les blocages propriétaires", "Fiche de qualification"],
+        ["Commerce fermé", "Identifier des usages réalistes", "Scénario d'occupation"],
+        ["Matériaux", "Tester une chaîne de réemploi", "Registre de ressources"],
+      ]),
     ],
   },
   {
@@ -224,13 +239,66 @@ const pages = [
     ctas: [["Écrire à TVF", "contact.html"], ["Proposer un bien", "#proposer"]],
     sections: [
       cards("Choisir son parcours", "Un seul objectif : transformer une intention en démarche claire.", [
-        ["Je suis une collectivité", "Préparer un diagnostic, une coopération ou une expérimentation territoriale."],
-        ["Je suis propriétaire", "Proposer un logement, commerce, bâtiment ou terrain inutilisé."],
-        ["Je suis une entreprise", "Valoriser matériaux, compétences, locaux ou mécénat."],
-        ["Je suis bénévole", "Participer à une mission, un chantier ou une action locale."],
-        ["Je souhaite financer", "Soutenir un projet avec un cadre de suivi et de transparence."],
+        ["Je suis une collectivité", "Préparer un diagnostic, une coopération ou une expérimentation territoriale.", "#collectivite"],
+        ["Je suis propriétaire", "Proposer un logement, commerce, bâtiment ou terrain inutilisé.", "#proprietaire"],
+        ["Je suis une entreprise", "Valoriser matériaux, compétences, locaux ou mécénat.", "#entreprise"],
+        ["Je suis bénévole", "Participer à une mission, un chantier ou une action locale.", "#citoyen"],
+        ["Je souhaite financer", "Soutenir un projet avec un cadre de suivi et de transparence.", "partenaires.html"],
       ]),
+      audienceSection(),
       formSection(),
+    ],
+  },
+  {
+    file: "partenaires.html",
+    title: "Partenaires",
+    meta:
+      "Devenir partenaire de Territoires Vivants France : collectivités, entreprises, associations, propriétaires, mécènes et financeurs.",
+    heroImage: "assets/photos/france-saint-etienne-chateaucreux.jpg",
+    eyebrow: "Coopération",
+    h1: "Construire des partenariats utiles et traçables.",
+    intro:
+      "TVF ne publie pas de faux partenaires. Cette page présente les formes de coopération possibles et le cadre attendu avant toute officialisation.",
+    ctas: [["Présenter une coopération", "contact.html"], ["Voir les documents", "documents.html"]],
+    sections: [
+      cards("Qui peut coopérer avec TVF ?", "Chaque partenariat doit avoir un objectif, des responsabilités et des preuves.", [
+        ["Collectivités", "Diagnostic, mise à disposition d'informations, expérimentation locale, animation territoriale."],
+        ["Entreprises", "Dons de matériaux, compétences, mécénat, locaux, logistique ou expertise technique."],
+        ["Associations", "Besoins locaux, bénévolat, usage futur, relais habitants, actions solidaires."],
+        ["Propriétaires", "Signalement de biens, convention d'usage, projet de remise en activité."],
+        ["Financeurs", "Soutien à des dossiers instruits, reporting, indicateurs et transparence."],
+      ]),
+      tableSection("Cadre de partenariat", "Un partenariat sérieux se formalise avant communication publique.", [
+        ["Étape", "Contenu", "Preuve attendue"],
+        ["Intention", "Échange sur le besoin, le territoire et le rôle possible", "Compte rendu"],
+        ["Instruction", "Vérification juridique, technique, financière et opérationnelle", "Fiche projet"],
+        ["Convention", "Responsabilités, durée, usages, suivi et communication", "Document signé"],
+        ["Suivi", "Indicateurs, retours d'expérience et preuves d'action", "Tableau de bord"],
+      ]),
+    ],
+  },
+  {
+    file: "documents.html",
+    title: "Documents",
+    meta:
+      "Documents préparatoires de Territoires Vivants France : fiches collectivité, propriétaire, entreprise et modèle de convention.",
+    heroImage: "assets/photos/france-saint-etienne-chateaucreux.jpg",
+    eyebrow: "Ressources",
+    h1: "Des documents simples pour cadrer les premières démarches.",
+    intro:
+      "Ces documents sont des bases de travail modifiables. Ils aident à préparer un échange sans se substituer à un conseil juridique ou technique.",
+    ctas: [["Contacter TVF", "contact.html"], ["Voir la transparence", "transparence.html"]],
+    sections: [
+      cards("Documents disponibles", "Chaque modèle aide à collecter les informations nécessaires avant instruction.", [
+        ["Fiche collectivité", "Qualifier un besoin territorial, un périmètre, des ressources et des interlocuteurs.", "documents/fiche-collectivite.md"],
+        ["Fiche propriétaire", "Présenter un bien, son état, ses contraintes et les usages envisageables.", "documents/fiche-proprietaire.md"],
+        ["Fiche entreprise", "Décrire des matériaux, compétences, locaux ou contributions possibles.", "documents/fiche-entreprise.md"],
+        ["Modèle de convention", "Préparer les clauses de coopération à adapter avec les parties concernées.", "documents/modele-convention.md"],
+      ]),
+      textBlock(
+        "À utiliser avec prudence",
+        "Ces documents sont volontairement préparatoires. Avant signature ou engagement, chaque projet doit être relu, adapté au contexte et validé par les personnes compétentes."
+      ),
     ],
   },
   {
@@ -261,8 +329,8 @@ const pages = [
     eyebrow: "Transparence",
     h1: "Avancer avec méthode et preuve.",
     intro:
-      "TVF distingue clairement ce qui est déjà établi, ce qui est en cours de structuration et ce qui devra être validé par convention, données ou partenariats réels.",
-    ctas: [["Documents", "#documents"], ["Contact", "contact.html"]],
+      "TVF distingue clairement ce qui est établi, ce qui est en cours de structuration et ce qui devra être validé par convention, données ou partenariats réels.",
+    ctas: [["Documents", "documents.html"], ["Contact", "contact.html"]],
     sections: [
       cards("Principes de publication", "Une règle simple : pas de chiffres ni de partenaires inventés.", [
         ["Données", "Publier uniquement des données sourcées ou des objectifs explicitement identifiés."],
@@ -288,9 +356,7 @@ const pages = [
     intro:
       "Cette page est préparée pour être mise à jour après les formalités administratives officielles de l'association.",
     ctas: [["Contact", "contact.html"], ["Transparence", "transparence.html"]],
-    sections: [
-      legalSection(),
-    ],
+    sections: [legalSection()],
   },
 ];
 
@@ -312,6 +378,13 @@ function timeline(title, items) {
     .join("")}</div></div></section>`;
 }
 
+function tableSection(title, intro, rows) {
+  const [head, ...body] = rows;
+  return `<section class="section"><div class="container"><div class="section-head"><p class="section-kicker">Cadre</p><h2>${title}</h2><p>${intro}</p></div><div class="table-wrap"><table><thead><tr>${head.map((cell) => `<th>${cell}</th>`).join("")}</tr></thead><tbody>${body
+    .map((row) => `<tr>${row.map((cell) => `<td>${cell}</td>`).join("")}</tr>`)
+    .join("")}</tbody></table></div></div></section>`;
+}
+
 function highlight(title, text, label, href, image) {
   return `<section class="section feature"><div class="container feature-grid"><img src="${image}" alt="Vue urbaine française liée à la revitalisation territoriale" loading="lazy"><div><p class="section-kicker">Pilote</p><h2>${title}</h2><p>${text}</p><a class="btn primary" href="${href}">${label}</a></div></div></section>`;
 }
@@ -322,6 +395,10 @@ function split(title, text, image) {
 
 function textBlock(title, text) {
   return `<section class="section"><div class="container narrow"><p class="section-kicker">Analyse</p><h2>${title}</h2><p>${text}</p></div></section>`;
+}
+
+function audienceSection() {
+  return `<section class="section"><div class="container audience-grid"><article id="collectivite"><h2>Collectivité</h2><p>TVF peut aider à préparer un diagnostic, identifier des biens ou ressources et structurer une expérimentation locale. La coopération doit rester compatible avec les compétences, politiques publiques et procédures de la collectivité.</p></article><article id="proprietaire"><h2>Propriétaire</h2><p>Un propriétaire peut présenter un bien vacant ou dégradé. TVF étudie alors l'état du bien, les contraintes, les usages possibles et les conditions d'une convention adaptée.</p></article><article id="entreprise"><h2>Entreprise</h2><p>Une entreprise peut contribuer par des matériaux, du mécénat, des compétences, des locaux ou de la logistique. La contribution doit être tracée et orientée vers un projet validé.</p></article><article id="citoyen"><h2>Citoyen ou bénévole</h2><p>Un habitant peut signaler une situation, rejoindre une mission, participer à un chantier encadré ou relayer les besoins de son territoire.</p></article></div></section>`;
 }
 
 function formSection() {
@@ -338,15 +415,15 @@ function legalSection() {
 
 function iconFor(text) {
   const t = text.toLowerCase();
-  if (t.includes("logement") || t.includes("habitat") || t.includes("propri")) return "⌂";
-  if (t.includes("commerce")) return "▦";
-  if (t.includes("mat")) return "♻";
-  if (t.includes("friche") || t.includes("terrain")) return "◎";
-  if (t.includes("solid") || t.includes("béné") || t.includes("citoy")) return "✦";
-  if (t.includes("collect")) return "⌁";
-  if (t.includes("entreprise")) return "◫";
-  if (t.includes("finance")) return "◆";
-  return "•";
+  if (t.includes("logement") || t.includes("habitat") || t.includes("propri")) return "H";
+  if (t.includes("commerce")) return "C";
+  if (t.includes("mat")) return "R";
+  if (t.includes("friche") || t.includes("terrain")) return "F";
+  if (t.includes("solid") || t.includes("béné") || t.includes("citoy")) return "S";
+  if (t.includes("collect")) return "T";
+  if (t.includes("entreprise")) return "E";
+  if (t.includes("finance")) return "€";
+  return "TVF";
 }
 
 function pageTemplate(page) {
@@ -394,8 +471,8 @@ function pageTemplate(page) {
   <footer class="site-footer">
     <div class="container footer-grid">
       <div><span class="footer-logo-box"><img src="assets/logo-tvf-officiel-transparent.png" alt="Territoires Vivants France" class="footer-logo"></span><p>Plateforme nationale de coopération pour redonner vie aux biens, lieux et ressources inutilisés.</p></div>
-      <div><h2>Navigation</h2>${nav.slice(0, 6).map(([label, href]) => `<a href="${href}">${label}</a>`).join("")}</div>
-      <div><h2>Ressources</h2><a href="transparence.html">Transparence</a><a href="mentions-legales.html">Mentions légales</a><a href="contact.html">Contact</a></div>
+      <div><h2>Navigation</h2>${nav.slice(0, 7).map(([label, href]) => `<a href="${href}">${label}</a>`).join("")}</div>
+      <div><h2>Ressources</h2><a href="documents.html">Documents</a><a href="transparence.html">Transparence</a><a href="mentions-legales.html">Mentions légales</a><a href="contact.html">Contact</a></div>
       <div><h2>Siège</h2><p>25 rue Élise Gervais<br>42000 Saint-Étienne</p><a class="btn secondary" href="contact.html">Contacter TVF</a></div>
     </div>
     <div class="container footer-bottom">© 2026 Territoires Vivants France - Tous droits réservés.</div>

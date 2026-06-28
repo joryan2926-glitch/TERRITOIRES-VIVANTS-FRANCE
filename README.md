@@ -22,9 +22,18 @@ Présenter TVF comme une association nationale en création, claire, crédible e
 - `observatoire.html`
 - `saint-etienne.html`
 - `agir-avec-nous.html`
+- `partenaires.html`
+- `documents.html`
 - `contact.html`
 - `transparence.html`
 - `mentions-legales.html`
+
+## Documents préparatoires
+
+- `documents/fiche-collectivite.md`
+- `documents/fiche-proprietaire.md`
+- `documents/fiche-entreprise.md`
+- `documents/modele-convention.md`
 
 ## Génération
 
