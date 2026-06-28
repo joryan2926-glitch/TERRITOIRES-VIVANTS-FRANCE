@@ -84,7 +84,7 @@ const pages = [
     h1: "Une plateforme de coopération territoriale.",
     intro:
       "TVF rassemble les acteurs capables de transformer un bien inutilisé en ressource pour les habitants : propriétaires, collectivités, entreprises, associations, bénévoles, financeurs et citoyens.",
-    ctas: [["Notre méthode", "nos-actions.html"], ["Transparence", "transparence.html"]],
+    ctas: [["Notre méthode", "notre-methode.html"], ["Transparence", "transparence.html"]],
     sections: [
       textBlock(
         "Notre rôle",
@@ -296,6 +296,7 @@ const pages = [
         ["Fiche projet", "Cadrer un projet territorial, son usage, ses acteurs, ses risques et ses livrables.", "documents/fiche-projet.md"],
         ["Dossier TVF", "Présenter l'association, sa méthode, ses publics et ses conditions de coopération.", "documents/dossier-presentation-tvf.md"],
         ["Modèle de convention", "Préparer les clauses de coopération à adapter avec les parties concernées.", "documents/modele-convention.md"],
+        ["Grille d'impact", "Suivre les indicateurs sans inventer de chiffres ni de résultats.", "documents/grille-impact.md"],
       ]),
       textBlock(
         "À utiliser avec prudence",
@@ -323,6 +324,74 @@ const pages = [
         ["Une collectivité peut-elle devenir territoire partenaire ?", "Oui, après un échange de cadrage. Les objectifs, responsabilités, données disponibles et modalités de coopération doivent être formalisés."],
         ["Les chiffres d'impact sont-ils déjà affichés ?", "Non. TVF ne communique pas de résultats non mesurés. Les indicateurs seront publiés lorsqu'ils seront vérifiés et documentés."],
       ]),
+    ],
+  },
+  {
+    file: "notre-methode.html",
+    title: "Notre méthode",
+    meta:
+      "La méthode TVF pour repérer, qualifier, conventionner, mobiliser et suivre les projets de revitalisation territoriale.",
+    heroImage: "assets/photos/france-saint-etienne-chateaucreux.jpg",
+    eyebrow: "Méthode",
+    h1: "Une méthode courte, traçable et progressive.",
+    intro:
+      "TVF avance par étapes pour éviter les promesses floues : comprendre la situation, vérifier les contraintes, réunir les acteurs, formaliser les engagements et suivre ce qui est réellement fait.",
+    ctas: [["Préparer un dossier", "documents.html"], ["Nous contacter", "contact.html"]],
+    sections: [
+      timeline("Les six étapes", [
+        ["1", "Repérer", "Identifier un bien, un besoin, une ressource ou une opportunité territoriale."],
+        ["2", "Qualifier", "Documenter l'adresse, l'état, les usages possibles, les contraintes et les acteurs concernés."],
+        ["3", "Prioriser", "Vérifier si le projet répond à un besoin local réel et si les conditions minimales sont réunies."],
+        ["4", "Conventionner", "Formaliser les responsabilités, la durée, les usages, la communication et le suivi."],
+        ["5", "Mobiliser", "Rechercher les compétences, matériaux, bénévoles, partenaires et financements nécessaires."],
+        ["6", "Suivre", "Documenter les actions, les décisions, les indicateurs et les retours d'expérience."],
+      ]),
+      tableSection("Critères de décision", "Un projet TVF doit être utile, faisable et traçable.", [
+        ["Critère", "Question posée", "Preuve attendue"],
+        ["Utilité", "Le projet répond-il à un besoin territorial clair ?", "Besoin décrit, public concerné, usage envisagé"],
+        ["Faisabilité", "Les contraintes sont-elles identifiées ?", "État du bien, accès, sécurité, propriété, budget"],
+        ["Coopération", "Les acteurs nécessaires sont-ils mobilisables ?", "Référents, contacts, rôle de chaque partie"],
+        ["Traçabilité", "Le projet peut-il être documenté ?", "Fiche projet, convention, indicateurs, compte rendu"],
+      ]),
+      cards("Ce que la méthode évite", "La méthode sert aussi à protéger le projet.", [
+        ["Annonces prématurées", "Ne pas présenter un projet comme acquis tant qu'il n'est pas cadré."],
+        ["Flou juridique", "Identifier les responsabilités avant toute action."],
+        ["Ressources dispersées", "Affecter les matériaux et contributions à des besoins validés."],
+        ["Impact non mesuré", "Distinguer clairement objectifs, actions et résultats."],
+      ]),
+    ],
+  },
+  {
+    file: "impact.html",
+    title: "Impact & suivi",
+    meta:
+      "La page Impact de TVF présente les indicateurs à suivre sans chiffres inventés : biens remis en usage, matériaux réemployés, projets accompagnés et coopération territoriale.",
+    heroImage: "assets/photos/france-saint-etienne-jean-jaures.jpg",
+    eyebrow: "Impact",
+    h1: "Mesurer avant d'annoncer.",
+    intro:
+      "TVF ne publie pas de chiffres fictifs. Cette page présente les indicateurs qui devront être suivis lorsque les premiers projets seront réellement instruits, conventionnés puis réalisés.",
+    ctas: [["Voir la transparence", "transparence.html"], ["Télécharger la grille", "documents/grille-impact.md"]],
+    sections: [
+      cards("Indicateurs à suivre", "Les chiffres seront publiés uniquement lorsqu'ils seront vérifiés.", [
+        ["Biens qualifiés", "Nombre de logements, commerces, bâtiments, terrains ou friches documentés."],
+        ["Biens remis en usage", "Nombre de biens effectivement réactivés après convention et action."],
+        ["Matériaux orientés", "Nature, quantité, état et destination des matériaux réemployables."],
+        ["Acteurs mobilisés", "Collectivités, propriétaires, entreprises, associations et bénévoles impliqués."],
+        ["Projets conventionnés", "Nombre de dossiers disposant d'un cadre signé et d'un suivi."],
+        ["Bénéficiaires", "Publics ou usages rendus possibles par le projet."],
+      ]),
+      tableSection("Lecture des résultats", "Chaque indicateur doit être replacé dans son niveau de preuve.", [
+        ["Niveau", "Ce que cela signifie", "Communication possible"],
+        ["Objectif", "Ce que TVF souhaite atteindre", "À présenter comme intention"],
+        ["Instruction", "Dossier en cours d'analyse", "À présenter comme étude"],
+        ["Convention", "Engagement formalisé", "À présenter comme projet cadré"],
+        ["Réalisation", "Action terminée et documentée", "À présenter comme résultat"],
+      ]),
+      textBlock(
+        "Pourquoi cette prudence ?",
+        "La crédibilité d'une association nationale repose sur la preuve. Un chiffre non vérifié peut fragiliser la confiance des collectivités, propriétaires, financeurs et habitants. TVF préfère publier moins, mais publier juste."
+      ),
     ],
   },
   {
@@ -515,7 +584,7 @@ function pageTemplate(page) {
     <div class="container footer-grid">
       <div><span class="footer-logo-box"><img src="assets/logo-tvf-officiel-transparent.png" alt="Territoires Vivants France" class="footer-logo"></span><p>Plateforme nationale de coopération pour redonner vie aux biens, lieux et ressources inutilisés.</p></div>
       <div><h2>Navigation</h2>${nav.slice(0, 7).map(([label, href]) => `<a href="${href}">${label}</a>`).join("")}</div>
-      <div><h2>Ressources</h2><a href="documents.html">Documents</a><a href="faq.html">FAQ</a><a href="transparence.html">Transparence</a><a href="mentions-legales.html">Mentions légales</a><a href="contact.html">Contact</a></div>
+      <div><h2>Ressources</h2><a href="notre-methode.html">Notre méthode</a><a href="impact.html">Impact</a><a href="documents.html">Documents</a><a href="faq.html">FAQ</a><a href="transparence.html">Transparence</a><a href="mentions-legales.html">Mentions légales</a><a href="contact.html">Contact</a></div>
       <div><h2>Siège</h2><p>25 rue Élise Gervais<br>42000 Saint-Étienne</p><a class="btn secondary" href="contact.html">Contacter TVF</a></div>
     </div>
     <div class="container footer-bottom">© 2026 Territoires Vivants France - Tous droits réservés.</div>
