@@ -54,6 +54,9 @@ Présenter TVF comme une association nationale en création, claire, crédible e
 - `documents/budget-previsionnel-projet.md`
 - `documents/ordre-du-jour-reunion-cadrage.md`
 - `documents/matrice-risques-projet.md`
+- `documents/fiche-territoire-partenaire.md`
+- `documents/note-opportunite-territoriale.md`
+- `documents/lettre-intention-cooperation.md`
 - `documents/dossier-presentation-tvf.md`
 - `documents/modele-convention.md`
 - `documents/grille-impact.md`
