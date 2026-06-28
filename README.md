@@ -83,6 +83,10 @@ Présenter TVF comme une association nationale en création, claire, crédible e
 - `documents/bareme-priorisation.md`
 - `documents/charte-ethique.md`
 - `documents/criteres-selection-projets.md`
+- `documents/bulletin-adhesion.md`
+- `documents/registre-adherents.md`
+- `documents/proces-verbal-reunion.md`
+- `documents/delegation-pouvoir.md`
 - `documents/reglement-interieur-preparatoire.md`
 - `documents/registre-suivi-decisions.md`
 - `documents/kit-media.md`
