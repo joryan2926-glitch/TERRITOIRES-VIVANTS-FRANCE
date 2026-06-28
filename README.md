@@ -42,6 +42,10 @@ Présenter TVF comme une association nationale en création, claire, crédible e
 
 - `documents/fiche-collectivite.md`
 - `documents/fiche-proprietaire.md`
+- `documents/fiche-bien-solidaire-usage-partage.md`
+- `documents/accord-principe-proprietaire.md`
+- `documents/scenarios-usage-bien.md`
+- `documents/suivi-restitution-bien.md`
 - `documents/fiche-entreprise.md`
 - `documents/fiche-benevole.md`
 - `documents/fiche-financeur.md`
