@@ -19,6 +19,427 @@
     <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
     <link rel="manifest" href="site.webmanifest" />
     <link rel="stylesheet" href="styles.min.css" />
+    <style>
+      .theme-home {
+        --home-green: #2e7d32;
+        --home-green-deep: #164f26;
+        --home-blue: #08243d;
+        --home-gold: #d99a16;
+        --home-cream: #fbfbf4;
+        --home-line: rgba(8, 36, 61, 0.12);
+        --home-shadow: 0 24px 70px rgba(8, 36, 61, 0.14);
+        background:
+          radial-gradient(circle at 8% 5%, rgba(76, 175, 80, 0.12), transparent 28rem),
+          linear-gradient(180deg, #fbfcf7 0%, #f5f8f0 46%, #ffffff 100%);
+      }
+
+      .theme-home main {
+        overflow: hidden;
+      }
+
+      .theme-home .hero {
+        min-height: clamp(650px, 78vh, 860px);
+        border-radius: 30px;
+        box-shadow: 0 34px 90px rgba(8, 36, 61, 0.22);
+        isolation: isolate;
+      }
+
+      .theme-home .hero::before {
+        background:
+          linear-gradient(90deg, rgba(4, 24, 37, 0.92) 0%, rgba(6, 43, 39, 0.76) 43%, rgba(8, 36, 61, 0.22) 100%),
+          linear-gradient(180deg, rgba(0, 0, 0, 0.22), rgba(0, 0, 0, 0.45));
+      }
+
+      .theme-home .hero-photo-grid img {
+        filter: saturate(1.05) contrast(1.08) brightness(0.72);
+        transform-origin: center;
+      }
+
+      .theme-home .hero-content {
+        max-width: 850px;
+        padding-top: clamp(68px, 8vw, 104px);
+      }
+
+      .home-hero-kicker {
+        display: inline-flex;
+        width: fit-content;
+        margin-bottom: 18px;
+        padding: 8px 13px;
+        color: #eaf8df;
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 0.11em;
+        text-transform: uppercase;
+        background: rgba(255, 255, 255, 0.14);
+        border: 1px solid rgba(255, 255, 255, 0.28);
+        border-radius: 999px;
+        backdrop-filter: blur(12px);
+      }
+
+      .theme-home .hero h1 {
+        max-width: 860px;
+        font-size: clamp(54px, 6.2vw, 88px);
+        line-height: 0.94;
+        text-wrap: balance;
+        text-shadow: 0 18px 42px rgba(0, 0, 0, 0.42);
+      }
+
+      .theme-home .hero p {
+        max-width: 735px;
+        font-size: clamp(18px, 1.55vw, 22px);
+        line-height: 1.55;
+      }
+
+      .theme-home .hero-actions .button {
+        min-height: 54px;
+        padding: 0 26px;
+        border-radius: 999px;
+        font-weight: 800;
+      }
+
+      .theme-home .hero-actions .button.primary,
+      .theme-home .hero-actions .button.accent {
+        box-shadow: 0 20px 46px rgba(46, 125, 50, 0.32);
+      }
+
+      .theme-home .hero-actions .button.secondary {
+        color: #fff !important;
+        background: rgba(255, 255, 255, 0.14) !important;
+        border-color: rgba(255, 255, 255, 0.38);
+      }
+
+      .theme-home .hero-context-stats {
+        margin-top: 30px;
+      }
+
+      .theme-home .hero-context-stats article {
+        display: grid;
+        min-height: 150px;
+        padding: 20px;
+        background: rgba(255, 255, 255, 0.15);
+        border-color: rgba(255, 255, 255, 0.28);
+        box-shadow: 0 18px 44px rgba(0, 0, 0, 0.18);
+      }
+
+      .theme-home .hero-context-stats strong {
+        font-size: clamp(30px, 3.1vw, 42px);
+      }
+
+      .theme-home .hero-context-stats span {
+        font-size: 13.5px;
+        line-height: 1.42;
+      }
+
+      .theme-home .hero-context-stats small {
+        align-self: end;
+        margin-top: 10px;
+        color: rgba(255, 255, 255, 0.72);
+        font-size: 11.2px;
+        line-height: 1.25;
+      }
+
+      .theme-home .hero-source-note {
+        max-width: 760px;
+        margin-top: 12px;
+        color: rgba(255, 255, 255, 0.78);
+        font-size: 12.5px;
+      }
+
+      .theme-home .premium-decision-strip,
+      .theme-home .in-page-nav,
+      .theme-home .home-start-hub,
+      .theme-home .home-urgency,
+      .theme-home .home-profile-switch,
+      .theme-home .home-direct-map,
+      .theme-home .home-trust-board,
+      .theme-home .home-confidence-row,
+      .theme-home .home-pilot-strip,
+      .theme-home .tvf-page-faq,
+      .theme-home .homepage-orientation-matrix {
+        width: min(calc(100% - 40px), 1180px);
+        margin-top: clamp(34px, 5vw, 70px);
+        margin-bottom: clamp(34px, 5vw, 70px);
+      }
+
+      .theme-home .home-start-hub {
+        margin-top: -54px;
+        border-radius: 28px;
+        box-shadow: var(--home-shadow);
+      }
+
+      .theme-home .start-hub-copy h2,
+      .theme-home .profile-switch-head h2,
+      .theme-home .direct-map-head h2,
+      .theme-home .trust-board-copy h2,
+      .theme-home .home-pilot-strip h2,
+      .theme-home .homepage-orientation-matrix h2,
+      .theme-home .tvf-page-faq h2 {
+        font-size: clamp(30px, 3.4vw, 48px);
+        line-height: 1.04;
+        text-wrap: balance;
+      }
+
+      .theme-home .start-actions {
+        gap: 18px;
+      }
+
+      .theme-home .start-action,
+      .theme-home .profile-switch-grid a,
+      .theme-home .trust-board-grid article,
+      .theme-home .home-confidence-row article,
+      .theme-home .home-priority-routes a {
+        border-radius: 22px !important;
+        transition: transform 0.24s ease, box-shadow 0.24s ease, border-color 0.24s ease, background 0.24s ease;
+      }
+
+      .theme-home .start-action {
+        min-height: 158px;
+        overflow: hidden;
+      }
+
+      .theme-home .start-action::before {
+        position: absolute;
+        inset: 0;
+        content: "";
+        background: linear-gradient(135deg, rgba(76, 175, 80, 0.11), transparent 42%);
+        opacity: 0;
+        transition: opacity 0.24s ease;
+      }
+
+      .theme-home .start-action:hover::before,
+      .theme-home .start-action:focus-visible::before {
+        opacity: 1;
+      }
+
+      .theme-home .home-urgency {
+        padding: clamp(24px, 4vw, 48px);
+        color: #fff;
+        background:
+          linear-gradient(135deg, rgba(8, 36, 61, 0.96), rgba(21, 87, 55, 0.92)),
+          var(--home-blue);
+        box-shadow: var(--home-shadow);
+      }
+
+      .theme-home .home-urgency-visual {
+        min-height: clamp(320px, 35vw, 470px);
+        border-radius: 24px;
+        box-shadow: 0 22px 54px rgba(0, 0, 0, 0.22);
+      }
+
+      .theme-home .home-urgency-copy h2 {
+        font-size: clamp(32px, 3.6vw, 52px);
+      }
+
+      .theme-home .urgency-points article {
+        background: rgba(255, 255, 255, 0.11);
+        border-color: rgba(255, 255, 255, 0.2);
+      }
+
+      .profile-cta {
+        display: inline-flex;
+        align-items: center;
+        width: fit-content;
+        margin-top: 16px;
+        color: var(--home-green-deep);
+        font-size: 13px;
+        font-weight: 800;
+      }
+
+      .profile-cta::after {
+        margin-left: 7px;
+        content: "→";
+        transition: transform 0.22s ease;
+      }
+
+      .theme-home .profile-switch-grid a:hover .profile-cta::after {
+        transform: translateX(4px);
+      }
+
+      .theme-home .home-direct-map {
+        position: relative;
+        padding: clamp(30px, 4vw, 58px);
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(246, 251, 243, 0.96)),
+          #fff;
+        border: 1px solid rgba(46, 125, 50, 0.14);
+        box-shadow: var(--home-shadow);
+      }
+
+      .theme-home .direct-map-grid {
+        position: relative;
+        gap: 28px;
+      }
+
+      .theme-home .direct-map-grid::before {
+        position: absolute;
+        top: 48px;
+        right: 13%;
+        left: 13%;
+        height: 2px;
+        content: "";
+        background: linear-gradient(90deg, transparent, rgba(46, 125, 50, 0.35), transparent);
+      }
+
+      .theme-home .direct-map-grid article {
+        position: relative;
+        min-height: 210px;
+        padding-top: 34px !important;
+        text-align: center;
+      }
+
+      .theme-home .direct-map-grid article span {
+        display: grid;
+        width: 54px;
+        height: 54px;
+        place-items: center;
+        margin: 0 auto 16px;
+        color: #fff;
+        font-weight: 900;
+        background: linear-gradient(135deg, var(--home-green-deep), var(--home-green));
+        border: 6px solid #eef8e9;
+        border-radius: 999px;
+        box-shadow: 0 14px 28px rgba(46, 125, 50, 0.22);
+      }
+
+      .theme-home .trust-board-grid article {
+        min-height: 188px;
+      }
+
+      .theme-home .trust-board-grid article span {
+        color: var(--home-gold);
+        font-size: 13px;
+        font-weight: 900;
+        letter-spacing: 0.12em;
+      }
+
+      .theme-home .home-pilot-strip {
+        grid-template-columns: minmax(0, 1.04fr) minmax(320px, 0.78fr);
+        gap: clamp(22px, 4vw, 54px);
+        padding: clamp(30px, 4vw, 58px);
+        overflow: hidden;
+        background:
+          linear-gradient(135deg, rgba(8, 36, 61, 0.96), rgba(30, 97, 53, 0.92)),
+          var(--home-blue);
+        box-shadow: var(--home-shadow);
+      }
+
+      .home-pilot-media {
+        position: relative;
+        min-height: 320px;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.22);
+        border-radius: 24px;
+        box-shadow: 0 24px 58px rgba(0, 0, 0, 0.24);
+      }
+
+      .home-pilot-media img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: saturate(1.08) contrast(1.04);
+        transition: transform 0.5s ease;
+      }
+
+      .home-pilot-media figcaption {
+        position: absolute;
+        right: 16px;
+        bottom: 16px;
+        left: 16px;
+        padding: 12px 14px;
+        color: #fff;
+        font-size: 12px;
+        font-weight: 750;
+        background: rgba(8, 36, 61, 0.72);
+        border: 1px solid rgba(255, 255, 255, 0.22);
+        border-radius: 16px;
+        backdrop-filter: blur(10px);
+      }
+
+      .theme-home .home-pilot-strip:hover .home-pilot-media img {
+        transform: scale(1.035);
+      }
+
+      .theme-home .pilot-actions {
+        align-items: flex-start;
+      }
+
+      .theme-home .pilot-actions .button {
+        min-height: 48px;
+        border-radius: 999px;
+      }
+
+      .theme-home .homepage-orientation-matrix {
+        padding: clamp(28px, 4vw, 54px);
+        background: #fff;
+        border: 1px solid rgba(8, 36, 61, 0.08);
+        border-radius: 28px;
+        box-shadow: var(--home-shadow);
+      }
+
+      @media (max-width: 980px) {
+        .theme-home .hero {
+          min-height: auto;
+          border-radius: 24px;
+        }
+
+        .theme-home .hero h1 {
+          font-size: clamp(44px, 11vw, 64px);
+        }
+
+        .theme-home .hero-context-stats,
+        .theme-home .home-pilot-strip,
+        .theme-home .home-urgency,
+        .theme-home .home-trust-board {
+          grid-template-columns: 1fr;
+        }
+
+        .theme-home .direct-map-grid::before {
+          display: none;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .theme-home .premium-decision-strip,
+        .theme-home .in-page-nav,
+        .theme-home .home-start-hub,
+        .theme-home .home-urgency,
+        .theme-home .home-profile-switch,
+        .theme-home .home-direct-map,
+        .theme-home .home-trust-board,
+        .theme-home .home-confidence-row,
+        .theme-home .home-pilot-strip,
+        .theme-home .tvf-page-faq,
+        .theme-home .homepage-orientation-matrix {
+          width: min(calc(100% - 20px), 720px);
+          margin-top: 30px;
+          margin-bottom: 30px;
+        }
+
+        .theme-home .hero {
+          width: min(calc(100% - 18px), 720px);
+        }
+
+        .theme-home .hero-content {
+          padding: 42px 22px 38px;
+        }
+
+        .theme-home .hero h1 {
+          font-size: clamp(40px, 13vw, 54px);
+        }
+
+        .theme-home .hero p {
+          font-size: 16px;
+        }
+
+        .theme-home .hero-context-stats article {
+          min-height: auto;
+        }
+
+        .home-pilot-media {
+          min-height: 230px;
+        }
+      }
+    </style>
       <script id="global-structured-data" type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://www.territoiresvivantsfrance.fr/#organization","name":"Territoires Vivants France","url":"https://www.territoiresvivantsfrance.fr/","logo":"https://www.territoiresvivantsfrance.fr/assets/logo-territoires-vivants-france.png","address":{"@type":"PostalAddress","streetAddress":"25 rue Elise Gervais","postalCode":"42000","addressLocality":"Saint-Etienne","addressCountry":"FR"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://www.territoiresvivantsfrance.fr/"},{"@type":"ListItem","position":2,"name":"Accueil","item":"https://www.territoiresvivantsfrance.fr/"}]}]}</script>
   </head>
   <body class="home-simplified site-streamlined tvf-v1 theme-home">
@@ -28,19 +449,20 @@
       <section class="hero" aria-labelledby="hero-title">
         <div class="hero-visual" aria-hidden="true">
           <div class="hero-photo-grid">
-            <img decoding="async" fetchpriority="high" src="assets/photos/v1/index-01.webp" alt="Saint-Etienne, territoire pilote de Territoires Vivants France" width="1280" height="800" / data-france-photo="verified" data-france-source="assets/photos/saint-etienne-design.webp">
-            <img loading="lazy" decoding="async" src="assets/photos/v1/index-02.webp" alt="Vitrine commerciale fermee a Paris, symbole de commerce vacant a requalifier" width="1280" height="800" / data-france-photo="verified" data-france-source="assets/photos/abandoned-shop-paris.webp">
-            <img loading="lazy" decoding="async" src="assets/photos/v1/index-03.webp" alt="Friche urbaine a Lille, exemple d espace delaisse pouvant retrouver un usage" width="1280" height="800" / data-france-photo="verified" data-france-source="assets/photos/brownfield-lille.webp">
-            <img loading="lazy" decoding="async" src="assets/photos/v1/index-04.webp" alt="Jardin partage a Paris, exemple d espace urbain transforme en lieu utile" width="1280" height="800" / data-france-photo="verified" data-france-source="assets/photos/community-garden-paris.webp">
+            <img decoding="async" fetchpriority="high" src="assets/photos/v1/index-01.webp" alt="Saint-Etienne, territoire pilote de Territoires Vivants France" width="1280" height="800" data-france-photo="verified" data-france-source="assets/photos/saint-etienne-design.webp" />
+            <img loading="lazy" decoding="async" src="assets/photos/v1/index-02.webp" alt="Vitrine commerciale fermee a Paris, symbole de commerce vacant a requalifier" width="1280" height="800" data-france-photo="verified" data-france-source="assets/photos/abandoned-shop-paris.webp" />
+            <img loading="lazy" decoding="async" src="assets/photos/v1/index-03.webp" alt="Friche urbaine a Lille, exemple d espace delaisse pouvant retrouver un usage" width="1280" height="800" data-france-photo="verified" data-france-source="assets/photos/brownfield-lille.webp" />
+            <img loading="lazy" decoding="async" src="assets/photos/v1/index-04.webp" alt="Jardin partage a Paris, exemple d espace urbain transforme en lieu utile" width="1280" height="800" data-france-photo="verified" data-france-source="assets/photos/community-garden-paris.webp" />
           </div>
         </div>
         <div class="hero-content">
+          <span class="home-hero-kicker">Plateforme nationale de revitalisation territoriale</span>
           <h1 id="hero-title">
             Ensemble,<br />redonnons <span>vie</span> aux lieux,<br />aux b&acirc;timents<br />et aux
             <span>territoires.</span>
           </h1>
           <p>
-            Un bien vacant, un commerce ferm&eacute;, des mat&eacute;riaux disponibles ou une friche : TVF aide &agrave; qualifier la situation, mobiliser les bons acteurs et passer &agrave; l'action.
+            TERRITOIRES VIVANTS FRANCE transforme les ressources inutilis&eacute;es en projets utiles : identifier, qualifier, relier les acteurs, conventionner et remettre en usage les lieux qui peuvent encore servir aux habitants.
           </p>
           <div class="hero-actions" aria-label="Actions principales">
             <a class="button primary" href="signalement.html">Signaler un lieu <span aria-hidden="true">&rarr;</span></a>
@@ -51,14 +473,17 @@
             <article>
               <strong class="tvf-animated-number" data-count="3.1" data-decimals="1" data-suffix=" M">3,1 M</strong>
               <span>logements vacants recens&eacute;s en France</span>
+              <small>Source : INSEE, parc de logements.</small>
             </article>
             <article>
               <strong class="tvf-animated-number" data-count="10.85" data-decimals="2" data-suffix=" %">10,85 %</strong>
               <span>de vacance commerciale moyenne en centres-villes &eacute;tudi&eacute;s</span>
+              <small>Source : Codata / Banque des Territoires.</small>
             </article>
             <article>
               <strong class="tvf-animated-number" data-count="43" data-decimals="0" data-suffix=" Mt/an">43 Mt/an</strong>
               <span>de d&eacute;chets issus du b&acirc;timent &agrave; mieux valoriser</span>
+              <small>Source : fili&egrave;re PMCB / ADEME.</small>
             </article>
           </div>
           <p class="hero-source-note">Rep&egrave;res de contexte : INSEE / Banque des Territoires, Codata, fili&egrave;re PMCB. Ces donn&eacute;es ne sont pas des r&eacute;sultats TVF.</p>
@@ -107,7 +532,7 @@
 
       <section class="home-urgency" aria-labelledby="home-urgency-title">
         <div class="home-urgency-visual">
-          <img loading="lazy" decoding="async" src="assets/photos/v1/index-05.webp" alt="Saint-Etienne, territoire pilote de Territoires Vivants France" width="1280" height="800" / data-france-photo="verified" data-france-source="assets/photos/saint-etienne-design.webp">
+          <img loading="lazy" decoding="async" src="assets/photos/v1/index-05.webp" alt="Saint-Etienne, territoire pilote de Territoires Vivants France" width="1280" height="800" data-france-photo="verified" data-france-source="assets/photos/saint-etienne-design.webp" />
         </div>
         <div class="home-urgency-copy">
           <span class="dossier-kicker">Pourquoi agir maintenant ?</span>
@@ -130,11 +555,11 @@
           <p>Un acc&egrave;s direct selon votre r&ocirc;le. Pas besoin de comprendre toute l'arborescence.</p>
         </div>
         <div class="profile-switch-grid">
-          <a href="espace-collectivites.html"><strong>Une collectivit&eacute;</strong><span>Diagnostic, projets, conventions, impact territorial.</span></a>
-          <a href="proprietaires.html"><strong>Un propri&eacute;taire</strong><span>Bien vacant, travaux, usage temporaire, valorisation.</span></a>
-          <a href="espace-entreprises.html"><strong>Une entreprise</strong><span>Mat&eacute;riaux, RSE, m&eacute;c&eacute;nat, comp&eacute;tences.</span></a>
-          <a href="espace-benevoles.html"><strong>Un citoyen ou b&eacute;n&eacute;vole</strong><span>Signalement, mission, chantier, antenne locale.</span></a>
-          <a href="financer-projets.html"><strong>Un financeur ou m&eacute;c&egrave;ne</strong><span>Projet qualifi&eacute;, budget, suivi, reporting.</span></a>
+          <a href="espace-collectivites.html"><strong>Une collectivit&eacute;</strong><span>Diagnostic, projets, conventions, impact territorial.</span><em class="profile-cta">D&eacute;couvrir</em></a>
+          <a href="proprietaires.html"><strong>Un propri&eacute;taire</strong><span>Bien vacant, travaux, usage temporaire, valorisation.</span><em class="profile-cta">D&eacute;couvrir</em></a>
+          <a href="espace-entreprises.html"><strong>Une entreprise</strong><span>Mat&eacute;riaux, RSE, m&eacute;c&eacute;nat, comp&eacute;tences.</span><em class="profile-cta">D&eacute;couvrir</em></a>
+          <a href="espace-benevoles.html"><strong>Un citoyen ou b&eacute;n&eacute;vole</strong><span>Signalement, mission, chantier, antenne locale.</span><em class="profile-cta">D&eacute;couvrir</em></a>
+          <a href="financer-projets.html"><strong>Un financeur ou m&eacute;c&egrave;ne</strong><span>Projet qualifi&eacute;, budget, suivi, reporting.</span><em class="profile-cta">D&eacute;couvrir</em></a>
         </div>
       </section>
 
@@ -196,12 +621,17 @@
         <div>
           <span class="dossier-kicker">Territoire pilote</span>
           <h2 id="pilot-strip-title">Saint-&Eacute;tienne sert de terrain d'application.</h2>
-          <p>TVF part d'un territoire concret pour tester sa m&eacute;thode : patrimoine vacant, commerces ferm&eacute;s, friches, r&eacute;emploi et coop&eacute;ration locale.</p>
+          <p>TVF part d'un territoire concret pour tester sa m&eacute;thode : patrimoine vacant, commerces ferm&eacute;s, friches, r&eacute;emploi et coop&eacute;ration locale. Le dossier Saint-&Eacute;tienne permet de relier le diagnostic territorial, les besoins publics, les ressources mobilisables et les premiers cadres d'action.</p>
+          <p>Cette approche pilote doit servir de base reproductible pour d'autres communes, intercommunalit&eacute;s et territoires souhaitant structurer une r&eacute;ponse locale sans inventer de r&eacute;sultats.</p>
+          <div class="pilot-actions">
+            <a class="button primary" href="dossier-saint-etienne.html">Voir le dossier</a>
+            <a class="button secondary" href="carte-territoires.html">Voir la carte</a>
+          </div>
         </div>
-        <div class="pilot-actions">
-          <a class="button primary" href="dossier-saint-etienne.html">Voir le dossier</a>
-          <a class="button secondary" href="carte-territoires.html">Voir la carte</a>
-        </div>
+        <figure class="home-pilot-media">
+          <img loading="lazy" decoding="async" src="assets/photos/v1/dossier-saint-etienne-01.webp" alt="Vue urbaine de Saint-Etienne, territoire pilote de Territoires Vivants France" width="1280" height="800" />
+          <figcaption>Saint-&Eacute;tienne : premier territoire pilote pour documenter les besoins, qualifier les biens et structurer les coop&eacute;rations.</figcaption>
+        </figure>
       </section>
 
       <section class="tvf-page-faq" aria-labelledby="faq-index-html">
@@ -220,10 +650,10 @@
       <section class="homepage-orientation-matrix" aria-labelledby="orientation-matrix-title">
         <span class="dossier-kicker">Orientation rapide</span>
         <h2 id="orientation-matrix-title">&Agrave; qui s&rsquo;adresse Territoires Vivants France ?</h2>
-        <div class="table-scroll"><table class="stat-comparison"><thead><tr><th>Vous &ecirc;tes</th><th>Votre besoin</th><th>Parcours conseill&rsquo;</th></tr></thead><tbody>
+        <div class="table-scroll"><table class="stat-comparison"><thead><tr><th>Vous &ecirc;tes</th><th>Votre besoin</th><th>Parcours conseill&eacute;</th></tr></thead><tbody>
           <tr><td>Collectivit&eacute;</td><td>Objectiver la vacance, les friches, les ressources et les priorit&eacute;s locales.</td><td><a href="espace-collectivites.html">Espace collectivit&eacute;s</a></td></tr>
-          <tr><td>Propri&eacute;taire</td><td>&eacute;tudier un bien vacant, d&eacute;grad&eacute; ou inutilis&eacute; dans un cadre s&eacute;curis&rsquo;.</td><td><a href="proprietaires.html">Parcours propri&eacute;taire</a></td></tr>
-          <tr><td>Entreprise</td><td>Valoriser mat&eacute;riaux, comp&eacute;tences, locaux ou m&eacute;c&eacute;nat dans une d&eacute;march&eacute; territoriale.</td><td><a href="espace-entreprises.html">Espace entreprises</a></td></tr>
+          <tr><td>Propri&eacute;taire</td><td>&Eacute;tudier un bien vacant, d&eacute;grad&eacute; ou inutilis&eacute; dans un cadre s&eacute;curis&eacute;.</td><td><a href="proprietaires.html">Parcours propri&eacute;taire</a></td></tr>
+          <tr><td>Entreprise</td><td>Valoriser mat&eacute;riaux, comp&eacute;tences, locaux ou m&eacute;c&eacute;nat dans une d&eacute;marche territoriale.</td><td><a href="espace-entreprises.html">Espace entreprises</a></td></tr>
           <tr><td>Financeur ou m&eacute;c&egrave;ne</td><td>Soutenir des projets qualifi&eacute;s, tra&ccedil;ables et utiles aux habitants.</td><td><a href="financer-projets.html">Financer les projets</a></td></tr>
           <tr><td>Habitant ou b&eacute;n&eacute;vole</td><td>Signaler, documenter, aider ou rejoindre une action encadr&eacute;e.</td><td><a href="agir-avec-nous.html">Agir avec TVF</a></td></tr>
         </tbody></table></div>
