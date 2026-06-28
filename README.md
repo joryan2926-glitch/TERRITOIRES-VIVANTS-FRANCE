@@ -33,6 +33,8 @@ Présenter TVF comme une association nationale en création, claire, crédible e
 - `documents/fiche-collectivite.md`
 - `documents/fiche-proprietaire.md`
 - `documents/fiche-entreprise.md`
+- `documents/fiche-projet.md`
+- `documents/dossier-presentation-tvf.md`
 - `documents/modele-convention.md`
 
 ## Génération

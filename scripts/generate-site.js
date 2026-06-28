@@ -293,12 +293,36 @@ const pages = [
         ["Fiche collectivité", "Qualifier un besoin territorial, un périmètre, des ressources et des interlocuteurs.", "documents/fiche-collectivite.md"],
         ["Fiche propriétaire", "Présenter un bien, son état, ses contraintes et les usages envisageables.", "documents/fiche-proprietaire.md"],
         ["Fiche entreprise", "Décrire des matériaux, compétences, locaux ou contributions possibles.", "documents/fiche-entreprise.md"],
+        ["Fiche projet", "Cadrer un projet territorial, son usage, ses acteurs, ses risques et ses livrables.", "documents/fiche-projet.md"],
+        ["Dossier TVF", "Présenter l'association, sa méthode, ses publics et ses conditions de coopération.", "documents/dossier-presentation-tvf.md"],
         ["Modèle de convention", "Préparer les clauses de coopération à adapter avec les parties concernées.", "documents/modele-convention.md"],
       ]),
       textBlock(
         "À utiliser avec prudence",
         "Ces documents sont volontairement préparatoires. Avant signature ou engagement, chaque projet doit être relu, adapté au contexte et validé par les personnes compétentes."
       ),
+    ],
+  },
+  {
+    file: "faq.html",
+    title: "FAQ",
+    meta:
+      "Questions fréquentes sur Territoires Vivants France, ses démarches, ses publics, ses conventions et ses documents.",
+    heroImage: "assets/photos/france-saint-etienne-chateaucreux.jpg",
+    eyebrow: "Questions fréquentes",
+    h1: "Comprendre TVF en quelques réponses.",
+    intro:
+      "Cette FAQ clarifie le rôle de l'association, les étapes d'une démarche, les documents à préparer et les limites de cette première version.",
+    ctas: [["Agir avec nous", "agir-avec-nous.html"], ["Nous contacter", "contact.html"]],
+    sections: [
+      faqSection([
+        ["TVF est-elle déjà une plateforme opérationnelle complète ?", "Non. TVF repart sur une base claire et progressive. Le site présente le cadre, les parcours et les documents préparatoires avant une montée en charge opérationnelle."],
+        ["TVF remplace-t-elle les collectivités ou dispositifs publics ?", "Non. TVF se positionne comme un outil de coopération et de coordination. L'association aide à cadrer les besoins, réunir les acteurs et documenter les projets."],
+        ["Un propriétaire peut-il proposer un bien ?", "Oui. Il peut présenter un logement, un commerce, un bâtiment ou un terrain inutilisé. TVF étudie ensuite l'état du bien, les contraintes et les usages envisageables."],
+        ["Les matériaux sont-ils distribués gratuitement ?", "Non. Les matériaux doivent être orientés vers des projets validés. TVF privilégie la traçabilité, l'utilité territoriale et l'affectation cohérente des ressources."],
+        ["Une collectivité peut-elle devenir territoire partenaire ?", "Oui, après un échange de cadrage. Les objectifs, responsabilités, données disponibles et modalités de coopération doivent être formalisés."],
+        ["Les chiffres d'impact sont-ils déjà affichés ?", "Non. TVF ne communique pas de résultats non mesurés. Les indicateurs seront publiés lorsqu'ils seront vérifiés et documentés."],
+      ]),
     ],
   },
   {
@@ -385,6 +409,12 @@ function tableSection(title, intro, rows) {
     .join("")}</tbody></table></div></div></section>`;
 }
 
+function faqSection(items) {
+  return `<section class="section soft"><div class="container"><div class="section-head"><p class="section-kicker">FAQ</p><h2>Questions fréquentes</h2><p>Des réponses courtes pour comprendre le cadre TVF sans jargon.</p></div><div class="faq-list">${items
+    .map(([question, answer]) => `<details><summary>${question}</summary><p>${answer}</p></details>`)
+    .join("")}</div></div></section>`;
+}
+
 function highlight(title, text, label, href, image) {
   return `<section class="section feature"><div class="container feature-grid"><img src="${image}" alt="Vue urbaine française liée à la revitalisation territoriale" loading="lazy"><div><p class="section-kicker">Pilote</p><h2>${title}</h2><p>${text}</p><a class="btn primary" href="${href}">${label}</a></div></div></section>`;
 }
@@ -467,12 +497,25 @@ function pageTemplate(page) {
       </div>
     </section>
     ${page.sections.join("\n")}
+    <section class="cta-band">
+      <div class="container cta-band-inner">
+        <div>
+          <p class="section-kicker">Passer à l'étape suivante</p>
+          <h2>Vous avez un bien, une ressource ou un besoin territorial ?</h2>
+          <p>Présentez la situation à TVF pour préparer un premier échange clair et utile.</p>
+        </div>
+        <div class="cta-band-actions">
+          <a class="btn primary" href="agir-avec-nous.html">Agir avec nous</a>
+          <a class="btn secondary" href="contact.html">Nous contacter</a>
+        </div>
+      </div>
+    </section>
   </main>
   <footer class="site-footer">
     <div class="container footer-grid">
       <div><span class="footer-logo-box"><img src="assets/logo-tvf-officiel-transparent.png" alt="Territoires Vivants France" class="footer-logo"></span><p>Plateforme nationale de coopération pour redonner vie aux biens, lieux et ressources inutilisés.</p></div>
       <div><h2>Navigation</h2>${nav.slice(0, 7).map(([label, href]) => `<a href="${href}">${label}</a>`).join("")}</div>
-      <div><h2>Ressources</h2><a href="documents.html">Documents</a><a href="transparence.html">Transparence</a><a href="mentions-legales.html">Mentions légales</a><a href="contact.html">Contact</a></div>
+      <div><h2>Ressources</h2><a href="documents.html">Documents</a><a href="faq.html">FAQ</a><a href="transparence.html">Transparence</a><a href="mentions-legales.html">Mentions légales</a><a href="contact.html">Contact</a></div>
       <div><h2>Siège</h2><p>25 rue Élise Gervais<br>42000 Saint-Étienne</p><a class="btn secondary" href="contact.html">Contacter TVF</a></div>
     </div>
     <div class="container footer-bottom">© 2026 Territoires Vivants France - Tous droits réservés.</div>
