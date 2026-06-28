@@ -67,6 +67,10 @@ Présenter TVF comme une association nationale en création, claire, crédible e
 - `documents/autorisation-visite-bien.md`
 - `documents/autorisation-droit-image.md`
 - `documents/consentement-donnees-personnelles.md`
+- `documents/evaluation-securite-site.md`
+- `documents/plan-prevention-action-terrain.md`
+- `documents/proces-verbal-remise-materiaux.md`
+- `documents/fiche-incident-action.md`
 - `documents/fiche-mission-benevole.md`
 - `documents/consignes-securite-action-terrain.md`
 - `documents/feuille-emargement-action.md`
