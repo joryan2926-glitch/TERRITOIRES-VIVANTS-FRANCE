@@ -1,0 +1,62 @@
+# Kit média TVF
+
+Document préparatoire modifiable - version de travail
+
+## 1. Présentation courte
+
+Territoires Vivants France est une association nationale en création qui structure une plateforme de coopération pour remettre en usage les logements, commerces, bâtiments, terrains et matériaux inutilisés.
+
+## 2. Présentation longue
+
+Territoires Vivants France coordonne propriétaires, collectivités, entreprises, associations, citoyens, bénévoles, mécènes et financeurs autour d'un objectif commun : transformer les ressources inutilisées en projets utiles pour les habitants et les territoires. TVF agit avec une méthode progressive : repérer, qualifier, prioriser, conventionner, mobiliser, suivre et documenter.
+
+## 3. Formulation recommandée
+
+TVF est une plateforme nationale de coopération territoriale. Elle ne remplace pas les dispositifs publics, les collectivités ou les professionnels existants. Elle facilite leur coordination autour de projets concrets de revitalisation.
+
+## 4. Formulations à éviter
+
+- "TVF finance tous les projets"
+- "TVF distribue gratuitement des matériaux"
+- "TVF dispose déjà d'un réseau national opérationnel"
+- "TVF est partenaire de..." sans accord formalisé
+- "TVF a déjà généré..." sans indicateur vérifié
+
+## 5. Logo officiel
+
+Fichiers de référence :
+
+- `assets/logo-tvf-officiel-transparent.png`
+- `assets/logo-tvf-officiel-fond-blanc.png`
+
+Règles :
+
+- conserver les proportions ;
+- ne pas modifier les couleurs ;
+- ne pas ajouter d'effet visuel ;
+- préserver une marge suffisante autour du logo ;
+- utiliser la version fond blanc sur supports clairs lorsque la lisibilité est meilleure.
+
+## 6. Message institutionnel
+
+TVF veut devenir un outil de coopération au service des territoires : plus lisible pour les collectivités, plus accessible pour les propriétaires, plus utile pour les entreprises engagées et plus mobilisateur pour les citoyens.
+
+## 7. Contact presse
+
+Contact à compléter après validation officielle :
+
+- Nom :
+- Fonction :
+- E-mail :
+- Téléphone :
+- Adresse :
+
+## 8. Contrôle avant diffusion
+
+Avant toute publication externe, vérifier :
+
+- cohérence avec la charte éthique ;
+- exactitude des informations ;
+- accord des personnes citées ;
+- autorisation d'utilisation des images ;
+- absence de faux partenaire, faux chiffre ou résultat non vérifié.

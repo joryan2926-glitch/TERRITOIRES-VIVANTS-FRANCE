@@ -10,8 +10,8 @@ Présenter TVF comme une association nationale en création, claire, crédible e
 - propriétaires ;
 - entreprises ;
 - associations ;
-- citoyens ;
-- financeurs.
+- bénévoles et citoyens ;
+- financeurs et mécènes.
 
 ## Pages publiques
 
@@ -22,12 +22,17 @@ Présenter TVF comme une association nationale en création, claire, crédible e
 - `observatoire.html`
 - `saint-etienne.html`
 - `agir-avec-nous.html`
-- `partenaires.html`
+- `collectivites.html`
+- `proprietaires.html`
+- `entreprises.html`
 - `benevoles-citoyens.html`
 - `financeurs-mecenes.html`
+- `partenaires.html`
 - `notre-methode.html`
 - `impact.html`
 - `documents.html`
+- `gouvernance.html`
+- `kit-media.html`
 - `faq.html`
 - `contact.html`
 - `transparence.html`
@@ -45,6 +50,8 @@ Présenter TVF comme une association nationale en création, claire, crédible e
 - `documents/modele-convention.md`
 - `documents/grille-impact.md`
 - `documents/bareme-priorisation.md`
+- `documents/charte-ethique.md`
+- `documents/kit-media.md`
 
 ## Génération
 
