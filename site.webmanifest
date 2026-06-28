@@ -1,29 +1,20 @@
 {
-  "name": "TERRITOIRES VIVANTS FRANCE",
-  "short_name": "Territoires Vivants",
-  "description": "Association nationale en création pour la revitalisation des territoires.",
-  "lang": "fr-FR",
+  "name": "Territoires Vivants France",
+  "short_name": "TVF",
   "start_url": "/",
-  "scope": "/",
   "display": "standalone",
-  "background_color": "#fffdf8",
-  "theme_color": "#3f7115",
+  "background_color": "#f6f3ec",
+  "theme_color": "#245c2b",
   "icons": [
     {
-      "src": "assets/favicon-32.png",
-      "sizes": "32x32",
+      "src": "assets/icon-512.png",
+      "sizes": "512x512",
       "type": "image/png"
     },
     {
       "src": "assets/apple-touch-icon.png",
       "sizes": "180x180",
       "type": "image/png"
-    },
-    {
-      "src": "assets/icon-512.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any"
     }
   ]
 }

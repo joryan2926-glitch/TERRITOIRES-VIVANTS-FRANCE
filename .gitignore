@@ -1,12 +1,5 @@
-*-full.png
-desktop-check.png
-mobile-check.png
-*.log
+node_modules/
 .env
-.env.*
-!.env.example
-output/
-tmp/
-scripts/__pycache__/
-scripts/create_*.py
-*.pyc
+.vercel/
+dist/
+*.log
