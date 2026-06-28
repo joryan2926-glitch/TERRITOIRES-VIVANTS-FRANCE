@@ -46,6 +46,8 @@ Présenter TVF comme une association nationale en création, claire, crédible e
 - `documents/fiche-benevole.md`
 - `documents/fiche-financeur.md`
 - `documents/fiche-projet.md`
+- `documents/pieces-a-fournir.md`
+- `documents/fiche-audit-terrain.md`
 - `documents/dossier-presentation-tvf.md`
 - `documents/modele-convention.md`
 - `documents/grille-impact.md`
