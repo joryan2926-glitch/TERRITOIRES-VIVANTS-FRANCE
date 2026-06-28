@@ -41,6 +41,10 @@ Présenter TVF comme une association nationale en création, claire, crédible e
 ## Documents préparatoires
 
 - `documents/fiche-collectivite.md`
+- `documents/cahier-charges-diagnostic-territorial.md`
+- `documents/convention-cooperation-territoriale.md`
+- `documents/fiche-comite-pilotage.md`
+- `documents/plan-action-territorial.md`
 - `documents/fiche-proprietaire.md`
 - `documents/fiche-bien-solidaire-usage-partage.md`
 - `documents/accord-principe-proprietaire.md`

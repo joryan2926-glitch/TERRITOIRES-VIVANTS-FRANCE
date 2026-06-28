@@ -433,6 +433,10 @@ const pages = [
     sections: [
       cards("Documents disponibles", "Chaque modèle aide à collecter les informations nécessaires avant instruction.", [
         ["Fiche collectivité", "Qualifier un besoin territorial, un périmètre, des ressources et des interlocuteurs.", "documents/fiche-collectivite.md"],
+        ["Diagnostic territorial", "Cadrer le périmètre, les données, la méthode et les livrables d'un diagnostic TVF.", "documents/cahier-charges-diagnostic-territorial.md"],
+        ["Convention territoriale", "Formaliser une coopération avec une collectivité sans engagement financier automatique.", "documents/convention-cooperation-territoriale.md"],
+        ["Comité de pilotage", "Organiser les acteurs, décisions, réunions et règles de suivi territorial.", "documents/fiche-comite-pilotage.md"],
+        ["Plan d'action territorial", "Transformer un diagnostic en actions, responsables, échéances et indicateurs.", "documents/plan-action-territorial.md"],
         ["Fiche propriétaire", "Présenter un bien, son état, ses contraintes et les usages envisageables.", "documents/fiche-proprietaire.md"],
         ["Bien solidaire", "Étudier un bien proposé pour un usage temporaire, solidaire ou partagé.", "documents/fiche-bien-solidaire-usage-partage.md"],
         ["Accord propriétaire", "Autoriser l'étude d'un bien sans créer d'occupation, de travaux ou d'engagement prématuré.", "documents/accord-principe-proprietaire.md"],
