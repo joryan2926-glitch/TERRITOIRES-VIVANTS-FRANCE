@@ -50,6 +50,10 @@ Présenter TVF comme une association nationale en création, claire, crédible e
 - `documents/fiche-benevole.md`
 - `documents/fiche-financeur.md`
 - `documents/fiche-projet.md`
+- `documents/fiche-signalement-lieu.md`
+- `documents/protocole-qualification-signalement.md`
+- `documents/registre-sources-donnees-territoriales.md`
+- `documents/fiche-cartographie-territoriale.md`
 - `documents/pieces-a-fournir.md`
 - `documents/fiche-audit-terrain.md`
 - `documents/autorisation-visite-bien.md`
