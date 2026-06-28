@@ -25,7 +25,7 @@ const pages = [
     title: "Accueil",
     meta:
       "Territoires Vivants France coordonne propriétaires, collectivités, entreprises, associations et citoyens pour redonner vie aux biens et ressources inutilisés.",
-    heroImage: "assets/photos/urban-renewal-street.webp",
+    heroImage: "assets/photos/france-saint-etienne-chateaucreux.jpg",
     eyebrow: "Association nationale en création",
     h1: "Redonner vie aux lieux utiles aux habitants.",
     intro:
@@ -69,7 +69,7 @@ const pages = [
         "Le siège national est situé à Saint-Étienne. Le territoire pilote doit permettre de tester la méthode TVF sur des sujets concrets : habitat vacant, commerces inoccupés, matériaux de réemploi, friches et mobilisation citoyenne.",
         "Découvrir le pilote",
         "saint-etienne.html",
-        "assets/photos/saint-etienne-design.webp"
+        "assets/photos/france-saint-etienne-jean-jaures.jpg"
       ),
     ],
   },
@@ -78,7 +78,7 @@ const pages = [
     title: "Qui sommes-nous ?",
     meta:
       "Découvrez Territoires Vivants France, association nationale en création basée à Saint-Étienne.",
-    heroImage: "assets/photos/institutional-meeting.webp",
+    heroImage: "assets/photos/france-saint-etienne-jean-jaures.jpg",
     eyebrow: "L'association",
     h1: "Une plateforme de coopération territoriale.",
     intro:
@@ -92,7 +92,7 @@ const pages = [
       split(
         "Une association en création",
         "Le projet est porté depuis Saint-Étienne avec une ambition nationale progressive. Cette phase demande de bâtir une méthode crédible, des documents solides, des conventions claires et des premiers partenariats réels avant toute communication de résultats.",
-        "assets/photos/community-volunteers.webp"
+        "assets/photos/community-garden-paris.webp"
       ),
       cards("Nos engagements", "TVF avance avec prudence et exigence.", [
         ["Clarté", "Ne pas annoncer de chiffres d'impact tant qu'ils ne sont pas mesurés."],
@@ -107,7 +107,7 @@ const pages = [
     title: "Nos actions",
     meta:
       "Les actions de TVF : logements vacants, commerces inoccupés, matériaux de réemploi, friches, insertion et coordination territoriale.",
-    heroImage: "assets/photos/housing-renovation.webp",
+    heroImage: "assets/photos/france-commerce-paris.jpg",
     eyebrow: "Actions",
     h1: "Passer du patrimoine inutilisé au projet utile.",
     intro:
@@ -140,7 +140,7 @@ const pages = [
     title: "Nos 5 pôles",
     meta:
       "Les cinq pôles de Territoires Vivants France : Habitat Vivant, Matériauthèque Solidaire, Commerce Vivant, Friches & Terrains Vivants, Solidarité & Insertion.",
-    heroImage: "assets/photos/materials-warehouse.webp",
+    heroImage: "assets/photos/france-ressourcerie-vichy.jpg",
     eyebrow: "Organisation",
     h1: "Cinq pôles pour couvrir tout le cycle de revitalisation.",
     intro:
@@ -157,7 +157,7 @@ const pages = [
       split(
         "Une logique de coopération",
         "Un même projet peut mobiliser plusieurs pôles. Un logement vacant peut nécessiter des matériaux de réemploi, une convention avec un propriétaire, un chantier solidaire et un suivi d'impact. TVF sert à organiser cette coordination.",
-        "assets/photos/housing-renovation.webp"
+        "assets/photos/france-saint-etienne-chateaucreux.jpg"
       ),
     ],
   },
@@ -166,7 +166,7 @@ const pages = [
     title: "Observatoire",
     meta:
       "L'observatoire TVF prépare le repérage des biens vacants, commerces fermés, friches, terrains et ressources inutilisées.",
-    heroImage: "assets/photos/brownfield-lille.webp",
+    heroImage: "assets/photos/france-friche-pcuk.jpg",
     eyebrow: "Observatoire",
     h1: "Voir, comprendre, prioriser.",
     intro:
@@ -191,7 +191,7 @@ const pages = [
     title: "Saint-Étienne",
     meta:
       "Saint-Étienne est le territoire pilote de Territoires Vivants France et le siège national de l'association.",
-    heroImage: "assets/photos/saint-etienne-design.webp",
+    heroImage: "assets/photos/france-saint-etienne-jean-jaures.jpg",
     eyebrow: "Territoire pilote",
     h1: "Saint-Étienne, point de départ de la méthode TVF.",
     intro:
@@ -216,7 +216,7 @@ const pages = [
     title: "Agir avec nous",
     meta:
       "Collectivités, propriétaires, entreprises, associations et citoyens peuvent rejoindre Territoires Vivants France.",
-    heroImage: "assets/photos/community-volunteers.webp",
+    heroImage: "assets/photos/community-garden-paris.webp",
     eyebrow: "Engagement",
     h1: "Chaque acteur peut apporter une partie de la solution.",
     intro:
@@ -238,7 +238,7 @@ const pages = [
     title: "Contact",
     meta:
       "Contacter Territoires Vivants France, association nationale en création basée à Saint-Étienne.",
-    heroImage: "assets/photos/institutional-meeting.webp",
+    heroImage: "assets/photos/france-saint-etienne-chateaucreux.jpg",
     eyebrow: "Contact",
     h1: "Entrer en relation avec TVF.",
     intro:
@@ -257,7 +257,7 @@ const pages = [
     title: "Transparence",
     meta:
       "Transparence, gouvernance, données et feuille de route de Territoires Vivants France.",
-    heroImage: "assets/photos/institutional-meeting.webp",
+    heroImage: "assets/photos/france-saint-etienne-chateaucreux.jpg",
     eyebrow: "Transparence",
     h1: "Avancer avec méthode et preuve.",
     intro:
@@ -282,7 +282,7 @@ const pages = [
     file: "mentions-legales.html",
     title: "Mentions légales",
     meta: "Mentions légales de Territoires Vivants France.",
-    heroImage: "assets/photos/institutional-meeting.webp",
+    heroImage: "assets/photos/france-saint-etienne-chateaucreux.jpg",
     eyebrow: "Cadre légal",
     h1: "Mentions légales.",
     intro:
