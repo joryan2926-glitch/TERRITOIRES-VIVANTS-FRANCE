@@ -428,6 +428,15 @@ const pages = [
       "TVF propose des parcours simples pour entrer en relation, qualifier un besoin et préparer une coopération utile.",
     ctas: [["Écrire à TVF", "contact.html"], ["Proposer un bien", "#proposer"]],
     sections: [
+      sectionIntro(
+        "Partir du bon profil pour gagner du temps",
+        "La première étape consiste à formuler une demande claire : qui porte le besoin, quel territoire est concerné, quelle ressource ou quel bien est disponible, et quelle décision doit être préparée.",
+        [
+          ["Comprendre", "Identifier le bon parcours avant de remplir un document."],
+          ["Qualifier", "Rassembler les informations minimales pour éviter les échanges imprécis."],
+          ["Orienter", "Diriger la demande vers le bon interlocuteur, la bonne fiche ou la bonne convention."],
+        ]
+      ),
       cards("Choisir son parcours", "Un seul objectif : transformer une intention en démarche claire.", [
         ["Je suis une collectivité", "Préparer un diagnostic, une coopération ou une expérimentation territoriale.", "#collectivite"],
         ["Je suis propriétaire", "Proposer un logement, commerce, bâtiment ou terrain inutilisé.", "#proprietaire"],
@@ -435,8 +444,27 @@ const pages = [
         ["Je suis bénévole", "Participer à une mission, un chantier ou une action locale.", "#citoyen"],
         ["Je souhaite financer", "Soutenir un projet avec un cadre de suivi et de transparence.", "financeurs-mecenes.html"],
       ]),
+      tableSection("Parcours d'entrée", "Chaque demande doit être orientée vers une suite lisible.", [
+        ["Profil", "Ce que vous pouvez proposer", "Première étape", "Suite possible"],
+        ["Collectivité", "Données, périmètre, besoin public, expérimentation", "Décrire le territoire et le problème à résoudre", "Diagnostic, réunion de cadrage, convention"],
+        ["Propriétaire", "Logement, commerce, bâtiment, terrain ou immeuble inutilisé", "Présenter le bien, son état et les contraintes connues", "Étude, visite, scénarios d'usage"],
+        ["Entreprise", "Matériaux, équipements, mécénat, compétences, locaux", "Lister la ressource et ses conditions de disponibilité", "Qualification, affectation, convention"],
+        ["Association", "Besoin de local, animation, bénévolat, projet social", "Décrire l'usage et les publics concernés", "Mise en relation, dossier projet, coopération"],
+        ["Citoyen", "Signalement, bénévolat, connaissance locale", "Transmettre une information factuelle et localisée", "Qualification ou mission encadrée"],
+      ]),
       audienceSection(),
       formSection(),
+      timeline("Du contact à l'action", [
+        ["1", "Décrire", "Présenter le besoin, le lieu, la ressource ou la coopération envisagée."],
+        ["2", "Qualifier", "Vérifier les informations disponibles, les contraintes et les acteurs concernés."],
+        ["3", "Orienter", "Choisir le bon parcours : document, échange, visite, diagnostic ou mise en attente."],
+        ["4", "Formaliser", "Préparer une convention, une mission, une affectation ou une décision d'orientation."],
+      ]),
+      faqSection([
+        ["Faut-il avoir un projet complet avant de contacter TVF ?", "Non. Il faut surtout décrire clairement la situation, le territoire, les acteurs connus et les contraintes déjà identifiées."],
+        ["Puis-je simplement signaler un lieu ?", "Oui, mais un signalement ne devient pas automatiquement un projet. Il doit être vérifié, qualifié et rattaché à un besoin réel."],
+        ["Quel parcours choisir si je suis à la fois habitant et bénévole ?", "Commencez par le parcours citoyen ou bénévole, puis indiquez vos compétences, disponibilités et le territoire concerné."],
+      ]),
     ],
   },
 
@@ -1103,11 +1131,27 @@ const pages = [
       "Le kit média centralise les éléments qui peuvent être repris dans une présentation, un article, une note de synthèse ou un échange institutionnel, sans créer de confusion sur l'état réel du projet.",
     ctas: [["Télécharger le dossier TVF", "documents/dossier-presentation-tvf.md"], ["Nous contacter", "contact.html"]],
     sections: [
+      sectionIntro(
+        "Un kit média pour parler juste de TVF",
+        "Le kit média sert à harmoniser la présentation publique : mêmes mots, mêmes limites, mêmes visuels, même exigence de preuve. Il évite qu'un article, un post ou une présentation donne une impression plus avancée que la réalité du projet.",
+        [
+          ["Identifier", "Utiliser le logo officiel, le nom complet et les formulations validées."],
+          ["Expliquer", "Présenter TVF comme une association nationale de coopération territoriale."],
+          ["Protéger", "Ne pas annoncer de partenaires, chiffres ou résultats non formalisés."],
+        ]
+      ),
       cards("Éléments disponibles", "Des supports simples pour parler de TVF avec justesse.", [
         ["Logo officiel", "Utiliser le logo officiel TVF sans le déformer, le recadrer excessivement ou modifier ses couleurs.", "assets/logo-tvf-officiel-fond-blanc.png"],
         ["Présentation courte", "TVF coordonne la remise en usage de biens, lieux et ressources inutilisés au service des territoires.", "documents/kit-media.md"],
         ["Dossier TVF", "Un document de présentation plus complet pour collectivités, entreprises et financeurs.", "documents/dossier-presentation-tvf.md"],
         ["Crédits images", "Les visuels utilisés sur le site sont documentés dans le fichier de crédits.", "assets/photos/CREDITS.md"],
+      ]),
+      tableSection("Règles d'usage visuel", "La cohérence graphique contribue directement à la crédibilité institutionnelle.", [
+        ["Élément", "Usage recommandé", "À éviter"],
+        ["Logo", "Utiliser les fichiers officiels, conserver les proportions et laisser une zone de respiration", "Déformer, recolorer, compresser ou placer sur un fond illisible"],
+        ["Photographies", "Privilégier des images françaises, territoriales, humaines et liées au sujet", "Images génériques, répétées ou sans lien avec la revitalisation"],
+        ["Couleurs", "Respecter la palette TVF : vert, bleu profond, blanc cassé et accents sobres", "Multiplier les couleurs ou utiliser des effets trop décoratifs"],
+        ["Chiffres", "Citer uniquement des données sourcées ou des objectifs clairement nommés", "Transformer une hypothèse en résultat"],
       ]),
       tableSection("Formulations recommandées", "Les mots utilisés doivent rester précis et crédibles.", [
         ["Sujet", "Formulation recommandée", "À éviter"],
@@ -1120,6 +1164,11 @@ const pages = [
         "Règle de communication",
         "TVF doit rester exigeante dans sa communication : pas de faux partenaire, pas de résultat inventé, pas de promesse non cadrée. Cette discipline éditoriale protège l'association, les partenaires et les futurs bénéficiaires."
       ),
+      faqSection([
+        ["Un journaliste peut-il reprendre les textes du site ?", "Il peut s'appuyer sur les formulations publiques, à condition de ne pas transformer les objectifs en résultats ni les pistes en partenariats officialisés."],
+        ["Quel logo utiliser ?", "Le logo officiel fourni dans les assets du site doit être utilisé sans modification de proportions, de couleurs ou de composition."],
+        ["TVF peut-elle fournir des visuels pour une présentation ?", "Oui, les visuels disponibles doivent être choisis pour leur cohérence avec le sujet et accompagnés des crédits lorsqu'ils existent."],
+      ]),
     ],
   },
   {
@@ -1218,7 +1267,32 @@ const pages = [
     intro:
       "Cette page est préparée pour être mise à jour après les formalités administratives officielles de l'association.",
     ctas: [["Contact", "contact.html"], ["Transparence", "transparence.html"]],
-    sections: [legalSection()],
+    sections: [
+      sectionIntro(
+        "Une structure prête à être complétée",
+        "Les mentions légales doivent rester simples, exactes et faciles à mettre à jour. Cette page distingue les informations déjà connues, les éléments administratifs à compléter et les règles de prudence applicables au site.",
+        [
+          ["Identité", "Nom, adresse, responsables identifiés et objet de présentation."],
+          ["Conformité", "Données personnelles, propriété intellectuelle, responsabilité éditoriale."],
+          ["Évolution", "Rubriques prévues pour intégrer les références officielles après formalisation."],
+        ]
+      ),
+      tableSection("Informations à tenir à jour", "Cette grille permet de vérifier rapidement les mentions à compléter lorsque l'association évolue.", [
+        ["Information", "Statut actuel", "Action à prévoir"],
+        ["Adresse du siège", "25 rue Élise Gervais, 42000 Saint-Étienne", "Maintenir à jour en cas de changement"],
+        ["Responsables", "Président fondateur, secrétaire et trésorier identifiés", "Actualiser après toute décision statutaire"],
+        ["Numéro RNA", "À compléter après formalisation officielle", "Ajouter la référence dès disponibilité"],
+        ["Numéro SIREN", "À compléter si attribution", "Ajouter uniquement si l'association en dispose"],
+        ["Contact officiel", "À préciser selon l'organisation retenue", "Publier une adresse de contact validée"],
+        ["Hébergement", "À maintenir à jour", "Indiquer l'hébergeur et les informations légales nécessaires"],
+      ]),
+      legalSection(),
+      faqSection([
+        ["Pourquoi cette page mentionne-t-elle des informations à compléter ?", "Parce que TVF est une association en structuration. La page est conçue pour intégrer les références officielles dès qu'elles seront disponibles."],
+        ["Les documents du site ont-ils une valeur juridique automatique ?", "Non. Ils servent de bases de travail et doivent être adaptés, relus et validés avant toute signature ou engagement."],
+        ["Qui contacter en cas de demande relative aux données personnelles ?", "La procédure définitive devra être précisée avec le contact officiel de l'association. En attendant, les demandes doivent passer par la page contact."],
+      ]),
+    ],
   },
 ];
 
@@ -1270,7 +1344,7 @@ function audienceSection() {
 }
 
 function formSection() {
-  return `<section class="section" id="proposer"><div class="container form-panel"><div><p class="section-kicker">Premier contact</p><h2>Présenter une situation</h2><p>Ce formulaire statique prépare les informations utiles. L'envoi réel sera relié à un outil sécurisé lorsque le cadre opérationnel sera finalisé.</p></div><form><label>Votre profil<select><option>Collectivité</option><option>Propriétaire</option><option>Entreprise</option><option>Association</option><option>Citoyen</option></select></label><label>Objet<input type="text" placeholder="Ex. logement vacant, matériaux, partenariat"></label><label>Message<textarea placeholder="Décrivez le besoin, le lieu, les acteurs concernés et les délais."></textarea></label><a class="btn primary" href="contact.html">Passer par la page contact</a></form></div></section>`;
+  return `<section class="section" id="proposer"><div class="container form-panel"><div><p class="section-kicker">Premier contact</p><h2>Préparer une situation</h2><p>Utilisez ce bloc comme guide de préparation avant d'écrire à TVF. L'objectif est de rassembler les informations utiles pour accélérer l'orientation de votre demande.</p></div><form><label>Votre profil<select><option>Collectivité</option><option>Propriétaire</option><option>Entreprise</option><option>Association</option><option>Citoyen</option></select></label><label>Objet<input type="text" placeholder="Ex. logement vacant, matériaux, partenariat"></label><label>Message<textarea placeholder="Décrivez le besoin, le lieu, les acteurs concernés et les délais."></textarea></label><a class="btn primary" href="contact.html">Passer par la page contact</a></form></div></section>`;
 }
 
 function contactSection() {
@@ -1278,7 +1352,7 @@ function contactSection() {
 }
 
 function legalSection() {
-  return `<section class="section"><div class="container legal"><h2>Éditeur</h2><p><strong>Territoires Vivants France</strong><br>Association nationale en création<br>25 rue Élise Gervais, 42000 Saint-Étienne</p><h2>Responsables</h2><p>Président fondateur : Edryan Rangoly.<br>Secrétaire et trésorier : M. Lambeau Jordan.</p><h2>Données personnelles</h2><p>Les formulaires présentés dans cette version sont préparatoires. Aucune collecte opérationnelle ne doit être considérée comme active tant que les outils sécurisés et les mentions RGPD définitives ne sont pas publiés.</p><h2>Propriété intellectuelle</h2><p>Les textes, logos et éléments graphiques du site sont destinés à présenter le projet Territoires Vivants France. Toute réutilisation doit faire l'objet d'une autorisation.</p></div></section>`;
+  return `<section class="section"><div class="container legal"><h2>Éditeur</h2><p><strong>Territoires Vivants France</strong><br>Association nationale en création<br>25 rue Élise Gervais, 42000 Saint-Étienne</p><h2>Responsables</h2><p>Président fondateur : Edryan Rangoly.<br>Secrétaire et trésorier : M. Lambeau Jordan.</p><h2>Statut de l'association</h2><p>Cette page est structurée pour être complétée après les formalités officielles : numéro RNA, numéro SIREN le cas échéant, publication administrative, hébergeur définitif, contact officiel et mentions RGPD détaillées.</p><h2>Hébergement</h2><p>Le site est préparé pour un déploiement web sécurisé. Les informations relatives à l'hébergeur, au domaine et aux responsabilités techniques doivent être tenues à jour dans cette rubrique.</p><h2>Données personnelles</h2><p>Les formulaires et parcours présentés servent à préparer les informations utiles à une demande. Les données transmises à TVF devront être traitées dans le respect du RGPD, avec une finalité claire, une durée de conservation adaptée et un droit de contact pour les personnes concernées.</p><h2>Propriété intellectuelle</h2><p>Les textes, logos, documents, visuels et éléments graphiques du site sont destinés à présenter le projet Territoires Vivants France. Toute réutilisation, modification ou diffusion doit faire l'objet d'une autorisation préalable.</p><h2>Responsabilité</h2><p>Les contenus du site présentent une démarche associative, des méthodes et des documents de travail. Ils ne constituent pas un conseil juridique, technique, financier ou administratif personnalisé. Chaque projet doit être vérifié et adapté avec les interlocuteurs compétents.</p></div></section>`;
 }
 
 function iconFor(text) {
