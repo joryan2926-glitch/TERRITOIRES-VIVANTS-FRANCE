@@ -60,6 +60,10 @@ Présenter TVF comme une association nationale en création, claire, crédible e
 - `documents/feuille-emargement-action.md`
 - `documents/compte-rendu-action-terrain.md`
 - `documents/budget-previsionnel-projet.md`
+- `documents/demande-soutien-financier.md`
+- `documents/note-impact-previsionnel.md`
+- `documents/suivi-contribution-financeur.md`
+- `documents/reporting-financeur.md`
 - `documents/ordre-du-jour-reunion-cadrage.md`
 - `documents/matrice-risques-projet.md`
 - `documents/fiche-territoire-partenaire.md`
