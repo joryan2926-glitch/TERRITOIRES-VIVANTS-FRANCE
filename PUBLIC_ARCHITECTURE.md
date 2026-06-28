@@ -49,6 +49,7 @@ Mise à jour : 27 juin 2026.
 - partenaires.html
 - partenariats-strategiques.html
 - ressources.html
+- kit-media.html
 - sources-donnees.html
 - faq.html
 - gouvernance.html
