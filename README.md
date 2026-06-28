@@ -23,6 +23,8 @@ Présenter TVF comme une association nationale en création, claire, crédible e
 - `saint-etienne.html`
 - `agir-avec-nous.html`
 - `partenaires.html`
+- `benevoles-citoyens.html`
+- `financeurs-mecenes.html`
 - `notre-methode.html`
 - `impact.html`
 - `documents.html`
@@ -36,6 +38,8 @@ Présenter TVF comme une association nationale en création, claire, crédible e
 - `documents/fiche-collectivite.md`
 - `documents/fiche-proprietaire.md`
 - `documents/fiche-entreprise.md`
+- `documents/fiche-benevole.md`
+- `documents/fiche-financeur.md`
 - `documents/fiche-projet.md`
 - `documents/dossier-presentation-tvf.md`
 - `documents/modele-convention.md`

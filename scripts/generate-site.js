@@ -243,7 +243,7 @@ const pages = [
         ["Je suis propriétaire", "Proposer un logement, commerce, bâtiment ou terrain inutilisé.", "#proprietaire"],
         ["Je suis une entreprise", "Valoriser matériaux, compétences, locaux ou mécénat.", "#entreprise"],
         ["Je suis bénévole", "Participer à une mission, un chantier ou une action locale.", "#citoyen"],
-        ["Je souhaite financer", "Soutenir un projet avec un cadre de suivi et de transparence.", "partenaires.html"],
+        ["Je souhaite financer", "Soutenir un projet avec un cadre de suivi et de transparence.", "financeurs-mecenes.html"],
       ]),
       audienceSection(),
       formSection(),
@@ -332,6 +332,63 @@ const pages = [
         ["Communication", "Valorisation possible apr?s accord", "Validation commune"],
       ]),
       textBlock("Ce que TVF refuse", "TVF n'est pas une d?chetterie ni une plateforme de d?stockage libre. Les contributions doivent ?tre r?utilisables, utiles et compatibles avec un projet valid?."),
+    ],
+  },
+
+  {
+    file: "benevoles-citoyens.html",
+    title: "B?n?voles & citoyens",
+    meta:
+      "Parcours b?n?voles et citoyens de Territoires Vivants France : signaler, participer, documenter et agir localement.",
+    heroImage: "assets/photos/community-garden-paris.webp",
+    eyebrow: "Citoyens",
+    h1: "Agir utilement, avec un cadre clair.",
+    intro:
+      "Les citoyens et b?n?voles peuvent aider TVF ? rep?rer les situations, documenter les besoins, participer ? des actions encadr?es et relayer les projets locaux.",
+    ctas: [["Remplir la fiche", "documents/fiche-benevole.md"], ["Nous contacter", "contact.html"]],
+    sections: [
+      cards("Fa?ons de participer", "L'engagement doit rester simple, utile et s?curis?.", [
+        ["Signaler", "Transmettre une situation : bien vacant, commerce ferm?, terrain d?laiss? ou mat?riau disponible."],
+        ["Documenter", "Aider ? collecter des informations publiques, photos, contacts et ?l?ments de contexte."],
+        ["Participer", "Rejoindre une action locale ou un chantier uniquement lorsqu'il est encadr?."],
+        ["Relayer", "Mettre en relation TVF avec des acteurs du territoire."],
+      ]),
+      tableSection("Cadre b?n?vole", "Chaque mission doit ?tre claire avant de commencer.", [
+        ["Point", "Question", "R?ponse attendue"],
+        ["Mission", "Que faut-il faire ?", "T?che pr?cise et limit?e"],
+        ["Encadrement", "Qui suit la mission ?", "R?f?rent identifi?"],
+        ["S?curit?", "Y a-t-il un risque ?", "Consignes et limites"],
+        ["Donn?es", "Que peut-on publier ?", "Accord et respect de la vie priv?e"],
+      ]),
+      textBlock("R?gle importante", "Un b?n?vole ne doit jamais entrer dans un bien priv?, intervenir sur un chantier ou repr?senter TVF officiellement sans cadre valid?."),
+    ],
+  },
+  {
+    file: "financeurs-mecenes.html",
+    title: "Financeurs & m?c?nes",
+    meta:
+      "Parcours financeurs et m?c?nes TVF : soutenir des projets instruits, avec gouvernance, transparence et suivi d'impact.",
+    heroImage: "assets/photos/france-saint-etienne-chateaucreux.jpg",
+    eyebrow: "Financement",
+    h1: "Soutenir des projets cadr?s, pas des promesses floues.",
+    intro:
+      "TVF pr?pare une logique de financement responsable : chaque soutien doit ?tre reli? ? un projet instruit, une convention, des indicateurs et une transparence de suivi.",
+    ctas: [["Remplir la fiche", "documents/fiche-financeur.md"], ["Voir l'impact", "impact.html"]],
+    sections: [
+      cards("Ce qui peut ?tre soutenu", "Le financement doit ?tre orient? vers des besoins pr?cis.", [
+        ["Diagnostic", "Rep?rage, qualification et documentation de biens ou ressources."],
+        ["R?emploi", "Logistique, stockage, tri et affectation de mat?riaux r?utilisables."],
+        ["Projet local", "Remise en usage d'un bien, commerce, local associatif ou espace partag?."],
+        ["Insertion", "Chantiers encadr?s, b?n?volat, formation et accompagnement."],
+      ]),
+      tableSection("Garanties attendues", "Un financeur doit pouvoir comprendre ce qu'il soutient.", [
+        ["Garantie", "Contenu", "Support"],
+        ["Projet instruit", "Besoin, acteurs, risques et objectifs d?finis", "Fiche projet"],
+        ["Cadre", "Responsabilit?s et modalit?s de suivi", "Convention"],
+        ["Tra?abilit?", "Utilisation des fonds ou ressources", "Compte rendu"],
+        ["Impact", "Indicateurs publi?s seulement apr?s v?rification", "Grille d'impact"],
+      ]),
+      textBlock("Principe", "TVF ne doit pas promettre un rendement, un impact ou une visibilit? qui ne seraient pas contractualis?s et v?rifiables. Le m?c?nat et le financement doivent rester transparents."),
     ],
   },
   {
