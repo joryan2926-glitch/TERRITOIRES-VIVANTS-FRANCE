@@ -264,6 +264,15 @@ const pages = [
       "L'observatoire doit aider les territoires à mieux identifier les ressources inutilisées avant de décider où agir.",
     ctas: [["Signaler un lieu", "agir-avec-nous.html#signalement"], ["Saint-Étienne", "saint-etienne.html"]],
     sections: [
+      sectionIntro(
+        "Un observatoire pour décider avec méthode",
+        "L'observatoire TVF n'est pas une carte décorative. Il doit servir à transformer des informations dispersées en dossiers exploitables : signalements citoyens, données publiques, visites autorisées, photos, contraintes, priorités et suites possibles.",
+        [
+          ["Centraliser", "Regrouper les informations utiles sans exposer de données sensibles."],
+          ["Qualifier", "Distinguer une intuition, un signalement, une donnée vérifiée et un dossier orienté."],
+          ["Prioriser", "Aider les territoires à concentrer leurs efforts sur les situations les plus utiles et faisables."],
+        ]
+      ),
       cards("Ce que l'observatoire suit", "Les catégories sont volontairement simples.", [
         ["Logements vacants", "Biens inutilisés ou dégradés à qualifier avec prudence."],
         ["Commerces fermés", "Cellules commerciales sans activité visible."],
@@ -271,16 +280,44 @@ const pages = [
         ["Friches et terrains", "Espaces délaissés pouvant accueillir un projet utile."],
         ["Matériaux disponibles", "Ressources réemployables proposées ou identifiées."],
       ]),
+      tableSection("Sources à croiser", "Une donnée isolée ne suffit pas. TVF doit croiser plusieurs niveaux d'information avant de prioriser.", [
+        ["Source", "Ce qu'elle apporte", "Précaution"],
+        ["Données publiques", "Contexte démographique, habitat, économie locale, environnement", "Citer la source et la date de consultation"],
+        ["Signalement citoyen", "Information de terrain rapide sur un lieu ou une ressource", "À vérifier avant toute conclusion"],
+        ["Collectivité", "Périmètre, priorités, programmes, contraintes publiques", "Respecter les procédures et validations"],
+        ["Propriétaire", "Droit d'accès, intention, état connu, usage acceptable", "Ne rien publier sans accord"],
+        ["Visite autorisée", "État apparent, accès, risques, photos internes", "Ne vaut pas diagnostic technique complet"],
+      ]),
       tableSection("Qualité des données", "L'observatoire doit distinguer signalement, vérification et décision.", [
         ["Niveau", "Statut", "Usage"],
         ["Signalé", "Information reçue", "À vérifier"],
         ["Qualifié", "Adresse, type, état et contraintes documentés", "À instruire"],
         ["Orienté", "Acteurs identifiés et piste d'usage crédible", "À conventionner"],
       ]),
+      timeline("Cycle d'un signalement", [
+        ["1", "Réception", "Le lieu ou la ressource est enregistré avec une description minimale."],
+        ["2", "Protection", "Les données personnelles, photos sensibles et informations privées sont limitées."],
+        ["3", "Qualification", "TVF vérifie le type de bien, la localisation, l'état apparent et les sources disponibles."],
+        ["4", "Orientation", "Le dossier est classé : à compléter, à visiter, à instruire, à réorienter ou sans suite."],
+        ["5", "Suivi", "Les décisions et livrables sont archivés pour éviter les doublons et les annonces imprécises."],
+      ]),
+      cards("Indicateurs à suivre", "Les indicateurs doivent être remplis seulement avec des données vérifiables.", [
+        ["Biens signalés", "Nombre de logements, commerces, bâtiments, friches ou terrains reçus dans le registre."],
+        ["Dossiers qualifiés", "Part des signalements disposant d'informations suffisantes pour instruction."],
+        ["Ressources matériaux", "Matériaux proposés, acceptés, refusés, stockés, réservés ou affectés."],
+        ["Dossiers orientés", "Situations ayant une piste d'usage, un acteur responsable ou une suite proposée."],
+        ["Projets conventionnés", "Dossiers disposant d'un cadre écrit et de responsabilités définies."],
+        ["Résultats vérifiés", "Effets publiés uniquement après réalisation et preuves associées."],
+      ]),
       textBlock(
         "Responsabilité",
         "L'observatoire n'a pas vocation à stigmatiser des propriétaires. Il sert à créer les conditions d'une solution avec des données vérifiées, des démarches respectueuses et un cadre de dialogue."
       ),
+      faqSection([
+        ["Un signalement est-il publié automatiquement ?", "Non. TVF doit d'abord vérifier les informations, protéger les données sensibles et éviter toute exposition injustifiée d'un propriétaire ou d'un site."],
+        ["L'observatoire remplace-t-il les données publiques ?", "Non. Il les complète par une méthode de qualification terrain, de traçabilité et d'orientation opérationnelle."],
+        ["Une carte nationale peut-elle afficher tous les biens ?", "Pas sans règles strictes. Certains éléments doivent rester internes pour respecter la propriété, la sécurité, la confidentialité et la protection des données."],
+      ]),
     ],
   },
   {
@@ -295,6 +332,15 @@ const pages = [
       "TVF souhaite expérimenter à Saint-Étienne une démarche de coopération sur l'habitat vacant, les commerces inoccupés, les matériaux de réemploi, les friches et l'engagement citoyen.",
     ctas: [["Proposer une coopération", "contact.html"], ["Agir avec nous", "agir-avec-nous.html"]],
     sections: [
+      sectionIntro(
+        "Un territoire pilote pour tester une méthode nationale",
+        "Saint-Étienne n'est pas présentée comme un résultat déjà obtenu, mais comme le premier terrain de structuration de la méthode TVF. L'objectif est de prouver qu'une démarche claire peut relier patrimoine vacant, matériaux disponibles, acteurs locaux, habitants, entreprises et collectivités.",
+        [
+          ["Tester", "Mettre à l'épreuve les fiches, registres, conventions et parcours utilisateurs."],
+          ["Apprendre", "Documenter ce qui fonctionne, ce qui bloque et ce qui doit être adapté."],
+          ["Reproduire", "Créer une méthode duplicable dans d'autres communes, EPCI et territoires."],
+        ]
+      ),
       cards("Axes prioritaires", "Les priorités restent à formaliser avec les acteurs locaux.", [
         ["Habitat", "Repérer les logements vacants ou dégradés et comprendre les blocages."],
         ["Commerce", "Identifier les locaux fermés et les possibilités de réactivation."],
@@ -302,15 +348,44 @@ const pages = [
         ["Friches", "Analyser les espaces délaissés et leurs usages possibles."],
         ["Citoyens", "Organiser le bénévolat, les signalements et les chantiers participatifs."],
       ]),
+      tableSection("Enjeux stéphanois et réponse TVF", "TVF doit se positionner comme outil de coordination, pas comme promesse de remplacement des dispositifs existants.", [
+        ["Enjeu à traiter", "Réponse TVF", "Livrable attendu"],
+        ["Logements ou immeubles inutilisés", "Qualifier les propriétaires, l'état, l'accès et les usages possibles", "Fiche propriétaire et scénarios"],
+        ["Commerces fermés", "Comprendre le local, le besoin de rue et les porteurs potentiels", "Scénario de réactivation"],
+        ["Matériaux de réemploi", "Recenser les ressources disponibles et leur destination possible", "Registre matériaux"],
+        ["Friches et terrains", "Analyser sécurité, accès, propriété, usages verts ou partagés", "Audit terrain"],
+        ["Engagement citoyen", "Cadrer les missions bénévoles et actions terrain", "Fiche mission et compte rendu"],
+      ]),
       textBlock(
         "Pourquoi un pilote local ?",
         "Un dispositif national doit d'abord prouver sa méthode sur un territoire concret. Saint-Étienne permet de travailler sur des sujets représentatifs : reconversion, patrimoine existant, centres-villes, transition écologique, économie circulaire et solidarité."
       ),
       tableSection("Premiers travaux à cadrer", "Le pilote doit avancer par dossiers courts, vérifiables et utiles.", [
-        ["Dossier", "Objectif", "Livrable"],
-        ["Habitat vacant", "Comprendre les blocages propriétaires", "Fiche de qualification"],
-        ["Commerce fermé", "Identifier des usages réalistes", "Scénario d'occupation"],
-        ["Matériaux", "Tester une chaîne de réemploi", "Registre de ressources"],
+        ["Dossier", "Objectif", "Livrable", "Point de prudence"],
+        ["Habitat vacant", "Comprendre les blocages propriétaires", "Fiche de qualification", "Pas d'accès sans autorisation"],
+        ["Commerce fermé", "Identifier des usages réalistes", "Scénario d'occupation", "Ne pas annoncer de porteur sans accord"],
+        ["Matériaux", "Tester une chaîne de réemploi", "Registre de ressources", "Refuser les matériaux dangereux ou inutilisables"],
+        ["Friche ou terrain", "Étudier sécurité, propriété et usage possible", "Note d'opportunité", "Ne pas cartographier publiquement un site sensible"],
+        ["Action citoyenne", "Créer une mission simple et encadrée", "Fiche mission", "Pas de chantier sans cadre sécurité"],
+      ]),
+      timeline("Déploiement pilote", [
+        ["1", "Cadrage local", "Définir les premiers périmètres, interlocuteurs et priorités."],
+        ["2", "Observation", "Recueillir signalements, données publiques, besoins et ressources disponibles."],
+        ["3", "Dossiers tests", "Sélectionner quelques situations simples à instruire sans effet d'annonce."],
+        ["4", "Coopérations", "Préparer les conventions, autorisations, budgets et responsabilités."],
+        ["5", "Bilan", "Comparer objectifs, livrables, blocages et apprentissages avant duplication."],
+      ]),
+      cards("Ce que Saint-Étienne doit permettre de valider", "La réussite du pilote se mesure d'abord à la qualité de la méthode.", [
+        ["Parcours propriétaire", "Peut-on passer d'un bien identifié à une décision claire et sécurisée ?"],
+        ["Parcours collectivité", "Peut-on produire des livrables utiles à une décision publique ?"],
+        ["Parcours entreprise", "Peut-on affecter une ressource à un projet sans confusion ni gaspillage ?"],
+        ["Parcours bénévole", "Peut-on mobiliser des citoyens avec un cadre simple et sûr ?"],
+        ["Parcours financeur", "Peut-on présenter un dossier lisible, chiffrable et vérifiable ?"],
+      ]),
+      faqSection([
+        ["Saint-Étienne est-elle déjà un projet réalisé ?", "Non. La page présente un territoire pilote de méthode. Les résultats seront publiés seulement lorsqu'ils seront réellement vérifiés."],
+        ["Pourquoi commencer par un territoire pilote ?", "Parce qu'un modèle national doit d'abord être testé, corrigé et documenté sur un terrain concret avant d'être reproduit ailleurs."],
+        ["Que peut faire un acteur stéphanois maintenant ?", "Présenter un bien, signaler une ressource, proposer une coopération, devenir bénévole ou demander un échange de cadrage."],
       ]),
     ],
   },
