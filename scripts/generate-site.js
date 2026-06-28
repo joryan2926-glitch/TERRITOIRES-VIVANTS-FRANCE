@@ -249,6 +249,91 @@ const pages = [
       formSection(),
     ],
   },
+
+  {
+    file: "collectivites.html",
+    title: "Collectivit?s",
+    meta:
+      "Parcours collectivit?s de Territoires Vivants France : diagnostic, coop?ration, exp?rimentation territoriale et suivi.",
+    heroImage: "assets/photos/france-saint-etienne-chateaucreux.jpg",
+    eyebrow: "Collectivit?s",
+    h1: "Un cadre simple pour devenir territoire partenaire.",
+    intro:
+      "TVF aide les collectivit?s ? passer d'un besoin local ? une d?marche cadr?e : rep?rage, diagnostic, acteurs, convention, suivi et indicateurs.",
+    ctas: [["Pr?parer une fiche", "documents/fiche-collectivite.md"], ["Nous contacter", "contact.html"]],
+    sections: [
+      cards("Ce que TVF peut apporter", "Un appui m?thodologique avant toute action op?rationnelle.", [
+        ["Diagnostic", "Structurer les premiers constats sur les biens, commerces, friches ou mat?riaux."],
+        ["Coordination", "Identifier les acteurs ? r?unir et clarifier leurs r?les."],
+        ["Convention", "Pr?parer un cadre de coop?ration lisible et adapt? au territoire."],
+        ["Suivi", "D?finir des indicateurs avant de communiquer des r?sultats."],
+      ]),
+      tableSection("Parcours collectivit?", "Le parcours doit rester compatible avec les proc?dures publiques.", [
+        ["?tape", "Objectif", "Livrable"],
+        ["Cadrage", "Comprendre le besoin et le p?rim?tre", "Fiche collectivit?"],
+        ["Diagnostic", "Qualifier les biens, ressources et acteurs", "Note de situation"],
+        ["Coop?ration", "D?finir les responsabilit?s", "Convention"],
+        ["Suivi", "Documenter les effets", "Grille d'impact"],
+      ]),
+      textBlock("Point de vigilance", "TVF n'agit pas ? la place de la collectivit?. L'association propose un cadre de coop?ration qui doit respecter les comp?tences, les d?cisions et les proc?dures publiques."),
+    ],
+  },
+  {
+    file: "proprietaires.html",
+    title: "Propri?taires",
+    meta:
+      "Parcours propri?taires TVF : proposer un bien vacant, d?grad? ou inutilis? et pr?parer un cadre de coop?ration.",
+    heroImage: "assets/photos/france-saint-etienne-jean-jaures.jpg",
+    eyebrow: "Propri?taires",
+    h1: "Proposer un bien sans perdre le cadre.",
+    intro:
+      "Un propri?taire peut pr?senter un logement, commerce, b?timent ou terrain inutilis?. TVF ?tudie ensuite les usages possibles, les contraintes et les conditions d'une convention.",
+    ctas: [["Remplir la fiche", "documents/fiche-proprietaire.md"], ["Nous contacter", "contact.html"]],
+    sections: [
+      cards("Ce qui peut ?tre ?tudi?", "Chaque bien doit ?tre qualifi? avant d'imaginer un usage.", [
+        ["Logement", "Vacant, d?grad?, sous-utilis? ou difficile ? remettre en ?tat."],
+        ["Commerce", "Cellule ferm?e, local inoccup?, rez-de-chauss?e ? r?activer."],
+        ["B?timent", "Immeuble, atelier, ?quipement ou local sans usage clair."],
+        ["Terrain", "Espace d?laiss? pouvant accueillir un usage collectif ou transitoire."],
+      ]),
+      tableSection("Points ? v?rifier", "Un projet s?rieux commence par les contraintes.", [
+        ["Sujet", "Question", "Document utile"],
+        ["Propri?t?", "Qui peut autoriser l'usage ?", "Justificatif ou accord"],
+        ["?tat", "Le bien est-il accessible et s?curis? ?", "Photos, diagnostics"],
+        ["Usage", "Quel usage est r?aliste ?", "Fiche projet"],
+        ["Dur?e", "Quelle dur?e de coop?ration est acceptable ?", "Convention"],
+      ]),
+      textBlock("Principe", "Le propri?taire conserve ses droits. Toute intervention doit ?tre encadr?e par un accord clair, pr?cisant les usages, la dur?e, les responsabilit?s et les limites."),
+    ],
+  },
+  {
+    file: "entreprises.html",
+    title: "Entreprises",
+    meta:
+      "Parcours entreprises TVF : mat?riaux, comp?tences, locaux, m?c?nat, RSE et contribution territoriale.",
+    heroImage: "assets/photos/france-ressourcerie-vichy.jpg",
+    eyebrow: "Entreprises",
+    h1: "Transformer une contribution en impact territorial.",
+    intro:
+      "Les entreprises peuvent contribuer par des mat?riaux, comp?tences, locaux, logistique ou m?c?nat. TVF aide ? relier ces contributions ? des projets cadr?s et tra?ables.",
+    ctas: [["Remplir la fiche", "documents/fiche-entreprise.md"], ["Devenir partenaire", "partenaires.html"]],
+    sections: [
+      cards("Formes de contribution", "Chaque contribution doit ?tre d?crite, localis?e et affect?e ? un besoin valid?.", [
+        ["Mat?riaux", "Surplus, invendus, ?l?ments de chantier ou ?quipements r?utilisables."],
+        ["Comp?tences", "Expertise technique, juridique, logistique, architecturale ou financi?re."],
+        ["Locaux", "Espaces temporairement disponibles ou ? remettre en usage."],
+        ["M?c?nat", "Soutien financier ou en nature avec tra?abilit?."],
+      ]),
+      tableSection("B?n?fices pour l'entreprise", "Le partenariat doit ?tre utile au territoire et clair pour l'entreprise.", [
+        ["B?n?fice", "Description", "Preuve"],
+        ["RSE", "Contribution concr?te ? l'?conomie circulaire et locale", "Fiche contribution"],
+        ["Tra?abilit?", "Suivi de l'affectation des ressources", "Registre ou convention"],
+        ["Ancrage local", "Participation ? un projet du territoire", "Compte rendu"],
+        ["Communication", "Valorisation possible apr?s accord", "Validation commune"],
+      ]),
+      textBlock("Ce que TVF refuse", "TVF n'est pas une d?chetterie ni une plateforme de d?stockage libre. Les contributions doivent ?tre r?utilisables, utiles et compatibles avec un projet valid?."),
+    ],
+  },
   {
     file: "partenaires.html",
     title: "Partenaires",

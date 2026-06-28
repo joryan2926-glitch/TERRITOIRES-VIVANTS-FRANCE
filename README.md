@@ -40,6 +40,7 @@ Présenter TVF comme une association nationale en création, claire, crédible e
 - `documents/dossier-presentation-tvf.md`
 - `documents/modele-convention.md`
 - `documents/grille-impact.md`
+- `documents/bareme-priorisation.md`
 
 ## Génération
 
