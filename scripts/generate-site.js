@@ -46,6 +46,14 @@ const pages = [
           ["Coordonner", "Réunir propriétaires, collectivités, entreprises, associations, financeurs, bénévoles et habitants."],
         ]
       ),
+      tableSection("Ce que vous pouvez faire dès maintenant", "L'accueil doit orienter vite vers le bon parcours, sans perdre le visiteur dans tout le site.", [
+        ["Votre situation", "Action utile", "Page à consulter"],
+        ["Vous représentez une collectivité", "Préparer un périmètre pilote, un besoin public ou une coopération", "Collectivités"],
+        ["Vous possédez un bien vacant", "Décrire le bien, son état, les contraintes et les usages possibles", "Propriétaires"],
+        ["Vous êtes une entreprise", "Signaler des matériaux, compétences, locaux ou un soutien possible", "Entreprises"],
+        ["Vous souhaitez aider", "Proposer du temps, une compétence, un signalement ou une mission locale", "Agir avec nous"],
+        ["Vous voulez comprendre la méthode", "Lire les étapes, critères de décision et règles de preuve", "Notre méthode"],
+      ]),
       cards(
         "À chacun son entrée",
         "Le site doit permettre à chaque public de savoir quoi faire en moins de deux minutes.",
@@ -822,6 +830,24 @@ const pages = [
       "Ces documents sont des bases de travail modifiables. Ils aident à préparer un échange sans se substituer à un conseil juridique ou technique.",
     ctas: [["Contacter TVF", "contact.html"], ["Voir la transparence", "transparence.html"]],
     sections: [
+      sectionIntro(
+        "Un centre documentaire pour cadrer, pas pour complexifier",
+        "Les documents TVF doivent aider à produire des dossiers clairs : une demande qualifiée, des pièces disponibles, une décision traçable et une suite compréhensible. Ils ne remplacent pas les validations juridiques, techniques ou administratives nécessaires.",
+        [
+          ["Préparer", "Rassembler les informations avant un premier échange."],
+          ["Décider", "Comparer les options, risques, pièces manquantes et suites possibles."],
+          ["Suivre", "Conserver les preuves, décisions, indicateurs et responsabilités."],
+        ]
+      ),
+      tableSection("Choisir le bon document", "Cette lecture rapide évite de se perdre dans la bibliothèque complète.", [
+        ["Besoin", "Document prioritaire", "Objectif"],
+        ["Une collectivité veut tester TVF", "Fiche collectivité", "Décrire le territoire, le besoin et les interlocuteurs"],
+        ["Un propriétaire propose un bien", "Fiche propriétaire", "Qualifier l'état, les contraintes et les scénarios d'usage"],
+        ["Une entreprise propose des matériaux", "Fiche entreprise", "Tracer la ressource, sa disponibilité et son affectation possible"],
+        ["Un lieu est signalé", "Fiche signalement", "Documenter l'information sans créer de projet automatique"],
+        ["Un projet doit être instruit", "Fiche projet", "Cadrer objectifs, acteurs, risques, budget et indicateurs"],
+        ["Un financement est recherché", "Plan de financement", "Distinguer coûts, contributions, demandes et montants obtenus"],
+      ]),
       cards("Documents disponibles", "Chaque modèle aide à collecter les informations nécessaires avant instruction.", [
         ["Fiche collectivité", "Qualifier un besoin territorial, un périmètre, des ressources et des interlocuteurs.", "documents/fiche-collectivite.md"],
         ["Diagnostic territorial", "Cadrer le périmètre, les données, la méthode et les livrables d'un diagnostic TVF.", "documents/cahier-charges-diagnostic-territorial.md"],
