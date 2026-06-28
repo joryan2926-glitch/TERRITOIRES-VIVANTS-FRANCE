@@ -350,11 +350,30 @@ const pages = [
       "TVF aide les collectivités à passer d'un besoin local à une démarche cadrée : repérage, diagnostic, acteurs, convention, suivi et indicateurs.",
     ctas: [["Préparer une fiche", "documents/fiche-collectivite.md"], ["Nous contacter", "contact.html"]],
     sections: [
+      sectionIntro(
+        "Un outil d'appui pour passer du constat à l'action",
+        "Une collectivité peut connaître la vacance, les locaux fermés ou les friches sans disposer du temps, des outils ou des relais pour transformer chaque situation en dossier opérationnel. TVF propose une méthode de cadrage complémentaire : qualifier, prioriser, réunir les acteurs, sécuriser les engagements et préparer le suivi.",
+        [
+          ["Clarifier", "Transformer un besoin territorial en périmètre de travail lisible."],
+          ["Coordonner", "Faire dialoguer propriétaires, entreprises, associations, habitants et financeurs."],
+          ["Documenter", "Produire des livrables utiles aux décisions publiques et aux financeurs."],
+        ]
+      ),
       cards("Ce que TVF peut apporter", "Un appui méthodologique avant toute action opérationnelle.", [
         ["Diagnostic", "Structurer les premiers constats sur les biens, commerces, friches ou matériaux."],
+        ["Cartographie", "Préparer une lecture territoriale des lieux, ressources et besoins à qualifier."],
         ["Coordination", "Identifier les acteurs à réunir et clarifier leurs rôles."],
         ["Convention", "Préparer un cadre de coopération lisible et adapté au territoire."],
+        ["Financements", "Mettre en forme les besoins, budgets et cofinancements sans annoncer de soutien non acquis."],
         ["Suivi", "Définir des indicateurs avant de communiquer des résultats."],
+      ]),
+      tableSection("Besoins publics et réponse TVF", "TVF aide à structurer les sujets sans se substituer à la décision publique.", [
+        ["Besoin de la collectivité", "Réponse TVF", "Livrable utile"],
+        ["Identifier des biens vacants", "Organiser les signalements, sources et qualifications", "Registre et fiche de qualification"],
+        ["Réactiver un local ou commerce", "Étudier les usages possibles et les acteurs à mobiliser", "Scénario d'usage"],
+        ["Valoriser des matériaux", "Repérer les ressources réemployables et leur destination possible", "Bordereau et registre matériaux"],
+        ["Mobiliser le tissu local", "Créer un cadre de dialogue avec associations, entreprises, habitants", "Compte rendu de cadrage"],
+        ["Chercher des soutiens", "Formaliser besoin, budget, impact attendu et pièces à fournir", "Plan de financement"],
       ]),
       tableSection("Parcours collectivité", "Le parcours doit rester compatible avec les procédures publiques.", [
         ["Étape", "Objectif", "Livrable"],
@@ -363,7 +382,19 @@ const pages = [
         ["Coopération", "Définir les responsabilités", "Convention"],
         ["Suivi", "Documenter les effets", "Grille d'impact"],
       ]),
-      textBlock("Point de vigilance", "TVF n'agit pas à la place de la collectivité. L'association propose un cadre de coopération qui doit respecter les compétences, les décisions et les procédures publiques."),
+      timeline("Devenir territoire partenaire", [
+        ["1", "Premier échange", "La collectivité expose son besoin, son périmètre et les sujets prioritaires."],
+        ["2", "Cadrage", "TVF identifie les données utiles, acteurs à mobiliser et contraintes de procédure."],
+        ["3", "Diagnostic", "Les situations sont classées : signalées, qualifiées, orientées ou à écarter."],
+        ["4", "Convention", "Le cadre de coopération précise les rôles, limites, livrables et modalités de suivi."],
+        ["5", "Pilotage", "Un comité de suivi documente les décisions, les suites et les indicateurs."],
+      ]),
+      textBlock("Point de vigilance", "TVF n'agit pas à la place de la collectivité. L'association propose un cadre de coopération qui doit respecter les compétences, les décisions, les procédures publiques, les règles de communication et la protection des données."),
+      faqSection([
+        ["Une collectivité doit-elle déjà avoir un projet identifié ?", "Non. TVF peut intervenir dès la phase de cadrage, lorsqu'il existe seulement un besoin, un périmètre ou une priorité à clarifier."],
+        ["TVF peut-elle annoncer un partenariat avec une mairie ?", "Uniquement après accord formalisé. Aucun logo ni nom de collectivité ne doit être utilisé sans validation."],
+        ["Quels documents préparer pour un premier échange ?", "Une fiche collectivité, le périmètre concerné, les données disponibles, les interlocuteurs et les contraintes déjà connues."],
+      ]),
     ],
   },
   {
@@ -378,11 +409,27 @@ const pages = [
       "Un propriétaire peut présenter un logement, commerce, bâtiment ou terrain inutilisé. TVF étudie ensuite les usages possibles, les contraintes et les conditions d'une convention.",
     ctas: [["Remplir la fiche", "documents/fiche-proprietaire.md"], ["Nous contacter", "contact.html"]],
     sections: [
+      sectionIntro(
+        "Le propriétaire reste au centre de la décision",
+        "TVF ne prend pas la place du propriétaire et ne transforme pas un bien sans accord écrit. La démarche vise d'abord à comprendre la situation : état du bien, contraintes, coûts possibles, usages utiles au territoire et conditions d'une coopération équilibrée.",
+        [
+          ["Propriété conservée", "Le bien reste la propriété de son détenteur."],
+          ["Usage encadré", "Toute occupation, visite ou intervention doit être formalisée."],
+          ["Valorisation possible", "Un bien inutilisé peut devenir logement, local associatif, commerce, atelier ou lieu partagé."],
+        ]
+      ),
       cards("Ce qui peut être étudié", "Chaque bien doit être qualifié avant d'imaginer un usage.", [
         ["Logement", "Vacant, dégradé, sous-utilisé ou difficile à remettre en état."],
         ["Commerce", "Cellule fermée, local inoccupé, rez-de-chaussée à réactiver."],
         ["Bâtiment", "Immeuble, atelier, équipement ou local sans usage clair."],
         ["Terrain", "Espace délaissé pouvant accueillir un usage collectif ou transitoire."],
+      ]),
+      tableSection("Scénarios possibles", "Les usages dépendent toujours de l'état du bien, du droit applicable, du budget et des responsabilités.", [
+        ["Scénario", "Usage possible", "Points à cadrer"],
+        ["Usage temporaire", "Occupation limitée pour tester un besoin local", "Durée, assurance, accès, restitution"],
+        ["Usage solidaire", "Logement, local associatif, atelier ou espace partagé", "Public concerné, gestion, sécurité"],
+        ["Valorisation progressive", "Travaux par étapes, réemploi de matériaux, recherche de soutiens", "Budget, devis, convention, suivi"],
+        ["Réorientation", "Transmission vers un acteur plus adapté si TVF n'est pas le bon cadre", "Motif, contact utile, limites"],
       ]),
       tableSection("Points à vérifier", "Un projet sérieux commence par les contraintes.", [
         ["Sujet", "Question", "Document utile"],
@@ -391,7 +438,19 @@ const pages = [
         ["Usage", "Quel usage est réaliste ?", "Fiche projet"],
         ["Durée", "Quelle durée de coopération est acceptable ?", "Convention"],
       ]),
-      textBlock("Principe", "Le propriétaire conserve ses droits. Toute intervention doit être encadrée par un accord clair, précisant les usages, la durée, les responsabilités et les limites."),
+      timeline("Parcours propriétaire", [
+        ["1", "Présentation du bien", "Le propriétaire transmet les informations disponibles sans engagement automatique."],
+        ["2", "Qualification", "TVF analyse l'état apparent, les contraintes, les usages possibles et les pièces manquantes."],
+        ["3", "Visite autorisée", "Une visite peut être organisée seulement avec accord écrit et règles de sécurité."],
+        ["4", "Scénarios", "Plusieurs usages sont comparés : temporaire, solidaire, économique, associatif ou réorientation."],
+        ["5", "Convention", "Si une suite est retenue, les rôles, durées, responsabilités et conditions de restitution sont écrits."],
+      ]),
+      textBlock("Principe", "Le propriétaire conserve ses droits. Toute intervention doit être encadrée par un accord clair, précisant les usages, la durée, les responsabilités, l'assurance, la communication et les limites de l'intervention."),
+      faqSection([
+        ["Proposer un bien engage-t-il le propriétaire ?", "Non. La première étape sert uniquement à étudier la situation. Aucun usage, travaux ou affichage public ne doit être engagé sans écrit."],
+        ["TVF peut-elle financer automatiquement une rénovation ?", "Non. Les financements doivent être recherchés, vérifiés, accordés et tracés. Aucun soutien ne doit être annoncé comme acquis sans preuve."],
+        ["Un bien très dégradé peut-il être étudié ?", "Oui, mais la sécurité, l'accès, les diagnostics, les responsabilités et la faisabilité financière deviennent prioritaires."],
+      ]),
     ],
   },
   {
@@ -406,11 +465,27 @@ const pages = [
       "Les entreprises peuvent contribuer par des matériaux, compétences, locaux, logistique ou mécénat. TVF aide à relier ces contributions à des projets cadrés et traçables.",
     ctas: [["Remplir la fiche", "documents/fiche-entreprise.md"], ["Devenir partenaire", "partenaires.html"]],
     sections: [
+      sectionIntro(
+        "Contribuer sans déclasser la ressource",
+        "TVF aide les entreprises à transformer des ressources disponibles en contribution territoriale utile. Un surplus de chantier, du mobilier, une compétence ou un local ne sont pas traités comme un simple don isolé : ils sont qualifiés, tracés puis reliés à un besoin réel.",
+        [
+          ["Réemploi", "Donner une seconde utilité à des matériaux ou équipements encore exploitables."],
+          ["RSE concrète", "Relier l'engagement de l'entreprise à un projet local documenté."],
+          ["Traçabilité", "Conserver les preuves d'affectation, de décision et de communication."],
+        ]
+      ),
       cards("Formes de contribution", "Chaque contribution doit être décrite, localisée et affectée à un besoin validé.", [
         ["Matériaux", "Surplus, invendus, éléments de chantier ou équipements réutilisables."],
         ["Compétences", "Expertise technique, juridique, logistique, architecturale ou financière."],
         ["Locaux", "Espaces temporairement disponibles ou à remettre en usage."],
         ["Mécénat", "Soutien financier ou en nature avec traçabilité."],
+      ]),
+      tableSection("Ce que l'entreprise gagne en clarté", "La valeur d'une contribution repose sur son utilité, sa traçabilité et son affectation.", [
+        ["Situation", "Risque si rien n'est cadré", "Cadre TVF"],
+        ["Matériaux disponibles", "Stockage inutile, gaspillage, coût d'évacuation", "Bordereau, état, quantité, destination possible"],
+        ["Compétence proposée", "Action ponctuelle difficile à valoriser", "Mission, périmètre, livrable, compte rendu"],
+        ["Local disponible", "Usage flou ou responsabilité mal définie", "Convention, assurance, accès, durée"],
+        ["Mécénat", "Communication fragile ou impact non vérifiable", "Projet instruit, budget, reporting"],
       ]),
       tableSection("Bénéfices pour l'entreprise", "Le partenariat doit être utile au territoire et clair pour l'entreprise.", [
         ["Bénéfice", "Description", "Preuve"],
@@ -419,7 +494,19 @@ const pages = [
         ["Ancrage local", "Participation à un projet du territoire", "Compte rendu"],
         ["Communication", "Valorisation possible après accord", "Validation commune"],
       ]),
+      timeline("Du contact à la contribution", [
+        ["1", "Description", "L'entreprise présente ce qu'elle peut apporter : matériaux, locaux, compétences ou soutien."],
+        ["2", "Qualification", "TVF vérifie l'état, la disponibilité, la sécurité, la logistique et l'utilité."],
+        ["3", "Affectation", "La ressource est orientée vers un projet validé ou mise en attente."],
+        ["4", "Formalisation", "Les responsabilités, limites et droits de communication sont écrits."],
+        ["5", "Suivi", "La contribution est tracée et peut être valorisée après accord."],
+      ]),
       textBlock("Ce que TVF refuse", "TVF n'est pas une déchetterie ni une plateforme de déstockage libre. Les contributions doivent être réutilisables, utiles et compatibles avec un projet validé."),
+      faqSection([
+        ["Une entreprise peut-elle donner des matériaux ?", "Oui, si les matériaux sont réutilisables, décrits, accessibles, sécurisés et compatibles avec un projet ou une mise en attente cadrée."],
+        ["Le logo de l'entreprise sera-t-il affiché ?", "Seulement après accord formalisé. TVF ne publie pas de faux partenaires ni de logos non autorisés."],
+        ["Une contribution peut-elle être refusée ?", "Oui. TVF peut refuser ou réorienter une ressource si elle est dangereuse, inutilisable, impossible à stocker ou sans destination réaliste."],
+      ]),
     ],
   },
 
@@ -435,11 +522,27 @@ const pages = [
       "Les citoyens et bénévoles peuvent aider TVF à repérer les situations, documenter les besoins, participer à des actions encadrées et relayer les projets locaux.",
     ctas: [["Remplir la fiche", "documents/fiche-benevole.md"], ["Nous contacter", "contact.html"]],
     sections: [
+      sectionIntro(
+        "Un engagement utile, encadré et progressif",
+        "Les bénévoles et citoyens sont essentiels pour repérer, documenter, relayer et participer. Mais l'engagement doit rester sécurisé : pas d'entrée dans un bien privé sans autorisation, pas de chantier sans encadrement, pas de représentation officielle sans mandat.",
+        [
+          ["Repérer", "Faire remonter une situation visible ou connue localement."],
+          ["Documenter", "Aider à collecter des informations vérifiables et utiles."],
+          ["Participer", "Rejoindre une mission claire, limitée et encadrée."],
+        ]
+      ),
       cards("Façons de participer", "L'engagement doit rester simple, utile et sécurisé.", [
         ["Signaler", "Transmettre une situation : bien vacant, commerce fermé, terrain délaissé ou matériau disponible."],
         ["Documenter", "Aider à collecter des informations publiques, photos, contacts et éléments de contexte."],
         ["Participer", "Rejoindre une action locale ou un chantier uniquement lorsqu'il est encadré."],
         ["Relayer", "Mettre en relation TVF avec des acteurs du territoire."],
+      ]),
+      tableSection("Missions possibles", "Chaque mission doit avoir une durée, un référent et une limite claire.", [
+        ["Mission", "Exemple", "Condition"],
+        ["Signalement citoyen", "Local fermé, terrain délaissé, matériau disponible", "Rester factuel et respecter la propriété"],
+        ["Appui documentaire", "Recherche de sources publiques, photos de contexte, contacts locaux", "Ne pas collecter de données sensibles inutilement"],
+        ["Action terrain", "Tri, inventaire, animation, jardin, chantier encadré", "Plan de prévention et référent présent"],
+        ["Relais local", "Mettre en relation TVF avec une association, artisan, élu ou habitant", "Ne pas engager TVF sans validation"],
       ]),
       tableSection("Cadre bénévole", "Chaque mission doit être claire avant de commencer.", [
         ["Point", "Question", "Réponse attendue"],
@@ -448,7 +551,19 @@ const pages = [
         ["Sécurité", "Y a-t-il un risque ?", "Consignes et limites"],
         ["Données", "Que peut-on publier ?", "Accord et respect de la vie privée"],
       ]),
+      timeline("Parcours bénévole", [
+        ["1", "Se présenter", "Le bénévole indique son territoire, ses disponibilités et ses compétences."],
+        ["2", "Choisir une mission", "TVF propose une mission adaptée au besoin et au niveau d'encadrement disponible."],
+        ["3", "Cadrer", "Objectifs, limites, sécurité, données et référent sont précisés."],
+        ["4", "Agir", "L'action est réalisée dans le cadre défini, avec émargement si nécessaire."],
+        ["5", "Restituer", "Un court compte rendu permet de garder une trace utile."],
+      ]),
       textBlock("Règle importante", "Un bénévole ne doit jamais entrer dans un bien privé, intervenir sur un chantier ou représenter TVF officiellement sans cadre validé."),
+      faqSection([
+        ["Puis-je signaler un bien vacant ?", "Oui, mais un signalement reste une information à qualifier. Il ne doit pas conduire à entrer sur un site ou à contacter un propriétaire au nom de TVF sans cadre."],
+        ["Puis-je participer à un chantier ?", "Oui uniquement si le chantier est encadré, sécurisé et documenté. TVF doit préciser le référent, les consignes et les limites."],
+        ["Faut-il des compétences techniques ?", "Pas forcément. TVF peut avoir besoin de relais locaux, d'appui administratif, de documentation, de communication prudente ou d'aide lors d'actions simples."],
+      ]),
     ],
   },
   {
@@ -463,11 +578,28 @@ const pages = [
       "TVF prépare une logique de financement responsable : chaque soutien doit être relié à un projet instruit, une convention, des indicateurs et une transparence de suivi.",
     ctas: [["Remplir la fiche", "documents/fiche-financeur.md"], ["Voir l'impact", "impact.html"]],
     sections: [
+      sectionIntro(
+        "Financer ce qui est instruit, mesurable et utile",
+        "TVF veut éviter les promesses floues. Un financeur doit savoir quel besoin il soutient, à quel stade se trouve le projet, quelles pièces existent, quelles dépenses sont éligibles, quels risques sont identifiés et quels indicateurs pourront être suivis.",
+        [
+          ["Clarté", "Un objet de financement précis, rattaché à un dossier."],
+          ["Traçabilité", "Un budget, un plan de financement et des justificatifs."],
+          ["Impact vérifiable", "Des indicateurs publiés seulement après mesure."],
+        ]
+      ),
       cards("Ce qui peut être soutenu", "Le financement doit être orienté vers des besoins précis.", [
         ["Diagnostic", "Repérage, qualification et documentation de biens ou ressources."],
         ["Réemploi", "Logistique, stockage, tri et affectation de matériaux réutilisables."],
         ["Projet local", "Remise en usage d'un bien, commerce, local associatif ou espace partagé."],
         ["Insertion", "Chantiers encadrés, bénévolat, formation et accompagnement."],
+      ]),
+      tableSection("Ce qu'un financeur doit pouvoir vérifier", "La confiance repose sur la preuve, pas sur l'effet d'annonce.", [
+        ["Question", "Réponse attendue", "Document utile"],
+        ["Quel est le besoin ?", "Bien, ressource, territoire et public concernés", "Fiche projet"],
+        ["Quel est le budget ?", "Coûts, postes, devis, reste à financer", "Budget prévisionnel"],
+        ["Qui porte quoi ?", "Rôles, responsabilités, convention", "Convention ou lettre d'intention"],
+        ["Quels risques ?", "Sécurité, propriété, financement, calendrier", "Matrice des risques"],
+        ["Quel impact suivre ?", "Indicateurs réalistes et mesurables", "Grille d'impact"],
       ]),
       tableSection("Garanties attendues", "Un financeur doit pouvoir comprendre ce qu'il soutient.", [
         ["Garantie", "Contenu", "Support"],
@@ -476,7 +608,19 @@ const pages = [
         ["Traçabilité", "Utilisation des fonds ou ressources", "Compte rendu"],
         ["Impact", "Indicateurs publiés seulement après vérification", "Grille d'impact"],
       ]),
+      timeline("Parcours financeur", [
+        ["1", "Échange", "TVF présente le besoin, le territoire et le niveau de maturité du dossier."],
+        ["2", "Instruction", "Le financeur examine budget, risques, pièces et objectifs."],
+        ["3", "Cadrage", "Les modalités de soutien, de communication et de reporting sont définies."],
+        ["4", "Suivi", "L'utilisation du soutien est documentée avec justificatifs."],
+        ["5", "Restitution", "TVF transmet un reporting honnête : résultats, limites et suites."],
+      ]),
       textBlock("Principe", "TVF ne doit pas promettre un rendement, un impact ou une visibilité qui ne seraient pas contractualisés et vérifiables. Le mécénat et le financement doivent rester transparents."),
+      faqSection([
+        ["TVF peut-elle garantir un impact chiffré avant projet ?", "Non. Les objectifs peuvent être formulés, mais les résultats ne seront publiés qu'après réalisation et vérification."],
+        ["Un financeur peut-il soutenir une phase de diagnostic ?", "Oui. Le diagnostic est souvent l'étape indispensable pour éviter de financer un projet mal cadré."],
+        ["Comment TVF rend-elle compte ?", "Avec des pièces de suivi : budget, décisions, compte rendu, preuves d'utilisation, indicateurs et limites clairement mentionnées."],
+      ]),
     ],
   },
   {
