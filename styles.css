@@ -14031,3 +14031,42 @@ body.site-streamlined .site-footer {
     display: none;
   }
 }
+
+/* Nouveau logo TVF : conservation des proportions et meilleure lisibilite */
+.brand {
+  display: inline-flex;
+  align-items: center;
+  min-width: 0;
+}
+
+.brand img {
+  width: clamp(150px, 15vw, 214px);
+  height: auto;
+  max-height: 74px;
+  object-fit: contain;
+  object-position: left center;
+}
+
+.footer-main-grid-simple .footer-logo-link img,
+.institutional-footer .footer-main-grid-simple .footer-logo-link img,
+.footer-logo-link img {
+  width: min(250px, 100%);
+  height: auto;
+  max-height: 168px;
+  object-fit: contain;
+  object-position: left center;
+}
+
+@media (max-width: 900px) {
+  .brand img {
+    width: clamp(128px, 34vw, 176px);
+    max-height: 66px;
+  }
+}
+
+@media (max-width: 520px) {
+  .brand img {
+    width: clamp(116px, 42vw, 154px);
+    max-height: 58px;
+  }
+}
