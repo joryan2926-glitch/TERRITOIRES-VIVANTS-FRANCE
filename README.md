@@ -77,6 +77,10 @@ Présenter TVF comme une association nationale en création, claire, crédible e
 - `documents/fiche-territoire-partenaire.md`
 - `documents/note-opportunite-territoriale.md`
 - `documents/lettre-intention-cooperation.md`
+- `documents/courrier-proprietaire-proposition-bien.md`
+- `documents/courrier-collectivite-territoire-partenaire.md`
+- `documents/courrier-entreprise-contribution.md`
+- `documents/courrier-financeur-mecene.md`
 - `documents/fiche-contribution-entreprise.md`
 - `documents/bordereau-don-materiaux.md`
 - `documents/convention-mecenat-preparatoire.md`
