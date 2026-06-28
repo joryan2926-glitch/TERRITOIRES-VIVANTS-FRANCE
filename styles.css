@@ -17937,6 +17937,105 @@ main > section:nth-of-type(4n + 2):not(.hero):not(.page-hero):not(.content-hero)
   font-weight: 760;
 }
 
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid rgba(236, 155, 27, 0.88) !important;
+  outline-offset: 3px !important;
+  border-radius: 10px;
+}
+
+.button,
+.donate-button,
+.audience-cta-grid a,
+.mega-link,
+.footer-social a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.decision-flow,
+.dossier-grid,
+.document-grid,
+.strategy-grid,
+.platform-grid,
+.platform-grid-2,
+.platform-grid-3 {
+  align-items: stretch;
+}
+
+table caption {
+  margin-bottom: 10px;
+  color: var(--final-muted);
+  font-size: 0.92rem;
+  text-align: left;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media print {
+  .site-header,
+  .breadcrumb,
+  .premium-newsletter,
+  .premium-footer,
+  .back-to-top,
+  .mobile-menu-toggle,
+  .nav-dropdown-menu {
+    display: none !important;
+  }
+
+  body {
+    color: #111111 !important;
+    background: #ffffff !important;
+  }
+
+  main,
+  main > section,
+  .page-wrap,
+  .dossier-section,
+  .content-panel,
+  .document-card,
+  .dossier-card {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 0 18px !important;
+    padding: 0 !important;
+    color: #111111 !important;
+    background: #ffffff !important;
+    border: 0 !important;
+    box-shadow: none !important;
+  }
+
+  a {
+    color: #111111 !important;
+    text-decoration: underline !important;
+  }
+
+  h1,
+  h2,
+  h3 {
+    break-after: avoid;
+  }
+
+  table,
+  .dossier-card,
+  .document-card,
+  .content-panel {
+    break-inside: avoid;
+  }
+}
+
 @media (max-width: 900px) {
   .in-page-nav,
   .reference-table-module,
