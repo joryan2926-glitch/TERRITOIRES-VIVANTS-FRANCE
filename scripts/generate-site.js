@@ -929,6 +929,11 @@ const pages = [
         "À utiliser avec prudence",
         "Ces documents sont volontairement préparatoires. Avant signature ou engagement, chaque projet doit être relu, adapté au contexte et validé par les personnes compétentes."
       ),
+      faqSection([
+        ["Faut-il remplir tous les documents ?", "Non. Le tableau d'orientation aide à choisir le bon document selon votre besoin. Un dossier simple doit rester lisible et proportionné."],
+        ["Les modèles peuvent-ils être modifiés ?", "Oui. Ils sont conçus comme des bases de travail adaptables au contexte, au territoire, au type de bien et aux responsabilités de chaque acteur."],
+        ["Un document TVF suffit-il pour engager un projet ?", "Non. Un document prépare l'instruction. Un engagement réel suppose une validation, une convention ou une décision formalisée par les personnes compétentes."],
+      ]),
     ],
   },
   {
@@ -1227,10 +1232,21 @@ const pages = [
         ["Partenariat", "Objectif, contribution possible, limites, mode de communication souhaité", "Fiche partenaire ou entreprise"],
         ["Financement", "Projet concerné, budget, statut du dossier, indicateurs attendus", "Fiche financeur"],
       ]),
+      timeline("Après votre message", [
+        ["1", "Réception", "La demande est lue comme une première information, sans engagement automatique."],
+        ["2", "Orientation", "TVF identifie le bon parcours : collectivité, propriétaire, entreprise, citoyen, financeur ou partenaire."],
+        ["3", "Complément", "Les pièces ou informations manquantes peuvent être demandées avant toute décision."],
+        ["4", "Cadrage", "Si la demande entre dans l'objet TVF, un échange ou un document de cadrage peut être proposé."],
+      ]),
       textBlock(
         "Siège national",
         "Territoires Vivants France - 25 rue Élise Gervais, 42000 Saint-Étienne. Président fondateur : Edryan Rangoly. Secrétaire et trésorier : M. Lambeau Jordan."
       ),
+      faqSection([
+        ["Que faut-il écrire dans le premier message ?", "Indiquez votre profil, le territoire concerné, le type de demande, les informations déjà disponibles et ce que vous attendez de TVF."],
+        ["Un message vaut-il engagement ?", "Non. Un message ouvre un échange. Les engagements éventuels doivent être ensuite cadrés, validés et formalisés."],
+        ["Puis-je joindre des photos ou pièces ?", "Oui, lorsqu'un canal de transmission adapté est défini. Évitez de transmettre des informations sensibles sans cadre clair."],
+      ]),
     ],
   },
   {
@@ -1269,6 +1285,14 @@ const pages = [
         ["Partenaire", "Oui", "Accord ou convention réelle"],
         ["Montant de financement", "Oui", "Distinguer demandé, accordé, conventionné et versé"],
         ["Résultat d'impact", "Oui", "Après réalisation, preuve et méthode de calcul"],
+      ]),
+      tableSection("Registres à tenir", "Ces registres transforment la transparence en méthode de travail concrète.", [
+        ["Registre", "Ce qu'il trace", "Pourquoi c'est utile"],
+        ["Demandes entrantes", "Origine, profil, territoire, objet, statut et prochaine action", "Ne pas perdre les sollicitations et prioriser proprement"],
+        ["Décisions", "Motif, responsable, date, réserves et pièces consultées", "Pouvoir expliquer pourquoi un dossier avance ou non"],
+        ["Partenariats", "Type d'accord, périmètre, durée, communication autorisée", "Éviter les faux partenaires et les ambiguïtés publiques"],
+        ["Financements", "Montants estimés, demandés, accordés, conventionnés et versés", "Ne jamais confondre piste de financement et ressource acquise"],
+        ["Impact", "Indicateurs, sources, limites et preuves disponibles", "Publier des résultats vérifiables"],
       ]),
       timeline("Feuille de route sobre", [
         ["1", "Structurer", "Documents, statuts, conventions, critères de sélection."],
