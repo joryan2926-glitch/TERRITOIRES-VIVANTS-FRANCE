@@ -362,7 +362,7 @@ function pageTemplate(page) {
   <meta property="og:description" content="${page.meta}">
   <meta property="og:type" content="website">
   <meta property="og:url" content="${site.url}/${page.file}">
-  <meta property="og:image" content="${site.url}/assets/logo-territoires-vivants-france.png">
+  <meta property="og:image" content="${site.url}/assets/logo-tvf-officiel-fond-blanc.png">
   <link rel="icon" href="assets/favicon-32.png">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <link rel="manifest" href="site.webmanifest">
@@ -372,7 +372,7 @@ function pageTemplate(page) {
   <a class="skip-link" href="#contenu">Aller au contenu</a>
   <header class="site-header">
     <div class="container header-inner">
-      <a class="brand" href="index.html" aria-label="Accueil Territoires Vivants France"><img src="assets/logo-territoires-vivants-france.png" alt="Territoires Vivants France"></a>
+      <a class="brand" href="index.html" aria-label="Accueil Territoires Vivants France"><img src="assets/logo-tvf-officiel-transparent.png" alt="Territoires Vivants France"></a>
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav">Menu</button>
       <nav class="main-nav" id="main-nav" aria-label="Navigation principale">${nav
         .map(([label, href]) => `<a href="${href}"${href === active ? ' aria-current="page"' : ""}>${label}</a>`)
@@ -393,7 +393,7 @@ function pageTemplate(page) {
   </main>
   <footer class="site-footer">
     <div class="container footer-grid">
-      <div><img src="assets/logo-territoires-vivants-france.png" alt="Territoires Vivants France" class="footer-logo"><p>Plateforme nationale de coopération pour redonner vie aux biens, lieux et ressources inutilisés.</p></div>
+      <div><span class="footer-logo-box"><img src="assets/logo-tvf-officiel-transparent.png" alt="Territoires Vivants France" class="footer-logo"></span><p>Plateforme nationale de coopération pour redonner vie aux biens, lieux et ressources inutilisés.</p></div>
       <div><h2>Navigation</h2>${nav.slice(0, 6).map(([label, href]) => `<a href="${href}">${label}</a>`).join("")}</div>
       <div><h2>Ressources</h2><a href="transparence.html">Transparence</a><a href="mentions-legales.html">Mentions légales</a><a href="contact.html">Contact</a></div>
       <div><h2>Siège</h2><p>25 rue Élise Gervais<br>42000 Saint-Étienne</p><a class="btn secondary" href="contact.html">Contacter TVF</a></div>

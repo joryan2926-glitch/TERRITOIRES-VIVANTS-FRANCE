@@ -72,7 +72,7 @@ a {
 }
 
 .header-inner {
-  min-height: 82px;
+  min-height: 78px;
   display: grid;
   grid-template-columns: auto 1fr auto;
   align-items: center;
@@ -80,8 +80,10 @@ a {
 }
 
 .brand img {
-  width: 154px;
+  width: 230px;
+  max-height: 64px;
   height: auto;
+  object-fit: contain;
 }
 
 .main-nav {
@@ -417,9 +419,21 @@ textarea {
   gap: 38px;
 }
 
-.footer-logo {
-  width: 160px;
+.footer-logo-box {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: min(100%, 260px);
+  padding: 10px 14px;
   margin-bottom: 18px;
+  background: var(--white);
+  border-radius: 18px;
+}
+
+.footer-logo {
+  width: 230px;
+  max-height: 76px;
+  object-fit: contain;
 }
 
 .site-footer h2 {
@@ -453,7 +467,8 @@ textarea {
   }
 
   .brand img {
-    width: 130px;
+    width: 190px;
+    max-height: 56px;
   }
 
   .menu-toggle {
@@ -516,6 +531,10 @@ textarea {
 
   .hero h1 {
     font-size: 2.8rem;
+  }
+
+  .brand img {
+    width: 165px;
   }
 
   .section {
