@@ -51,6 +51,9 @@ Présenter TVF comme une association nationale en création, claire, crédible e
 - `documents/grille-impact.md`
 - `documents/bareme-priorisation.md`
 - `documents/charte-ethique.md`
+- `documents/criteres-selection-projets.md`
+- `documents/reglement-interieur-preparatoire.md`
+- `documents/registre-suivi-decisions.md`
 - `documents/kit-media.md`
 
 ## Génération

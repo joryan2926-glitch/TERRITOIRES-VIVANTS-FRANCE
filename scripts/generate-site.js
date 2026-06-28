@@ -439,6 +439,11 @@ const pages = [
         ["Dossier TVF", "Présenter l'association, sa méthode, ses publics et ses conditions de coopération.", "documents/dossier-presentation-tvf.md"],
         ["Modèle de convention", "Préparer les clauses de coopération à adapter avec les parties concernées.", "documents/modele-convention.md"],
         ["Grille d'impact", "Suivre les indicateurs sans inventer de chiffres ni de résultats.", "documents/grille-impact.md"],
+        ["Charte éthique", "Fixer les règles de transparence, de prudence, de traçabilité et de communication.", "documents/charte-ethique.md"],
+        ["Critères de sélection", "Évaluer l’utilité, la faisabilit?, les risques et la priorité d’un dossier.", "documents/criteres-selection-projets.md"],
+        ["Règlement intérieur préparatoire", "Cadrer les règles internes avant adoption officielle.", "documents/reglement-interieur-preparatoire.md"],
+        ["Registre de décisions", "Tracer les décisions, les motifs, les responsables et les échéances.", "documents/registre-suivi-decisions.md"],
+        ["Kit média", "Centraliser les formulations publiques, l’usage du logo et les règles presse.", "documents/kit-media.md"],
       ]),
       textBlock(
         "À utiliser avec prudence",
