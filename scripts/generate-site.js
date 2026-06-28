@@ -110,31 +110,64 @@ const pages = [
       "Les actions de TVF : logements vacants, commerces inoccupés, matériaux de réemploi, friches, insertion et coordination territoriale.",
     heroImage: "assets/photos/france-commerce-paris.jpg",
     eyebrow: "Actions",
-    h1: "Passer du patrimoine inutilisé au projet utile.",
+    h1: "Transformer les lieux inutilisés en solutions concrètes.",
     intro:
-      "TVF organise ses actions autour de besoins concrets : repérer, qualifier, conventionner, mobiliser, réhabiliter et remettre en usage.",
+      "TVF agit sur les logements vacants, commerces fermés, friches, terrains, matériaux et besoins locaux en construisant des parcours simples : repérer, qualifier, mobiliser, conventionner, réaliser et suivre.",
     ctas: [["Agir avec nous", "agir-avec-nous.html"], ["Voir les pôles", "nos-poles.html"]],
     sections: [
-      cards("Six leviers opérationnels", "Une lecture simple des interventions possibles.", [
-        ["Logements vacants", "Identifier les biens inutilisés et accompagner les conditions d'un retour à l'usage."],
-        ["Commerces inoccupés", "Étudier les cellules fermées et les usages possibles : commerce, atelier, association, service."],
-        ["Matériaux de réemploi", "Collecter et affecter les matériaux à des projets validés par TVF."],
-        ["Friches et terrains", "Transformer des espaces délaissés en lieux utiles, verts ou partagés."],
-        ["Solidarité et insertion", "Construire des parcours de bénévolat, formation et chantier solidaire."],
-        ["Financement", "Préparer des dossiers lisibles pour collectivités, mécènes et financeurs."],
+      sectionIntro(
+        "Une action TVF commence toujours par un besoin réel",
+        "L'objectif n'est pas d'empiler des projets, mais de transformer une situation bloquée en démarche compréhensible : qui possède le bien, quel usage serait utile, quelles ressources existent, quelles responsabilités doivent être écrites et quelles preuves permettront de suivre l'action.",
+        [
+          ["Un lieu", "Logement vacant, commerce fermé, bâtiment inutilisé, friche ou terrain délaissé."],
+          ["Une ressource", "Matériaux, mobilier, compétences, locaux, temps bénévole ou financement."],
+          ["Un usage", "Logement, activité économique, lieu associatif, espace vert, atelier, formation ou service local."],
+        ]
+      ),
+      cards("Huit leviers opérationnels", "Chaque action correspond à un besoin lisible pour les habitants, les propriétaires, les entreprises et les collectivités.", [
+        ["Logements vacants", "Identifier, qualifier et accompagner les conditions de remise en usage de logements aujourd'hui inutilisés.", "proprietaires.html"],
+        ["Commerces inoccupés", "Étudier les cellules fermées et préparer des usages réalistes : commerce, atelier, association, service ou activité temporaire."],
+        ["Matériaux de réemploi", "Repérer, trier et affecter des matériaux encore utiles à des projets validés, sans distribution automatique."],
+        ["Friches et terrains", "Analyser des espaces délaissés et préparer leur reconversion vers des usages verts, sociaux, économiques ou pédagogiques."],
+        ["Solidarité et insertion", "Construire des missions encadrées pour bénévoles, habitants, publics en insertion et partenaires associatifs.", "benevoles-citoyens.html"],
+        ["Territoires partenaires", "Aider une commune ou un EPCI à cadrer un diagnostic, une expérimentation ou une coopération locale.", "collectivites.html"],
+        ["Financer les projets", "Préparer des budgets, cofinancements et dossiers lisibles pour mécènes, fondations et financeurs.", "financeurs-mecenes.html"],
+        ["Observatoire", "Organiser les signalements, données, sources et priorités pour décider où agir en premier.", "observatoire.html"],
       ]),
+      tableSection("Ce que chaque action produit", "TVF doit toujours produire un livrable clair, même lorsque le projet n'est pas encore lancé.", [
+        ["Action", "Problème traité", "Ce que TVF prépare", "Sortie concrète"],
+        ["Logement vacant", "Bien inutilisé, propriétaire isolé, contraintes mal connues", "Fiche propriétaire, visite, scénarios d'usage, risques", "Dossier de décision"],
+        ["Commerce fermé", "Vitrine inactive, rez-de-chaussée sans usage, besoin local", "Analyse d'usage, acteurs économiques, contraintes d'accès", "Scénario de réactivation"],
+        ["Matériaux", "Ressources jetées ou stockées sans destination", "Bordereau, tri, état, quantité, affectation possible", "Registre de réemploi"],
+        ["Friche ou terrain", "Espace délaissé, manque d'usage, risque de dégradation", "Qualification, sécurité, accès, usages compatibles", "Note d'opportunité"],
+        ["Action solidaire", "Besoin d'engagement citoyen ou d'insertion", "Mission, encadrement, sécurité, feuille d'émargement", "Action documentée"],
+      ]),
+      split(
+        "La Banque de matériaux est un outil de projet",
+        "Les matériaux proposés à TVF ne sont pas distribués librement. Ils sont qualifiés, tracés puis orientés vers des besoins utiles : remise en état d'un local associatif, aménagement d'un lieu partagé, soutien à un chantier encadré ou expérimentation territoriale. Cette logique protège les contributeurs et garantit que chaque ressource garde une utilité collective.",
+        "assets/photos/france-ressourcerie-vichy.jpg"
+      ),
       timeline("Méthode d'intervention", [
-        ["A", "Identifier", "Repérage du bien, du besoin ou de la ressource."],
-        ["B", "Évaluer", "Analyse technique, juridique, économique et sociale."],
-        ["C", "Mobiliser", "Recherche des acteurs, ressources et financements compatibles."],
-        ["D", "Contractualiser", "Convention de coopération, règles d'usage et responsabilités."],
-        ["E", "Suivre", "Indicateurs, documentation, retour d'expérience et transparence."],
+        ["1", "Recevoir", "Une demande, un signalement ou une contribution est enregistré avec un numéro de dossier."],
+        ["2", "Qualifier", "Le besoin, le bien, la ressource, les risques et les pièces manquantes sont analysés."],
+        ["3", "Orienter", "TVF décide de compléter, visiter, instruire, réorienter ou classer le dossier."],
+        ["4", "Mobiliser", "Les acteurs utiles sont identifiés : propriétaire, collectivité, entreprise, association, financeur ou bénévole."],
+        ["5", "Formaliser", "Les engagements, usages, responsabilités, budgets et limites sont écrits avant action."],
+        ["6", "Suivre", "Le projet est documenté avec indicateurs, photos autorisées, comptes rendus et reporting."],
       ]),
-      tableSection("De l'idée à l'action", "Chaque action doit pouvoir être comprise, instruite et suivie.", [
-        ["Sujet", "Ce que TVF prépare", "Résultat attendu"],
-        ["Bien vacant", "Diagnostic, propriétaire, contraintes, usage possible", "Dossier de décision"],
-        ["Matériaux", "Nature, état, quantité, stockage, affectation", "Ressource orientée vers un projet validé"],
-        ["Projet local", "Acteurs, budget, convention, calendrier", "Cadre de coopération partagé"],
+      cards("À qui s'adressent les actions ?", "Chaque public doit comprendre immédiatement où il intervient dans la chaîne de revitalisation.", [
+        ["Collectivités", "Diagnostiquer, prioriser et structurer une coopération territoriale.", "collectivites.html"],
+        ["Propriétaires", "Étudier un bien vacant sans perdre la propriété ni s'engager prématurément.", "proprietaires.html"],
+        ["Entreprises", "Valoriser matériaux, locaux, compétences ou mécénat dans un cadre traçable.", "entreprises.html"],
+        ["Associations", "Exprimer un besoin de local, d'équipement, de bénévolat ou d'appui projet.", "partenaires.html"],
+        ["Bénévoles", "Participer à des missions utiles, encadrées et documentées.", "benevoles-citoyens.html"],
+        ["Financeurs", "Soutenir des dossiers instruits avec budget, suivi et reporting.", "financeurs-mecenes.html"],
+      ]),
+      faqSection([
+        ["TVF réalise-t-elle directement les travaux ?", "TVF prépare, coordonne et documente les projets. Les travaux nécessitent un cadre adapté, des compétences, des assurances et des responsabilités clairement définies."],
+        ["Un signalement devient-il automatiquement un projet ?", "Non. Un signalement déclenche une phase de qualification. Il peut être complété, orienté, classé ou transformé en dossier seulement si les conditions sont réunies."],
+        ["Les matériaux sont-ils gratuits ?", "Non. La matériauthèque TVF est un outil de valorisation territoriale : les ressources sont affectées à des projets validés, selon leur état, leur utilité et leur traçabilité."],
+        ["Quand les chiffres d'impact seront-ils publiés ?", "Lorsque des projets seront réellement instruits, conventionnés, réalisés puis mesurés. TVF ne publie pas de résultats non vérifiés."],
       ]),
     ],
   },
@@ -147,21 +180,76 @@ const pages = [
     eyebrow: "Organisation",
     h1: "Cinq pôles pour couvrir tout le cycle de revitalisation.",
     intro:
-      "Les pôles structurent l'action de TVF : du repérage d'un bien à son nouvel usage, en intégrant les matériaux, les acteurs et l'impact social.",
+      "Les pôles structurent l'action de TVF : repérer un lieu ou une ressource, comprendre le besoin, mobiliser les bons acteurs, préparer un cadre écrit et suivre le retour à l'usage.",
     ctas: [["Nos actions", "nos-actions.html"], ["Devenir partenaire", "partenaires.html"]],
     sections: [
-      cards("Les pôles TVF", "Chaque pôle répond à un enjeu précis.", [
-        ["Habitat Vivant", "Logements vacants, habitat dégradé, propriétaires, usages solidaires."],
-        ["Matériauthèque Solidaire", "Matériaux réemployables, collecte, diagnostic, affectation à des projets."],
-        ["Commerce Vivant", "Locaux fermés, rez-de-chaussée actifs, artisans, services de proximité."],
-        ["Friches & Terrains Vivants", "Terrains délaissés, nature en ville, usages collectifs, biodiversité."],
-        ["Solidarité & Insertion", "Bénévolat, chantiers, formation, inclusion et engagement citoyen."],
+      sectionIntro(
+        "Une organisation lisible pour passer de l'idée au terrain",
+        "Les pôles ne sont pas des silos. Ils permettent de répartir les responsabilités, de clarifier les sujets à traiter et d'éviter qu'un projet reste bloqué parce qu'il manque un propriétaire, un usage, des matériaux, une collectivité, un financement ou une équipe locale.",
+        [
+          ["Repérer", "Identifier les logements, commerces, friches, terrains, matériaux et besoins associatifs."],
+          ["Assembler", "Relier le bon pôle principal aux pôles complémentaires selon la nature du projet."],
+          ["Suivre", "Documenter la décision, les conventions, les ressources mobilisées et les résultats mesurables."],
+        ]
+      ),
+      cards("Les pôles TVF", "Chaque pôle apporte une compétence précise au service d'un même objectif : remettre en usage ce qui peut redevenir utile.", [
+        ["Habitat Vivant", "Logements vacants, habitat dégradé, propriétaires, occupation temporaire, usages solidaires.", "proprietaires.html"],
+        ["Matériauthèque Solidaire", "Matériaux réemployables, collecte, diagnostic, stockage, affectation à des projets validés.", "entreprises.html"],
+        ["Commerce Vivant", "Locaux fermés, vitrines inactives, artisans, services de proximité et usages temporaires."],
+        ["Friches & Terrains Vivants", "Terrains délaissés, espaces verts, jardins partagés, biodiversité et nouveaux usages collectifs."],
+        ["Solidarité & Insertion", "Bénévolat, missions encadrées, formation, participation citoyenne et inclusion.", "benevoles-citoyens.html"],
+      ]),
+      tableSection("Rôle détaillé de chaque pôle", "Chaque pôle doit produire des informations utiles à la décision, pas seulement une intention.", [
+        ["Pôle", "Pourquoi il existe", "Missions principales", "Livrables possibles"],
+        ["Habitat Vivant", "Des biens restent inutilisés alors que les besoins locaux existent", "Qualifier le bien, dialoguer avec le propriétaire, étudier les usages", "Fiche propriétaire, scénarios, accord de principe"],
+        ["Matériauthèque Solidaire", "Des ressources encore utiles sortent des circuits de projet", "Recenser, trier, sécuriser et affecter les matériaux", "Bordereau, registre, PV de remise"],
+        ["Commerce Vivant", "Des locaux fermés fragilisent les rues et les centres-villes", "Comprendre le local, tester des usages, relier porteurs et acteurs locaux", "Fiche local, scénario d'usage, convention"],
+        ["Friches & Terrains Vivants", "Des espaces délaissés peuvent devenir utiles au cadre de vie", "Qualifier l'accès, les risques, les usages verts ou partagés", "Audit terrain, note d'opportunité, plan d'action"],
+        ["Solidarité & Insertion", "Les projets locaux peuvent créer de l'engagement et des parcours", "Cadrer les missions, encadrer les actions, suivre la participation", "Fiche mission, émargement, compte rendu"],
       ]),
       split(
+        "Habitat Vivant",
+        "Ce pôle s'adresse d'abord aux propriétaires, collectivités et habitants confrontés à des logements vacants, dégradés ou sans usage clair. TVF ne promet pas une rénovation immédiate : l'objectif est de qualifier le bien, comprendre les contraintes, identifier les usages réalistes et préparer un cadre de coopération.",
+        "assets/photos/france-saint-etienne-jean-jaures.jpg"
+      ),
+      split(
+        "Matériauthèque Solidaire",
+        "Ce pôle transforme les matériaux disponibles en ressources de projet. Une porte, du bois, du carrelage, du mobilier ou un équipement technique ne sont utiles que s'ils sont identifiés, stockables, sécurisés et affectés à un usage concret.",
+        "assets/photos/france-ressourcerie-vichy.jpg"
+      ),
+      split(
+        "Commerce Vivant",
+        "Ce pôle travaille sur les vitrines fermées, locaux vacants et rez-de-chaussée sans activité. L'objectif est de préparer des usages réalistes : activité de proximité, artisanat, association, atelier, service, occupation temporaire ou expérimentation locale.",
+        "assets/photos/france-commerce-paris.jpg"
+      ),
+      split(
+        "Friches & Terrains Vivants",
+        "Ce pôle regarde les espaces délaissés comme des réserves d'usage possible : jardin partagé, espace pédagogique, lieu associatif, biodiversité, équipement temporaire ou projet territorial. La sécurité, l'accès et la propriété restent toujours les premiers points à vérifier.",
+        "assets/photos/france-friche-pcuk.jpg"
+      ),
+      split(
+        "Solidarité & Insertion",
+        "Ce pôle permet aux habitants, bénévoles, associations et publics accompagnés de participer à des actions utiles sans improvisation. Les missions doivent être claires, encadrées, sécurisées et documentées.",
+        "assets/photos/community-garden-paris.webp"
+      ),
+      split(
         "Une logique de coopération",
-        "Un même projet peut mobiliser plusieurs pôles. Un logement vacant peut nécessiter des matériaux de réemploi, une convention avec un propriétaire, un chantier solidaire et un suivi d'impact. TVF sert à organiser cette coordination.",
+        "Un même projet peut mobiliser plusieurs pôles. Un logement vacant peut nécessiter des matériaux de réemploi, une convention avec un propriétaire, un appui de collectivité, un chantier encadré et un suivi d'impact. TVF sert à organiser cette coordination étape par étape.",
         "assets/photos/france-saint-etienne-chateaucreux.jpg"
       ),
+      timeline("Comment les pôles travaillent ensemble", [
+        ["1", "Repérage", "Un lieu, une ressource ou un besoin est identifié."],
+        ["2", "Pôle principal", "TVF choisit le pôle qui porte l'analyse principale."],
+        ["3", "Pôles associés", "Les autres pôles complètent : matériaux, insertion, commerce, friche ou habitat."],
+        ["4", "Cadre écrit", "Convention, autorisation, budget, sécurité et responsabilités sont préparés."],
+        ["5", "Action suivie", "Les résultats ne sont publiés qu'après réalisation et vérification."],
+      ]),
+      faqSection([
+        ["Pourquoi organiser TVF en pôles ?", "Les pôles rendent la méthode lisible. Ils permettent de traiter séparément l'habitat, les commerces, les friches, les matériaux et l'engagement humain, tout en les reliant dans un même projet."],
+        ["Un projet peut-il relever de plusieurs pôles ?", "Oui. C'est même fréquent : un bâtiment vacant peut mobiliser Habitat Vivant, Matériauthèque Solidaire, Solidarité & Insertion et parfois Commerce Vivant."],
+        ["Qui décide du pôle principal ?", "TVF l'identifie après qualification du besoin, des contraintes, des acteurs et de l'usage envisagé."],
+        ["Les pôles correspondent-ils à des résultats déjà obtenus ?", "Non. Ils structurent la méthode et les futurs dossiers. Les résultats seront communiqués uniquement lorsqu'ils seront vérifiés."],
+      ]),
     ],
   },
   {
