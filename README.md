@@ -59,6 +59,10 @@ Présenter TVF comme une association nationale en création, claire, crédible e
 - `documents/registre-sources-donnees-territoriales.md`
 - `documents/fiche-cartographie-territoriale.md`
 - `documents/pieces-a-fournir.md`
+- `documents/registre-demandes-entrantes.md`
+- `documents/accuse-reception-demande.md`
+- `documents/grille-instruction-dossier.md`
+- `documents/fiche-decision-orientation.md`
 - `documents/fiche-audit-terrain.md`
 - `documents/autorisation-visite-bien.md`
 - `documents/autorisation-droit-image.md`
