@@ -90,16 +90,43 @@ const pages = [
         "Notre rôle",
         "TVF ne remplace ni les collectivités, ni les dispositifs publics, ni les professionnels du bâtiment. L'association cherche à rendre les coopérations plus simples : repérer les situations, préparer les dossiers, mettre les acteurs autour de la même table et suivre ce qui est décidé."
       ),
+      sectionIntro(
+        "Ce que TVF apporte concrètement",
+        "L'association se positionne comme un cadre de travail : elle transforme une intention en dossier lisible, un signalement en situation qualifiée et une ressource inutilisée en contribution possible à un projet territorial.",
+        [
+          ["Un cadre", "Des étapes, des pièces à fournir, des responsabilités et des limites écrites avant toute communication."],
+          ["Un langage commun", "Une manière simple de relier propriétaires, collectivités, entreprises, associations et financeurs autour du même dossier."],
+          ["Une continuité", "Un suivi depuis le premier contact jusqu'à la décision, la convention, l'action et la restitution des résultats."],
+        ]
+      ),
       split(
         "Une association en création",
         "La priorité est de construire une méthode crédible avant de communiquer des résultats. Cela signifie : des documents propres, des conventions adaptées, des critères de sélection, une traçabilité des décisions et une distinction nette entre objectifs, projets en instruction et actions réalisées.",
         "assets/photos/community-garden-paris.webp"
       ),
+      tableSection("Ce que TVF fait, et ce que TVF ne prétend pas faire", "Cette clarification protège la crédibilité du projet et évite les promesses trop rapides.", [
+        ["Sujet", "TVF fait", "TVF ne fait pas"],
+        ["Biens vacants", "Aide à qualifier un bien, un usage possible, les risques et les acteurs à mobiliser", "Ne décide pas seule de l'avenir d'un bien sans accord du propriétaire ou du cadre public compétent"],
+        ["Matériaux", "Organise une valorisation orientée projet, avec traçabilité et affectation", "Ne fonctionne pas comme une plateforme de dons libres ou une déchetterie"],
+        ["Collectivités", "Prépare un cadre de coopération, un diagnostic et des documents d'aide à la décision", "Ne remplace pas les politiques publiques ni les services instructeurs"],
+        ["Impact", "Mesure les résultats lorsqu'ils sont documentés", "N'annonce pas de chiffres non vérifiés"],
+      ]),
       cards("Nos engagements", "TVF avance avec prudence et exigence.", [
         ["Clarté", "Ne pas annoncer de chiffres d'impact tant qu'ils ne sont pas mesurés."],
         ["Traçabilité", "Documenter les décisions, conventions, ressources et projets."],
         ["Complémentarité", "Aider les acteurs existants sans se substituer à eux."],
         ["Utilité", "Orienter chaque action vers un bénéfice concret pour le territoire."],
+      ]),
+      timeline("Construction de la crédibilité", [
+        ["1", "Cadrer", "Définir l'objet de l'association, les responsabilités, les documents et les règles de communication."],
+        ["2", "Tester", "Appliquer la méthode sur un territoire pilote avec des dossiers réels, sans annoncer de résultat prématuré."],
+        ["3", "Formaliser", "Transformer les retours terrain en conventions, grilles de décision et procédures reproductibles."],
+        ["4", "Déployer", "Ouvrir progressivement le modèle à d'autres territoires lorsque les conditions de suivi sont réunies."],
+      ]),
+      faqSection([
+        ["TVF est-elle déjà une structure nationale opérationnelle ?", "TVF se construit comme une association nationale en structuration. Le site présente la méthode, les outils, les parcours et les cadres à utiliser avant les premières actions pleinement documentées."],
+        ["Pourquoi parler de plateforme de coopération ?", "Parce que la valeur de TVF n'est pas de faire seule, mais de relier les bons acteurs autour d'un dossier clair : bien, usage, ressources, responsabilités, financement et impact."],
+        ["Pourquoi ne pas afficher de partenaires partout ?", "Un partenaire ne doit être affiché que lorsqu'un accord réel existe. Cette règle évite toute confusion et renforce la confiance des collectivités, entreprises et financeurs."],
       ]),
     ],
   },
@@ -710,6 +737,15 @@ const pages = [
       "TVF ne publie pas de faux partenaires. Cette page présente les formes de coopération possibles et le cadre attendu avant toute officialisation.",
     ctas: [["Présenter une coopération", "contact.html"], ["Voir les documents", "documents.html"]],
     sections: [
+      sectionIntro(
+        "Un partenariat doit être utile, formalisé et vérifiable",
+        "TVF distingue l'échange exploratoire, la coopération en instruction et le partenariat officialisé. Cette progression évite de communiquer trop vite et permet à chaque acteur de comprendre son rôle exact.",
+        [
+          ["Utilité", "Le partenariat répond à un besoin territorial, social, environnemental ou économique clairement identifié."],
+          ["Cadre", "Les responsabilités, limites, usages, données et modalités de communication sont écrites."],
+          ["Preuve", "Chaque contribution peut être suivie : matériau, compétence, financement, local, temps bénévole ou donnée."],
+        ]
+      ),
       cards("Qui peut coopérer avec TVF ?", "Chaque partenariat doit avoir un objectif, des responsabilités et des preuves.", [
         ["Collectivités", "Diagnostic, mise à disposition d'informations, expérimentation locale, animation territoriale."],
         ["Entreprises", "Dons de matériaux, compétences, mécénat, locaux, logistique ou expertise technique."],
@@ -717,12 +753,32 @@ const pages = [
         ["Propriétaires", "Signalement de biens, convention d'usage, projet de remise en activité."],
         ["Financeurs", "Soutien à des dossiers instruits, reporting, indicateurs et transparence."],
       ]),
+      tableSection("Bénéfices par type d'acteur", "Un partenariat TVF doit produire un bénéfice partagé, sans contrepartie floue ni promesse non écrite.", [
+        ["Acteur", "Contribution possible", "Bénéfice recherché", "Point à formaliser"],
+        ["Collectivité", "Données, locaux, relais institutionnel, expérimentation", "Accélérer une réponse locale et mieux suivre les effets", "Périmètre, gouvernance, usage des données, calendrier"],
+        ["Entreprise", "Matériaux, mécénat, compétences, logistique", "Valoriser une démarche RSE concrète et réduire le gaspillage", "Traçabilité, affectation, communication, justificatifs"],
+        ["Propriétaire", "Bien vacant, terrain, commerce ou bâtiment à étudier", "Préserver et valoriser un patrimoine tout en répondant à un besoin local", "Droit d'usage, durée, responsabilités, restitution"],
+        ["Association", "Besoin d'usage, bénévolat, animation, expertise sociale", "Accéder à un cadre de projet plus lisible et mieux soutenu", "Public concerné, règles d'accueil, sécurité, suivi"],
+        ["Financeur", "Soutien financier ou ingénierie de projet", "Appuyer des projets instruits avec reporting et indicateurs", "Objet financé, indicateurs, justificatifs, calendrier de reporting"],
+      ]),
       tableSection("Cadre de partenariat", "Un partenariat sérieux se formalise avant communication publique.", [
         ["Étape", "Contenu", "Preuve attendue"],
         ["Intention", "Échange sur le besoin, le territoire et le rôle possible", "Compte rendu"],
         ["Instruction", "Vérification juridique, technique, financière et opérationnelle", "Fiche projet"],
         ["Convention", "Responsabilités, durée, usages, suivi et communication", "Document signé"],
         ["Suivi", "Indicateurs, retours d'expérience et preuves d'action", "Tableau de bord"],
+      ]),
+      timeline("De l'intention à l'officialisation", [
+        ["1", "Premier échange", "Comprendre le besoin, le territoire, la contribution possible et les limites."],
+        ["2", "Qualification", "Rassembler les pièces, vérifier la faisabilité et identifier les risques."],
+        ["3", "Décision", "Valider si la coopération entre bien dans l'objet TVF et dans les capacités disponibles."],
+        ["4", "Convention", "Écrire le rôle de chacun, les engagements, la communication et le suivi."],
+        ["5", "Publication", "Afficher le partenariat uniquement lorsque le cadre est validé."],
+      ]),
+      faqSection([
+        ["TVF peut-elle afficher mon logo immédiatement ?", "Non. Un logo ou une mention publique suppose un accord formalisé, afin d'éviter toute confusion sur la réalité du partenariat."],
+        ["Une entreprise peut-elle donner des matériaux sans projet identifié ?", "Elle peut signaler une ressource. TVF doit ensuite vérifier l'état, les conditions de récupération et l'affectation possible à un projet validé."],
+        ["Une collectivité peut-elle tester TVF sur un périmètre limité ?", "Oui, une coopération peut commencer par un diagnostic, un quartier pilote, une typologie de biens ou une démarche de cartographie progressive."],
       ]),
     ],
   },
@@ -855,6 +911,15 @@ const pages = [
       "TVF avance par étapes pour éviter les promesses floues : comprendre la situation, vérifier les contraintes, réunir les acteurs, formaliser les engagements et suivre ce qui est réellement fait.",
     ctas: [["Préparer un dossier", "documents.html"], ["Nous contacter", "contact.html"]],
     sections: [
+      sectionIntro(
+        "Une méthode de décision avant une méthode de communication",
+        "La méthode TVF sert d'abord à éviter les confusions : un signalement n'est pas un projet, une intention n'est pas une convention, un objectif n'est pas un résultat et une contribution n'est utile que si elle est affectée à un besoin validé.",
+        [
+          ["Qualifier", "Rassembler les éléments factuels avant toute annonce."],
+          ["Décider", "Vérifier l'utilité, la faisabilité et le niveau de risque."],
+          ["Tracer", "Conserver les pièces qui justifient les décisions et les résultats."],
+        ]
+      ),
       timeline("Les six étapes", [
         ["1", "Repérer", "Identifier un bien, un besoin, une ressource ou une opportunité territoriale."],
         ["2", "Qualifier", "Documenter l'adresse, l'état, les usages possibles, les contraintes et les acteurs concernés."],
@@ -870,11 +935,24 @@ const pages = [
         ["Coopération", "Les acteurs nécessaires sont-ils mobilisables ?", "Référents, contacts, rôle de chaque partie"],
         ["Traçabilité", "Le projet peut-il être documenté ?", "Fiche projet, convention, indicateurs, compte rendu"],
       ]),
+      tableSection("De la demande à la décision", "Chaque entrée doit produire une suite lisible, même lorsqu'elle n'aboutit pas immédiatement.", [
+        ["Entrée", "Question centrale", "Document utile", "Décision possible"],
+        ["Signalement", "Le lieu existe-t-il et peut-il être qualifié ?", "Fiche signalement", "Classer, compléter, visiter ou orienter"],
+        ["Bien proposé", "Le propriétaire accepte-t-il une étude et un cadre d'usage ?", "Fiche propriétaire", "Étude, refus motivé ou convention à préparer"],
+        ["Matériaux", "La ressource est-elle réemployable et récupérable ?", "Fiche entreprise ou particulier", "Affecter, stocker, refuser ou compléter"],
+        ["Projet local", "Le besoin est-il clair et réaliste ?", "Fiche projet", "Prioriser, mettre en attente ou rechercher des partenaires"],
+        ["Financement", "Le projet est-il assez cadré pour être présenté ?", "Plan de financement", "Chercher un soutien, retravailler ou reporter"],
+      ]),
       cards("Ce que la méthode évite", "La méthode sert aussi à protéger le projet.", [
         ["Annonces prématurées", "Ne pas présenter un projet comme acquis tant qu'il n'est pas cadré."],
         ["Flou juridique", "Identifier les responsabilités avant toute action."],
         ["Ressources dispersées", "Affecter les matériaux et contributions à des besoins validés."],
         ["Impact non mesuré", "Distinguer clairement objectifs, actions et résultats."],
+      ]),
+      faqSection([
+        ["Pourquoi autant de documents ?", "Parce qu'un projet territorial implique souvent un bien, des personnes, des responsabilités, des risques, des ressources et des décisions. Les documents évitent les malentendus."],
+        ["Une demande peut-elle être refusée ?", "Oui. TVF doit pouvoir refuser, reporter ou réorienter une demande si elle n'est pas conforme à l'objet, trop risquée, insuffisamment documentée ou impossible à suivre."],
+        ["La méthode sera-t-elle identique partout ?", "Le socle reste commun, mais chaque territoire devra adapter les priorités, les interlocuteurs, les données et les conventions à son contexte local."],
       ]),
     ],
   },
@@ -890,6 +968,15 @@ const pages = [
       "TVF ne publie pas de chiffres fictifs. Cette page présente les indicateurs qui devront être suivis lorsque les premiers projets seront réellement instruits, conventionnés puis réalisés.",
     ctas: [["Voir la transparence", "transparence.html"], ["Télécharger la grille", "documents/grille-impact.md"]],
     sections: [
+      sectionIntro(
+        "Mesurer sans inventer",
+        "L'impact TVF doit être lu comme une chaîne de preuves. Avant de publier un résultat, il faut savoir d'où vient la donnée, qui l'a validée, à quel projet elle correspond et quelles limites doivent être indiquées.",
+        [
+          ["Objectifs", "Ce que l'association cherche à atteindre sur un territoire ou un projet."],
+          ["Indicateurs", "Ce qui sera mesuré avec une définition stable."],
+          ["Résultats", "Ce qui sera publié après réalisation et vérification."],
+        ]
+      ),
       cards("Indicateurs à suivre", "Les chiffres seront publiés uniquement lorsqu'ils seront vérifiés.", [
         ["Biens qualifiés", "Nombre de logements, commerces, bâtiments, terrains ou friches documentés."],
         ["Biens remis en usage", "Nombre de biens effectivement réactivés après convention et action."],
@@ -905,10 +992,23 @@ const pages = [
         ["Convention", "Engagement formalisé", "À présenter comme projet cadré"],
         ["Réalisation", "Action terminée et documentée", "À présenter comme résultat"],
       ]),
+      tableSection("Preuves attendues par indicateur", "Un indicateur n'a de valeur que si sa définition et sa preuve sont stables.", [
+        ["Indicateur", "Définition", "Preuve minimale", "Moment de publication"],
+        ["Bien qualifié", "Bien documenté avec adresse, statut, contraintes et usage possible", "Fiche signalement ou fiche propriétaire", "Après qualification interne"],
+        ["Projet conventionné", "Projet disposant d'un cadre écrit et accepté", "Convention ou décision formalisée", "Après signature ou validation"],
+        ["Matériau réemployé", "Ressource affectée à un projet identifié", "PV de remise, suivi d'affectation, photo ou justificatif", "Après affectation vérifiée"],
+        ["Bénévole mobilisé", "Personne ayant participé à une action encadrée", "Feuille d'émargement ou fiche mission", "Après action"],
+        ["Impact territorial", "Effet local documenté sur usage, service, cadre de vie ou économie circulaire", "Compte rendu, indicateur, témoignage vérifié", "Après bilan"],
+      ]),
       textBlock(
         "Pourquoi cette prudence ?",
         "La crédibilité d'une association nationale repose sur la preuve. Un chiffre non vérifié peut fragiliser la confiance des collectivités, propriétaires, financeurs et habitants. TVF préfère publier moins, mais publier juste."
       ),
+      faqSection([
+        ["Pourquoi ne pas afficher de compteurs dès maintenant ?", "Parce qu'un compteur sans données vérifiées donnerait une impression artificielle. TVF prépare les indicateurs avant de publier des résultats."],
+        ["Les objectifs peuvent-ils être affichés ?", "Oui, à condition de les présenter comme des objectifs ou des estimations, jamais comme des résultats réalisés."],
+        ["Qui pourra utiliser les indicateurs ?", "Les collectivités, partenaires, financeurs et équipes TVF pourront les utiliser pour suivre les dossiers, décider et rendre compte de manière plus transparente."],
+      ]),
     ],
   },
   {
