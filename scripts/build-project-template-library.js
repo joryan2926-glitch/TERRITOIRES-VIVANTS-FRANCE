@@ -1128,7 +1128,7 @@ const page = `<!doctype html>
     <meta property="og:title" content="Fiches projet territorialis&eacute;es | TERRITOIRES VIVANTS FRANCE" />
     <meta property="og:description" content="Transformer un bien, un besoin public ou une ressource en dossier op&eacute;rationnel : fiche projet, convention, budget, indicateurs et garde-fous." />
     <meta property="og:url" content="https://www.territoiresvivantsfrance.fr/fiches-projets-territorialisees.html" />
-    <meta property="og:image" content="https://www.territoiresvivantsfrance.fr/assets/photos/documents-resources.jpg" />
+    <meta property="og:image" content="https://www.territoiresvivantsfrance.fr/assets/photos/saint-etienne-design.jpg" />
     <link rel="stylesheet" href="styles.css" />
     ${structuredData}
   </head>
@@ -1141,7 +1141,7 @@ const page = `<!doctype html>
           <h1>Fiches projet <span>territorialis&eacute;es</span></h1>
           <p>Transformer un signalement, un bien vacant ou une ressource inutilis&eacute;e en dossier pr&ecirc;t &agrave; instruire : besoin public, dispositif compatible, acteurs &agrave; mobiliser, convention, budget et indicateurs.</p>
         </div>
-        <img decoding="async" fetchpriority="high" class="page-hero-photo" src="assets/photos/documents-resources.jpg" alt="Dossier de projet territorial avec documents, plans et budget" width="1800" height="1200" />
+        <img decoding="async" fetchpriority="high" class="page-hero-photo" src="assets/photos/saint-etienne-design.jpg" alt="Dossier de projet territorial avec documents, plans et budget" width="1800" height="1200" />
       </section>
 
       <section class="impact-section">

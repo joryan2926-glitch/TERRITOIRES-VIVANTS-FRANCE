@@ -11,7 +11,7 @@ const poles = [
     kicker: "Habitat et usages",
     title: "Habitat Vivant",
     href: "pole-habitat-vivant.html",
-    image: "assets/photos/housing-renovation.jpg",
+    image: "assets/photos/abandoned-house-reunion.jpg",
     alt: "Logement rénové illustrant la remise en usage de l'habitat vacant",
     width: 1800,
     height: 1201,
@@ -29,7 +29,7 @@ const poles = [
     kicker: "Ressources et réemploi",
     title: "Matériauthèque Solidaire",
     href: "pole-materiautheque-solidaire.html",
-    image: "assets/photos/materials-warehouse.jpg",
+    image: "assets/photos/brownfield-lille.jpg",
     alt: "Matériaux triés dans un entrepôt pour une démarche de réemploi",
     width: 1800,
     height: 1201,
@@ -47,7 +47,7 @@ const poles = [
     kicker: "Centralités et proximité",
     title: "Commerce Vivant",
     href: "pole-commerce-vivant.html",
-    image: "assets/photos/local-commerce.jpg",
+    image: "assets/photos/abandoned-shop-paris.jpg",
     alt: "Commerce de proximité actif dans une rue commerçante",
     width: 1800,
     height: 1201,
@@ -83,7 +83,7 @@ const poles = [
     kicker: "Humain et parcours",
     title: "Solidarité & Insertion",
     href: "pole-solidarite-insertion.html",
-    image: "assets/photos/community-volunteers.jpg",
+    image: "assets/photos/community-garden-paris.jpg",
     alt: "Bénévoles et habitants mobilisés dans une action collective",
     width: 1800,
     height: 1196,
@@ -128,7 +128,7 @@ function poleSection(pole, index) {
 
 const main = `    <main class="poles-premium" data-professional-enrichment="public-page">
       <section class="actions-hero-premium poles-hero-premium">
-        <img decoding="async" fetchpriority="high" src="assets/photos/urban-renewal-street.jpg" alt="Centre-ville en transformation dans une démarche de revitalisation territoriale" width="1800" height="1200" />
+        <img decoding="async" fetchpriority="high" src="assets/photos/saint-etienne-design.jpg" alt="Centre-ville en transformation dans une démarche de revitalisation territoriale" width="1800" height="1200" />
         <div class="actions-hero-overlay">
           <span class="page-status" data-status="public">Dossier public</span>
           <span class="poles-hero-label">Les 5 pôles de TERRITOIRES VIVANTS FRANCE</span>
@@ -276,7 +276,7 @@ html = html
   )
   .replace(
     /<meta property="og:image" content="[^"]*" \/>/,
-    '<meta property="og:image" content="https://www.territoiresvivantsfrance.fr/assets/photos/urban-renewal-street.jpg" />',
+    '<meta property="og:image" content="https://www.territoiresvivantsfrance.fr/assets/photos/saint-etienne-design.jpg" />',
   )
   .replace(/<main[\s\S]*?<\/main>/, main);
 

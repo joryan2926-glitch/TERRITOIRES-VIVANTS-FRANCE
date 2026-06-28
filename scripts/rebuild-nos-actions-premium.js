@@ -24,7 +24,7 @@ const actions = [
     eyebrow: "Usage partagé",
     title: "Bien Solidaire à Usage Partagé",
     href: "bien-solidaire-usage-partage.html",
-    image: "assets/photos/renovated-building.jpg",
+    image: "assets/photos/abandoned-house-reunion.jpg",
     alt: "Bâtiment rénové pouvant accueillir un usage partagé et utile au territoire",
     width: 1800,
     height: 1200,
@@ -37,10 +37,10 @@ const actions = [
     eyebrow: "Ressources",
     title: "Matériaux de réemploi",
     href: "action-materiaux-reemploi.html",
-    image: "assets/photos/salvage-warehouse.jpg",
-    alt: "Entrepôt de matériaux de réemploi triés pour de futurs projets territoriaux",
+    image: "assets/photos/brownfield-lille.jpg",
+    alt: "Matériaux triés dans un espace de stockage pour de futurs projets territoriaux",
     width: 960,
-    height: 549,
+    height: 640,
     text:
       "Transformer des matériaux disponibles localement en ressources qualifiées pour des projets validés : rénovation, aménagement, locaux associatifs ou chantiers solidaires.",
     objectives: ["Collecter", "Trier", "Affecter aux projets validés"],
@@ -76,7 +76,7 @@ const actions = [
     eyebrow: "Engagement",
     title: "Solidarité & Insertion",
     href: "action-solidarite-insertion.html",
-    image: "assets/photos/volunteers.jpg",
+    image: "assets/photos/community-garden-paris.jpg",
     alt: "Bénévoles mobilisés dans une action collective",
     width: 1600,
     height: 1067,
@@ -89,7 +89,7 @@ const actions = [
     eyebrow: "Maillage national",
     title: "Antennes locales",
     href: "antennes-locales.html",
-    image: "assets/photos/institutional-meeting.jpg",
+    image: "assets/photos/saint-etienne-design.jpg",
     alt: "Réunion locale préparant la structuration d'une antenne territoriale",
     width: 1800,
     height: 1200,
@@ -102,7 +102,7 @@ const actions = [
     eyebrow: "Financement",
     title: "Financer les projets",
     href: "financer-projets.html",
-    image: "assets/photos/documents-resources.jpg",
+    image: "assets/photos/saint-etienne-design.jpg",
     alt: "Dossier de financement et convention préparés pour un projet territorial",
     width: 1800,
     height: 1201,
@@ -145,7 +145,7 @@ function actionSection(item, index) {
 
 const main = `    <main class="actions-premium" data-professional-enrichment="public-page">
       <section class="actions-hero-premium">
-        <img decoding="async" fetchpriority="high" src="assets/photos/urban-renewal-street.jpg" alt="Rue urbaine en transformation dans un quartier en renouvellement" width="1800" height="1200" />
+        <img decoding="async" fetchpriority="high" src="assets/photos/saint-etienne-design.jpg" alt="Rue urbaine en transformation dans un quartier en renouvellement" width="1800" height="1200" />
         <div class="actions-hero-overlay">
           <span class="page-status" data-status="public">Dossier public</span>
           <h1>Nos actions pour redonner vie aux territoires</h1>
@@ -295,7 +295,7 @@ html = html
   )
   .replace(
     /<meta property="og:image" content="[^"]*" \/>/,
-    '<meta property="og:image" content="https://www.territoiresvivantsfrance.fr/assets/photos/urban-renewal-street.jpg" />',
+    '<meta property="og:image" content="https://www.territoiresvivantsfrance.fr/assets/photos/saint-etienne-design.jpg" />',
   )
   .replace(/<main[\s\S]*?<\/main>/, main);
 

@@ -11,7 +11,7 @@ function write(file, html) {
   fs.writeFileSync(path.join(root, file), html, "utf8");
 }
 
-function updateHead(html, { title, description, slug, image = "assets/photos/institutional-meeting.jpg" }) {
+function updateHead(html, { title, description, slug, image = "assets/photos/saint-etienne-design.jpg" }) {
   html = html.replace(/<title>[\s\S]*?<\/title>/i, `<title>${title}</title>`);
   html = html.replace(/<meta\s+name="description"\s+content="[^"]*"\s*\/>/i, `<meta name="description" content="${description}" />`);
   html = html.replace(/<link\s+rel="canonical"\s+href="[^"]*"\s*\/>/i, `<link rel="canonical" href="https://www.territoiresvivantsfrance.fr/${slug}" />`);
@@ -48,7 +48,7 @@ function afterHeroHome() {
 const whyMain = `    <main class="dossier-shell" data-professional-enrichment="public-page">
       <section class="page-hero">
         <div><span class="page-status">Raison d'&ecirc;tre</span><h1>Pourquoi <span>TVF existe</span></h1><p>Comprendre le probl&egrave;me public auquel Territoires Vivants France veut r&eacute;pondre : des lieux utiles restent vacants, des ressources sont perdues et des territoires manquent de moyens pour agir ensemble.</p></div>
-        <img decoding="async" fetchpriority="high" class="page-hero-photo" src="assets/photos/urban-renewal-street.jpg" alt="Rue urbaine observee dans une demarche de revitalisation" width="1800" height="1200" />
+        <img decoding="async" fetchpriority="high" class="page-hero-photo" src="assets/photos/saint-etienne-design.jpg" alt="Rue urbaine observee dans une demarche de revitalisation" width="1800" height="1200" />
       </section>
       <div class="page-wrap">
         <section class="dossier-intro" aria-labelledby="why-intro">
@@ -158,7 +158,7 @@ replaceMain("pourquoi-tvf-existe.html", whyMain, {
   title: "Pourquoi TVF existe | Territoires Vivants France",
   description: "Le dossier de r&eacute;f&eacute;rence qui explique la raison d'&ecirc;tre de Territoires Vivants France : vacance, friches, r&eacute;emploi, coop&eacute;ration territoriale et mesure d'impact.",
   slug: "pourquoi-tvf-existe.html",
-  image: "assets/photos/urban-renewal-street.jpg"
+  image: "assets/photos/saint-etienne-design.jpg"
 });
 
 afterHeroHome();

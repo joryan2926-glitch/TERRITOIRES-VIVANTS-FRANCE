@@ -214,7 +214,7 @@ renderPage({
   h1: "Proprietaires et",
   h1Accent: "biens vacants",
   intro: "Un proprietaire peut conserver la pleine propriete de son bien tout en etudiant avec TVF une remise en usage utile au territoire, sous reserve de diagnostic, faisabilite, financement et convention.",
-  image: "assets/photos/housing-renovation.jpg",
+  image: "assets/photos/abandoned-house-reunion.jpg",
   imageAlt: "Batiment residentiel en renovation",
   sections: [
     section("Principe", "Un cadre pour les biens qui ont un potentiel d'utilite territoriale", `<p class="lead-block">TVF peut etudier des situations concernant un logement vacant, un immeuble degrade, un commerce ferme, un batiment inutilise ou un terrain abandonne. L'objectif n'est pas de remplacer le proprietaire, mais de construire une cooperation lorsque le bien peut redevenir utile aux habitants.</p>${cards([["Biens concernes", "Logements vacants, locaux commerciaux fermes, batiments inutilises, immeubles a renover, terrains delaisses ou espaces pouvant accueillir un usage temporaire."], ["Propriete conservee", "Le proprietaire garde son bien. Toute utilisation par TVF ou un tiers doit etre encadree par une convention ecrite, datee et limitee."], ["Projet utile", "Le bien doit pouvoir repondre a un besoin local : logement solidaire, local associatif, activite de proximite, formation, atelier partage ou service aux habitants."]])}`),
@@ -234,7 +234,7 @@ renderPage({
   h1: "Parcours d'une",
   h1Accent: "demande",
   intro: "Pour rester credible, TVF distingue clairement la reception d'une demande, sa qualification, la decision interne, la convention eventuelle et la publication des resultats.",
-  image: "assets/photos/institutional-meeting.jpg",
+  image: "assets/photos/saint-etienne-design.jpg",
   imageAlt: "Equipe en reunion de qualification de projet",
   sections: [
     section("Vue d'ensemble", "Un parcours simple pour l'utilisateur, rigoureux pour l'association", `<p class="lead-block">Le visiteur doit comprendre ce qui se passe apres un formulaire. Une demande n'est pas automatiquement un projet TVF : elle devient un dossier a qualifier, puis une action seulement si les conditions sont reunies.</p>${flow([["Reception", "Le formulaire est enregistre avec les informations transmises et un statut initial."], ["Verification", "TVF controle les donnees essentielles : contact, territoire, type de demande, pieces et risques."], ["Qualification", "La demande est analysee au regard de l'utilite territoriale, des droits, du cout et de la faisabilite."], ["Orientation", "TVF peut classer, ajourner, demander des precisions, orienter vers un acteur ou preparer un projet."], ["Convention", "Si l'action se confirme, les responsabilites sont formalisees avant toute intervention."], ["Suivi", "Les resultats sont mesures et publies uniquement apres validation."]])}`),
@@ -253,7 +253,7 @@ renderPage({
   h1: "Sources et",
   h1Accent: "donnees",
   intro: "TVF s'appuie sur des donnees publiques, datees et citees. Les chiffres nationaux servent a contextualiser ; les decisions locales exigent toujours une verification territoriale.",
-  image: "assets/photos/documents-resources.jpg",
+  image: "assets/photos/saint-etienne-design.jpg",
   imageAlt: "Documents de travail et donnees territoriales",
   sections: [
     section("Principe", "Une donnee n'est utile que si elle est sourcee, datee et contextualisee", `<p class="lead-block">Le site peut citer des chiffres officiels pour expliquer les enjeux, mais il ne transforme pas ces chiffres en resultats propres a TVF. Les impacts de l'association seront publies uniquement apres enregistrement, validation et controle.</p>${cards([["Source", "Nom de l'organisme, lien public et date de consultation ou millesime statistique."], ["Territoire", "France, region, departement, commune ou perimetre d'etude clairement indique."], ["Limite", "Preciser ce que la donnee ne dit pas : disponibilite juridique, cout de remise en etat, etat technique ou usage possible."]] )}`),
@@ -272,7 +272,7 @@ renderPage({
   h1: "Ce que TVF",
   h1Accent: "ne fait pas",
   intro: "Pour etre credible, TVF doit expliquer ses limites aussi clairement que ses ambitions. Cette page protege les habitants, proprietaires, partenaires et financeurs contre les malentendus.",
-  image: "assets/photos/institutional-meeting.jpg",
+  image: "assets/photos/saint-etienne-design.jpg",
   imageAlt: "Reunion institutionnelle de cadrage",
   sections: [
     section("Garde-fous", "Des limites claires pour eviter les promesses floues", cards([["Pas une agence immobiliere", "TVF ne vend pas, n'achete pas et ne loue pas automatiquement les biens proposes."], ["Pas une dechetterie", "La Banque de Materiaux ne recupere pas tout et ne remplace pas les filieres agreees."], ["Pas une plateforme de dons libres", "Les materiaux ne sont pas distribues automatiquement. Leur affectation depend d'un projet valide."], ["Pas un guichet de subventions", "TVF peut rechercher des financements, mais ne garantit aucune aide publique ou privee."], ["Pas un service d'urgence", "Les situations dangereuses doivent etre signalees aux services competents."], ["Pas une publication automatique", "Adresses, photos, partenaires, financeurs et resultats sont verifies avant diffusion."]])),
@@ -291,7 +291,7 @@ renderPage({
   h1: "Politique de",
   h1Accent: "confidentialite",
   intro: "TVF collecte uniquement les informations necessaires a la qualification des demandes, a la relation avec les contributeurs et a la preparation d'une plateforme collaborative securisee.",
-  image: "assets/photos/documents-resources.jpg",
+  image: "assets/photos/saint-etienne-design.jpg",
   imageAlt: "Dossiers administratifs et documents de confidentialite",
   sections: [
     section("Responsable", "Une page facilement modifiable apres declaration officielle", `<p>Territoires Vivants France est une association nationale en creation, basee au 25 rue Elise Gervais, 42000 Saint-Etienne. Le pr&eacute;sident fondateur indiqu&eacute; sur le site est M. Edryan Rangoly. Le secr&eacute;taire et tr&eacute;sorier indiqu&eacute; est M. Jordan Lambeau. Ces informations pourront etre completees apres declaration officielle et attribution des identifiants administratifs.</p>`),
@@ -312,7 +312,7 @@ renderPage({
   h1: "Questions",
   h1Accent: "frequentes",
   intro: "Une FAQ centrale pour comprendre rapidement le role de TVF, les parcours possibles, les limites du dispositif et les prochaines etapes de la plateforme.",
-  image: "assets/photos/institutional-meeting.jpg",
+  image: "assets/photos/saint-etienne-design.jpg",
   imageAlt: "Echange de questions et reponses en reunion",
   sections: [
     section("Comprendre TVF", "Les questions essentielles", `<div class="faq-list"><details open><summary>Qui sommes-nous ?</summary><p>TVF est une association nationale en creation, basee a Saint-Etienne, qui veut redonner vie aux logements vacants, commerces fermes, friches, terrains inutilises et materiaux encore utiles.</p></details><details><summary>TVF est-elle deja une grande structure operationnelle ?</summary><p>Non. Le site prepare une plateforme nationale progressive. Les pages distinguent les dispositifs en structuration, les projets pilotes et les resultats qui seront publies uniquement apres validation.</p></details><details><summary>Pourquoi autant de prudence sur les chiffres ?</summary><p>Parce qu'un site institutionnel credible ne doit pas transformer des objectifs en resultats. Les chiffres nationaux cites servent au contexte ; les chiffres TVF viendront de donnees reelles.</p></details></div>`),

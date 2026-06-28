@@ -18,7 +18,7 @@ const main = `
             <a class="button secondary" href="#fonctionnement">Comprendre le dispositif</a>
           </div>
         </div>
-        <img decoding="async" fetchpriority="high" class="page-hero-photo" src="assets/photos/reuse-materials.jpg" alt="Professionnels r&eacute;unis sur un chantier de construction" />
+        <img decoding="async" fetchpriority="high" class="page-hero-photo" src="assets/photos/brownfield-lille.jpg" alt="Professionnels r&eacute;unis sur un chantier de construction" />
       </section>
 
       <div class="page-wrap">
@@ -213,7 +213,7 @@ html = html.replace(/\s*<main\b[\s\S]*?<\/main>/i, main);
 html = html.replace(/<title>[\s\S]*?<\/title>/i, "<title>Banque de Mat&eacute;riaux TVF | Valorisation territoriale et r&eacute;emploi</title>");
 html = html.replace(/<meta name="description" content="[^"]*" \/>/i, '<meta name="description" content="La Banque de Mat&eacute;riaux TVF qualifie et oriente les ressources inutilis&eacute;es vers des projets territoriaux : fonctionnement, contributeurs, conventions, impacts et FAQ." />');
 html = html.replace(/<meta property="og:type"[\s\S]*?<meta name="twitter:card" content="summary_large_image" \/>/i,
-  '<meta property="og:type" content="website" /><meta property="og:locale" content="fr_FR" /><meta property="og:site_name" content="TERRITOIRES VIVANTS FRANCE" /><meta property="og:title" content="Banque de Mat&eacute;riaux TVF | Valorisation territoriale" /><meta property="og:description" content="Transformer les ressources inutilis&eacute;es en projets utiles aux habitants et aux territoires." /><meta property="og:url" content="https://www.territoiresvivantsfrance.fr/banque-materiaux.html" /><meta property="og:image" content="https://www.territoiresvivantsfrance.fr/assets/photos/reuse-materials.jpg" /><meta name="twitter:card" content="summary_large_image" />');
+  '<meta property="og:type" content="website" /><meta property="og:locale" content="fr_FR" /><meta property="og:site_name" content="TERRITOIRES VIVANTS FRANCE" /><meta property="og:title" content="Banque de Mat&eacute;riaux TVF | Valorisation territoriale" /><meta property="og:description" content="Transformer les ressources inutilis&eacute;es en projets utiles aux habitants et aux territoires." /><meta property="og:url" content="https://www.territoiresvivantsfrance.fr/banque-materiaux.html" /><meta property="og:image" content="https://www.territoiresvivantsfrance.fr/assets/photos/brownfield-lille.jpg" /><meta name="twitter:card" content="summary_large_image" />');
 
 html = html.replace(/\s*<script id="materials-bank-faq-schema"[\s\S]*?<\/script>/i, "");
 

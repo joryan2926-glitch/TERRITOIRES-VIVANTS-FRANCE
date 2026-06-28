@@ -10,7 +10,7 @@ const photos = {
   closedShop: ["abandoned-shop-paris.jpg", "Local commercial fermé à Paris en attente d'un nouvel usage"],
   oldGrocery: ["old-grocery-jura.jpg", "Ancienne épicerie fermée dans le Jura, exemple de vacance commerciale rurale"],
   localCommerce: ["local-commerce.jpg", "Commerce de proximité en activité dans un centre-ville"],
-  materials: ["salvage-warehouse.jpg", "Lieu de collecte et de valorisation de matériaux issus du bâtiment"],
+  materials: ["materials-warehouse.jpg", "Lieu de collecte et de valorisation de matériaux issus du bâtiment"],
   brownfield: ["brownfield-lille.jpg", "Friche urbaine à Lille observée avant sa transformation"],
   garden: ["community-garden-paris.jpg", "Jardin partagé aménagé au cœur d'un quartier parisien"],
   volunteers: ["solidarity-volunteers.jpg", "Bénévoles réunis pour participer à une action collective"],

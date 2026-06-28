@@ -15,7 +15,7 @@ const structuredData = `<script id="global-structured-data" type="application/ld
 
 const main = `    <main class="differentiation-page" data-professional-enrichment="public-page">
       <section class="actions-hero-premium differentiation-hero">
-        <img decoding="async" fetchpriority="high" src="assets/photos/institutional-meeting.jpg" alt="R&eacute;union de coordination entre collectivit&eacute;, association et acteurs territoriaux" width="1800" height="1200" />
+        <img decoding="async" fetchpriority="high" src="assets/photos/saint-etienne-design.jpg" alt="R&eacute;union de coordination entre collectivit&eacute;, association et acteurs territoriaux" width="1800" height="1200" />
         <div class="actions-hero-overlay">
           <span class="page-status" data-status="public">Positionnement strat&eacute;gique</span>
           <h1>Ce que fait TERRITOIRES VIVANTS FRANCE</h1>
@@ -128,7 +128,7 @@ const html = `<!doctype html>
     <meta property="og:title" content="Ce que fait TVF | TERRITOIRES VIVANTS FRANCE" />
     <meta property="og:description" content="TVF ne remplace pas les dispositifs existants : elle relie les acteurs, les ressources et les usages pour redonner vie aux territoires." />
     <meta property="og:url" content="https://www.territoiresvivantsfrance.fr/ce-que-fait-tvf.html" />
-    <meta property="og:image" content="https://www.territoiresvivantsfrance.fr/assets/photos/institutional-meeting.jpg" />
+    <meta property="og:image" content="https://www.territoiresvivantsfrance.fr/assets/photos/saint-etienne-design.jpg" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="theme-color" content="#3f7115" />
     <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png" />

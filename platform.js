@@ -123,4 +123,75 @@ document.addEventListener("DOMContentLoaded", () => {
       button.addEventListener("click", () => form.requestSubmit());
     });
   });
+
+  const revealItems = document.querySelectorAll(
+    "main > section, .content-panel, .document-card, .dossier-card, .opportunity-card, .case-card, .doc-card, .data-card, .content-card, .impact-card, .project-card, .strategy-card, .resource-card, .resources-card, .metric-card, .audience-card, .journey-card, .faq-card"
+  );
+  revealItems.forEach((item) => item.classList.add("tvf-reveal"));
+
+  if ("IntersectionObserver" in window) {
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12 }
+    );
+    revealItems.forEach((item) => revealObserver.observe(item));
+  } else {
+    revealItems.forEach((item) => item.classList.add("is-visible"));
+  }
+
+  function formatCounter(value, decimals) {
+    return value.toLocaleString("fr-FR", {
+      minimumFractionDigits: decimals,
+      maximumFractionDigits: decimals
+    });
+  }
+
+  const counters = document.querySelectorAll("[data-count]");
+  function animateCounter(counter) {
+    if (counter.dataset.animated === "true") return;
+    counter.dataset.animated = "true";
+    const target = Number(counter.dataset.count || 0);
+    const decimals = Number(counter.dataset.decimals || 0);
+    const suffix = counter.dataset.suffix || "";
+    const duration = 1100;
+    const start = performance.now();
+    const initialText = counter.textContent;
+
+    function tick(now) {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      counter.textContent = `${formatCounter(target * eased, decimals)}${suffix}`;
+      if (progress < 1) {
+        requestAnimationFrame(tick);
+      } else {
+        counter.textContent = initialText;
+      }
+    }
+
+    requestAnimationFrame(tick);
+  }
+
+  if ("IntersectionObserver" in window) {
+    const counterObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            animateCounter(entry.target);
+            counterObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.45 }
+    );
+    counters.forEach((counter) => counterObserver.observe(counter));
+  } else {
+    counters.forEach(animateCounter);
+  }
 });

@@ -226,7 +226,7 @@ const impactMain = `<main class="impact-study-page" data-professional-enrichment
 
 const sourcesMain = `<main class="impact-study-page sources-study-page" data-professional-enrichment="public-page">
       <section class="impact-hero compact">
-        <img decoding="async" fetchpriority="high" src="assets/photos/documents-resources.jpg" alt="Documents, données et tableaux utilisés pour une étude territoriale" width="1800" height="1200" />
+        <img decoding="async" fetchpriority="high" src="assets/photos/saint-etienne-design.jpg" alt="Documents, données et tableaux utilisés pour une étude territoriale" width="1800" height="1200" />
         <div class="impact-hero-panel">
           <span class="page-status" data-status="public">Registre des sources</span>
           <h1>Sources - Etude Saint-Etienne</h1>
@@ -290,7 +290,7 @@ write(sourcesPage, pageShell({
   title: "Sources Etude Saint-Etienne",
   description: "Sources officielles utilisees pour l'etude d'impact TVF Saint-Etienne : INSEE, SIG Ville, ANCT, Cerema, ADEME et calculs TVF.",
   file: sourcesPage,
-  image: "assets/photos/documents-resources.jpg",
+  image: "assets/photos/saint-etienne-design.jpg",
   breadcrumb: ["Accueil", "Observatoire", "Sources Saint-Etienne"],
   main: sourcesMain
 }));
