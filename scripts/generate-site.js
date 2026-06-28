@@ -889,6 +889,23 @@ const pages = [
       "Cette FAQ clarifie le rôle de l'association, les étapes d'une démarche, les documents à préparer et les limites de cette première version.",
     ctas: [["Agir avec nous", "agir-avec-nous.html"], ["Nous contacter", "contact.html"]],
     sections: [
+      sectionIntro(
+        "Des réponses utiles avant le premier échange",
+        "La FAQ doit éviter les malentendus : TVF n'est ni un guichet automatique, ni une plateforme de dons libres, ni un opérateur public. C'est un cadre de coopération qui demande des informations précises avant toute décision.",
+        [
+          ["Pour décider", "Comprendre si votre demande entre dans l'objet TVF."],
+          ["Pour préparer", "Identifier les pièces, le contexte et les responsabilités à clarifier."],
+          ["Pour orienter", "Savoir quelle page ou quel document utiliser avant de contacter l'association."],
+        ]
+      ),
+      tableSection("Réponse rapide par profil", "Chaque public doit pouvoir trouver son premier pas en moins d'une minute.", [
+        ["Profil", "Question fréquente", "Première action conseillée", "Page utile"],
+        ["Collectivité", "Comment tester TVF sur mon territoire ?", "Préparer le périmètre, les données disponibles et le besoin public", "Espace collectivités"],
+        ["Propriétaire", "Que faire avec un bien vacant ou dégradé ?", "Décrire le bien, son état, les contraintes et les usages possibles", "Espace propriétaires"],
+        ["Entreprise", "Comment valoriser matériaux ou compétences ?", "Lister les ressources, leur état, leur localisation et les conditions de récupération", "Espace entreprises"],
+        ["Bénévole", "Comment aider concrètement ?", "Indiquer ses compétences, disponibilités et territoire d'action", "Bénévoles & citoyens"],
+        ["Financeur", "Comment soutenir un projet sans chiffres inventés ?", "Demander un dossier instruit avec budget, indicateurs et preuve de suivi", "Financeurs & mécènes"],
+      ]),
       faqSection([
         ["TVF est-elle déjà une plateforme opérationnelle complète ?", "Non. TVF repart sur une base claire et progressive. Le site présente le cadre, les parcours et les documents préparatoires avant une montée en charge opérationnelle."],
         ["TVF remplace-t-elle les collectivités ou dispositifs publics ?", "Non. TVF se positionne comme un outil de coopération et de coordination. L'association aide à cadrer les besoins, réunir les acteurs et documenter les projets."],
@@ -896,6 +913,9 @@ const pages = [
         ["Les matériaux sont-ils distribués gratuitement ?", "Non. Les matériaux doivent être orientés vers des projets validés. TVF privilégie la traçabilité, l'utilité territoriale et l'affectation cohérente des ressources."],
         ["Une collectivité peut-elle devenir territoire partenaire ?", "Oui, après un échange de cadrage. Les objectifs, responsabilités, données disponibles et modalités de coopération doivent être formalisés."],
         ["Les chiffres d'impact sont-ils déjà affichés ?", "Non. TVF ne communique pas de résultats non mesurés. Les indicateurs seront publiés lorsqu'ils seront vérifiés et documentés."],
+        ["Pourquoi TVF demande-t-elle des pièces avant d'avancer ?", "Parce qu'un bien, un chantier, un don de matériaux ou un financement peut engager des responsabilités. Les pièces permettent de vérifier la faisabilité et de protéger les parties."],
+        ["Un projet peut-il être simplement conseillé puis orienté ailleurs ?", "Oui. Si TVF n'est pas le bon cadre, l'association doit pouvoir recommander une orientation plus adaptée plutôt que d'entretenir une promesse impossible."],
+        ["Peut-on utiliser les documents TVF comme modèles de travail ?", "Oui, ils sont conçus comme des bases modifiables. Ils doivent toutefois être adaptés au contexte, relus et validés avant toute signature."],
       ]),
     ],
   },
@@ -1023,11 +1043,28 @@ const pages = [
       "TVF doit être capable de dialoguer avec des collectivités, propriétaires, entreprises et financeurs. Cela suppose un cadre clair : qui décide, sur quels critères, avec quelles preuves et quelles limites de communication.",
     ctas: [["Lire la charte", "documents/charte-ethique.md"], ["Voir la transparence", "transparence.html"]],
     sections: [
+      sectionIntro(
+        "Une gouvernance pensée pour la confiance",
+        "La gouvernance TVF doit permettre de répondre simplement à trois questions : qui porte la décision, pourquoi le dossier est priorisé et comment l'information sera rendue traçable.",
+        [
+          ["Décider", "Aucun dossier ne doit avancer sans critères lisibles."],
+          ["Tracer", "Les étapes, validations et réserves doivent rester consultables."],
+          ["Rendre compte", "La communication publique doit rester alignée avec les faits établis."],
+        ]
+      ),
       cards("Principes de gouvernance", "Chaque décision doit pouvoir être expliquée simplement.", [
         ["Intérêt général", "Prioriser les projets utiles aux habitants, au territoire et à la transition écologique."],
         ["Traçabilité", "Conserver les éléments qui justifient une décision, une convention ou une affectation de ressource."],
         ["Complémentarité", "Coopérer avec les acteurs existants sans se présenter comme substitut aux dispositifs publics."],
         ["Sobriété", "Communiquer uniquement sur les faits établis, les objectifs assumés et les documents disponibles."],
+      ]),
+      tableSection("Règles de vigilance", "Ces points doivent être vérifiés avant toute décision ou publication.", [
+        ["Sujet", "Risque à éviter", "Règle TVF"],
+        ["Partenariat", "Afficher un soutien non officialisé", "Ne publier un nom ou un logo qu'après accord réel"],
+        ["Projet", "Présenter une intention comme une réalisation", "Indiquer clairement le statut : idée, instruction, convention, réalisation"],
+        ["Financement", "Annoncer une aide non obtenue", "Distinguer montant estimé, demandé, accordé, versé"],
+        ["Bénévolat", "Engager des personnes sans cadre", "Prévoir mission, consignes, sécurité et émargement"],
+        ["Données", "Diffuser une information sensible ou non vérifiée", "Sourcer, anonymiser si nécessaire et limiter la publication"],
       ]),
       tableSection("Processus de décision", "Un dossier ne doit pas passer directement de l'idée à la communication publique.", [
         ["Étape", "Décision attendue", "Preuve ou livrable"],
@@ -1047,6 +1084,11 @@ const pages = [
         "Responsabilités identifiées",
         "Président fondateur : Edryan Rangoly. Secrétaire et trésorier : M. Lambeau Jordan. Les responsabilités pourront être complétées après formalisation officielle de l'association et publication des documents administratifs à jour."
       ),
+      faqSection([
+        ["Pourquoi une page gouvernance dès maintenant ?", "Parce que la confiance institutionnelle se construit avant les premiers projets. Les règles de décision doivent être visibles dès le départ."],
+        ["Qui valide les projets ?", "Les modalités définitives devront être précisées dans les statuts, le règlement intérieur et les procédures internes. Le site présente le cadre de décision attendu."],
+        ["Comment éviter les conflits d'intérêts ?", "Chaque décision sensible doit être tracée, motivée et appuyée par des pièces. Une charte éthique doit préciser les règles de déclaration et d'abstention."],
+      ]),
     ],
   },
   {
@@ -1092,7 +1134,24 @@ const pages = [
       "Vous représentez une collectivité, une entreprise, une association, un propriétaire ou un collectif citoyen ? Présentez votre besoin en quelques lignes.",
     ctas: [["Envoyer un message", "#contact-form"], ["Voir les parcours", "agir-avec-nous.html"]],
     sections: [
+      sectionIntro(
+        "Bien formuler sa demande",
+        "Un message utile permet de comprendre rapidement le territoire, le type de besoin, les acteurs déjà identifiés et le niveau d'urgence. Plus la demande est précise, plus l'orientation pourra être sérieuse.",
+        [
+          ["Qui ?", "Indiquer votre profil : collectivité, propriétaire, entreprise, association, habitant, financeur."],
+          ["Quoi ?", "Décrire le bien, le matériau, le projet, le besoin ou la coopération envisagée."],
+          ["Où ?", "Préciser la commune, le quartier, l'adresse si elle peut être transmise et les contraintes connues."],
+        ]
+      ),
       contactSection(),
+      tableSection("Informations utiles à transmettre", "Ces éléments facilitent un premier tri sans créer d'engagement automatique.", [
+        ["Type de demande", "Informations à préparer", "Document conseillé"],
+        ["Bien vacant", "Adresse, propriétaire, état apparent, photos, usages possibles, contraintes", "Fiche propriétaire ou signalement"],
+        ["Matériaux", "Catégorie, quantité, état, localisation, date possible de récupération", "Fiche entreprise ou fiche signalement"],
+        ["Collectivité", "Périmètre, besoin public, données disponibles, interlocuteur, calendrier", "Fiche collectivité"],
+        ["Partenariat", "Objectif, contribution possible, limites, mode de communication souhaité", "Fiche partenaire ou entreprise"],
+        ["Financement", "Projet concerné, budget, statut du dossier, indicateurs attendus", "Fiche financeur"],
+      ]),
       textBlock(
         "Siège national",
         "Territoires Vivants France - 25 rue Élise Gervais, 42000 Saint-Étienne. Président fondateur : Edryan Rangoly. Secrétaire et trésorier : M. Lambeau Jordan."
@@ -1111,6 +1170,15 @@ const pages = [
       "TVF distingue clairement ce qui est établi, ce qui est en cours de structuration et ce qui devra être validé par convention, données ou partenariats réels.",
     ctas: [["Documents", "documents.html"], ["Contact", "contact.html"]],
     sections: [
+      sectionIntro(
+        "Une transparence utile, pas décorative",
+        "La transparence TVF doit aider les visiteurs à comprendre l'état réel du projet : ce qui est déjà cadré, ce qui relève de l'objectif et ce qui devra être validé avant d'être annoncé publiquement.",
+        [
+          ["Établi", "Informations institutionnelles, documents préparatoires, méthode et responsabilités connues."],
+          ["À instruire", "Dossiers, partenariats, financements et projets avant convention."],
+          ["À publier", "Résultats, impacts et partenaires uniquement après vérification."],
+        ]
+      ),
       cards("Principes de publication", "Une règle simple : pas de chiffres ni de partenaires inventés.", [
         ["Données", "Publier uniquement des données sourcées ou des objectifs explicitement identifiés."],
         ["Partenariats", "Afficher les partenaires seulement lorsqu'un accord réel existe."],
@@ -1119,11 +1187,24 @@ const pages = [
         ["Gouvernance", "Rendre lisibles les responsabilités, les décisions et les critères de sélection.", "gouvernance.html"],
         ["Kit média", "Mettre à disposition les éléments publics validés et les règles d'usage.", "kit-media.html"],
       ]),
+      tableSection("Ce qui peut être publié", "Chaque information doit être reliée à son niveau de preuve.", [
+        ["Information", "Publication possible", "Condition"],
+        ["Objectif", "Oui", "Mentionner qu'il s'agit d'une intention ou d'une cible"],
+        ["Projet en discussion", "Avec prudence", "Ne pas le présenter comme acquis"],
+        ["Partenaire", "Oui", "Accord ou convention réelle"],
+        ["Montant de financement", "Oui", "Distinguer demandé, accordé, conventionné et versé"],
+        ["Résultat d'impact", "Oui", "Après réalisation, preuve et méthode de calcul"],
+      ]),
       timeline("Feuille de route sobre", [
         ["1", "Structurer", "Documents, statuts, conventions, critères de sélection."],
         ["2", "Expérimenter", "Territoire pilote, premiers diagnostics, premiers contacts."],
         ["3", "Formaliser", "Partenariats, financements, projets validés."],
         ["4", "Déployer", "Antennes locales et observatoire national lorsque la méthode est éprouvée."],
+      ]),
+      faqSection([
+        ["Pourquoi regrouper les éléments prudents sur cette page ?", "Pour éviter de répéter partout le même message et permettre aux autres pages d'aller directement au sujet."],
+        ["TVF peut-elle publier des objectifs chiffrés ?", "Oui, si la page précise clairement qu'il s'agit d'objectifs, d'hypothèses ou d'estimations, et non de résultats réalisés."],
+        ["Quand les résultats seront-ils publiés ?", "Lorsqu'un projet aura été instruit, conventionné, réalisé puis documenté avec une méthode de preuve cohérente."],
       ]),
     ],
   },
