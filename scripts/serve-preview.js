@@ -22,7 +22,10 @@ http
   .createServer((req, res) => {
     const clean = decodeURIComponent(req.url.split("?")[0]);
     const target = clean === "/" ? "/index.html" : clean;
-    const file = path.join(root, target);
+    let file = path.join(root, target);
+    if (!path.extname(file) && fs.existsSync(`${file}.html`)) {
+      file = `${file}.html`;
+    }
     if (!file.startsWith(root)) {
       res.writeHead(403);
       res.end("Forbidden");

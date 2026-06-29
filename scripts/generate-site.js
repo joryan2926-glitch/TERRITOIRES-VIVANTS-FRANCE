@@ -1365,7 +1365,7 @@ function sectionIntro(title, text, items) {
 
 function cards(title, intro, items) {
   return `<section class="section soft"><div class="container"><div class="section-head"><p class="section-kicker">Repères</p><h2>${title}</h2><p>${intro}</p></div><div class="card-grid">${items
-    .map(([h, p, href]) => `<article class="card"><span class="card-icon" aria-hidden="true">${iconFor(h)}</span><h3>${h}</h3><p>${p}</p>${href ? `<a class="text-link" href="${href}">Découvrir</a>` : ""}</article>`)
+    .map(([h, p, href]) => `<article class="card"><span class="card-icon" aria-hidden="true">${iconFor(h)}</span><h3>${h}</h3><p>${p}</p>${href ? `<a class="text-link" href="${hrefFor(href)}">Découvrir</a>` : ""}</article>`)
     .join("")}</div></div></section>`;
 }
 
@@ -1389,7 +1389,7 @@ function faqSection(items) {
 }
 
 function highlight(title, text, label, href, image) {
-  return `<section class="section feature"><div class="container feature-grid"><img src="${image}" ${imageAttrs(image)} alt="Vue urbaine française liée à la revitalisation territoriale" loading="lazy" decoding="async"><div><p class="section-kicker">Pilote</p><h2>${title}</h2><p>${text}</p><a class="btn primary" href="${href}">${label}</a></div></div></section>`;
+  return `<section class="section feature"><div class="container feature-grid"><img src="${image}" ${imageAttrs(image)} alt="Vue urbaine française liée à la revitalisation territoriale" loading="lazy" decoding="async"><div><p class="section-kicker">Pilote</p><h2>${title}</h2><p>${text}</p><a class="btn primary" href="${hrefFor(href)}">${label}</a></div></div></section>`;
 }
 
 function split(title, text, image) {
@@ -1405,7 +1405,7 @@ function audienceSection() {
 }
 
 function formSection() {
-  return `<section class="section" id="proposer"><div class="container form-panel"><div><p class="section-kicker">Premier contact</p><h2>Préparer une situation</h2><p>Utilisez ce bloc comme guide de préparation avant d'écrire à TVF. L'objectif est de rassembler les informations utiles pour accélérer l'orientation de votre demande.</p></div><form><label>Votre profil<select><option>Collectivité</option><option>Propriétaire</option><option>Entreprise</option><option>Association</option><option>Citoyen</option></select></label><label>Objet<input type="text" placeholder="Ex. logement vacant, matériaux, partenariat"></label><label>Message<textarea placeholder="Décrivez le besoin, le lieu, les acteurs concernés et les délais."></textarea></label><a class="btn primary" href="contact.html">Passer par la page contact</a></form></div></section>`;
+  return `<section class="section" id="proposer"><div class="container form-panel"><div><p class="section-kicker">Premier contact</p><h2>Préparer une situation</h2><p>Utilisez ce bloc comme guide de préparation avant d'écrire à TVF. L'objectif est de rassembler les informations utiles pour accélérer l'orientation de votre demande.</p></div><form><label>Votre profil<select><option>Collectivité</option><option>Propriétaire</option><option>Entreprise</option><option>Association</option><option>Citoyen</option></select></label><label>Objet<input type="text" placeholder="Ex. logement vacant, matériaux, partenariat"></label><label>Message<textarea placeholder="Décrivez le besoin, le lieu, les acteurs concernés et les délais."></textarea></label><a class="btn primary" href="${hrefFor("contact.html")}">Passer par la page contact</a></form></div></section>`;
 }
 
 function contactSection() {
@@ -1431,6 +1431,13 @@ function iconFor(text) {
 
 function pageUrl(page) {
   return page.file === "index.html" ? `${site.url}/` : `${site.url}/${page.file.replace(/\.html$/, "")}`;
+}
+
+function hrefFor(href) {
+  if (!href || href.startsWith("#") || /^[a-z]+:/i.test(href) || href.startsWith("assets/") || href.startsWith("documents/")) return href;
+  const [target, hash] = href.split("#");
+  const clean = target === "index.html" ? "/" : target.endsWith(".html") ? target.replace(/\.html$/, "") : target;
+  return `${clean}${hash ? `#${hash}` : ""}`;
 }
 
 function imageAttrs(src) {
@@ -1519,12 +1526,12 @@ function pageTemplate(page) {
   <a class="skip-link" href="#contenu">Aller au contenu</a>
   <header class="site-header">
     <div class="container header-inner">
-      <a class="brand" href="index.html" aria-label="Accueil Territoires Vivants France"><img src="assets/logo-tvf-officiel-transparent.png" width="612" height="408" alt="Territoires Vivants France" decoding="async"></a>
+      <a class="brand" href="${hrefFor("index.html")}" aria-label="Accueil Territoires Vivants France"><img src="assets/logo-tvf-officiel-transparent.png" width="612" height="408" alt="Territoires Vivants France" decoding="async"></a>
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav">Menu</button>
       <nav class="main-nav" id="main-nav" aria-label="Navigation principale">${nav
-        .map(([label, href]) => `<a href="${href}"${href === active ? ' aria-current="page"' : ""}>${label}</a>`)
+        .map(([label, href]) => `<a href="${hrefFor(href)}"${href === active ? ' aria-current="page"' : ""}>${label}</a>`)
         .join("")}</nav>
-      <a class="btn header-cta" href="contact.html">Nous contacter</a>
+      <a class="btn header-cta" href="${hrefFor("contact.html")}">Nous contacter</a>
     </div>
   </header>
   <main id="contenu">
@@ -1533,7 +1540,7 @@ function pageTemplate(page) {
         <p class="eyebrow">${page.eyebrow}</p>
         <h1>${page.h1}</h1>
         <p>${page.intro}</p>
-        <div class="hero-actions">${page.ctas.map(([label, href], i) => `<a class="btn ${i === 0 ? "primary" : "secondary"}" href="${href}">${label}</a>`).join("")}</div>
+        <div class="hero-actions">${page.ctas.map(([label, href], i) => `<a class="btn ${i === 0 ? "primary" : "secondary"}" href="${hrefFor(href)}">${label}</a>`).join("")}</div>
       </div>
     </section>
     ${page.sections.join("\n")}
@@ -1545,8 +1552,8 @@ function pageTemplate(page) {
           <p>Présentez la situation à TVF pour préparer un premier échange clair et utile.</p>
         </div>
         <div class="cta-band-actions">
-          <a class="btn primary" href="agir-avec-nous.html">Agir avec nous</a>
-          <a class="btn secondary" href="contact.html">Nous contacter</a>
+          <a class="btn primary" href="${hrefFor("agir-avec-nous.html")}">Agir avec nous</a>
+          <a class="btn secondary" href="${hrefFor("contact.html")}">Nous contacter</a>
         </div>
       </div>
     </section>
@@ -1554,9 +1561,9 @@ function pageTemplate(page) {
   <footer class="site-footer">
     <div class="container footer-grid">
       <div><span class="footer-logo-box"><img src="assets/logo-tvf-officiel-transparent.png" width="612" height="408" alt="Territoires Vivants France" class="footer-logo" loading="lazy" decoding="async"></span><p>Plateforme nationale de coopération pour redonner vie aux biens, lieux et ressources inutilisés.</p></div>
-      <div><h2>Navigation</h2>${nav.slice(0, 7).map(([label, href]) => `<a href="${href}">${label}</a>`).join("")}</div>
-      <div><h2>Ressources</h2><a href="notre-methode.html">Notre méthode</a><a href="impact.html">Impact</a><a href="gouvernance.html">Gouvernance</a><a href="kit-media.html">Kit média</a><a href="documents.html">Documents</a><a href="faq.html">FAQ</a><a href="transparence.html">Transparence</a><a href="mentions-legales.html">Mentions légales</a><a href="contact.html">Contact</a></div>
-      <div><h2>Siège</h2><p>25 rue Élise Gervais<br>42000 Saint-Étienne</p><a class="btn secondary" href="contact.html">Contacter TVF</a></div>
+      <div><h2>Navigation</h2>${nav.slice(0, 7).map(([label, href]) => `<a href="${hrefFor(href)}">${label}</a>`).join("")}</div>
+      <div><h2>Ressources</h2><a href="${hrefFor("notre-methode.html")}">Notre méthode</a><a href="${hrefFor("impact.html")}">Impact</a><a href="${hrefFor("gouvernance.html")}">Gouvernance</a><a href="${hrefFor("kit-media.html")}">Kit média</a><a href="${hrefFor("documents.html")}">Documents</a><a href="${hrefFor("faq.html")}">FAQ</a><a href="${hrefFor("transparence.html")}">Transparence</a><a href="${hrefFor("mentions-legales.html")}">Mentions légales</a><a href="${hrefFor("contact.html")}">Contact</a></div>
+      <div><h2>Siège</h2><p>25 rue Élise Gervais<br>42000 Saint-Étienne</p><a class="btn secondary" href="${hrefFor("contact.html")}">Contacter TVF</a></div>
     </div>
     <div class="container footer-bottom">© 2026 Territoires Vivants France - Tous droits réservés.</div>
   </footer>
