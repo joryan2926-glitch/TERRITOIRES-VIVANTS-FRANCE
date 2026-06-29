@@ -495,6 +495,7 @@ const pages = [
         ["Association", "Besoin de local, animation, bénévolat, projet social", "Décrire l'usage et les publics concernés", "Mise en relation, dossier projet, coopération"],
         ["Citoyen", "Signalement, bénévolat, connaissance locale", "Transmettre une information factuelle et localisée", "Qualification ou mission encadrée"],
       ]),
+      publicEntryMatrixSection(),
       audienceSection(),
       formSection(),
       timeline("Du contact à l'action", [
@@ -555,6 +556,7 @@ const pages = [
         ["Coopération", "Définir les responsabilités", "Convention"],
         ["Suivi", "Documenter les effets", "Grille d'impact"],
       ]),
+      collectivityConventionSection(),
       timeline("Devenir territoire partenaire", [
         ["1", "Premier échange", "La collectivité expose son besoin, son périmètre et les sujets prioritaires."],
         ["2", "Cadrage", "TVF identifie les données utiles, acteurs à mobiliser et contraintes de procédure."],
@@ -611,6 +613,7 @@ const pages = [
         ["Usage", "Quel usage est réaliste ?", "Fiche projet"],
         ["Durée", "Quelle durée de coopération est acceptable ?", "Convention"],
       ]),
+      ownerConventionSection(),
       timeline("Parcours propriétaire", [
         ["1", "Présentation du bien", "Le propriétaire transmet les informations disponibles sans engagement automatique."],
         ["2", "Qualification", "TVF analyse l'état apparent, les contraintes, les usages possibles et les pièces manquantes."],
@@ -667,6 +670,7 @@ const pages = [
         ["Ancrage local", "Participation à un projet du territoire", "Compte rendu"],
         ["Communication", "Valorisation possible après accord", "Validation commune"],
       ]),
+      enterpriseOperationalSection(),
       timeline("Du contact à la contribution", [
         ["1", "Description", "L'entreprise présente ce qu'elle peut apporter : matériaux, locaux, compétences ou soutien."],
         ["2", "Qualification", "TVF vérifie l'état, la disponibilité, la sécurité, la logistique et l'utilité."],
@@ -724,6 +728,7 @@ const pages = [
         ["Sécurité", "Y a-t-il un risque ?", "Consignes et limites"],
         ["Données", "Que peut-on publier ?", "Accord et respect de la vie privée"],
       ]),
+      volunteerOperationalSection(),
       timeline("Parcours bénévole", [
         ["1", "Se présenter", "Le bénévole indique son territoire, ses disponibilités et ses compétences."],
         ["2", "Choisir une mission", "TVF propose une mission adaptée au besoin et au niveau d'encadrement disponible."],
@@ -781,6 +786,7 @@ const pages = [
         ["Traçabilité", "Utilisation des fonds ou ressources", "Compte rendu"],
         ["Impact", "Indicateurs publiés seulement après vérification", "Grille d'impact"],
       ]),
+      financerOperationalSection(),
       timeline("Parcours financeur", [
         ["1", "Échange", "TVF présente le besoin, le territoire et le niveau de maturité du dossier."],
         ["2", "Instruction", "Le financeur examine budget, risques, pièces et objectifs."],
@@ -839,6 +845,7 @@ const pages = [
         ["Convention", "Responsabilités, durée, usages, suivi et communication", "Document signé"],
         ["Suivi", "Indicateurs, retours d'expérience et preuves d'action", "Tableau de bord"],
       ]),
+      partnerOfficialisationSection(),
       timeline("De l'intention à l'officialisation", [
         ["1", "Premier échange", "Comprendre le besoin, le territoire, la contribution possible et les limites."],
         ["2", "Qualification", "Rassembler les pièces, vérifier la faisabilité et identifier les risques."],
@@ -883,6 +890,7 @@ const pages = [
         ["Un projet doit être instruit", "Fiche projet", "Cadrer objectifs, acteurs, risques, budget et indicateurs"],
         ["Un financement est recherché", "Plan de financement", "Distinguer coûts, contributions, demandes et montants obtenus"],
       ]),
+      publicEntryMatrixSection(),
       documentTools(),
       documentCards("Documents disponibles", "Chaque modèle aide à collecter les informations nécessaires avant instruction.", [
         ["Fiche collectivité", "Qualifier un besoin territorial, un périmètre, des ressources et des interlocuteurs.", "documents/fiche-collectivite.md"],
@@ -1684,6 +1692,86 @@ function contactDetailsSection() {
     ["E-mail", `<a href="mailto:${contact.email}">${contact.email}</a>`, "Premier contact écrit, transmission d'une demande, prise de rendez-vous ou envoi d'un dossier."],
     ["Téléphone", `<a href="tel:${contact.phoneHref}">${contact.phone}</a>`, "Contact court, orientation rapide ou confirmation d'un rendez-vous."],
     ["Siège national", contact.address, "Adresse institutionnelle de référence pour les mentions et documents TVF."],
+  ]);
+}
+
+function publicEntryMatrixSection() {
+  return tableSection("Dossier minimum par profil", "Chaque demande doit pouvoir être orientée rapidement. Ce tableau indique le minimum utile à transmettre avant un échange approfondi.", [
+    ["Profil", "À préparer", "Document utile", "Décision attendue"],
+    ["Collectivité", "Périmètre, besoin public, données disponibles, interlocuteur, calendrier", "Fiche collectivité + note d'opportunité", "Cadrer un diagnostic, une expérimentation ou une convention territoriale"],
+    ["Propriétaire", "Adresse, type de bien, état apparent, photos, contraintes, intention du propriétaire", "Fiche propriétaire + accord de principe", "Étudier un usage, organiser une visite autorisée ou classer le dossier"],
+    ["Entreprise", "Ressource proposée, quantité, état, localisation, disponibilité, conditions de retrait", "Fiche entreprise + bordereau matériaux", "Accepter, refuser, mettre en attente ou affecter à un projet"],
+    ["Association", "Besoin d'usage, publics concernés, horaires, responsabilités, capacité d'animation", "Fiche projet + convention partenariat", "Qualifier un usage possible ou réorienter vers un acteur adapté"],
+    ["Bénévole", "Compétences, territoire, disponibilités, mobilité, limites d'intervention", "Fiche bénévole + fiche mission", "Proposer une mission encadrée ou constituer un vivier local"],
+    ["Financeur", "Objet du soutien, budget, critères, attentes de reporting, calendrier", "Fiche financeur + plan de financement", "Vérifier si un dossier peut être présenté sans promesse excessive"],
+  ]);
+}
+
+function collectivityConventionSection() {
+  return tableSection("Convention de coopération territoriale", "La convention ne doit pas être un simple symbole. Elle doit permettre à la collectivité de savoir précisément ce qui est testé, par qui, avec quelles limites et quels livrables.", [
+    ["Clause", "Contenu à préciser", "Point de vigilance"],
+    ["Périmètre", "Quartier, commune, EPCI, type de biens ou thématique visée", "Éviter un périmètre trop large au démarrage"],
+    ["Objet", "Diagnostic, cartographie, mobilisation, expérimentation, accompagnement projet", "Ne pas transformer une phase exploratoire en engagement opérationnel"],
+    ["Gouvernance", "Référents, fréquence des réunions, comptes rendus, décisions attendues", "Identifier qui valide quoi avant communication"],
+    ["Données", "Sources publiques, données transmises, règles de confidentialité et publication", "Protéger les données sensibles et les biens privés"],
+    ["Livrables", "Note d'opportunité, registre, carte, fiche projet, plan d'action, bilan", "Définir un livrable concret même si aucun projet n'est lancé"],
+    ["Communication", "Usage du nom, logos, photos, citations, calendrier de publication", "Aucun affichage public sans accord écrit"],
+  ]);
+}
+
+function ownerConventionSection() {
+  return tableSection("Modalités de convention propriétaire", "La convention doit sécuriser le propriétaire, TVF et les futurs usagers. Elle formalise un cadre d'étude ou d'usage sans ambiguïté.", [
+    ["Sujet", "À cadrer", "Pourquoi c'est important"],
+    ["Propriété", "Le propriétaire conserve la pleine propriété du bien", "Éviter toute confusion sur la maîtrise du bien"],
+    ["Accès", "Personnes autorisées, dates, conditions de visite, règles de sécurité", "Protéger les personnes et limiter la responsabilité"],
+    ["Usage", "Usage envisagé : étude, occupation temporaire, local associatif, atelier, logement solidaire", "Ne pas promettre un usage impossible ou non autorisé"],
+    ["Durée", "Période d'étude, période d'usage, conditions de renouvellement ou d'arrêt", "Donner une visibilité claire aux parties"],
+    ["Travaux", "Travaux exclus, travaux autorisés, responsabilités, devis, assurances", "Éviter tout chantier sans validation écrite"],
+    ["Restitution", "État de sortie, nettoyage, inventaire, documents remis", "Préserver la valeur patrimoniale et la confiance"],
+  ]);
+}
+
+function enterpriseOperationalSection() {
+  return tableSection("Cadre de contribution entreprise", "Une contribution entreprise doit être utile, traçable et compatible avec un projet. TVF ne transforme pas un surplus en visibilité automatique.", [
+    ["Contribution", "Informations à fournir", "Suite possible"],
+    ["Matériaux", "Catégorie, quantité, dimensions, état, photos, date limite, lieu de retrait", "Acceptation, refus motivé, stockage ou affectation à un projet"],
+    ["Compétences", "Métier, disponibilité, périmètre, livrable possible, contraintes", "Mission ponctuelle, conseil, expertise ou mentorat"],
+    ["Locaux", "Adresse, surface, état, durée possible, accès, charges, sécurité", "Étude d'usage temporaire ou orientation vers un besoin associatif"],
+    ["Mécénat", "Objet soutenu, montant envisagé, calendrier, critères internes", "Instruction, convention, reporting et communication validée"],
+    ["Logistique", "Transport, stockage, manutention, équipement, disponibilité", "Soutien à une collecte, un chantier ou une opération encadrée"],
+  ]);
+}
+
+function volunteerOperationalSection() {
+  return tableSection("Cadre d'engagement citoyen", "Une mission bénévole doit être simple, utile et sécurisée. TVF doit éviter les missions floues et les interventions improvisées.", [
+    ["Étape", "Ce qui doit être clair", "Document ou trace"],
+    ["Inscription", "Identité, commune, disponibilité, compétences, limites", "Fiche bénévole"],
+    ["Mission", "Objectif, durée, lieu, référent, consignes", "Fiche mission bénévole"],
+    ["Sécurité", "Accès, risques, équipements, personnes autorisées", "Consignes sécurité ou plan de prévention"],
+    ["Action", "Présences, horaires, tâches réalisées, incidents éventuels", "Feuille d'émargement et compte rendu"],
+    ["Restitution", "Ce qui a été appris, ce qui reste à faire, suites proposées", "Compte rendu terrain"],
+  ]);
+}
+
+function financerOperationalSection() {
+  return tableSection("Dossier financeur recevable", "Un financeur doit pouvoir distinguer une idée, un dossier instruit, une convention et un résultat. TVF doit préparer cette lecture avant toute demande.", [
+    ["Élément", "Contenu attendu", "Document associé"],
+    ["Besoin", "Territoire, public concerné, problème traité, urgence ou opportunité", "Fiche projet"],
+    ["Budget", "Dépenses, contributions en nature, cofinancements, reste à financer", "Budget prévisionnel + plan de financement"],
+    ["Risque", "Juridique, technique, financier, humain, calendrier, communication", "Matrice des risques"],
+    ["Cadre", "Rôles, responsabilités, durée, conditions de communication", "Convention ou lettre d'intention"],
+    ["Impact", "Indicateurs, méthode de calcul, limites, fréquence de reporting", "Grille d'impact + reporting financeur"],
+  ]);
+}
+
+function partnerOfficialisationSection() {
+  return tableSection("Statuts de coopération", "Cette progression évite de présenter trop tôt une relation comme un partenariat officiel.", [
+    ["Statut", "Définition", "Ce qui peut être communiqué"],
+    ["Contact exploratoire", "Premier échange sans engagement", "Aucune annonce publique"],
+    ["Coopération en instruction", "Sujet identifié, pièces en cours, faisabilité à vérifier", "Mention interne uniquement"],
+    ["Lettre d'intention", "Volonté de travailler ensemble sur un périmètre limité", "Communication possible seulement si les deux parties valident"],
+    ["Convention signée", "Rôles, durée, livrables, responsabilités et communication formalisés", "Partenariat affichable selon les termes de la convention"],
+    ["Bilan publié", "Action réalisée, preuves disponibles, indicateurs vérifiés", "Résultat communicable avec limites et sources"],
   ]);
 }
 
