@@ -134,6 +134,20 @@ function summaryForForm(form) {
   };
 }
 
+function clearFieldErrors(form) {
+  form.querySelectorAll("[aria-invalid='true']").forEach((field) => {
+    field.removeAttribute("aria-invalid");
+  });
+}
+
+function focusFirstRequiredField(form) {
+  const field = Array.from(form.querySelectorAll("input, textarea")).find((item) => !valueForField(item));
+  if (!field) return;
+
+  field.setAttribute("aria-invalid", "true");
+  field.focus();
+}
+
 let contactDraftRecovered = false;
 const contactMessage = document.querySelector("#contact-message");
 if (contactMessage) {
@@ -165,9 +179,13 @@ document.querySelectorAll("[data-prepare-form]").forEach((form) => {
   form.dataset.draftDirty = String(initialDirty);
   form.dataset.draftHandled = "false";
 
-  function markDirty() {
+  function markDirty(event) {
     form.dataset.draftDirty = String(summaryForForm(form).lines.length > 0);
     form.dataset.draftHandled = "false";
+
+    if (event?.target && valueForField(event.target)) {
+      event.target.removeAttribute("aria-invalid");
+    }
   }
 
   function markHandled() {
@@ -236,16 +254,23 @@ document.querySelectorAll("[data-prepare-form]").forEach((form) => {
 
   button.addEventListener("click", () => {
     const summary = summaryForForm(form);
+    const hasSummary = summary.lines.length > 0;
 
     output.hidden = false;
     output.textContent = summary.text;
 
+    if (hasSummary) {
+      clearFieldErrors(form);
+    } else {
+      focusFirstRequiredField(form);
+    }
+
     if (copyButton) {
-      copyButton.hidden = !summary.lines.length;
+      copyButton.hidden = !hasSummary;
     }
 
     if (downloadButton) {
-      downloadButton.hidden = !summary.lines.length;
+      downloadButton.hidden = !hasSummary;
     }
   });
 

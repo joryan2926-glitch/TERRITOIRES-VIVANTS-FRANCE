@@ -698,6 +698,13 @@ textarea {
   font: inherit;
 }
 
+input[aria-invalid="true"],
+textarea[aria-invalid="true"],
+select[aria-invalid="true"] {
+  border-color: #b42318;
+  box-shadow: 0 0 0 3px rgba(180, 35, 24, 0.12);
+}
+
 textarea {
   min-height: 140px;
   resize: vertical;
