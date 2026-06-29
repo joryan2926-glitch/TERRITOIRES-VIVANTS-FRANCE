@@ -1411,6 +1411,131 @@ function pageMiniNav(page) {
     .join("")}</div></nav>`;
 }
 
+function journeySection(page) {
+  const links = {
+    "index.html": [
+      ["Comprendre l'association", "qui-sommes-nous.html", "Lire le rôle de TVF, son cadre et sa logique d'action."],
+      ["Choisir un parcours", "agir-avec-nous.html", "Trouver l'entrée adaptée : collectivité, propriétaire, entreprise ou citoyen."],
+      ["Voir le territoire pilote", "saint-etienne.html", "Comprendre comment la méthode peut s'appliquer à Saint-Étienne."],
+    ],
+    "qui-sommes-nous.html": [
+      ["Découvrir la méthode", "notre-methode.html", "Passer de la mission générale aux étapes concrètes d'intervention."],
+      ["Lire la gouvernance", "gouvernance.html", "Vérifier le cadre, la transparence et les responsabilités."],
+      ["Consulter les documents", "documents.html", "Accéder aux fiches, conventions et modèles de travail."],
+    ],
+    "nos-actions.html": [
+      ["Voir les pôles", "nos-poles.html", "Relier chaque action aux pôles opérationnels de TVF."],
+      ["Mesurer l'impact", "impact.html", "Comprendre les indicateurs suivis sans annoncer de résultats inventés."],
+      ["Agir avec TVF", "agir-avec-nous.html", "Transformer une intention en première demande qualifiée."],
+    ],
+    "nos-poles.html": [
+      ["Approfondir les actions", "nos-actions.html", "Voir comment les pôles deviennent des actions de terrain."],
+      ["Lire l'observatoire", "observatoire.html", "Comprendre le rôle des données et de la qualification territoriale."],
+      ["Contacter TVF", "contact.html", "Présenter un besoin, un bien ou une coopération possible."],
+    ],
+    "notre-methode.html": [
+      ["Préparer un dossier", "documents.html", "Utiliser les fiches pour cadrer une demande ou une coopération."],
+      ["Voir les critères", "gouvernance.html", "Comprendre les règles de décision, de prudence et de traçabilité."],
+      ["Passer à l'action", "agir-avec-nous.html", "Identifier le bon parcours selon votre profil."],
+    ],
+    "observatoire.html": [
+      ["Voir Saint-Étienne", "saint-etienne.html", "Relier l'observation nationale à un premier territoire pilote."],
+      ["Mesurer l'impact", "impact.html", "Distinguer données publiques, objectifs et résultats vérifiés."],
+      ["Préparer une source", "documents.html", "Tracer les données utilisées dans un diagnostic ou une carte."],
+    ],
+    "saint-etienne.html": [
+      ["Lire l'observatoire", "observatoire.html", "Comprendre les données nécessaires au diagnostic territorial."],
+      ["Voir les partenaires", "partenaires.html", "Identifier les coopérations possibles autour du territoire pilote."],
+      ["Contacter TVF", "contact.html", "Proposer un échange sur Saint-Étienne ou un autre territoire."],
+    ],
+    "agir-avec-nous.html": [
+      ["Parcours collectivités", "collectivites.html", "Comprendre les modalités pour une commune, un EPCI ou une collectivité."],
+      ["Parcours propriétaires", "proprietaires.html", "Préparer la présentation d'un bien vacant ou dégradé."],
+      ["Parcours entreprises", "entreprises.html", "Valoriser matériaux, compétences, locaux ou mécénat."],
+    ],
+    "collectivites.html": [
+      ["Diagnostic territorial", "documents/cahier-charges-diagnostic-territorial.md", "Préparer les données, le périmètre et les livrables."],
+      ["Convention territoriale", "documents/convention-cooperation-territoriale.md", "Cadrer une coopération sans engagement prématuré."],
+      ["Nous contacter", "contact.html", "Présenter un territoire, un besoin ou un périmètre pilote."],
+    ],
+    "proprietaires.html": [
+      ["Fiche propriétaire", "documents/fiche-proprietaire.md", "Rassembler les informations essentielles sur le bien."],
+      ["Bien solidaire", "documents/fiche-bien-solidaire-usage-partage.md", "Étudier un usage temporaire, solidaire ou partagé."],
+      ["Nous contacter", "contact.html", "Présenter le bien à TVF pour une première orientation."],
+    ],
+    "entreprises.html": [
+      ["Fiche entreprise", "documents/fiche-entreprise.md", "Décrire une contribution possible : matériaux, compétences, locaux ou soutien."],
+      ["Bordereau matériaux", "documents/bordereau-don-materiaux.md", "Tracer les ressources avant toute affectation à un projet."],
+      ["Devenir partenaire", "partenaires.html", "Comprendre le cadre d'une coopération responsable."],
+    ],
+    "benevoles-citoyens.html": [
+      ["Agir avec nous", "agir-avec-nous.html", "Choisir le bon parcours d'engagement."],
+      ["Mission bénévole", "documents/fiche-mission-benevole.md", "Cadrer une mission avant une action terrain."],
+      ["Nous contacter", "contact.html", "Proposer une compétence, un signalement ou une disponibilité."],
+    ],
+    "financeurs-mecenes.html": [
+      ["Voir l'impact", "impact.html", "Comprendre les indicateurs suivis et les limites de communication."],
+      ["Demande de soutien", "documents/demande-soutien-financier.md", "Préparer une demande claire et rattachée à un projet instruit."],
+      ["Contacter TVF", "contact.html", "Proposer un échange financeur ou mécène."],
+    ],
+    "partenaires.html": [
+      ["Gouvernance", "gouvernance.html", "Vérifier les règles d'officialisation et de transparence."],
+      ["Documents", "documents.html", "Accéder aux modèles de convention et fiches partenaires."],
+      ["Contact", "contact.html", "Présenter une coopération possible."],
+    ],
+    "documents.html": [
+      ["Kit média", "kit-media.html", "Trouver les éléments publics et les règles de communication."],
+      ["Gouvernance", "gouvernance.html", "Comprendre les règles d'usage des documents et conventions."],
+      ["Contact", "contact.html", "Demander une orientation vers le bon modèle."],
+    ],
+    "kit-media.html": [
+      ["Dossier TVF", "documents/dossier-presentation-tvf.md", "Partager une présentation structurée de l'association."],
+      ["Pitch officiel", "documents/pitch-officiel-tvf.md", "Utiliser des formulations courtes et cohérentes."],
+      ["Contact presse", "contact.html", "Préparer un échange média ou institutionnel."],
+    ],
+    "impact.html": [
+      ["Observatoire", "observatoire.html", "Relier les indicateurs aux données territoriales."],
+      ["Grille d'impact", "documents/grille-impact.md", "Structurer le suivi sans inventer de résultats."],
+      ["Transparence", "transparence.html", "Comprendre la différence entre objectifs et résultats vérifiés."],
+    ],
+    "gouvernance.html": [
+      ["Charte éthique", "documents/charte-ethique.md", "Lire les principes de prudence, traçabilité et transparence."],
+      ["Transparence", "transparence.html", "Voir les informations à maintenir à jour."],
+      ["Documents", "documents.html", "Retrouver les modèles utiles à l'instruction."],
+    ],
+    "transparence.html": [
+      ["Gouvernance", "gouvernance.html", "Comprendre les responsabilités et le cadre de décision."],
+      ["Impact", "impact.html", "Voir comment les résultats seront suivis."],
+      ["Mentions légales", "mentions-legales.html", "Consulter le cadre légal préparatoire."],
+    ],
+    "faq.html": [
+      ["Notre méthode", "notre-methode.html", "Lire les étapes complètes de la démarche TVF."],
+      ["Documents", "documents.html", "Trouver les fiches utiles après une réponse FAQ."],
+      ["Contact", "contact.html", "Poser une question précise à TVF."],
+    ],
+    "contact.html": [
+      ["Agir avec nous", "agir-avec-nous.html", "Vérifier le parcours adapté avant d'écrire."],
+      ["Documents", "documents.html", "Préparer les pièces utiles à votre demande."],
+      ["FAQ", "faq.html", "Lire les réponses aux questions les plus fréquentes."],
+    ],
+    "mentions-legales.html": [
+      ["Transparence", "transparence.html", "Voir les informations à suivre dans la durée."],
+      ["Gouvernance", "gouvernance.html", "Comprendre le cadre de décision TVF."],
+      ["Contact", "contact.html", "Demander une précision sur le site ou les documents."],
+    ],
+  };
+
+  const items = links[page.file] || [
+    ["Notre méthode", "notre-methode.html", "Comprendre le cadre d'intervention TVF."],
+    ["Documents", "documents.html", "Préparer une demande avec les bons supports."],
+    ["Contact", "contact.html", "Échanger avec TVF sur une situation concrète."],
+  ];
+
+  return `<section class="section journey-section"><div class="container"><div class="section-head"><p class="section-kicker">Suite logique</p><h2>Continuer votre parcours</h2><p>Trois entrées utiles pour transformer la lecture de cette page en prochaine étape claire.</p></div><div class="journey-grid">${items
+    .map(([title, href, text]) => `<a class="journey-card" href="${hrefFor(href)}"><span class="card-icon" aria-hidden="true">${iconFor(title)}</span><strong>${title}</strong><small>${text}</small></a>`)
+    .join("")}</div></div></section>`;
+}
+
 function sectionIntro(title, text, items) {
   return `<section class="section" ${sectionAttrs(title)}><div class="container intro-grid"><div><p class="section-kicker">Fondation</p><h2>${title}</h2><p>${text}</p></div><div class="mini-list">${items
     .map(([h, p]) => `<article><strong>${h}</strong><span>${p}</span></article>`)
@@ -1637,6 +1762,7 @@ function pageTemplate(page) {
     </section>
     ${pageMiniNav(page)}
     ${page.sections.join("\n")}
+    ${journeySection(page)}
     <section class="cta-band">
       <div class="container cta-band-inner">
         <div>
