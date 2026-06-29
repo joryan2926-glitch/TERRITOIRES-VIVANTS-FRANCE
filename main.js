@@ -62,6 +62,28 @@ if (documentCards.length) {
   updateDocumentLibrary();
 }
 
+const pageNavLinks = Array.from(document.querySelectorAll(".page-nav a"));
+const pageSections = pageNavLinks
+  .map((link) => document.querySelector(link.getAttribute("href")))
+  .filter(Boolean);
+
+if (pageNavLinks.length && pageSections.length && "IntersectionObserver" in window) {
+  const pageNavObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const activeHref = `#${entry.target.id}`;
+        pageNavLinks.forEach((link) => {
+          link.classList.toggle("is-current", link.getAttribute("href") === activeHref);
+        });
+      });
+    },
+    { rootMargin: "-35% 0px -55% 0px", threshold: 0.01 }
+  );
+
+  pageSections.forEach((section) => pageNavObserver.observe(section));
+}
+
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 if (!reduceMotion && "IntersectionObserver" in window) {

@@ -1374,14 +1374,51 @@ const pages = [
   },
 ];
 
+function slugify(value) {
+  return String(value)
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .slice(0, 64) || "section";
+}
+
+function escapeAttr(value) {
+  return String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/"/g, "&quot;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+
+function sectionAttrs(label, id = slugify(label)) {
+  return `id="${id}" data-page-section data-page-label="${escapeAttr(label)}"`;
+}
+
+function pageMiniNav(page) {
+  const anchors = [];
+  for (const section of page.sections) {
+    const match = section.match(/id="([^"]+)" data-page-section data-page-label="([^"]+)"/);
+    if (match) anchors.push([match[2], match[1]]);
+  }
+
+  if (anchors.length < 3) return "";
+
+  return `<nav class="page-nav" aria-label="Dans cette page"><div class="container page-nav-inner"><span>Dans cette page</span>${anchors
+    .slice(0, 8)
+    .map(([label, id]) => `<a href="#${id}">${label}</a>`)
+    .join("")}</div></nav>`;
+}
+
 function sectionIntro(title, text, items) {
-  return `<section class="section"><div class="container intro-grid"><div><p class="section-kicker">Fondation</p><h2>${title}</h2><p>${text}</p></div><div class="mini-list">${items
+  return `<section class="section" ${sectionAttrs(title)}><div class="container intro-grid"><div><p class="section-kicker">Fondation</p><h2>${title}</h2><p>${text}</p></div><div class="mini-list">${items
     .map(([h, p]) => `<article><strong>${h}</strong><span>${p}</span></article>`)
     .join("")}</div></div></section>`;
 }
 
 function cards(title, intro, items) {
-  return `<section class="section soft"><div class="container"><div class="section-head"><p class="section-kicker">Repères</p><h2>${title}</h2><p>${intro}</p></div><div class="card-grid">${items
+  return `<section class="section soft" ${sectionAttrs(title)}><div class="container"><div class="section-head"><p class="section-kicker">Repères</p><h2>${title}</h2><p>${intro}</p></div><div class="card-grid">${items
     .map(([h, p, href]) => `<article class="card"><span class="card-icon" aria-hidden="true">${iconFor(h)}</span><h3>${h}</h3><p>${p}</p>${href ? `<a class="text-link" href="${hrefFor(href)}">Découvrir</a>` : ""}</article>`)
     .join("")}</div></div></section>`;
 }
@@ -1404,7 +1441,7 @@ function documentTools() {
 }
 
 function documentCards(title, intro, items) {
-  return `<section class="section soft document-library" id="documents-library"><div class="container"><div class="section-head"><p class="section-kicker">Repères</p><h2>${title}</h2><p>${intro}</p></div><div class="card-grid">${items
+  return `<section class="section soft document-library" ${sectionAttrs(title, "documents-library")}><div class="container"><div class="section-head"><p class="section-kicker">Repères</p><h2>${title}</h2><p>${intro}</p></div><div class="card-grid">${items
     .map(([h, p, href]) => `<article class="card" data-doc-card data-doc-category="${docCategory(h, p, href)}"><span class="card-icon" aria-hidden="true">${iconFor(h)}</span><h3>${h}</h3><p>${p}</p>${href ? `<a class="text-link" href="${hrefFor(href)}">Découvrir</a>` : ""}</article>`)
     .join("")}</div><p class="doc-empty" data-doc-empty hidden>Aucun document ne correspond à cette recherche. Essayez un autre mot-clé ou un autre filtre.</p></div></section>`;
 }
@@ -1425,50 +1462,50 @@ function docCategory(title, text, href = "") {
 }
 
 function timeline(title, items) {
-  return `<section class="section"><div class="container"><div class="section-head"><p class="section-kicker">Méthode</p><h2>${title}</h2></div><div class="timeline">${items
+  return `<section class="section" ${sectionAttrs(title)}><div class="container"><div class="section-head"><p class="section-kicker">Méthode</p><h2>${title}</h2></div><div class="timeline">${items
     .map(([n, h, p]) => `<article><span>${n}</span><div><h3>${h}</h3><p>${p}</p></div></article>`)
     .join("")}</div></div></section>`;
 }
 
 function tableSection(title, intro, rows) {
   const [head, ...body] = rows;
-  return `<section class="section"><div class="container"><div class="section-head"><p class="section-kicker">Cadre</p><h2>${title}</h2><p>${intro}</p></div><div class="table-wrap"><table><thead><tr>${head.map((cell) => `<th>${cell}</th>`).join("")}</tr></thead><tbody>${body
+  return `<section class="section" ${sectionAttrs(title)}><div class="container"><div class="section-head"><p class="section-kicker">Cadre</p><h2>${title}</h2><p>${intro}</p></div><div class="table-wrap"><table><thead><tr>${head.map((cell) => `<th>${cell}</th>`).join("")}</tr></thead><tbody>${body
     .map((row) => `<tr>${row.map((cell) => `<td>${cell}</td>`).join("")}</tr>`)
     .join("")}</tbody></table></div></div></section>`;
 }
 
 function faqSection(items) {
-  return `<section class="section soft"><div class="container"><div class="section-head"><p class="section-kicker">FAQ</p><h2>Questions fréquentes</h2><p>Des réponses courtes pour comprendre le cadre TVF sans jargon.</p></div><div class="faq-list">${items
+  return `<section class="section soft" ${sectionAttrs("Questions fréquentes")}><div class="container"><div class="section-head"><p class="section-kicker">FAQ</p><h2>Questions fréquentes</h2><p>Des réponses courtes pour comprendre le cadre TVF sans jargon.</p></div><div class="faq-list">${items
     .map(([question, answer]) => `<details><summary>${question}</summary><p>${answer}</p></details>`)
     .join("")}</div></div></section>`;
 }
 
 function highlight(title, text, label, href, image) {
-  return `<section class="section feature"><div class="container feature-grid"><img src="${image}" ${imageAttrs(image)} alt="Vue urbaine française liée à la revitalisation territoriale" loading="lazy" decoding="async"><div><p class="section-kicker">Pilote</p><h2>${title}</h2><p>${text}</p><a class="btn primary" href="${hrefFor(href)}">${label}</a></div></div></section>`;
+  return `<section class="section feature" ${sectionAttrs(title)}><div class="container feature-grid"><img src="${image}" ${imageAttrs(image)} alt="Vue urbaine française liée à la revitalisation territoriale" loading="lazy" decoding="async"><div><p class="section-kicker">Pilote</p><h2>${title}</h2><p>${text}</p><a class="btn primary" href="${hrefFor(href)}">${label}</a></div></div></section>`;
 }
 
 function split(title, text, image) {
-  return `<section class="section"><div class="container split"><img src="${image}" ${imageAttrs(image)} alt="${title}" loading="lazy" decoding="async"><div><p class="section-kicker">Approche</p><h2>${title}</h2><p>${text}</p></div></div></section>`;
+  return `<section class="section" ${sectionAttrs(title)}><div class="container split"><img src="${image}" ${imageAttrs(image)} alt="${title}" loading="lazy" decoding="async"><div><p class="section-kicker">Approche</p><h2>${title}</h2><p>${text}</p></div></div></section>`;
 }
 
 function textBlock(title, text) {
-  return `<section class="section"><div class="container narrow"><p class="section-kicker">Analyse</p><h2>${title}</h2><p>${text}</p></div></section>`;
+  return `<section class="section" ${sectionAttrs(title)}><div class="container narrow"><p class="section-kicker">Analyse</p><h2>${title}</h2><p>${text}</p></div></section>`;
 }
 
 function audienceSection() {
-  return `<section class="section"><div class="container audience-grid"><article id="collectivite"><h2>Collectivité</h2><p>TVF peut aider à préparer un diagnostic, identifier des biens ou ressources et structurer une expérimentation locale. La coopération doit rester compatible avec les compétences, politiques publiques et procédures de la collectivité.</p></article><article id="proprietaire"><h2>Propriétaire</h2><p>Un propriétaire peut présenter un bien vacant ou dégradé. TVF étudie alors l'état du bien, les contraintes, les usages possibles et les conditions d'une convention adaptée.</p></article><article id="entreprise"><h2>Entreprise</h2><p>Une entreprise peut contribuer par des matériaux, du mécénat, des compétences, des locaux ou de la logistique. La contribution doit être tracée et orientée vers un projet validé.</p></article><article id="citoyen"><h2>Citoyen ou bénévole</h2><p>Un habitant peut signaler une situation, rejoindre une mission, participer à un chantier encadré ou relayer les besoins de son territoire.</p></article></div></section>`;
+  return `<section class="section" ${sectionAttrs("Parcours par public", "parcours-publics")}><div class="container audience-grid"><article id="collectivite"><h2>Collectivité</h2><p>TVF peut aider à préparer un diagnostic, identifier des biens ou ressources et structurer une expérimentation locale. La coopération doit rester compatible avec les compétences, politiques publiques et procédures de la collectivité.</p></article><article id="proprietaire"><h2>Propriétaire</h2><p>Un propriétaire peut présenter un bien vacant ou dégradé. TVF étudie alors l'état du bien, les contraintes, les usages possibles et les conditions d'une convention adaptée.</p></article><article id="entreprise"><h2>Entreprise</h2><p>Une entreprise peut contribuer par des matériaux, du mécénat, des compétences, des locaux ou de la logistique. La contribution doit être tracée et orientée vers un projet validé.</p></article><article id="citoyen"><h2>Citoyen ou bénévole</h2><p>Un habitant peut signaler une situation, rejoindre une mission, participer à un chantier encadré ou relayer les besoins de son territoire.</p></article></div></section>`;
 }
 
 function formSection() {
-  return `<section class="section" id="proposer"><div class="container form-panel"><div><p class="section-kicker">Premier contact</p><h2>Préparer une situation</h2><p>Utilisez ce bloc comme guide de préparation avant d'écrire à TVF. L'objectif est de rassembler les informations utiles pour accélérer l'orientation de votre demande.</p></div><form><label>Votre profil<select><option>Collectivité</option><option>Propriétaire</option><option>Entreprise</option><option>Association</option><option>Citoyen</option></select></label><label>Objet<input type="text" placeholder="Ex. logement vacant, matériaux, partenariat"></label><label>Message<textarea placeholder="Décrivez le besoin, le lieu, les acteurs concernés et les délais."></textarea></label><a class="btn primary" href="${hrefFor("contact.html")}">Passer par la page contact</a></form></div></section>`;
+  return `<section class="section" ${sectionAttrs("Préparer une situation", "proposer")}><div class="container form-panel"><div><p class="section-kicker">Premier contact</p><h2>Préparer une situation</h2><p>Utilisez ce bloc comme guide de préparation avant d'écrire à TVF. L'objectif est de rassembler les informations utiles pour accélérer l'orientation de votre demande.</p></div><form><label>Votre profil<select><option>Collectivité</option><option>Propriétaire</option><option>Entreprise</option><option>Association</option><option>Citoyen</option></select></label><label>Objet<input type="text" placeholder="Ex. logement vacant, matériaux, partenariat"></label><label>Message<textarea placeholder="Décrivez le besoin, le lieu, les acteurs concernés et les délais."></textarea></label><a class="btn primary" href="${hrefFor("contact.html")}">Passer par la page contact</a></form></div></section>`;
 }
 
 function contactSection() {
-  return `<section class="section" id="contact-form"><div class="container form-panel"><div><p class="section-kicker">Message</p><h2>Décrivez votre demande</h2><p>Indiquez votre profil, votre commune, le type de bien ou de coopération, et les informations déjà disponibles.</p></div><form><label>Nom / structure<input type="text" placeholder="Votre nom ou organisme"></label><label>E-mail<input type="email" placeholder="contact@exemple.fr"></label><label>Message<textarea placeholder="Votre message"></textarea></label><button class="btn primary" type="button">Préparer l'envoi</button></form></div></section>`;
+  return `<section class="section" ${sectionAttrs("Décrivez votre demande", "contact-form")}><div class="container form-panel"><div><p class="section-kicker">Message</p><h2>Décrivez votre demande</h2><p>Indiquez votre profil, votre commune, le type de bien ou de coopération, et les informations déjà disponibles.</p></div><form><label>Nom / structure<input type="text" placeholder="Votre nom ou organisme"></label><label>E-mail<input type="email" placeholder="contact@exemple.fr"></label><label>Message<textarea placeholder="Votre message"></textarea></label><button class="btn primary" type="button">Préparer l'envoi</button></form></div></section>`;
 }
 
 function legalSection() {
-  return `<section class="section"><div class="container legal"><h2>Éditeur</h2><p><strong>Territoires Vivants France</strong><br>Association nationale en création<br>25 rue Élise Gervais, 42000 Saint-Étienne</p><h2>Responsables</h2><p>Président fondateur : Edryan Rangoly.<br>Secrétaire et trésorier : M. Lambeau Jordan.</p><h2>Statut de l'association</h2><p>Cette page est structurée pour être complétée après les formalités officielles : numéro RNA, numéro SIREN le cas échéant, publication administrative, hébergeur définitif, contact officiel et mentions RGPD détaillées.</p><h2>Hébergement</h2><p>Le site est préparé pour un déploiement web sécurisé. Les informations relatives à l'hébergeur, au domaine et aux responsabilités techniques doivent être tenues à jour dans cette rubrique.</p><h2>Données personnelles</h2><p>Les formulaires et parcours présentés servent à préparer les informations utiles à une demande. Les données transmises à TVF devront être traitées dans le respect du RGPD, avec une finalité claire, une durée de conservation adaptée et un droit de contact pour les personnes concernées.</p><h2>Propriété intellectuelle</h2><p>Les textes, logos, documents, visuels et éléments graphiques du site sont destinés à présenter le projet Territoires Vivants France. Toute réutilisation, modification ou diffusion doit faire l'objet d'une autorisation préalable.</p><h2>Responsabilité</h2><p>Les contenus du site présentent une démarche associative, des méthodes et des documents de travail. Ils ne constituent pas un conseil juridique, technique, financier ou administratif personnalisé. Chaque projet doit être vérifié et adapté avec les interlocuteurs compétents.</p></div></section>`;
+  return `<section class="section" ${sectionAttrs("Mentions légales", "mentions-legales-detail")}><div class="container legal"><h2>Éditeur</h2><p><strong>Territoires Vivants France</strong><br>Association nationale en création<br>25 rue Élise Gervais, 42000 Saint-Étienne</p><h2>Responsables</h2><p>Président fondateur : Edryan Rangoly.<br>Secrétaire et trésorier : M. Lambeau Jordan.</p><h2>Statut de l'association</h2><p>Cette page est structurée pour être complétée après les formalités officielles : numéro RNA, numéro SIREN le cas échéant, publication administrative, hébergeur définitif, contact officiel et mentions RGPD détaillées.</p><h2>Hébergement</h2><p>Le site est préparé pour un déploiement web sécurisé. Les informations relatives à l'hébergeur, au domaine et aux responsabilités techniques doivent être tenues à jour dans cette rubrique.</p><h2>Données personnelles</h2><p>Les formulaires et parcours présentés servent à préparer les informations utiles à une demande. Les données transmises à TVF devront être traitées dans le respect du RGPD, avec une finalité claire, une durée de conservation adaptée et un droit de contact pour les personnes concernées.</p><h2>Propriété intellectuelle</h2><p>Les textes, logos, documents, visuels et éléments graphiques du site sont destinés à présenter le projet Territoires Vivants France. Toute réutilisation, modification ou diffusion doit faire l'objet d'une autorisation préalable.</p><h2>Responsabilité</h2><p>Les contenus du site présentent une démarche associative, des méthodes et des documents de travail. Ils ne constituent pas un conseil juridique, technique, financier ou administratif personnalisé. Chaque projet doit être vérifié et adapté avec les interlocuteurs compétents.</p></div></section>`;
 }
 
 function iconFor(text) {
@@ -1598,6 +1635,7 @@ function pageTemplate(page) {
         <div class="hero-actions">${page.ctas.map(([label, href], i) => `<a class="btn ${i === 0 ? "primary" : "secondary"}" href="${hrefFor(href)}">${label}</a>`).join("")}</div>
       </div>
     </section>
+    ${pageMiniNav(page)}
     ${page.sections.join("\n")}
     <section class="cta-band">
       <div class="container cta-band-inner">
