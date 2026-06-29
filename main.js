@@ -229,6 +229,7 @@ document.querySelectorAll("[data-prepare-form]").forEach((form, index) => {
   const resetButton = form.querySelector("[data-reset-form]");
   const transferLink = form.querySelector("[data-transfer-summary]");
   const output = form.querySelector("[data-form-summary]");
+  const localDraftStatus = form.querySelector("[data-local-draft-status]");
   if (!button || !output) return;
 
   const localDraftKey = storageKeyForForm(form, index);
@@ -240,6 +241,9 @@ document.querySelectorAll("[data-prepare-form]").forEach((form, index) => {
   const initialDirty = localDraftRestored || (contactDraftRecovered && contactMessage && form.contains(contactMessage));
   form.dataset.draftDirty = String(initialDirty);
   form.dataset.draftHandled = "false";
+  if (localDraftStatus) {
+    localDraftStatus.hidden = !localDraftRestored;
+  }
   if (resetButton) {
     resetButton.hidden = !initialDirty;
   }
@@ -275,6 +279,9 @@ document.querySelectorAll("[data-prepare-form]").forEach((form, index) => {
     form.dataset.draftDirty = "false";
     form.dataset.draftHandled = "true";
     clearLocalFormDraft(localDraftKey);
+    if (localDraftStatus) {
+      localDraftStatus.hidden = true;
+    }
   }
 
   function resetDraft() {
@@ -287,6 +294,10 @@ document.querySelectorAll("[data-prepare-form]").forEach((form, index) => {
     const draftStatus = form.querySelector("[data-draft-status]");
     if (draftStatus) {
       draftStatus.hidden = true;
+    }
+
+    if (localDraftStatus) {
+      localDraftStatus.hidden = true;
     }
 
     if (copyButton) {
