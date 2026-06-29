@@ -44,9 +44,6 @@ Les visuels ont été sélectionnés pour renforcer une identité française : S
 - `artisan-menuiserie-bois.jpg`  
   Source : [Menuiserie bois 01](https://commons.wikimedia.org/wiki/File:Menuiserie_bois_01.jpg), CyrilShepherd2, CC BY-SA 4.0.
 
-- `reunion-conseil-municipal.jpg`  
-  Source : [Conseil municipal de Somain](https://commons.wikimedia.org/wiki/File:Somain_-_Conseil_municipal_d%27installation_et_%C3%A9lection_de_Jean-Baptiste_Gros_comme_maire_%28093%29.JPG), Jérémy-Günther-Heinz Jähnick, CC BY-SA 3.0.
-
 - `immeuble-renovation-meudon.jpg`  
   Source : [Immeuble en rénovation à Meudon](https://commons.wikimedia.org/wiki/File:Immeuble_en_r%C3%A9novation_%C3%A0_Meudon_le_17_d%C3%A9cembre_2017_-_1.jpg), Lionel Allorge, CC BY-SA 3.0.
 
@@ -79,7 +76,7 @@ Cette table sert de contrôle qualité pour garder une cohérence entre le sujet
 | Thème | Image recommandée | Usage |
 |---|---|---|
 | Accueil / territoire pilote | `france-saint-etienne-chateaucreux.jpg` | Première impression nationale avec ancrage Saint-Étienne |
-| Qui sommes-nous / gouvernance | `reunion-conseil-municipal.jpg` | Réunion, coordination, dialogue institutionnel |
+| Qui sommes-nous / gouvernance | `france-saint-etienne-jean-jaures.jpg` ou `france-saint-etienne-chateaucreux.jpg` | Ancrage territorial, cadre institutionnel sobre, espace public français |
 | Nos actions / centre-ville | `centre-ville-nantes.jpg` | Revitalisation urbaine, mobilité, centre-ville français |
 | Nos pôles / travaux | `chantier-renovation-lyon.jpg` | Rénovation, méthode, intervention sur patrimoine existant |
 | Habitat / propriétaires | `immeuble-renovation-meudon.jpg` | Bien bâti, rénovation, logement |

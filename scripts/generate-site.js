@@ -42,7 +42,6 @@ const imageSizes = {
   "assets/photos/france-ressourcerie-vichy.jpg": [960, 720],
   "assets/photos/immeuble-renovation-meudon.jpg": [1400, 934],
   "assets/photos/jardin-partage-france.jpg": [1400, 1050],
-  "assets/photos/reunion-conseil-municipal.jpg": [1400, 1000],
   "assets/photos/saint-etienne-centre-commerce.jpg": [1200, 902],
   "assets/photos/france-saint-etienne-chateaucreux.jpg": [1280, 853],
   "assets/photos/france-saint-etienne-jean-jaures.jpg": [1200, 800],
@@ -119,7 +118,7 @@ const pages = [
     title: "Qui sommes-nous ?",
     meta:
       "Découvrez Territoires Vivants France, association nationale de coopération territoriale basée à Saint-Étienne.",
-    heroImage: "assets/photos/reunion-conseil-municipal.jpg",
+    heroImage: "assets/photos/france-saint-etienne-chateaucreux.jpg",
     eyebrow: "L'association",
     h1: "Une plateforme de coopération territoriale.",
     intro:
@@ -527,7 +526,7 @@ const pages = [
     title: "Collectivités",
     meta:
       "Parcours collectivités de Territoires Vivants France : diagnostic, coopération, expérimentation territoriale et suivi.",
-    heroImage: "assets/photos/reunion-conseil-municipal.jpg",
+    heroImage: "assets/photos/france-saint-etienne-jean-jaures.jpg",
     eyebrow: "Collectivités",
     h1: "Un cadre simple pour devenir territoire partenaire.",
     intro:
@@ -822,7 +821,7 @@ const pages = [
     title: "Partenaires",
     meta:
       "Devenir partenaire de Territoires Vivants France : collectivités, entreprises, associations, propriétaires, mécènes et financeurs.",
-    heroImage: "assets/photos/reunion-conseil-municipal.jpg",
+    heroImage: "assets/photos/france-saint-etienne-chateaucreux.jpg",
     eyebrow: "Coopération",
     h1: "Construire des partenariats utiles et traçables.",
     intro:
@@ -1186,7 +1185,7 @@ const pages = [
     title: "Gouvernance & éthique",
     meta:
       "Gouvernance, éthique, responsabilités et règles de décision de Territoires Vivants France.",
-    heroImage: "assets/photos/reunion-conseil-municipal.jpg",
+    heroImage: "assets/photos/france-saint-etienne-jean-jaures.jpg",
     eyebrow: "Cadre institutionnel",
     h1: "Une gouvernance lisible pour inspirer confiance.",
     intro:
