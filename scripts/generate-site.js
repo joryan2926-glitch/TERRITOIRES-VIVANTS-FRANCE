@@ -140,7 +140,7 @@ const pages = [
         ]
       ),
       split(
-        "Une association en structuration",
+        "Une méthode avant la communication",
         "La priorité est de construire une méthode crédible avant de communiquer des résultats. Cela signifie : des documents propres, des conventions adaptées, des critères de sélection, une traçabilité des décisions et une distinction nette entre objectifs, projets en instruction et actions réalisées.",
         "assets/photos/saint-etienne-rue-resistance.jpg"
       ),
@@ -164,7 +164,7 @@ const pages = [
         ["4", "Déployer", "Ouvrir progressivement le modèle à d'autres territoires lorsque les conditions de suivi sont réunies."],
       ]),
       faqSection([
-        ["TVF est-elle déjà une structure nationale opérationnelle ?", "TVF se construit comme une association nationale en structuration. Le site présente la méthode, les outils, les parcours et les cadres à utiliser avant les premières actions pleinement documentées."],
+        ["TVF est-elle déjà déployée nationalement ?", "TVF pose les fondations d'une organisation nationale : méthode, outils, parcours, documents et règles de preuve. Le déploiement opérationnel s'appuiera ensuite sur des actions documentées territoire par territoire."],
         ["Pourquoi parler de plateforme de coopération ?", "Parce que la valeur de TVF n'est pas de faire seule, mais de relier les bons acteurs autour d'un dossier clair : bien, usage, ressources, responsabilités, financement et impact."],
         ["Pourquoi ne pas afficher de partenaires partout ?", "Un partenaire ne doit être affiché que lorsqu'un accord réel existe. Cette règle évite toute confusion et renforce la confiance des collectivités, entreprises et financeurs."],
       ]),
@@ -694,7 +694,7 @@ const pages = [
       textBlock("Ce que TVF refuse", "TVF n'est pas une déchetterie ni une plateforme de déstockage libre. Les contributions doivent être réutilisables, utiles et compatibles avec un projet validé."),
       faqSection([
         ["Une entreprise peut-elle donner des matériaux ?", "Oui, si les matériaux sont réutilisables, décrits, accessibles, sécurisés et compatibles avec un projet ou une mise en attente cadrée."],
-        ["Le logo de l'entreprise sera-t-il affiché ?", "Seulement après accord formalisé. TVF ne publie pas de faux partenaires ni de logos non autorisés."],
+        ["Le logo de l'entreprise sera-t-il affiché ?", "Seulement après accord formalisé. L'utilisation d'un logo suppose une autorisation écrite, un périmètre clair et des règles de communication validées."],
         ["Une contribution peut-elle être refusée ?", "Oui. TVF peut refuser ou réorienter une ressource si elle est dangereuse, inutilisable, impossible à stocker ou sans destination réaliste."],
       ]),
     ],
@@ -826,7 +826,7 @@ const pages = [
     eyebrow: "Coopération",
     h1: "Construire des partenariats utiles et traçables.",
     intro:
-      "TVF ne publie pas de faux partenaires. Cette page présente les formes de coopération possibles et le cadre attendu avant toute officialisation.",
+      "Cette page présente les formes de coopération possibles, les responsabilités attendues et le cadre à formaliser avant toute communication publique.",
     ctas: [["Présenter une coopération", "contact.html"], ["Voir les documents", "documents.html"]],
     sections: [
       sectionIntro(
@@ -869,7 +869,7 @@ const pages = [
         ["5", "Publication", "Afficher le partenariat uniquement lorsque le cadre est validé."],
       ]),
       faqSection([
-        ["TVF peut-elle afficher mon logo immédiatement ?", "Non. Un logo ou une mention publique suppose un accord formalisé, afin d'éviter toute confusion sur la réalité du partenariat."],
+        ["TVF peut-elle afficher mon logo immédiatement ?", "Un logo ou une mention publique suppose un accord formalisé, afin que le périmètre, la durée et les règles de communication soient clairs pour chacun."],
         ["Une entreprise peut-elle donner des matériaux sans projet identifié ?", "Elle peut signaler une ressource. TVF doit ensuite vérifier l'état, les conditions de récupération et l'affectation possible à un projet validé."],
         ["Une collectivité peut-elle tester TVF sur un périmètre limité ?", "Oui, une coopération peut commencer par un diagnostic, un quartier pilote, une typologie de biens ou une démarche de cartographie progressive."],
       ]),
@@ -915,7 +915,7 @@ const pages = [
       documentPriorityPackSection(),
       documentWorkflowSection(),
       publicEntryMatrixSection(),
-      documentArchiveSection("Bibliothèque complète filtrable", "Cette archive rassemble tous les modèles avancés. Elle est utile après avoir identifié le bon parcours et le bon niveau de formalisation.", [
+      documentArchiveSection("Archive documentaire avancée", "Cette archive rassemble les modèles spécialisés. Elle s'utilise après avoir choisi le bon parcours afin de ne télécharger que les pièces réellement utiles au dossier.", [
         ["Dossier TVF", "Présenter l'association, sa méthode, ses publics et ses conditions de coopération.", "documents/dossier-presentation-tvf.md"],
         ["Dossier collectivité TVF", "Présenter un parcours territoire partenaire en réunion avec une commune, un EPCI, un département ou une région.", "documents/dossier-collectivite-tvf.md"],
         ["Dossier propriétaire TVF", "Expliquer au propriétaire le cadre d'étude, de convention, d'usage et de restitution d'un bien.", "documents/dossier-proprietaire-tvf.md"],
@@ -1014,8 +1014,8 @@ const pages = [
         ["Kit média", "Centraliser les formulations publiques, l’usage du logo et les règles presse.", "documents/kit-media.md"],
       ]),
       textBlock(
-        "À utiliser avec prudence",
-        "Ces documents sont volontairement préparatoires. Avant signature ou engagement, chaque projet doit être relu, adapté au contexte et validé par les personnes compétentes."
+        "Mode d'emploi",
+        "Commencez par le document prioritaire, puis ajoutez seulement les pièces nécessaires : fiche projet, convention, grille d'impact ou pièces de suivi. Avant signature ou engagement, chaque modèle doit être adapté au contexte et validé par les personnes compétentes."
       ),
       faqSection([
         ["Faut-il remplir tous les documents ?", "Non. Le tableau d'orientation aide à choisir le bon document selon votre besoin. Un dossier simple doit rester lisible et proportionné."],
@@ -1051,10 +1051,10 @@ const pages = [
         ["Propriétaire", "Que faire avec un bien vacant ou dégradé ?", "Décrire le bien, son état, les contraintes et les usages possibles", "Espace propriétaires"],
         ["Entreprise", "Comment valoriser matériaux ou compétences ?", "Lister les ressources, leur état, leur localisation et les conditions de récupération", "Espace entreprises"],
         ["Bénévole", "Comment aider concrètement ?", "Indiquer ses compétences, disponibilités et territoire d'action", "Bénévoles & citoyens"],
-        ["Financeur", "Comment soutenir un projet sans chiffres inventés ?", "Demander un dossier instruit avec budget, indicateurs et preuve de suivi", "Financeurs & mécènes"],
+        ["Financeur", "Comment soutenir un projet avec des indicateurs fiables ?", "Demander un dossier instruit avec budget, indicateurs et preuve de suivi", "Financeurs & mécènes"],
       ]),
       faqSection([
-        ["TVF est-elle déjà une plateforme opérationnelle complète ?", "Non. TVF repart sur une base claire et progressive. Le site présente le cadre, les parcours et les documents préparatoires avant une montée en charge opérationnelle."],
+        ["Comment TVF progresse-t-elle vers une plateforme opérationnelle ?", "TVF avance par étapes : cadrage des parcours, documents de travail, qualification des demandes, conventions, puis publication d'indicateurs uniquement lorsque les actions sont vérifiées."],
         ["TVF remplace-t-elle les collectivités ou dispositifs publics ?", "Non. TVF se positionne comme un outil de coopération et de coordination. L'association aide à cadrer les besoins, réunir les acteurs et documenter les projets."],
         ["Un propriétaire peut-il proposer un bien ?", "Oui. Il peut présenter un logement, un commerce, un bâtiment ou un terrain inutilisé. TVF étudie ensuite l'état du bien, les contraintes et les usages envisageables."],
         ["Les matériaux sont-ils distribués gratuitement ?", "Non. Les matériaux doivent être orientés vers des projets validés. TVF privilégie la traçabilité, l'utilité territoriale et l'affectation cohérente des ressources."],
@@ -1132,11 +1132,11 @@ const pages = [
     eyebrow: "Impact",
     h1: "Mesurer avant d'annoncer.",
     intro:
-      "TVF ne publie pas de chiffres fictifs. Cette page présente les indicateurs qui devront être suivis lorsque les premiers projets seront réellement instruits, conventionnés puis réalisés.",
+      "Cette page présente les indicateurs qui devront être suivis lorsque les premiers projets seront instruits, conventionnés puis réalisés, avec une méthode de preuve lisible.",
     ctas: [["Voir la transparence", "transparence.html"], ["Télécharger la grille", "documents/grille-impact.md"]],
     sections: [
       sectionIntro(
-        "Mesurer sans inventer",
+        "Mesurer avec méthode",
         "L'impact TVF doit être lu comme une chaîne de preuves. Avant de publier un résultat, il faut savoir d'où vient la donnée, qui l'a validée, à quel projet elle correspond et quelles limites doivent être indiquées.",
         [
           ["Objectifs", "Ce que l'association cherche à atteindre sur un territoire ou un projet."],
@@ -1185,7 +1185,7 @@ const pages = [
     file: "gouvernance.html",
     title: "Gouvernance & éthique",
     meta:
-      "Gouvernance, éthique, responsabilités et règles de décision de Territoires Vivants France.",
+      "Gouvernance et éthique de Territoires Vivants France : responsabilités, critères de décision, transparence, traçabilité et prévention des risques.",
     heroImage: "assets/photos/france-saint-etienne-jean-jaures.jpg",
     eyebrow: "Cadre institutionnel",
     h1: "Une gouvernance lisible pour inspirer confiance.",
@@ -1292,7 +1292,7 @@ const pages = [
       ]),
       textBlock(
         "Règle de communication",
-        "TVF doit rester exigeante dans sa communication : pas de faux partenaire, pas de résultat inventé, pas de promesse non cadrée. Cette discipline éditoriale protège l'association, les partenaires et les futurs bénéficiaires."
+        "TVF doit rester exigeante dans sa communication : chaque partenaire, résultat ou engagement public doit être vérifiable, cadré et cohérent avec l'état réel du projet. Cette discipline éditoriale protège l'association, les partenaires et les futurs bénéficiaires."
       ),
       faqSection([
         ["Un journaliste peut-il reprendre les textes du site ?", "Il peut s'appuyer sur les formulations publiques, à condition de ne pas transformer les objectifs en résultats ni les pistes en partenariats officialisés."],
@@ -1356,12 +1356,12 @@ const pages = [
     file: "transparence.html",
     title: "Transparence",
     meta:
-      "Transparence, gouvernance, données et feuille de route de Territoires Vivants France.",
+      "Transparence de Territoires Vivants France : gouvernance, preuve, publication des données, registres de suivi et feuille de route publique.",
     heroImage: "assets/photos/friche-industrielle-ronchamp.jpg",
     eyebrow: "Transparence",
     h1: "Avancer avec méthode et preuve.",
     intro:
-      "TVF distingue clairement ce qui est établi, ce qui est en cours de structuration et ce qui devra être validé par convention, données ou partenariats réels.",
+      "TVF distingue clairement les informations établies, les objectifs publics, les dossiers à instruire et les éléments qui devront être validés par convention, source ou preuve avant publication.",
     ctas: [["Documents", "documents.html"], ["Contact", "contact.html"]],
     sections: [
       sectionIntro(
@@ -1390,6 +1390,10 @@ const pages = [
         ["Projets réalisés", "Ne pas communiquer avant réalisation vérifiée", "Compte rendu, convention, photos autorisées, indicateurs"],
         ["Chiffres d'impact", "Ne pas publier sans méthode de calcul", "Grille d'impact, source, date, preuve"],
       ]),
+      textBlock(
+        "Informations administratives à compléter",
+        "Les références administratives définitives seront ajoutées lorsque les pièces officielles seront disponibles : numéro RNA, numéro SIREN le cas échéant, statut juridique exact, informations complètes d'hébergement et documents officiels actualisés. En attendant, TVF conserve une rédaction volontairement sobre pour ne pas publier d'information approximative."
+      ),
       tableSection("Ce qui peut être publié", "Chaque information doit être reliée à son niveau de preuve.", [
         ["Information", "Publication possible", "Condition"],
         ["Objectif", "Oui", "Mentionner qu'il s'agit d'une intention ou d'une cible"],
@@ -2165,11 +2169,11 @@ function audienceSection() {
 }
 
 function formSection() {
-  return `<section class="section" ${sectionAttrs("Préparer une situation", "proposer")}><span class="anchor-target" id="signalement"></span><div class="container form-panel"><div><p class="section-kicker">Premier contact</p><h2>Préparer une situation</h2><p>Utilisez ce bloc comme guide de préparation avant d'écrire à TVF. L'objectif est de rassembler les informations utiles pour accélérer l'orientation de votre demande.</p></div><form data-prepare-form aria-describedby="preparation-note"><label for="prep-profile">Votre profil</label><select id="prep-profile" name="profil"><option value="collectivite">Collectivité</option><option value="proprietaire">Propriétaire</option><option value="entreprise">Entreprise</option><option value="association">Association</option><option value="citoyen">Citoyen</option></select><label for="prep-subject">Objet</label><input id="prep-subject" name="objet" type="text" autocomplete="off" placeholder="Ex. logement vacant, matériaux, partenariat"><label for="prep-message">Message</label><textarea id="prep-message" name="message" placeholder="Décrivez le besoin, le lieu, les acteurs concernés et les délais."></textarea><p class="form-note" id="preparation-note">Ce bloc sert à préparer votre demande. Aucune donnée n'est transmise automatiquement depuis cette page.</p><p class="form-note" data-local-draft-status hidden role="status">Brouillon restauré depuis cet onglet. Vous pouvez le modifier, le préparer ou l'effacer.</p><p class="form-note" data-save-status hidden role="status">Brouillon sauvegardé localement dans cet onglet.</p><button class="btn secondary" type="button" data-prepare-summary>Créer un résumé</button><button class="btn secondary" type="button" data-copy-summary hidden>Copier le résumé</button><button class="btn secondary" type="button" data-download-summary hidden>Télécharger le résumé</button><button class="btn secondary" type="button" data-reset-form hidden>Effacer le brouillon</button><output class="form-summary" data-form-summary hidden aria-live="polite"></output><a class="btn primary" href="${hrefFor("contact.html")}" data-transfer-summary>Passer par la page contact</a></form></div></section>`;
+  return `<section class="section" ${sectionAttrs("Préparer une situation", "proposer")}><span class="anchor-target" id="signalement"></span><div class="container form-panel"><div><p class="section-kicker">Premier contact</p><h2>Préparer une situation</h2><p>Utilisez ce bloc pour préparer un message clair avant contact : profil, lieu, ressource, besoin et suite attendue. Le résumé peut être copié, téléchargé ou ouvert dans votre messagerie.</p></div><form data-prepare-form aria-describedby="preparation-note"><label for="prep-profile">Votre profil</label><select id="prep-profile" name="profil"><option value="collectivite">Collectivité</option><option value="proprietaire">Propriétaire</option><option value="entreprise">Entreprise</option><option value="association">Association</option><option value="citoyen">Citoyen</option></select><label for="prep-subject">Objet</label><input id="prep-subject" name="objet" type="text" autocomplete="off" placeholder="Ex. logement vacant, matériaux, partenariat"><label for="prep-message">Message</label><textarea id="prep-message" name="message" placeholder="Décrivez le besoin, le lieu, les acteurs concernés et les délais."></textarea><p class="form-note" id="preparation-note">Ce bloc prépare votre demande localement. Le bouton d'e-mail ouvre votre messagerie : rien n'est transmis sans action de votre part.</p><p class="form-note" data-local-draft-status hidden role="status">Brouillon restauré depuis cet onglet. Vous pouvez le modifier, le préparer ou l'effacer.</p><p class="form-note" data-save-status hidden role="status">Brouillon sauvegardé localement dans cet onglet.</p><button class="btn secondary" type="button" data-prepare-summary>Créer un résumé</button><a class="btn primary" href="mailto:${contact.email}" data-mailto-summary data-mailto-to="${contact.email}" data-mailto-subject="Demande TVF - situation à qualifier" hidden>Ouvrir l'e-mail</a><button class="btn secondary" type="button" data-copy-summary hidden>Copier le résumé</button><button class="btn secondary" type="button" data-download-summary hidden>Télécharger le résumé</button><button class="btn secondary" type="button" data-reset-form hidden>Effacer le brouillon</button><output class="form-summary" data-form-summary hidden aria-live="polite"></output><a class="btn secondary" href="${hrefFor("contact.html")}" data-transfer-summary>Passer par la page contact</a></form></div></section>`;
 }
 
 function contactSection() {
-  return `<section class="section" ${sectionAttrs("Demander un rendez-vous", "contact-form")}><div class="container form-panel"><div><p class="section-kicker">Rendez-vous</p><h2>Demander un rendez-vous</h2><p>Préparez un message structuré : profil, territoire, objet, urgence, pièces disponibles et décision attendue. L'envoi définitif se fait par e-mail à <a href="mailto:${contact.email}">${contact.email}</a> ou par téléphone au <a href="tel:${contact.phoneHref}">${contact.phone}</a>.</p></div><form data-prepare-form aria-describedby="contact-note"><label for="contact-profile">Votre profil</label><select id="contact-profile" name="profil"><option value="">Choisir un profil</option><option value="collectivite">Collectivité / EPCI</option><option value="proprietaire">Propriétaire</option><option value="entreprise">Entreprise</option><option value="association">Association</option><option value="benevole">Bénévole / citoyen</option><option value="financeur">Financeur / mécène</option><option value="presse">Presse / institution</option></select><label for="contact-name">Nom / structure</label><input id="contact-name" name="nom" type="text" autocomplete="name" placeholder="Votre nom ou organisme"><label for="contact-email">E-mail</label><input id="contact-email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="contact@exemple.fr"><label for="contact-phone">Téléphone</label><input id="contact-phone" name="telephone" type="tel" autocomplete="tel" inputmode="tel" placeholder="06 00 00 00 00"><label for="contact-location">Commune / territoire concerné</label><input id="contact-location" name="territoire" type="text" autocomplete="address-level2" placeholder="Ex. Saint-Étienne, quartier, commune ou EPCI"><label for="contact-subject">Objet de la demande</label><input id="contact-subject" name="objet" type="text" autocomplete="off" placeholder="Ex. logement vacant, matériaux, friche, rendez-vous collectivité"><label for="contact-message">Message</label><textarea id="contact-message" name="message" autocomplete="off" placeholder="Décrivez la situation, les pièces disponibles, les acteurs connus et la suite souhaitée."></textarea><p class="form-note" id="contact-note">Ce formulaire prépare un résumé localement dans votre navigateur. Aucune donnée n'est envoyée automatiquement depuis cette page.</p><p class="form-note" data-draft-status hidden role="status">Résumé récupéré depuis la page Agir avec nous. Relisez le message avant tout envoi officiel.</p><p class="form-note" data-local-draft-status hidden role="status">Brouillon restauré depuis cet onglet. Vous pouvez le modifier, le préparer ou l'effacer.</p><p class="form-note" data-save-status hidden role="status">Brouillon sauvegardé localement dans cet onglet.</p><button class="btn primary" type="button" data-prepare-summary>Préparer l'envoi</button><button class="btn secondary" type="button" data-copy-summary hidden>Copier le résumé</button><button class="btn secondary" type="button" data-download-summary hidden>Télécharger le résumé</button><button class="btn secondary" type="button" data-reset-form hidden>Effacer le brouillon</button><output class="form-summary" data-form-summary hidden aria-live="polite"></output></form></div></section>`;
+  return `<section class="section" ${sectionAttrs("Demander un rendez-vous", "contact-form")}><div class="container form-panel"><div><p class="section-kicker">Rendez-vous</p><h2>Demander un rendez-vous</h2><p>Préparez un message structuré : profil, territoire, objet, urgence, pièces disponibles et décision attendue. L'envoi définitif se fait par e-mail à <a href="mailto:${contact.email}">${contact.email}</a> ou par téléphone au <a href="tel:${contact.phoneHref}">${contact.phone}</a>.</p></div><form data-prepare-form aria-describedby="contact-note"><label for="contact-profile">Votre profil</label><select id="contact-profile" name="profil"><option value="">Choisir un profil</option><option value="collectivite">Collectivité / EPCI</option><option value="proprietaire">Propriétaire</option><option value="entreprise">Entreprise</option><option value="association">Association</option><option value="benevole">Bénévole / citoyen</option><option value="financeur">Financeur / mécène</option><option value="presse">Presse / institution</option></select><label for="contact-name">Nom / structure</label><input id="contact-name" name="nom" type="text" autocomplete="name" placeholder="Votre nom ou organisme"><label for="contact-email">E-mail</label><input id="contact-email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="contact@exemple.fr"><label for="contact-phone">Téléphone</label><input id="contact-phone" name="telephone" type="tel" autocomplete="tel" inputmode="tel" placeholder="06 00 00 00 00"><label for="contact-location">Commune / territoire concerné</label><input id="contact-location" name="territoire" type="text" autocomplete="address-level2" placeholder="Ex. Saint-Étienne, quartier, commune ou EPCI"><label for="contact-subject">Objet de la demande</label><input id="contact-subject" name="objet" type="text" autocomplete="off" placeholder="Ex. logement vacant, matériaux, friche, rendez-vous collectivité"><label for="contact-message">Message</label><textarea id="contact-message" name="message" autocomplete="off" placeholder="Décrivez la situation, les pièces disponibles, les acteurs connus et la suite souhaitée."></textarea><p class="form-note" id="contact-note">Ce formulaire prépare un résumé dans votre navigateur. Le bouton d'e-mail ouvre votre messagerie préremplie : aucun envoi n'est effectué sans validation de votre part.</p><p class="form-note" data-draft-status hidden role="status">Résumé récupéré depuis la page Agir avec nous. Relisez le message avant tout envoi officiel.</p><p class="form-note" data-local-draft-status hidden role="status">Brouillon restauré depuis cet onglet. Vous pouvez le modifier, le préparer ou l'effacer.</p><p class="form-note" data-save-status hidden role="status">Brouillon sauvegardé localement dans cet onglet.</p><button class="btn primary" type="button" data-prepare-summary>Préparer l'envoi</button><a class="btn primary" href="mailto:${contact.email}" data-mailto-summary data-mailto-to="${contact.email}" data-mailto-subject="Demande de rendez-vous TVF" hidden>Ouvrir l'e-mail</a><button class="btn secondary" type="button" data-copy-summary hidden>Copier le résumé</button><button class="btn secondary" type="button" data-download-summary hidden>Télécharger le résumé</button><button class="btn secondary" type="button" data-reset-form hidden>Effacer le brouillon</button><output class="form-summary" data-form-summary hidden aria-live="polite"></output></form></div></section>`;
 }
 
 function legalSection() {

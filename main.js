@@ -228,6 +228,7 @@ document.querySelectorAll("[data-prepare-form]").forEach((form, index) => {
   const downloadButton = form.querySelector("[data-download-summary]");
   const resetButton = form.querySelector("[data-reset-form]");
   const transferLink = form.querySelector("[data-transfer-summary]");
+  const mailtoLink = form.querySelector("[data-mailto-summary]");
   const output = form.querySelector("[data-form-summary]");
   const localDraftStatus = form.querySelector("[data-local-draft-status]");
   const saveStatus = form.querySelector("[data-save-status]");
@@ -294,6 +295,10 @@ document.querySelectorAll("[data-prepare-form]").forEach((form, index) => {
       downloadButton.hidden = true;
     }
 
+    if (mailtoLink) {
+      mailtoLink.hidden = true;
+    }
+
     if (resetButton) {
       resetButton.hidden = !hasDraft;
     }
@@ -333,9 +338,30 @@ document.querySelectorAll("[data-prepare-form]").forEach((form, index) => {
       downloadButton.hidden = true;
     }
 
+    if (mailtoLink) {
+      mailtoLink.hidden = true;
+      mailtoLink.removeAttribute("href");
+    }
+
     if (resetButton) {
       resetButton.hidden = true;
     }
+  }
+
+  function updateMailtoLink(summary) {
+    if (!mailtoLink) return;
+
+    const hasSummary = summary.lines.length > 0;
+    mailtoLink.hidden = !hasSummary;
+
+    if (!hasSummary) {
+      mailtoLink.removeAttribute("href");
+      return;
+    }
+
+    const recipient = mailtoLink.dataset.mailtoTo || "contact@territoiresvivantsfrance.fr";
+    const subject = mailtoLink.dataset.mailtoSubject || "Demande Territoires Vivants France";
+    mailtoLink.href = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(summary.text)}`;
   }
 
   async function copySummary() {
@@ -418,6 +444,8 @@ document.querySelectorAll("[data-prepare-form]").forEach((form, index) => {
       downloadButton.hidden = !hasSummary;
     }
 
+    updateMailtoLink(summary);
+
     if (resetButton) {
       resetButton.hidden = !hasSummary;
     }
@@ -427,6 +455,11 @@ document.querySelectorAll("[data-prepare-form]").forEach((form, index) => {
   downloadButton?.addEventListener("click", downloadSummary);
   resetButton?.addEventListener("click", resetDraft);
   transferLink?.addEventListener("click", transferSummary);
+  mailtoLink?.addEventListener("click", () => {
+    if (!mailtoLink.hidden) {
+      markHandled();
+    }
+  });
 });
 
 window.addEventListener("beforeunload", (event) => {
