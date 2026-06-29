@@ -30,6 +30,7 @@ const nav = [
 
 const imageSizes = {
   "assets/logo-territoires-vivants-france.png": [612, 408],
+  "assets/logo-territoires-vivants-france-web.png": [583, 181],
   "assets/photos/community-garden-paris.webp": [960, 640],
   "assets/photos/artisan-menuiserie-bois.jpg": [1600, 1059],
   "assets/photos/batiment-rural-france.jpg": [801, 1200],
@@ -2569,7 +2570,7 @@ ${socialImageSize}
   <a class="skip-link" href="#contenu">Aller au contenu</a>
   <header class="site-header">
     <div class="container header-inner">
-      <a class="brand" href="${hrefFor("index.html")}" aria-label="Accueil Territoires Vivants France"><img src="assets/logo-territoires-vivants-france.png" width="612" height="408" alt="Territoires Vivants France" decoding="async"></a>
+      <a class="brand" href="${hrefFor("index.html")}" aria-label="Accueil Territoires Vivants France"><img src="assets/logo-territoires-vivants-france-web.png" width="583" height="181" alt="Territoires Vivants France" decoding="async"></a>
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav">Menu</button>
       <nav class="main-nav" id="main-nav" aria-label="Navigation principale">${nav
         .map(([label, href]) => `<a href="${hrefFor(href)}"${href === active ? ' aria-current="page"' : ""}>${label}</a>`)
@@ -2595,7 +2596,7 @@ ${breadcrumbNav(page)}
   </main>
   <footer class="site-footer">
     <div class="container footer-grid">
-      <div><span class="footer-logo-box"><img src="assets/logo-territoires-vivants-france.png" width="612" height="408" alt="Territoires Vivants France" class="footer-logo" loading="lazy" decoding="async"></span><p>Plateforme nationale de coopération pour redonner vie aux biens, lieux et ressources inutilisés.</p></div>
+      <div><span class="footer-logo-box"><img src="assets/logo-territoires-vivants-france-web.png" width="583" height="181" alt="Territoires Vivants France" class="footer-logo" loading="lazy" decoding="async"></span><p>Plateforme nationale de coopération pour redonner vie aux biens, lieux et ressources inutilisés.</p></div>
       <div><h3>Navigation</h3>${nav.slice(0, 7).map(([label, href]) => `<a href="${hrefFor(href)}">${label}</a>`).join("")}</div>
       <div><h3>Ressources</h3><a href="${hrefFor("notre-methode.html")}">Notre méthode</a><a href="${hrefFor("impact.html")}">Impact</a><a href="${hrefFor("gouvernance.html")}">Gouvernance</a><a href="${hrefFor("kit-media.html")}">Kit média</a><a href="${hrefFor("documents.html")}">Documents</a><a href="${hrefFor("faq.html")}">FAQ</a><a href="${hrefFor("transparence.html")}">Transparence</a><a href="${hrefFor("mentions-legales.html")}">Mentions légales</a><a href="${hrefFor("contact.html")}">Contact</a></div>
       <div><h3>Siège</h3><p>25 rue Élise Gervais<br>42000 Saint-Étienne</p><p><a href="mailto:${contact.email}">${contact.email}</a><br><a href="tel:${contact.phoneHref}">${contact.phone}</a></p><a class="btn secondary" href="${hrefFor("contact.html")}">Contacter TVF</a></div>

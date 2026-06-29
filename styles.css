@@ -107,8 +107,9 @@ a {
 }
 
 .brand img {
-  width: 220px;
-  max-height: 64px;
+  display: block;
+  width: clamp(210px, 17vw, 258px);
+  max-width: 100%;
   height: auto;
   object-fit: contain;
 }
@@ -1167,16 +1168,17 @@ tr:last-child td {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: min(100%, 260px);
-  padding: 10px 14px;
+  width: min(100%, 320px);
+  padding: 14px 18px;
   margin-bottom: 18px;
   background: var(--white);
-  border-radius: 18px;
+  border-radius: 16px;
 }
 
 .footer-logo {
-  width: 230px;
-  max-height: 76px;
+  display: block;
+  width: min(100%, 280px);
+  height: auto;
   object-fit: contain;
 }
 
@@ -1218,8 +1220,7 @@ tr:last-child td {
   }
 
   .brand img {
-    width: 190px;
-    max-height: 56px;
+    width: 210px;
   }
 
   .menu-toggle {
@@ -1328,7 +1329,16 @@ tr:last-child td {
   }
 
   .brand img {
-    width: 165px;
+    width: 176px;
+  }
+
+  .footer-logo-box {
+    width: min(100%, 270px);
+    padding: 12px 14px;
+  }
+
+  .footer-logo {
+    width: min(100%, 238px);
   }
 
   .section {
