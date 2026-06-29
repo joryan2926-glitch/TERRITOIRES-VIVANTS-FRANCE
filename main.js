@@ -114,10 +114,39 @@ function valueForField(field) {
   return field.value.trim();
 }
 
+function summaryForForm(form) {
+  const fields = Array.from(form.querySelectorAll("input, select, textarea"));
+  const lines = fields
+    .map((field) => [labelForField(field), valueForField(field)])
+    .filter(([, value]) => value)
+    .map(([label, value]) => `${label} : ${value}`);
+
+  return {
+    lines,
+    text: lines.length
+      ? `Résumé de la demande\n\n${lines.join("\n")}`
+      : "Renseignez au moins un champ pour préparer un résumé de demande.",
+  };
+}
+
+const contactMessage = document.querySelector("#contact-message");
+if (contactMessage) {
+  try {
+    const draft = sessionStorage.getItem("tvfContactDraft");
+    if (draft && !contactMessage.value.trim()) {
+      contactMessage.value = draft;
+    }
+    sessionStorage.removeItem("tvfContactDraft");
+  } catch {
+    // Le parcours reste utilisable si le stockage local est indisponible.
+  }
+}
+
 document.querySelectorAll("[data-prepare-form]").forEach((form) => {
   const button = form.querySelector("[data-prepare-summary]");
   const copyButton = form.querySelector("[data-copy-summary]");
   const downloadButton = form.querySelector("[data-download-summary]");
+  const transferLink = form.querySelector("[data-transfer-summary]");
   const output = form.querySelector("[data-form-summary]");
   if (!button || !output) return;
 
@@ -163,29 +192,35 @@ document.querySelectorAll("[data-prepare-form]").forEach((form) => {
     window.setTimeout(() => URL.revokeObjectURL(link.href), 1000);
   }
 
+  function transferSummary() {
+    const summary = summaryForForm(form);
+    if (!summary.lines.length) return;
+
+    try {
+      sessionStorage.setItem("tvfContactDraft", summary.text);
+    } catch {
+      // Le lien continue vers la page contact même si le stockage local échoue.
+    }
+  }
+
   button.addEventListener("click", () => {
-    const fields = Array.from(form.querySelectorAll("input, select, textarea"));
-    const lines = fields
-      .map((field) => [labelForField(field), valueForField(field)])
-      .filter(([, value]) => value)
-      .map(([label, value]) => `${label} : ${value}`);
+    const summary = summaryForForm(form);
 
     output.hidden = false;
-    output.textContent = lines.length
-      ? `Résumé de la demande\n\n${lines.join("\n")}`
-      : "Renseignez au moins un champ pour préparer un résumé de demande.";
+    output.textContent = summary.text;
 
     if (copyButton) {
-      copyButton.hidden = !lines.length;
+      copyButton.hidden = !summary.lines.length;
     }
 
     if (downloadButton) {
-      downloadButton.hidden = !lines.length;
+      downloadButton.hidden = !summary.lines.length;
     }
   });
 
   copyButton?.addEventListener("click", copySummary);
   downloadButton?.addEventListener("click", downloadSummary);
+  transferLink?.addEventListener("click", transferSummary);
 });
 
 const printDetailsState = [];
