@@ -265,8 +265,8 @@ const pages = [
       cards("Les pôles TVF", "Chaque pôle apporte une compétence précise au service d'un même objectif : remettre en usage ce qui peut redevenir utile.", [
         ["Habitat Vivant", "Logements vacants, habitat dégradé, propriétaires, occupation temporaire, usages solidaires.", "proprietaires.html"],
         ["Matériauthèque Solidaire", "Matériaux réemployables, collecte, diagnostic, stockage, affectation à des projets validés.", "entreprises.html"],
-        ["Commerce Vivant", "Locaux fermés, vitrines inactives, artisans, services de proximité et usages temporaires."],
-        ["Friches & Terrains Vivants", "Terrains délaissés, espaces verts, jardins partagés, biodiversité et nouveaux usages collectifs."],
+        ["Commerce Vivant", "Locaux fermés, vitrines inactives, artisans, services de proximité et usages temporaires.", "nos-poles.html#commerce-vivant"],
+        ["Friches & Terrains Vivants", "Terrains délaissés, espaces verts, jardins partagés, biodiversité et nouveaux usages collectifs.", "nos-poles.html#friches-terrains-vivants"],
         ["Solidarité & Insertion", "Bénévolat, missions encadrées, formation, participation citoyenne et inclusion.", "benevoles-citoyens.html"],
       ]),
       tableSection("Rôle détaillé de chaque pôle", "Chaque pôle doit produire des informations utiles à la décision, pas seulement une intention.", [
