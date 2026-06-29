@@ -4,6 +4,7 @@ const path = require("path");
 const site = {
   name: "Territoires Vivants France",
   url: "https://www.territoiresvivantsfrance.fr",
+  lastModified: "2026-06-29",
   description:
     "Plateforme nationale de coopération pour remettre en usage les logements, commerces, bâtiments, terrains et matériaux inutilisés.",
 };
@@ -1765,6 +1766,7 @@ function jsonLd(page) {
       isPartOf: { "@id": `${site.url}/#website` },
       about: { "@id": `${site.url}/#organization` },
       primaryImageOfPage: imageObjectFor(page),
+      dateModified: site.lastModified,
       inLanguage: "fr-FR",
     },
   ];
@@ -1833,6 +1835,7 @@ function pageTemplate(page) {
   <meta property="og:description" content="${page.meta}">
   <meta property="og:type" content="website">
   <meta property="og:url" content="${url}">
+  <meta property="og:updated_time" content="${site.lastModified}">
   <meta property="og:image" content="${socialImage.url}">
   <meta property="og:image:secure_url" content="${socialImage.url}">
 ${socialImageSize}
@@ -1917,7 +1920,7 @@ fs.writeFileSync(
   `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${pages
     .map((p) => {
       const priority = p.file === "index.html" ? "1.0" : ["qui-sommes-nous.html", "nos-actions.html", "nos-poles.html", "saint-etienne.html", "agir-avec-nous.html", "contact.html"].includes(p.file) ? "0.8" : "0.6";
-      return `  <url><loc>${pageUrl(p)}</loc><changefreq>monthly</changefreq><priority>${priority}</priority></url>`;
+      return `  <url><loc>${pageUrl(p)}</loc><lastmod>${site.lastModified}</lastmod><changefreq>monthly</changefreq><priority>${priority}</priority></url>`;
     })
     .join("\n")}\n</urlset>\n`,
   "utf8"
