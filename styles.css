@@ -578,6 +578,82 @@ p {
   border-radius: var(--radius);
 }
 
+.quick-brief {
+  padding: 22px 0;
+  background: var(--white);
+  border-bottom: 1px solid rgba(24, 63, 34, 0.1);
+}
+
+.quick-brief-grid {
+  display: grid;
+  grid-template-columns: 1.1fr repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  align-items: stretch;
+}
+
+.quick-brief-grid > * {
+  margin: 0;
+  padding: 18px 20px;
+  color: var(--blue-900);
+  background: rgba(235, 244, 232, 0.58);
+  border: 1px solid rgba(24, 63, 34, 0.1);
+  border-radius: 18px;
+}
+
+.quick-brief-grid strong {
+  display: block;
+  color: var(--green-900);
+  font-size: 1.1rem;
+  line-height: 1.25;
+}
+
+.quick-brief-grid span {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.quick-brief-grid a {
+  color: var(--green-900);
+  font-weight: 900;
+}
+
+.compact-section {
+  padding-top: 54px;
+}
+
+.compact-grid {
+  display: grid;
+  grid-template-columns: 1.35fr repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.compact-grid article {
+  padding: 24px;
+  color: var(--blue-900);
+  background: var(--white);
+  border: 1px solid rgba(24, 63, 34, 0.1);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-soft);
+}
+
+.compact-grid h2 {
+  margin: 0 0 12px;
+  font-size: clamp(1.8rem, 2.5vw, 2.7rem);
+  line-height: 1.08;
+}
+
+.compact-grid strong {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--green-900);
+  font-size: 1.05rem;
+}
+
 .journey-section {
   background:
     linear-gradient(135deg, rgba(24, 63, 34, 0.94), rgba(14, 45, 69, 0.94)),
@@ -999,6 +1075,15 @@ tr:last-child td {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .quick-brief-grid,
+  .compact-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .compact-grid article:first-child {
+    grid-column: 1 / -1;
+  }
+
   .journey-grid {
     grid-template-columns: 1fr;
   }
@@ -1050,6 +1135,20 @@ tr:last-child td {
 
   .card-grid {
     grid-template-columns: 1fr;
+  }
+
+  .quick-brief {
+    padding: 14px 0;
+  }
+
+  .quick-brief-grid,
+  .compact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .quick-brief-grid > *,
+  .compact-grid article {
+    padding: 18px;
   }
 
   .timeline article {

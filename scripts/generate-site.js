@@ -76,6 +76,7 @@ const pages = [
           ["Coordonner", "Réunir propriétaires, collectivités, entreprises, associations, financeurs, bénévoles et habitants."],
         ]
       ),
+      homeClaritySection(),
       tableSection("Ce que vous pouvez faire dès maintenant", "L'accueil doit orienter vite vers le bon parcours, sans perdre le visiteur dans tout le site.", [
         ["Votre situation", "Action utile", "Page à consulter"],
         ["Vous représentez une collectivité", "Préparer un périmètre pilote, un besoin public ou une coopération", "Collectivités"],
@@ -1618,6 +1619,10 @@ function sectionIntro(title, text, items) {
     .join("")}</div></div></section>`;
 }
 
+function homeClaritySection() {
+  return `<section class="section compact-section" ${sectionAttrs("TVF en lecture rapide")}><div class="container compact-grid"><article><p class="section-kicker">Mission</p><h2>TVF sert à relier les bons acteurs autour d'un lieu inutile.</h2><p>Un logement, un commerce, une friche, un terrain ou des matériaux ne deviennent utiles que si le besoin, l'usage, les responsabilités, les documents et le suivi sont clarifiés.</p></article><article><strong>Pour qui ?</strong><p>Collectivités, propriétaires, entreprises, associations, financeurs, bénévoles et citoyens.</p><a class="text-link" href="${hrefFor("agir-avec-nous.html")}">Choisir mon parcours</a></article><article><strong>Premier geste</strong><p>Décrire la situation en quelques lignes : lieu, ressource, besoin, acteurs connus et suite attendue.</p><a class="text-link" href="${hrefFor("contact.html")}">Demander un rendez-vous</a></article><article><strong>Document utile</strong><p>Commencer par le dossier TVF ou la fiche adaptée à votre profil.</p><a class="text-link" href="${hrefFor("documents.html#les-10-documents-essentiels")}">Voir les essentiels</a></article></div></section>`;
+}
+
 function cards(title, intro, items) {
   return `<section class="section soft" ${sectionAttrs(title)}><div class="container"><div class="section-head"><p class="section-kicker">Repères</p><h2>${title}</h2><p>${intro}</p></div><div class="card-grid">${items
     .map(([h, p, href]) => `<article class="card"><span class="card-icon" aria-hidden="true">${iconFor(h)}</span><h3>${h}</h3><p>${p}</p>${href ? `<a class="text-link" href="${hrefFor(href)}" aria-label="Découvrir : ${escapeAttr(h)}">Découvrir</a>` : ""}</article>`)
@@ -2283,6 +2288,39 @@ function ctaBandFor(page) {
     .join("")}</div></div></section>`;
 }
 
+function quickBriefFor(page) {
+  const briefs = {
+    "index.html": ["TVF en 30 secondes", "Coordonner la remise en usage de biens, lieux et ressources inutilisés.", "Choisir votre profil puis demander un échange.", "Dossier TVF", "agir-avec-nous.html"],
+    "nos-actions.html": ["À lire en priorité", "Comprendre les leviers d'action : logements, commerces, matériaux, friches, insertion et financement.", "Identifier l'action qui correspond à votre situation.", "Fiche projet", "contact.html"],
+    "nos-poles.html": ["Organisation", "Voir comment les 5 pôles structurent le travail de terrain.", "Repérer le pôle principal d'un dossier.", "Grille d'instruction", "nos-actions.html"],
+    "observatoire.html": ["Lecture rapide", "Observer, qualifier, cartographier et prioriser sans exposer de données sensibles.", "Signaler une situation factuelle.", "Fiche signalement", "agir-avec-nous.html#signalement"],
+    "agir-avec-nous.html": ["Parcours", "Choisir le bon point d'entrée selon votre profil et la nature de la contribution.", "Préparer une situation courte puis passer par la page contact.", "Fiche signalement", "#proposer"],
+    "saint-etienne.html": ["Territoire pilote", "Utiliser Saint-Étienne pour tester la méthode TVF sur des cas concrets et vérifiables.", "Proposer un bien, une ressource ou un besoin local.", "Dossier Saint-Étienne", "documents/dossier-territorial-saint-etienne.md"],
+    "contact.html": ["Objectif", "Transformer un premier message en demande exploitable.", "Préparer profil, territoire, objet, pièces et suite attendue.", "Fiche adaptée au profil", "#contact-form"],
+    "documents.html": ["Mode d'emploi", "Commencer par les 10 essentiels avant d'ouvrir la bibliothèque complète.", "Choisir un pack selon votre profil.", "Dossier TVF", "#les-10-documents-essentiels"],
+    "impact.html": ["Impact", "Distinguer objectif, instruction, convention et résultat vérifié.", "Lire les indicateurs avec leur preuve.", "Grille d'impact", "documents/grille-impact.md"],
+    "collectivites.html": ["Collectivités", "Cadrer un périmètre, un diagnostic, une convention et un suivi.", "Préparer une fiche collectivité.", "Fiche collectivité", "documents/fiche-collectivite.md"],
+    "proprietaires.html": ["Propriétaires", "Présenter un bien sans créer d'engagement prématuré.", "Décrire état, contraintes, usage et limites.", "Fiche propriétaire", "documents/fiche-proprietaire.md"],
+    "entreprises.html": ["Entreprises", "Transformer matériaux, locaux, compétences ou mécénat en contribution traçable.", "Décrire la ressource et ses conditions.", "Fiche entreprise", "documents/fiche-entreprise.md"],
+    "benevoles-citoyens.html": ["Engagement", "Signaler, documenter ou participer avec un cadre de sécurité.", "Choisir une mission adaptée au temps disponible.", "Fiche bénévole", "documents/fiche-benevole.md"],
+    "financeurs-mecenes.html": ["Financeurs", "Soutenir des dossiers instruits avec budget, risques, preuves et reporting.", "Demander une lecture financeur du dossier.", "Plan de financement", "documents/plan-financement-territorial.md"],
+    "partenaires.html": ["Partenariat", "Clarifier le périmètre, les responsabilités et la communication avant annonce.", "Qualifier la coopération possible.", "Fiche partenaire", "documents/fiche-partenaire-potentiel.md"],
+    "notre-methode.html": ["Méthode", "Passer d'un signalement à une décision documentée.", "Suivre les étapes sans brûler le cadrage.", "Grille d'instruction", "documents/grille-instruction-dossier.md"],
+    "qui-sommes-nous.html": ["Association", "Comprendre la mission, les limites et la logique de coopération de TVF.", "Lire la méthode ou contacter TVF.", "Dossier TVF", "documents/dossier-presentation-tvf.md"],
+    "gouvernance.html": ["Gouvernance", "Savoir qui décide, sur quels critères et avec quelles preuves.", "Vérifier le cadre avant tout engagement.", "Charte éthique", "documents/charte-ethique.md"],
+    "transparence.html": ["Transparence", "Distinguer établi, à instruire et publiable.", "Vérifier les statuts avant communication.", "Registre décisions", "documents/registre-suivi-decisions.md"],
+    "faq.html": ["FAQ", "Trouver une réponse courte puis rejoindre la page ou le document utile.", "Chercher par profil ou passer au contact.", "Documents essentiels", "documents.html#les-10-documents-essentiels"],
+    "kit-media.html": ["Kit média", "Utiliser les bons mots, le logo officiel et les limites de communication.", "Préparer une présentation publique sans exagération.", "Pitch officiel", "documents/pitch-officiel-tvf.md"],
+    "mentions-legales.html": ["Cadre légal", "Retrouver les informations publiques et les champs à actualiser.", "Contacter TVF pour toute précision.", "Mentions", "contact.html"],
+  };
+
+  const brief = briefs[page.file];
+  if (!brief) return "";
+
+  const [label, objective, action, documentName, href] = brief;
+  return `<aside class="quick-brief" aria-label="À retenir"><div class="container quick-brief-grid"><div><p class="section-kicker">À retenir</p><strong>${label}</strong></div><p><span>Objectif</span>${objective}</p><p><span>Action</span>${action}</p><p><span>Document</span><a href="${hrefFor(href)}">${documentName}</a></p></div></aside>`;
+}
+
 function pageTemplate(page) {
   const active = page.file;
   const url = pageUrl(page);
@@ -2349,6 +2387,7 @@ ${breadcrumbNav(page)}
       </div>
     </section>
     ${pageMiniNav(page)}
+    ${quickBriefFor(page)}
     ${page.sections.join("\n")}
     ${journeySection(page)}
     ${ctaBandFor(page)}
