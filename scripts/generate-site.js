@@ -1418,24 +1418,85 @@ function iconFor(text) {
   return "TVF";
 }
 
+function pageUrl(page) {
+  return page.file === "index.html" ? `${site.url}/` : `${site.url}/${page.file}`;
+}
+
+function jsonLd(page) {
+  const url = pageUrl(page);
+  return JSON.stringify(
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": `${site.url}/#organization`,
+          name: site.name,
+          url: site.url,
+          logo: `${site.url}/assets/logo-tvf-officiel-fond-blanc.png`,
+          address: {
+            "@type": "PostalAddress",
+            streetAddress: "25 rue Élise Gervais",
+            postalCode: "42000",
+            addressLocality: "Saint-Étienne",
+            addressCountry: "FR",
+          },
+        },
+        {
+          "@type": "WebSite",
+          "@id": `${site.url}/#website`,
+          name: site.name,
+          url: site.url,
+          publisher: { "@id": `${site.url}/#organization` },
+          inLanguage: "fr-FR",
+        },
+        {
+          "@type": "WebPage",
+          "@id": `${url}#webpage`,
+          url,
+          name: `${page.title} | ${site.name}`,
+          description: page.meta,
+          isPartOf: { "@id": `${site.url}/#website` },
+          about: { "@id": `${site.url}/#organization` },
+          inLanguage: "fr-FR",
+        },
+      ],
+    },
+    null,
+    2
+  ).replace(/</g, "\\u003c");
+}
+
 function pageTemplate(page) {
   const active = page.file;
+  const url = pageUrl(page);
+  const title = `${page.title} | ${site.name}`;
   return `<!doctype html>
 <html lang="fr">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>${page.title} | ${site.name}</title>
+  <title>${title}</title>
   <meta name="description" content="${page.meta}">
-  <meta property="og:title" content="${page.title} | ${site.name}">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#183f22">
+  <link rel="canonical" href="${url}">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:site_name" content="${site.name}">
+  <meta property="og:title" content="${title}">
   <meta property="og:description" content="${page.meta}">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="${site.url}/${page.file}">
+  <meta property="og:url" content="${url}">
   <meta property="og:image" content="${site.url}/assets/logo-tvf-officiel-fond-blanc.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="${title}">
+  <meta name="twitter:description" content="${page.meta}">
+  <meta name="twitter:image" content="${site.url}/assets/logo-tvf-officiel-fond-blanc.png">
   <link rel="icon" href="assets/favicon-32.png">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <link rel="manifest" href="site.webmanifest">
   <link rel="stylesheet" href="styles.css">
+  <script type="application/ld+json">${jsonLd(page)}</script>
 </head>
 <body>
   <a class="skip-link" href="#contenu">Aller au contenu</a>

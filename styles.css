@@ -41,6 +41,11 @@ a {
   color: inherit;
 }
 
+:focus-visible {
+  outline: 3px solid var(--gold-500);
+  outline-offset: 4px;
+}
+
 .container {
   width: min(var(--container), calc(100% - 40px));
   margin-inline: auto;
@@ -141,6 +146,14 @@ a {
 
 .btn:hover {
   transform: translateY(-2px);
+}
+
+.btn:focus-visible,
+.main-nav a:focus-visible,
+.site-footer a:focus-visible,
+.text-link:focus-visible,
+.menu-toggle:focus-visible {
+  border-radius: 12px;
 }
 
 .btn.primary {
@@ -667,5 +680,25 @@ tr:last-child td {
   .form-panel,
   .legal {
     padding: 22px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .btn:hover,
+  .card:hover {
+    transform: none;
   }
 }
