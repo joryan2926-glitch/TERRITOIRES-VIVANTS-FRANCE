@@ -1595,7 +1595,7 @@ function timeline(title, items) {
 
 function tableSection(title, intro, rows) {
   const [head, ...body] = rows;
-  return `<section class="section" ${sectionAttrs(title)}><div class="container"><div class="section-head"><p class="section-kicker">Cadre</p><h2>${title}</h2><p>${intro}</p></div><div class="table-wrap"><table><thead><tr>${head.map((cell) => `<th>${cell}</th>`).join("")}</tr></thead><tbody>${body
+  return `<section class="section" ${sectionAttrs(title)}><div class="container"><div class="section-head"><p class="section-kicker">Cadre</p><h2>${title}</h2><p>${intro}</p></div><div class="table-wrap"><table><caption class="sr-only">${title}</caption><thead><tr>${head.map((cell) => `<th scope="col">${cell}</th>`).join("")}</tr></thead><tbody>${body
     .map((row) => `<tr>${row.map((cell) => `<td>${cell}</td>`).join("")}</tr>`)
     .join("")}</tbody></table></div></div></section>`;
 }
