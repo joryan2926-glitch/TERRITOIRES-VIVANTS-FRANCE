@@ -148,6 +148,61 @@ function focusFirstRequiredField(form) {
   field.focus();
 }
 
+function fieldsForForm(form) {
+  return Array.from(form.querySelectorAll("input, select, textarea"));
+}
+
+function storageKeyForForm(form, index) {
+  const section = form.closest("section[id]");
+  return `tvfFormDraft:${window.location.pathname}:${section?.id || index}`;
+}
+
+function saveLocalFormDraft(form, key) {
+  try {
+    if (!summaryForForm(form).lines.length) {
+      sessionStorage.removeItem(key);
+      return;
+    }
+
+    const draft = {};
+    fieldsForForm(form).forEach((field) => {
+      draft[field.id || field.name] = field.value;
+    });
+    sessionStorage.setItem(key, JSON.stringify(draft));
+  } catch {
+    // La sauvegarde locale est une aide : le formulaire reste utilisable sans elle.
+  }
+}
+
+function clearLocalFormDraft(key) {
+  try {
+    sessionStorage.removeItem(key);
+  } catch {
+    // Sans stockage local, rien n'est à nettoyer.
+  }
+}
+
+function restoreLocalFormDraft(form, key) {
+  try {
+    const rawDraft = sessionStorage.getItem(key);
+    if (!rawDraft) return false;
+
+    const draft = JSON.parse(rawDraft);
+    if (!draft || typeof draft !== "object") return false;
+
+    fieldsForForm(form).forEach((field) => {
+      const value = draft[field.id || field.name];
+      if (typeof value === "string") {
+        field.value = value;
+      }
+    });
+
+    return summaryForForm(form).lines.length > 0;
+  } catch {
+    return false;
+  }
+}
+
 let contactDraftRecovered = false;
 const contactMessage = document.querySelector("#contact-message");
 if (contactMessage) {
@@ -167,7 +222,7 @@ if (contactMessage) {
   }
 }
 
-document.querySelectorAll("[data-prepare-form]").forEach((form) => {
+document.querySelectorAll("[data-prepare-form]").forEach((form, index) => {
   const button = form.querySelector("[data-prepare-summary]");
   const copyButton = form.querySelector("[data-copy-summary]");
   const downloadButton = form.querySelector("[data-download-summary]");
@@ -176,7 +231,13 @@ document.querySelectorAll("[data-prepare-form]").forEach((form) => {
   const output = form.querySelector("[data-form-summary]");
   if (!button || !output) return;
 
-  const initialDirty = contactDraftRecovered && contactMessage && form.contains(contactMessage);
+  const localDraftKey = storageKeyForForm(form, index);
+  const skipLocalRestore = contactDraftRecovered && contactMessage && form.contains(contactMessage);
+  if (skipLocalRestore) {
+    clearLocalFormDraft(localDraftKey);
+  }
+  const localDraftRestored = skipLocalRestore ? false : restoreLocalFormDraft(form, localDraftKey);
+  const initialDirty = localDraftRestored || (contactDraftRecovered && contactMessage && form.contains(contactMessage));
   form.dataset.draftDirty = String(initialDirty);
   form.dataset.draftHandled = "false";
   if (resetButton) {
@@ -187,6 +248,7 @@ document.querySelectorAll("[data-prepare-form]").forEach((form) => {
     const hasDraft = summaryForForm(form).lines.length > 0;
     form.dataset.draftDirty = String(hasDraft);
     form.dataset.draftHandled = "false";
+    saveLocalFormDraft(form, localDraftKey);
 
     if (event?.target && valueForField(event.target)) {
       event.target.removeAttribute("aria-invalid");
@@ -212,6 +274,7 @@ document.querySelectorAll("[data-prepare-form]").forEach((form) => {
   function markHandled() {
     form.dataset.draftDirty = "false";
     form.dataset.draftHandled = "true";
+    clearLocalFormDraft(localDraftKey);
   }
 
   function resetDraft() {
