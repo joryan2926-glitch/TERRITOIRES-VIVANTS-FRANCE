@@ -41,7 +41,22 @@ Règles :
 
 TVF veut devenir un outil de coopération au service des territoires : plus lisible pour les collectivités, plus accessible pour les propriétaires, plus utile pour les entreprises engagées et plus mobilisateur pour les citoyens.
 
-## 7. Contact presse
+## 7. Supports de discours associés
+
+Pour préparer une prise de parole, un rendez-vous ou une campagne de communication, utiliser également :
+
+- `kit-discours-tvf.md`
+- `pitch-officiel-tvf.md`
+- `scripts-rendez-vous-institutionnels.md`
+- `argumentaires-par-public.md`
+- `scripts-prise-contact.md`
+- `objections-reponses.md`
+- `scripts-video-reseaux-sociaux.md`
+- `scenarios-types-cas-usage.md`
+
+Règle : adapter chaque support au contexte réel, sans annoncer de partenaire, chiffre ou résultat non vérifié.
+
+## 8. Contact presse
 
 Contact à compléter après validation officielle :
 
@@ -51,7 +66,7 @@ Contact à compléter après validation officielle :
 - Téléphone :
 - Adresse :
 
-## 8. Contrôle avant diffusion
+## 9. Contrôle avant diffusion
 
 Avant toute publication externe, vérifier :
 
