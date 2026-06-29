@@ -8,6 +8,60 @@ if (menuButton && nav) {
   });
 }
 
+const documentSearch = document.querySelector("#document-search");
+const documentCards = Array.from(document.querySelectorAll("[data-doc-card]"));
+const documentFilters = Array.from(document.querySelectorAll("[data-doc-filter]"));
+const documentCount = document.querySelector("[data-doc-count]");
+const documentEmpty = document.querySelector("[data-doc-empty]");
+
+function normalizeSearch(value) {
+  return value
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
+}
+
+function updateDocumentLibrary() {
+  if (!documentCards.length) return;
+
+  const term = normalizeSearch(documentSearch?.value || "");
+  const activeFilter = document.querySelector("[data-doc-filter].is-active")?.dataset.docFilter || "all";
+  let visibleCount = 0;
+
+  documentCards.forEach((card) => {
+    const matchesTerm = !term || normalizeSearch(card.textContent || "").includes(term);
+    const matchesFilter = activeFilter === "all" || card.dataset.docCategory === activeFilter;
+    const isVisible = matchesTerm && matchesFilter;
+
+    card.classList.toggle("is-hidden", !isVisible);
+    if (isVisible) visibleCount += 1;
+  });
+
+  if (documentCount) {
+    documentCount.textContent = `${visibleCount} document${visibleCount > 1 ? "s" : ""} affiché${visibleCount > 1 ? "s" : ""}`;
+  }
+
+  if (documentEmpty) {
+    documentEmpty.hidden = visibleCount !== 0;
+  }
+}
+
+if (documentCards.length) {
+  documentSearch?.addEventListener("input", updateDocumentLibrary);
+  documentFilters.forEach((button) => {
+    button.addEventListener("click", () => {
+      documentFilters.forEach((filter) => {
+        filter.classList.remove("is-active");
+        filter.setAttribute("aria-pressed", "false");
+      });
+      button.classList.add("is-active");
+      button.setAttribute("aria-pressed", "true");
+      updateDocumentLibrary();
+    });
+  });
+  updateDocumentLibrary();
+}
+
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 if (!reduceMotion && "IntersectionObserver" in window) {

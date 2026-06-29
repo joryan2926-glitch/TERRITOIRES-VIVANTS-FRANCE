@@ -348,6 +348,102 @@ p {
   text-decoration: none;
 }
 
+.doc-tools {
+  padding-top: 0;
+  padding-bottom: 28px;
+}
+
+.doc-tool-panel {
+  display: grid;
+  gap: 18px;
+  padding: 24px;
+  background: linear-gradient(135deg, rgba(247, 250, 245, 0.98), rgba(255, 255, 255, 0.98));
+  border: 1px solid rgba(24, 63, 34, 0.12);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.doc-search {
+  display: grid;
+  gap: 10px;
+}
+
+.doc-search label {
+  color: var(--green-900);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+.doc-search input {
+  width: 100%;
+  min-height: 54px;
+  padding: 0 18px;
+  color: var(--ink);
+  background: var(--white);
+  border: 1px solid rgba(24, 63, 34, 0.16);
+  border-radius: 16px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.75);
+  font: inherit;
+}
+
+.doc-search input:focus {
+  border-color: rgba(47, 125, 50, 0.7);
+  box-shadow: 0 0 0 4px rgba(47, 125, 50, 0.13);
+  outline: none;
+}
+
+.doc-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.doc-filter {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 0 15px;
+  color: var(--green-900);
+  background: var(--white);
+  border: 1px solid rgba(24, 63, 34, 0.14);
+  border-radius: 999px;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.92rem;
+  font-weight: 800;
+  transition: transform 0.18s ease, background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+}
+
+.doc-filter:hover,
+.doc-filter:focus-visible,
+.doc-filter.is-active {
+  color: var(--white);
+  background: var(--green-800);
+  border-color: var(--green-800);
+  transform: translateY(-1px);
+}
+
+.doc-count,
+.doc-empty {
+  margin: 0;
+  color: var(--muted);
+  font-weight: 800;
+}
+
+.doc-empty {
+  margin-top: 22px;
+  padding: 18px 20px;
+  color: var(--green-900);
+  background: rgba(235, 244, 232, 0.9);
+  border: 1px solid rgba(24, 63, 34, 0.12);
+  border-radius: 16px;
+}
+
+.document-library .card.is-hidden {
+  display: none;
+}
+
 .timeline {
   display: grid;
   gap: 16px;
@@ -680,6 +776,19 @@ tr:last-child td {
   .form-panel,
   .legal {
     padding: 22px;
+  }
+
+  .doc-tool-panel {
+    padding: 18px;
+  }
+
+  .doc-search input {
+    min-height: 50px;
+  }
+
+  .doc-filter {
+    flex: 1 1 auto;
+    justify-content: center;
   }
 }
 

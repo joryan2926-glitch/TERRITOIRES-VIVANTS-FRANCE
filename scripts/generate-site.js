@@ -859,7 +859,8 @@ const pages = [
         ["Un projet doit être instruit", "Fiche projet", "Cadrer objectifs, acteurs, risques, budget et indicateurs"],
         ["Un financement est recherché", "Plan de financement", "Distinguer coûts, contributions, demandes et montants obtenus"],
       ]),
-      cards("Documents disponibles", "Chaque modèle aide à collecter les informations nécessaires avant instruction.", [
+      documentTools(),
+      documentCards("Documents disponibles", "Chaque modèle aide à collecter les informations nécessaires avant instruction.", [
         ["Fiche collectivité", "Qualifier un besoin territorial, un périmètre, des ressources et des interlocuteurs.", "documents/fiche-collectivite.md"],
         ["Diagnostic territorial", "Cadrer le périmètre, les données, la méthode et les livrables d'un diagnostic TVF.", "documents/cahier-charges-diagnostic-territorial.md"],
         ["Convention territoriale", "Formaliser une coopération avec une collectivité sans engagement financier automatique.", "documents/convention-cooperation-territoriale.md"],
@@ -1383,6 +1384,44 @@ function cards(title, intro, items) {
   return `<section class="section soft"><div class="container"><div class="section-head"><p class="section-kicker">Repères</p><h2>${title}</h2><p>${intro}</p></div><div class="card-grid">${items
     .map(([h, p, href]) => `<article class="card"><span class="card-icon" aria-hidden="true">${iconFor(h)}</span><h3>${h}</h3><p>${p}</p>${href ? `<a class="text-link" href="${hrefFor(href)}">Découvrir</a>` : ""}</article>`)
     .join("")}</div></div></section>`;
+}
+
+function documentTools() {
+  const filters = [
+    ["all", "Tous"],
+    ["collectivites", "Collectivités"],
+    ["proprietaires", "Propriétaires"],
+    ["entreprises", "Entreprises & matériaux"],
+    ["financement", "Financement"],
+    ["communication", "Communication"],
+    ["terrain", "Terrain"],
+    ["cadre", "Cadre interne"],
+  ];
+
+  return `<section class="section doc-tools" aria-labelledby="documents-filter-title"><div class="container"><div class="doc-tool-panel"><div class="doc-search"><label for="document-search" id="documents-filter-title">Trouver rapidement le bon document</label><input id="document-search" type="search" placeholder="Rechercher un document, un public, une démarche..." autocomplete="off"></div><div class="doc-filters" aria-label="Filtrer les documents">${filters
+    .map(([key, label], index) => `<button class="doc-filter${index === 0 ? " is-active" : ""}" type="button" data-doc-filter="${key}" aria-pressed="${index === 0 ? "true" : "false"}">${label}</button>`)
+    .join("")}</div><p class="doc-count" data-doc-count></p></div></div></section>`;
+}
+
+function documentCards(title, intro, items) {
+  return `<section class="section soft document-library" id="documents-library"><div class="container"><div class="section-head"><p class="section-kicker">Repères</p><h2>${title}</h2><p>${intro}</p></div><div class="card-grid">${items
+    .map(([h, p, href]) => `<article class="card" data-doc-card data-doc-category="${docCategory(h, p, href)}"><span class="card-icon" aria-hidden="true">${iconFor(h)}</span><h3>${h}</h3><p>${p}</p>${href ? `<a class="text-link" href="${hrefFor(href)}">Découvrir</a>` : ""}</article>`)
+    .join("")}</div><p class="doc-empty" data-doc-empty hidden>Aucun document ne correspond à cette recherche. Essayez un autre mot-clé ou un autre filtre.</p></div></section>`;
+}
+
+function docCategory(title, text, href = "") {
+  const source = `${title} ${text} ${href}`
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
+
+  if (/discours|pitch|script|argumentaire|objection|prospection|media|presentation|reseaux|video|courrier/.test(source)) return "communication";
+  if (/signalement|securite|prevention|incident|emargement|benevole|terrain|mission/.test(source)) return "terrain";
+  if (/entreprise|materiaux|materiau|bordereau|reemploi|pv-remise/.test(source)) return "entreprises";
+  if (/finance|mecen|soutien|budget|devis|cofinancement|contribution|reporting|depense|prestation/.test(source)) return "financement";
+  if (/collectiv|territoire|diagnostic|cartograph|source|action-territorial|comite|commune|epci/.test(source)) return "collectivites";
+  if (/propriet|bien|usage|restitution|visite/.test(source)) return "proprietaires";
+  return "cadre";
 }
 
 function timeline(title, items) {
