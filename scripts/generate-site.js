@@ -1697,6 +1697,21 @@ function imageAttrs(src) {
   return size ? `width="${size[0]}" height="${size[1]}"` : "";
 }
 
+function assetUrl(src) {
+  return /^[a-z]+:/i.test(src) ? src : `${site.url}/${String(src).replace(/^\/+/, "")}`;
+}
+
+function imageObjectFor(page) {
+  const src = page.heroImage || "assets/logo-tvf-officiel-fond-blanc.png";
+  const size = imageSizes[src];
+  return {
+    "@type": "ImageObject",
+    url: assetUrl(src),
+    ...(size ? { width: size[0], height: size[1] } : {}),
+    caption: `${page.title} - ${site.name}`,
+  };
+}
+
 function textFromHtml(value) {
   return String(value)
     .replace(/<[^>]*>/g, " ")
@@ -1749,6 +1764,7 @@ function jsonLd(page) {
       description: page.meta,
       isPartOf: { "@id": `${site.url}/#website` },
       about: { "@id": `${site.url}/#organization` },
+      primaryImageOfPage: imageObjectFor(page),
       inLanguage: "fr-FR",
     },
   ];
@@ -1795,6 +1811,12 @@ function pageTemplate(page) {
   const active = page.file;
   const url = pageUrl(page);
   const title = `${page.title} | ${site.name}`;
+  const socialImage = imageObjectFor(page);
+  const socialAlt = escapeAttr(`${page.title} - ${site.name}`);
+  const socialImageSize = socialImage.width && socialImage.height
+    ? `  <meta property="og:image:width" content="${socialImage.width}">
+  <meta property="og:image:height" content="${socialImage.height}">`
+    : "";
   return `<!doctype html>
 <html lang="fr">
 <head>
@@ -1811,11 +1833,15 @@ function pageTemplate(page) {
   <meta property="og:description" content="${page.meta}">
   <meta property="og:type" content="website">
   <meta property="og:url" content="${url}">
-  <meta property="og:image" content="${site.url}/assets/logo-tvf-officiel-fond-blanc.png">
+  <meta property="og:image" content="${socialImage.url}">
+  <meta property="og:image:secure_url" content="${socialImage.url}">
+${socialImageSize}
+  <meta property="og:image:alt" content="${socialAlt}">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${title}">
   <meta name="twitter:description" content="${page.meta}">
-  <meta name="twitter:image" content="${site.url}/assets/logo-tvf-officiel-fond-blanc.png">
+  <meta name="twitter:image" content="${socialImage.url}">
+  <meta name="twitter:image:alt" content="${socialAlt}">
   <link rel="icon" href="assets/favicon-32.png">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <link rel="manifest" href="site.webmanifest">
