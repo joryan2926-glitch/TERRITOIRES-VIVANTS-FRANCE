@@ -116,7 +116,12 @@ function valueForField(field) {
 
 function summaryForForm(form) {
   const fields = Array.from(form.querySelectorAll("input, select, textarea"));
+  const hasTypedValue = fields.some((field) => field.tagName !== "SELECT" && valueForField(field));
   const lines = fields
+    .filter((field) => {
+      if (field.tagName !== "SELECT") return valueForField(field);
+      return hasTypedValue || field.selectedIndex > 0;
+    })
     .map((field) => [labelForField(field), valueForField(field)])
     .filter(([, value]) => value)
     .map(([label, value]) => `${label} : ${value}`);
@@ -129,12 +134,14 @@ function summaryForForm(form) {
   };
 }
 
+let contactDraftRecovered = false;
 const contactMessage = document.querySelector("#contact-message");
 if (contactMessage) {
   try {
     const draft = sessionStorage.getItem("tvfContactDraft");
     if (draft && !contactMessage.value.trim()) {
       contactMessage.value = draft;
+      contactDraftRecovered = true;
       const draftStatus = document.querySelector("[data-draft-status]");
       if (draftStatus) {
         draftStatus.hidden = false;
@@ -153,6 +160,20 @@ document.querySelectorAll("[data-prepare-form]").forEach((form) => {
   const transferLink = form.querySelector("[data-transfer-summary]");
   const output = form.querySelector("[data-form-summary]");
   if (!button || !output) return;
+
+  const initialDirty = contactDraftRecovered && contactMessage && form.contains(contactMessage);
+  form.dataset.draftDirty = String(initialDirty);
+  form.dataset.draftHandled = "false";
+
+  function markDirty() {
+    form.dataset.draftDirty = String(summaryForForm(form).lines.length > 0);
+    form.dataset.draftHandled = "false";
+  }
+
+  function markHandled() {
+    form.dataset.draftDirty = "false";
+    form.dataset.draftHandled = "true";
+  }
 
   async function copySummary() {
     const text = output.textContent.trim();
@@ -179,6 +200,8 @@ document.querySelectorAll("[data-prepare-form]").forEach((form) => {
         copyButton.textContent = initialLabel;
       }, 1800);
     }
+
+    markHandled();
   }
 
   function downloadSummary() {
@@ -194,18 +217,22 @@ document.querySelectorAll("[data-prepare-form]").forEach((form) => {
     link.click();
     link.remove();
     window.setTimeout(() => URL.revokeObjectURL(link.href), 1000);
+    markHandled();
   }
 
   function transferSummary() {
     const summary = summaryForForm(form);
     if (!summary.lines.length) return;
 
+    markHandled();
     try {
       sessionStorage.setItem("tvfContactDraft", summary.text);
     } catch {
       // Le lien continue vers la page contact même si le stockage local échoue.
     }
   }
+
+  form.addEventListener("input", markDirty);
 
   button.addEventListener("click", () => {
     const summary = summaryForForm(form);
@@ -225,6 +252,16 @@ document.querySelectorAll("[data-prepare-form]").forEach((form) => {
   copyButton?.addEventListener("click", copySummary);
   downloadButton?.addEventListener("click", downloadSummary);
   transferLink?.addEventListener("click", transferSummary);
+});
+
+window.addEventListener("beforeunload", (event) => {
+  const hasUnsavedDraft = Array.from(document.querySelectorAll("[data-prepare-form]")).some(
+    (form) => form.dataset.draftDirty === "true" && form.dataset.draftHandled !== "true"
+  );
+
+  if (!hasUnsavedDraft) return;
+  event.preventDefault();
+  event.returnValue = "";
 });
 
 const printDetailsState = [];
