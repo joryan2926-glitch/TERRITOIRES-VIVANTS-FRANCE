@@ -193,9 +193,9 @@ const pages = [
       ),
       cards("Huit leviers opérationnels", "Chaque action correspond à un besoin lisible pour les habitants, les propriétaires, les entreprises et les collectivités.", [
         ["Logements vacants", "Identifier, qualifier et accompagner les conditions de remise en usage de logements aujourd'hui inutilisés.", "proprietaires.html"],
-        ["Commerces inoccupés", "Étudier les cellules fermées et préparer des usages réalistes : commerce, atelier, association, service ou activité temporaire."],
-        ["Matériaux de réemploi", "Repérer, trier et affecter des matériaux encore utiles à des projets validés, sans distribution automatique."],
-        ["Friches et terrains", "Analyser des espaces délaissés et préparer leur reconversion vers des usages verts, sociaux, économiques ou pédagogiques."],
+        ["Commerces inoccupés", "Étudier les cellules fermées et préparer des usages réalistes : commerce, atelier, association, service ou activité temporaire.", "nos-poles.html#commerce-vivant"],
+        ["Matériaux de réemploi", "Repérer, trier et affecter des matériaux encore utiles à des projets validés, sans distribution automatique.", "nos-actions.html#la-banque-de-materiaux-est-un-outil-de-projet"],
+        ["Friches et terrains", "Analyser des espaces délaissés et préparer leur reconversion vers des usages verts, sociaux, économiques ou pédagogiques.", "nos-poles.html#friches-terrains-vivants"],
         ["Solidarité et insertion", "Construire des missions encadrées pour bénévoles, habitants, publics en insertion et partenaires associatifs.", "benevoles-citoyens.html"],
         ["Territoires partenaires", "Aider une commune ou un EPCI à cadrer un diagnostic, une expérimentation ou une coopération locale.", "collectivites.html"],
         ["Financer les projets", "Préparer des budgets, cofinancements et dossiers lisibles pour mécènes, fondations et financeurs.", "financeurs-mecenes.html"],
