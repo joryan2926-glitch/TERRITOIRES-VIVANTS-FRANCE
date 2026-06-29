@@ -47,9 +47,13 @@ Pour préparer une prise de parole, un rendez-vous ou une campagne de communicat
 
 - `kit-discours-tvf.md`
 - `pitch-officiel-tvf.md`
+- `script-presentation-15-minutes.md`
 - `scripts-rendez-vous-institutionnels.md`
+- `fiche-preparation-rendez-vous.md`
 - `argumentaires-par-public.md`
 - `scripts-prise-contact.md`
+- `plan-prospection-30-jours.md`
+- `tableau-suivi-prospection.md`
 - `objections-reponses.md`
 - `scripts-video-reseaux-sociaux.md`
 - `scenarios-types-cas-usage.md`
