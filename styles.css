@@ -23,6 +23,12 @@ html {
   scroll-behavior: smooth;
 }
 
+.anchor-target {
+  display: block;
+  height: 0;
+  scroll-margin-top: 110px;
+}
+
 body {
   margin: 0;
   color: var(--ink);
@@ -702,6 +708,26 @@ textarea {
   border-radius: 14px;
   font-size: 0.92rem;
   font-weight: 700;
+}
+
+.form-summary {
+  display: block;
+  white-space: pre-wrap;
+  margin: 0;
+  padding: 14px 16px;
+  color: var(--blue-900);
+  background: #fff;
+  border: 1px solid rgba(7, 31, 50, 0.14);
+  border-left: 4px solid var(--green-700);
+  border-radius: 14px;
+  box-shadow: 0 12px 28px rgba(7, 31, 50, 0.08);
+  font-size: 0.94rem;
+  font-weight: 650;
+  line-height: 1.65;
+}
+
+.form-summary[hidden] {
+  display: none;
 }
 
 .legal {

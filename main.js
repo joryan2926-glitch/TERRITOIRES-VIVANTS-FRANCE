@@ -97,6 +97,42 @@ if (pageNavLinks.length && pageSections.length && "IntersectionObserver" in wind
   pageSections.forEach((section) => pageNavObserver.observe(section));
 }
 
+function labelForField(field) {
+  if (field.id) {
+    const label = document.querySelector(`label[for="${field.id.replace(/"/g, '\\"')}"]`);
+    if (label) return label.textContent.trim();
+  }
+
+  return field.name || "Champ";
+}
+
+function valueForField(field) {
+  if (field.tagName === "SELECT") {
+    return field.options[field.selectedIndex]?.textContent.trim() || field.value.trim();
+  }
+
+  return field.value.trim();
+}
+
+document.querySelectorAll("[data-prepare-form]").forEach((form) => {
+  const button = form.querySelector("[data-prepare-summary]");
+  const output = form.querySelector("[data-form-summary]");
+  if (!button || !output) return;
+
+  button.addEventListener("click", () => {
+    const fields = Array.from(form.querySelectorAll("input, select, textarea"));
+    const lines = fields
+      .map((field) => [labelForField(field), valueForField(field)])
+      .filter(([, value]) => value)
+      .map(([label, value]) => `${label} : ${value}`);
+
+    output.hidden = false;
+    output.textContent = lines.length
+      ? `Résumé de la demande\n\n${lines.join("\n")}`
+      : "Renseignez au moins un champ pour préparer un résumé de demande.";
+  });
+});
+
 const printDetailsState = [];
 
 window.addEventListener("beforeprint", () => {
