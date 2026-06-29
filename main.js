@@ -97,6 +97,23 @@ if (pageNavLinks.length && pageSections.length && "IntersectionObserver" in wind
   pageSections.forEach((section) => pageNavObserver.observe(section));
 }
 
+const printDetailsState = [];
+
+window.addEventListener("beforeprint", () => {
+  printDetailsState.length = 0;
+  document.querySelectorAll("details").forEach((detail) => {
+    printDetailsState.push([detail, detail.open]);
+    detail.open = true;
+  });
+});
+
+window.addEventListener("afterprint", () => {
+  printDetailsState.forEach(([detail, wasOpen]) => {
+    detail.open = wasOpen;
+  });
+  printDetailsState.length = 0;
+});
+
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 if (!reduceMotion && "IntersectionObserver" in window) {

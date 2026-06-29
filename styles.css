@@ -1012,3 +1012,160 @@ tr:last-child td {
     transform: none;
   }
 }
+
+@media print {
+  @page {
+    margin: 16mm;
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-shadow: none !important;
+    text-shadow: none !important;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  html,
+  body {
+    color: #111 !important;
+    background: #fff !important;
+    font-size: 11pt;
+    overflow: visible;
+  }
+
+  .site-header,
+  .page-nav,
+  .hero-actions,
+  .cta-band,
+  .site-footer,
+  .doc-tools,
+  .menu-toggle {
+    display: none !important;
+  }
+
+  .container {
+    width: 100%;
+  }
+
+  .hero {
+    min-height: auto;
+    color: #111;
+    background: none !important;
+    border-bottom: 2px solid #183f22;
+  }
+
+  .hero-inner {
+    padding: 0 0 18px;
+  }
+
+  .breadcrumbs {
+    margin-bottom: 12px;
+    color: #555;
+    font-size: 9pt;
+  }
+
+  .breadcrumbs a,
+  .breadcrumbs span[aria-current="page"] {
+    color: #555;
+  }
+
+  .eyebrow,
+  .section-kicker {
+    color: #183f22;
+    letter-spacing: 0.05em;
+  }
+
+  .hero h1,
+  h2,
+  h3 {
+    color: #0e2d45 !important;
+  }
+
+  .hero h1 {
+    font-size: 30pt;
+    line-height: 1.05;
+  }
+
+  .hero p:not(.eyebrow),
+  p,
+  td,
+  .mini-list span {
+    color: #222 !important;
+  }
+
+  .section {
+    padding: 18px 0;
+    break-inside: avoid;
+  }
+
+  .section.soft,
+  .journey-section {
+    background: #fff !important;
+  }
+
+  .intro-grid,
+  .feature-grid,
+  .split,
+  .form-panel,
+  .audience-grid,
+  .card-grid,
+  .journey-grid,
+  .footer-grid {
+    display: block;
+  }
+
+  .mini-list article,
+  .card,
+  .timeline article,
+  .form-panel,
+  .legal,
+  .journey-card,
+  .faq-list details {
+    break-inside: avoid;
+    margin: 0 0 10px;
+    padding: 14px;
+    color: #111 !important;
+    background: #fff !important;
+    border: 1px solid #cfd8cf;
+  }
+
+  .card-icon,
+  .journey-card .card-icon {
+    display: none;
+  }
+
+  .journey-section .section-kicker,
+  .journey-section h2,
+  .journey-section .section-head p,
+  .journey-card strong,
+  .journey-card small {
+    color: #111 !important;
+  }
+
+  img {
+    max-height: 80mm;
+    object-fit: cover;
+  }
+
+  a {
+    color: #0e2d45 !important;
+    text-decoration: underline;
+  }
+
+  .table-wrap {
+    overflow: visible;
+    border: 1px solid #cfd8cf;
+  }
+
+  table {
+    min-width: 0;
+    font-size: 9pt;
+  }
+
+  th {
+    color: #fff !important;
+    background: #183f22 !important;
+  }
+}
