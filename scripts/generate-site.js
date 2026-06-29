@@ -9,6 +9,13 @@ const site = {
     "Plateforme nationale de coopération pour remettre en usage les logements, commerces, bâtiments, terrains et matériaux inutilisés.",
 };
 
+const contact = {
+  email: "contact@territoiresvivantsfrance.fr",
+  phone: "06 22 03 93 24",
+  phoneHref: "+33622039324",
+  address: "25 rue Élise Gervais, 42000 Saint-Étienne",
+};
+
 const nav = [
   ["Accueil", "index.html"],
   ["L'association", "qui-sommes-nous.html"],
@@ -25,11 +32,23 @@ const imageSizes = {
   "assets/logo-tvf-officiel-transparent.png": [612, 408],
   "assets/logo-tvf-officiel-fond-blanc.png": [1536, 1024],
   "assets/photos/community-garden-paris.webp": [960, 640],
+  "assets/photos/artisan-menuiserie-bois.jpg": [1600, 1059],
+  "assets/photos/batiment-rural-france.jpg": [1067, 1600],
+  "assets/photos/centre-ville-nantes.jpg": [1600, 1200],
+  "assets/photos/chantier-renovation-lyon.jpg": [1600, 1200],
+  "assets/photos/commerce-ferme-vichy.jpg": [1070, 1600],
+  "assets/photos/friche-industrielle-ronchamp.jpg": [1600, 1067],
   "assets/photos/france-commerce-paris.jpg": [330, 495],
   "assets/photos/france-friche-pcuk.jpg": [960, 324],
   "assets/photos/france-ressourcerie-vichy.jpg": [960, 720],
+  "assets/photos/immeuble-renovation-meudon.jpg": [1600, 1067],
+  "assets/photos/jardin-partage-france.jpg": [1600, 1200],
+  "assets/photos/reunion-conseil-municipal.jpg": [1600, 1143],
+  "assets/photos/saint-etienne-centre-commerce.jpg": [1600, 1202],
   "assets/photos/france-saint-etienne-chateaucreux.jpg": [1280, 853],
   "assets/photos/france-saint-etienne-jean-jaures.jpg": [1280, 853],
+  "assets/photos/saint-etienne-panorama.jpg": [1600, 215],
+  "assets/photos/saint-etienne-rue-resistance.jpg": [1273, 1600],
 };
 
 const pages = [
@@ -39,7 +58,7 @@ const pages = [
     meta:
       "Territoires Vivants France coordonne propriétaires, collectivités, entreprises, associations et citoyens pour redonner vie aux biens et ressources inutilisés.",
     heroImage: "assets/photos/france-saint-etienne-chateaucreux.jpg",
-    eyebrow: "Association nationale en création",
+    eyebrow: "Plateforme nationale de coopération",
     h1: "Redonner vie aux lieux utiles aux habitants.",
     intro:
       "Territoires Vivants France structure une méthode de coopération pour repérer les ressources inutilisées, mobiliser les bons acteurs, préparer les conventions et accompagner des projets utiles aux territoires.",
@@ -98,8 +117,8 @@ const pages = [
     file: "qui-sommes-nous.html",
     title: "Qui sommes-nous ?",
     meta:
-      "Découvrez Territoires Vivants France, association nationale en création basée à Saint-Étienne.",
-    heroImage: "assets/photos/france-saint-etienne-jean-jaures.jpg",
+      "Découvrez Territoires Vivants France, association nationale de coopération territoriale basée à Saint-Étienne.",
+    heroImage: "assets/photos/reunion-conseil-municipal.jpg",
     eyebrow: "L'association",
     h1: "Une plateforme de coopération territoriale.",
     intro:
@@ -120,9 +139,9 @@ const pages = [
         ]
       ),
       split(
-        "Une association en création",
+        "Une association en structuration",
         "La priorité est de construire une méthode crédible avant de communiquer des résultats. Cela signifie : des documents propres, des conventions adaptées, des critères de sélection, une traçabilité des décisions et une distinction nette entre objectifs, projets en instruction et actions réalisées.",
-        "assets/photos/community-garden-paris.webp"
+        "assets/photos/saint-etienne-rue-resistance.jpg"
       ),
       tableSection("Ce que TVF fait, et ce que TVF ne prétend pas faire", "Cette clarification protège la crédibilité du projet et évite les promesses trop rapides.", [
         ["Sujet", "TVF fait", "TVF ne fait pas"],
@@ -155,7 +174,7 @@ const pages = [
     title: "Nos actions",
     meta:
       "Les actions de TVF : logements vacants, commerces inoccupés, matériaux de réemploi, friches, insertion et coordination territoriale.",
-    heroImage: "assets/photos/france-commerce-paris.jpg",
+    heroImage: "assets/photos/centre-ville-nantes.jpg",
     eyebrow: "Actions",
     h1: "Transformer les lieux inutilisés en solutions concrètes.",
     intro:
@@ -181,6 +200,7 @@ const pages = [
         ["Financer les projets", "Préparer des budgets, cofinancements et dossiers lisibles pour mécènes, fondations et financeurs.", "financeurs-mecenes.html"],
         ["Observatoire", "Organiser les signalements, données, sources et priorités pour décider où agir en premier.", "observatoire.html"],
       ]),
+      nationalDataSection("Données publiques qui justifient ces actions"),
       tableSection("Ce que chaque action produit", "TVF doit toujours produire un livrable clair, même lorsque le projet n'est pas encore lancé.", [
         ["Action", "Problème traité", "Ce que TVF prépare", "Sortie concrète"],
         ["Logement vacant", "Bien inutilisé, propriétaire isolé, contraintes mal connues", "Fiche propriétaire, visite, scénarios d'usage, risques", "Dossier de décision"],
@@ -192,7 +212,7 @@ const pages = [
       split(
         "La Banque de matériaux est un outil de projet",
         "Les matériaux proposés à TVF ne sont pas distribués librement. Ils sont qualifiés, tracés puis orientés vers des besoins utiles : remise en état d'un local associatif, aménagement d'un lieu partagé, soutien à un chantier encadré ou expérimentation territoriale. Cette logique protège les contributeurs et garantit que chaque ressource garde une utilité collective.",
-        "assets/photos/france-ressourcerie-vichy.jpg"
+        "assets/photos/artisan-menuiserie-bois.jpg"
       ),
       timeline("Méthode d'intervention", [
         ["1", "Recevoir", "Une demande, un signalement ou une contribution est enregistré avec un numéro de dossier."],
@@ -223,7 +243,7 @@ const pages = [
     title: "Nos 5 pôles",
     meta:
       "Les cinq pôles de Territoires Vivants France : Habitat Vivant, Matériauthèque Solidaire, Commerce Vivant, Friches & Terrains Vivants, Solidarité & Insertion.",
-    heroImage: "assets/photos/france-ressourcerie-vichy.jpg",
+    heroImage: "assets/photos/chantier-renovation-lyon.jpg",
     eyebrow: "Organisation",
     h1: "Cinq pôles pour couvrir tout le cycle de revitalisation.",
     intro:
@@ -254,35 +274,36 @@ const pages = [
         ["Friches & Terrains Vivants", "Des espaces délaissés peuvent devenir utiles au cadre de vie", "Qualifier l'accès, les risques, les usages verts ou partagés", "Audit terrain, note d'opportunité, plan d'action"],
         ["Solidarité & Insertion", "Les projets locaux peuvent créer de l'engagement et des parcours", "Cadrer les missions, encadrer les actions, suivre la participation", "Fiche mission, émargement, compte rendu"],
       ]),
+      nationalDataSection("Repères nationaux par pôle"),
       split(
         "Habitat Vivant",
         "Ce pôle s'adresse d'abord aux propriétaires, collectivités et habitants confrontés à des logements vacants, dégradés ou sans usage clair. TVF ne promet pas une rénovation immédiate : l'objectif est de qualifier le bien, comprendre les contraintes, identifier les usages réalistes et préparer un cadre de coopération.",
-        "assets/photos/france-saint-etienne-jean-jaures.jpg"
+        "assets/photos/immeuble-renovation-meudon.jpg"
       ),
       split(
         "Matériauthèque Solidaire",
         "Ce pôle transforme les matériaux disponibles en ressources de projet. Une porte, du bois, du carrelage, du mobilier ou un équipement technique ne sont utiles que s'ils sont identifiés, stockables, sécurisés et affectés à un usage concret.",
-        "assets/photos/france-ressourcerie-vichy.jpg"
+        "assets/photos/artisan-menuiserie-bois.jpg"
       ),
       split(
         "Commerce Vivant",
         "Ce pôle travaille sur les vitrines fermées, locaux vacants et rez-de-chaussée sans activité. L'objectif est de préparer des usages réalistes : activité de proximité, artisanat, association, atelier, service, occupation temporaire ou expérimentation locale.",
-        "assets/photos/france-commerce-paris.jpg"
+        "assets/photos/commerce-ferme-vichy.jpg"
       ),
       split(
         "Friches & Terrains Vivants",
         "Ce pôle regarde les espaces délaissés comme des réserves d'usage possible : jardin partagé, espace pédagogique, lieu associatif, biodiversité, équipement temporaire ou projet territorial. La sécurité, l'accès et la propriété restent toujours les premiers points à vérifier.",
-        "assets/photos/france-friche-pcuk.jpg"
+        "assets/photos/friche-industrielle-ronchamp.jpg"
       ),
       split(
         "Solidarité & Insertion",
         "Ce pôle permet aux habitants, bénévoles, associations et publics accompagnés de participer à des actions utiles sans improvisation. Les missions doivent être claires, encadrées, sécurisées et documentées.",
-        "assets/photos/community-garden-paris.webp"
+        "assets/photos/jardin-partage-france.jpg"
       ),
       split(
         "Une logique de coopération",
         "Un même projet peut mobiliser plusieurs pôles. Un logement vacant peut nécessiter des matériaux de réemploi, une convention avec un propriétaire, un appui de collectivité, un chantier encadré et un suivi d'impact. TVF sert à organiser cette coordination étape par étape.",
-        "assets/photos/france-saint-etienne-chateaucreux.jpg"
+        "assets/photos/centre-ville-nantes.jpg"
       ),
       timeline("Comment les pôles travaillent ensemble", [
         ["1", "Repérage", "Un lieu, une ressource ou un besoin est identifié."],
@@ -304,7 +325,7 @@ const pages = [
     title: "Observatoire",
     meta:
       "L'observatoire TVF prépare le repérage des biens vacants, commerces fermés, friches, terrains et ressources inutilisées.",
-    heroImage: "assets/photos/france-friche-pcuk.jpg",
+    heroImage: "assets/photos/friche-industrielle-ronchamp.jpg",
     eyebrow: "Observatoire",
     h1: "Voir, comprendre, prioriser.",
     intro:
@@ -335,6 +356,7 @@ const pages = [
         ["Propriétaire", "Droit d'accès, intention, état connu, usage acceptable", "Ne rien publier sans accord"],
         ["Visite autorisée", "État apparent, accès, risques, photos internes", "Ne vaut pas diagnostic technique complet"],
       ]),
+      observatoryDataSection(),
       tableSection("Qualité des données", "L'observatoire doit distinguer signalement, vérification et décision.", [
         ["Niveau", "Statut", "Usage"],
         ["Signalé", "Information reçue", "À vérifier"],
@@ -372,7 +394,7 @@ const pages = [
     title: "Saint-Étienne",
     meta:
       "Saint-Étienne est le territoire pilote de Territoires Vivants France et le siège national de l'association.",
-    heroImage: "assets/photos/france-saint-etienne-jean-jaures.jpg",
+    heroImage: "assets/photos/saint-etienne-centre-commerce.jpg",
     eyebrow: "Territoire pilote",
     h1: "Saint-Étienne, point de départ de la méthode TVF.",
     intro:
@@ -388,6 +410,7 @@ const pages = [
           ["Reproduire", "Créer une méthode duplicable dans d'autres communes, EPCI et territoires."],
         ]
       ),
+      saintEtienneDataSection(),
       cards("Axes prioritaires", "Les priorités restent à formaliser avec les acteurs locaux.", [
         ["Habitat", "Repérer les logements vacants ou dégradés et comprendre les blocages."],
         ["Commerce", "Identifier les locaux fermés et les possibilités de réactivation."],
@@ -441,7 +464,7 @@ const pages = [
     title: "Agir avec nous",
     meta:
       "Collectivités, propriétaires, entreprises, associations et citoyens peuvent rejoindre Territoires Vivants France.",
-    heroImage: "assets/photos/community-garden-paris.webp",
+    heroImage: "assets/photos/jardin-partage-france.jpg",
     eyebrow: "Engagement",
     h1: "Chaque acteur peut apporter une partie de la solution.",
     intro:
@@ -493,7 +516,7 @@ const pages = [
     title: "Collectivités",
     meta:
       "Parcours collectivités de Territoires Vivants France : diagnostic, coopération, expérimentation territoriale et suivi.",
-    heroImage: "assets/photos/france-saint-etienne-chateaucreux.jpg",
+    heroImage: "assets/photos/reunion-conseil-municipal.jpg",
     eyebrow: "Collectivités",
     h1: "Un cadre simple pour devenir territoire partenaire.",
     intro:
@@ -552,7 +575,7 @@ const pages = [
     title: "Propriétaires",
     meta:
       "Parcours propriétaires TVF : proposer un bien vacant, dégradé ou inutilisé et préparer un cadre de coopération.",
-    heroImage: "assets/photos/france-saint-etienne-jean-jaures.jpg",
+    heroImage: "assets/photos/immeuble-renovation-meudon.jpg",
     eyebrow: "Propriétaires",
     h1: "Proposer un bien sans perdre le cadre.",
     intro:
@@ -608,7 +631,7 @@ const pages = [
     title: "Entreprises",
     meta:
       "Parcours entreprises TVF : matériaux, compétences, locaux, mécénat, RSE et contribution territoriale.",
-    heroImage: "assets/photos/france-ressourcerie-vichy.jpg",
+    heroImage: "assets/photos/artisan-menuiserie-bois.jpg",
     eyebrow: "Entreprises",
     h1: "Transformer une contribution en impact territorial.",
     intro:
@@ -665,7 +688,7 @@ const pages = [
     title: "Bénévoles & citoyens",
     meta:
       "Parcours bénévoles et citoyens de Territoires Vivants France : signaler, participer, documenter et agir localement.",
-    heroImage: "assets/photos/community-garden-paris.webp",
+    heroImage: "assets/photos/jardin-partage-france.jpg",
     eyebrow: "Citoyens",
     h1: "Agir utilement, avec un cadre clair.",
     intro:
@@ -721,7 +744,7 @@ const pages = [
     title: "Financeurs & mécènes",
     meta:
       "Parcours financeurs et mécènes TVF : soutenir des projets instruits, avec gouvernance, transparence et suivi d'impact.",
-    heroImage: "assets/photos/france-saint-etienne-chateaucreux.jpg",
+    heroImage: "assets/photos/centre-ville-nantes.jpg",
     eyebrow: "Financement",
     h1: "Soutenir des projets cadrés, pas des promesses floues.",
     intro:
@@ -778,7 +801,7 @@ const pages = [
     title: "Partenaires",
     meta:
       "Devenir partenaire de Territoires Vivants France : collectivités, entreprises, associations, propriétaires, mécènes et financeurs.",
-    heroImage: "assets/photos/france-saint-etienne-chateaucreux.jpg",
+    heroImage: "assets/photos/reunion-conseil-municipal.jpg",
     eyebrow: "Coopération",
     h1: "Construire des partenariats utiles et traçables.",
     intro:
@@ -835,7 +858,7 @@ const pages = [
     title: "Documents",
     meta:
       "Documents préparatoires de Territoires Vivants France : fiches collectivité, propriétaire, entreprise et modèle de convention.",
-    heroImage: "assets/photos/france-saint-etienne-chateaucreux.jpg",
+    heroImage: "assets/photos/saint-etienne-rue-resistance.jpg",
     eyebrow: "Ressources",
     h1: "Des documents simples pour cadrer les premières démarches.",
     intro:
@@ -966,7 +989,7 @@ const pages = [
     title: "FAQ",
     meta:
       "Questions fréquentes sur Territoires Vivants France, ses démarches, ses publics, ses conventions et ses documents.",
-    heroImage: "assets/photos/france-saint-etienne-chateaucreux.jpg",
+    heroImage: "assets/photos/batiment-rural-france.jpg",
     eyebrow: "Questions fréquentes",
     h1: "Comprendre TVF en quelques réponses.",
     intro:
@@ -1008,7 +1031,7 @@ const pages = [
     title: "Notre méthode",
     meta:
       "La méthode TVF pour repérer, qualifier, conventionner, mobiliser et suivre les projets de revitalisation territoriale.",
-    heroImage: "assets/photos/france-saint-etienne-chateaucreux.jpg",
+    heroImage: "assets/photos/chantier-renovation-lyon.jpg",
     eyebrow: "Méthode",
     h1: "Une méthode courte, traçable et progressive.",
     intro:
@@ -1065,7 +1088,7 @@ const pages = [
     title: "Impact & suivi",
     meta:
       "La page Impact de TVF présente les indicateurs à suivre sans chiffres inventés : biens remis en usage, matériaux réemployés, projets accompagnés et coopération territoriale.",
-    heroImage: "assets/photos/france-saint-etienne-jean-jaures.jpg",
+    heroImage: "assets/photos/centre-ville-nantes.jpg",
     eyebrow: "Impact",
     h1: "Mesurer avant d'annoncer.",
     intro:
@@ -1081,6 +1104,7 @@ const pages = [
           ["Résultats", "Ce qui sera publié après réalisation et vérification."],
         ]
       ),
+      nationalDataSection("Contexte public à relier aux futurs indicateurs"),
       cards("Indicateurs à suivre", "Les chiffres seront publiés uniquement lorsqu'ils seront vérifiés.", [
         ["Biens qualifiés", "Nombre de logements, commerces, bâtiments, terrains ou friches documentés."],
         ["Biens remis en usage", "Nombre de biens effectivement réactivés après convention et action."],
@@ -1120,7 +1144,7 @@ const pages = [
     title: "Gouvernance & éthique",
     meta:
       "Gouvernance, éthique, responsabilités et règles de décision de Territoires Vivants France.",
-    heroImage: "assets/photos/france-saint-etienne-chateaucreux.jpg",
+    heroImage: "assets/photos/reunion-conseil-municipal.jpg",
     eyebrow: "Cadre institutionnel",
     h1: "Une gouvernance lisible pour inspirer confiance.",
     intro:
@@ -1180,7 +1204,7 @@ const pages = [
     title: "Kit média",
     meta:
       "Kit média de Territoires Vivants France : logo officiel, présentation, règles de citation et documents presse.",
-    heroImage: "assets/photos/france-saint-etienne-jean-jaures.jpg",
+    heroImage: "assets/photos/saint-etienne-centre-commerce.jpg",
     eyebrow: "Presse & communication",
     h1: "Des éléments publics cohérents et vérifiables.",
     intro:
@@ -1215,7 +1239,7 @@ const pages = [
       ]),
       tableSection("Formulations recommandées", "Les mots utilisés doivent rester précis et crédibles.", [
         ["Sujet", "Formulation recommandée", "À éviter"],
-        ["Nature", "Association nationale en création", "Institution publique ou opérateur officiel"],
+        ["Nature", "Association nationale en structuration", "Institution publique ou opérateur officiel"],
         ["Rôle", "Plateforme de coopération et de coordination territoriale", "Remplacement des collectivités ou dispositifs existants"],
         ["Impact", "Indicateurs à mesurer après projets conventionnés", "Résultats chiffrés non vérifiés"],
         ["Partenaires", "Partenaires à afficher uniquement après accord réel", "Logos ou références non officialisés"],
@@ -1235,7 +1259,7 @@ const pages = [
     file: "contact.html",
     title: "Contact",
     meta:
-      "Contacter Territoires Vivants France, association nationale en création basée à Saint-Étienne.",
+      "Contacter Territoires Vivants France : contact@territoiresvivantsfrance.fr, 06 22 03 93 24, association nationale basée à Saint-Étienne.",
     heroImage: "assets/photos/france-saint-etienne-chateaucreux.jpg",
     eyebrow: "Contact",
     h1: "Entrer en relation avec TVF.",
@@ -1252,6 +1276,7 @@ const pages = [
           ["Où ?", "Préciser la commune, le quartier, l'adresse si elle peut être transmise et les contraintes connues."],
         ]
       ),
+      contactDetailsSection(),
       contactSection(),
       tableSection("Informations utiles à transmettre", "Ces éléments facilitent un premier tri sans créer d'engagement automatique.", [
         ["Type de demande", "Informations à préparer", "Document conseillé"],
@@ -1269,7 +1294,7 @@ const pages = [
       ]),
       textBlock(
         "Siège national",
-        "Territoires Vivants France - 25 rue Élise Gervais, 42000 Saint-Étienne. Président fondateur : Edryan Rangoly. Secrétaire et trésorier : M. Lambeau Jordan."
+        `Territoires Vivants France - ${contact.address}. E-mail : ${contact.email}. Téléphone : ${contact.phone}. Président fondateur : Edryan Rangoly. Secrétaire et trésorier : M. Lambeau Jordan.`
       ),
       faqSection([
         ["Que faut-il écrire dans le premier message ?", "Indiquez votre profil, le territoire concerné, le type de demande, les informations déjà disponibles et ce que vous attendez de TVF."],
@@ -1283,7 +1308,7 @@ const pages = [
     title: "Transparence",
     meta:
       "Transparence, gouvernance, données et feuille de route de Territoires Vivants France.",
-    heroImage: "assets/photos/france-saint-etienne-chateaucreux.jpg",
+    heroImage: "assets/photos/friche-industrielle-ronchamp.jpg",
     eyebrow: "Transparence",
     h1: "Avancer avec méthode et preuve.",
     intro:
@@ -1340,16 +1365,16 @@ const pages = [
     file: "mentions-legales.html",
     title: "Mentions légales",
     meta: "Mentions légales de Territoires Vivants France.",
-    heroImage: "assets/photos/france-saint-etienne-chateaucreux.jpg",
+    heroImage: "assets/photos/reunion-conseil-municipal.jpg",
     eyebrow: "Cadre légal",
     h1: "Mentions légales.",
     intro:
-      "Cette page est préparée pour être mise à jour après les formalités administratives officielles de l'association.",
+      "Cette page rassemble les informations publiques de référence et prévoit les champs administratifs à actualiser à chaque évolution officielle de l'association.",
     ctas: [["Contact", "contact.html"], ["Transparence", "transparence.html"]],
     sections: [
       sectionIntro(
-        "Une structure prête à être complétée",
-        "Les mentions légales doivent rester simples, exactes et faciles à mettre à jour. Cette page distingue les informations déjà connues, les éléments administratifs à compléter et les règles de prudence applicables au site.",
+        "Un cadre légal évolutif et vérifiable",
+        "Les mentions légales doivent rester simples, exactes et faciles à mettre à jour. Cette page distingue les informations déjà connues, les éléments administratifs qui seront ajoutés après formalisation et les règles de prudence applicables au site.",
         [
           ["Identité", "Nom, adresse, responsables identifiés et objet de présentation."],
           ["Conformité", "Données personnelles, propriété intellectuelle, responsabilité éditoriale."],
@@ -1362,14 +1387,14 @@ const pages = [
         ["Responsables", "Président fondateur, secrétaire et trésorier identifiés", "Actualiser après toute décision statutaire"],
         ["Numéro RNA", "À compléter après formalisation officielle", "Ajouter la référence dès disponibilité"],
         ["Numéro SIREN", "À compléter si attribution", "Ajouter uniquement si l'association en dispose"],
-        ["Contact officiel", "À préciser selon l'organisation retenue", "Publier une adresse de contact validée"],
+        ["Contact officiel", `${contact.email} - ${contact.phone}`, "Maintenir à jour les canaux publics de contact"],
         ["Hébergement", "À maintenir à jour", "Indiquer l'hébergeur et les informations légales nécessaires"],
       ]),
       legalSection(),
       faqSection([
         ["Pourquoi cette page mentionne-t-elle des informations à compléter ?", "Parce que TVF est une association en structuration. La page est conçue pour intégrer les références officielles dès qu'elles seront disponibles."],
         ["Les documents du site ont-ils une valeur juridique automatique ?", "Non. Ils servent de bases de travail et doivent être adaptés, relus et validés avant toute signature ou engagement."],
-        ["Qui contacter en cas de demande relative aux données personnelles ?", "La procédure définitive devra être précisée avec le contact officiel de l'association. En attendant, les demandes doivent passer par la page contact."],
+        ["Qui contacter en cas de demande relative aux données personnelles ?", `Les demandes peuvent être adressées à ${contact.email} ou préparées depuis la page contact. TVF devra ensuite traiter chaque demande selon le RGPD et les finalités réellement concernées.`],
       ]),
     ],
   },
@@ -1532,7 +1557,7 @@ function journeySection(page) {
     ["Contact", "contact.html", "Échanger avec TVF sur une situation concrète."],
   ];
 
-  return `<section class="section journey-section"><div class="container"><div class="section-head"><p class="section-kicker">Suite logique</p><h2>Continuer votre parcours</h2><p>Trois entrées utiles pour transformer la lecture de cette page en prochaine étape claire.</p></div><div class="journey-grid">${items
+  return `<section class="section journey-section"><div class="container"><div class="section-head"><p class="section-kicker">Suite logique</p><h3>Continuer votre parcours</h3><p>Trois entrées utiles pour transformer la lecture de cette page en prochaine étape claire.</p></div><div class="journey-grid">${items
     .map(([title, href, text]) => `<a class="journey-card" href="${hrefFor(href)}"><span class="card-icon" aria-hidden="true">${iconFor(title)}</span><strong>${title}</strong><small>${text}</small></a>`)
     .join("")}</div></div></section>`;
 }
@@ -1611,15 +1636,59 @@ function highlight(title, text, label, href, image) {
 }
 
 function split(title, text, image) {
-  return `<section class="section" ${sectionAttrs(title)}><div class="container split"><img src="${image}" ${imageAttrs(image)} alt="${title}" loading="lazy" decoding="async"><div><p class="section-kicker">Approche</p><h2>${title}</h2><p>${text}</p></div></div></section>`;
+  return `<section class="section" ${sectionAttrs(title)}><div class="container split"><img src="${image}" ${imageAttrs(image)} alt="${title}" loading="lazy" decoding="async"><div><p class="section-kicker">Approche</p><h3>${title}</h3><p>${text}</p></div></div></section>`;
 }
 
 function textBlock(title, text) {
   return `<section class="section" ${sectionAttrs(title)}><div class="container narrow"><p class="section-kicker">Analyse</p><h2>${title}</h2><p>${text}</p></div></section>`;
 }
 
+function extLink(label, url) {
+  return `<a href="${url}" target="_blank" rel="noopener noreferrer">${label}</a>`;
+}
+
+function nationalDataSection(title = "Chiffres publics de contexte") {
+  return tableSection(title, "Ces repères ne sont pas des résultats TVF. Ils servent à comprendre l'ampleur nationale des sujets traités et à cadrer les futurs diagnostics territoriaux.", [
+    ["Sujet", "Repère public récent", "Source", "Utilité pour TVF"],
+    ["Logements vacants", "3,1 millions de logements vacants en France en 2023, soit plus de 8 % du parc de logements.", extLink("INSEE, relayé par Banque des Territoires / Localtis, janvier 2024", "https://www.banquedesterritoires.fr/la-france-compte-plus-de-3-millions-de-logements-vacants"), "Cibler les territoires où la vacance est structurelle et préparer le dialogue avec les propriétaires."],
+    ["Déchets du bâtiment", "Environ 42 millions de tonnes de déchets par an pour le secteur du bâtiment ; la filière REP PMCB vise collecte, traçabilité, recyclage, réemploi et réutilisation.", extLink("Ministère de la Transition écologique, page PMCB mise à jour en novembre 2025", "https://www.ecologie.gouv.fr/politiques-publiques/produits-materiaux-construction-du-secteur-du-batiment-pmcb"), "Relier la matériauthèque TVF à une logique de projet, de traçabilité et d'économie circulaire."],
+    ["Friches", "Cartofriches consolide des données ouvertes, des observatoires locaux et des statuts de friches à l'échelle nationale.", extLink("Cerema, Cartofriches", "https://cartofriches.cerema.fr/cartofriches/"), "Préparer des cartes et diagnostics sans exposer des sites sensibles ni inventer de recensement."],
+    ["Recyclage foncier", "Les politiques de recyclage foncier et de sobriété foncière encouragent la réutilisation de sites déjà artificialisés avant l'extension urbaine.", extLink("Cerema, Cartofriches et ressources friches", "https://cartofriches.cerema.fr/cartofriches/"), "Aider à formuler des dossiers compatibles avec les politiques de recyclage foncier et de sobriété foncière."],
+  ]);
+}
+
+function saintEtienneDataSection() {
+  return tableSection("Données publiques de cadrage - Saint-Étienne", "Ces données INSEE 2023 donnent un socle vérifiable au territoire pilote. Elles ne constituent pas des résultats TVF.", [
+    ["Indicateur", "Donnée publique", "Source", "Lecture TVF"],
+    ["Population", "173 136 habitants en 2023.", extLink("INSEE, dossier complet Commune de Saint-Étienne, paru le 25/06/2026", "https://www.insee.fr/fr/statistiques/2011101?geo=COM-42218"), "Un territoire de taille suffisante pour tester une méthode structurée et duplicable."],
+    ["Logements vacants", "12 175 logements vacants en 2023, soit 12,0 % du parc de logements de la commune.", extLink("INSEE, LOG T1 et LOG T2, RP2023", "https://www.insee.fr/fr/statistiques/2011101?geo=COM-42218"), "Un enjeu direct pour Habitat Vivant, les propriétaires et les scénarios de remise en usage."],
+    ["Parc ancien", "Plus de la moitié des résidences principales datent d'avant 1971 selon les tableaux logement INSEE.", extLink("INSEE, LOG T8, RP2023", "https://www.insee.fr/fr/statistiques/2011101?geo=COM-42218"), "Un besoin potentiel de qualification fine : état, sécurité, rénovation, usages et coûts."],
+    ["Chômage", "Taux de chômage au sens du recensement : 19,0 % des 15-64 ans en 2023.", extLink("INSEE, EMP T4, RP2023", "https://www.insee.fr/fr/statistiques/2011101?geo=COM-42218"), "Justifie de relier certains projets à l'insertion, à la formation et aux chantiers encadrés."],
+    ["Pauvreté", "Taux de pauvreté à 60 % de la médiane : 30,4 % en 2023.", extLink("INSEE-DGFiP-Cnaf-Cnav-Ccmsa, Filosofi 2023", "https://www.insee.fr/fr/statistiques/2011101?geo=COM-42218"), "Renforce l'intérêt d'usages utiles : locaux associatifs, services, économie circulaire et logement solidaire."],
+  ]);
+}
+
+function observatoryDataSection() {
+  return tableSection("Sources publiques à croiser", "L'observatoire TVF doit distinguer données publiques, signalements, visites autorisées et décisions internes.", [
+    ["Source", "Ce qu'elle permet", "Limite à respecter"],
+    [extLink("INSEE - dossiers communaux", "https://www.insee.fr/fr/statistiques/2011101?geo=COM-42218"), "Population, logements, vacance, emploi, pauvreté, équipements et activité économique.", "La donnée décrit un contexte ; elle ne suffit pas à qualifier un bien précis."],
+    [extLink("Cartofriches - Cerema", "https://cartofriches.cerema.fr/cartofriches/"), "Friches, statuts, types, observatoires locaux et données ouvertes.", "Certaines friches restent sensibles : la publication doit être maîtrisée."],
+    [extLink("PMCB - Ministère de la Transition écologique", "https://www.ecologie.gouv.fr/politiques-publiques/produits-materiaux-construction-du-secteur-du-batiment-pmcb"), "Cadre de la filière bâtiment, reprise, traçabilité, réemploi et réutilisation.", "La banque de matériaux TVF doit rester orientée projet, pas distribution libre."],
+    [extLink("Banque des Territoires / Localtis - logements vacants", "https://www.banquedesterritoires.fr/la-france-compte-plus-de-3-millions-de-logements-vacants"), "Synthèse de l'étude INSEE sur la vacance, ses causes et ses contrastes territoriaux.", "Ne pas confondre vacance frictionnelle et vacance structurelle."],
+  ]);
+}
+
+function contactDetailsSection() {
+  return tableSection("Coordonnées officielles TVF", "Ces coordonnées sont les canaux de contact publics à utiliser pour les demandes institutionnelles, partenariales ou citoyennes.", [
+    ["Canal", "Information", "Usage recommandé"],
+    ["E-mail", `<a href="mailto:${contact.email}">${contact.email}</a>`, "Premier contact écrit, transmission d'une demande, prise de rendez-vous ou envoi d'un dossier."],
+    ["Téléphone", `<a href="tel:${contact.phoneHref}">${contact.phone}</a>`, "Contact court, orientation rapide ou confirmation d'un rendez-vous."],
+    ["Siège national", contact.address, "Adresse institutionnelle de référence pour les mentions et documents TVF."],
+  ]);
+}
+
 function audienceSection() {
-  return `<section class="section" ${sectionAttrs("Parcours par public", "parcours-publics")}><div class="container audience-grid"><article id="collectivite"><h2>Collectivité</h2><p>TVF peut aider à préparer un diagnostic, identifier des biens ou ressources et structurer une expérimentation locale. La coopération doit rester compatible avec les compétences, politiques publiques et procédures de la collectivité.</p></article><article id="proprietaire"><h2>Propriétaire</h2><p>Un propriétaire peut présenter un bien vacant ou dégradé. TVF étudie alors l'état du bien, les contraintes, les usages possibles et les conditions d'une convention adaptée.</p></article><article id="entreprise"><h2>Entreprise</h2><p>Une entreprise peut contribuer par des matériaux, du mécénat, des compétences, des locaux ou de la logistique. La contribution doit être tracée et orientée vers un projet validé.</p></article><article id="citoyen"><h2>Citoyen ou bénévole</h2><p>Un habitant peut signaler une situation, rejoindre une mission, participer à un chantier encadré ou relayer les besoins de son territoire.</p></article></div></section>`;
+  return `<section class="section" ${sectionAttrs("Parcours par public", "parcours-publics")}><div class="container audience-grid"><article id="collectivite"><h3>Collectivité</h3><p>TVF peut aider à préparer un diagnostic, identifier des biens ou ressources et structurer une expérimentation locale. La coopération doit rester compatible avec les compétences, politiques publiques et procédures de la collectivité.</p></article><article id="proprietaire"><h3>Propriétaire</h3><p>Un propriétaire peut présenter un bien vacant ou dégradé. TVF étudie alors l'état du bien, les contraintes, les usages possibles et les conditions d'une convention adaptée.</p></article><article id="entreprise"><h3>Entreprise</h3><p>Une entreprise peut contribuer par des matériaux, du mécénat, des compétences, des locaux ou de la logistique. La contribution doit être tracée et orientée vers un projet validé.</p></article><article id="citoyen"><h3>Citoyen ou bénévole</h3><p>Un habitant peut signaler une situation, rejoindre une mission, participer à un chantier encadré ou relayer les besoins de son territoire.</p></article></div></section>`;
 }
 
 function formSection() {
@@ -1627,11 +1696,11 @@ function formSection() {
 }
 
 function contactSection() {
-  return `<section class="section" ${sectionAttrs("Décrivez votre demande", "contact-form")}><div class="container form-panel"><div><p class="section-kicker">Message</p><h2>Décrivez votre demande</h2><p>Indiquez votre profil, votre commune, le type de bien ou de coopération, et les informations déjà disponibles.</p></div><form data-prepare-form aria-describedby="contact-note"><label for="contact-name">Nom / structure</label><input id="contact-name" name="nom" type="text" autocomplete="name" placeholder="Votre nom ou organisme"><label for="contact-email">E-mail</label><input id="contact-email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="contact@exemple.fr"><label for="contact-message">Message</label><textarea id="contact-message" name="message" autocomplete="off" placeholder="Votre message"></textarea><p class="form-note" id="contact-note">Ce formulaire prépare les informations utiles. L'envoi définitif doit être réalisé via le canal de contact officiel de TVF.</p><p class="form-note" data-draft-status hidden role="status">Résumé récupéré depuis la page Agir avec nous. Relisez le message avant tout envoi officiel.</p><p class="form-note" data-local-draft-status hidden role="status">Brouillon restauré depuis cet onglet. Vous pouvez le modifier, le préparer ou l'effacer.</p><p class="form-note" data-save-status hidden role="status">Brouillon sauvegardé localement dans cet onglet.</p><button class="btn primary" type="button" data-prepare-summary>Préparer l'envoi</button><button class="btn secondary" type="button" data-copy-summary hidden>Copier le résumé</button><button class="btn secondary" type="button" data-download-summary hidden>Télécharger le résumé</button><button class="btn secondary" type="button" data-reset-form hidden>Effacer le brouillon</button><output class="form-summary" data-form-summary hidden aria-live="polite"></output></form></div></section>`;
+  return `<section class="section" ${sectionAttrs("Décrivez votre demande", "contact-form")}><div class="container form-panel"><div><p class="section-kicker">Message</p><h2>Décrivez votre demande</h2><p>Indiquez votre profil, votre commune, le type de bien ou de coopération, et les informations déjà disponibles. Après préparation, envoyez votre message à <a href="mailto:${contact.email}">${contact.email}</a> ou appelez le <a href="tel:${contact.phoneHref}">${contact.phone}</a>.</p></div><form data-prepare-form aria-describedby="contact-note"><label for="contact-name">Nom / structure</label><input id="contact-name" name="nom" type="text" autocomplete="name" placeholder="Votre nom ou organisme"><label for="contact-email">E-mail</label><input id="contact-email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="contact@exemple.fr"><label for="contact-message">Message</label><textarea id="contact-message" name="message" autocomplete="off" placeholder="Votre message"></textarea><p class="form-note" id="contact-note">Ce formulaire prépare les informations utiles dans votre navigateur. L'envoi définitif se fait par e-mail à ${contact.email} ou par téléphone au ${contact.phone}.</p><p class="form-note" data-draft-status hidden role="status">Résumé récupéré depuis la page Agir avec nous. Relisez le message avant tout envoi officiel.</p><p class="form-note" data-local-draft-status hidden role="status">Brouillon restauré depuis cet onglet. Vous pouvez le modifier, le préparer ou l'effacer.</p><p class="form-note" data-save-status hidden role="status">Brouillon sauvegardé localement dans cet onglet.</p><button class="btn primary" type="button" data-prepare-summary>Préparer l'envoi</button><button class="btn secondary" type="button" data-copy-summary hidden>Copier le résumé</button><button class="btn secondary" type="button" data-download-summary hidden>Télécharger le résumé</button><button class="btn secondary" type="button" data-reset-form hidden>Effacer le brouillon</button><output class="form-summary" data-form-summary hidden aria-live="polite"></output></form></div></section>`;
 }
 
 function legalSection() {
-  return `<section class="section" ${sectionAttrs("Mentions légales", "mentions-legales-detail")}><div class="container legal"><h2>Éditeur</h2><p><strong>Territoires Vivants France</strong><br>Association nationale en création<br>25 rue Élise Gervais, 42000 Saint-Étienne</p><h2>Responsables</h2><p>Président fondateur : Edryan Rangoly.<br>Secrétaire et trésorier : M. Lambeau Jordan.</p><h2>Statut de l'association</h2><p>Cette page est structurée pour être complétée après les formalités officielles : numéro RNA, numéro SIREN le cas échéant, publication administrative, hébergeur définitif, contact officiel et mentions RGPD détaillées.</p><h2>Hébergement</h2><p>Le site est préparé pour un déploiement web sécurisé. Les informations relatives à l'hébergeur, au domaine et aux responsabilités techniques doivent être tenues à jour dans cette rubrique.</p><h2>Données personnelles</h2><p>Les formulaires et parcours présentés servent à préparer les informations utiles à une demande. Les données transmises à TVF devront être traitées dans le respect du RGPD, avec une finalité claire, une durée de conservation adaptée et un droit de contact pour les personnes concernées.</p><h2>Propriété intellectuelle</h2><p>Les textes, logos, documents, visuels et éléments graphiques du site sont destinés à présenter le projet Territoires Vivants France. Toute réutilisation, modification ou diffusion doit faire l'objet d'une autorisation préalable.</p><h2>Responsabilité</h2><p>Les contenus du site présentent une démarche associative, des méthodes et des documents de travail. Ils ne constituent pas un conseil juridique, technique, financier ou administratif personnalisé. Chaque projet doit être vérifié et adapté avec les interlocuteurs compétents.</p></div></section>`;
+  return `<section class="section" ${sectionAttrs("Mentions légales", "mentions-legales-detail")}><div class="container legal"><h2>Cadre légal du site</h2><h3>Éditeur</h3><p><strong>Territoires Vivants France</strong><br>Association nationale en structuration<br>${contact.address}<br>E-mail : <a href="mailto:${contact.email}">${contact.email}</a><br>Téléphone : <a href="tel:${contact.phoneHref}">${contact.phone}</a></p><h3>Responsables</h3><p>Président fondateur : Edryan Rangoly.<br>Secrétaire et trésorier : M. Lambeau Jordan.</p><h3>Références administratives</h3><p>Les références administratives telles que le numéro RNA, le numéro SIREN le cas échéant et les informations de publication officielle doivent être ajoutées dès leur attribution. Cette rubrique est conçue pour être actualisée sans modifier la structure du site.</p><h3>Hébergement</h3><p>Le site est diffusé sur le domaine territoiresvivantsfrance.fr. Les informations relatives à l'hébergeur, au domaine et aux responsabilités techniques doivent rester à jour dans cette rubrique.</p><h3>Données personnelles</h3><p>Les formulaires et parcours présentés servent à préparer les informations utiles à une demande. Les données transmises à TVF doivent être traitées dans le respect du RGPD, avec une finalité claire, une durée de conservation adaptée et un droit de contact pour les personnes concernées.</p><h3>Propriété intellectuelle</h3><p>Les textes, logos, documents, visuels et éléments graphiques du site sont destinés à présenter Territoires Vivants France. Toute réutilisation, modification ou diffusion doit faire l'objet d'une autorisation préalable.</p><h3>Responsabilité</h3><p>Les contenus du site présentent une démarche associative, des méthodes et des documents de travail. Ils ne constituent pas un conseil juridique, technique, financier ou administratif personnalisé. Chaque projet doit être vérifié et adapté avec les interlocuteurs compétents.</p></div></section>`;
 }
 
 function iconFor(text) {
@@ -1741,6 +1810,8 @@ function jsonLd(page) {
       name: site.name,
       url: site.url,
       logo: `${site.url}/assets/logo-tvf-officiel-fond-blanc.png`,
+      email: contact.email,
+      telephone: contact.phoneHref,
       address: {
         "@type": "PostalAddress",
         streetAddress: "25 rue Élise Gervais",
@@ -1881,7 +1952,7 @@ ${breadcrumbNav(page)}
       <div class="container cta-band-inner">
         <div>
           <p class="section-kicker">Passer à l'étape suivante</p>
-          <h2>Vous avez un bien, une ressource ou un besoin territorial ?</h2>
+          <h3>Vous avez un bien, une ressource ou un besoin territorial ?</h3>
           <p>Présentez la situation à TVF pour préparer un premier échange clair et utile.</p>
         </div>
         <div class="cta-band-actions">
@@ -1894,9 +1965,9 @@ ${breadcrumbNav(page)}
   <footer class="site-footer">
     <div class="container footer-grid">
       <div><span class="footer-logo-box"><img src="assets/logo-tvf-officiel-transparent.png" width="612" height="408" alt="Territoires Vivants France" class="footer-logo" loading="lazy" decoding="async"></span><p>Plateforme nationale de coopération pour redonner vie aux biens, lieux et ressources inutilisés.</p></div>
-      <div><h2>Navigation</h2>${nav.slice(0, 7).map(([label, href]) => `<a href="${hrefFor(href)}">${label}</a>`).join("")}</div>
-      <div><h2>Ressources</h2><a href="${hrefFor("notre-methode.html")}">Notre méthode</a><a href="${hrefFor("impact.html")}">Impact</a><a href="${hrefFor("gouvernance.html")}">Gouvernance</a><a href="${hrefFor("kit-media.html")}">Kit média</a><a href="${hrefFor("documents.html")}">Documents</a><a href="${hrefFor("faq.html")}">FAQ</a><a href="${hrefFor("transparence.html")}">Transparence</a><a href="${hrefFor("mentions-legales.html")}">Mentions légales</a><a href="${hrefFor("contact.html")}">Contact</a></div>
-      <div><h2>Siège</h2><p>25 rue Élise Gervais<br>42000 Saint-Étienne</p><a class="btn secondary" href="${hrefFor("contact.html")}">Contacter TVF</a></div>
+      <div><h3>Navigation</h3>${nav.slice(0, 7).map(([label, href]) => `<a href="${hrefFor(href)}">${label}</a>`).join("")}</div>
+      <div><h3>Ressources</h3><a href="${hrefFor("notre-methode.html")}">Notre méthode</a><a href="${hrefFor("impact.html")}">Impact</a><a href="${hrefFor("gouvernance.html")}">Gouvernance</a><a href="${hrefFor("kit-media.html")}">Kit média</a><a href="${hrefFor("documents.html")}">Documents</a><a href="${hrefFor("faq.html")}">FAQ</a><a href="${hrefFor("transparence.html")}">Transparence</a><a href="${hrefFor("mentions-legales.html")}">Mentions légales</a><a href="${hrefFor("contact.html")}">Contact</a></div>
+      <div><h3>Siège</h3><p>25 rue Élise Gervais<br>42000 Saint-Étienne</p><p><a href="mailto:${contact.email}">${contact.email}</a><br><a href="tel:${contact.phoneHref}">${contact.phone}</a></p><a class="btn secondary" href="${hrefFor("contact.html")}">Contacter TVF</a></div>
     </div>
     <div class="container footer-bottom">© 2026 Territoires Vivants France - Tous droits réservés.</div>
   </footer>

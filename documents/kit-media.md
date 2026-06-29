@@ -60,15 +60,15 @@ Pour préparer une prise de parole, un rendez-vous ou une campagne de communicat
 
 Règle : adapter chaque support au contexte réel, sans annoncer de partenaire, chiffre ou résultat non vérifié.
 
-## 8. Contact presse
+## 8. Contact presse et institutionnel
 
-Contact à compléter après validation officielle :
+Canal officiel TVF pour les premières demandes :
 
-- Nom :
-- Fonction :
-- E-mail :
-- Téléphone :
-- Adresse :
+- E-mail : contact@territoiresvivantsfrance.fr
+- Téléphone : 06 22 03 93 24
+- Siège : 25 rue Élise Gervais, 42000 Saint-Étienne
+
+Interlocuteur presse nominatif à préciser selon la demande, le sujet traité et l'autorisation de communication.
 
 ## 9. Contrôle avant diffusion
 

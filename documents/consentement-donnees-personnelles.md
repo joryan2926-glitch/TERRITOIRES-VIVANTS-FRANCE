@@ -62,6 +62,11 @@ Chaque personne peut demander :
 - la limitation d'un traitement ;
 - le retrait d'un consentement donné pour une communication.
 
+Les demandes relatives aux données personnelles peuvent être adressées à :
+
+- contact@territoiresvivantsfrance.fr
+- 06 22 03 93 24
+
 ## 8. Consentement
 
 Je reconnais avoir été informé(e) de l'utilisation des informations transmises à TVF dans le cadre du dossier suivant :

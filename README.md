@@ -4,7 +4,7 @@ Nouvelle base propre du portail Territoires Vivants France.
 
 ## Objectif
 
-Présenter TVF comme une association nationale en création, claire, crédible et lisible pour :
+Présenter TVF comme une association nationale en structuration, claire, crédible et lisible pour :
 
 - collectivités ;
 - propriétaires ;
@@ -12,6 +12,12 @@ Présenter TVF comme une association nationale en création, claire, crédible e
 - associations ;
 - bénévoles et citoyens ;
 - financeurs et mécènes.
+
+## Coordonnées publiques
+
+- E-mail : contact@territoiresvivantsfrance.fr
+- Téléphone : 06 22 03 93 24
+- Siège : 25 rue Élise Gervais, 42000 Saint-Étienne
 
 ## Pages publiques
 

@@ -572,9 +572,22 @@ p {
 }
 
 .journey-section .section-kicker,
-.journey-section h2,
+.journey-section h3,
 .journey-section .section-head p {
   color: var(--white);
+}
+
+.journey-section h3,
+.split h3,
+.cta-band h3 {
+  margin: 0;
+  font-size: clamp(2rem, 3.5vw, 3.1rem);
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+}
+
+.split h3 {
+  color: var(--blue-900);
 }
 
 .journey-grid {
@@ -745,7 +758,15 @@ textarea {
   padding: 36px;
 }
 
-.legal h2 + p {
+.legal h3 {
+  margin-top: 22px;
+}
+
+.legal h2 + h3 {
+  margin-top: 14px;
+}
+
+.legal h3 + p {
   margin-top: 8px;
 }
 
@@ -824,12 +845,12 @@ tr:last-child td {
   align-items: center;
 }
 
-.cta-band h2,
+.cta-band h3,
 .cta-band p {
   color: var(--white);
 }
 
-.cta-band h2 {
+.cta-band h3 {
   max-width: 760px;
 }
 
@@ -869,7 +890,7 @@ tr:last-child td {
   object-fit: contain;
 }
 
-.site-footer h2 {
+.site-footer h3 {
   color: var(--white);
   font-size: 1rem;
   margin-bottom: 12px;
@@ -1185,7 +1206,7 @@ tr:last-child td {
   }
 
   .journey-section .section-kicker,
-  .journey-section h2,
+  .journey-section h3,
   .journey-section .section-head p,
   .journey-card strong,
   .journey-card small {

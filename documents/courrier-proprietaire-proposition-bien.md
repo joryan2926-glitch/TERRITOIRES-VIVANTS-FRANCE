@@ -62,7 +62,7 @@ Nom :
 
 Fonction :
 
-Contact :
+Contact : contact@territoiresvivantsfrance.fr - 06 22 03 93 24
 
 ## 7. Relance courte
 
