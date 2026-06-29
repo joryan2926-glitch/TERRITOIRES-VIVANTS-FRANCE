@@ -116,8 +116,36 @@ function valueForField(field) {
 
 document.querySelectorAll("[data-prepare-form]").forEach((form) => {
   const button = form.querySelector("[data-prepare-summary]");
+  const copyButton = form.querySelector("[data-copy-summary]");
   const output = form.querySelector("[data-form-summary]");
   if (!button || !output) return;
+
+  async function copySummary() {
+    const text = output.textContent.trim();
+    if (!text) return;
+
+    try {
+      await navigator.clipboard.writeText(text);
+    } catch {
+      const textarea = document.createElement("textarea");
+      textarea.value = text;
+      textarea.setAttribute("readonly", "");
+      textarea.style.position = "fixed";
+      textarea.style.left = "-9999px";
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand("copy");
+      textarea.remove();
+    }
+
+    if (copyButton) {
+      const initialLabel = copyButton.textContent;
+      copyButton.textContent = "Résumé copié";
+      window.setTimeout(() => {
+        copyButton.textContent = initialLabel;
+      }, 1800);
+    }
+  }
 
   button.addEventListener("click", () => {
     const fields = Array.from(form.querySelectorAll("input, select, textarea"));
@@ -130,7 +158,13 @@ document.querySelectorAll("[data-prepare-form]").forEach((form) => {
     output.textContent = lines.length
       ? `Résumé de la demande\n\n${lines.join("\n")}`
       : "Renseignez au moins un champ pour préparer un résumé de demande.";
+
+    if (copyButton) {
+      copyButton.hidden = !lines.length;
+    }
   });
+
+  copyButton?.addEventListener("click", copySummary);
 });
 
 const printDetailsState = [];
