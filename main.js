@@ -117,6 +117,7 @@ function valueForField(field) {
 document.querySelectorAll("[data-prepare-form]").forEach((form) => {
   const button = form.querySelector("[data-prepare-summary]");
   const copyButton = form.querySelector("[data-copy-summary]");
+  const downloadButton = form.querySelector("[data-download-summary]");
   const output = form.querySelector("[data-form-summary]");
   if (!button || !output) return;
 
@@ -147,6 +148,21 @@ document.querySelectorAll("[data-prepare-form]").forEach((form) => {
     }
   }
 
+  function downloadSummary() {
+    const text = output.textContent.trim();
+    if (!text) return;
+
+    const date = new Date().toISOString().slice(0, 10);
+    const blob = new Blob([text], { type: "text/plain;charset=utf-8" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = `resume-demande-tvf-${date}.txt`;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    window.setTimeout(() => URL.revokeObjectURL(link.href), 1000);
+  }
+
   button.addEventListener("click", () => {
     const fields = Array.from(form.querySelectorAll("input, select, textarea"));
     const lines = fields
@@ -162,9 +178,14 @@ document.querySelectorAll("[data-prepare-form]").forEach((form) => {
     if (copyButton) {
       copyButton.hidden = !lines.length;
     }
+
+    if (downloadButton) {
+      downloadButton.hidden = !lines.length;
+    }
   });
 
   copyButton?.addEventListener("click", copySummary);
+  downloadButton?.addEventListener("click", downloadSummary);
 });
 
 const printDetailsState = [];
