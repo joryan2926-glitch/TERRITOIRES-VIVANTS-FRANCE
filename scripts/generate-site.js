@@ -1545,7 +1545,7 @@ function sectionIntro(title, text, items) {
 
 function cards(title, intro, items) {
   return `<section class="section soft" ${sectionAttrs(title)}><div class="container"><div class="section-head"><p class="section-kicker">Repères</p><h2>${title}</h2><p>${intro}</p></div><div class="card-grid">${items
-    .map(([h, p, href]) => `<article class="card"><span class="card-icon" aria-hidden="true">${iconFor(h)}</span><h3>${h}</h3><p>${p}</p>${href ? `<a class="text-link" href="${hrefFor(href)}">Découvrir</a>` : ""}</article>`)
+    .map(([h, p, href]) => `<article class="card"><span class="card-icon" aria-hidden="true">${iconFor(h)}</span><h3>${h}</h3><p>${p}</p>${href ? `<a class="text-link" href="${hrefFor(href)}" aria-label="Découvrir : ${escapeAttr(h)}">Découvrir</a>` : ""}</article>`)
     .join("")}</div></div></section>`;
 }
 
@@ -1568,7 +1568,7 @@ function documentTools() {
 
 function documentCards(title, intro, items) {
   return `<section class="section soft document-library" ${sectionAttrs(title, "documents-library")}><div class="container"><div class="section-head"><p class="section-kicker">Repères</p><h2>${title}</h2><p>${intro}</p></div><div class="card-grid">${items
-    .map(([h, p, href]) => `<article class="card" data-doc-card data-doc-category="${docCategory(h, p, href)}"><span class="card-icon" aria-hidden="true">${iconFor(h)}</span><h3>${h}</h3><p>${p}</p>${href ? `<a class="text-link" href="${hrefFor(href)}">Découvrir</a>` : ""}</article>`)
+    .map(([h, p, href]) => `<article class="card" data-doc-card data-doc-category="${docCategory(h, p, href)}"><span class="card-icon" aria-hidden="true">${iconFor(h)}</span><h3>${h}</h3><p>${p}</p>${href ? `<a class="text-link" href="${hrefFor(href)}" aria-label="Ouvrir le document : ${escapeAttr(h)}">Découvrir</a>` : ""}</article>`)
     .join("")}</div><p class="doc-empty" data-doc-empty hidden>Aucun document ne correspond à cette recherche. Essayez un autre mot-clé ou un autre filtre.</p></div></section>`;
 }
 
