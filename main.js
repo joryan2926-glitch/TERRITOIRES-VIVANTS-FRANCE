@@ -135,6 +135,10 @@ if (contactMessage) {
     const draft = sessionStorage.getItem("tvfContactDraft");
     if (draft && !contactMessage.value.trim()) {
       contactMessage.value = draft;
+      const draftStatus = document.querySelector("[data-draft-status]");
+      if (draftStatus) {
+        draftStatus.hidden = false;
+      }
     }
     sessionStorage.removeItem("tvfContactDraft");
   } catch {
