@@ -171,6 +171,7 @@ document.querySelectorAll("[data-prepare-form]").forEach((form) => {
   const button = form.querySelector("[data-prepare-summary]");
   const copyButton = form.querySelector("[data-copy-summary]");
   const downloadButton = form.querySelector("[data-download-summary]");
+  const resetButton = form.querySelector("[data-reset-form]");
   const transferLink = form.querySelector("[data-transfer-summary]");
   const output = form.querySelector("[data-form-summary]");
   if (!button || !output) return;
@@ -178,9 +179,13 @@ document.querySelectorAll("[data-prepare-form]").forEach((form) => {
   const initialDirty = contactDraftRecovered && contactMessage && form.contains(contactMessage);
   form.dataset.draftDirty = String(initialDirty);
   form.dataset.draftHandled = "false";
+  if (resetButton) {
+    resetButton.hidden = !initialDirty;
+  }
 
   function markDirty(event) {
-    form.dataset.draftDirty = String(summaryForForm(form).lines.length > 0);
+    const hasDraft = summaryForForm(form).lines.length > 0;
+    form.dataset.draftDirty = String(hasDraft);
     form.dataset.draftHandled = "false";
 
     if (event?.target && valueForField(event.target)) {
@@ -198,11 +203,40 @@ document.querySelectorAll("[data-prepare-form]").forEach((form) => {
     if (downloadButton) {
       downloadButton.hidden = true;
     }
+
+    if (resetButton) {
+      resetButton.hidden = !hasDraft;
+    }
   }
 
   function markHandled() {
     form.dataset.draftDirty = "false";
     form.dataset.draftHandled = "true";
+  }
+
+  function resetDraft() {
+    form.reset();
+    clearFieldErrors(form);
+    markHandled();
+    output.hidden = true;
+    output.textContent = "";
+
+    const draftStatus = form.querySelector("[data-draft-status]");
+    if (draftStatus) {
+      draftStatus.hidden = true;
+    }
+
+    if (copyButton) {
+      copyButton.hidden = true;
+    }
+
+    if (downloadButton) {
+      downloadButton.hidden = true;
+    }
+
+    if (resetButton) {
+      resetButton.hidden = true;
+    }
   }
 
   async function copySummary() {
@@ -284,10 +318,15 @@ document.querySelectorAll("[data-prepare-form]").forEach((form) => {
     if (downloadButton) {
       downloadButton.hidden = !hasSummary;
     }
+
+    if (resetButton) {
+      resetButton.hidden = !hasSummary;
+    }
   });
 
   copyButton?.addEventListener("click", copySummary);
   downloadButton?.addEventListener("click", downloadSummary);
+  resetButton?.addEventListener("click", resetDraft);
   transferLink?.addEventListener("click", transferSummary);
 });
 
