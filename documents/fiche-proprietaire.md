@@ -1,81 +1,166 @@
-# Fiche propriétaire - Bien à proposer
+# Fiche propriétaire - Bien à proposer à TVF
 
 Document préparatoire pour présenter un bien vacant, dégradé ou sous-utilisé.
+Cette fiche ne crée aucun engagement automatique. Toute suite nécessite un accord écrit.
 
-## 1. Propriétaire
+---
 
-- Nom :
-- Prénom :
-- Adresse :
-- E-mail :
-- Téléphone :
-- Statut :
-  - [ ] Propriétaire particulier
-  - [ ] SCI
-  - [ ] Entreprise
-  - [ ] Association
-  - [ ] Collectivité
+## 1. Propriétaire ou représentant
+
+| Champ | Réponse |
+|---|---|
+| Nom / structure |  |
+| Statut | Particulier / SCI / entreprise / association / collectivité |
+| Adresse |  |
+| E-mail |  |
+| Téléphone |  |
+| Mandataire éventuel |  |
+| Pouvoir ou mandat disponible | Oui / Non / À vérifier |
+| Date de la demande |  |
+
+---
 
 ## 2. Bien concerné
 
-- Type :
-  - [ ] Logement
-  - [ ] Immeuble
-  - [ ] Commerce
-  - [ ] Bâtiment
-  - [ ] Terrain
-  - [ ] Autre :
+| Champ | Réponse |
+|---|---|
+| Type | Logement / immeuble / commerce / bâtiment / terrain / autre |
+| Adresse |  |
+| Surface approximative |  |
+| Nombre de niveaux ou lots |  |
+| Occupation actuelle | Vacant / partiellement utilisé / autre |
+| Durée de vacance estimée |  |
+| État général apparent |  |
+| Accès possible | Oui / Non / À vérifier |
+| Photos disponibles | Oui / Non |
 
-- Adresse :
-- Surface approximative :
-- État général :
-- Occupation actuelle :
-- Durée de vacance estimée :
+---
 
 ## 3. Situation juridique
 
-- Propriété pleine et entière :
-  - [ ] Oui
-  - [ ] Non
-  - [ ] À vérifier
-- Copropriété :
-  - [ ] Oui
-  - [ ] Non
-- Servitudes ou contraintes connues :
-- Diagnostics disponibles :
+- propriété pleine et entière :
+  - [ ] oui ;
+  - [ ] non ;
+  - [ ] à vérifier.
 
-## 4. Travaux ou besoins identifiés
+- copropriété :
+  - [ ] oui ;
+  - [ ] non.
 
-- Sécurité :
-- Structure :
-- Électricité :
-- Eau / sanitaires :
-- Accessibilité :
-- Isolation :
-- Autres :
+- indivision :
+  - [ ] oui ;
+  - [ ] non.
 
-## 5. Usage envisagé
+- servitudes connues :
+- diagnostics disponibles :
+- assurance :
+- contentieux ou procédure :
+- autorisation de visite possible :
 
-- [ ] Logement solidaire
-- [ ] Usage associatif
-- [ ] Commerce de proximité
-- [ ] Atelier / activité locale
-- [ ] Espace partagé
-- [ ] À définir avec TVF
+---
+
+## 4. État et besoins connus
+
+| Sujet | État / commentaire |
+|---|---|
+| Sécurité |  |
+| Structure |  |
+| Toiture |  |
+| Électricité |  |
+| Eau / sanitaires |  |
+| Chauffage |  |
+| Accessibilité |  |
+| Isolation |  |
+| Humidité |  |
+| Extérieurs |  |
+| Autres |  |
+
+---
+
+## 5. Usages envisageables
+
+- [ ] étude simple ;
+- [ ] occupation temporaire ;
+- [ ] logement solidaire ;
+- [ ] logement étudiant ;
+- [ ] logement intergénérationnel ;
+- [ ] local associatif ;
+- [ ] commerce de proximité ;
+- [ ] atelier ou activité locale ;
+- [ ] espace partagé ;
+- [ ] jardin ou terrain partagé ;
+- [ ] à définir avec TVF.
+
+Limites ou usages refusés :
+
+................................................................................
+
+---
 
 ## 6. Cadre souhaité
 
-- [ ] Étude simple
-- [ ] Mise en relation
-- [ ] Convention d'usage
-- [ ] Projet de réhabilitation
-- [ ] Autre :
+- [ ] simple échange d'orientation ;
+- [ ] visite autorisée ;
+- [ ] note d'opportunité ;
+- [ ] étude de faisabilité ;
+- [ ] convention d'étude ;
+- [ ] convention d'usage ;
+- [ ] recherche de matériaux ;
+- [ ] recherche de partenaires ;
+- [ ] autre :
 
-## 7. Pièces utiles
+Durée envisageable :
 
-- [ ] Photos extérieures
-- [ ] Photos intérieures
-- [ ] Plan ou croquis
-- [ ] Titre de propriété ou justificatif
-- [ ] Diagnostics existants
-- [ ] Derniers travaux connus
+................................................................................
+
+---
+
+## 7. Points à verrouiller avant toute action
+
+- [ ] propriétaire ou mandataire habilité identifié ;
+- [ ] accès autorisé par écrit ;
+- [ ] risques de sécurité identifiés ;
+- [ ] assurance vérifiée ;
+- [ ] règles de visite fixées ;
+- [ ] travaux autorisés ou interdits listés ;
+- [ ] usage envisagé compatible ;
+- [ ] communication publique autorisée ou refusée ;
+- [ ] restitution prévue.
+
+---
+
+## 8. Pièces utiles
+
+- [ ] photos extérieures ;
+- [ ] photos intérieures ;
+- [ ] plan ou croquis ;
+- [ ] titre de propriété ou justificatif ;
+- [ ] mandat si représentant ;
+- [ ] diagnostics existants ;
+- [ ] factures ou travaux récents ;
+- [ ] contraintes écrites ;
+- [ ] attestation d'assurance si disponible.
+
+---
+
+## 9. Décision TVF
+
+- [ ] informations à compléter ;
+- [ ] visite autorisée à préparer ;
+- [ ] note d'opportunité ;
+- [ ] scénarios d'usage ;
+- [ ] convention à préparer ;
+- [ ] réorientation ;
+- [ ] classement sans suite motivé.
+
+Motif :
+
+................................................................................
+
+---
+
+## 10. Notes
+
+................................................................................
+
+................................................................................

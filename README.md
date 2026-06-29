@@ -46,6 +46,11 @@ Présenter TVF comme une association nationale en structuration, claire, crédib
 
 ## Documents préparatoires
 
+- `documents/dossier-presentation-tvf.md`
+- `documents/dossier-collectivite-tvf.md`
+- `documents/dossier-entreprise-mecene-tvf.md`
+- `documents/dossier-proprietaire-tvf.md`
+- `documents/registre-elements-officiels-en-attente.md`
 - `documents/fiche-collectivite.md`
 - `documents/cahier-charges-diagnostic-territorial.md`
 - `documents/convention-cooperation-territoriale.md`
@@ -111,7 +116,6 @@ Présenter TVF comme une association nationale en structuration, claire, crédib
 - `documents/bordereau-don-materiaux.md`
 - `documents/convention-mecenat-preparatoire.md`
 - `documents/registre-materiaux-reemploi.md`
-- `documents/dossier-presentation-tvf.md`
 - `documents/modele-convention.md`
 - `documents/grille-impact.md`
 - `documents/bareme-priorisation.md`
@@ -125,12 +129,27 @@ Présenter TVF comme une association nationale en structuration, claire, crédib
 - `documents/registre-suivi-decisions.md`
 - `documents/kit-media.md`
 
+## Dossiers PDF prêts à présenter
+
+Les PDF sont générés depuis les documents Markdown :
+
+- `output/pdf/dossier-presentation-tvf.pdf`
+- `output/pdf/dossier-collectivite-tvf.pdf`
+- `output/pdf/dossier-entreprise-mecene-tvf.pdf`
+- `output/pdf/dossier-proprietaire-tvf.pdf`
+
 ## Génération
 
 Les pages sont générées depuis :
 
 ```bash
 node scripts/generate-site.js
+```
+
+Générer les PDF :
+
+```bash
+python scripts/generate-pdf-documents.py
 ```
 
 ## Prévisualisation locale

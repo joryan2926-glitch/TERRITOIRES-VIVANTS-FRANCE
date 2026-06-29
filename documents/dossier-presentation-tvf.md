@@ -1,94 +1,213 @@
 # Dossier de présentation - Territoires Vivants France
 
-Document de présentation synthétique à adapter selon l'interlocuteur.
+Document de présentation institutionnelle à adapter selon l'interlocuteur.
 
-## 1. Présentation courte
+Version de travail : 2026
+Contact : contact@territoiresvivantsfrance.fr - 06 22 03 93 24
+Siège national : 25 rue Élise Gervais, 42000 Saint-Étienne
 
-Territoires Vivants France est une association nationale en création basée à Saint-Étienne.
+---
 
-Sa mission est de faciliter la remise en usage de ressources aujourd'hui sous-utilisées :
+## 1. Résumé exécutif
 
-- logements vacants ;
-- commerces inoccupés ;
-- bâtiments inutilisés ;
-- terrains et friches ;
-- matériaux réemployables ;
-- compétences, bénévolat et contributions locales.
+Territoires Vivants France (TVF) est une association nationale en structuration, basée à Saint-Étienne, qui vise à remettre en usage des ressources aujourd'hui sous-utilisées : logements vacants, commerces inoccupés, bâtiments inutilisés, friches, terrains délaissés, matériaux réemployables, compétences locales et engagement citoyen.
 
-TVF agit comme une plateforme de coopération entre propriétaires, collectivités, entreprises, associations, citoyens, bénévoles, mécènes et financeurs.
+TVF ne se positionne pas comme un opérateur isolé. Sa vocation est de créer un cadre de coopération entre propriétaires, collectivités, entreprises, associations, citoyens, bénévoles, mécènes et financeurs afin de transformer des situations bloquées en dossiers lisibles, conventionnés et suivis.
 
-## 2. Problème traité
+La méthode repose sur une exigence simple : ne pas annoncer de résultats, de partenaires ou de financements sans preuve. Chaque projet doit être repéré, qualifié, priorisé, formalisé, suivi et documenté.
 
-De nombreux territoires font face à des situations dispersées :
+---
 
-- biens vacants sans projet ;
-- propriétaires isolés ;
-- collectivités avec des besoins mais peu de moyens opérationnels ;
-- matériaux encore utiles non réorientés ;
-- associations en recherche de locaux ou de ressources ;
-- entreprises souhaitant contribuer mais ne sachant pas toujours par quel canal.
+## 2. Pourquoi TVF est nécessaire
 
-TVF cherche à créer un cadre simple pour relier ces situations.
+De nombreux territoires font face à des difficultés simultanées :
 
-## 3. Méthode
+- des logements vacants ou dégradés restent sans solution ;
+- des commerces fermés fragilisent les rues et centres-villes ;
+- des bâtiments et terrains inutilisés se dégradent ;
+- des matériaux encore exploitables sortent des circuits utiles ;
+- des associations cherchent des locaux ou des ressources ;
+- des entreprises veulent contribuer sans toujours disposer d'un cadre traçable ;
+- des collectivités doivent coordonner plusieurs acteurs avec des moyens limités ;
+- des financeurs demandent des dossiers structurés, suivis et vérifiables.
 
-1. Identifier une ressource ou un besoin.
-2. Qualifier la situation.
-3. Vérifier les contraintes.
-4. Réunir les acteurs concernés.
-5. Préparer une convention adaptée.
-6. Suivre la mise en œuvre.
-7. Documenter les résultats.
+Ces sujets sont souvent traités séparément. TVF propose de les relier autour d'un même parcours : observer, qualifier, mobiliser, conventionner, agir, mesurer.
+
+---
+
+## 3. Mission
+
+La mission de TVF est de faciliter la remise en usage des biens, lieux et ressources inutilisés au service des habitants et des territoires.
+
+TVF cherche notamment à :
+
+- identifier les situations de vacance ou de sous-utilisation ;
+- qualifier les contraintes techniques, juridiques, financières et humaines ;
+- mettre autour de la table les acteurs concernés ;
+- préparer des conventions adaptées ;
+- orienter les matériaux et contributions vers des projets validés ;
+- créer des missions utiles pour les bénévoles et acteurs locaux ;
+- suivre les résultats uniquement lorsqu'ils sont prouvés.
+
+---
 
 ## 4. Publics concernés
 
 ### Collectivités
 
-Objectif : aider à structurer un diagnostic, une expérimentation ou un projet de coopération locale.
+TVF peut aider une commune, un EPCI, un département ou une région à cadrer un diagnostic, un périmètre pilote ou une coopération territoriale.
+
+Ce que TVF apporte :
+
+- une méthode de qualification ;
+- une grille de priorisation ;
+- des modèles de convention ;
+- un registre de suivi ;
+- des indicateurs d'impact ;
+- une interface avec propriétaires, entreprises, associations et citoyens.
 
 ### Propriétaires
 
-Objectif : étudier les conditions de remise en usage d'un bien vacant ou dégradé.
+Un propriétaire peut proposer un logement, un commerce, un bâtiment, un immeuble ou un terrain inutilisé.
+
+Ce que TVF clarifie :
+
+- le statut du bien ;
+- l'état apparent ;
+- les contraintes d'accès et de sécurité ;
+- les usages possibles ;
+- la durée envisageable ;
+- les modalités de convention ;
+- les conditions de restitution.
 
 ### Entreprises
 
-Objectif : valoriser matériaux, compétences, locaux, mécénat ou logistique dans un cadre traçable.
+Une entreprise peut contribuer par des matériaux, du mobilier, des locaux, des compétences, de la logistique ou du mécénat.
 
-### Associations et citoyens
+Ce que TVF sécurise :
 
-Objectif : relier les besoins locaux, le bénévolat, les usages futurs et l'engagement citoyen.
+- la description de la contribution ;
+- la traçabilité ;
+- l'affectation à un projet utile ;
+- le refus des ressources non adaptées ;
+- les règles de communication ;
+- le reporting éventuel.
+
+### Associations, bénévoles et citoyens
+
+TVF peut recevoir des besoins d'usage, des signalements, des compétences ou des disponibilités bénévoles.
+
+Ce que TVF organise :
+
+- des missions simples ;
+- des consignes de sécurité ;
+- des fiches de signalement ;
+- des feuilles d'émargement ;
+- des comptes rendus ;
+- des limites claires de représentation.
 
 ### Financeurs et mécènes
 
-Objectif : soutenir des projets instruits avec des indicateurs, une gouvernance et une transparence.
+TVF prépare des dossiers de soutien plus lisibles : besoin, budget, risques, convention, indicateurs et preuve.
 
-## 5. Garanties de sérieux
+Ce que TVF doit fournir :
 
-- pas de faux partenaires ;
-- pas de faux chiffres ;
-- pas de projets présentés comme réalisés sans preuve ;
-- distinction entre objectifs, projets en instruction et résultats mesurés ;
-- conventions avant action ;
-- suivi documentaire.
+- un objet de financement précis ;
+- un plan de financement ;
+- une matrice des risques ;
+- une grille d'impact ;
+- un reporting honnête ;
+- une distinction entre objectif et résultat.
 
-## 6. Territoire pilote
+---
 
-Saint-Étienne est le point de départ de la méthode TVF.
+## 5. Méthode TVF
 
-Le pilote doit permettre de tester :
+| Étape | Objectif | Livrable |
+|---|---|---|
+| 1. Repérer | Identifier un bien, un besoin ou une ressource | Fiche signalement |
+| 2. Qualifier | Vérifier informations, contraintes, acteurs et risques | Grille d'instruction |
+| 3. Prioriser | Décider si le dossier mérite une suite | Fiche décision |
+| 4. Mobiliser | Identifier propriétaires, collectivités, entreprises, associations, financeurs | Compte rendu de cadrage |
+| 5. Formaliser | Écrire les responsabilités et conditions | Convention ou lettre d'intention |
+| 6. Agir | Mettre en oeuvre une action encadrée | PV, émargement, compte rendu |
+| 7. Mesurer | Publier uniquement ce qui est prouvé | Grille d'impact |
 
-- le repérage de biens ;
-- le dialogue avec propriétaires ;
-- la structuration d'une filière de matériaux ;
-- les premiers dossiers de coopération ;
-- les outils de suivi.
+---
 
-## 7. Prochaine étape
+## 6. Les cinq pôles
 
-Organiser un rendez-vous de cadrage avec :
+| Pôle | Rôle |
+|---|---|
+| Habitat Vivant | Étudier les logements vacants, dégradés ou sous-utilisés |
+| Matériauthèque Solidaire | Qualifier et affecter des matériaux réemployables à des projets utiles |
+| Commerce Vivant | Préparer la réactivation de locaux commerciaux inoccupés |
+| Friches & Terrains Vivants | Transformer des espaces délaissés en usages utiles, verts ou collectifs |
+| Solidarité & Insertion | Organiser bénévolat, missions encadrées, participation et insertion |
 
-- un besoin identifié ;
-- un territoire ou un bien concerné ;
-- les acteurs déjà connus ;
-- les documents disponibles ;
-- les contraintes principales.
+---
+
+## 7. Territoire pilote : Saint-Étienne
+
+Saint-Étienne constitue le point de départ de la méthode TVF. Le pilote doit permettre de tester les outils avant tout déploiement plus large.
+
+Objectifs du pilote :
+
+- structurer les premiers registres ;
+- qualifier des situations réelles ;
+- tester les fiches par public ;
+- produire des conventions adaptées ;
+- préparer des indicateurs ;
+- identifier les blocages ;
+- rendre la méthode duplicable.
+
+Le pilote ne doit pas être présenté comme un résultat déjà réalisé. Il s'agit d'un terrain de méthode, de cadrage et de mise en confiance.
+
+---
+
+## 8. Garanties de sérieux
+
+TVF applique des règles de prudence indispensables :
+
+- aucun faux partenaire ;
+- aucun faux financeur ;
+- aucun chiffre d'impact inventé ;
+- aucun projet présenté comme réalisé sans preuve ;
+- aucune utilisation de logo sans accord ;
+- aucune entrée dans un bien sans autorisation ;
+- aucune action terrain sans cadre de sécurité ;
+- aucune distribution libre de matériaux sans affectation validée ;
+- distinction entre idée, signalement, instruction, convention, réalisation et résultat.
+
+---
+
+## 9. Documents essentiels
+
+Pour un premier rendez-vous, les documents prioritaires sont :
+
+- fiche collectivité ;
+- fiche propriétaire ;
+- fiche entreprise ;
+- fiche projet ;
+- fiche signalement ;
+- grille d'instruction ;
+- modèle de convention ;
+- grille d'impact ;
+- plan de financement ;
+- registre des décisions.
+
+---
+
+## 10. Prochaine étape
+
+Pour engager un échange, préparer :
+
+- le profil de l'interlocuteur ;
+- le territoire ou le bien concerné ;
+- la situation à traiter ;
+- les acteurs connus ;
+- les pièces déjà disponibles ;
+- les contraintes principales ;
+- la décision attendue du rendez-vous.
+
+Contact : contact@territoiresvivantsfrance.fr - 06 22 03 93 24

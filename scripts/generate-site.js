@@ -899,19 +899,31 @@ const pages = [
       tableSection("Choisir le bon document", "Cette lecture rapide évite de se perdre dans la bibliothèque complète.", [
         ["Besoin", "Document prioritaire", "Objectif"],
         ["Une collectivité veut tester TVF", "Fiche collectivité", "Décrire le territoire, le besoin et les interlocuteurs"],
+        ["Une collectivité prépare une réunion", "Dossier collectivité TVF", "Présenter la méthode, le périmètre, les livrables et les décisions attendues"],
         ["Saint-Étienne doit être présenté en réunion", "Dossier territorial Saint-Étienne", "Appuyer le pilote sur des données, besoins, livrables et indicateurs"],
         ["Un propriétaire propose un bien", "Fiche propriétaire", "Qualifier l'état, les contraintes et les scénarios d'usage"],
+        ["Un propriétaire veut comprendre le cadre", "Dossier propriétaire TVF", "Expliquer propriété conservée, visite, convention, usages et restitution"],
         ["Une entreprise propose des matériaux", "Fiche entreprise", "Tracer la ressource, sa disponibilité et son affectation possible"],
+        ["Une entreprise ou un mécène veut contribuer", "Dossier entreprise et mécène TVF", "Présenter contribution, RSE, traçabilité, convention et reporting"],
         ["Un lieu est signalé", "Fiche signalement", "Documenter l'information sans créer de projet automatique"],
         ["Un projet doit être instruit", "Fiche projet", "Cadrer objectifs, acteurs, risques, budget et indicateurs"],
         ["Un financement est recherché", "Plan de financement", "Distinguer coûts, contributions, demandes et montants obtenus"],
       ]),
       essentialDocumentsSection(),
+      pdfPresentationPackSection(),
       documentPriorityPackSection(),
       documentWorkflowSection(),
       publicEntryMatrixSection(),
       documentTools(),
       documentCards("Bibliothèque complète filtrable", "Tous les modèles restent accessibles. Utilisez la recherche ou les filtres pour retrouver un document précis après avoir identifié le bon pack.", [
+        ["Dossier TVF", "Présenter l'association, sa méthode, ses publics et ses conditions de coopération.", "documents/dossier-presentation-tvf.md"],
+        ["Dossier collectivité TVF", "Présenter un parcours territoire partenaire en réunion avec une commune, un EPCI, un département ou une région.", "documents/dossier-collectivite-tvf.md"],
+        ["Dossier propriétaire TVF", "Expliquer au propriétaire le cadre d'étude, de convention, d'usage et de restitution d'un bien.", "documents/dossier-proprietaire-tvf.md"],
+        ["Dossier entreprise et mécène TVF", "Présenter les contributions possibles : matériaux, locaux, compétences, mécénat, reporting et RSE.", "documents/dossier-entreprise-mecene-tvf.md"],
+        ["PDF dossier TVF", "Version PDF prête à transmettre pour une première présentation institutionnelle.", "output/pdf/dossier-presentation-tvf.pdf"],
+        ["PDF collectivité", "Version PDF du dossier collectivité, adaptée aux mairies, EPCI, départements et régions.", "output/pdf/dossier-collectivite-tvf.pdf"],
+        ["PDF entreprise et mécène", "Version PDF pour entreprises, fondations, mécènes et financeurs.", "output/pdf/dossier-entreprise-mecene-tvf.pdf"],
+        ["PDF propriétaire", "Version PDF du dossier propriétaire pour présenter un bien sans engagement automatique.", "output/pdf/dossier-proprietaire-tvf.pdf"],
         ["Fiche collectivité", "Qualifier un besoin territorial, un périmètre, des ressources et des interlocuteurs.", "documents/fiche-collectivite.md"],
         ["Diagnostic territorial", "Cadrer le périmètre, les données, la méthode et les livrables d'un diagnostic TVF.", "documents/cahier-charges-diagnostic-territorial.md"],
         ["Convention territoriale", "Formaliser une coopération avec une collectivité sans engagement financier automatique.", "documents/convention-cooperation-territoriale.md"],
@@ -976,7 +988,7 @@ const pages = [
         ["Bordereau matériaux", "Décrire précisément les matériaux proposés, leur état, leur retrait et leur affectation possible.", "documents/bordereau-don-materiaux.md"],
         ["Convention mécénat", "Préparer un soutien financier, matériel ou de compétences sans promesse fiscale automatique.", "documents/convention-mecenat-preparatoire.md"],
         ["Registre matériaux", "Tracer les matériaux proposés, acceptés, refusés, stockés, réservés ou affectés.", "documents/registre-materiaux-reemploi.md"],
-        ["Dossier TVF", "Présenter l'association, sa méthode, ses publics et ses conditions de coopération.", "documents/dossier-presentation-tvf.md"],
+        ["Éléments officiels en attente", "Lister les informations administratives, partenaires, résultats et preuves à publier uniquement après vérification.", "documents/registre-elements-officiels-en-attente.md"],
         ["Kit de discours", "Centraliser les pitchs, argumentaires, scripts et réponses aux objections.", "documents/kit-discours-tvf.md"],
         ["Pitch officiel", "Présenter TVF en 30 secondes, 1 minute, 3 minutes ou en version institutionnelle.", "documents/pitch-officiel-tvf.md"],
         ["Présentation 15 minutes", "Présenter TVF en réunion courte avec une structure claire et prudente.", "documents/script-presentation-15-minutes.md"],
@@ -1239,7 +1251,7 @@ const pages = [
     h1: "Des éléments publics cohérents et vérifiables.",
     intro:
       "Le kit média centralise les éléments qui peuvent être repris dans une présentation, un article, une note de synthèse ou un échange institutionnel, sans créer de confusion sur l'état réel du projet.",
-    ctas: [["Télécharger le dossier TVF", "documents/dossier-presentation-tvf.md"], ["Nous contacter", "contact.html"]],
+    ctas: [["Télécharger le dossier TVF", "output/pdf/dossier-presentation-tvf.pdf"], ["Nous contacter", "contact.html"]],
     sections: [
       sectionIntro(
         "Un kit média pour parler juste de TVF",
@@ -1254,6 +1266,10 @@ const pages = [
         ["Logo officiel", "Utiliser le logo officiel TVF sans le déformer, le recadrer excessivement ou modifier ses couleurs.", "assets/logo-territoires-vivants-france.png"],
         ["Présentation courte", "TVF coordonne la remise en usage de biens, lieux et ressources inutilisés au service des territoires.", "documents/kit-media.md"],
         ["Dossier TVF", "Un document de présentation plus complet pour collectivités, entreprises et financeurs.", "documents/dossier-presentation-tvf.md"],
+        ["Dossier TVF PDF", "Version prête à transmettre pour une première présentation institutionnelle.", "output/pdf/dossier-presentation-tvf.pdf"],
+        ["Dossier collectivité PDF", "Support ciblé pour commune, EPCI, département, région ou service public.", "output/pdf/dossier-collectivite-tvf.pdf"],
+        ["Dossier entreprise et mécène PDF", "Support ciblé pour contribution, RSE, mécénat, matériaux et reporting.", "output/pdf/dossier-entreprise-mecene-tvf.pdf"],
+        ["Dossier propriétaire PDF", "Support ciblé pour présenter un bien sans créer d'engagement automatique.", "output/pdf/dossier-proprietaire-tvf.pdf"],
         ["Pitch officiel", "Des versions 30 secondes, 1 minute, 3 minutes et dossier institutionnel.", "documents/pitch-officiel-tvf.md"],
         ["Scripts rendez-vous", "Des trames adaptées aux collectivités, propriétaires, entreprises et financeurs.", "documents/scripts-rendez-vous-institutionnels.md"],
         ["Objections réponses", "Des réponses crédibles aux questions sensibles avant un rendez-vous.", "documents/objections-reponses.md"],
@@ -1364,6 +1380,15 @@ const pages = [
         ["Impact", "Mesurer avant de communiquer des résultats."],
         ["Gouvernance", "Rendre lisibles les responsabilités, les décisions et les critères de sélection.", "gouvernance.html"],
         ["Kit média", "Mettre à disposition les éléments publics validés et les règles d'usage.", "kit-media.html"],
+        ["Éléments en attente", "Tenir une liste des informations officielles à publier uniquement après preuve.", "documents/registre-elements-officiels-en-attente.md"],
+      ]),
+      tableSection("Éléments officiels mis en attente", "Ces informations doivent rester en attente tant qu'elles ne sont pas vérifiées, attribuées ou autorisées à la publication.", [
+        ["Élément", "Statut de publication", "Preuve attendue"],
+        ["Références administratives", "Ne pas inventer ; compléter uniquement après disponibilité officielle", "Récépissé, avis ou document officiel"],
+        ["Partenaires", "Ne pas afficher sans accord réel", "Convention, courrier, autorisation de logo"],
+        ["Financeurs ou mécènes", "Ne pas présenter comme acquis sans décision", "Convention, notification, accord écrit"],
+        ["Projets réalisés", "Ne pas communiquer avant réalisation vérifiée", "Compte rendu, convention, photos autorisées, indicateurs"],
+        ["Chiffres d'impact", "Ne pas publier sans méthode de calcul", "Grille d'impact, source, date, preuve"],
       ]),
       tableSection("Ce qui peut être publié", "Chaque information doit être reliée à son niveau de preuve.", [
         ["Information", "Publication possible", "Condition"],
@@ -1917,7 +1942,7 @@ function impactPublicationRulesSection() {
 }
 
 function essentialDocumentsSection() {
-  return cards("Les 10 documents essentiels", "Cette sélection évite de commencer par les 91 modèles. Elle suffit pour préparer la majorité des premiers rendez-vous.", [
+  return cards("Les 10 documents essentiels", "Cette sélection évite de commencer par toute la bibliothèque documentaire. Elle suffit pour préparer la majorité des premiers rendez-vous.", [
     ["Dossier TVF", "Présenter l'association, sa méthode, ses publics et ses limites de communication.", "documents/dossier-presentation-tvf.md"],
     ["Dossier Saint-Étienne", "Appuyer le territoire pilote sur les données publiques, besoins, indicateurs et pièces à réunir.", "documents/dossier-territorial-saint-etienne.md"],
     ["Fiche collectivité", "Décrire un territoire, un périmètre, un besoin public et les interlocuteurs.", "documents/fiche-collectivite.md"],
@@ -1928,6 +1953,15 @@ function essentialDocumentsSection() {
     ["Grille d'instruction", "Décider si le dossier doit être complété, visité, instruit ou classé.", "documents/grille-instruction-dossier.md"],
     ["Modèle de convention", "Préparer les clauses de coopération à adapter aux parties concernées.", "documents/modele-convention.md"],
     ["Grille d'impact", "Mesurer uniquement ce qui est défini, prouvé et traçable.", "documents/grille-impact.md"],
+  ]);
+}
+
+function pdfPresentationPackSection() {
+  return cards("Dossiers PDF prêts à présenter", "Ces PDF sont conçus pour être transmis ou imprimés avant un rendez-vous. Ils restent modifiables à partir des versions Markdown correspondantes.", [
+    ["Dossier TVF PDF", "Présentation générale de TVF, de sa méthode, de ses publics et de ses garanties de sérieux.", "output/pdf/dossier-presentation-tvf.pdf"],
+    ["Dossier collectivité PDF", "Support destiné aux communes, EPCI, départements, régions et services publics.", "output/pdf/dossier-collectivite-tvf.pdf"],
+    ["Dossier entreprise et mécène PDF", "Support pour entreprises, fondations, mécènes, financeurs et acteurs économiques.", "output/pdf/dossier-entreprise-mecene-tvf.pdf"],
+    ["Dossier propriétaire PDF", "Support pour expliquer comment proposer un bien sans engagement automatique.", "output/pdf/dossier-proprietaire-tvf.pdf"],
   ]);
 }
 
