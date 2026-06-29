@@ -1053,6 +1053,14 @@ const pages = [
         ["Bénévole", "Comment aider concrètement ?", "Indiquer ses compétences, disponibilités et territoire d'action", "Bénévoles & citoyens"],
         ["Financeur", "Comment soutenir un projet avec des indicateurs fiables ?", "Demander un dossier instruit avec budget, indicateurs et preuve de suivi", "Financeurs & mécènes"],
       ]),
+      tableSection("Avant de contacter TVF", "Cette grille évite les demandes trop vagues et accélère l'orientation vers le bon parcours.", [
+        ["Situation", "À préparer", "À éviter"],
+        ["Bien vacant ou dégradé", "Adresse, photos si possible, statut connu, contraintes d'accès, idée d'usage", "Demander une intervention sans préciser le propriétaire ou le cadre"],
+        ["Matériaux disponibles", "Nature, quantité, état, localisation, délai de retrait, conditions de sécurité", "Présenter TVF comme une déchetterie ou un débarras automatique"],
+        ["Projet de collectivité", "Périmètre, besoin public, données disponibles, interlocuteurs, calendrier politique", "Lancer une communication avant d'avoir défini le cadre"],
+        ["Partenariat entreprise", "Contribution proposée, valeur d'usage, traçabilité, contraintes logistiques", "Afficher un partenariat sans accord écrit"],
+        ["Soutien financier", "Objet du financement, budget prévisionnel, indicateurs et reporting attendus", "Demander un résultat chiffré avant réalisation"],
+      ]),
       faqSection([
         ["Comment TVF progresse-t-elle vers une plateforme opérationnelle ?", "TVF avance par étapes : cadrage des parcours, documents de travail, qualification des demandes, conventions, puis publication d'indicateurs uniquement lorsque les actions sont vérifiées."],
         ["TVF remplace-t-elle les collectivités ou dispositifs publics ?", "Non. TVF se positionne comme un outil de coopération et de coordination. L'association aide à cadrer les besoins, réunir les acteurs et documenter les projets."],
@@ -1063,6 +1071,9 @@ const pages = [
         ["Pourquoi TVF demande-t-elle des pièces avant d'avancer ?", "Parce qu'un bien, un chantier, un don de matériaux ou un financement peut engager des responsabilités. Les pièces permettent de vérifier la faisabilité et de protéger les parties."],
         ["Un projet peut-il être simplement conseillé puis orienté ailleurs ?", "Oui. Si TVF n'est pas le bon cadre, l'association doit pouvoir recommander une orientation plus adaptée plutôt que d'entretenir une promesse impossible."],
         ["Peut-on utiliser les documents TVF comme modèles de travail ?", "Oui, ils sont conçus comme des bases modifiables. Ils doivent toutefois être adaptés au contexte, relus et validés avant toute signature."],
+        ["Combien de temps prend une première qualification ?", "Le délai dépend de la qualité des informations transmises. Une demande avec adresse, contexte, interlocuteurs et pièces de base peut être orientée beaucoup plus vite qu'une intention générale."],
+        ["TVF peut-elle intervenir sans propriétaire identifié ?", "TVF peut aider à qualifier une situation, mais aucune étude approfondie, visite ou convention ne doit être engagée sans cadre clair et autorisation adaptée."],
+        ["Que se passe-t-il après le premier message ?", "TVF doit d'abord comprendre la demande, demander les pièces manquantes, proposer une orientation et décider si un échange, une fiche projet ou une convention est pertinente."],
       ]),
     ],
   },
@@ -1208,6 +1219,14 @@ const pages = [
         ["Complémentarité", "Coopérer avec les acteurs existants sans se présenter comme substitut aux dispositifs publics."],
         ["Sobriété", "Communiquer uniquement sur les faits établis, les objectifs assumés et les documents disponibles."],
       ]),
+      tableSection("Responsabilités à formaliser", "Cette organisation prépare une gouvernance lisible sans préjuger des informations administratives officielles à compléter.", [
+        ["Fonction", "Rôle attendu", "Preuve ou document associé"],
+        ["Présidence", "Porter la vision, représenter l'association et arbitrer les priorités structurantes", "Statuts, registre de décisions, délégations éventuelles"],
+        ["Secrétariat", "Tenir les documents, convocations, comptes rendus, registres et suivi administratif", "Procès-verbaux, registre adhérents, registre décisions"],
+        ["Trésorerie", "Suivre les dépenses, contributions, justificatifs, budgets et engagements financiers", "Budget prévisionnel, engagement de dépense, reporting"],
+        ["Référent dossier", "Qualifier une demande, collecter les pièces et préparer la décision", "Fiche projet, grille d'instruction, compte rendu"],
+        ["Comité de suivi", "Examiner les projets sensibles, arbitrer les risques et suivre les engagements", "Ordre du jour, compte rendu, matrice des risques"],
+      ]),
       tableSection("Règles de vigilance", "Ces points doivent être vérifiés avant toute décision ou publication.", [
         ["Sujet", "Risque à éviter", "Règle TVF"],
         ["Partenariat", "Afficher un soutien non officialisé", "Ne publier un nom ou un logo qu'après accord réel"],
@@ -1229,6 +1248,14 @@ const pages = [
         ["2", "Décider", "Valider l'intérêt, la faisabilité et les conditions minimales du dossier."],
         ["3", "Formaliser", "Écrire les engagements, usages, limites, responsabilités et modalités de suivi."],
         ["4", "Publier", "Communiquer seulement ce qui est vérifié, signé ou explicitement présenté comme objectif."],
+      ]),
+      tableSection("Documents de gouvernance à tenir", "Ces supports donnent une base de contrôle compréhensible par une collectivité, un financeur ou un partenaire.", [
+        ["Document", "Utilité", "Moment d'utilisation"],
+        ["Charte éthique", "Fixer les principes de prudence, transparence, intérêt général et traçabilité", "Avant toute communication institutionnelle"],
+        ["Registre de décisions", "Conserver les arbitrages, motifs, responsables et échéances", "À chaque décision significative"],
+        ["Critères de sélection", "Prioriser les dossiers avec une grille stable et explicable", "Avant instruction d'un projet"],
+        ["Matrice des risques", "Identifier les risques juridiques, techniques, financiers, humains et d'image", "Avant convention ou action terrain"],
+        ["Reporting", "Rendre compte de l'usage des ressources, limites et résultats", "Pendant et après un projet"],
       ]),
       textBlock(
         "Responsabilités identifiées",
@@ -1262,6 +1289,14 @@ const pages = [
           ["Protéger", "Ne pas annoncer de partenaires, chiffres ou résultats non formalisés."],
         ]
       ),
+      tableSection("Quel support utiliser ?", "Le kit média doit aider chaque interlocuteur à choisir le bon niveau d'information.", [
+        ["Usage", "Support recommandé", "Précaution"],
+        ["Rendez-vous institutionnel", "Dossier TVF PDF et dossier collectivité", "Présenter les objectifs comme un cadre de travail, pas comme des résultats acquis"],
+        ["Article ou interview", "Pitch officiel, présentation courte et coordonnées", "Vérifier les citations et ne pas transformer une piste en partenariat"],
+        ["Publication réseaux sociaux", "Scripts réseaux sociaux, logo officiel, visuels crédités", "Rester sobre sur les chiffres et renvoyer vers les pages sources"],
+        ["Démarche entreprise", "Dossier entreprise et mécène, fiche contribution", "Préciser traçabilité, usage des logos et reporting"],
+        ["Présentation propriétaire", "Dossier propriétaire et fiche bien solidaire", "Expliquer que l'étude ne crée pas d'engagement automatique"],
+      ]),
       cards("Éléments disponibles", "Des supports simples pour parler de TVF avec justesse.", [
         ["Logo officiel", "Utiliser le logo officiel TVF sans le déformer, le recadrer excessivement ou modifier ses couleurs.", "assets/logo-territoires-vivants-france.png"],
         ["Présentation courte", "TVF coordonne la remise en usage de biens, lieux et ressources inutilisés au service des territoires.", "documents/kit-media.md"],
@@ -1289,6 +1324,12 @@ const pages = [
         ["Rôle", "Plateforme de coopération et de coordination territoriale", "Remplacement des collectivités ou dispositifs existants"],
         ["Impact", "Indicateurs à mesurer après projets conventionnés", "Résultats chiffrés non vérifiés"],
         ["Partenaires", "Partenaires à afficher uniquement après accord réel", "Logos ou références non officialisés"],
+      ]),
+      timeline("Validation avant diffusion", [
+        ["1", "Choisir le support", "Utiliser le dossier, la fiche ou le pitch adapté à l'interlocuteur."],
+        ["2", "Vérifier les faits", "Contrôler les sources, dates, statuts de projet, noms et autorisations de logo."],
+        ["3", "Adapter le message", "Conserver le sens TVF sans promettre plus que ce qui est établi."],
+        ["4", "Valider la publication", "Faire relire les contenus sensibles avant diffusion externe."],
       ]),
       textBlock(
         "Règle de communication",
@@ -1452,6 +1493,14 @@ const pages = [
         ["Numéro SIREN", "À compléter si attribution", "Ajouter uniquement si l'association en dispose"],
         ["Contact officiel", `${contact.email} - ${contact.phone}`, "Maintenir à jour les canaux publics de contact"],
         ["Hébergement", "À maintenir à jour", "Indiquer l'hébergeur et les informations légales nécessaires"],
+      ]),
+      tableSection("Procédure de mise à jour légale", "Les mentions légales doivent être actualisées dès qu'une information officielle change.", [
+        ["Déclencheur", "Vérification à faire", "Pièce attendue"],
+        ["Déclaration officielle", "Ajouter les références administratives attribuées", "Récépissé ou publication officielle"],
+        ["Attribution SIREN", "Compléter l'identification si l'association en dispose", "Avis de situation ou document officiel"],
+        ["Changement d'adresse", "Mettre à jour siège, contact et documents publics", "Décision interne ou document administratif"],
+        ["Évolution des responsables", "Actualiser les noms, fonctions et responsabilités affichées", "Procès-verbal ou décision statutaire"],
+        ["Changement d'hébergement", "Mettre à jour l'identité de l'hébergeur et les informations obligatoires", "Contrat, facture ou fiche hébergeur"],
       ]),
       legalSection(),
       faqSection([
@@ -1688,24 +1737,14 @@ function documentCards(title, intro, items) {
 }
 
 function documentArchiveSection(title, intro, items) {
-  const filters = [
-    ["all", "Tous"],
-    ["collectivites", "Collectivités"],
-    ["proprietaires", "Propriétaires"],
-    ["entreprises", "Entreprises & matériaux"],
-    ["financement", "Financement"],
-    ["communication", "Communication"],
-    ["terrain", "Terrain"],
-    ["cadre", "Cadre interne"],
-  ];
-
   const cardsMarkup = items
-    .map(([h, p, href]) => `<article class="card" data-doc-card data-doc-category="${docCategory(h, p, href)}"><span class="card-icon" aria-hidden="true">${iconFor(h)}</span><h3>${h}</h3><p>${p}</p>${documentCardLink(h, href)}</article>`)
+    .map(([h, p, href]) => {
+      const category = docCategory(h, p, href);
+      return `<article class="card doc-card-compact"><span class="card-icon" aria-hidden="true">${iconFor(h)}</span><strong class="doc-card-title">${h}</strong><small class="doc-card-meta">${docCategoryLabel(category)}</small>${documentCardLink(h, href)}</article>`;
+    })
     .join("");
 
-  return `<section class="section soft document-library document-archive-section" ${sectionAttrs(title, "documents-library")}><div class="container"><div class="section-head"><p class="section-kicker">Archive</p><h2>${title}</h2><p>${intro}</p></div><details class="document-archive"><summary><span>Afficher l'archive complète</span><small>Modèles avancés, registres et supports internes restent disponibles en PDF.</small></summary><div class="doc-tool-panel"><div class="doc-search"><label for="document-search" id="documents-filter-title">Trouver rapidement le bon document</label><input id="document-search" type="search" placeholder="Rechercher un document, un public, une démarche..." autocomplete="off"></div><div class="doc-filters" aria-label="Filtrer les documents">${filters
-    .map(([key, label], index) => `<button class="doc-filter${index === 0 ? " is-active" : ""}" type="button" data-doc-filter="${key}" aria-pressed="${index === 0 ? "true" : "false"}">${label}</button>`)
-    .join("")}</div><p class="doc-count" data-doc-count></p></div><div class="card-grid">${cardsMarkup}</div><p class="doc-empty" data-doc-empty hidden>Aucun document ne correspond à cette recherche. Essayez un autre mot-clé ou un autre filtre.</p></details></div></section>`;
+  return `<section class="section soft document-library document-archive-section" ${sectionAttrs(title)}><div class="container"><div class="section-head"><p class="section-kicker">Archive</p><h2>${title}</h2><p>${intro}</p></div><details class="document-archive"><summary><span>Afficher l'archive complète</span><small>Modèles avancés, registres et supports internes restent disponibles en PDF.</small></summary><p class="archive-guidance">Cette archive est volontairement secondaire. Commencez par les documents essentiels, puis ouvrez cette liste uniquement si votre dossier nécessite une pièce spécialisée.</p><div class="card-grid">${cardsMarkup}</div></details></div></section>`;
 }
 
 function smartCardLink(title, href) {
@@ -1739,6 +1778,20 @@ function docCategory(title, text, href = "") {
   return "cadre";
 }
 
+function docCategoryLabel(category) {
+  const labels = {
+    collectivites: "Collectivités",
+    proprietaires: "Propriétaires",
+    entreprises: "Entreprises & matériaux",
+    financement: "Financement",
+    communication: "Communication",
+    terrain: "Terrain",
+    cadre: "Cadre interne",
+  };
+
+  return labels[category] || "Document TVF";
+}
+
 function timeline(title, items) {
   return `<section class="section" ${sectionAttrs(title)}><div class="container"><div class="section-head"><p class="section-kicker">Méthode</p><h2>${title}</h2></div><div class="timeline">${items
     .map(([n, h, p]) => `<article><span>${n}</span><div><h3>${h}</h3><p>${p}</p></div></article>`)
@@ -1747,7 +1800,7 @@ function timeline(title, items) {
 
 function tableSection(title, intro, rows) {
   const [head, ...body] = rows;
-  return `<section class="section" ${sectionAttrs(title)}><div class="container"><div class="section-head"><p class="section-kicker">Cadre</p><h2>${title}</h2><p>${intro}</p></div><div class="table-wrap"><table><caption class="sr-only">${title}</caption><thead><tr>${head.map((cell) => `<th scope="col">${cell}</th>`).join("")}</tr></thead><tbody>${body
+  return `<section class="section" ${sectionAttrs(title)}><div class="container"><div class="section-head"><p class="section-kicker">Cadre</p><h2>${title}</h2><p>${intro}</p></div><p class="table-scroll-hint" aria-hidden="true">Faire glisser le tableau horizontalement sur mobile.</p><div class="table-wrap"><table><caption class="sr-only">${title}</caption><thead><tr>${head.map((cell) => `<th scope="col">${cell}</th>`).join("")}</tr></thead><tbody>${body
     .map((row) => `<tr>${row.map((cell) => `<td>${cell}</td>`).join("")}</tr>`)
     .join("")}</tbody></table></div></div></section>`;
 }

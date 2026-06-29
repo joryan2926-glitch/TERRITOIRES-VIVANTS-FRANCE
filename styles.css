@@ -662,6 +662,40 @@ table a:focus-visible {
   margin: 24px;
 }
 
+.archive-guidance {
+  margin: 22px 24px 0;
+  padding: 14px 16px;
+  color: var(--green-900);
+  background: rgba(235, 244, 232, 0.86);
+  border: 1px solid rgba(24, 63, 34, 0.12);
+  border-radius: 16px;
+  font-weight: 750;
+}
+
+.doc-card-compact {
+  gap: 10px;
+}
+
+.doc-card-title {
+  display: block;
+  color: var(--blue-900);
+  font-size: 1.05rem;
+  font-weight: 850;
+  line-height: 1.25;
+}
+
+.doc-card-meta {
+  display: inline-flex;
+  width: fit-content;
+  padding: 5px 9px;
+  color: var(--green-900);
+  background: rgba(235, 244, 232, 0.86);
+  border: 1px solid rgba(24, 63, 34, 0.1);
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
 .document-library .card.is-hidden {
   display: none;
 }
@@ -1077,6 +1111,14 @@ textarea {
   box-shadow: var(--shadow);
 }
 
+.table-scroll-hint {
+  display: none;
+  margin: -10px 0 12px;
+  color: var(--green-900);
+  font-size: 0.86rem;
+  font-weight: 800;
+}
+
 table {
   width: 100%;
   border-collapse: collapse;
@@ -1427,6 +1469,10 @@ tr:last-child td {
   .doc-filter {
     flex: 1 1 auto;
     justify-content: center;
+  }
+
+  .table-scroll-hint {
+    display: block;
   }
 }
 
