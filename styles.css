@@ -281,9 +281,9 @@ a {
 .hero h1 {
   max-width: 850px;
   margin: 0;
-  font-size: clamp(2.65rem, 6vw, 5.7rem);
+  font-size: clamp(2.35rem, 5.2vw, 4.9rem);
   line-height: 0.96;
-  letter-spacing: -0.03em;
+  letter-spacing: 0;
 }
 
 .hero p:not(.eyebrow) {
@@ -377,9 +377,9 @@ a {
 h2 {
   margin: 0;
   color: var(--blue-900);
-  font-size: clamp(2rem, 3.5vw, 3.1rem);
+  font-size: clamp(1.75rem, 3vw, 2.65rem);
   line-height: 1.08;
-  letter-spacing: -0.025em;
+  letter-spacing: 0;
 }
 
 h3 {
@@ -517,7 +517,7 @@ table a:focus-visible {
 .doc-search label {
   color: var(--green-900);
   font-weight: 800;
-  letter-spacing: -0.01em;
+  letter-spacing: 0;
 }
 
 .doc-search input {
@@ -557,7 +557,7 @@ table a:focus-visible {
   cursor: pointer;
   font: inherit;
   font-size: 0.92rem;
-  font-weight: 800;
+  font-weight: 700;
   transition: transform 0.18s ease, background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
 }
 
@@ -584,6 +584,68 @@ table a:focus-visible {
   background: rgba(235, 244, 232, 0.9);
   border: 1px solid rgba(24, 63, 34, 0.12);
   border-radius: 16px;
+}
+
+.document-archive {
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.86);
+  border: 1px solid rgba(24, 63, 34, 0.12);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-soft);
+}
+
+.document-archive summary {
+  position: relative;
+  display: grid;
+  gap: 4px;
+  padding: 24px 62px 24px 28px;
+  color: var(--blue-900);
+  cursor: pointer;
+  list-style: none;
+}
+
+.document-archive summary::-webkit-details-marker {
+  display: none;
+}
+
+.document-archive summary span {
+  font-size: 1.12rem;
+  font-weight: 800;
+}
+
+.document-archive summary small {
+  color: var(--muted);
+  font-size: 0.94rem;
+  font-weight: 600;
+}
+
+.document-archive summary::after {
+  content: "+";
+  position: absolute;
+  top: 50%;
+  right: 28px;
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  color: var(--white);
+  background: var(--green-800);
+  border-radius: 999px;
+  transform: translateY(-50%);
+}
+
+.document-archive[open] summary {
+  border-bottom: 1px solid rgba(24, 63, 34, 0.1);
+}
+
+.document-archive[open] summary::after {
+  content: "−";
+}
+
+.document-archive .doc-tool-panel,
+.document-archive .card-grid,
+.document-archive .doc-empty {
+  margin: 24px;
 }
 
 .document-library .card.is-hidden {
@@ -796,9 +858,9 @@ table a:focus-visible {
 .split h3,
 .cta-band h3 {
   margin: 0;
-  font-size: clamp(2rem, 3.5vw, 3.1rem);
+  font-size: clamp(1.75rem, 3vw, 2.65rem);
   line-height: 1.08;
-  letter-spacing: -0.025em;
+  letter-spacing: 0;
 }
 
 .split h3 {
@@ -1262,7 +1324,7 @@ tr:last-child td {
   }
 
   .hero h1 {
-    font-size: 2.8rem;
+    font-size: 2.35rem;
   }
 
   .brand img {

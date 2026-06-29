@@ -32,22 +32,22 @@ const imageSizes = {
   "assets/logo-territoires-vivants-france.png": [612, 408],
   "assets/photos/community-garden-paris.webp": [960, 640],
   "assets/photos/artisan-menuiserie-bois.jpg": [1600, 1059],
-  "assets/photos/batiment-rural-france.jpg": [1067, 1600],
-  "assets/photos/centre-ville-nantes.jpg": [1600, 1200],
-  "assets/photos/chantier-renovation-lyon.jpg": [1600, 1200],
-  "assets/photos/commerce-ferme-vichy.jpg": [1070, 1600],
-  "assets/photos/friche-industrielle-ronchamp.jpg": [1600, 1067],
+  "assets/photos/batiment-rural-france.jpg": [801, 1200],
+  "assets/photos/centre-ville-nantes.jpg": [1400, 1050],
+  "assets/photos/chantier-renovation-lyon.jpg": [1400, 1050],
+  "assets/photos/commerce-ferme-vichy.jpg": [802, 1200],
+  "assets/photos/friche-industrielle-ronchamp.jpg": [1400, 934],
   "assets/photos/france-commerce-paris.jpg": [330, 495],
   "assets/photos/france-friche-pcuk.jpg": [960, 324],
   "assets/photos/france-ressourcerie-vichy.jpg": [960, 720],
-  "assets/photos/immeuble-renovation-meudon.jpg": [1600, 1067],
-  "assets/photos/jardin-partage-france.jpg": [1600, 1200],
-  "assets/photos/reunion-conseil-municipal.jpg": [1600, 1143],
-  "assets/photos/saint-etienne-centre-commerce.jpg": [1600, 1202],
+  "assets/photos/immeuble-renovation-meudon.jpg": [1400, 934],
+  "assets/photos/jardin-partage-france.jpg": [1400, 1050],
+  "assets/photos/reunion-conseil-municipal.jpg": [1400, 1000],
+  "assets/photos/saint-etienne-centre-commerce.jpg": [1200, 902],
   "assets/photos/france-saint-etienne-chateaucreux.jpg": [1280, 853],
-  "assets/photos/france-saint-etienne-jean-jaures.jpg": [1280, 853],
+  "assets/photos/france-saint-etienne-jean-jaures.jpg": [1200, 800],
   "assets/photos/saint-etienne-panorama.jpg": [1600, 215],
-  "assets/photos/saint-etienne-rue-resistance.jpg": [1273, 1600],
+  "assets/photos/saint-etienne-rue-resistance.jpg": [955, 1200],
 };
 
 const pages = [
@@ -237,7 +237,7 @@ const pages = [
         ["TVF réalise-t-elle directement les travaux ?", "TVF prépare, coordonne et documente les projets. Les travaux nécessitent un cadre adapté, des compétences, des assurances et des responsabilités clairement définies."],
         ["Un signalement devient-il automatiquement un projet ?", "Non. Un signalement déclenche une phase de qualification. Il peut être complété, orienté, classé ou transformé en dossier seulement si les conditions sont réunies."],
         ["Les matériaux sont-ils gratuits ?", "Non. La matériauthèque TVF est un outil de valorisation territoriale : les ressources sont affectées à des projets validés, selon leur état, leur utilité et leur traçabilité."],
-        ["Quand les chiffres d'impact seront-ils publiés ?", "Lorsque des projets seront réellement instruits, conventionnés, réalisés puis mesurés. TVF ne publie pas de résultats non vérifiés."],
+        ["Quand les chiffres d'impact seront-ils publiés ?", "Lorsque des projets seront instruits, conventionnés, réalisés puis mesurés avec une méthode stable."],
       ]),
     ],
   },
@@ -321,7 +321,7 @@ const pages = [
         ["Pourquoi organiser TVF en pôles ?", "Les pôles rendent la méthode lisible. Ils permettent de traiter séparément l'habitat, les commerces, les friches, les matériaux et l'engagement humain, tout en les reliant dans un même projet."],
         ["Un projet peut-il relever de plusieurs pôles ?", "Oui. C'est même fréquent : un bâtiment vacant peut mobiliser Habitat Vivant, Matériauthèque Solidaire, Solidarité & Insertion et parfois Commerce Vivant."],
         ["Qui décide du pôle principal ?", "TVF l'identifie après qualification du besoin, des contraintes, des acteurs et de l'usage envisagé."],
-        ["Les pôles correspondent-ils à des résultats déjà obtenus ?", "Non. Ils structurent la méthode et les futurs dossiers. Les résultats seront communiqués uniquement lorsqu'ils seront vérifiés."],
+        ["Les pôles correspondent-ils à des résultats déjà obtenus ?", "Ils structurent la méthode et les dossiers à instruire. Les résultats relèveront ensuite des pages Impact et Transparence."],
       ]),
     ],
   },
@@ -911,11 +911,11 @@ const pages = [
       ]),
       essentialDocumentsSection(),
       pdfPresentationPackSection(),
+      documentVisibilitySection(),
       documentPriorityPackSection(),
       documentWorkflowSection(),
       publicEntryMatrixSection(),
-      documentTools(),
-      documentCards("Bibliothèque complète filtrable", "Tous les modèles restent accessibles. Utilisez la recherche ou les filtres pour retrouver un document précis après avoir identifié le bon pack.", [
+      documentArchiveSection("Bibliothèque complète filtrable", "Cette archive rassemble tous les modèles avancés. Elle est utile après avoir identifié le bon parcours et le bon niveau de formalisation.", [
         ["Dossier TVF", "Présenter l'association, sa méthode, ses publics et ses conditions de coopération.", "documents/dossier-presentation-tvf.md"],
         ["Dossier collectivité TVF", "Présenter un parcours territoire partenaire en réunion avec une commune, un EPCI, un département ou une région.", "documents/dossier-collectivite-tvf.md"],
         ["Dossier propriétaire TVF", "Expliquer au propriétaire le cadre d'étude, de convention, d'usage et de restitution d'un bien.", "documents/dossier-proprietaire-tvf.md"],
@@ -1127,7 +1127,7 @@ const pages = [
     file: "impact.html",
     title: "Impact & suivi",
     meta:
-      "La page Impact de TVF présente les indicateurs à suivre sans chiffres inventés : biens remis en usage, matériaux réemployés, projets accompagnés et coopération territoriale.",
+      "Indicateurs TVF pour suivre biens remis en usage, matériaux réemployés, projets accompagnés et coopération territoriale avec des preuves claires.",
     heroImage: "assets/photos/saint-etienne-panorama.jpg",
     eyebrow: "Impact",
     h1: "Mesurer avant d'annoncer.",
@@ -1422,7 +1422,8 @@ const pages = [
   {
     file: "mentions-legales.html",
     title: "Mentions légales",
-    meta: "Mentions légales de Territoires Vivants France.",
+    meta:
+      "Mentions légales de Territoires Vivants France : éditeur, contact, siège, données personnelles, propriété intellectuelle et responsabilités.",
     heroImage: "assets/photos/batiment-rural-france.jpg",
     eyebrow: "Cadre légal",
     h1: "Mentions légales.",
@@ -1509,7 +1510,7 @@ function journeySection(page) {
     ],
     "nos-actions.html": [
       ["Voir les pôles", "nos-poles.html", "Relier chaque action aux pôles opérationnels de TVF."],
-      ["Mesurer l'impact", "impact.html", "Comprendre les indicateurs suivis sans annoncer de résultats inventés."],
+      ["Mesurer l'impact", "impact.html", "Comprendre les indicateurs suivis et leur niveau de preuve."],
       ["Agir avec TVF", "agir-avec-nous.html", "Transformer une intention en première demande qualifiée."],
     ],
     "nos-poles.html": [
@@ -1524,7 +1525,7 @@ function journeySection(page) {
     ],
     "observatoire.html": [
       ["Voir Saint-Étienne", "saint-etienne.html", "Relier l'observation nationale à un premier territoire pilote."],
-      ["Mesurer l'impact", "impact.html", "Distinguer données publiques, objectifs et résultats vérifiés."],
+      ["Mesurer l'impact", "impact.html", "Distinguer données publiques, objectifs et indicateurs vérifiés."],
       ["Préparer une source", "documents.html", "Tracer les données utilisées dans un diagnostic ou une carte."],
     ],
     "saint-etienne.html": [
@@ -1682,6 +1683,27 @@ function documentCards(title, intro, items) {
     .join("")}</div><p class="doc-empty" data-doc-empty hidden>Aucun document ne correspond à cette recherche. Essayez un autre mot-clé ou un autre filtre.</p></div></section>`;
 }
 
+function documentArchiveSection(title, intro, items) {
+  const filters = [
+    ["all", "Tous"],
+    ["collectivites", "Collectivités"],
+    ["proprietaires", "Propriétaires"],
+    ["entreprises", "Entreprises & matériaux"],
+    ["financement", "Financement"],
+    ["communication", "Communication"],
+    ["terrain", "Terrain"],
+    ["cadre", "Cadre interne"],
+  ];
+
+  const cardsMarkup = items
+    .map(([h, p, href]) => `<article class="card" data-doc-card data-doc-category="${docCategory(h, p, href)}"><span class="card-icon" aria-hidden="true">${iconFor(h)}</span><h3>${h}</h3><p>${p}</p>${href ? `<a class="text-link" href="${hrefFor(href)}" aria-label="Ouvrir le document : ${escapeAttr(h)}">Découvrir</a>` : ""}</article>`)
+    .join("");
+
+  return `<section class="section soft document-library document-archive-section" ${sectionAttrs(title, "documents-library")}><div class="container"><div class="section-head"><p class="section-kicker">Archive</p><h2>${title}</h2><p>${intro}</p></div><details class="document-archive"><summary><span>Afficher l'archive complète</span><small>${items.length} modèles avancés, registres et supports internes restent disponibles.</small></summary><div class="doc-tool-panel"><div class="doc-search"><label for="document-search" id="documents-filter-title">Trouver rapidement le bon document</label><input id="document-search" type="search" placeholder="Rechercher un document, un public, une démarche..." autocomplete="off"></div><div class="doc-filters" aria-label="Filtrer les documents">${filters
+    .map(([key, label], index) => `<button class="doc-filter${index === 0 ? " is-active" : ""}" type="button" data-doc-filter="${key}" aria-pressed="${index === 0 ? "true" : "false"}">${label}</button>`)
+    .join("")}</div><p class="doc-count" data-doc-count></p></div><div class="card-grid">${cardsMarkup}</div><p class="doc-empty" data-doc-empty hidden>Aucun document ne correspond à cette recherche. Essayez un autre mot-clé ou un autre filtre.</p></details></div></section>`;
+}
+
 function docCategory(title, text, href = "") {
   const source = `${title} ${text} ${href}`
     .toLowerCase()
@@ -1733,7 +1755,7 @@ function extLink(label, url) {
 }
 
 function nationalDataSection(title = "Chiffres publics de contexte") {
-  return tableSection(title, "Ces repères ne sont pas des résultats TVF. Ils servent à comprendre l'ampleur nationale des sujets traités et à cadrer les futurs diagnostics territoriaux.", [
+  return tableSection(title, "Ces repères publics donnent l'échelle des sujets traités par TVF et aident à cadrer les diagnostics territoriaux.", [
     ["Sujet", "Repère public récent", "Source", "Utilité pour TVF"],
     ["Logements vacants", "3,1 millions de logements vacants en France en 2023, soit plus de 8 % du parc de logements.", extLink("INSEE, relayé par Banque des Territoires / Localtis, janvier 2024", "https://www.banquedesterritoires.fr/la-france-compte-plus-de-3-millions-de-logements-vacants"), "Cibler les territoires où la vacance est structurelle et préparer le dialogue avec les propriétaires."],
     ["Déchets du bâtiment", "Environ 42 millions de tonnes de déchets par an pour le secteur du bâtiment ; la filière REP PMCB vise collecte, traçabilité, recyclage, réemploi et réutilisation.", extLink("Ministère de la Transition écologique, page PMCB mise à jour en novembre 2025", "https://www.ecologie.gouv.fr/politiques-publiques/produits-materiaux-construction-du-secteur-du-batiment-pmcb"), "Relier la matériauthèque TVF à une logique de projet, de traçabilité et d'économie circulaire."],
@@ -1962,6 +1984,15 @@ function pdfPresentationPackSection() {
     ["Dossier collectivité PDF", "Support destiné aux communes, EPCI, départements, régions et services publics.", "output/pdf/dossier-collectivite-tvf.pdf"],
     ["Dossier entreprise et mécène PDF", "Support pour entreprises, fondations, mécènes, financeurs et acteurs économiques.", "output/pdf/dossier-entreprise-mecene-tvf.pdf"],
     ["Dossier propriétaire PDF", "Support pour expliquer comment proposer un bien sans engagement automatique.", "output/pdf/dossier-proprietaire-tvf.pdf"],
+  ]);
+}
+
+function documentVisibilitySection() {
+  return tableSection("Documents publics et outils internes", "Tous les contenus restent disponibles, mais ils n'ont pas le même usage. Cette distinction évite de présenter un registre interne comme un support public.", [
+    ["Niveau", "À utiliser pour", "Exemples", "Lecture recommandée"],
+    ["Documents publics", "Présenter TVF à une collectivité, un propriétaire, une entreprise ou un financeur", "Dossier TVF, dossiers PDF, fiche collectivité, fiche propriétaire, fiche entreprise", "À ouvrir en priorité"],
+    ["Supports de rendez-vous", "Préparer une réunion, qualifier une demande ou structurer une suite", "Fiche projet, pièces à fournir, note d'opportunité, modèle de convention", "À choisir selon le profil"],
+    ["Outils internes", "Tracer les décisions, risques, preuves, incidents, conventions et suivis", "Registres, grilles, PV, reporting, matrices", "À utiliser après cadrage"],
   ]);
 }
 
