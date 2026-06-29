@@ -1697,6 +1697,25 @@ function imageAttrs(src) {
   return size ? `width="${size[0]}" height="${size[1]}"` : "";
 }
 
+function textFromHtml(value) {
+  return String(value)
+    .replace(/<[^>]*>/g, " ")
+    .replace(/&nbsp;/g, " ")
+    .replace(/&amp;/g, "&")
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function faqItemsFor(page) {
+  const html = page.sections.join("\n");
+  return [...html.matchAll(/<details><summary>([\s\S]*?)<\/summary><p>([\s\S]*?)<\/p><\/details>/g)].map((match) => ({
+    question: textFromHtml(match[1]),
+    answer: textFromHtml(match[2]),
+  }));
+}
+
 function jsonLd(page) {
   const url = pageUrl(page);
   const graph = [
@@ -1749,6 +1768,23 @@ function jsonLd(page) {
           item: targetPage ? pageUrl(targetPage) : `${site.url}/${href.replace(/\.html$/, "")}`,
         };
       }),
+    });
+  }
+
+  const faqItems = faqItemsFor(page);
+  if (faqItems.length) {
+    graph[2].mainEntity = { "@id": `${url}#faq` };
+    graph.push({
+      "@type": "FAQPage",
+      "@id": `${url}#faq`,
+      mainEntity: faqItems.map((item) => ({
+        "@type": "Question",
+        name: item.question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: item.answer,
+        },
+      })),
     });
   }
 
