@@ -884,7 +884,7 @@ const pages = [
     eyebrow: "Ressources",
     h1: "Des documents simples pour cadrer les premières démarches.",
     intro:
-      "Ces documents sont des bases de travail modifiables. Ils aident à préparer un échange sans se substituer à un conseil juridique ou technique.",
+      "Chaque modèle dispose d'une version PDF téléchargeable. Ces documents aident à préparer un échange sans se substituer à un conseil juridique ou technique.",
     ctas: [["Contacter TVF", "contact.html"], ["Voir la transparence", "transparence.html"]],
     sections: [
       sectionIntro(
@@ -1656,7 +1656,7 @@ function homeTrustSection() {
 
 function cards(title, intro, items) {
   return `<section class="section soft" ${sectionAttrs(title)}><div class="container"><div class="section-head"><p class="section-kicker">Repères</p><h2>${title}</h2><p>${intro}</p></div><div class="card-grid">${items
-    .map(([h, p, href]) => `<article class="card"><span class="card-icon" aria-hidden="true">${iconFor(h)}</span><h3>${h}</h3><p>${p}</p>${href ? `<a class="text-link" href="${hrefFor(href)}" aria-label="Découvrir : ${escapeAttr(h)}">Découvrir</a>` : ""}</article>`)
+    .map(([h, p, href]) => `<article class="card"><span class="card-icon" aria-hidden="true">${iconFor(h)}</span><h3>${h}</h3><p>${p}</p>${href ? smartCardLink(h, href) : ""}</article>`)
     .join("")}</div></div></section>`;
 }
 
@@ -1679,7 +1679,7 @@ function documentTools() {
 
 function documentCards(title, intro, items) {
   return `<section class="section soft document-library" ${sectionAttrs(title, "documents-library")}><div class="container"><div class="section-head"><p class="section-kicker">Repères</p><h2>${title}</h2><p>${intro}</p></div><div class="card-grid">${items
-    .map(([h, p, href]) => `<article class="card" data-doc-card data-doc-category="${docCategory(h, p, href)}"><span class="card-icon" aria-hidden="true">${iconFor(h)}</span><h3>${h}</h3><p>${p}</p>${href ? `<a class="text-link" href="${hrefFor(href)}" aria-label="Ouvrir le document : ${escapeAttr(h)}">Découvrir</a>` : ""}</article>`)
+    .map(([h, p, href]) => `<article class="card" data-doc-card data-doc-category="${docCategory(h, p, href)}"><span class="card-icon" aria-hidden="true">${iconFor(h)}</span><h3>${h}</h3><p>${p}</p>${documentCardLink(h, href)}</article>`)
     .join("")}</div><p class="doc-empty" data-doc-empty hidden>Aucun document ne correspond à cette recherche. Essayez un autre mot-clé ou un autre filtre.</p></div></section>`;
 }
 
@@ -1696,12 +1696,28 @@ function documentArchiveSection(title, intro, items) {
   ];
 
   const cardsMarkup = items
-    .map(([h, p, href]) => `<article class="card" data-doc-card data-doc-category="${docCategory(h, p, href)}"><span class="card-icon" aria-hidden="true">${iconFor(h)}</span><h3>${h}</h3><p>${p}</p>${href ? `<a class="text-link" href="${hrefFor(href)}" aria-label="Ouvrir le document : ${escapeAttr(h)}">Découvrir</a>` : ""}</article>`)
+    .map(([h, p, href]) => `<article class="card" data-doc-card data-doc-category="${docCategory(h, p, href)}"><span class="card-icon" aria-hidden="true">${iconFor(h)}</span><h3>${h}</h3><p>${p}</p>${documentCardLink(h, href)}</article>`)
     .join("");
 
-  return `<section class="section soft document-library document-archive-section" ${sectionAttrs(title, "documents-library")}><div class="container"><div class="section-head"><p class="section-kicker">Archive</p><h2>${title}</h2><p>${intro}</p></div><details class="document-archive"><summary><span>Afficher l'archive complète</span><small>${items.length} modèles avancés, registres et supports internes restent disponibles.</small></summary><div class="doc-tool-panel"><div class="doc-search"><label for="document-search" id="documents-filter-title">Trouver rapidement le bon document</label><input id="document-search" type="search" placeholder="Rechercher un document, un public, une démarche..." autocomplete="off"></div><div class="doc-filters" aria-label="Filtrer les documents">${filters
+  return `<section class="section soft document-library document-archive-section" ${sectionAttrs(title, "documents-library")}><div class="container"><div class="section-head"><p class="section-kicker">Archive</p><h2>${title}</h2><p>${intro}</p></div><details class="document-archive"><summary><span>Afficher l'archive complète</span><small>Modèles avancés, registres et supports internes restent disponibles en PDF.</small></summary><div class="doc-tool-panel"><div class="doc-search"><label for="document-search" id="documents-filter-title">Trouver rapidement le bon document</label><input id="document-search" type="search" placeholder="Rechercher un document, un public, une démarche..." autocomplete="off"></div><div class="doc-filters" aria-label="Filtrer les documents">${filters
     .map(([key, label], index) => `<button class="doc-filter${index === 0 ? " is-active" : ""}" type="button" data-doc-filter="${key}" aria-pressed="${index === 0 ? "true" : "false"}">${label}</button>`)
     .join("")}</div><p class="doc-count" data-doc-count></p></div><div class="card-grid">${cardsMarkup}</div><p class="doc-empty" data-doc-empty hidden>Aucun document ne correspond à cette recherche. Essayez un autre mot-clé ou un autre filtre.</p></details></div></section>`;
+}
+
+function smartCardLink(title, href) {
+  if (!href) return "";
+  if (/^(documents\/|output\/documents\/|output\/pdf\/)/i.test(href) || /\.pdf(?:$|[#?])/i.test(href)) {
+    return documentCardLink(title, href);
+  }
+  return `<a class="text-link" href="${hrefFor(href)}" aria-label="Découvrir : ${escapeAttr(title)}">Découvrir</a>`;
+}
+
+function documentCardLink(title, href) {
+  if (!href) return "";
+  const isMarkdown = /^documents\/[^?#]+\.md$/i.test(href);
+  const isPdf = /\.pdf(?:$|[#?])/i.test(href);
+  const label = isMarkdown ? "Télécharger le PDF" : isPdf ? "Ouvrir le PDF" : "Découvrir";
+  return `<a class="text-link" href="${hrefFor(href)}" aria-label="${label} : ${escapeAttr(title)}">${label}</a>`;
 }
 
 function docCategory(title, text, href = "") {
@@ -1979,7 +1995,7 @@ function essentialDocumentsSection() {
 }
 
 function pdfPresentationPackSection() {
-  return cards("Dossiers PDF prêts à présenter", "Ces PDF sont conçus pour être transmis ou imprimés avant un rendez-vous. Ils restent modifiables à partir des versions Markdown correspondantes.", [
+  return cards("Dossiers PDF prêts à présenter", "Ces PDF sont conçus pour être transmis ou imprimés avant un rendez-vous. Les sources internes restent modifiables pour adapter chaque dossier.", [
     ["Dossier TVF PDF", "Présentation générale de TVF, de sa méthode, de ses publics et de ses garanties de sérieux.", "output/pdf/dossier-presentation-tvf.pdf"],
     ["Dossier collectivité PDF", "Support destiné aux communes, EPCI, départements, régions et services publics.", "output/pdf/dossier-collectivite-tvf.pdf"],
     ["Dossier entreprise et mécène PDF", "Support pour entreprises, fondations, mécènes, financeurs et acteurs économiques.", "output/pdf/dossier-entreprise-mecene-tvf.pdf"],
@@ -2213,7 +2229,12 @@ function breadcrumbNav(page) {
 }
 
 function hrefFor(href) {
-  if (!href || href.startsWith("#") || /^[a-z]+:/i.test(href) || href.startsWith("assets/") || href.startsWith("documents/")) return href;
+  if (!href || href.startsWith("#") || /^[a-z]+:/i.test(href) || href.startsWith("assets/")) return href;
+  if (/^documents\/[^?#]+\.md(?:[#?].*)?$/i.test(href)) {
+    const [target, suffix = ""] = href.split(/(?=[#?])/);
+    return target.replace(/^documents\//, "output/documents/").replace(/\.md$/i, ".pdf") + suffix;
+  }
+  if (href.startsWith("documents/") || href.startsWith("output/")) return href;
   const [target, hash] = href.split("#");
   const clean = target === "index.html" ? "/" : target.endsWith(".html") ? target.replace(/\.html$/, "") : target;
   return `${clean}${hash ? `#${hash}` : ""}`;

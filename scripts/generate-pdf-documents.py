@@ -23,6 +23,7 @@ from reportlab.platypus import (
 
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / "output" / "pdf"
+DOCUMENT_OUTPUT = ROOT / "output" / "documents"
 LOGO = ROOT / "assets" / "logo-territoires-vivants-france.png"
 
 PDFS = [
@@ -168,7 +169,9 @@ def make_table(rows: list[list[str]], styles: dict):
     for r, row in enumerate(normalized):
         style = styles["cell_header"] if r == 0 else styles["cell"]
         table_rows.append([Paragraph(clean_inline(cell), style) for cell in row])
-    table = Table(table_rows, repeatRows=1, hAlign="LEFT")
+    available_width = A4[0] - 36 * mm
+    col_widths = [available_width / col_count] * col_count
+    table = Table(table_rows, repeatRows=1, hAlign="LEFT", colWidths=col_widths)
     table.setStyle(
         TableStyle(
             [
@@ -254,12 +257,12 @@ def parse_markdown(path: Path, subtitle: str, styles: dict) -> list:
 
         if stripped.startswith("- [ ]"):
             flush_paragraph(paragraph, story, styles)
-            story.append(Paragraph("□ " + clean_inline(stripped[5:].strip()), styles["bullet"]))
+            story.append(Paragraph("[ ] " + clean_inline(stripped[5:].strip()), styles["bullet"]))
             continue
 
         if stripped.startswith("- "):
             flush_paragraph(paragraph, story, styles)
-            story.append(Paragraph("• " + clean_inline(stripped[2:]), styles["bullet"]))
+            story.append(Paragraph("- " + clean_inline(stripped[2:]), styles["bullet"]))
             continue
 
         paragraph.append(stripped)
@@ -299,8 +302,13 @@ def build_pdf(source: Path, target: Path, subtitle: str) -> None:
 
 def main() -> None:
     OUTPUT.mkdir(parents=True, exist_ok=True)
+    DOCUMENT_OUTPUT.mkdir(parents=True, exist_ok=True)
     for source, target, subtitle in PDFS:
         build_pdf(source, target, subtitle)
+        print(f"Generated {target.relative_to(ROOT)}")
+    for source in sorted((ROOT / "documents").glob("*.md")):
+        target = DOCUMENT_OUTPUT / f"{source.stem}.pdf"
+        build_pdf(source, target, "Document operationnel TVF")
         print(f"Generated {target.relative_to(ROOT)}")
 
 

@@ -138,6 +138,8 @@ Les PDF sont générés depuis les documents Markdown :
 - `output/pdf/dossier-entreprise-mecene-tvf.pdf`
 - `output/pdf/dossier-proprietaire-tvf.pdf`
 
+Tous les modèles opérationnels du dossier `documents/` sont également générés en PDF téléchargeables dans `output/documents/`.
+
 ## Génération
 
 Les pages sont générées depuis :
