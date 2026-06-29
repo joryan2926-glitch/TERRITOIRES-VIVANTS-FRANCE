@@ -77,6 +77,7 @@ const pages = [
         ]
       ),
       homeClaritySection(),
+      homeTrustSection(),
       tableSection("Ce que vous pouvez faire dès maintenant", "L'accueil doit orienter vite vers le bon parcours, sans perdre le visiteur dans tout le site.", [
         ["Votre situation", "Action utile", "Page à consulter"],
         ["Vous représentez une collectivité", "Préparer un périmètre pilote, un besoin public ou une coopération", "Collectivités"],
@@ -1623,6 +1624,10 @@ function homeClaritySection() {
   return `<section class="section compact-section" ${sectionAttrs("TVF en lecture rapide")}><div class="container compact-grid"><article><p class="section-kicker">Mission</p><h2>TVF sert à relier les bons acteurs autour d'un lieu inutile.</h2><p>Un logement, un commerce, une friche, un terrain ou des matériaux ne deviennent utiles que si le besoin, l'usage, les responsabilités, les documents et le suivi sont clarifiés.</p></article><article><strong>Pour qui ?</strong><p>Collectivités, propriétaires, entreprises, associations, financeurs, bénévoles et citoyens.</p><a class="text-link" href="${hrefFor("agir-avec-nous.html")}">Choisir mon parcours</a></article><article><strong>Premier geste</strong><p>Décrire la situation en quelques lignes : lieu, ressource, besoin, acteurs connus et suite attendue.</p><a class="text-link" href="${hrefFor("contact.html")}">Demander un rendez-vous</a></article><article><strong>Document utile</strong><p>Commencer par le dossier TVF ou la fiche adaptée à votre profil.</p><a class="text-link" href="${hrefFor("documents.html#les-10-documents-essentiels")}">Voir les essentiels</a></article></div></section>`;
 }
 
+function homeTrustSection() {
+  return `<section class="section soft trust-section" ${sectionAttrs("Ce qui rend TVF présentable à une institution")}><div class="container"><div class="section-head"><p class="section-kicker">Crédibilité</p><h2>Ce qui rend TVF présentable à une institution.</h2><p>Avant de promettre un résultat, TVF prépare un cadre lisible : données sourcées, responsabilités écrites, preuves d'action et indicateurs vérifiables.</p></div><div class="trust-grid"><article><span class="card-icon" aria-hidden="true">S</span><strong>Données sourcées</strong><p>Chaque diagnostic doit distinguer données publiques, signalement, visite autorisée et décision interne.</p></article><article><span class="card-icon" aria-hidden="true">C</span><strong>Conventions</strong><p>Les rôles, usages, durées, limites, assurances, données et communications sont écrits avant action.</p></article><article><span class="card-icon" aria-hidden="true">I</span><strong>Impact vérifiable</strong><p>Les résultats ne sont publiés qu'après preuve : registre, compte rendu, PV, photos autorisées ou indicateurs.</p></article><article><span class="card-icon" aria-hidden="true">P</span><strong>Parcours par public</strong><p>Collectivité, propriétaire, entreprise, bénévole ou financeur disposent d'une entrée et d'un document adapté.</p></article></div></div></section>`;
+}
+
 function cards(title, intro, items) {
   return `<section class="section soft" ${sectionAttrs(title)}><div class="container"><div class="section-head"><p class="section-kicker">Repères</p><h2>${title}</h2><p>${intro}</p></div><div class="card-grid">${items
     .map(([h, p, href]) => `<article class="card"><span class="card-icon" aria-hidden="true">${iconFor(h)}</span><h3>${h}</h3><p>${p}</p>${href ? `<a class="text-link" href="${hrefFor(href)}" aria-label="Découvrir : ${escapeAttr(h)}">Découvrir</a>` : ""}</article>`)
@@ -2321,6 +2326,117 @@ function quickBriefFor(page) {
   return `<aside class="quick-brief" aria-label="À retenir"><div class="container quick-brief-grid"><div><p class="section-kicker">À retenir</p><strong>${label}</strong></div><p><span>Objectif</span>${objective}</p><p><span>Action</span>${action}</p><p><span>Document</span><a href="${hrefFor(href)}">${documentName}</a></p></div></aside>`;
 }
 
+function decisionPanelFor(page) {
+  const panels = {
+    "index.html": {
+      kicker: "Décision",
+      title: "En arrivant ici, le visiteur doit savoir quoi faire.",
+      text: "La page d'accueil oriente vers le bon parcours sans demander au visiteur de comprendre tout le site.",
+      action: ["Choisir mon parcours", "agir-avec-nous.html"],
+      items: [
+        ["Je comprends", "TVF coordonne des biens, lieux, matériaux et acteurs autour d'un usage utile."],
+        ["Je me situe", "Collectivité, propriétaire, entreprise, bénévole, financeur ou citoyen."],
+        ["Je passe à l'action", "Je prépare une demande courte et je contacte TVF avec les bons éléments."],
+      ],
+    },
+    "nos-actions.html": {
+      kicker: "Priorisation",
+      title: "Chaque action doit produire une sortie exploitable.",
+      text: "Une action TVF n'est pas une intention générale : elle doit conduire à une fiche, un scénario, une décision, une convention ou un indicateur.",
+      action: ["Préparer une fiche projet", "documents/fiche-projet.md"],
+      items: [
+        ["Problème", "Identifier le lieu, la ressource ou le besoin qui bloque le territoire."],
+        ["Réponse TVF", "Qualifier les acteurs, les contraintes, l'usage possible et les preuves."],
+        ["Livrable", "Sortir avec un document réutilisable en réunion ou en instruction."],
+      ],
+    },
+    "nos-poles.html": {
+      kicker: "Organisation",
+      title: "Les pôles structurent le travail, ils ne compliquent pas le parcours.",
+      text: "Le visiteur doit repérer le pôle principal d'un dossier puis comprendre quels pôles complémentaires peuvent intervenir.",
+      action: ["Voir les actions", "nos-actions.html"],
+      items: [
+        ["Pôle principal", "Habitat, matériaux, commerce, friche ou insertion selon le besoin dominant."],
+        ["Pôles associés", "Les autres pôles complètent le dossier quand une action est transversale."],
+        ["Décision", "TVF choisit la suite : compléter, visiter, instruire, conventionner ou classer."],
+      ],
+    },
+    "collectivites.html": {
+      kicker: "Collectivité",
+      title: "La bonne sortie d'un rendez-vous : un périmètre, un référent, un livrable.",
+      text: "Une commune ou un EPCI doit pouvoir tester TVF sans flou : sujet prioritaire, données disponibles, acteurs à mobiliser et décision à préparer.",
+      action: ["Remplir la fiche collectivité", "documents/fiche-collectivite.md"],
+      items: [
+        ["Périmètre", "Quartier, rue, typologie de biens, friche ou besoin public clairement délimité."],
+        ["Gouvernance", "Référent, rythme de suivi, règles de communication et validation des livrables."],
+        ["Livrables", "Diagnostic court, registre, note d'opportunité, convention ou tableau de bord."],
+      ],
+    },
+    "proprietaires.html": {
+      kicker: "Propriétaire",
+      title: "Proposer un bien ne crée pas d'engagement automatique.",
+      text: "Le parcours sécurise d'abord le propriétaire : propriété conservée, accès autorisé, usage étudié, responsabilités écrites.",
+      action: ["Remplir la fiche propriétaire", "documents/fiche-proprietaire.md"],
+      items: [
+        ["Bien", "Type, adresse, état apparent, photos, diagnostics, contraintes et accès."],
+        ["Intention", "Usage acceptable, durée possible, limites non négociables et attentes du propriétaire."],
+        ["Suite", "Étude, visite autorisée, scénarios d'usage, convention ou réorientation."],
+      ],
+    },
+    "entreprises.html": {
+      kicker: "Entreprise",
+      title: "Une contribution utile doit être qualifiée avant d'être valorisée.",
+      text: "TVF transforme matériaux, compétences, locaux ou mécénat en contribution territoriale traçable et orientée vers un besoin réel.",
+      action: ["Remplir la fiche entreprise", "documents/fiche-entreprise.md"],
+      items: [
+        ["Ressource", "Catégorie, quantité, état, localisation, délai, conditions de retrait ou disponibilité."],
+        ["Affectation", "Acceptation, refus, stockage, mission, mise à disposition ou orientation vers un projet."],
+        ["Preuve", "Bordereau, convention, PV de remise, compte rendu ou reporting de contribution."],
+      ],
+    },
+    "saint-etienne.html": {
+      kicker: "Pilote",
+      title: "Saint-Étienne doit démontrer la méthode, pas promettre des résultats prématurés.",
+      text: "Le territoire pilote sert à tester des dossiers courts, vérifiables et reproductibles avant tout déploiement national.",
+      action: ["Lire le dossier Saint-Étienne", "documents/dossier-territorial-saint-etienne.md"],
+      items: [
+        ["Cadrage", "Données publiques, besoins locaux, acteurs et périmètres à prioriser."],
+        ["Dossiers tests", "Habitat, commerce, matériaux, friches et mobilisation citoyenne."],
+        ["Bilan", "Ce qui fonctionne, ce qui bloque, ce qui peut être dupliqué ailleurs."],
+      ],
+    },
+    "financeurs-mecenes.html": {
+      kicker: "Financement",
+      title: "Un soutien doit financer un objet clair, pas une promesse.",
+      text: "La page financeur prépare une lecture rapide : besoin, budget, risques, cadre juridique, preuves et reporting.",
+      action: ["Préparer une demande de soutien", "documents/demande-soutien-financier.md"],
+      items: [
+        ["Objet", "Phase financée, territoire, bénéficiaires, dépenses et reste à financer."],
+        ["Risque", "Juridique, technique, financier, humain, calendrier et communication."],
+        ["Reporting", "Justificatifs, indicateurs, limites et bilan transmis au financeur."],
+      ],
+    },
+    "contact.html": {
+      kicker: "Contact utile",
+      title: "Un bon message permet une réponse plus rapide.",
+      text: "La page Contact doit aider à préparer un échange exploitable, pas seulement envoyer une demande vague.",
+      action: ["Préparer l'envoi", "#contact-form"],
+      items: [
+        ["Profil", "Collectivité, propriétaire, entreprise, association, bénévole, financeur ou presse."],
+        ["Territoire", "Commune, quartier, adresse ou périmètre concerné."],
+        ["Objet", "Bien, matériau, besoin public, partenariat, financement ou signalement."],
+      ],
+    },
+  };
+
+  const panel = panels[page.file];
+  if (!panel) return "";
+
+  return `<section class="decision-panel" ${sectionAttrs(panel.title)}><div class="container decision-panel-inner"><div class="decision-copy"><p class="section-kicker">${panel.kicker}</p><h2>${panel.title}</h2><p>${panel.text}</p><a class="btn primary" href="${hrefFor(panel.action[1])}">${panel.action[0]}</a></div><div class="decision-list">${panel.items
+    .map(([title, text], index) => `<article><span aria-hidden="true">${index + 1}</span><div><strong>${title}</strong><p>${text}</p></div></article>`)
+    .join("")}</div></div></section>`;
+}
+
 function pageTemplate(page) {
   const active = page.file;
   const url = pageUrl(page);
@@ -2387,7 +2503,7 @@ ${breadcrumbNav(page)}
       </div>
     </section>
     ${pageMiniNav(page)}
-    ${quickBriefFor(page)}
+    ${quickBriefFor(page)}${decisionPanelFor(page)}
     ${page.sections.join("\n")}
     ${journeySection(page)}
     ${ctaBandFor(page)}
