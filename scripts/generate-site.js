@@ -1430,7 +1430,7 @@ function iconFor(text) {
 }
 
 function pageUrl(page) {
-  return page.file === "index.html" ? `${site.url}/` : `${site.url}/${page.file}`;
+  return page.file === "index.html" ? `${site.url}/` : `${site.url}/${page.file.replace(/\.html$/, "")}`;
 }
 
 function imageAttrs(src) {
@@ -1578,7 +1578,10 @@ fs.writeFileSync(
 fs.writeFileSync(
   "sitemap.xml",
   `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${pages
-    .map((p) => `  <url><loc>${site.url}/${p.file}</loc></url>`)
+    .map((p) => {
+      const priority = p.file === "index.html" ? "1.0" : ["qui-sommes-nous.html", "nos-actions.html", "nos-poles.html", "saint-etienne.html", "agir-avec-nous.html", "contact.html"].includes(p.file) ? "0.8" : "0.6";
+      return `  <url><loc>${pageUrl(p)}</loc><changefreq>monthly</changefreq><priority>${priority}</priority></url>`;
+    })
     .join("\n")}\n</urlset>\n`,
   "utf8"
 );
@@ -1606,7 +1609,39 @@ fs.writeFileSync(
 
 fs.writeFileSync(
   "vercel.json",
-  JSON.stringify({ cleanUrls: true, trailingSlash: false }, null, 2),
+  JSON.stringify(
+    {
+      cleanUrls: true,
+      trailingSlash: false,
+      headers: [
+        {
+          source: "/(.*)",
+          headers: [
+            { key: "X-Content-Type-Options", value: "nosniff" },
+            { key: "X-Frame-Options", value: "SAMEORIGIN" },
+            { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+            { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=(), payment=()" },
+            { key: "Strict-Transport-Security", value: "max-age=63072000; includeSubDomains; preload" },
+            {
+              key: "Content-Security-Policy",
+              value:
+                "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self'; frame-ancestors 'self'; base-uri 'self'; form-action 'self'",
+            },
+          ],
+        },
+        {
+          source: "/assets/(.*)",
+          headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],
+        },
+        {
+          source: "/(.*).html",
+          headers: [{ key: "Cache-Control", value: "public, max-age=0, must-revalidate" }],
+        },
+      ],
+    },
+    null,
+    2
+  ),
   "utf8"
 );
 
