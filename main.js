@@ -186,6 +186,18 @@ document.querySelectorAll("[data-prepare-form]").forEach((form) => {
     if (event?.target && valueForField(event.target)) {
       event.target.removeAttribute("aria-invalid");
     }
+
+    if (!output.hidden) {
+      output.textContent = "Le formulaire a été modifié. Cliquez à nouveau sur Préparer pour générer un résumé à jour.";
+    }
+
+    if (copyButton) {
+      copyButton.hidden = true;
+    }
+
+    if (downloadButton) {
+      downloadButton.hidden = true;
+    }
   }
 
   function markHandled() {
