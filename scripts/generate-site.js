@@ -20,6 +20,17 @@ const nav = [
   ["Contact", "contact.html"],
 ];
 
+const imageSizes = {
+  "assets/logo-tvf-officiel-transparent.png": [612, 408],
+  "assets/logo-tvf-officiel-fond-blanc.png": [1536, 1024],
+  "assets/photos/community-garden-paris.webp": [960, 640],
+  "assets/photos/france-commerce-paris.jpg": [330, 495],
+  "assets/photos/france-friche-pcuk.jpg": [960, 324],
+  "assets/photos/france-ressourcerie-vichy.jpg": [960, 720],
+  "assets/photos/france-saint-etienne-chateaucreux.jpg": [1280, 853],
+  "assets/photos/france-saint-etienne-jean-jaures.jpg": [1280, 853],
+};
+
 const pages = [
   {
     file: "index.html",
@@ -1378,11 +1389,11 @@ function faqSection(items) {
 }
 
 function highlight(title, text, label, href, image) {
-  return `<section class="section feature"><div class="container feature-grid"><img src="${image}" alt="Vue urbaine française liée à la revitalisation territoriale" loading="lazy"><div><p class="section-kicker">Pilote</p><h2>${title}</h2><p>${text}</p><a class="btn primary" href="${href}">${label}</a></div></div></section>`;
+  return `<section class="section feature"><div class="container feature-grid"><img src="${image}" ${imageAttrs(image)} alt="Vue urbaine française liée à la revitalisation territoriale" loading="lazy" decoding="async"><div><p class="section-kicker">Pilote</p><h2>${title}</h2><p>${text}</p><a class="btn primary" href="${href}">${label}</a></div></div></section>`;
 }
 
 function split(title, text, image) {
-  return `<section class="section"><div class="container split"><img src="${image}" alt="${title}" loading="lazy"><div><p class="section-kicker">Approche</p><h2>${title}</h2><p>${text}</p></div></div></section>`;
+  return `<section class="section"><div class="container split"><img src="${image}" ${imageAttrs(image)} alt="${title}" loading="lazy" decoding="async"><div><p class="section-kicker">Approche</p><h2>${title}</h2><p>${text}</p></div></div></section>`;
 }
 
 function textBlock(title, text) {
@@ -1420,6 +1431,11 @@ function iconFor(text) {
 
 function pageUrl(page) {
   return page.file === "index.html" ? `${site.url}/` : `${site.url}/${page.file}`;
+}
+
+function imageAttrs(src) {
+  const size = imageSizes[src];
+  return size ? `width="${size[0]}" height="${size[1]}"` : "";
 }
 
 function jsonLd(page) {
@@ -1495,6 +1511,7 @@ function pageTemplate(page) {
   <link rel="icon" href="assets/favicon-32.png">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <link rel="manifest" href="site.webmanifest">
+  <link rel="preload" as="image" href="${page.heroImage}">
   <link rel="stylesheet" href="styles.css">
   <script type="application/ld+json">${jsonLd(page)}</script>
 </head>
@@ -1502,7 +1519,7 @@ function pageTemplate(page) {
   <a class="skip-link" href="#contenu">Aller au contenu</a>
   <header class="site-header">
     <div class="container header-inner">
-      <a class="brand" href="index.html" aria-label="Accueil Territoires Vivants France"><img src="assets/logo-tvf-officiel-transparent.png" alt="Territoires Vivants France"></a>
+      <a class="brand" href="index.html" aria-label="Accueil Territoires Vivants France"><img src="assets/logo-tvf-officiel-transparent.png" width="612" height="408" alt="Territoires Vivants France" decoding="async"></a>
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav">Menu</button>
       <nav class="main-nav" id="main-nav" aria-label="Navigation principale">${nav
         .map(([label, href]) => `<a href="${href}"${href === active ? ' aria-current="page"' : ""}>${label}</a>`)
@@ -1536,7 +1553,7 @@ function pageTemplate(page) {
   </main>
   <footer class="site-footer">
     <div class="container footer-grid">
-      <div><span class="footer-logo-box"><img src="assets/logo-tvf-officiel-transparent.png" alt="Territoires Vivants France" class="footer-logo"></span><p>Plateforme nationale de coopération pour redonner vie aux biens, lieux et ressources inutilisés.</p></div>
+      <div><span class="footer-logo-box"><img src="assets/logo-tvf-officiel-transparent.png" width="612" height="408" alt="Territoires Vivants France" class="footer-logo" loading="lazy" decoding="async"></span><p>Plateforme nationale de coopération pour redonner vie aux biens, lieux et ressources inutilisés.</p></div>
       <div><h2>Navigation</h2>${nav.slice(0, 7).map(([label, href]) => `<a href="${href}">${label}</a>`).join("")}</div>
       <div><h2>Ressources</h2><a href="notre-methode.html">Notre méthode</a><a href="impact.html">Impact</a><a href="gouvernance.html">Gouvernance</a><a href="kit-media.html">Kit média</a><a href="documents.html">Documents</a><a href="faq.html">FAQ</a><a href="transparence.html">Transparence</a><a href="mentions-legales.html">Mentions légales</a><a href="contact.html">Contact</a></div>
       <div><h2>Siège</h2><p>25 rue Élise Gervais<br>42000 Saint-Étienne</p><a class="btn secondary" href="contact.html">Contacter TVF</a></div>
