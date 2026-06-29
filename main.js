@@ -230,6 +230,7 @@ document.querySelectorAll("[data-prepare-form]").forEach((form, index) => {
   const transferLink = form.querySelector("[data-transfer-summary]");
   const output = form.querySelector("[data-form-summary]");
   const localDraftStatus = form.querySelector("[data-local-draft-status]");
+  const saveStatus = form.querySelector("[data-save-status]");
   if (!button || !output) return;
 
   const localDraftKey = storageKeyForForm(form, index);
@@ -248,11 +249,34 @@ document.querySelectorAll("[data-prepare-form]").forEach((form, index) => {
     resetButton.hidden = !initialDirty;
   }
 
+  let saveStatusTimer;
+
+  function hideSaveStatus() {
+    if (saveStatus) {
+      saveStatus.hidden = true;
+    }
+    window.clearTimeout(saveStatusTimer);
+  }
+
+  function showSaveStatus() {
+    if (!saveStatus) return;
+    saveStatus.hidden = false;
+    window.clearTimeout(saveStatusTimer);
+    saveStatusTimer = window.setTimeout(() => {
+      saveStatus.hidden = true;
+    }, 2200);
+  }
+
   function markDirty(event) {
     const hasDraft = summaryForForm(form).lines.length > 0;
     form.dataset.draftDirty = String(hasDraft);
     form.dataset.draftHandled = "false";
     saveLocalFormDraft(form, localDraftKey);
+    if (hasDraft) {
+      showSaveStatus();
+    } else {
+      hideSaveStatus();
+    }
 
     if (event?.target && valueForField(event.target)) {
       event.target.removeAttribute("aria-invalid");
@@ -279,6 +303,7 @@ document.querySelectorAll("[data-prepare-form]").forEach((form, index) => {
     form.dataset.draftDirty = "false";
     form.dataset.draftHandled = "true";
     clearLocalFormDraft(localDraftKey);
+    hideSaveStatus();
     if (localDraftStatus) {
       localDraftStatus.hidden = true;
     }
