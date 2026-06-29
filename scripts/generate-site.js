@@ -29,8 +29,7 @@ const nav = [
 ];
 
 const imageSizes = {
-  "assets/logo-tvf-officiel-transparent.png": [612, 408],
-  "assets/logo-tvf-officiel-fond-blanc.png": [1536, 1024],
+  "assets/logo-territoires-vivants-france.png": [612, 408],
   "assets/photos/community-garden-paris.webp": [960, 640],
   "assets/photos/artisan-menuiserie-bois.jpg": [1600, 1059],
   "assets/photos/batiment-rural-france.jpg": [1067, 1600],
@@ -209,6 +208,7 @@ const pages = [
         ["Friche ou terrain", "Espace délaissé, manque d'usage, risque de dégradation", "Qualification, sécurité, accès, usages compatibles", "Note d'opportunité"],
         ["Action solidaire", "Besoin d'engagement citoyen ou d'insertion", "Mission, encadrement, sécurité, feuille d'émargement", "Action documentée"],
       ]),
+      actionsOperationalMatrixSection(),
       split(
         "La Banque de matériaux est un outil de projet",
         "Les matériaux proposés à TVF ne sont pas distribués librement. Ils sont qualifiés, tracés puis orientés vers des besoins utiles : remise en état d'un local associatif, aménagement d'un lieu partagé, soutien à un chantier encadré ou expérimentation territoriale. Cette logique protège les contributeurs et garantit que chaque ressource garde une utilité collective.",
@@ -222,6 +222,7 @@ const pages = [
         ["5", "Formaliser", "Les engagements, usages, responsabilités, budgets et limites sont écrits avant action."],
         ["6", "Suivre", "Le projet est documenté avec indicateurs, photos autorisées, comptes rendus et reporting."],
       ]),
+      actionsDecisionSection(),
       cards("À qui s'adressent les actions ?", "Chaque public doit comprendre immédiatement où il intervient dans la chaîne de revitalisation.", [
         ["Collectivités", "Diagnostiquer, prioriser et structurer une coopération territoriale.", "collectivites.html"],
         ["Propriétaires", "Étudier un bien vacant sans perdre la propriété ni s'engager prématurément.", "proprietaires.html"],
@@ -274,6 +275,7 @@ const pages = [
         ["Friches & Terrains Vivants", "Des espaces délaissés peuvent devenir utiles au cadre de vie", "Qualifier l'accès, les risques, les usages verts ou partagés", "Audit terrain, note d'opportunité, plan d'action"],
         ["Solidarité & Insertion", "Les projets locaux peuvent créer de l'engagement et des parcours", "Cadrer les missions, encadrer les actions, suivre la participation", "Fiche mission, émargement, compte rendu"],
       ]),
+      polesOperationalMatrixSection(),
       nationalDataSection("Repères nationaux par pôle"),
       split(
         "Habitat Vivant",
@@ -305,6 +307,7 @@ const pages = [
         "Un même projet peut mobiliser plusieurs pôles. Un logement vacant peut nécessiter des matériaux de réemploi, une convention avec un propriétaire, un appui de collectivité, un chantier encadré et un suivi d'impact. TVF sert à organiser cette coordination étape par étape.",
         "assets/photos/centre-ville-nantes.jpg"
       ),
+      polesCoordinationSection(),
       timeline("Comment les pôles travaillent ensemble", [
         ["1", "Repérage", "Un lieu, une ressource ou un besoin est identifié."],
         ["2", "Pôle principal", "TVF choisit le pôle qui porte l'analyse principale."],
@@ -1229,7 +1232,7 @@ const pages = [
         ]
       ),
       cards("Éléments disponibles", "Des supports simples pour parler de TVF avec justesse.", [
-        ["Logo officiel", "Utiliser le logo officiel TVF sans le déformer, le recadrer excessivement ou modifier ses couleurs.", "assets/logo-tvf-officiel-fond-blanc.png"],
+        ["Logo officiel", "Utiliser le logo officiel TVF sans le déformer, le recadrer excessivement ou modifier ses couleurs.", "assets/logo-territoires-vivants-france.png"],
         ["Présentation courte", "TVF coordonne la remise en usage de biens, lieux et ressources inutilisés au service des territoires.", "documents/kit-media.md"],
         ["Dossier TVF", "Un document de présentation plus complet pour collectivités, entreprises et financeurs.", "documents/dossier-presentation-tvf.md"],
         ["Pitch officiel", "Des versions 30 secondes, 1 minute, 3 minutes et dossier institutionnel.", "documents/pitch-officiel-tvf.md"],
@@ -1707,6 +1710,53 @@ function publicEntryMatrixSection() {
   ]);
 }
 
+function actionsOperationalMatrixSection() {
+  return tableSection("Matrice opérationnelle des actions", "Cette matrice relie chaque action à un problème concret, à un document de travail, à une décision attendue et à un indicateur de suivi. Elle permet de comprendre rapidement ce que TVF produit réellement avant toute communication publique.", [
+    ["Action", "Problème traité", "Réponse TVF", "Document utile", "Décision attendue", "Impact attendu"],
+    ["Logements vacants", "Bien inutilisé, état incertain, propriétaire isolé ou absence d'usage clair", "Qualifier le bien, organiser une visite autorisée, comparer les usages possibles et préparer le cadre propriétaire", "Fiche propriétaire, accord de principe, scénarios d'usage", "Compléter, visiter, instruire, conventionner ou classer", "Biens qualifiés, propriétaires accompagnés, logements remis en usage uniquement après preuve"],
+    ["Commerces inoccupés", "Vitrine fermée, local sans projet, besoin économique ou associatif non relié au propriétaire", "Décrire le local, analyser les usages compatibles et rapprocher les acteurs locaux", "Fiche signalement, fiche projet, note d'opportunité", "Tester un usage, rechercher un porteur, conventionner ou réorienter", "Locaux qualifiés, scénarios d'activation, commerces ou usages accompagnés"],
+    ["Matériaux de réemploi", "Surplus, invendus ou matériaux de chantier sans affectation utile", "Identifier, trier, tracer et affecter les ressources à un projet validé", "Fiche entreprise, bordereau matériaux, PV de remise", "Accepter, refuser, stocker, affecter ou mettre en attente", "Matériaux orientés vers des projets, déchets évités lorsque la preuve existe"],
+    ["Friches et terrains", "Espace délaissé, propriété ou sécurité à clarifier, usage inexistant", "Qualifier l'accès, les risques, les contraintes, les usages temporaires et les acteurs à mobiliser", "Fiche d'audit terrain, matrice des risques, note d'opportunité", "Étudier, sécuriser, conventionner, réorienter ou classer", "Sites qualifiés, usages temporaires ou projets de reconversion cadrés"],
+    ["Solidarité et insertion", "Volonté d'agir sans mission claire, besoin d'encadrement ou de parcours utile", "Définir des missions courtes, encadrées, traçables et compatibles avec les compétences disponibles", "Fiche mission bénévole, feuille d'émargement, compte rendu terrain", "Ouvrir une mission, reporter, encadrer ou refuser", "Bénévoles mobilisés, heures suivies, missions réalisées avec sécurité"],
+    ["Territoires partenaires", "Besoin public identifié mais périmètre, gouvernance ou livrables encore flous", "Cadrer un diagnostic, une expérimentation, un quartier pilote ou une convention territoriale", "Fiche collectivité, convention territoriale, plan d'action", "Lancer un cadrage, signer une coopération ou différer", "Territoires qualifiés, diagnostics produits, décisions publiques facilitées"],
+    ["Financer les projets", "Idée utile mais budget, risques, preuves ou reporting insuffisants", "Structurer un budget, un plan de financement, une grille de risques et des indicateurs", "Budget prévisionnel, plan de financement, reporting financeur", "Dossier finançable, à compléter, à ajourner ou à abandonner", "Demandes mieux cadrées, financements suivis séparément des intentions"],
+    ["Observatoire", "Données dispersées, signalements non vérifiés, priorités difficiles à hiérarchiser", "Croiser sources publiques, signalements, visites autorisées et statuts de décision", "Registre sources, protocole signalement, fiche cartographie", "Signalé, qualifié, orienté, conventionné ou classé", "Base de décision territoriale, cartes et indicateurs fiables"],
+  ]);
+}
+
+function actionsDecisionSection() {
+  return tableSection("De la demande à la décision", "Une action TVF doit produire une suite claire, même lorsqu'elle n'aboutit pas. Ce processus évite les promesses floues et donne aux collectivités, propriétaires, entreprises et financeurs une lecture simple du dossier.", [
+    ["Étape", "Question à trancher", "Preuve attendue", "Suite possible"],
+    ["1. Recevoir", "Qui demande quoi, sur quel territoire et avec quel niveau d'urgence ?", "Message, fiche d'entrée, coordonnées, localisation", "Accusé de réception et numéro de dossier"],
+    ["2. Qualifier", "Les informations sont-elles suffisantes pour comprendre le bien, la ressource ou le besoin ?", "Photos, adresse, état apparent, contraintes connues, interlocuteur", "Demande de pièces, visite autorisée ou classement"],
+    ["3. Prioriser", "Le dossier est-il utile, faisable, sûr et cohérent avec la mission TVF ?", "Grille d'instruction, risques, utilité territoriale, moyens nécessaires", "Instruction, réorientation, mise en attente ou refus motivé"],
+    ["4. Formaliser", "Qui porte quoi, pendant combien de temps, avec quelles responsabilités ?", "Convention, accord de principe, budget, autorisations, assurances", "Lancement d'une action encadrée ou report"],
+    ["5. Suivre", "Que peut-on mesurer et publier sans exagérer ?", "Compte rendu, indicateurs, photos autorisées, pièces justificatives", "Bilan, mise à jour des indicateurs ou retour d'expérience"],
+  ]);
+}
+
+function polesOperationalMatrixSection() {
+  return tableSection("Matrice opérationnelle des pôles", "Les pôles donnent une organisation lisible au cœur métier. Chaque pôle doit savoir ce qu'il analyse, avec quels documents, pour quels publics et jusqu'à quelle décision.", [
+    ["Pôle", "Sujet traité", "Publics principalement concernés", "Documents de référence", "Décision produite"],
+    ["Habitat Vivant", "Logements vacants, immeubles dégradés, usages temporaires ou solidaires", "Propriétaires, collectivités, habitants, financeurs", "Fiche propriétaire, accord de principe, scénarios d'usage, suivi de restitution", "Étude, visite, convention, travaux à cadrer ou classement"],
+    ["Matériauthèque Solidaire", "Matériaux, mobilier, équipements, surplus, invendus ou ressources de chantier", "Entreprises, artisans, collectivités, associations, particuliers", "Fiche entreprise, bordereau matériaux, PV de remise, registre matériaux", "Acceptation, refus, stockage, affectation ou réorientation"],
+    ["Commerce Vivant", "Locaux commerciaux vacants, vitrines fermées, rez-de-chaussée sans activité", "Propriétaires, commerçants, artisans, communes, associations", "Fiche local, fiche projet, note d'opportunité, convention d'usage", "Test d'usage, recherche de porteur, occupation temporaire ou classement"],
+    ["Friches & Terrains Vivants", "Friches, terrains délaissés, espaces verts potentiels, sites à sécuriser", "Collectivités, propriétaires, associations, habitants, experts techniques", "Fiche d'audit terrain, matrice des risques, plan d'action territorial", "Étude, sécurisation, usage transitoire, projet territorial ou classement"],
+    ["Solidarité & Insertion", "Missions bénévoles, chantiers encadrés, participation citoyenne, parcours d'utilité", "Bénévoles, associations, structures d'insertion, habitants, jeunes et seniors", "Fiche mission, consignes sécurité, feuille d'émargement, compte rendu", "Mission ouverte, mission reportée, encadrement renforcé ou refus"],
+  ]);
+}
+
+function polesCoordinationSection() {
+  return tableSection("Comment les pôles s'assemblent sur un dossier", "Un projet crédible ne dépend presque jamais d'un seul pôle. Cette lecture aide à comprendre qui porte le dossier principal et quels pôles interviennent en appui.", [
+    ["Situation de départ", "Pôle principal", "Pôles associés", "Livrable final attendu"],
+    ["Un logement vacant proposé par un propriétaire", "Habitat Vivant", "Matériauthèque Solidaire, Solidarité & Insertion, Financement", "Scénario d'usage, budget, accord propriétaire, convention possible"],
+    ["Un commerce fermé en centre-ville", "Commerce Vivant", "Habitat Vivant, Matériauthèque Solidaire, Collectivités", "Note d'opportunité, usage compatible, porteur identifié ou besoin de recherche"],
+    ["Des matériaux disponibles chez une entreprise", "Matériauthèque Solidaire", "Habitat Vivant, Friches & Terrains Vivants, Solidarité & Insertion", "Registre, état, conditions de retrait, affectation à un projet validé"],
+    ["Un terrain délaissé dans un quartier", "Friches & Terrains Vivants", "Solidarité & Insertion, Collectivités, Matériauthèque Solidaire", "Audit terrain, risques, usages possibles, plan d'action local"],
+    ["Une mission citoyenne ou bénévole", "Solidarité & Insertion", "Tous les pôles selon le support de mission", "Fiche mission, consignes, référent, émargement et compte rendu"],
+  ]);
+}
+
 function collectivityConventionSection() {
   return tableSection("Convention de coopération territoriale", "La convention ne doit pas être un simple symbole. Elle doit permettre à la collectivité de savoir précisément ce qui est testé, par qui, avec quelles limites et quels livrables.", [
     ["Clause", "Contenu à préciser", "Point de vigilance"],
@@ -1860,7 +1910,7 @@ function assetUrl(src) {
 }
 
 function imageObjectFor(page) {
-  const src = page.heroImage || "assets/logo-tvf-officiel-fond-blanc.png";
+  const src = page.heroImage || "assets/logo-territoires-vivants-france.png";
   const size = imageSizes[src];
   return {
     "@type": "ImageObject",
@@ -1897,7 +1947,7 @@ function jsonLd(page) {
       "@id": `${site.url}/#organization`,
       name: site.name,
       url: site.url,
-      logo: `${site.url}/assets/logo-tvf-officiel-fond-blanc.png`,
+      logo: `${site.url}/assets/logo-territoires-vivants-france.png`,
       email: contact.email,
       telephone: contact.phoneHref,
       address: {
@@ -2015,7 +2065,7 @@ ${socialImageSize}
   <a class="skip-link" href="#contenu">Aller au contenu</a>
   <header class="site-header">
     <div class="container header-inner">
-      <a class="brand" href="${hrefFor("index.html")}" aria-label="Accueil Territoires Vivants France"><img src="assets/logo-tvf-officiel-transparent.png" width="612" height="408" alt="Territoires Vivants France" decoding="async"></a>
+      <a class="brand" href="${hrefFor("index.html")}" aria-label="Accueil Territoires Vivants France"><img src="assets/logo-territoires-vivants-france.png" width="612" height="408" alt="Territoires Vivants France" decoding="async"></a>
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav">Menu</button>
       <nav class="main-nav" id="main-nav" aria-label="Navigation principale">${nav
         .map(([label, href]) => `<a href="${hrefFor(href)}"${href === active ? ' aria-current="page"' : ""}>${label}</a>`)
@@ -2052,7 +2102,7 @@ ${breadcrumbNav(page)}
   </main>
   <footer class="site-footer">
     <div class="container footer-grid">
-      <div><span class="footer-logo-box"><img src="assets/logo-tvf-officiel-transparent.png" width="612" height="408" alt="Territoires Vivants France" class="footer-logo" loading="lazy" decoding="async"></span><p>Plateforme nationale de coopération pour redonner vie aux biens, lieux et ressources inutilisés.</p></div>
+      <div><span class="footer-logo-box"><img src="assets/logo-territoires-vivants-france.png" width="612" height="408" alt="Territoires Vivants France" class="footer-logo" loading="lazy" decoding="async"></span><p>Plateforme nationale de coopération pour redonner vie aux biens, lieux et ressources inutilisés.</p></div>
       <div><h3>Navigation</h3>${nav.slice(0, 7).map(([label, href]) => `<a href="${hrefFor(href)}">${label}</a>`).join("")}</div>
       <div><h3>Ressources</h3><a href="${hrefFor("notre-methode.html")}">Notre méthode</a><a href="${hrefFor("impact.html")}">Impact</a><a href="${hrefFor("gouvernance.html")}">Gouvernance</a><a href="${hrefFor("kit-media.html")}">Kit média</a><a href="${hrefFor("documents.html")}">Documents</a><a href="${hrefFor("faq.html")}">FAQ</a><a href="${hrefFor("transparence.html")}">Transparence</a><a href="${hrefFor("mentions-legales.html")}">Mentions légales</a><a href="${hrefFor("contact.html")}">Contact</a></div>
       <div><h3>Siège</h3><p>25 rue Élise Gervais<br>42000 Saint-Étienne</p><p><a href="mailto:${contact.email}">${contact.email}</a><br><a href="tel:${contact.phoneHref}">${contact.phone}</a></p><a class="btn secondary" href="${hrefFor("contact.html")}">Contacter TVF</a></div>

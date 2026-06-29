@@ -26,8 +26,7 @@ TVF est une plateforme nationale de coopération territoriale. Elle ne remplace 
 
 Fichiers de référence :
 
-- `assets/logo-tvf-officiel-transparent.png`
-- `assets/logo-tvf-officiel-fond-blanc.png`
+- `assets/logo-territoires-vivants-france.png`
 
 Règles :
 
