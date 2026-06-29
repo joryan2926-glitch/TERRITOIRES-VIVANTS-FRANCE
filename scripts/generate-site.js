@@ -565,6 +565,7 @@ const pages = [
         ["Suivi", "Documenter les effets", "Grille d'impact"],
       ]),
       collectivityConventionSection(),
+      collectivityDecisionMatrixSection(),
       timeline("Devenir territoire partenaire", [
         ["1", "Premier échange", "La collectivité expose son besoin, son périmètre et les sujets prioritaires."],
         ["2", "Cadrage", "TVF identifie les données utiles, acteurs à mobiliser et contraintes de procédure."],
@@ -622,6 +623,7 @@ const pages = [
         ["Durée", "Quelle durée de coopération est acceptable ?", "Convention"],
       ]),
       ownerConventionSection(),
+      ownerReadinessMatrixSection(),
       timeline("Parcours propriétaire", [
         ["1", "Présentation du bien", "Le propriétaire transmet les informations disponibles sans engagement automatique."],
         ["2", "Qualification", "TVF analyse l'état apparent, les contraintes, les usages possibles et les pièces manquantes."],
@@ -679,6 +681,7 @@ const pages = [
         ["Communication", "Valorisation possible après accord", "Validation commune"],
       ]),
       enterpriseOperationalSection(),
+      enterpriseValueMatrixSection(),
       timeline("Du contact à la contribution", [
         ["1", "Description", "L'entreprise présente ce qu'elle peut apporter : matériaux, locaux, compétences ou soutien."],
         ["2", "Qualification", "TVF vérifie l'état, la disponibilité, la sécurité, la logistique et l'utilité."],
@@ -737,6 +740,7 @@ const pages = [
         ["Données", "Que peut-on publier ?", "Accord et respect de la vie privée"],
       ]),
       volunteerOperationalSection(),
+      volunteerMissionSelectorSection(),
       timeline("Parcours bénévole", [
         ["1", "Se présenter", "Le bénévole indique son territoire, ses disponibilités et ses compétences."],
         ["2", "Choisir une mission", "TVF propose une mission adaptée au besoin et au niveau d'encadrement disponible."],
@@ -757,7 +761,7 @@ const pages = [
     title: "Financeurs & mécènes",
     meta:
       "Parcours financeurs et mécènes TVF : soutenir des projets instruits, avec gouvernance, transparence et suivi d'impact.",
-    heroImage: "assets/photos/centre-ville-nantes.jpg",
+    heroImage: "assets/photos/france-saint-etienne-jean-jaures.jpg",
     eyebrow: "Financement",
     h1: "Soutenir des projets cadrés, pas des promesses floues.",
     intro:
@@ -795,6 +799,7 @@ const pages = [
         ["Impact", "Indicateurs publiés seulement après vérification", "Grille d'impact"],
       ]),
       financerOperationalSection(),
+      financerDueDiligenceSection(),
       timeline("Parcours financeur", [
         ["1", "Échange", "TVF présente le besoin, le territoire et le niveau de maturité du dossier."],
         ["2", "Instruction", "Le financeur examine budget, risques, pièces et objectifs."],
@@ -899,11 +904,12 @@ const pages = [
         ["Un projet doit être instruit", "Fiche projet", "Cadrer objectifs, acteurs, risques, budget et indicateurs"],
         ["Un financement est recherché", "Plan de financement", "Distinguer coûts, contributions, demandes et montants obtenus"],
       ]),
+      essentialDocumentsSection(),
       documentPriorityPackSection(),
       documentWorkflowSection(),
       publicEntryMatrixSection(),
       documentTools(),
-      documentCards("Documents disponibles", "Chaque modèle aide à collecter les informations nécessaires avant instruction.", [
+      documentCards("Bibliothèque complète filtrable", "Tous les modèles restent accessibles. Utilisez la recherche ou les filtres pour retrouver un document précis après avoir identifié le bon pack.", [
         ["Fiche collectivité", "Qualifier un besoin territorial, un périmètre, des ressources et des interlocuteurs.", "documents/fiche-collectivite.md"],
         ["Diagnostic territorial", "Cadrer le périmètre, les données, la méthode et les livrables d'un diagnostic TVF.", "documents/cahier-charges-diagnostic-territorial.md"],
         ["Convention territoriale", "Formaliser une coopération avec une collectivité sans engagement financier automatique.", "documents/convention-cooperation-territoriale.md"],
@@ -1108,7 +1114,7 @@ const pages = [
     title: "Impact & suivi",
     meta:
       "La page Impact de TVF présente les indicateurs à suivre sans chiffres inventés : biens remis en usage, matériaux réemployés, projets accompagnés et coopération territoriale.",
-    heroImage: "assets/photos/centre-ville-nantes.jpg",
+    heroImage: "assets/photos/saint-etienne-panorama.jpg",
     eyebrow: "Impact",
     h1: "Mesurer avant d'annoncer.",
     intro:
@@ -1281,25 +1287,28 @@ const pages = [
     file: "contact.html",
     title: "Contact",
     meta:
-      "Contacter Territoires Vivants France : contact@territoiresvivantsfrance.fr, 06 22 03 93 24, association nationale basée à Saint-Étienne.",
-    heroImage: "assets/photos/france-saint-etienne-chateaucreux.jpg",
+      "Demander un rendez-vous ou contacter Territoires Vivants France : collectivité, propriétaire, entreprise, financeur, bénévole ou partenaire.",
+    heroImage: "assets/photos/saint-etienne-rue-resistance.jpg",
     eyebrow: "Contact",
-    h1: "Entrer en relation avec TVF.",
+    h1: "Préparer un échange utile avec TVF.",
     intro:
-      "Vous représentez une collectivité, une entreprise, une association, un propriétaire ou un collectif citoyen ? Présentez votre besoin en quelques lignes.",
-    ctas: [["Envoyer un message", "#contact-form"], ["Voir les parcours", "agir-avec-nous.html"]],
+      "Que vous soyez collectivité, propriétaire, entreprise, financeur, association ou citoyen, l'objectif est simple : décrire la situation, identifier le bon parcours et préparer une suite claire.",
+    ctas: [["Demander un rendez-vous", "#contact-form"], ["Préparer les pièces", "documents.html"]],
     sections: [
       sectionIntro(
-        "Bien formuler sa demande",
-        "Un message utile permet de comprendre rapidement le territoire, le type de besoin, les acteurs déjà identifiés et le niveau d'urgence. Plus la demande est précise, plus l'orientation pourra être sérieuse.",
+        "Un bon contact commence par une situation claire",
+        "TVF n'attend pas un dossier parfait dès le premier message. En revanche, quelques informations de base permettent de comprendre rapidement le territoire, le type de besoin, les acteurs déjà identifiés et la suite à préparer.",
         [
           ["Qui ?", "Indiquer votre profil : collectivité, propriétaire, entreprise, association, habitant, financeur."],
           ["Quoi ?", "Décrire le bien, le matériau, le projet, le besoin ou la coopération envisagée."],
           ["Où ?", "Préciser la commune, le quartier, l'adresse si elle peut être transmise et les contraintes connues."],
         ]
       ),
+      contactAppointmentSection(),
+      contactProfileTriageSection(),
       contactDetailsSection(),
       contactSection(),
+      firstMeetingSection(),
       tableSection("Informations utiles à transmettre", "Ces éléments facilitent un premier tri sans créer d'engagement automatique.", [
         ["Type de demande", "Informations à préparer", "Document conseillé"],
         ["Bien vacant", "Adresse, propriétaire, état apparent, photos, usages possibles, contraintes", "Fiche propriétaire ou signalement"],
@@ -1387,7 +1396,7 @@ const pages = [
     file: "mentions-legales.html",
     title: "Mentions légales",
     meta: "Mentions légales de Territoires Vivants France.",
-    heroImage: "assets/photos/reunion-conseil-municipal.jpg",
+    heroImage: "assets/photos/batiment-rural-france.jpg",
     eyebrow: "Cadre légal",
     h1: "Mentions légales.",
     intro:
@@ -1579,9 +1588,28 @@ function journeySection(page) {
     ["Contact", "contact.html", "Échanger avec TVF sur une situation concrète."],
   ];
 
-  return `<section class="section journey-section"><div class="container"><div class="section-head"><p class="section-kicker">Suite logique</p><h3>Continuer votre parcours</h3><p>Trois entrées utiles pour transformer la lecture de cette page en prochaine étape claire.</p></div><div class="journey-grid">${items
+  const copy = journeyCopyFor(page);
+  return `<section class="section journey-section"><div class="container"><div class="section-head"><p class="section-kicker">${copy.kicker}</p><h3>${copy.title}</h3><p>${copy.text}</p></div><div class="journey-grid">${items
     .map(([title, href, text]) => `<a class="journey-card" href="${hrefFor(href)}"><span class="card-icon" aria-hidden="true">${iconFor(title)}</span><strong>${title}</strong><small>${text}</small></a>`)
     .join("")}</div></div></section>`;
+}
+
+function journeyCopyFor(page) {
+  const map = {
+    "index.html": ["Orientation", "Comprendre TVF en trois portes", "Choisissez l'entrée la plus utile selon votre besoin : comprendre, agir ou étudier le territoire pilote."],
+    "contact.html": ["Après contact", "Préparer une demande exploitable", "Ces liens évitent d'envoyer un message trop général et aident à joindre les bonnes pièces."],
+    "documents.html": ["Documents", "Passer du modèle à l'action", "Après avoir identifié un document, vérifiez le cadre, le public concerné et la prochaine décision."],
+    "saint-etienne.html": ["Pilote", "Transformer le diagnostic en dossier", "Le territoire pilote doit conduire vers des données, des acteurs et des documents directement exploitables."],
+    "observatoire.html": ["Données", "Relier observation et décision", "L'observatoire prend de la valeur lorsqu'il alimente une carte, un indicateur ou une décision."],
+    "impact.html": ["Preuve", "Lire les indicateurs avec prudence", "Chaque indicateur doit être relié à une source, un statut et une preuve avant publication."],
+    "collectivites.html": ["Collectivités", "Passer du besoin public au cadrage", "Ces ressources aident à préparer un périmètre, une convention ou un premier diagnostic."],
+    "proprietaires.html": ["Propriétaires", "Passer du bien au scénario", "Ces ressources permettent de présenter un bien sans créer d'engagement prématuré."],
+    "entreprises.html": ["Entreprises", "Transformer une contribution en dossier", "Ces liens aident à qualifier matériaux, locaux, compétences ou mécénat avant valorisation."],
+    "financeurs-mecenes.html": ["Financeurs", "Vérifier avant de soutenir", "Ces entrées permettent de comprendre le niveau de preuve, le budget et le reporting attendu."],
+    "benevoles-citoyens.html": ["Engagement", "Choisir une mission utile", "Ces ressources aident à signaler, documenter ou participer avec un cadre clair."],
+  };
+  const [kicker, title, text] = map[page.file] || ["Suite", "Choisir la prochaine étape", "Trois entrées ciblées pour poursuivre sans perdre le fil de votre parcours."];
+  return { kicker, title, text };
 }
 
 function sectionIntro(title, text, items) {
@@ -1755,6 +1783,37 @@ function contactDetailsSection() {
   ]);
 }
 
+function contactAppointmentSection() {
+  return cards("Pourquoi contacter TVF maintenant ?", "Une demande peut commencer simplement. L'important est de savoir quel problème vous souhaitez résoudre et quelles informations existent déjà.", [
+    ["Vous avez un territoire à diagnostiquer", "Commune, EPCI, quartier, rue commerçante, friche, parc de logements ou besoin public à qualifier.", "collectivites.html"],
+    ["Vous possédez un bien inutilisé", "Logement, immeuble, commerce, bâtiment ou terrain que vous souhaitez étudier dans un cadre sécurisé.", "proprietaires.html"],
+    ["Vous pouvez contribuer", "Matériaux, locaux, compétences, mécénat, logistique ou expertise pouvant servir à un projet utile.", "entreprises.html"],
+    ["Vous voulez soutenir", "Financeur, mécène, fondation ou investisseur à impact souhaitant comprendre la méthode, les preuves et le reporting.", "financeurs-mecenes.html"],
+  ]);
+}
+
+function contactProfileTriageSection() {
+  return tableSection("Quel message envoyer selon votre profil ?", "Cette grille transforme la page Contact en outil de tri. Elle évite les échanges trop généraux et aide TVF à orienter rapidement la demande.", [
+    ["Profil", "Objet recommandé du message", "Informations essentielles", "Document utile"],
+    ["Collectivité", "Demande de rendez-vous territorial", "Commune ou EPCI, périmètre, besoin public, données disponibles, calendrier", "Fiche collectivité"],
+    ["Propriétaire", "Proposition de bien inutilisé", "Adresse, type de bien, état apparent, photos, contraintes, intention", "Fiche propriétaire"],
+    ["Entreprise", "Contribution matériaux, locaux, compétences ou mécénat", "Nature de la contribution, quantité, localisation, délai, conditions", "Fiche entreprise ou bordereau matériaux"],
+    ["Association", "Besoin d'usage ou projet local", "Publics concernés, usage souhaité, durée, capacité d'animation, partenaires connus", "Fiche projet"],
+    ["Bénévole ou citoyen", "Engagement ou signalement", "Commune, disponibilité, compétence, lieu signalé ou mission souhaitée", "Fiche bénévole ou fiche signalement"],
+    ["Financeur", "Échange sur un dossier ou une méthode de reporting", "Type de soutien, critères, calendrier, niveau de preuve attendu", "Plan de financement ou grille d'impact"],
+  ]);
+}
+
+function firstMeetingSection() {
+  return timeline("Premier rendez-vous TVF", [
+    ["1", "Clarifier le besoin", "Identifier le territoire, le bien, la ressource, le public concerné et la décision attendue."],
+    ["2", "Vérifier les pièces", "Lister ce qui existe déjà : photos, données publiques, autorisations, contacts, budget ou contraintes."],
+    ["3", "Choisir le parcours", "Orienter vers collectivité, propriétaire, entreprise, bénévole, financeur ou partenaire."],
+    ["4", "Préparer le document", "Sélectionner la fiche utile : territoire, propriétaire, entreprise, projet, financement ou signalement."],
+    ["5", "Décider de la suite", "Compléter, visiter, instruire, réorienter, conventionner ou classer le dossier."],
+  ]);
+}
+
 function publicEntryMatrixSection() {
   return tableSection("Dossier minimum par profil", "Chaque demande doit pouvoir être orientée rapidement. Ce tableau indique le minimum utile à transmettre avant un échange approfondi.", [
     ["Profil", "À préparer", "Document utile", "Décision attendue"],
@@ -1847,6 +1906,21 @@ function impactPublicationRulesSection() {
   ]);
 }
 
+function essentialDocumentsSection() {
+  return cards("Les 10 documents essentiels", "Cette sélection évite de commencer par les 91 modèles. Elle suffit pour préparer la majorité des premiers rendez-vous.", [
+    ["Dossier TVF", "Présenter l'association, sa méthode, ses publics et ses limites de communication.", "documents/dossier-presentation-tvf.md"],
+    ["Dossier Saint-Étienne", "Appuyer le territoire pilote sur les données publiques, besoins, indicateurs et pièces à réunir.", "documents/dossier-territorial-saint-etienne.md"],
+    ["Fiche collectivité", "Décrire un territoire, un périmètre, un besoin public et les interlocuteurs.", "documents/fiche-collectivite.md"],
+    ["Fiche propriétaire", "Qualifier un bien vacant ou dégradé avant étude, visite ou scénario d'usage.", "documents/fiche-proprietaire.md"],
+    ["Fiche entreprise", "Présenter une contribution en matériaux, locaux, compétences ou mécénat.", "documents/fiche-entreprise.md"],
+    ["Fiche projet", "Cadrer objectif, acteurs, risques, budget, preuves et décision attendue.", "documents/fiche-projet.md"],
+    ["Fiche signalement", "Décrire un lieu, un commerce, une friche ou une ressource à qualifier.", "documents/fiche-signalement-lieu.md"],
+    ["Grille d'instruction", "Décider si le dossier doit être complété, visité, instruit ou classé.", "documents/grille-instruction-dossier.md"],
+    ["Modèle de convention", "Préparer les clauses de coopération à adapter aux parties concernées.", "documents/modele-convention.md"],
+    ["Grille d'impact", "Mesurer uniquement ce qui est défini, prouvé et traçable.", "documents/grille-impact.md"],
+  ]);
+}
+
 function documentPriorityPackSection() {
   return tableSection("Pack prioritaire pour présenter TVF", "Pour une réunion avec une mairie, une métropole, une entreprise ou un financeur, il vaut mieux arriver avec peu de documents, mais parfaitement choisis.", [
     ["Situation", "Documents à préparer", "Objectif de la réunion"],
@@ -1883,6 +1957,17 @@ function collectivityConventionSection() {
   ]);
 }
 
+function collectivityDecisionMatrixSection() {
+  return tableSection("Décisions à préparer avec une collectivité", "Une collectivité doit pouvoir sortir d'un échange avec une décision simple : lancer un cadrage, cibler un périmètre, réunir les acteurs ou différer.", [
+    ["Décision publique à préparer", "Ce que TVF apporte", "Pièce utile", "Résultat attendu de la réunion"],
+    ["Choisir un périmètre pilote", "Comparer quartier, rue, typologie de biens ou thématique prioritaire", "Fiche collectivité", "Périmètre réaliste et interlocuteur désigné"],
+    ["Qualifier des biens ou ressources", "Proposer une méthode de statut : signalé, qualifié, orienté, classé", "Protocole de qualification", "Liste de données et pièces à réunir"],
+    ["Mobiliser les acteurs locaux", "Identifier propriétaires, entreprises, associations, habitants et financeurs utiles", "Fiche comité de pilotage", "Première composition d'un groupe de travail"],
+    ["Préparer une coopération", "Définir objet, durée, livrables, communication et règles de confidentialité", "Convention territoriale", "Projet de convention ou lettre d'intention"],
+    ["Suivre l'impact", "Définir les indicateurs avant toute communication publique", "Grille d'impact", "Tableau de bord de suivi validé"],
+  ]);
+}
+
 function ownerConventionSection() {
   return tableSection("Modalités de convention propriétaire", "La convention doit sécuriser le propriétaire, TVF et les futurs usagers. Elle formalise un cadre d'étude ou d'usage sans ambiguïté.", [
     ["Sujet", "À cadrer", "Pourquoi c'est important"],
@@ -1892,6 +1977,17 @@ function ownerConventionSection() {
     ["Durée", "Période d'étude, période d'usage, conditions de renouvellement ou d'arrêt", "Donner une visibilité claire aux parties"],
     ["Travaux", "Travaux exclus, travaux autorisés, responsabilités, devis, assurances", "Éviter tout chantier sans validation écrite"],
     ["Restitution", "État de sortie, nettoyage, inventaire, documents remis", "Préserver la valeur patrimoniale et la confiance"],
+  ]);
+}
+
+function ownerReadinessMatrixSection() {
+  return tableSection("Avant de proposer un bien", "Cette grille aide le propriétaire à savoir si son dossier est prêt pour un premier échange TVF.", [
+    ["Question", "Pourquoi TVF la pose", "Pièce ou réponse utile", "Suite possible"],
+    ["Qui peut autoriser l'étude ?", "TVF doit éviter toute démarche sans personne habilitée", "Identité du propriétaire ou mandataire", "Accord de principe ou demande de précision"],
+    ["Quel est l'état apparent ?", "La sécurité et la faisabilité conditionnent tout le reste", "Photos, diagnostics disponibles, accès, risques connus", "Visite autorisée, expertise à prévoir ou classement"],
+    ["Quel usage est acceptable ?", "Un usage utile doit rester compatible avec la volonté du propriétaire", "Logement, local associatif, commerce, atelier, usage temporaire", "Scénarios d'usage comparés"],
+    ["Quelle durée peut être envisagée ?", "La durée influence les investissements, travaux et responsabilités", "Durée d'étude, occupation possible, conditions d'arrêt", "Convention courte, progressive ou reportée"],
+    ["Quelles limites sont non négociables ?", "Les règles doivent être écrites avant toute mobilisation", "Accès, travaux interdits, communication, restitution", "Convention adaptée ou réorientation"],
   ]);
 }
 
@@ -1906,6 +2002,17 @@ function enterpriseOperationalSection() {
   ]);
 }
 
+function enterpriseValueMatrixSection() {
+  return tableSection("Ce que l'entreprise doit pouvoir valoriser", "L'intérêt d'une contribution n'est pas seulement de donner. C'est de prouver une action utile, traçable et reliée au territoire.", [
+    ["Objectif entreprise", "Condition TVF", "Preuve produite", "Communication possible"],
+    ["Réduire le gaspillage", "Matériaux réutilisables, décrits et affectables", "Bordereau, PV de remise, registre", "Après acceptation et affectation"],
+    ["Structurer une démarche RSE", "Contribution reliée à un besoin territorial", "Fiche contribution, compte rendu", "Après validation commune"],
+    ["Mobiliser des compétences", "Mission courte, livrable clair, référent identifié", "Fiche mission ou convention", "Après réalisation ou bilan"],
+    ["Mettre un local à disposition", "Durée, accès, charges, sécurité et responsabilités écrits", "Convention de mise à disposition", "Selon accord de communication"],
+    ["Soutenir financièrement", "Budget, objet, reporting et indicateurs définis", "Convention mécénat ou plan de financement", "Après accord formalisé"],
+  ]);
+}
+
 function volunteerOperationalSection() {
   return tableSection("Cadre d'engagement citoyen", "Une mission bénévole doit être simple, utile et sécurisée. TVF doit éviter les missions floues et les interventions improvisées.", [
     ["Étape", "Ce qui doit être clair", "Document ou trace"],
@@ -1917,6 +2024,17 @@ function volunteerOperationalSection() {
   ]);
 }
 
+function volunteerMissionSelectorSection() {
+  return tableSection("Choisir une mission adaptée", "Le bon engagement dépend du temps disponible, des compétences et du niveau d'encadrement possible.", [
+    ["Disponibilité", "Mission adaptée", "Encadrement nécessaire", "Trace attendue"],
+    ["Quelques minutes", "Signaler un lieu, une ressource ou un contact local", "Consignes de signalement", "Fiche signalement"],
+    ["Quelques heures", "Aider à documenter des sources publiques ou préparer une réunion", "Référent TVF", "Compte rendu court"],
+    ["Une journée", "Participer à une action terrain encadrée", "Plan de prévention, consignes, référent sur place", "Feuille d'émargement"],
+    ["Régulièrement", "Devenir relais local ou appui administratif", "Mission définie, limites écrites", "Fiche mission et suivi"],
+    ["Compétence spécifique", "Apporter une expertise technique, juridique, communication ou bâtiment", "Périmètre et livrable précis", "Note ou livrable daté"],
+  ]);
+}
+
 function financerOperationalSection() {
   return tableSection("Dossier financeur recevable", "Un financeur doit pouvoir distinguer une idée, un dossier instruit, une convention et un résultat. TVF doit préparer cette lecture avant toute demande.", [
     ["Élément", "Contenu attendu", "Document associé"],
@@ -1925,6 +2043,18 @@ function financerOperationalSection() {
     ["Risque", "Juridique, technique, financier, humain, calendrier, communication", "Matrice des risques"],
     ["Cadre", "Rôles, responsabilités, durée, conditions de communication", "Convention ou lettre d'intention"],
     ["Impact", "Indicateurs, méthode de calcul, limites, fréquence de reporting", "Grille d'impact + reporting financeur"],
+  ]);
+}
+
+function financerDueDiligenceSection() {
+  return tableSection("Lecture financeur en 15 minutes", "Cette grille permet à un financeur ou mécène de savoir si un dossier TVF est assez mûr pour être étudié.", [
+    ["Point de vérification", "Question à poser", "Réponse attendue", "Document"],
+    ["Maturité", "Le dossier est-il une idée, une instruction, une convention ou une réalisation ?", "Statut clair et daté", "Fiche décision"],
+    ["Besoin", "Quel problème territorial est traité ?", "Bien, public, territoire, urgence ou opportunité", "Fiche projet"],
+    ["Budget", "Combien coûte la phase demandée et que couvre-t-elle ?", "Postes, devis, contributions, reste à financer", "Budget prévisionnel"],
+    ["Risque", "Quels sont les risques majeurs ?", "Juridique, technique, financier, humain, communication", "Matrice des risques"],
+    ["Preuve", "Comment l'impact sera-t-il mesuré ?", "Indicateurs, source, fréquence, limites", "Grille d'impact"],
+    ["Reporting", "Que recevra le financeur ?", "Compte rendu, justificatifs, indicateurs et bilan prudent", "Reporting financeur"],
   ]);
 }
 
@@ -1948,7 +2078,7 @@ function formSection() {
 }
 
 function contactSection() {
-  return `<section class="section" ${sectionAttrs("Décrivez votre demande", "contact-form")}><div class="container form-panel"><div><p class="section-kicker">Message</p><h2>Décrivez votre demande</h2><p>Indiquez votre profil, votre commune, le type de bien ou de coopération, et les informations déjà disponibles. Après préparation, envoyez votre message à <a href="mailto:${contact.email}">${contact.email}</a> ou appelez le <a href="tel:${contact.phoneHref}">${contact.phone}</a>.</p></div><form data-prepare-form aria-describedby="contact-note"><label for="contact-name">Nom / structure</label><input id="contact-name" name="nom" type="text" autocomplete="name" placeholder="Votre nom ou organisme"><label for="contact-email">E-mail</label><input id="contact-email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="contact@exemple.fr"><label for="contact-message">Message</label><textarea id="contact-message" name="message" autocomplete="off" placeholder="Votre message"></textarea><p class="form-note" id="contact-note">Ce formulaire prépare les informations utiles dans votre navigateur. L'envoi définitif se fait par e-mail à ${contact.email} ou par téléphone au ${contact.phone}.</p><p class="form-note" data-draft-status hidden role="status">Résumé récupéré depuis la page Agir avec nous. Relisez le message avant tout envoi officiel.</p><p class="form-note" data-local-draft-status hidden role="status">Brouillon restauré depuis cet onglet. Vous pouvez le modifier, le préparer ou l'effacer.</p><p class="form-note" data-save-status hidden role="status">Brouillon sauvegardé localement dans cet onglet.</p><button class="btn primary" type="button" data-prepare-summary>Préparer l'envoi</button><button class="btn secondary" type="button" data-copy-summary hidden>Copier le résumé</button><button class="btn secondary" type="button" data-download-summary hidden>Télécharger le résumé</button><button class="btn secondary" type="button" data-reset-form hidden>Effacer le brouillon</button><output class="form-summary" data-form-summary hidden aria-live="polite"></output></form></div></section>`;
+  return `<section class="section" ${sectionAttrs("Demander un rendez-vous", "contact-form")}><div class="container form-panel"><div><p class="section-kicker">Rendez-vous</p><h2>Demander un rendez-vous</h2><p>Préparez un message structuré : profil, territoire, objet, urgence, pièces disponibles et décision attendue. L'envoi définitif se fait par e-mail à <a href="mailto:${contact.email}">${contact.email}</a> ou par téléphone au <a href="tel:${contact.phoneHref}">${contact.phone}</a>.</p></div><form data-prepare-form aria-describedby="contact-note"><label for="contact-profile">Votre profil</label><select id="contact-profile" name="profil"><option value="">Choisir un profil</option><option value="collectivite">Collectivité / EPCI</option><option value="proprietaire">Propriétaire</option><option value="entreprise">Entreprise</option><option value="association">Association</option><option value="benevole">Bénévole / citoyen</option><option value="financeur">Financeur / mécène</option><option value="presse">Presse / institution</option></select><label for="contact-name">Nom / structure</label><input id="contact-name" name="nom" type="text" autocomplete="name" placeholder="Votre nom ou organisme"><label for="contact-email">E-mail</label><input id="contact-email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="contact@exemple.fr"><label for="contact-phone">Téléphone</label><input id="contact-phone" name="telephone" type="tel" autocomplete="tel" inputmode="tel" placeholder="06 00 00 00 00"><label for="contact-location">Commune / territoire concerné</label><input id="contact-location" name="territoire" type="text" autocomplete="address-level2" placeholder="Ex. Saint-Étienne, quartier, commune ou EPCI"><label for="contact-subject">Objet de la demande</label><input id="contact-subject" name="objet" type="text" autocomplete="off" placeholder="Ex. logement vacant, matériaux, friche, rendez-vous collectivité"><label for="contact-message">Message</label><textarea id="contact-message" name="message" autocomplete="off" placeholder="Décrivez la situation, les pièces disponibles, les acteurs connus et la suite souhaitée."></textarea><p class="form-note" id="contact-note">Ce formulaire prépare un résumé localement dans votre navigateur. Aucune donnée n'est envoyée automatiquement depuis cette page.</p><p class="form-note" data-draft-status hidden role="status">Résumé récupéré depuis la page Agir avec nous. Relisez le message avant tout envoi officiel.</p><p class="form-note" data-local-draft-status hidden role="status">Brouillon restauré depuis cet onglet. Vous pouvez le modifier, le préparer ou l'effacer.</p><p class="form-note" data-save-status hidden role="status">Brouillon sauvegardé localement dans cet onglet.</p><button class="btn primary" type="button" data-prepare-summary>Préparer l'envoi</button><button class="btn secondary" type="button" data-copy-summary hidden>Copier le résumé</button><button class="btn secondary" type="button" data-download-summary hidden>Télécharger le résumé</button><button class="btn secondary" type="button" data-reset-form hidden>Effacer le brouillon</button><output class="form-summary" data-form-summary hidden aria-live="polite"></output></form></div></section>`;
 }
 
 function legalSection() {
@@ -2132,6 +2262,27 @@ function jsonLd(page) {
   return JSON.stringify({ "@context": "https://schema.org", "@graph": graph }, null, 2).replace(/</g, "\\u003c");
 }
 
+function ctaBandFor(page) {
+  const map = {
+    "index.html": ["Première étape", "Vous voulez savoir par où commencer ?", "Choisissez votre profil et préparez une première demande lisible en quelques minutes.", [["Choisir mon parcours", "agir-avec-nous.html"], ["Demander un échange", "contact.html"]]],
+    "contact.html": ["Contact direct", "Votre demande est prête à être envoyée ?", `Envoyez le résumé préparé à ${contact.email} ou appelez le ${contact.phone}.`, [["Écrire à TVF", `mailto:${contact.email}`], ["Voir les documents", "documents.html"]]],
+    "documents.html": ["Documents", "Vous ne savez pas quel modèle choisir ?", "Commencez par les 10 documents essentiels ou demandez une orientation avant de remplir un dossier complet.", [["Demander une orientation", "contact.html"], ["Voir les essentiels", "#les-10-documents-essentiels"]]],
+    "saint-etienne.html": ["Territoire pilote", "Vous êtes acteur à Saint-Étienne ?", "Présentez un bien, une ressource, un besoin public ou une coopération possible pour alimenter le pilote.", [["Présenter une situation", "contact.html"], ["Lire le dossier pilote", "documents/dossier-territorial-saint-etienne.md"]]],
+    "observatoire.html": ["Signalement", "Vous connaissez un lieu ou une ressource à qualifier ?", "Transmettez une information factuelle : TVF la traitera comme un signalement, pas comme un projet automatique.", [["Signaler une situation", "agir-avec-nous.html#signalement"], ["Voir la méthode", "notre-methode.html"]]],
+    "impact.html": ["Preuve", "Vous souhaitez soutenir TVF avec un suivi clair ?", "Appuyez-vous sur la grille d'impact, le reporting et les statuts de preuve avant toute annonce.", [["Voir les financeurs", "financeurs-mecenes.html"], ["Télécharger la grille", "documents/grille-impact.md"]]],
+    "collectivites.html": ["Territoire partenaire", "Votre collectivité veut tester un périmètre pilote ?", "Préparez une fiche collectivité avec le besoin public, les données disponibles et la décision attendue.", [["Préparer la fiche", "documents/fiche-collectivite.md"], ["Demander un rendez-vous", "contact.html"]]],
+    "proprietaires.html": ["Bien inutilisé", "Vous souhaitez étudier un bien sans engagement prématuré ?", "Présentez le bien, son état, vos intentions et les limites à respecter.", [["Remplir la fiche propriétaire", "documents/fiche-proprietaire.md"], ["Demander un échange", "contact.html"]]],
+    "entreprises.html": ["Contribution", "Votre entreprise peut apporter une ressource utile ?", "Décrivez les matériaux, locaux, compétences ou soutiens disponibles pour vérifier leur affectation possible.", [["Remplir la fiche entreprise", "documents/fiche-entreprise.md"], ["Contacter TVF", "contact.html"]]],
+    "benevoles-citoyens.html": ["Engagement", "Vous voulez aider sans improvisation ?", "Indiquez votre territoire, vos disponibilités et le type de mission que vous pouvez réaliser.", [["Remplir la fiche bénévole", "documents/fiche-benevole.md"], ["Nous contacter", "contact.html"]]],
+    "financeurs-mecenes.html": ["Soutien", "Vous souhaitez financer une démarche vérifiable ?", "Demandez un échange sur un dossier instruit, avec budget, risques, indicateurs et reporting.", [["Préparer un soutien", "documents/demande-soutien-financier.md"], ["Contacter TVF", "contact.html"]]],
+    "partenaires.html": ["Coopération", "Vous envisagez une coopération avec TVF ?", "Avant toute communication, clarifions le périmètre, les responsabilités, la durée et les règles d'officialisation.", [["Préparer une coopération", "documents/fiche-partenaire-potentiel.md"], ["Contacter TVF", "contact.html"]]],
+  };
+  const [kicker, title, text, actions] = map[page.file] || ["Passer à l'étape suivante", "Vous avez un bien, une ressource ou un besoin territorial ?", "Présentez la situation à TVF pour préparer un premier échange clair et utile.", [["Agir avec nous", "agir-avec-nous.html"], ["Nous contacter", "contact.html"]]];
+  return `<section class="cta-band"><div class="container cta-band-inner"><div><p class="section-kicker">${kicker}</p><h3>${title}</h3><p>${text}</p></div><div class="cta-band-actions">${actions
+    .map(([label, href], index) => `<a class="btn ${index === 0 ? "primary" : "secondary"}" href="${hrefFor(href)}">${label}</a>`)
+    .join("")}</div></div></section>`;
+}
+
 function pageTemplate(page) {
   const active = page.file;
   const url = pageUrl(page);
@@ -2200,19 +2351,7 @@ ${breadcrumbNav(page)}
     ${pageMiniNav(page)}
     ${page.sections.join("\n")}
     ${journeySection(page)}
-    <section class="cta-band">
-      <div class="container cta-band-inner">
-        <div>
-          <p class="section-kicker">Passer à l'étape suivante</p>
-          <h3>Vous avez un bien, une ressource ou un besoin territorial ?</h3>
-          <p>Présentez la situation à TVF pour préparer un premier échange clair et utile.</p>
-        </div>
-        <div class="cta-band-actions">
-          <a class="btn primary" href="${hrefFor("agir-avec-nous.html")}">Agir avec nous</a>
-          <a class="btn secondary" href="${hrefFor("contact.html")}">Nous contacter</a>
-        </div>
-      </div>
-    </section>
+    ${ctaBandFor(page)}
   </main>
   <footer class="site-footer">
     <div class="container footer-grid">

@@ -565,6 +565,19 @@ p {
   display: none;
 }
 
+.document-library .card-grid {
+  max-height: 760px;
+  overflow: auto;
+  padding-right: 8px;
+  scrollbar-color: var(--green-800) rgba(24, 63, 34, 0.1);
+}
+
+.document-library .card-grid:focus-within {
+  outline: 3px solid rgba(47, 125, 50, 0.22);
+  outline-offset: 6px;
+  border-radius: var(--radius);
+}
+
 .journey-section {
   background:
     linear-gradient(135deg, rgba(24, 63, 34, 0.94), rgba(14, 45, 69, 0.94)),
