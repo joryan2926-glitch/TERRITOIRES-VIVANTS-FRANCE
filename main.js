@@ -67,15 +67,28 @@ const pageSections = pageNavLinks
   .map((link) => document.querySelector(link.getAttribute("href")))
   .filter(Boolean);
 
+function setCurrentPageSection(activeHref) {
+  pageNavLinks.forEach((link) => {
+    const isCurrent = link.getAttribute("href") === activeHref;
+    link.classList.toggle("is-current", isCurrent);
+    if (isCurrent) {
+      link.setAttribute("aria-current", "true");
+    } else {
+      link.removeAttribute("aria-current");
+    }
+  });
+}
+
+if (pageNavLinks.length && pageSections.length) {
+  setCurrentPageSection(`#${pageSections[0].id}`);
+}
+
 if (pageNavLinks.length && pageSections.length && "IntersectionObserver" in window) {
   const pageNavObserver = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
         if (!entry.isIntersecting) return;
-        const activeHref = `#${entry.target.id}`;
-        pageNavLinks.forEach((link) => {
-          link.classList.toggle("is-current", link.getAttribute("href") === activeHref);
-        });
+        setCurrentPageSection(`#${entry.target.id}`);
       });
     },
     { rootMargin: "-35% 0px -55% 0px", threshold: 0.01 }

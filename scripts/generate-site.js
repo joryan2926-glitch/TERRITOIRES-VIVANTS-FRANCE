@@ -1408,7 +1408,7 @@ function pageMiniNav(page) {
 
   return `<nav class="page-nav" aria-label="Dans cette page"><div class="container page-nav-inner"><span>Dans cette page</span>${anchors
     .slice(0, 8)
-    .map(([label, id]) => `<a href="#${id}">${label}</a>`)
+    .map(([label, id]) => `<a href="#${id}" aria-label="Aller à la section : ${escapeAttr(label)}">${label}</a>`)
     .join("")}</div></nav>`;
 }
 
