@@ -63,7 +63,28 @@
       "about": {
         "@id": "https://www.territoiresvivantsfrance.fr/#organization"
       },
-      "inLanguage": "fr-FR"
+      "inLanguage": "fr-FR",
+      "breadcrumb": {
+        "@id": "https://www.territoiresvivantsfrance.fr/agir-avec-nous#breadcrumb"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.territoiresvivantsfrance.fr/agir-avec-nous#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Accueil",
+          "item": "https://www.territoiresvivantsfrance.fr/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Agir avec nous",
+          "item": "https://www.territoiresvivantsfrance.fr/agir-avec-nous"
+        }
+      ]
     }
   ]
 }</script>
@@ -81,6 +102,7 @@
   <main id="contenu">
     <section class="hero" style="--hero-image:url('assets/photos/community-garden-paris.webp')">
       <div class="container hero-inner">
+<nav class="breadcrumbs" aria-label="Fil d'Ariane"><ol><li><a href="/">Accueil</a></li><li><span aria-current="page">Agir avec nous</span></li></ol></nav>
         <p class="eyebrow">Engagement</p>
         <h1>Chaque acteur peut apporter une partie de la solution.</h1>
         <p>TVF propose des parcours simples pour entrer en relation, qualifier un besoin et préparer une coopération utile.</p>

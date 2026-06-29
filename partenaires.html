@@ -63,7 +63,28 @@
       "about": {
         "@id": "https://www.territoiresvivantsfrance.fr/#organization"
       },
-      "inLanguage": "fr-FR"
+      "inLanguage": "fr-FR",
+      "breadcrumb": {
+        "@id": "https://www.territoiresvivantsfrance.fr/partenaires#breadcrumb"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.territoiresvivantsfrance.fr/partenaires#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Accueil",
+          "item": "https://www.territoiresvivantsfrance.fr/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Partenaires",
+          "item": "https://www.territoiresvivantsfrance.fr/partenaires"
+        }
+      ]
     }
   ]
 }</script>
@@ -81,6 +102,7 @@
   <main id="contenu">
     <section class="hero" style="--hero-image:url('assets/photos/france-saint-etienne-chateaucreux.jpg')">
       <div class="container hero-inner">
+<nav class="breadcrumbs" aria-label="Fil d'Ariane"><ol><li><a href="/">Accueil</a></li><li><span aria-current="page">Partenaires</span></li></ol></nav>
         <p class="eyebrow">Coopération</p>
         <h1>Construire des partenariats utiles et traçables.</h1>
         <p>TVF ne publie pas de faux partenaires. Cette page présente les formes de coopération possibles et le cadre attendu avant toute officialisation.</p>

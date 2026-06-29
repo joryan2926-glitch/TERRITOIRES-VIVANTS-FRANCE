@@ -63,7 +63,28 @@
       "about": {
         "@id": "https://www.territoiresvivantsfrance.fr/#organization"
       },
-      "inLanguage": "fr-FR"
+      "inLanguage": "fr-FR",
+      "breadcrumb": {
+        "@id": "https://www.territoiresvivantsfrance.fr/contact#breadcrumb"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.territoiresvivantsfrance.fr/contact#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Accueil",
+          "item": "https://www.territoiresvivantsfrance.fr/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Contact",
+          "item": "https://www.territoiresvivantsfrance.fr/contact"
+        }
+      ]
     }
   ]
 }</script>
@@ -81,6 +102,7 @@
   <main id="contenu">
     <section class="hero" style="--hero-image:url('assets/photos/france-saint-etienne-chateaucreux.jpg')">
       <div class="container hero-inner">
+<nav class="breadcrumbs" aria-label="Fil d'Ariane"><ol><li><a href="/">Accueil</a></li><li><span aria-current="page">Contact</span></li></ol></nav>
         <p class="eyebrow">Contact</p>
         <h1>Entrer en relation avec TVF.</h1>
         <p>Vous représentez une collectivité, une entreprise, une association, un propriétaire ou un collectif citoyen ? Présentez votre besoin en quelques lignes.</p>

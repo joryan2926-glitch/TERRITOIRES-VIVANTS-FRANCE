@@ -63,7 +63,34 @@
       "about": {
         "@id": "https://www.territoiresvivantsfrance.fr/#organization"
       },
-      "inLanguage": "fr-FR"
+      "inLanguage": "fr-FR",
+      "breadcrumb": {
+        "@id": "https://www.territoiresvivantsfrance.fr/benevoles-citoyens#breadcrumb"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.territoiresvivantsfrance.fr/benevoles-citoyens#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Accueil",
+          "item": "https://www.territoiresvivantsfrance.fr/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Agir",
+          "item": "https://www.territoiresvivantsfrance.fr/agir-avec-nous"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Bénévoles & citoyens",
+          "item": "https://www.territoiresvivantsfrance.fr/benevoles-citoyens"
+        }
+      ]
     }
   ]
 }</script>
@@ -81,6 +108,7 @@
   <main id="contenu">
     <section class="hero" style="--hero-image:url('assets/photos/community-garden-paris.webp')">
       <div class="container hero-inner">
+<nav class="breadcrumbs" aria-label="Fil d'Ariane"><ol><li><a href="/">Accueil</a></li><li><a href="agir-avec-nous">Agir</a></li><li><span aria-current="page">Bénévoles & citoyens</span></li></ol></nav>
         <p class="eyebrow">Citoyens</p>
         <h1>Agir utilement, avec un cadre clair.</h1>
         <p>Les citoyens et bénévoles peuvent aider TVF à repérer les situations, documenter les besoins, participer à des actions encadrées et relayer les projets locaux.</p>

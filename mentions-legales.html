@@ -63,7 +63,34 @@
       "about": {
         "@id": "https://www.territoiresvivantsfrance.fr/#organization"
       },
-      "inLanguage": "fr-FR"
+      "inLanguage": "fr-FR",
+      "breadcrumb": {
+        "@id": "https://www.territoiresvivantsfrance.fr/mentions-legales#breadcrumb"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.territoiresvivantsfrance.fr/mentions-legales#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Accueil",
+          "item": "https://www.territoiresvivantsfrance.fr/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Transparence",
+          "item": "https://www.territoiresvivantsfrance.fr/transparence"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Mentions légales",
+          "item": "https://www.territoiresvivantsfrance.fr/mentions-legales"
+        }
+      ]
     }
   ]
 }</script>
@@ -81,6 +108,7 @@
   <main id="contenu">
     <section class="hero" style="--hero-image:url('assets/photos/france-saint-etienne-chateaucreux.jpg')">
       <div class="container hero-inner">
+<nav class="breadcrumbs" aria-label="Fil d'Ariane"><ol><li><a href="/">Accueil</a></li><li><a href="transparence">Transparence</a></li><li><span aria-current="page">Mentions légales</span></li></ol></nav>
         <p class="eyebrow">Cadre légal</p>
         <h1>Mentions légales.</h1>
         <p>Cette page est préparée pour être mise à jour après les formalités administratives officielles de l'association.</p>

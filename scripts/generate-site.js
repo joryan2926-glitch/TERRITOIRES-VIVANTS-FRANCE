@@ -1650,6 +1650,41 @@ function pageUrl(page) {
   return page.file === "index.html" ? `${site.url}/` : `${site.url}/${page.file.replace(/\.html$/, "")}`;
 }
 
+function pageByFile(file) {
+  return pages.find((page) => page.file === file);
+}
+
+function breadcrumbTrail(page) {
+  if (page.file === "index.html") return [];
+
+  const parents = {
+    "notre-methode.html": [["Nos actions", "nos-actions.html"]],
+    "collectivites.html": [["Agir", "agir-avec-nous.html"]],
+    "proprietaires.html": [["Agir", "agir-avec-nous.html"]],
+    "entreprises.html": [["Agir", "agir-avec-nous.html"]],
+    "benevoles-citoyens.html": [["Agir", "agir-avec-nous.html"]],
+    "financeurs-mecenes.html": [["Agir", "agir-avec-nous.html"]],
+    "saint-etienne.html": [["Observatoire", "observatoire.html"]],
+    "impact.html": [["Observatoire", "observatoire.html"]],
+    "kit-media.html": [["Documents", "documents.html"]],
+    "mentions-legales.html": [["Transparence", "transparence.html"]],
+  };
+
+  return [["Accueil", "index.html"], ...(parents[page.file] || []), [page.title, page.file]];
+}
+
+function breadcrumbNav(page) {
+  const items = breadcrumbTrail(page);
+  if (!items.length) return "";
+
+  return `<nav class="breadcrumbs" aria-label="Fil d'Ariane"><ol>${items
+    .map(([label, href], index) => {
+      const isLast = index === items.length - 1;
+      return `<li>${isLast ? `<span aria-current="page">${label}</span>` : `<a href="${hrefFor(href)}">${label}</a>`}</li>`;
+    })
+    .join("")}</ol></nav>`;
+}
+
 function hrefFor(href) {
   if (!href || href.startsWith("#") || /^[a-z]+:/i.test(href) || href.startsWith("assets/") || href.startsWith("documents/")) return href;
   const [target, hash] = href.split("#");
@@ -1664,47 +1699,60 @@ function imageAttrs(src) {
 
 function jsonLd(page) {
   const url = pageUrl(page);
-  return JSON.stringify(
+  const graph = [
     {
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "Organization",
-          "@id": `${site.url}/#organization`,
-          name: site.name,
-          url: site.url,
-          logo: `${site.url}/assets/logo-tvf-officiel-fond-blanc.png`,
-          address: {
-            "@type": "PostalAddress",
-            streetAddress: "25 rue Élise Gervais",
-            postalCode: "42000",
-            addressLocality: "Saint-Étienne",
-            addressCountry: "FR",
-          },
-        },
-        {
-          "@type": "WebSite",
-          "@id": `${site.url}/#website`,
-          name: site.name,
-          url: site.url,
-          publisher: { "@id": `${site.url}/#organization` },
-          inLanguage: "fr-FR",
-        },
-        {
-          "@type": "WebPage",
-          "@id": `${url}#webpage`,
-          url,
-          name: `${page.title} | ${site.name}`,
-          description: page.meta,
-          isPartOf: { "@id": `${site.url}/#website` },
-          about: { "@id": `${site.url}/#organization` },
-          inLanguage: "fr-FR",
-        },
-      ],
+      "@type": "Organization",
+      "@id": `${site.url}/#organization`,
+      name: site.name,
+      url: site.url,
+      logo: `${site.url}/assets/logo-tvf-officiel-fond-blanc.png`,
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "25 rue Élise Gervais",
+        postalCode: "42000",
+        addressLocality: "Saint-Étienne",
+        addressCountry: "FR",
+      },
     },
-    null,
-    2
-  ).replace(/</g, "\\u003c");
+    {
+      "@type": "WebSite",
+      "@id": `${site.url}/#website`,
+      name: site.name,
+      url: site.url,
+      publisher: { "@id": `${site.url}/#organization` },
+      inLanguage: "fr-FR",
+    },
+    {
+      "@type": "WebPage",
+      "@id": `${url}#webpage`,
+      url,
+      name: `${page.title} | ${site.name}`,
+      description: page.meta,
+      isPartOf: { "@id": `${site.url}/#website` },
+      about: { "@id": `${site.url}/#organization` },
+      inLanguage: "fr-FR",
+    },
+  ];
+
+  const trail = breadcrumbTrail(page);
+  if (trail.length) {
+    graph[2].breadcrumb = { "@id": `${url}#breadcrumb` };
+    graph.push({
+      "@type": "BreadcrumbList",
+      "@id": `${url}#breadcrumb`,
+      itemListElement: trail.map(([label, href], index) => {
+        const targetPage = pageByFile(href);
+        return {
+          "@type": "ListItem",
+          position: index + 1,
+          name: label,
+          item: targetPage ? pageUrl(targetPage) : `${site.url}/${href.replace(/\.html$/, "")}`,
+        };
+      }),
+    });
+  }
+
+  return JSON.stringify({ "@context": "https://schema.org", "@graph": graph }, null, 2).replace(/</g, "\\u003c");
 }
 
 function pageTemplate(page) {
@@ -1754,6 +1802,7 @@ function pageTemplate(page) {
   <main id="contenu">
     <section class="hero" style="--hero-image:url('${page.heroImage}')">
       <div class="container hero-inner">
+${breadcrumbNav(page)}
         <p class="eyebrow">${page.eyebrow}</p>
         <h1>${page.h1}</h1>
         <p>${page.intro}</p>

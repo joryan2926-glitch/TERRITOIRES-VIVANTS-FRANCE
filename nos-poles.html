@@ -63,7 +63,28 @@
       "about": {
         "@id": "https://www.territoiresvivantsfrance.fr/#organization"
       },
-      "inLanguage": "fr-FR"
+      "inLanguage": "fr-FR",
+      "breadcrumb": {
+        "@id": "https://www.territoiresvivantsfrance.fr/nos-poles#breadcrumb"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.territoiresvivantsfrance.fr/nos-poles#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Accueil",
+          "item": "https://www.territoiresvivantsfrance.fr/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Nos 5 pôles",
+          "item": "https://www.territoiresvivantsfrance.fr/nos-poles"
+        }
+      ]
     }
   ]
 }</script>
@@ -81,6 +102,7 @@
   <main id="contenu">
     <section class="hero" style="--hero-image:url('assets/photos/france-ressourcerie-vichy.jpg')">
       <div class="container hero-inner">
+<nav class="breadcrumbs" aria-label="Fil d'Ariane"><ol><li><a href="/">Accueil</a></li><li><span aria-current="page">Nos 5 pôles</span></li></ol></nav>
         <p class="eyebrow">Organisation</p>
         <h1>Cinq pôles pour couvrir tout le cycle de revitalisation.</h1>
         <p>Les pôles structurent l'action de TVF : repérer un lieu ou une ressource, comprendre le besoin, mobiliser les bons acteurs, préparer un cadre écrit et suivre le retour à l'usage.</p>
