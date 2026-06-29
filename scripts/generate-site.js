@@ -360,6 +360,8 @@ const pages = [
         ["Visite autorisée", "État apparent, accès, risques, photos internes", "Ne vaut pas diagnostic technique complet"],
       ]),
       observatoryDataSection(),
+      observatoryDecisionMatrixSection(),
+      observatoryMapReadinessSection(),
       tableSection("Qualité des données", "L'observatoire doit distinguer signalement, vérification et décision.", [
         ["Niveau", "Statut", "Usage"],
         ["Signalé", "Information reçue", "À vérifier"],
@@ -414,6 +416,7 @@ const pages = [
         ]
       ),
       saintEtienneDataSection(),
+      saintEtienneAlignmentSection(),
       cards("Axes prioritaires", "Les priorités restent à formaliser avec les acteurs locaux.", [
         ["Habitat", "Repérer les logements vacants ou dégradés et comprendre les blocages."],
         ["Commerce", "Identifier les locaux fermés et les possibilités de réactivation."],
@@ -429,6 +432,7 @@ const pages = [
         ["Friches et terrains", "Analyser sécurité, accès, propriété, usages verts ou partagés", "Audit terrain"],
         ["Engagement citoyen", "Cadrer les missions bénévoles et actions terrain", "Fiche mission et compte rendu"],
       ]),
+      saintEtiennePilotDashboardSection(),
       textBlock(
         "Pourquoi un pilote local ?",
         "Un dispositif national doit d'abord prouver sa méthode sur un territoire concret. Saint-Étienne permet de travailler sur des sujets représentatifs : reconversion, patrimoine existant, centres-villes, transition écologique, économie circulaire et solidarité."
@@ -490,6 +494,7 @@ const pages = [
         ["Je suis bénévole", "Participer à une mission, un chantier ou une action locale.", "#citoyen"],
         ["Je souhaite financer", "Soutenir un projet avec un cadre de suivi et de transparence.", "financeurs-mecenes.html"],
       ]),
+      fastJourneySection(),
       tableSection("Parcours d'entrée", "Chaque demande doit être orientée vers une suite lisible.", [
         ["Profil", "Ce que vous pouvez proposer", "Première étape", "Suite possible"],
         ["Collectivité", "Données, périmètre, besoin public, expérimentation", "Décrire le territoire et le problème à résoudre", "Diagnostic, réunion de cadrage, convention"],
@@ -887,12 +892,15 @@ const pages = [
       tableSection("Choisir le bon document", "Cette lecture rapide évite de se perdre dans la bibliothèque complète.", [
         ["Besoin", "Document prioritaire", "Objectif"],
         ["Une collectivité veut tester TVF", "Fiche collectivité", "Décrire le territoire, le besoin et les interlocuteurs"],
+        ["Saint-Étienne doit être présenté en réunion", "Dossier territorial Saint-Étienne", "Appuyer le pilote sur des données, besoins, livrables et indicateurs"],
         ["Un propriétaire propose un bien", "Fiche propriétaire", "Qualifier l'état, les contraintes et les scénarios d'usage"],
         ["Une entreprise propose des matériaux", "Fiche entreprise", "Tracer la ressource, sa disponibilité et son affectation possible"],
         ["Un lieu est signalé", "Fiche signalement", "Documenter l'information sans créer de projet automatique"],
         ["Un projet doit être instruit", "Fiche projet", "Cadrer objectifs, acteurs, risques, budget et indicateurs"],
         ["Un financement est recherché", "Plan de financement", "Distinguer coûts, contributions, demandes et montants obtenus"],
       ]),
+      documentPriorityPackSection(),
+      documentWorkflowSection(),
       publicEntryMatrixSection(),
       documentTools(),
       documentCards("Documents disponibles", "Chaque modèle aide à collecter les informations nécessaires avant instruction.", [
@@ -945,6 +953,7 @@ const pages = [
         ["Réunion de cadrage", "Organiser un premier échange clair avec objectifs, décisions, pièces et suites.", "documents/ordre-du-jour-reunion-cadrage.md"],
         ["Matrice des risques", "Identifier les risques juridiques, techniques, financiers, humains et de communication.", "documents/matrice-risques-projet.md"],
         ["Fiche territoire", "Présenter un territoire candidat, ses besoins, acteurs, programmes et premières actions possibles.", "documents/fiche-territoire-partenaire.md"],
+        ["Dossier Saint-Étienne", "Présenter le territoire pilote avec données publiques, besoins, réponse TVF, indicateurs et pièces à réunir.", "documents/dossier-territorial-saint-etienne.md"],
         ["Note d’opportunité", "Synthétiser l'intérêt d'une coopération TVF avant un rendez-vous institutionnel.", "documents/note-opportunite-territoriale.md"],
         ["Lettre d’intention", "Formaliser une volonté de coopération sans créer d'engagement opérationnel prématuré.", "documents/lettre-intention-cooperation.md"],
         ["Courrier propriétaire", "Contacter un propriétaire pour étudier un bien sans créer d'engagement prématuré.", "documents/courrier-proprietaire-proposition-bien.md"],
@@ -1139,6 +1148,8 @@ const pages = [
         ["Bénévole mobilisé", "Personne ayant participé à une action encadrée", "Feuille d'émargement ou fiche mission", "Après action"],
         ["Impact territorial", "Effet local documenté sur usage, service, cadre de vie ou économie circulaire", "Compte rendu, indicateur, témoignage vérifié", "Après bilan"],
       ]),
+      impactDashboardModelSection(),
+      impactPublicationRulesSection(),
       textBlock(
         "Pourquoi cette prudence ?",
         "La crédibilité d'une association nationale repose sur la preuve. Un chiffre non vérifié peut fragiliser la confiance des collectivités, propriétaires, financeurs et habitants. TVF préfère publier moins, mais publier juste."
@@ -1679,6 +1690,29 @@ function saintEtienneDataSection() {
   ]);
 }
 
+function saintEtienneAlignmentSection() {
+  return tableSection("Besoins du territoire et réponse TVF", "Cette lecture transforme les données de cadrage en pistes de travail concrètes pour le territoire pilote. Les dispositifs publics cités sont des cadres de référence à articuler avec les acteurs compétents, pas des financements acquis.", [
+    ["Besoin observé", "Donnée ou source à mobiliser", "Cadre public compatible", "Réponse TVF", "Document à produire"],
+    ["Logements vacants et habitat ancien", "INSEE : logements vacants, âge du parc, statut d'occupation", "Politiques habitat, rénovation, lutte contre l'habitat indigne, dispositifs locaux à confirmer", "Qualifier les biens, comprendre les blocages propriétaires, préparer des scénarios d'usage", "Fiche propriétaire, accord de principe, scénarios d'usage"],
+    ["Commerces fermés et rues fragilisées", "Observation terrain, données économiques locales, informations collectivité", "Revitalisation de centre-ville, commerce de proximité, occupation temporaire", "Identifier les locaux, tester des usages, rapprocher propriétaires et porteurs", "Fiche signalement, note d'opportunité, fiche projet"],
+    ["Friches et foncier délaissé", extLink("Cartofriches - Cerema", "https://cartofriches.cerema.fr/cartofriches/"), "Recyclage foncier, sobriété foncière, renaturation ou usage transitoire", "Qualifier sécurité, accès, propriété, usages verts ou collectifs", "Fiche d'audit terrain, matrice des risques, plan d'action"],
+    ["Matériaux et ressources inutilisées", extLink("PMCB - Ministère de la Transition écologique", "https://www.ecologie.gouv.fr/politiques-publiques/produits-materiaux-construction-du-secteur-du-batiment-pmcb"), "Économie circulaire, réemploi, réduction des déchets du bâtiment", "Recenser, tracer, accepter ou refuser puis affecter les ressources à des projets validés", "Bordereau matériaux, registre de réemploi, PV de remise"],
+    ["Insertion et mobilisation citoyenne", "INSEE : chômage, pauvreté, contexte social du territoire", "ESS, bénévolat, participation citoyenne, parcours d'insertion à articuler avec les acteurs locaux", "Créer des missions encadrées, utiles, limitées et documentées", "Fiche mission, feuille d'émargement, compte rendu terrain"],
+  ]);
+}
+
+function saintEtiennePilotDashboardSection() {
+  return tableSection("Tableau de bord du pilote Saint-Étienne", "Le pilote doit être suivi comme une expérimentation professionnelle. Les compteurs restent à zéro tant qu'aucun dossier n'est vérifié ; l'enjeu est d'abord de préparer des définitions robustes.", [
+    ["Indicateur", "Définition TVF", "Preuve attendue", "Fréquence de mise à jour", "Usage en réunion"],
+    ["Biens signalés", "Logements, commerces, bâtiments, terrains ou friches reçus dans le registre", "Fiche signalement, source, date, localisation non sensible", "Mensuelle pendant le pilote", "Repérer les sujets récurrents"],
+    ["Biens qualifiés", "Signalements complétés avec état apparent, contraintes et suite proposée", "Fiche d'audit, photos autorisées, décision d'orientation", "Mensuelle", "Décider ce qui mérite une visite ou une étude"],
+    ["Propriétaires accompagnés", "Propriétaires ayant transmis un dossier exploitable ou autorisé une étape d'étude", "Fiche propriétaire, accord de principe, échange tracé", "Trimestrielle", "Mesurer l'adhésion au dispositif"],
+    ["Matériaux proposés", "Ressources décrites avec catégorie, quantité, état et disponibilité", "Bordereau, photos, conditions de retrait", "Mensuelle", "Orienter vers la matériauthèque TVF"],
+    ["Missions citoyennes", "Actions bénévoles ouvertes, réalisées ou reportées avec encadrement", "Fiche mission, émargement, compte rendu", "Après chaque action", "Sécuriser l'engagement local"],
+    ["Dossiers prêts à présenter", "Dossiers disposant d'un besoin, d'un usage, d'un responsable et de pièces suffisantes", "Fiche projet, budget, matrice des risques", "Avant chaque comité", "Préparer une décision ou une demande de soutien"],
+  ]);
+}
+
 function observatoryDataSection() {
   return tableSection("Sources publiques à croiser", "L'observatoire TVF doit distinguer données publiques, signalements, visites autorisées et décisions internes.", [
     ["Source", "Ce qu'elle permet", "Limite à respecter"],
@@ -1686,6 +1720,29 @@ function observatoryDataSection() {
     [extLink("Cartofriches - Cerema", "https://cartofriches.cerema.fr/cartofriches/"), "Friches, statuts, types, observatoires locaux et données ouvertes.", "Certaines friches restent sensibles : la publication doit être maîtrisée."],
     [extLink("PMCB - Ministère de la Transition écologique", "https://www.ecologie.gouv.fr/politiques-publiques/produits-materiaux-construction-du-secteur-du-batiment-pmcb"), "Cadre de la filière bâtiment, reprise, traçabilité, réemploi et réutilisation.", "La banque de matériaux TVF doit rester orientée projet, pas distribution libre."],
     [extLink("Banque des Territoires / Localtis - logements vacants", "https://www.banquedesterritoires.fr/la-france-compte-plus-de-3-millions-de-logements-vacants"), "Synthèse de l'étude INSEE sur la vacance, ses causes et ses contrastes territoriaux.", "Ne pas confondre vacance frictionnelle et vacance structurelle."],
+  ]);
+}
+
+function observatoryDecisionMatrixSection() {
+  return tableSection("Matrice donnée, carte, décision", "L'observatoire devient crédible lorsqu'il ne se contente pas d'afficher des points sur une carte. Chaque donnée doit avoir un statut, une preuve et une décision possible.", [
+    ["Objet observé", "Donnée minimale", "Statut possible", "Décision TVF", "Publication"],
+    ["Logement vacant", "Adresse approximative, type, état apparent, source, contact éventuel", "Signalé, qualifié, propriétaire contacté, classé", "Demander pièces, organiser visite autorisée, orienter Habitat Vivant", "Jamais d'adresse privée sans accord"],
+    ["Commerce fermé", "Rue, type de local, état de vitrine, usage antérieur si connu", "Signalé, vérifié terrain, usage à étudier, classé", "Analyser le potentiel Commerce Vivant", "Publication possible par secteur, pas par propriétaire"],
+    ["Bâtiment abandonné", "Type de bâtiment, accès, risques apparents, propriété à vérifier", "Signalé, sensible, à sécuriser, à réorienter", "Demander avis compétent ou classer par prudence", "Publication limitée si risque ou sécurité"],
+    ["Friche ou terrain", "Localisation, surface estimée, accès, végétation, usage possible", "Signalé, croisé Cartofriches, qualifié, orienté", "Préparer audit Friches & Terrains Vivants", "Carte agrégée ou non sensible"],
+    ["Matériaux disponibles", "Catégorie, quantité, état, délai, conditions de retrait", "Proposé, accepté, refusé, réservé, affecté", "Orienter Matériauthèque Solidaire", "Publication uniquement si contribution validée"],
+  ]);
+}
+
+function observatoryMapReadinessSection() {
+  return tableSection("Préparer une carte exploitable", "La carte TVF doit être un outil de travail, pas une vitrine imprudente. Elle doit distinguer ce qui peut être public, réservé aux partenaires ou strictement interne.", [
+    ["Couche cartographique", "Contenu", "Niveau de diffusion", "Raison"],
+    ["Contexte territorial", "Population, logements, vacance, emploi, pauvreté, sources publiques", "Public", "Données agrégées et sourcées"],
+    ["Biens signalés", "Signalements reçus avec statut interne", "Interne", "Protection des propriétaires, sécurité et données personnelles"],
+    ["Dossiers qualifiés", "Biens ou ressources avec pièces suffisantes", "Partenaires autorisés", "Aide à la décision sans exposition excessive"],
+    ["Projets conventionnés", "Périmètre, objectif, responsable, calendrier et indicateurs", "Public si accord écrit", "Communication possible lorsque le cadre est formalisé"],
+    ["Matériaux disponibles", "Catégorie, quantité, disponibilité, conditions de retrait", "Interne ou partenaires", "Éviter une logique de distribution libre"],
+    ["Résultats vérifiés", "Actions réalisées avec preuve et indicateurs", "Public", "Valoriser seulement les résultats établis"],
   ]);
 }
 
@@ -1707,6 +1764,17 @@ function publicEntryMatrixSection() {
     ["Association", "Besoin d'usage, publics concernés, horaires, responsabilités, capacité d'animation", "Fiche projet + convention partenariat", "Qualifier un usage possible ou réorienter vers un acteur adapté"],
     ["Bénévole", "Compétences, territoire, disponibilités, mobilité, limites d'intervention", "Fiche bénévole + fiche mission", "Proposer une mission encadrée ou constituer un vivier local"],
     ["Financeur", "Objet du soutien, budget, critères, attentes de reporting, calendrier", "Fiche financeur + plan de financement", "Vérifier si un dossier peut être présenté sans promesse excessive"],
+  ]);
+}
+
+function fastJourneySection() {
+  return tableSection("Trouver son parcours en trois clics", "Cette table sert de boussole : elle indique la page, le document et l'action immédiate selon le profil du visiteur.", [
+    ["Je suis...", "Page à ouvrir", "Document à préparer", "Action immédiate"],
+    ["Une collectivité", `<a href="${hrefFor("collectivites.html")}">Collectivités</a>`, "Fiche collectivité ou fiche territoire", "Décrire le périmètre, le besoin public et les interlocuteurs"],
+    ["Un propriétaire", `<a href="${hrefFor("proprietaires.html")}">Propriétaires</a>`, "Fiche propriétaire ou accord de principe", "Présenter le bien, son état, les contraintes et l'intention"],
+    ["Une entreprise", `<a href="${hrefFor("entreprises.html")}">Entreprises</a>`, "Fiche entreprise ou bordereau matériaux", "Décrire la contribution, sa disponibilité et ses limites"],
+    ["Un bénévole ou citoyen", `<a href="${hrefFor("benevoles-citoyens.html")}">Bénévoles et citoyens</a>`, "Fiche bénévole ou fiche signalement", "Indiquer la commune, les disponibilités ou le lieu signalé"],
+    ["Un financeur ou mécène", `<a href="${hrefFor("financeurs-mecenes.html")}">Financeurs et mécènes</a>`, "Plan de financement ou dossier projet", "Demander un échange sur un dossier instruit, pas sur une promesse vague"],
   ]);
 }
 
@@ -1754,6 +1822,52 @@ function polesCoordinationSection() {
     ["Des matériaux disponibles chez une entreprise", "Matériauthèque Solidaire", "Habitat Vivant, Friches & Terrains Vivants, Solidarité & Insertion", "Registre, état, conditions de retrait, affectation à un projet validé"],
     ["Un terrain délaissé dans un quartier", "Friches & Terrains Vivants", "Solidarité & Insertion, Collectivités, Matériauthèque Solidaire", "Audit terrain, risques, usages possibles, plan d'action local"],
     ["Une mission citoyenne ou bénévole", "Solidarité & Insertion", "Tous les pôles selon le support de mission", "Fiche mission, consignes, référent, émargement et compte rendu"],
+  ]);
+}
+
+function impactDashboardModelSection() {
+  return tableSection("Modèle de tableau de bord d'impact", "Ce modèle prépare les futurs reportings TVF. Les colonnes évitent de mélanger objectifs, dossiers en cours et résultats prouvés.", [
+    ["Famille d'impact", "Indicateur", "Statut à distinguer", "Source de preuve", "Lecture attendue"],
+    ["Patrimoine", "Biens signalés, qualifiés, orientés, conventionnés, remis en usage", "Signalé / qualifié / conventionné / réalisé", "Registre demandes, fiche propriétaire, convention, compte rendu", "Montrer la progression réelle d'un bien"],
+    ["Matériaux", "Matériaux proposés, acceptés, refusés, affectés, réemployés", "Proposé / accepté / réservé / affecté / réemployé", "Bordereau, PV de remise, registre matériaux", "Éviter de compter comme réemployé ce qui est seulement proposé"],
+    ["Territoires", "Communes, quartiers ou périmètres accompagnés", "Contact / diagnostic / coopération / bilan", "Fiche collectivité, convention territoriale, plan d'action", "Distinguer intérêt, coopération et action mesurée"],
+    ["Citoyens", "Bénévoles inscrits, missions ouvertes, participations réalisées", "Inscrit / mobilisable / présent / action réalisée", "Fiche bénévole, feuille d'émargement, compte rendu", "Mesurer l'engagement réel et encadré"],
+    ["Financement", "Montants estimés, demandés, accordés, conventionnés, versés", "Estimation / demande / accord / convention / versement", "Plan de financement, courrier, convention, justificatif", "Ne jamais confondre une piste avec un financement obtenu"],
+  ]);
+}
+
+function impactPublicationRulesSection() {
+  return tableSection("Règles de publication des chiffres", "Un chiffre TVF doit pouvoir être relu par une collectivité, un financeur ou un journaliste sans créer de doute sur son origine.", [
+    ["Règle", "Application concrète", "Exemple de formulation prudente"],
+    ["Séparer objectif et résultat", "Un objectif 2026 ne doit pas être présenté comme déjà atteint", "Objectif : qualifier les premiers biens du territoire pilote"],
+    ["Citer la source", "Toute donnée nationale ou locale doit indiquer organisme, année et lien", "Source : INSEE, RP2023, dossier communal de Saint-Étienne"],
+    ["Indiquer le statut", "Un projet en instruction n'est pas un projet réalisé", "Dossier en cours de qualification, sans convention à ce stade"],
+    ["Documenter la preuve", "Un indicateur doit renvoyer à un registre, une fiche ou un compte rendu", "Indicateur calculé à partir du registre des demandes"],
+    ["Mettre à jour avec date", "Chaque tableau de bord doit avoir une date de mise à jour", "Mise à jour trimestrielle prévue après démarrage du pilote"],
+  ]);
+}
+
+function documentPriorityPackSection() {
+  return tableSection("Pack prioritaire pour présenter TVF", "Pour une réunion avec une mairie, une métropole, une entreprise ou un financeur, il vaut mieux arriver avec peu de documents, mais parfaitement choisis.", [
+    ["Situation", "Documents à préparer", "Objectif de la réunion"],
+    ["Premier rendez-vous collectivité", "Dossier TVF, fiche collectivité, fiche territoire partenaire, dossier Saint-Étienne si le pilote est concerné", "Comprendre le besoin public et cadrer un périmètre réaliste"],
+    ["Bien proposé par un propriétaire", "Fiche propriétaire, accord de principe, autorisation de visite, scénarios d'usage", "Vérifier si le bien peut entrer dans un parcours TVF"],
+    ["Matériaux proposés par une entreprise", "Fiche entreprise, bordereau matériaux, PV de remise, registre matériaux", "Décider si la ressource est utile, sûre et affectable"],
+    ["Projet à financer", "Fiche projet, budget prévisionnel, plan de financement, matrice des risques, grille d'impact", "Présenter un dossier lisible sans promesse excessive"],
+    ["Action terrain ou bénévole", "Fiche mission, consignes sécurité, feuille d'émargement, compte rendu", "Encadrer une action courte, traçable et sécurisée"],
+  ]);
+}
+
+function documentWorkflowSection() {
+  return tableSection("Chaîne documentaire d'un dossier complet", "Un dossier TVF doit pouvoir être suivi du premier contact au bilan. Cette chaîne évite les pertes d'information et les décisions non tracées.", [
+    ["Moment", "Document", "Ce qu'il sécurise"],
+    ["Entrée", "Accusé de réception + registre des demandes", "La date, le demandeur, le sujet et la prochaine action"],
+    ["Qualification", "Fiche profil + pièces à fournir + grille d'instruction", "L'utilité, la faisabilité, les manques et les risques"],
+    ["Orientation", "Fiche décision d'orientation", "La suite donnée : compléter, visiter, instruire, réorienter ou classer"],
+    ["Cadrage", "Fiche projet + matrice des risques + budget", "Le périmètre, les responsabilités, les coûts et les limites"],
+    ["Formalisation", "Convention adaptée ou lettre d'intention", "Les engagements réels avant toute communication publique"],
+    ["Action", "Compte rendu, émargement, PV de remise ou réception", "Les preuves de ce qui s'est réellement passé"],
+    ["Bilan", "Grille d'impact + reporting financeur si besoin", "Les résultats vérifiables et les enseignements à capitaliser"],
   ]);
 }
 
