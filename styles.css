@@ -38,6 +38,7 @@ body {
   color: var(--ink);
   background: var(--paper);
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 15px;
   line-height: 1.6;
   overflow-x: hidden;
 }
@@ -119,7 +120,7 @@ a {
   justify-content: center;
   gap: 14px;
   align-items: center;
-  font-size: 0.88rem;
+  font-size: 0.84rem;
   font-weight: 600;
   white-space: nowrap;
 }
@@ -293,7 +294,7 @@ a {
 .hero h1 {
   max-width: 850px;
   margin: 0;
-  font-size: clamp(2.35rem, 5.2vw, 4.9rem);
+  font-size: clamp(2.05rem, 4.6vw, 4.15rem);
   line-height: 0.96;
   letter-spacing: 0;
   text-shadow: 0 4px 24px rgba(0, 0, 0, 0.28);
@@ -302,7 +303,7 @@ a {
 .hero p:not(.eyebrow) {
   max-width: 720px;
   margin: 24px 0 0;
-  font-size: clamp(1.05rem, 2vw, 1.32rem);
+  font-size: clamp(0.98rem, 1.6vw, 1.14rem);
   color: rgba(255, 255, 255, 0.9);
   text-shadow: 0 3px 18px rgba(0, 0, 0, 0.28);
 }
@@ -391,7 +392,7 @@ a {
 h2 {
   margin: 0;
   color: var(--blue-900);
-  font-size: clamp(1.75rem, 3vw, 2.65rem);
+  font-size: clamp(1.48rem, 2.45vw, 2.15rem);
   line-height: 1.08;
   letter-spacing: 0;
 }
@@ -399,7 +400,7 @@ h2 {
 h3 {
   margin: 0;
   color: var(--blue-900);
-  font-size: 1.12rem;
+  font-size: 1.02rem;
   line-height: 1.25;
 }
 
@@ -441,7 +442,7 @@ p {
   display: block;
   margin-bottom: 6px;
   color: var(--green-900);
-  font-size: 1.05rem;
+  font-size: 0.98rem;
 }
 
 .mini-list span {
@@ -778,7 +779,7 @@ table a:focus-visible {
 
 .compact-grid h2 {
   margin: 0 0 12px;
-  font-size: clamp(1.8rem, 2.5vw, 2.7rem);
+  font-size: clamp(1.55rem, 2.1vw, 2.25rem);
   line-height: 1.08;
 }
 
@@ -786,7 +787,7 @@ table a:focus-visible {
   display: block;
   margin-bottom: 10px;
   color: var(--green-900);
-  font-size: 1.05rem;
+  font-size: 0.98rem;
 }
 
 .trust-section .section-head {
@@ -816,7 +817,7 @@ table a:focus-visible {
   display: block;
   margin-bottom: 8px;
   color: var(--blue-900);
-  font-size: 1.08rem;
+  font-size: 1rem;
   line-height: 1.25;
 }
 
@@ -841,7 +842,7 @@ table a:focus-visible {
 
 .decision-copy h2 {
   margin-bottom: 14px;
-  font-size: clamp(1.9rem, 3.2vw, 3rem);
+  font-size: clamp(1.55rem, 2.6vw, 2.45rem);
 }
 
 .decision-copy p {
@@ -883,7 +884,7 @@ table a:focus-visible {
   display: block;
   margin-bottom: 4px;
   color: var(--blue-900);
-  font-size: 1.02rem;
+  font-size: 0.96rem;
 }
 
 .decision-list p {
@@ -906,7 +907,7 @@ table a:focus-visible {
 .split h3,
 .cta-band h3 {
   margin: 0;
-  font-size: clamp(1.75rem, 3vw, 2.65rem);
+  font-size: clamp(1.45rem, 2.4vw, 2.1rem);
   line-height: 1.08;
   letter-spacing: 0;
 }
@@ -952,13 +953,13 @@ table a:focus-visible {
   display: block;
   margin-bottom: 8px;
   color: var(--white);
-  font-size: 1.12rem;
+  font-size: 1rem;
   line-height: 1.25;
 }
 
 .journey-card small {
   color: rgba(255, 255, 255, 0.82);
-  font-size: 0.95rem;
+  font-size: 0.88rem;
   line-height: 1.55;
 }
 
@@ -1063,7 +1064,7 @@ textarea {
   background: var(--green-100);
   border: 1px solid rgba(24, 63, 34, 0.12);
   border-radius: 14px;
-  font-size: 0.92rem;
+  font-size: 0.86rem;
   font-weight: 700;
 }
 
@@ -1078,7 +1079,7 @@ textarea {
   border-left: 4px solid var(--green-700);
   border-radius: 14px;
   box-shadow: 0 12px 28px rgba(7, 31, 50, 0.08);
-  font-size: 0.94rem;
+  font-size: 0.88rem;
   font-weight: 650;
   line-height: 1.65;
 }
@@ -1123,6 +1124,7 @@ table {
   width: 100%;
   border-collapse: collapse;
   min-width: 720px;
+  font-size: 0.93rem;
 }
 
 th,
@@ -1136,7 +1138,7 @@ td {
 th {
   color: var(--white);
   background: var(--blue-900);
-  font-size: 0.88rem;
+  font-size: 0.82rem;
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }
@@ -1380,7 +1382,7 @@ tr:last-child td {
   }
 
   .hero h1 {
-    font-size: 2.35rem;
+    font-size: 2.05rem;
   }
 
   .brand img {
