@@ -957,6 +957,7 @@ const pages = [
       publicEntryMatrixSection(),
       documentArchiveSection("Archive documentaire avancée", "Cette archive rassemble les modèles spécialisés. Elle s'utilise après avoir choisi le bon parcours afin de ne télécharger que les pièces réellement utiles au dossier.", [
         ["Dossier TVF", "Présenter l'association, sa méthode, ses publics et ses conditions de coopération.", "documents/dossier-presentation-tvf.md"],
+        ["Dossier de contact TVF", "Centraliser coordonnées, services, pôles, actions et informations à transmettre avant un premier échange.", "documents/dossier-contact-tvf.md"],
         ["Dossier collectivité TVF", "Présenter un parcours territoire partenaire en réunion avec une commune, un EPCI, un département ou une région.", "documents/dossier-collectivite-tvf.md"],
         ["Dossier propriétaire TVF", "Expliquer au propriétaire le cadre d'étude, de convention, d'usage et de restitution d'un bien.", "documents/dossier-proprietaire-tvf.md"],
         ["Dossier entreprise et mécène TVF", "Présenter les contributions possibles : matériaux, locaux, compétences, mécénat, reporting et RSE.", "documents/dossier-entreprise-mecene-tvf.md"],
@@ -1367,6 +1368,7 @@ const pages = [
         ["Logo officiel", "Utiliser le logo officiel TVF sans le déformer, le recadrer excessivement ou modifier ses couleurs.", "assets/logo-territoires-vivants-france.png"],
         ["Présentation courte", "TVF coordonne la remise en usage de biens, lieux et ressources inutilisés au service des territoires.", "documents/kit-media.md"],
         ["Dossier TVF", "Un document de présentation plus complet pour collectivités, entreprises et financeurs.", "documents/dossier-presentation-tvf.md"],
+        ["Dossier de contact TVF", "Coordonnées, services, pôles, actions et informations à préparer avant un premier échange.", "documents/dossier-contact-tvf.md"],
         ["Dossier TVF PDF", "Version prête à transmettre pour une première présentation institutionnelle.", "output/pdf/dossier-presentation-tvf.pdf"],
         ["Dossier collectivité PDF", "Support ciblé pour commune, EPCI, département, région ou service public.", "output/pdf/dossier-collectivite-tvf.pdf"],
         ["Dossier entreprise et mécène PDF", "Support ciblé pour contribution, RSE, mécénat, matériaux et reporting.", "output/pdf/dossier-entreprise-mecene-tvf.pdf"],
@@ -1790,7 +1792,7 @@ function sectionIntro(title, text, items) {
 }
 
 function homeClaritySection() {
-  return `<section class="section compact-section" ${sectionAttrs("TVF en lecture rapide")}><div class="container compact-grid"><article><p class="section-kicker">Mission</p><h2>TVF sert à relier les bons acteurs autour d'un lieu inutile.</h2><p>Un logement, un commerce, une friche, un terrain ou des matériaux ne deviennent utiles que si le besoin, l'usage, les responsabilités, les documents et le suivi sont clarifiés.</p></article><article><strong>Pour qui ?</strong><p>Collectivités, propriétaires, entreprises, associations, financeurs, bénévoles et citoyens.</p><a class="text-link" href="${hrefFor("agir-avec-nous.html")}">Choisir mon parcours</a></article><article><strong>Premier geste</strong><p>Décrire la situation en quelques lignes : lieu, ressource, besoin, acteurs connus et suite attendue.</p><a class="text-link" href="${hrefFor("contact.html")}">Demander un rendez-vous</a></article><article><strong>Document utile</strong><p>Commencer par le dossier TVF ou la fiche adaptée à votre profil.</p><a class="text-link" href="${hrefFor("documents.html#les-10-documents-essentiels")}">Voir les essentiels</a></article></div></section>`;
+  return `<section class="section compact-section" ${sectionAttrs("TVF en lecture rapide")}><div class="container compact-grid"><article><p class="section-kicker">Mission</p><h2>TVF sert à relier les bons acteurs autour d'un lieu inutile.</h2><p>Un logement, un commerce, une friche, un terrain ou des matériaux ne deviennent utiles que si le besoin, l'usage, les responsabilités, les documents et le suivi sont clarifiés.</p></article><article><strong>Pour qui ?</strong><p>Collectivités, propriétaires, entreprises, associations, financeurs, bénévoles et citoyens.</p><a class="text-link" href="${hrefFor("agir-avec-nous.html")}">Choisir mon parcours</a></article><article><strong>Premier geste</strong><p>Décrire la situation en quelques lignes : lieu, ressource, besoin, acteurs connus et suite attendue.</p><a class="text-link" href="${hrefFor("contact.html")}">Demander un rendez-vous</a></article><article><strong>Document utile</strong><p>Commencer par le dossier TVF ou la fiche adaptée à votre profil.</p><a class="text-link" href="${hrefFor("documents.html#les-documents-essentiels")}">Voir les essentiels</a></article></div></section>`;
 }
 
 function homeTrustSection() {
@@ -2127,8 +2129,9 @@ function impactPublicationRulesSection() {
 }
 
 function essentialDocumentsSection() {
-  return cards("Les 10 documents essentiels", "Cette sélection évite de commencer par toute la bibliothèque documentaire. Elle suffit pour préparer la majorité des premiers rendez-vous.", [
+  return cards("Les documents essentiels", "Cette sélection évite de commencer par toute la bibliothèque documentaire. Elle suffit pour préparer la majorité des premiers rendez-vous.", [
     ["Dossier TVF", "Présenter l'association, sa méthode, ses publics et ses limites de communication.", "documents/dossier-presentation-tvf.md"],
+    ["Dossier de contact TVF", "Retrouver coordonnées, services, pôles, actions et informations à transmettre.", "documents/dossier-contact-tvf.md"],
     ["Dossier Saint-Étienne", "Appuyer le territoire pilote sur les données publiques, besoins, indicateurs et pièces à réunir.", "documents/dossier-territorial-saint-etienne.md"],
     ["Fiche collectivité", "Décrire un territoire, un périmètre, un besoin public et les interlocuteurs.", "documents/fiche-collectivite.md"],
     ["Fiche propriétaire", "Qualifier un bien vacant ou dégradé avant étude, visite ou scénario d'usage.", "documents/fiche-proprietaire.md"],
@@ -2144,6 +2147,7 @@ function essentialDocumentsSection() {
 function pdfPresentationPackSection() {
   return cards("Dossiers PDF prêts à présenter", "Ces PDF sont conçus pour être transmis ou imprimés avant un rendez-vous. Les sources internes restent modifiables pour adapter chaque dossier.", [
     ["Dossier TVF PDF", "Présentation générale de TVF, de sa méthode, de ses publics et de ses garanties de sérieux.", "output/pdf/dossier-presentation-tvf.pdf"],
+    ["Dossier de contact PDF", "Coordonnées, services, pôles, actions et informations à préparer avant un échange.", "output/documents/dossier-contact-tvf.pdf"],
     ["Dossier collectivité PDF", "Support destiné aux communes, EPCI, départements, régions et services publics.", "output/pdf/dossier-collectivite-tvf.pdf"],
     ["Dossier entreprise et mécène PDF", "Support pour entreprises, fondations, mécènes, financeurs et acteurs économiques.", "output/pdf/dossier-entreprise-mecene-tvf.pdf"],
     ["Dossier propriétaire PDF", "Support pour expliquer comment proposer un bien sans engagement automatique.", "output/pdf/dossier-proprietaire-tvf.pdf"],
@@ -2509,7 +2513,7 @@ function ctaBandFor(page) {
   const map = {
     "index.html": ["Première étape", "Vous voulez savoir par où commencer ?", "Choisissez votre profil et préparez une première demande lisible en quelques minutes.", [["Choisir mon parcours", "agir-avec-nous.html"], ["Demander un échange", "contact.html"]]],
     "contact.html": ["Contact direct", "Votre demande est prête à être envoyée ?", `Envoyez le résumé préparé à ${contact.email} ou appelez le ${contact.phone}.`, [["Écrire à TVF", `mailto:${contact.email}`], ["Voir les documents", "documents.html"]]],
-    "documents.html": ["Documents", "Vous ne savez pas quel modèle choisir ?", "Commencez par les 10 documents essentiels ou demandez une orientation avant de remplir un dossier complet.", [["Demander une orientation", "contact.html"], ["Voir les essentiels", "#les-10-documents-essentiels"]]],
+    "documents.html": ["Documents", "Vous ne savez pas quel modèle choisir ?", "Commencez par les documents essentiels ou demandez une orientation avant de remplir un dossier complet.", [["Demander une orientation", "contact.html"], ["Voir les essentiels", "#les-documents-essentiels"]]],
     "saint-etienne.html": ["Territoire pilote", "Vous êtes acteur à Saint-Étienne ?", "Présentez un bien, une ressource, un besoin public ou une coopération possible pour alimenter le pilote.", [["Présenter une situation", "contact.html"], ["Lire le dossier pilote", "documents/dossier-territorial-saint-etienne.md"]]],
     "observatoire.html": ["Signalement", "Vous connaissez un lieu ou une ressource à qualifier ?", "Transmettez une information factuelle : TVF la traitera comme un signalement, pas comme un projet automatique.", [["Signaler une situation", "agir-avec-nous.html#signalement"], ["Voir la méthode", "notre-methode.html"]]],
     "impact.html": ["Preuve", "Vous souhaitez soutenir TVF avec un suivi clair ?", "Appuyez-vous sur la grille d'impact, le reporting et les statuts de preuve avant toute annonce.", [["Voir les financeurs", "financeurs-mecenes.html"], ["Télécharger la grille", "documents/grille-impact.md"]]],
@@ -2535,7 +2539,7 @@ function quickBriefFor(page) {
     "agir-avec-nous.html": ["Parcours", "Choisir le bon point d'entrée selon votre profil et la nature de la contribution.", "Préparer une situation courte puis passer par la page contact.", "Fiche signalement", "#proposer"],
     "saint-etienne.html": ["Territoire pilote", "Utiliser Saint-Étienne pour tester la méthode TVF sur des cas concrets et vérifiables.", "Proposer un bien, une ressource ou un besoin local.", "Dossier Saint-Étienne", "documents/dossier-territorial-saint-etienne.md"],
     "contact.html": ["Objectif", "Transformer un premier message en demande exploitable.", "Préparer profil, territoire, objet, pièces et suite attendue.", "Fiche adaptée au profil", "#contact-form"],
-    "documents.html": ["Mode d'emploi", "Commencer par les 10 essentiels avant d'ouvrir la bibliothèque complète.", "Choisir un pack selon votre profil.", "Dossier TVF", "#les-10-documents-essentiels"],
+    "documents.html": ["Mode d'emploi", "Commencer par les documents essentiels avant d'ouvrir la bibliothèque complète.", "Choisir un pack selon votre profil.", "Dossier TVF", "#les-documents-essentiels"],
     "impact.html": ["Impact", "Distinguer objectif, instruction, convention et résultat vérifié.", "Lire les indicateurs avec leur preuve.", "Grille d'impact", "documents/grille-impact.md"],
     "collectivites.html": ["Collectivités", "Cadrer un périmètre, un diagnostic, une convention et un suivi.", "Préparer une fiche collectivité.", "Fiche collectivité", "documents/fiche-collectivite.md"],
     "proprietaires.html": ["Propriétaires", "Présenter un bien sans créer d'engagement prématuré.", "Décrire état, contraintes, usage et limites.", "Fiche propriétaire", "documents/fiche-proprietaire.md"],
@@ -2547,7 +2551,7 @@ function quickBriefFor(page) {
     "qui-sommes-nous.html": ["Association", "Comprendre la mission, les limites et la logique de coopération de TVF.", "Lire la méthode ou contacter TVF.", "Dossier TVF", "documents/dossier-presentation-tvf.md"],
     "gouvernance.html": ["Gouvernance", "Savoir qui décide, sur quels critères et avec quelles preuves.", "Vérifier le cadre avant tout engagement.", "Charte éthique", "documents/charte-ethique.md"],
     "transparence.html": ["Transparence", "Distinguer établi, à instruire et publiable.", "Vérifier les statuts avant communication.", "Registre décisions", "documents/registre-suivi-decisions.md"],
-    "faq.html": ["FAQ", "Trouver une réponse courte puis rejoindre la page ou le document utile.", "Chercher par profil ou passer au contact.", "Documents essentiels", "documents.html#les-10-documents-essentiels"],
+    "faq.html": ["FAQ", "Trouver une réponse courte puis rejoindre la page ou le document utile.", "Chercher par profil ou passer au contact.", "Documents essentiels", "documents.html#les-documents-essentiels"],
     "kit-media.html": ["Kit média", "Utiliser les bons mots, le logo officiel et les limites de communication.", "Préparer une présentation publique sans exagération.", "Pitch officiel", "documents/pitch-officiel-tvf.md"],
     "mentions-legales.html": ["Cadre légal", "Retrouver les informations publiques et les champs à actualiser.", "Contacter TVF pour toute précision.", "Mentions", "contact.html"],
   };
