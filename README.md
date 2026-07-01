@@ -48,6 +48,7 @@ Présenter TVF comme une association nationale en structuration, claire, crédib
 
 - `documents/dossier-presentation-tvf.md`
 - `documents/dossier-contact-tvf.md`
+- `documents/dossier-prospection-saint-etienne.md`
 - `documents/dossier-collectivite-tvf.md`
 - `documents/dossier-entreprise-mecene-tvf.md`
 - `documents/dossier-proprietaire-tvf.md`
