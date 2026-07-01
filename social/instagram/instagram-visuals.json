@@ -1,0 +1,163 @@
+{
+  "brand": {
+    "name": "TERRITOIRES VIVANTS FRANCE",
+    "short": "TVF",
+    "logo": "assets/logo-territoires-vivants-france-web.png",
+    "website": "territoiresvivantsfrance.fr",
+    "colors": {
+      "greenDark": "#183F22",
+      "green": "#2F7D32",
+      "greenSoft": "#EAF4E8",
+      "blue": "#0E2D45",
+      "gold": "#D5A238",
+      "paper": "#FBFAF6",
+      "muted": "#5A6872",
+      "white": "#FFFFFF"
+    }
+  },
+  "visuals": [
+    {
+      "id": "pole-habitat-vivant",
+      "kind": "Pôle TVF",
+      "title": "Habitat Vivant",
+      "hook": "Redonner vie aux logements vacants.",
+      "body": "Qualifier les biens, dialoguer avec les propriétaires et préparer des usages utiles pour les habitants.",
+      "cta": "Proposer un bien",
+      "image": "assets/photos/immeuble-renovation-meudon.jpg",
+      "style": "institutional_frame",
+      "accent": "#2F7D32"
+    },
+    {
+      "id": "pole-materiautheque-solidaire",
+      "kind": "Pôle TVF",
+      "title": "Matériauthèque Solidaire",
+      "hook": "Transformer les matériaux inutilisés en ressources utiles.",
+      "body": "Bois, portes, fenêtres, mobilier ou équipements : chaque ressource doit être qualifiée, tracée et affectée.",
+      "cta": "Valoriser des matériaux",
+      "image": "assets/photos/france-ressourcerie-vichy.jpg",
+      "style": "workshop_split",
+      "accent": "#D5A238"
+    },
+    {
+      "id": "pole-commerce-vivant",
+      "kind": "Pôle TVF",
+      "title": "Commerce Vivant",
+      "hook": "Réactiver les vitrines fermées.",
+      "body": "Préparer des usages réalistes : commerce de proximité, atelier, service local ou occupation temporaire.",
+      "cta": "Signaler un commerce",
+      "image": "assets/photos/saint-etienne-centre-commerce.jpg",
+      "style": "urban_band",
+      "accent": "#0E2D45"
+    },
+    {
+      "id": "pole-friches-terrains-vivants",
+      "kind": "Pôle TVF",
+      "title": "Friches & Terrains Vivants",
+      "hook": "Faire renaître les espaces délaissés.",
+      "body": "Qualifier l’accès, la sécurité, la propriété et les usages possibles avant toute expérimentation.",
+      "cta": "Identifier un terrain",
+      "image": "assets/photos/france-friche-pcuk.jpg",
+      "style": "green_overlay",
+      "accent": "#245C2B"
+    },
+    {
+      "id": "pole-solidarite-insertion",
+      "kind": "Pôle TVF",
+      "title": "Solidarité & Insertion",
+      "hook": "Créer des parcours utiles pour les habitants.",
+      "body": "Bénévolat, missions encadrées, participation citoyenne et actions de terrain documentées.",
+      "cta": "Devenir bénévole",
+      "image": "assets/photos/chantier-renovation-lyon.jpg",
+      "style": "human_card",
+      "accent": "#2F7D32"
+    },
+    {
+      "id": "action-logements-vacants",
+      "kind": "Action TVF",
+      "title": "Logements vacants",
+      "hook": "Un logement vide peut redevenir une solution.",
+      "body": "Identifier, qualifier et préparer les conditions de remise en usage avec un cadre clair.",
+      "cta": "Découvrir l’action",
+      "image": "assets/photos/batiment-rural-france.jpg",
+      "style": "before_after_hint",
+      "accent": "#2F7D32"
+    },
+    {
+      "id": "action-commerces-inoccupes",
+      "kind": "Action TVF",
+      "title": "Commerces inoccupés",
+      "hook": "Chaque vitrine fermée peut retrouver une utilité.",
+      "body": "Analyser le local, le besoin de rue et les usages possibles avant de mobiliser les acteurs.",
+      "cta": "Signaler un local",
+      "image": "assets/photos/commerce-ferme-vichy.jpg",
+      "style": "street_poster",
+      "accent": "#D5A238"
+    },
+    {
+      "id": "action-materiaux-reemploi",
+      "kind": "Action TVF",
+      "title": "Matériaux de réemploi",
+      "hook": "Réutiliser ce qui peut encore servir.",
+      "body": "Éviter le gaspillage en orientant les matériaux vers des projets validés, suivis et utiles.",
+      "cta": "Proposer des matériaux",
+      "image": "assets/photos/artisan-menuiserie-bois.jpg",
+      "style": "material_catalog",
+      "accent": "#B98216"
+    },
+    {
+      "id": "action-espaces-abandonnes",
+      "kind": "Action TVF",
+      "title": "Espaces abandonnés",
+      "hook": "Transformer les lieux délaissés en lieux utiles.",
+      "body": "Friches, terrains ou bâtiments sans usage peuvent devenir supports de projets verts, sociaux ou locaux.",
+      "cta": "Signaler un lieu",
+      "image": "assets/photos/friche-industrielle-ronchamp.jpg",
+      "style": "territory_map",
+      "accent": "#245C2B"
+    },
+    {
+      "id": "action-solidarite-insertion",
+      "kind": "Action TVF",
+      "title": "Solidarité & insertion",
+      "hook": "Agir ensemble, apprendre, transmettre.",
+      "body": "Créer des missions encadrées autour de projets locaux, utiles et documentés.",
+      "cta": "Rejoindre le mouvement",
+      "image": "assets/photos/community-garden-paris.webp",
+      "style": "community_light",
+      "accent": "#2F7D32"
+    },
+    {
+      "id": "action-territoires-partenaires",
+      "kind": "Action TVF",
+      "title": "Territoires partenaires",
+      "hook": "Une méthode pour accompagner les collectivités.",
+      "body": "Cadrer un diagnostic, une expérimentation ou une coopération locale avec des livrables lisibles.",
+      "cta": "Devenir territoire partenaire",
+      "image": "assets/photos/france-saint-etienne-jean-jaures.jpg",
+      "style": "civic_blueprint",
+      "accent": "#0E2D45"
+    },
+    {
+      "id": "action-financer-projets",
+      "kind": "Action TVF",
+      "title": "Financer les projets",
+      "hook": "Mobiliser des moyens pour remettre en usage.",
+      "body": "Structurer budgets, cofinancements, mécénat et reporting sans annoncer de chiffres non vérifiés.",
+      "cta": "Soutenir TVF",
+      "image": "assets/photos/centre-ville-nantes.jpg",
+      "style": "premium_finance",
+      "accent": "#D5A238"
+    },
+    {
+      "id": "action-observatoire",
+      "kind": "Action TVF",
+      "title": "Observatoire",
+      "hook": "Voir les lieux vacants pour mieux agir.",
+      "body": "Croiser signalements, données publiques et qualification terrain pour prioriser les actions.",
+      "cta": "Explorer l’observatoire",
+      "image": "assets/photos/saint-etienne-panorama.jpg",
+      "style": "data_map",
+      "accent": "#2F7D32"
+    }
+  ]
+}
