@@ -1,3 +1,7 @@
 User-agent: *
 Allow: /
+Disallow: /documents
+Disallow: /documents/
+Disallow: /output/
+Disallow: /tmp/
 Sitemap: https://www.territoiresvivantsfrance.fr/sitemap.xml

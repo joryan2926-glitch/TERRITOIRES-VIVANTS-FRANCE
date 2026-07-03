@@ -4,7 +4,7 @@ const path = require("path");
 const site = {
   name: "Territoires Vivants France",
   url: "https://www.territoiresvivantsfrance.fr",
-  lastModified: "2026-06-29",
+  lastModified: "2026-07-03",
   description:
     "Plateforme nationale de coopération pour remettre en usage les logements, commerces, bâtiments, terrains et matériaux inutilisés.",
 };
@@ -353,7 +353,7 @@ const pages = [
     file: "observatoire.html",
     title: "Observatoire",
     meta:
-      "L'observatoire TVF prépare le repérage des biens vacants, commerces fermés, friches, terrains et ressources inutilisées.",
+      "Observatoire TVF : reperer, qualifier et prioriser les logements vacants, commerces fermes, friches, terrains et ressources inutilisees avec des donnees tracables.",
     heroImage: "assets/photos/friche-industrielle-ronchamp.jpg",
     eyebrow: "Observatoire",
     h1: "Voir, comprendre, prioriser.",
@@ -851,7 +851,7 @@ const pages = [
     h1: "Construire des partenariats utiles et traçables.",
     intro:
       "Cette page présente les formes de coopération possibles, les responsabilités attendues et le cadre à formaliser avant toute communication publique.",
-    ctas: [["Présenter une coopération", "contact.html"], ["Voir les documents", "documents.html"]],
+    ctas: [["Pr?senter une coop?ration", "contact.html"], ["Demander les supports", "contact.html"]],
     sections: [
       sectionIntro(
         "Un partenariat doit être utile, formalisé et vérifiable",
@@ -909,19 +909,19 @@ const pages = [
   },
   {
     file: "documents.html",
-    title: "Documents",
+    title: "Documents internes",
     meta:
-      "Documents préparatoires de Territoires Vivants France : fiches collectivité, propriétaire, entreprise et modèle de convention.",
+      "Documents préparatoires internes de Territoires Vivants France : fiches collectivité, propriétaire, entreprise et modèle de convention transmis sur demande.",
     heroImage: "assets/photos/saint-etienne-rue-resistance.jpg",
     eyebrow: "Ressources",
-    h1: "Des documents simples pour cadrer les premières démarches.",
+    h1: "Des documents internes pour cadrer les premières démarches.",
     intro:
-      "Chaque modèle dispose d'une version PDF téléchargeable. Ces documents aident à préparer un échange sans se substituer à un conseil juridique ou technique.",
+      "Les modèles TVF ne sont pas diffusés en accès libre. Ils peuvent être transmis sur demande lorsqu'un échange est qualifié, afin de garder un cadre clair, traçable et adapté à chaque situation.",
     ctas: [["Contacter TVF", "contact.html"], ["Voir la transparence", "transparence.html"]],
     sections: [
       sectionIntro(
-        "Un centre documentaire pour cadrer, pas pour complexifier",
-        "Les documents TVF doivent aider à produire des dossiers clairs : une demande qualifiée, des pièces disponibles, une décision traçable et une suite compréhensible. Ils ne remplacent pas les validations juridiques, techniques ou administratives nécessaires.",
+        "Un centre documentaire interne pour cadrer, pas pour complexifier",
+        "Les documents TVF aident à produire des dossiers clairs : une demande qualifiée, des pièces disponibles, une décision traçable et une suite compréhensible. Ils sont remis dans le bon contexte et ne remplacent pas les validations juridiques, techniques ou administratives nécessaires.",
         [
           ["Préparer", "Rassembler les informations avant un premier échange."],
           ["Décider", "Comparer les options, risques, pièces manquantes et suites possibles."],
@@ -950,9 +950,11 @@ const pages = [
         ["Suivi", "Une action est engagée ou soutenue", "Registre, compte rendu, grille d'impact, reporting", "Prouver ce qui a été fait"],
       ]),
       essentialDocumentsSection(),
+      documentQuickPacksSection(),
       pdfPresentationPackSection(),
       documentVisibilitySection(),
       documentPriorityPackSection(),
+      documentContactMatrixSection(),
       documentWorkflowSection(),
       publicEntryMatrixSection(),
       documentArchiveSection("Archive documentaire avancée", "Cette archive rassemble les modèles spécialisés. Elle s'utilise après avoir choisi le bon parcours afin de ne télécharger que les pièces réellement utiles au dossier.", [
@@ -961,6 +963,14 @@ const pages = [
         ["Dossier prospection Saint-Étienne", "Organiser les contacts publics, économiques, associatifs et techniques à solliciter pour lancer TVF sur le territoire pilote.", "documents/dossier-prospection-saint-etienne.md"],
         ["Glossaire et annuaire Saint-Étienne", "Classer les contacts par secteur, pôle, action, insertion, matériaux et besoin de local de stockage.", "documents/glossaire-annuaire-contacts-saint-etienne.md"],
         ["Kit courriers prêts à l'emploi", "Utiliser des modèles de courriers et e-mails prêts à adapter pour partenariats, matériaux, locaux, insertion, propriétaires et financeurs.", "documents/kit-courriers-partenariats-demandes-tvf.md"],
+        ["Pack lancement Saint-Étienne", "Commencer le pilote avec les bons documents, les bons interlocuteurs et une feuille de route courte.", "documents/pack-lancement-saint-etienne.md"],
+        ["Synthèse collectivité 1 page", "Présenter TVF à une mairie, un EPCI ou une collectivité sans surcharger le rendez-vous.", "documents/synthese-collectivite-1-page.md"],
+        ["Synthèse entreprise matériaux 1 page", "Expliquer en une page comment une entreprise peut contribuer par matériaux, local, compétences ou RSE.", "documents/synthese-entreprise-materiaux-1-page.md"],
+        ["Synthèse propriétaire 1 page", "Expliquer le premier contact, les garanties et les pièces utiles pour proposer un bien.", "documents/synthese-proprietaire-1-page.md"],
+        ["Synthèse financeur 1 page", "Présenter les garanties de méthode, d'impact et de reporting attendues par un mécène ou financeur.", "documents/synthese-financeur-1-page.md"],
+        ["Critères matériaux", "Décider quels matériaux peuvent être acceptés, refusés, orientés, stockés ou affectés.", "documents/criteres-acceptation-materiaux.md"],
+        ["Protocole local de stockage", "Encadrer la recherche, l'usage et la restitution d'un local de stockage temporaire.", "documents/protocole-local-stockage.md"],
+        ["Cadre chantiers insertion", "Définir ce qui est possible, exclu ou à confier à une structure habilitée.", "documents/cadre-chantiers-insertion.md"],
         ["Dossier collectivité TVF", "Présenter un parcours territoire partenaire en réunion avec une commune, un EPCI, un département ou une région.", "documents/dossier-collectivite-tvf.md"],
         ["Dossier propriétaire TVF", "Expliquer au propriétaire le cadre d'étude, de convention, d'usage et de restitution d'un bien.", "documents/dossier-proprietaire-tvf.md"],
         ["Dossier entreprise et mécène TVF", "Présenter les contributions possibles : matériaux, locaux, compétences, mécénat, reporting et RSE.", "documents/dossier-entreprise-mecene-tvf.md"],
@@ -1214,7 +1224,7 @@ const pages = [
     h1: "Mesurer avant d'annoncer.",
     intro:
       "Cette page présente les indicateurs qui devront être suivis lorsque les premiers projets seront instruits, conventionnés puis réalisés, avec une méthode de preuve lisible.",
-    ctas: [["Voir la transparence", "transparence.html"], ["Télécharger la grille", "documents/grille-impact.md"]],
+    ctas: [["Voir la transparence", "transparence.html"], ["Demander la grille", "contact.html"]],
     sections: [
       sectionIntro(
         "Mesurer avec méthode",
@@ -1855,9 +1865,7 @@ function smartCardLink(title, href) {
 
 function documentCardLink(title, href) {
   if (!href) return "";
-  const isMarkdown = /^documents\/[^?#]+\.md$/i.test(href);
-  const isPdf = /\.pdf(?:$|[#?])/i.test(href);
-  const label = isMarkdown ? "Télécharger le PDF" : isPdf ? "Ouvrir le PDF" : "Découvrir";
+  const label = isPrivateDocumentHref(href) ? "Demander le document" : "Découvrir";
   return `<a class="text-link" href="${hrefFor(href)}" aria-label="${label} : ${escapeAttr(title)}">${label}</a>`;
 }
 
@@ -2141,6 +2149,11 @@ function essentialDocumentsSection() {
     ["Dossier prospection Saint-Étienne", "Préparer les contacts à solliciter pour lancer le pilote : collectivités, entreprises, artisans, insertion, foncier et financeurs.", "documents/dossier-prospection-saint-etienne.md"],
     ["Glossaire et annuaire Saint-Étienne", "Centraliser contacts, glossaire, secteurs, pôles, insertion, matériaux et local de stockage.", "documents/glossaire-annuaire-contacts-saint-etienne.md"],
     ["Kit courriers prêts à l'emploi", "Envoyer des demandes cadrées pour partenariats, matériaux, local de stockage, insertion, propriétaires et financeurs.", "documents/kit-courriers-partenariats-demandes-tvf.md"],
+    ["Pack lancement Saint-Étienne", "Réunir les documents indispensables pour les premiers rendez-vous du pilote.", "documents/pack-lancement-saint-etienne.md"],
+    ["Synthèses 1 page", "Utiliser une version courte pour collectivité, entreprise, propriétaire ou financeur.", "documents/synthese-collectivite-1-page.md"],
+    ["Critères matériaux", "Savoir quoi accepter, refuser, orienter ou stocker avant tout retrait.", "documents/criteres-acceptation-materiaux.md"],
+    ["Protocole stockage", "Sécuriser un local temporaire avant l'entrée de matériaux.", "documents/protocole-local-stockage.md"],
+    ["Cadre insertion", "Encadrer les actions terrain sans improviser de chantier non habilité.", "documents/cadre-chantiers-insertion.md"],
     ["Dossier Saint-Étienne", "Appuyer le territoire pilote sur les données publiques, besoins, indicateurs et pièces à réunir.", "documents/dossier-territorial-saint-etienne.md"],
     ["Fiche collectivité", "Décrire un territoire, un périmètre, un besoin public et les interlocuteurs.", "documents/fiche-collectivite.md"],
     ["Fiche propriétaire", "Qualifier un bien vacant ou dégradé avant étude, visite ou scénario d'usage.", "documents/fiche-proprietaire.md"],
@@ -2153,13 +2166,46 @@ function essentialDocumentsSection() {
   ]);
 }
 
+function documentQuickPacksSection() {
+  return tableSection("Packs rapides par public", "Ces packs courts evitent d'ouvrir toute la bibliotheque documentaire. Ils donnent le bon ordre de lecture selon le rendez-vous.", [
+    ["Public", "Documents a transmettre", "Decision attendue"],
+    ["Collectivite", "Synthese collectivite 1 page, dossier TVF, fiche collectivite", "Choisir un perimetre et un referent"],
+    ["Entreprise materiaux", "Synthese entreprise materiaux 1 page, criteres materiaux, bordereau", "Qualifier une ressource ou un local"],
+    ["Proprietaire", "Synthese proprietaire 1 page, fiche proprietaire, accord de principe", "Autoriser une etude ou une visite"],
+    ["Financeur", "Synthese financeur 1 page, fiche projet, budget, grille d'impact", "Verifier l'eligibilite d'un soutien"],
+    ["Saint-Etienne", "Pack lancement Saint-Etienne, glossaire annuaire, kit courriers", "Lancer une prospection structuree"],
+    ["Insertion", "Cadre chantiers insertion, fiche projet, consignes securite", "Identifier une action compatible"],
+    ["Stockage", "Protocole local stockage, convention mise a disposition, registre materiaux", "Verifier un local avant usage"],
+  ]);
+}
+
+function documentContactMatrixSection() {
+  return tableSection("Qui contacter selon le besoin ?", "Cette matrice transforme la bibliotheque documentaire en parcours d'action lisible.", [
+    ["Besoin", "Premier interlocuteur", "Document court", "Document de cadrage"],
+    ["Presenter TVF a une mairie", "Cabinet, direction generale, service habitat, commerce ou transition", "Synthese collectivite", "Fiche collectivite"],
+    ["Trouver un local de stockage", "Collectivite, bailleur, entreprise, proprietaire, fonciere", "Protocole stockage", "Convention mise a disposition"],
+    ["Recuperer des materiaux", "Entreprise BTP, artisan, administration, commerce, collectivite", "Synthese entreprise materiaux", "Bordereau materiaux"],
+    ["Etudier un bien vacant", "Proprietaire, mandataire, bailleur, service habitat", "Synthese proprietaire", "Fiche proprietaire"],
+    ["Monter une action insertion", "PLIE, structure IAE, association habilitee, acteur emploi", "Cadre insertion", "Fiche projet"],
+    ["Chercher un soutien financier", "Fondation, mecene, financeur public ou prive", "Synthese financeur", "Plan de financement"],
+    ["Suivre une piste Saint-Etienne", "Acteur identifie dans l'annuaire", "Pack lancement Saint-Etienne", "Note opportunite territoriale"],
+  ]);
+}
 function pdfPresentationPackSection() {
-  return cards("Dossiers PDF prêts à présenter", "Ces PDF sont conçus pour être transmis ou imprimés avant un rendez-vous. Les sources internes restent modifiables pour adapter chaque dossier.", [
+  return cards("Dossiers internes pr?ts ? pr?senter", "Ces supports sont transmis apr?s qualification d'un ?change. Les sources internes restent modifiables pour adapter chaque dossier.", [
     ["Dossier TVF PDF", "Présentation générale de TVF, de sa méthode, de ses publics et de ses garanties de sérieux.", "output/pdf/dossier-presentation-tvf.pdf"],
     ["Dossier de contact PDF", "Coordonnées, services, pôles, actions et informations à préparer avant un échange.", "output/documents/dossier-contact-tvf.pdf"],
     ["Dossier prospection Saint-Étienne PDF", "Liste opérationnelle des acteurs à solliciter, priorités, scripts et suivi de prospection.", "output/documents/dossier-prospection-saint-etienne.pdf"],
     ["Glossaire et annuaire Saint-Étienne PDF", "Contacts par secteur, poles, insertion, matériaux, stockage et tableaux de suivi.", "output/documents/glossaire-annuaire-contacts-saint-etienne.pdf"],
     ["Kit courriers prêts à l'emploi PDF", "Modèles de courriers pour collectivités, entreprises, propriétaires, insertion, financeurs et demandes de local.", "output/documents/kit-courriers-partenariats-demandes-tvf.pdf"],
+    ["Pack lancement Saint-Étienne PDF", "Documents et ordre logique pour lancer le pilote Saint-Étienne sans surcharger les rendez-vous.", "output/documents/pack-lancement-saint-etienne.pdf"],
+    ["Synthèse collectivité PDF", "Version 1 page pour présenter TVF à une mairie, un EPCI ou une collectivité.", "output/documents/synthese-collectivite-1-page.pdf"],
+    ["Synthèse entreprise matériaux PDF", "Version 1 page pour solliciter matériaux, local, compétences ou RSE.", "output/documents/synthese-entreprise-materiaux-1-page.pdf"],
+    ["Synthèse propriétaire PDF", "Version 1 page pour expliquer comment proposer un bien sans engagement automatique.", "output/documents/synthese-proprietaire-1-page.pdf"],
+    ["Synthèse financeur PDF", "Version 1 page pour présenter garanties, impact, budget et reporting.", "output/documents/synthese-financeur-1-page.pdf"],
+    ["Critères matériaux PDF", "Critères d'acceptation, refus, orientation, stockage et traçabilité.", "output/documents/criteres-acceptation-materiaux.pdf"],
+    ["Protocole stockage PDF", "Cadre d'utilisation d'un local de stockage temporaire pour matériaux.", "output/documents/protocole-local-stockage.pdf"],
+    ["Cadre insertion PDF", "Conditions minimales avant chantier d'insertion, action terrain ou mission encadrée.", "output/documents/cadre-chantiers-insertion.pdf"],
     ["Dossier collectivité PDF", "Support destiné aux communes, EPCI, départements, régions et services publics.", "output/pdf/dossier-collectivite-tvf.pdf"],
     ["Dossier entreprise et mécène PDF", "Support pour entreprises, fondations, mécènes, financeurs et acteurs économiques.", "output/pdf/dossier-entreprise-mecene-tvf.pdf"],
     ["Dossier propriétaire PDF", "Support pour expliquer comment proposer un bien sans engagement automatique.", "output/pdf/dossier-proprietaire-tvf.pdf"],
@@ -2167,7 +2213,7 @@ function pdfPresentationPackSection() {
 }
 
 function documentVisibilitySection() {
-  return tableSection("Documents publics et outils internes", "Tous les contenus restent disponibles, mais ils n'ont pas le même usage. Cette distinction évite de présenter un registre interne comme un support public.", [
+  return tableSection("Supports de pr?sentation et outils internes", "Tous les contenus restent disponibles, mais ils n'ont pas le même usage. Cette distinction évite de présenter un registre interne comme un support public.", [
     ["Niveau", "À utiliser pour", "Exemples", "Lecture recommandée"],
     ["Documents publics", "Présenter TVF à une collectivité, un propriétaire, une entreprise ou un financeur", "Dossier TVF, dossiers PDF, fiche collectivité, fiche propriétaire, fiche entreprise", "À ouvrir en priorité"],
     ["Supports de rendez-vous", "Préparer une réunion, qualifier une demande ou structurer une suite", "Fiche projet, pièces à fournir, note d'opportunité, modèle de convention", "À choisir selon le profil"],
@@ -2391,13 +2437,15 @@ function breadcrumbNav(page) {
     .join("")}</ol></nav>`;
 }
 
+function isPrivateDocumentHref(href) {
+  if (!href) return false;
+  const [target] = href.split(/(?=[#?])/);
+  return target === "documents.html" || target === "documents" || target.startsWith("documents/") || target.startsWith("output/") || /\.pdf$/i.test(target);
+}
+
 function hrefFor(href) {
   if (!href || href.startsWith("#") || /^[a-z]+:/i.test(href) || href.startsWith("assets/")) return href;
-  if (/^documents\/[^?#]+\.md(?:[#?].*)?$/i.test(href)) {
-    const [target, suffix = ""] = href.split(/(?=[#?])/);
-    return target.replace(/^documents\//, "output/documents/").replace(/\.md$/i, ".pdf") + suffix;
-  }
-  if (href.startsWith("documents/") || href.startsWith("output/")) return href;
+  if (isPrivateDocumentHref(href)) return "contact";
   const [target, hash] = href.split("#");
   const clean = target === "index.html" ? "/" : target.endsWith(".html") ? target.replace(/\.html$/, "") : target;
   return `${clean}${hash ? `#${hash}` : ""}`;
@@ -2524,11 +2572,11 @@ function jsonLd(page) {
 function ctaBandFor(page) {
   const map = {
     "index.html": ["Première étape", "Vous voulez savoir par où commencer ?", "Choisissez votre profil et préparez une première demande lisible en quelques minutes.", [["Choisir mon parcours", "agir-avec-nous.html"], ["Demander un échange", "contact.html"]]],
-    "contact.html": ["Contact direct", "Votre demande est prête à être envoyée ?", `Envoyez le résumé préparé à ${contact.email} ou appelez le ${contact.phone}.`, [["Écrire à TVF", `mailto:${contact.email}`], ["Voir les documents", "documents.html"]]],
+    "contact.html": ["Contact direct", "Votre demande est pr?te ? ?tre envoy?e ?", `Envoyez le r?sum? pr?par? ? ${contact.email} ou appelez le ${contact.phone}.`, [["?crire ? TVF", `mailto:${contact.email}`], ["Demander les supports", "contact.html"]]],
     "documents.html": ["Documents", "Vous ne savez pas quel modèle choisir ?", "Commencez par les documents essentiels ou demandez une orientation avant de remplir un dossier complet.", [["Demander une orientation", "contact.html"], ["Voir les essentiels", "#les-documents-essentiels"]]],
-    "saint-etienne.html": ["Territoire pilote", "Vous êtes acteur à Saint-Étienne ?", "Présentez un bien, une ressource, un besoin public ou une coopération possible pour alimenter le pilote.", [["Présenter une situation", "contact.html"], ["Lire le dossier pilote", "documents/dossier-territorial-saint-etienne.md"]]],
+    "saint-etienne.html": ["Territoire pilote", "Vous ?tes acteur ? Saint-?tienne ?", "Pr?sentez un bien, une ressource, un besoin public ou une coop?ration possible pour alimenter le pilote.", [["Pr?senter une situation", "contact.html"], ["Demander le dossier pilote", "contact.html"]]],
     "observatoire.html": ["Signalement", "Vous connaissez un lieu ou une ressource à qualifier ?", "Transmettez une information factuelle : TVF la traitera comme un signalement, pas comme un projet automatique.", [["Signaler une situation", "agir-avec-nous.html#signalement"], ["Voir la méthode", "notre-methode.html"]]],
-    "impact.html": ["Preuve", "Vous souhaitez soutenir TVF avec un suivi clair ?", "Appuyez-vous sur la grille d'impact, le reporting et les statuts de preuve avant toute annonce.", [["Voir les financeurs", "financeurs-mecenes.html"], ["Télécharger la grille", "documents/grille-impact.md"]]],
+    "impact.html": ["Preuve", "Vous souhaitez soutenir TVF avec un suivi clair ?", "Appuyez-vous sur la grille d'impact, le reporting et les statuts de preuve avant toute annonce.", [["Voir les financeurs", "financeurs-mecenes.html"], ["Demander la grille", "contact.html"]]],
     "collectivites.html": ["Territoire partenaire", "Votre collectivité veut tester un périmètre pilote ?", "Préparez une fiche collectivité avec le besoin public, les données disponibles et la décision attendue.", [["Préparer la fiche", "documents/fiche-collectivite.md"], ["Demander un rendez-vous", "contact.html"]]],
     "proprietaires.html": ["Bien inutilisé", "Vous souhaitez étudier un bien sans engagement prématuré ?", "Présentez le bien, son état, vos intentions et les limites à respecter.", [["Remplir la fiche propriétaire", "documents/fiche-proprietaire.md"], ["Demander un échange", "contact.html"]]],
     "entreprises.html": ["Contribution", "Votre entreprise peut apporter une ressource utile ?", "Décrivez les matériaux, locaux, compétences ou soutiens disponibles pour vérifier leur affectation possible.", [["Remplir la fiche entreprise", "documents/fiche-entreprise.md"], ["Contacter TVF", "contact.html"]]],
@@ -2761,7 +2809,7 @@ ${breadcrumbNav(page)}
     <div class="container footer-grid">
       <div><span class="footer-logo-box"><img src="assets/logo-territoires-vivants-france-web.png" width="583" height="181" alt="Territoires Vivants France" class="footer-logo" loading="lazy" decoding="async"></span><p>Plateforme nationale de coopération pour redonner vie aux biens, lieux et ressources inutilisés.</p></div>
       <div><h3>Navigation</h3>${nav.slice(0, 7).map(([label, href]) => `<a href="${hrefFor(href)}">${label}</a>`).join("")}</div>
-      <div><h3>Ressources</h3><a href="${hrefFor("notre-methode.html")}">Notre méthode</a><a href="${hrefFor("impact.html")}">Impact</a><a href="${hrefFor("gouvernance.html")}">Gouvernance</a><a href="${hrefFor("kit-media.html")}">Kit média</a><a href="${hrefFor("documents.html")}">Documents</a><a href="${hrefFor("faq.html")}">FAQ</a><a href="${hrefFor("transparence.html")}">Transparence</a><a href="${hrefFor("mentions-legales.html")}">Mentions légales</a><a href="${hrefFor("contact.html")}">Contact</a></div>
+      <div><h3>Ressources</h3><a href="${hrefFor("notre-methode.html")}">Notre méthode</a><a href="${hrefFor("impact.html")}">Impact</a><a href="${hrefFor("gouvernance.html")}">Gouvernance</a><a href="${hrefFor("kit-media.html")}">Kit média</a><a href="${hrefFor("faq.html")}">FAQ</a><a href="${hrefFor("transparence.html")}">Transparence</a><a href="${hrefFor("mentions-legales.html")}">Mentions légales</a><a href="${hrefFor("contact.html")}">Contact</a></div>
       <div><h3>Siège</h3><p>25 rue Élise Gervais<br>42000 Saint-Étienne</p><p><a href="mailto:${contact.email}">${contact.email}</a><br><a href="tel:${contact.phoneHref}">${contact.phone}</a></p><a class="btn secondary" href="${hrefFor("contact.html")}">Contacter TVF</a></div>
     </div>
     <div class="container footer-bottom">© 2026 Territoires Vivants France - Tous droits réservés.</div>
@@ -2777,13 +2825,14 @@ for (const page of pages) {
 
 fs.writeFileSync(
   "robots.txt",
-  `User-agent: *\nAllow: /\nSitemap: ${site.url}/sitemap.xml\n`,
+  `User-agent: *\nAllow: /\nDisallow: /documents\nDisallow: /documents/\nDisallow: /output/\nDisallow: /tmp/\nSitemap: ${site.url}/sitemap.xml\n`,
   "utf8"
 );
 
 fs.writeFileSync(
   "sitemap.xml",
   `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${pages
+    .filter((p) => p.file !== "documents.html")
     .map((p) => {
       const priority = p.file === "index.html" ? "1.0" : ["qui-sommes-nous.html", "nos-actions.html", "nos-poles.html", "saint-etienne.html", "agir-avec-nous.html", "contact.html"].includes(p.file) ? "0.8" : "0.6";
       return `  <url><loc>${pageUrl(p)}</loc><lastmod>${site.lastModified}</lastmod><changefreq>monthly</changefreq><priority>${priority}</priority></url>`;
@@ -2819,6 +2868,13 @@ fs.writeFileSync(
     {
       cleanUrls: true,
       trailingSlash: false,
+      redirects: [
+        { source: "/documents", destination: "/contact", permanent: false },
+        { source: "/documents.html", destination: "/contact", permanent: false },
+        { source: "/documents/:path*", destination: "/contact", permanent: false },
+        { source: "/output/:path*", destination: "/contact", permanent: false },
+        { source: "/tmp/:path*", destination: "/contact", permanent: false },
+      ],
       headers: [
         {
           source: "/(.*)",

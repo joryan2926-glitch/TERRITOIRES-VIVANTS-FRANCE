@@ -1,6 +1,33 @@
 {
   "cleanUrls": true,
   "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/documents",
+      "destination": "/contact",
+      "permanent": false
+    },
+    {
+      "source": "/documents.html",
+      "destination": "/contact",
+      "permanent": false
+    },
+    {
+      "source": "/documents/:path*",
+      "destination": "/contact",
+      "permanent": false
+    },
+    {
+      "source": "/output/:path*",
+      "destination": "/contact",
+      "permanent": false
+    },
+    {
+      "source": "/tmp/:path*",
+      "destination": "/contact",
+      "permanent": false
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",

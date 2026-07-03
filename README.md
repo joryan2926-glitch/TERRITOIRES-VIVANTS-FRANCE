@@ -1,4 +1,4 @@
-# Territoires Vivants France
+﻿# Territoires Vivants France
 
 Nouvelle base propre du portail Territoires Vivants France.
 
@@ -51,6 +51,14 @@ Présenter TVF comme une association nationale en structuration, claire, crédib
 - `documents/dossier-prospection-saint-etienne.md`
 - `documents/glossaire-annuaire-contacts-saint-etienne.md`
 - `documents/kit-courriers-partenariats-demandes-tvf.md`
+- `documents/pack-lancement-saint-etienne.md`
+- `documents/synthese-collectivite-1-page.md`
+- `documents/synthese-entreprise-materiaux-1-page.md`
+- `documents/synthese-proprietaire-1-page.md`
+- `documents/synthese-financeur-1-page.md`
+- `documents/criteres-acceptation-materiaux.md`
+- `documents/protocole-local-stockage.md`
+- `documents/cadre-chantiers-insertion.md`
 - `documents/dossier-collectivite-tvf.md`
 - `documents/dossier-entreprise-mecene-tvf.md`
 - `documents/dossier-proprietaire-tvf.md`
