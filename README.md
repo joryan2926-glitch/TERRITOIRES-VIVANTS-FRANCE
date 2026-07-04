@@ -199,5 +199,6 @@ Notifications e-mail optionnelles :
 - `TVF_EMAIL_FROM` : expéditeur vérifié, par exemple `Territoires Vivants France <contact@territoiresvivantsfrance.fr>`.
 - `TVF_EMAIL_REPLY_TO` : adresse de réponse. Par défaut : `contact@territoiresvivantsfrance.fr`.
 - `TVF_NOTIFICATION_EMAIL` : adresse qui reçoit les notifications internes. Par défaut : `contact@territoiresvivantsfrance.fr`.
+- `TVF_OUTBOUND_TIMEOUT_MS` : optionnel, délai maximal des appels Supabase/e-mail. Par défaut : `9000`.
 
 Fonctionnement : la demande est d'abord enregistrée dans Supabase. Ensuite, l'API tente d'envoyer une notification à TVF et un accusé de réception à l'utilisateur si son e-mail est renseigné. Une erreur d'e-mail ne bloque pas l'enregistrement de la demande.

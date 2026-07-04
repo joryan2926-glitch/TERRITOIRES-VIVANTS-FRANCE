@@ -2,6 +2,7 @@ const MAX_BODY_SIZE = 32 * 1024;
 const CONTACT_TABLE = process.env.SUPABASE_CONTACTS_TABLE || "contacts";
 const DEFAULT_CONTACT_EMAIL = "contact@territoiresvivantsfrance.fr";
 const DEFAULT_FROM = "Territoires Vivants France <contact@territoiresvivantsfrance.fr>";
+const OUTBOUND_TIMEOUT_MS = Number(process.env.TVF_OUTBOUND_TIMEOUT_MS || 9000);
 
 function sendJson(res, statusCode, payload) {
   res.statusCode = statusCode;
@@ -16,6 +17,15 @@ function normalizeSupabaseRestUrl(rawUrl) {
   return trimmed.endsWith("/rest/v1") ? trimmed : `${trimmed}/rest/v1`;
 }
 
+async function fetchWithTimeout(url, options = {}, timeoutMs = OUTBOUND_TIMEOUT_MS) {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    return await fetch(url, { ...options, signal: controller.signal });
+  } finally {
+    clearTimeout(timeout);
+  }
+}
 async function readJsonBody(req) {
   let body = "";
   for await (const chunk of req) {
@@ -186,7 +196,7 @@ async function insertIntoSupabase(submission) {
   let lastError = null;
 
   for (const row of rows) {
-    const response = await fetch(endpoint, {
+    const response = await fetchWithTimeout(endpoint, {
       method: "POST",
       headers: {
         apikey: key,
@@ -312,7 +322,7 @@ function confirmationEmail(submission) {
 
 async function sendWithResend(config, message) {
   if (!config.resendKey) throw new Error("RESEND_API_KEY manquante.");
-  const response = await fetch("https://api.resend.com/emails", {
+  const response = await fetchWithTimeout("https://api.resend.com/emails", {
     method: "POST",
     headers: {
       Authorization: `Bearer ${config.resendKey}`,
@@ -334,7 +344,7 @@ async function sendWithBrevo(config, message) {
   if (!config.brevoKey) throw new Error("BREVO_API_KEY manquante.");
   const sender = parseAddress(config.from);
   const replyTo = parseAddress(message.replyTo || config.replyTo);
-  const response = await fetch("https://api.brevo.com/v3/smtp/email", {
+  const response = await fetchWithTimeout("https://api.brevo.com/v3/smtp/email", {
     method: "POST",
     headers: {
       "api-key": config.brevoKey,
