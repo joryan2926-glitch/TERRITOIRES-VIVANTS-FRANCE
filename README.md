@@ -1,4 +1,4 @@
-﻿# Territoires Vivants France
+# Territoires Vivants France
 
 Nouvelle base propre du portail Territoires Vivants France.
 
@@ -177,3 +177,16 @@ Puis ouvrir :
 ```text
 http://127.0.0.1:4173/index.html
 ```
+
+
+## Formulaires connectés
+
+Les formulaires publics du site envoient les demandes vers la fonction Vercel `/api/contact`.
+
+Variables d'environnement attendues dans Vercel :
+
+- `SUPABASE_URL` : URL du projet Supabase, au format `https://xxxx.supabase.co` ou `https://xxxx.supabase.co/rest/v1`
+- `SUPABASE_SERVICE_ROLE_KEY` : clé serveur Supabase, uniquement côté Vercel, jamais dans le navigateur
+- `SUPABASE_CONTACTS_TABLE` : optionnel, nom de la table de destination. Par défaut : `contacts`
+
+Le formulaire conserve un secours par e-mail si l'enregistrement Supabase échoue. Les documents internes ne sont pas rendus publics par ce branchement.

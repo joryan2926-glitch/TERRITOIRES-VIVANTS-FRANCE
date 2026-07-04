@@ -232,6 +232,8 @@ document.querySelectorAll("[data-prepare-form]").forEach((form, index) => {
   const output = form.querySelector("[data-form-summary]");
   const localDraftStatus = form.querySelector("[data-local-draft-status]");
   const saveStatus = form.querySelector("[data-save-status]");
+  const submitButton = form.querySelector("[data-submit-form]");
+  const submitStatus = form.querySelector("[data-submit-status]");
   if (!button || !output) return;
 
   const localDraftKey = storageKeyForForm(form, index);
@@ -268,6 +270,88 @@ document.querySelectorAll("[data-prepare-form]").forEach((form, index) => {
     }, 2200);
   }
 
+  function setSubmitStatus(message, type = "") {
+    if (!submitStatus) return;
+    submitStatus.hidden = false;
+    submitStatus.textContent = message;
+    submitStatus.classList.toggle("is-success", type === "success");
+    submitStatus.classList.toggle("is-error", type === "error");
+  }
+
+  function hideSubmitStatus() {
+    if (!submitStatus) return;
+    submitStatus.hidden = true;
+    submitStatus.textContent = "";
+    submitStatus.classList.remove("is-success", "is-error");
+  }
+
+  function payloadForForm(summary) {
+    const fields = {};
+    fieldsForForm(form).forEach((field) => {
+      if (!field.name) return;
+      fields[field.name] = field.value.trim();
+    });
+
+    const section = form.closest("section[id]");
+    return {
+      formKind: form.dataset.formKind || "contact",
+      page: window.location.pathname,
+      section: section?.id || "",
+      summary: summary.text,
+      fields,
+      site: fields.site || fields.website || "",
+    };
+  }
+
+  async function submitConnectedForm() {
+    const summary = summaryForForm(form);
+    const hasSummary = summary.lines.length > 0;
+
+    output.hidden = false;
+    output.textContent = summary.text;
+
+    if (!hasSummary) {
+      focusFirstRequiredField(form);
+      if (submitButton) submitButton.hidden = true;
+      setSubmitStatus("Renseignez au moins un champ avant l'envoi.", "error");
+      return;
+    }
+
+    if (!submitButton) return;
+
+    clearFieldErrors(form);
+    hideSubmitStatus();
+    submitButton.disabled = true;
+    submitButton.textContent = "Envoi en cours...";
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payloadForForm(summary)),
+      });
+
+      const responseText = await response.text();
+      const result = responseText ? JSON.parse(responseText) : { ok: response.ok };
+
+      if (!response.ok || result.ok === false) {
+        throw new Error(result.error || "L'enregistrement a echoue.");
+      }
+
+      markHandled();
+      submitButton.hidden = true;
+      if (mailtoLink) mailtoLink.hidden = true;
+      setSubmitStatus("Votre demande a ete transmise a TVF. Conservez une copie du resume si necessaire.", "success");
+    } catch (error) {
+      updateMailtoLink(summary);
+      if (mailtoLink) mailtoLink.hidden = false;
+      setSubmitStatus(`${error.message} Vous pouvez utiliser le bouton e-mail en secours.`, "error");
+    } finally {
+      submitButton.disabled = false;
+      submitButton.textContent = "Envoyer à TVF";
+    }
+  }
+
   function markDirty(event) {
     const hasDraft = summaryForForm(form).lines.length > 0;
     form.dataset.draftDirty = String(hasDraft);
@@ -298,6 +382,12 @@ document.querySelectorAll("[data-prepare-form]").forEach((form, index) => {
     if (mailtoLink) {
       mailtoLink.hidden = true;
     }
+
+    if (submitButton) {
+      submitButton.hidden = true;
+    }
+
+    hideSubmitStatus();
 
     if (resetButton) {
       resetButton.hidden = !hasDraft;
@@ -342,6 +432,14 @@ document.querySelectorAll("[data-prepare-form]").forEach((form, index) => {
       mailtoLink.hidden = true;
       mailtoLink.removeAttribute("href");
     }
+
+    if (submitButton) {
+      submitButton.hidden = true;
+      submitButton.disabled = false;
+      submitButton.textContent = "Envoyer à TVF";
+    }
+
+    hideSubmitStatus();
 
     if (resetButton) {
       resetButton.hidden = true;
@@ -446,6 +544,12 @@ document.querySelectorAll("[data-prepare-form]").forEach((form, index) => {
 
     updateMailtoLink(summary);
 
+    if (submitButton) {
+      submitButton.hidden = !hasSummary;
+    }
+
+    hideSubmitStatus();
+
     if (resetButton) {
       resetButton.hidden = !hasSummary;
     }
@@ -454,6 +558,7 @@ document.querySelectorAll("[data-prepare-form]").forEach((form, index) => {
   copyButton?.addEventListener("click", copySummary);
   downloadButton?.addEventListener("click", downloadSummary);
   resetButton?.addEventListener("click", resetDraft);
+  submitButton?.addEventListener("click", submitConnectedForm);
   transferLink?.addEventListener("click", transferSummary);
   mailtoLink?.addEventListener("click", () => {
     if (!mailtoLink.hidden) {

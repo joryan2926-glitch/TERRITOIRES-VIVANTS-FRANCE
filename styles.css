@@ -2745,3 +2745,27 @@ tr:nth-child(even) td {
     width: min(100%, 190px);
   }
 }
+
+
+/* Formulaires connectes */
+.hp-field {
+  display: none !important;
+}
+
+.form-note.is-success {
+  color: #174b24;
+  background: rgba(234, 244, 232, 0.95);
+  border: 1px solid rgba(47, 125, 50, 0.24);
+}
+
+.form-note.is-error {
+  color: #7a1f1f;
+  background: rgba(255, 244, 238, 0.95);
+  border: 1px solid rgba(181, 82, 34, 0.24);
+}
+
+.btn[disabled] {
+  cursor: wait;
+  opacity: 0.72;
+  transform: none;
+}
