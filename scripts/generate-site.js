@@ -27,6 +27,14 @@ const official = {
   receiptLabel: "Récépissé de déclaration de création n° W423016361",
 };
 
+const statutes = {
+  signedDate: "22 juin 2026",
+  signedPlace: "Saint-Étienne",
+  duration: "indéterminée",
+  founders: "Edryan Rangoly et Jordan Lambeau",
+  object: "revitalisation, réhabilitation et valorisation des territoires urbains, ruraux et ultramarins",
+};
+
 const nav = [
   ["Accueil", "index.html"],
   ["L'association", "qui-sommes-nous.html"],
@@ -141,8 +149,12 @@ const pages = [
         "Notre rôle",
         "TVF ne remplace ni les collectivités, ni les dispositifs publics, ni les professionnels du bâtiment. L'association cherche à rendre les coopérations plus simples : repérer les situations, préparer les dossiers, mettre les acteurs autour de la même table et suivre ce qui est décidé."
       ),
+      textBlock(
+        "Objet social inscrit dans les statuts",
+        "Les statuts signés à Saint-Étienne le 22 juin 2026 donnent à TVF un objet large : participer à la revitalisation, la réhabilitation et la valorisation des territoires urbains, ruraux et ultramarins. Cet objet couvre notamment le logement, l'habitat, la vacance immobilière, la réhabilitation de bâtiments dégradés, la revitalisation commerciale, le réemploi des matériaux, les friches, l'insertion, la solidarité, l'environnement, l'économie circulaire, la formation et l'accompagnement des collectivités, entreprises et habitants."
+      ),
       sectionIntro(
-        "Ce que TVF apporte concrètement",
+        "Ce que TVF apporte concr?tement",
         "L'association se positionne comme un cadre de travail : elle transforme une intention en dossier lisible, un signalement en situation qualifiée et une ressource inutilisée en contribution possible à un projet territorial.",
         [
           ["Un cadre", "Des étapes, des pièces à fournir, des responsabilités et des limites écrites avant toute communication."],
@@ -1304,6 +1316,15 @@ const pages = [
           ["Rendre compte", "La communication publique doit rester alignée avec les faits établis."],
         ]
       ),
+      tableSection("Repères statutaires", "Les statuts signés le 22 juin 2026 complètent le récépissé de création et donnent un cadre de fonctionnement public.", [
+        ["Sujet", "Règle statutaire", "Conséquence pour TVF"],
+        ["Durée", "Durée indéterminée", "Permettre un projet national inscrit dans le temps long"],
+        ["Membres fondateurs", "Edryan Rangoly et Jordan Lambeau", "Identifier clairement les personnes à l'origine de l'association"],
+        ["Bureau", "Président, secrétaire et trésorier", "Organiser la gestion quotidienne et les responsabilités"],
+        ["Réunions du bureau", "Au moins deux fois par an", "Assurer un suivi régulier des décisions"],
+        ["Assemblées", "Convocation au moins 15 jours avant l'assemblée", "Garantir l'information des membres"],
+        ["Voix des membres", "Chaque membre dispose d'une voix", "Préserver une base associative lisible"],
+      ]),
       cards("Principes de gouvernance", "Chaque décision doit pouvoir être expliquée simplement.", [
         ["Intérêt général", "Prioriser les projets utiles aux habitants, au territoire et à la transition écologique."],
         ["Traçabilité", "Conserver les éléments qui justifient une décision, une convention ou une affectation de ressource."],
@@ -1546,6 +1567,13 @@ const pages = [
         "Références administratives publiées",
         "TVF dispose désormais du numéro RNA W423016361, issu du récépissé de déclaration de création délivré à Roanne le 2 juillet 2026. Le numéro SIREN sera ajouté uniquement s’il est attribué ultérieurement. Les informations d’hébergement et toute évolution statutaire devront rester appuyées par une pièce officielle."
       ),
+      tableSection("Statuts et transparence associative", "Les statuts précisent le cadre de fonctionnement interne et les ressources autorisées. Le site en publie une synthèse sans rendre les documents internes librement téléchargeables.", [
+        ["Point statutaire", "Ce qui est prévu", "Publication sur le site"],
+        ["Objet", "Revitalisation des territoires, habitat, commerces, friches, réemploi, insertion, solidarité et accompagnement", "Synthèse publique dans les pages institutionnelles"],
+        ["Ressources", "Cotisations, subventions, prestations, dons et ressources autorisées par la loi", "Présentation sans annoncer de financement non obtenu"],
+        ["Indemnités", "Fonctions exercées librement et volontairement, remboursements possibles sur justificatifs", "Principe de prudence et de traçabilité"],
+        ["Dissolution", "Actif net non réparti entre les membres et attribué à une structure d'intérêt général ou objet similaire", "Garantie d'intérêt général"],
+      ]),
       tableSection("Ce qui peut être publié", "Chaque information doit être reliée à son niveau de preuve.", [
         ["Information", "Publication possible", "Condition"],
         ["Objectif", "Oui", "Mentionner qu'il s'agit d'une intention ou d'une cible"],
@@ -1620,6 +1648,15 @@ const pages = [
         ["Changement d'adresse", "Mettre à jour siège, contact et supports publics", "Décision interne ou document administratif"],
         ["Évolution des responsables", "Actualiser les noms, fonctions et responsabilités affichées", "Procès-verbal ou décision statutaire"],
         ["Changement d'hébergement", "Mettre à jour l'identité de l'hébergeur et les informations obligatoires", "Contrat, facture ou fiche hébergeur"],
+      ]),
+      tableSection("Informations issues des statuts", "Les statuts signés le 22 juin 2026 complètent les informations administratives issues du récépissé.", [
+        ["Information", "Contenu statutaire", "Publication"],
+        ["Dénomination", "TERRITOIRES VIVANTS FRANCE", "Publiée"],
+        ["Sigle", "TVF", "Publié"],
+        ["Siège social", "25 rue Élise Gervais, 42000 Saint-Étienne", "Publié"],
+        ["Durée", "Indéterminée", "Publiée"],
+        ["Membres fondateurs", "Edryan Rangoly et Jordan Lambeau", "Publiés"],
+        ["Exercice social", "Durée d'un an", "Synthèse publique"],
       ]),
       legalSection(),
       faqSection([
@@ -2393,7 +2430,7 @@ function contactSection() {
 }
 
 function legalSection() {
-  return `<section class="section" ${sectionAttrs("Mentions légales", "mentions-legales-detail")}><div class="container legal"><h2>Cadre légal du site</h2><h3>Éditeur</h3><p><strong>Territoires Vivants France</strong><br>${official.status}<br>RNA : ${official.rna}<br>${contact.address}<br>E-mail : <a href="mailto:${contact.email}">${contact.email}</a><br>Téléphone : <a href="tel:${contact.phoneHref}">${contact.phone}</a></p><h3>Responsables</h3><p>Président fondateur : Edryan Rangoly.<br>Secrétaire et trésorier : M. Lambeau Jordan.</p><h3>Références administratives</h3><p>${official.receiptLabel}. Déclaration en date du ${official.declarationDate}. Décision prise le ${official.decisionDate}. Récépissé délivré à ${official.receiptPlace} le ${official.receiptDate} par ${official.authority}. Numéro SIREN : à compléter uniquement si attribution ultérieure.</p><h3>Hébergement</h3><p>Le site est diffusé sur le domaine territoiresvivantsfrance.fr. Les informations relatives à l'hébergeur, au domaine et aux responsabilités techniques doivent rester à jour dans cette rubrique.</p><h3>Données personnelles</h3><p>Les formulaires et parcours présentés servent à préparer les informations utiles à une demande. Les données transmises à TVF doivent être traitées dans le respect du RGPD, avec une finalité claire, une durée de conservation adaptée et un droit de contact pour les personnes concernées.</p><h3>Propriété intellectuelle</h3><p>Les textes, logos, documents, visuels et éléments graphiques du site sont destinés à présenter Territoires Vivants France. Toute réutilisation, modification ou diffusion doit faire l'objet d'une autorisation préalable.</p><h3>Responsabilité</h3><p>Les contenus du site présentent une démarche associative, des méthodes et des documents de travail. Ils ne constituent pas un conseil juridique, technique, financier ou administratif personnalisé. Chaque projet doit être vérifié et adapté avec les interlocuteurs compétents.</p></div></section>`;
+  return `<section class="section" ${sectionAttrs("Mentions légales", "mentions-legales-detail")}><div class="container legal"><h2>Cadre légal du site</h2><h3>Éditeur</h3><p><strong>Territoires Vivants France</strong><br>${official.status}<br>RNA : ${official.rna}<br>${contact.address}<br>E-mail : <a href="mailto:${contact.email}">${contact.email}</a><br>Téléphone : <a href="tel:${contact.phoneHref}">${contact.phone}</a></p><h3>Responsables</h3><p>Président fondateur : Edryan Rangoly.<br>Secrétaire et trésorier : M. Lambeau Jordan.</p><h3>Références administratives</h3><p>${official.receiptLabel}. Déclaration en date du ${official.declarationDate}. Décision prise le ${official.decisionDate}. Récépissé délivré à ${official.receiptPlace} le ${official.receiptDate} par ${official.authority}. Numéro SIREN : à compléter uniquement si attribution ultérieure.</p><h3>Statuts</h3><p>Les statuts de Territoires Vivants France ont ?t? ?tablis ? Saint-?tienne le 22 juin 2026. Ils pr?voient notamment une dur?e ind?termin?e, un bureau compos? d?un pr?sident, d?un secr?taire et d?un tr?sorier, des ressources autoris?es par la loi et une attribution de l?actif net ? un organisme d?int?r?t g?n?ral ou ? objet similaire en cas de dissolution.</p><h3>Hébergement</h3><p>Le site est diffusé sur le domaine territoiresvivantsfrance.fr. Les informations relatives à l'hébergeur, au domaine et aux responsabilités techniques doivent rester à jour dans cette rubrique.</p><h3>Données personnelles</h3><p>Les formulaires et parcours présentés servent à préparer les informations utiles à une demande. Les données transmises à TVF doivent être traitées dans le respect du RGPD, avec une finalité claire, une durée de conservation adaptée et un droit de contact pour les personnes concernées.</p><h3>Propriété intellectuelle</h3><p>Les textes, logos, documents, visuels et éléments graphiques du site sont destinés à présenter Territoires Vivants France. Toute réutilisation, modification ou diffusion doit faire l'objet d'une autorisation préalable.</p><h3>Responsabilité</h3><p>Les contenus du site présentent une démarche associative, des méthodes et des documents de travail. Ils ne constituent pas un conseil juridique, technique, financier ou administratif personnalisé. Chaque projet doit être vérifié et adapté avec les interlocuteurs compétents.</p></div></section>`;
 }
 
 function iconFor(text) {
