@@ -186,7 +186,8 @@ Les formulaires publics du site envoient les demandes vers la fonction Vercel `/
 Variables d'environnement attendues dans Vercel :
 
 - `SUPABASE_URL` : URL du projet Supabase, au format `https://xxxx.supabase.co` ou `https://xxxx.supabase.co/rest/v1`
-- `SUPABASE_SERVICE_ROLE_KEY` : clé serveur Supabase, uniquement côté Vercel, jamais dans le navigateur
+- `SUPABASE_SERVICE_ROLE_KEY` : clé serveur Supabase, uniquement côté Vercel, jamais dans le navigateur. Les clés modernes `sb_secret_...` sont supportées.
+- `SUPABASE_ANON_KEY` : optionnel, clé anon ou `sb_publishable_...` si une policy RLS autorise l'insertion.
 - `SUPABASE_CONTACTS_TABLE` : optionnel, nom de la table de destination. Par défaut : `contacts`
 
 Le formulaire conserve un secours par e-mail si l'enregistrement Supabase échoue. Les documents internes ne sont pas rendus publics par ce branchement.

@@ -191,6 +191,21 @@ function supabaseKeys() {
   );
 }
 
+function supabaseHeadersForKey(key) {
+  const headers = {
+    apikey: key,
+    "Content-Type": "application/json",
+    Prefer: "return=minimal",
+  };
+
+  // Legacy anon/service_role keys are JWTs. New sb_secret_/sb_publishable_ keys are not.
+  if (!key.startsWith("sb_")) {
+    headers.Authorization = `Bearer ${key}`;
+  }
+
+  return headers;
+}
+
 async function insertIntoSupabase(submission) {
   const restUrl = normalizeSupabaseRestUrl(process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL);
   const keys = supabaseKeys();
@@ -211,12 +226,7 @@ async function insertIntoSupabase(submission) {
     for (const row of rows) {
       const response = await fetchWithTimeout(endpoint, {
         method: "POST",
-        headers: {
-          apikey: key,
-          Authorization: `Bearer ${key}`,
-          "Content-Type": "application/json",
-          Prefer: "return=minimal",
-        },
+        headers: supabaseHeadersForKey(key),
         body: JSON.stringify(row),
       });
 
