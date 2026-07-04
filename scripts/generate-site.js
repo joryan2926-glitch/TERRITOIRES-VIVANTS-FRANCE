@@ -253,7 +253,7 @@ const pages = [
       split(
         "La Banque de matériaux est un outil de projet",
         "Les matériaux proposés à TVF ne sont pas distribués librement. Ils sont qualifiés, tracés puis orientés vers des besoins utiles : remise en état d'un local associatif, aménagement d'un lieu partagé, soutien à un chantier encadré ou expérimentation territoriale. Cette logique protège les contributeurs et garantit que chaque ressource garde une utilité collective.",
-        "assets/photos/artisan-menuiserie-bois.jpg"
+        "assets/photos/france-ressourcerie-vichy.jpg"
       ),
       timeline("Méthode d'intervention", [
         ["1", "Recevoir", "Une demande, un signalement ou une contribution est enregistré avec un numéro de dossier."],
@@ -334,7 +334,7 @@ const pages = [
       split(
         "Matériauthèque Solidaire",
         "Ce pôle transforme les matériaux disponibles en ressources de projet. Une porte, du bois, du carrelage, du mobilier ou un équipement technique ne sont utiles que s'ils sont identifiés, stockables, sécurisés et affectés à un usage concret.",
-        "assets/photos/artisan-menuiserie-bois.jpg"
+        "assets/photos/france-ressourcerie-vichy.jpg"
       ),
       split(
         "Commerce Vivant",

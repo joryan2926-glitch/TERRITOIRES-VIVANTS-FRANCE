@@ -80,7 +80,7 @@ Cette table sert de contrôle qualité pour garder une cohérence entre le sujet
 | Nos actions / centre-ville | `centre-ville-nantes.jpg` | Revitalisation urbaine, mobilité, centre-ville français |
 | Nos pôles / travaux | `chantier-renovation-lyon.jpg` | Rénovation, méthode, intervention sur patrimoine existant |
 | Habitat / propriétaires | `immeuble-renovation-meudon.jpg` | Bien bâti, rénovation, logement |
-| Matériaux / entreprises | `artisan-menuiserie-bois.jpg` | Bois, matériaux, savoir-faire, réemploi |
+| Matériaux / entreprises | `france-ressourcerie-vichy.jpg` | Ressourcerie, matériaux et objets réemployables, économie circulaire |
 | Commerces | `commerce-ferme-vichy.jpg` ou `saint-etienne-centre-commerce.jpg` | Local fermé ou rue commerçante française |
 | Friches / observatoire | `friche-industrielle-ronchamp.jpg` | Friche, recyclage foncier, site à qualifier |
 | Citoyens / bénévoles | `jardin-partage-france.jpg` | Action collective, espace vert, participation |
