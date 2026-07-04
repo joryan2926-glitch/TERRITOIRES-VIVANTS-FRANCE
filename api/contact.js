@@ -181,11 +181,21 @@ function candidateRows(submission) {
   ].filter((row) => Object.keys(row).length > 0);
 }
 
+function supabaseKeys() {
+  return Array.from(
+    new Set(
+      [process.env.SUPABASE_SERVICE_ROLE_KEY, process.env.SUPABASE_ANON_KEY, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY]
+        .map((value) => clean(value || "", 3000))
+        .filter(Boolean)
+    )
+  );
+}
+
 async function insertIntoSupabase(submission) {
   const restUrl = normalizeSupabaseRestUrl(process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL);
-  const key = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  const keys = supabaseKeys();
 
-  if (!restUrl || !key) {
+  if (!restUrl || keys.length === 0) {
     const error = new Error("Supabase n'est pas configure sur Vercel.");
     error.statusCode = 503;
     error.code = "SUPABASE_NOT_CONFIGURED";
@@ -197,25 +207,31 @@ async function insertIntoSupabase(submission) {
   const rows = candidateRows(submission);
   let lastError = null;
 
-  for (const row of rows) {
-    const response = await fetchWithTimeout(endpoint, {
-      method: "POST",
-      headers: {
-        apikey: key,
-        Authorization: `Bearer ${key}`,
-        "Content-Type": "application/json",
-        Prefer: "return=minimal",
-      },
-      body: JSON.stringify(row),
-    });
+  for (const key of keys) {
+    for (const row of rows) {
+      const response = await fetchWithTimeout(endpoint, {
+        method: "POST",
+        headers: {
+          apikey: key,
+          Authorization: `Bearer ${key}`,
+          "Content-Type": "application/json",
+          Prefer: "return=minimal",
+        },
+        body: JSON.stringify(row),
+      });
 
-    if (response.ok) return true;
+      if (response.ok) return true;
 
-    const errorText = await response.text().catch(() => "");
-    lastError = { status: response.status, body: errorText };
+      const errorText = await response.text().catch(() => "");
+      lastError = { status: response.status, body: errorText };
 
-    if (![400, 404, 409].includes(response.status)) {
-      break;
+      if (response.status === 401 || response.status === 403) {
+        break;
+      }
+
+      if (![400, 404, 409].includes(response.status)) {
+        break;
+      }
     }
   }
 
@@ -223,10 +239,9 @@ async function insertIntoSupabase(submission) {
   error.statusCode = 502;
   error.code = "SUPABASE_INSERT_FAILED";
   error.details = lastError;
-  error.publicDetails = { stage: "supabase_insert", upstreamStatus: lastError?.status || null };
+  error.publicDetails = { stage: "supabase_insert", upstreamStatus: lastError?.status || null, attemptedKeys: keys.length };
   throw error;
 }
-
 function parseAddress(value, fallbackEmail = DEFAULT_CONTACT_EMAIL) {
   const input = clean(value || fallbackEmail, 300);
   const match = input.match(/^(.*)<([^>]+)>$/);
