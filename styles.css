@@ -758,6 +758,67 @@ table a:focus-visible {
   font-weight: 900;
 }
 
+
+.institutional-narrative {
+  padding: 58px 0 42px;
+  background: linear-gradient(180deg, var(--cream), rgba(255, 255, 255, 0.92));
+  border-bottom: 1px solid rgba(24, 63, 34, 0.08);
+}
+
+.institutional-narrative-inner {
+  display: grid;
+  grid-template-columns: minmax(240px, 0.62fr) minmax(0, 1.38fr);
+  gap: clamp(28px, 4vw, 64px);
+  align-items: start;
+}
+
+.institutional-narrative h2 {
+  margin: 8px 0 0;
+  max-width: 560px;
+  color: var(--blue-900);
+  font-size: clamp(1.55rem, 2.45vw, 2.45rem);
+  line-height: 1.08;
+}
+
+.institutional-narrative p {
+  color: rgba(14, 45, 69, 0.86);
+  font-size: 1rem;
+  line-height: 1.78;
+}
+
+.institutional-narrative-inner > div p:first-child {
+  margin-top: 2px;
+}
+
+.institutional-brief.quick-brief {
+  padding: 20px 0 28px;
+  background: var(--cream);
+}
+
+.institutional-brief .quick-brief-grid > * {
+  background: rgba(255, 255, 255, 0.72);
+  border-color: rgba(24, 63, 34, 0.12);
+  box-shadow: none;
+}
+
+.institutional-brief .quick-brief-grid span {
+  font-weight: 800;
+  letter-spacing: 0.07em;
+}
+
+.institutional-panel.decision-panel {
+  padding: 64px 0;
+  background:
+    linear-gradient(135deg, rgba(14, 45, 69, 0.97), rgba(24, 63, 34, 0.96)),
+    radial-gradient(circle at top right, rgba(213, 162, 56, 0.18), transparent 36%);
+}
+
+.institutional-panel .decision-list article span {
+  border-radius: 12px;
+  font-size: 0.76rem;
+  letter-spacing: 0.04em;
+}
+
 .compact-section {
   padding-top: 54px;
 }
@@ -1660,5 +1721,28 @@ tr:last-child td {
   th {
     color: #fff !important;
     background: #183f22 !important;
+  }
+}
+
+
+@media (max-width: 900px) {
+  .institutional-narrative-inner {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .institutional-narrative {
+    padding: 42px 0 30px;
+  }
+}
+
+@media (max-width: 760px) {
+  .institutional-narrative h2 {
+    font-size: clamp(1.35rem, 6vw, 1.9rem);
+  }
+
+  .institutional-narrative p {
+    font-size: 0.96rem;
+    line-height: 1.68;
   }
 }

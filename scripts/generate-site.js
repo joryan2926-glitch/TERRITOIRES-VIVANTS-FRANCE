@@ -154,7 +154,7 @@ const pages = [
         "Les statuts signés à Saint-Étienne le 22 juin 2026 donnent à TVF un objet large : participer à la revitalisation, la réhabilitation et la valorisation des territoires urbains, ruraux et ultramarins. Cet objet couvre notamment le logement, l'habitat, la vacance immobilière, la réhabilitation de bâtiments dégradés, la revitalisation commerciale, le réemploi des matériaux, les friches, l'insertion, la solidarité, l'environnement, l'économie circulaire, la formation et l'accompagnement des collectivités, entreprises et habitants."
       ),
       sectionIntro(
-        "Ce que TVF apporte concr?tement",
+        "Ce que TVF apporte concrètement",
         "L'association se positionne comme un cadre de travail : elle transforme une intention en dossier lisible, un signalement en situation qualifiée et une ressource inutilisée en contribution possible à un projet territorial.",
         [
           ["Un cadre", "Des étapes, des pièces à fournir, des responsabilités et des limites écrites avant toute communication."],
@@ -180,7 +180,7 @@ const pages = [
         ["Complémentarité", "Aider les acteurs existants sans se substituer à eux."],
         ["Utilité", "Orienter chaque action vers un bénéfice concret pour le territoire."],
       ]),
-      tableSection("Lecture institutionnelle de TVF", "Cette grille résume ce qu'un interlocuteur public, économique ou associatif doit comprendre avant un premier rendez-vous.", [
+      tableSection("Lecture institutionnelle de TVF", "Ce cadre de lecture résume ce qu'un interlocuteur public, économique ou associatif doit comprendre avant un premier rendez-vous.", [
         ["Question", "Réponse TVF", "Preuve ou document associé"],
         ["Pourquoi TVF existe ?", "Réduire la dispersion entre biens vacants, ressources inutilisées, besoins locaux et acteurs capables d'agir", "Méthode TVF, pages actions et pôles"],
         ["À qui TVF s'adresse ?", "Collectivités, propriétaires, entreprises, associations, bénévoles, financeurs et habitants", "Parcours publics et fiches dédiées"],
@@ -316,7 +316,7 @@ const pages = [
         ["Friches & Terrains Vivants", "Des espaces délaissés peuvent devenir utiles au cadre de vie", "Qualifier l'accès, les risques, les usages verts ou partagés", "Audit terrain, note d'opportunité, plan d'action"],
         ["Solidarité & Insertion", "Les projets locaux peuvent créer de l'engagement et des parcours", "Cadrer les missions, encadrer les actions, suivre la participation", "Fiche mission, émargement, compte rendu"],
       ]),
-      tableSection("Exemples de dossiers par pôle", "Cette lecture aide un visiteur à comprendre rapidement quel pôle peut porter l'analyse principale d'un dossier.", [
+      tableSection("Exemples de dossiers par pôle", "Cette synthèse aide un visiteur à comprendre rapidement quel pôle peut porter l'analyse principale d'un dossier.", [
         ["Pôle principal", "Dossier typique", "Pôles associés possibles", "Question de décision"],
         ["Habitat Vivant", "Logement vacant proposé par un propriétaire", "Matériauthèque, Solidarité, Financement", "Le bien peut-il être étudié et sécurisé pour un usage utile ?"],
         ["Matériauthèque Solidaire", "Matériaux de chantier ou mobilier professionnel disponibles", "Habitat, Commerce, Friches", "La ressource est-elle réemployable, traçable et affectable ?"],
@@ -874,7 +874,7 @@ const pages = [
     h1: "Construire des partenariats utiles et traçables.",
     intro:
       "Cette page présente les formes de coopération possibles, les responsabilités attendues et le cadre à formaliser avant toute communication publique.",
-    ctas: [["Pr?senter une coop?ration", "contact.html"], ["Demander les supports", "contact.html"]],
+    ctas: [["Présenter une coopération", "contact.html"], ["Demander les supports", "contact.html"]],
     sections: [
       sectionIntro(
         "Un partenariat doit être utile, formalisé et vérifiable",
@@ -951,7 +951,7 @@ const pages = [
           ["Suivre", "Conserver les preuves, décisions, indicateurs et responsabilités."],
         ]
       ),
-      tableSection("Choisir le bon document", "Cette lecture rapide évite de se perdre dans la bibliothèque complète.", [
+      tableSection("Choisir le bon document", "Cette synthèse rapide évite de se perdre dans la bibliothèque complète.", [
         ["Besoin", "Document prioritaire", "Objectif"],
         ["Une collectivité veut tester TVF", "Fiche collectivité", "Décrire le territoire, le besoin et les interlocuteurs"],
         ["Une collectivité prépare une réunion", "Dossier collectivité TVF", "Présenter la méthode, le périmètre, les livrables et les décisions attendues"],
@@ -1091,7 +1091,7 @@ const pages = [
         ["Kit média", "Centraliser les formulations publiques, l’usage du logo et les règles presse.", "documents/kit-media.md"],
       ]),
       textBlock(
-        "Mode d'emploi",
+        "Repères institutionnels",
         "Commencez par le document prioritaire, puis ajoutez seulement les pièces nécessaires : fiche projet, convention, grille d'impact ou pièces de suivi. Avant signature ou engagement, chaque modèle doit être adapté au contexte et validé par les personnes compétentes."
       ),
       faqSection([
@@ -1130,7 +1130,7 @@ const pages = [
         ["Bénévole", "Comment aider concrètement ?", "Indiquer ses compétences, disponibilités et territoire d'action", "Bénévoles & citoyens"],
         ["Financeur", "Comment soutenir un projet avec des indicateurs fiables ?", "Demander un dossier instruit avec budget, indicateurs et preuve de suivi", "Financeurs & mécènes"],
       ]),
-      tableSection("Avant de contacter TVF", "Cette grille évite les demandes trop vagues et accélère l'orientation vers le bon parcours.", [
+      tableSection("Avant de contacter TVF", "Ce cadre de lecture évite les demandes trop vagues et accélère l'orientation vers le bon parcours.", [
         ["Situation", "À préparer", "À éviter"],
         ["Bien vacant ou dégradé", "Adresse, photos si possible, statut connu, contraintes d'accès, idée d'usage", "Demander une intervention sans préciser le propriétaire ou le cadre"],
         ["Matériaux disponibles", "Nature, quantité, état, localisation, délai de retrait, conditions de sécurité", "Présenter TVF comme une déchetterie ou un débarras automatique"],
@@ -1138,7 +1138,7 @@ const pages = [
         ["Partenariat entreprise", "Contribution proposée, valeur d'usage, traçabilité, contraintes logistiques", "Afficher un partenariat sans accord écrit"],
         ["Soutien financier", "Objet du financement, budget prévisionnel, indicateurs et reporting attendus", "Demander un résultat chiffré avant réalisation"],
       ]),
-      tableSection("Où aller selon votre besoin", "Cette table transforme la FAQ en orientation rapide vers le bon parcours public.", [
+      tableSection("Où aller selon votre besoin", "Cette matrice transforme la FAQ en orientation rapide vers le bon parcours public.", [
         ["Besoin", "Page à consulter", "Document conseillé", "Résultat attendu"],
         ["Comprendre l'association", "Qui sommes-nous ?", "Dossier TVF", "Savoir si TVF correspond à votre besoin"],
         ["Proposer un bien", "Propriétaires", "Fiche propriétaire", "Qualifier le bien sans engagement automatique"],
@@ -1207,7 +1207,7 @@ const pages = [
         ["Projet local", "Le besoin est-il clair et réaliste ?", "Fiche projet", "Prioriser, mettre en attente ou rechercher des partenaires"],
         ["Financement", "Le projet est-il assez cadré pour être présenté ?", "Plan de financement", "Chercher un soutien, retravailler ou reporter"],
       ]),
-      tableSection("Niveau de maturité d'un dossier", "Cette lecture permet d'éviter de présenter trop tôt un dossier comme un projet abouti.", [
+      tableSection("Niveau de maturité d'un dossier", "Cette synthèse permet d'éviter de présenter trop tôt un dossier comme un projet abouti.", [
         ["Niveau", "Définition", "Ce qui manque souvent", "Suite logique"],
         ["Intention", "Une idée ou un besoin est exprimé", "Adresse, porteur, pièces, contraintes", "Demander les informations minimales"],
         ["Signalement qualifié", "Le lieu, la ressource ou le besoin est documenté", "Accord, accès, état réel, priorités", "Décider d'une visite ou d'une orientation"],
@@ -1620,7 +1620,7 @@ const pages = [
     eyebrow: "Cadre légal",
     h1: "Mentions légales.",
     intro:
-      "Cette page rassemble les informations publiques de référence et prévoit les champs administratifs à actualiser à chaque évolution officielle de l'association.",
+      "Cette page centralise les informations publiques de référence et prévoit les champs administratifs à actualiser à chaque évolution officielle de l'association.",
     ctas: [["Contact", "contact.html"], ["Transparence", "transparence.html"]],
     sections: [
       sectionIntro(
@@ -1632,7 +1632,7 @@ const pages = [
           ["Évolution", "Rubriques prévues pour intégrer les références officielles après formalisation."],
         ]
       ),
-      tableSection("Informations à tenir à jour", "Cette grille permet de vérifier rapidement les mentions à compléter lorsque l'association évolue.", [
+      tableSection("Informations à tenir à jour", "Ce cadre de lecture permet de vérifier rapidement les mentions à compléter lorsque l'association évolue.", [
         ["Information", "Statut actuel", "Action à prévoir"],
         ["Adresse du siège", "25 rue Élise Gervais, 42000 Saint-Étienne", "Maintenir à jour en cas de changement"],
         ["Responsables", "Président fondateur, secrétaire et trésorier identifiés", "Actualiser après toute décision statutaire"],
@@ -1663,6 +1663,87 @@ const pages = [
         ["Pourquoi certaines informations restent-elles à compléter ?", `TVF dispose désormais du RNA ${official.rna}. Seuls les éléments non attribués ou évolutifs, comme le SIREN le cas échéant, l’hébergement ou une modification statutaire, doivent être complétés après preuve officielle.`],
         ["Les documents du site ont-ils une valeur juridique automatique ?", "Non. Ils servent de bases de travail et doivent être adaptés, relus et validés avant toute signature ou engagement."],
         ["Qui contacter en cas de demande relative aux données personnelles ?", `Les demandes peuvent être adressées à ${contact.email} ou préparées depuis la page contact. TVF devra ensuite traiter chaque demande selon le RGPD et les finalités réellement concernées.`],
+      ]),
+    ],
+  },
+
+
+  {
+    file: "politique-confidentialite.html",
+    title: "Politique de confidentialité",
+    meta:
+      "Politique de confidentialité de Territoires Vivants France : données collectées, finalités, bases légales, durées de conservation, droits et contact RGPD.",
+    heroImage: "assets/photos/france-saint-etienne-jean-jaures.jpg",
+    eyebrow: "Données personnelles",
+    h1: "Une politique de confidentialité claire et évolutive.",
+    intro:
+      "Territoires Vivants France limite la collecte aux informations nécessaires pour répondre aux demandes, instruire les propositions et préparer les coopérations territoriales. Cette page précise le cadre actuel du site et les informations à compléter si de nouveaux services numériques sont activés.",
+    ctas: [["Exercer vos droits", "contact.html"], ["Mentions légales", "mentions-legales.html"]],
+    sections: [
+      sectionIntro(
+        "Un cadre RGPD proportionné au fonctionnement actuel",
+        "Le site public présente TVF, ses parcours et ses documents. À ce stade, les formulaires du site préparent principalement une demande de contact ou de dossier ; ils ne doivent pas être confondus avec une plateforme de compte utilisateur ou une base opérationnelle publique. Toute évolution future devra être documentée avant activation.",
+        [
+          ["Minimisation", "Ne demander que les informations utiles au traitement de la demande."],
+          ["Transparence", "Expliquer pourquoi les données sont collectées, qui y accède et pendant combien de temps."],
+          ["Traçabilité", "Tenir un registre interne des demandes, décisions et accès autorisés."],
+        ]
+      ),
+      tableSection("Responsable du traitement", "Ces informations permettent d'identifier clairement l'organisme à contacter pour toute question liée aux données personnelles.", [
+        ["Élément", "Information"],
+        ["Organisme", "Territoires Vivants France"],
+        ["Statut", official.status],
+        ["RNA", official.rna],
+        ["Siège", contact.address],
+        ["Contact RGPD", `${contact.email} - ${contact.phone}`],
+      ]),
+      tableSection("Données traitées selon les situations", "TVF doit conserver une logique de sobriété : aucune information sensible ne doit être demandée si elle n'est pas nécessaire au dossier.", [
+        ["Situation", "Données possibles", "Utilité"],
+        ["Demande de contact", "Nom, prénom, organisation, e-mail, téléphone, commune, message", "Répondre, orienter la demande et proposer un rendez-vous"],
+        ["Signalement ou proposition de bien", "Adresse ou commune, description, type de bien, informations transmises volontairement", "Qualifier le sujet, vérifier le périmètre et préparer une éventuelle instruction"],
+        ["Proposition de matériaux", "Type de ressource, quantité, localisation, état, coordonnées du contributeur", "Évaluer l'intérêt, la faisabilité logistique et l'affectation possible"],
+        ["Bénévolat ou partenariat", "Profil, compétences, disponibilité, structure, territoire", "Identifier une mission, un interlocuteur ou une coopération pertinente"],
+        ["Navigation du site", "Données techniques éventuellement traitées par l'hébergeur", "Sécurité, disponibilité et fonctionnement technique du site"],
+      ]),
+      tableSection("Finalités et bases légales", "Chaque traitement doit avoir une finalité précise et une base juridique adaptée. Les bases ci-dessous doivent être confirmées dans le registre interne selon les usages réels.", [
+        ["Finalité", "Base légale envisagée", "Exemple"],
+        ["Répondre aux demandes", "Intérêt légitime de l'association", "Réponse à un message, orientation vers le bon parcours"],
+        ["Préparer une coopération", "Mesures précontractuelles ou intérêt légitime", "Étude d'une proposition de bien, de matériaux ou de partenariat"],
+        ["Gérer l'adhésion ou la vie associative", "Contrat, obligation légale ou statutaire selon le cas", "Suivi des membres, justificatifs administratifs"],
+        ["Sécuriser le site", "Intérêt légitime", "Logs techniques, prévention des abus"],
+        ["Envoyer une newsletter", "Consentement", "Uniquement si un module d'inscription est activé"],
+      ]),
+      tableSection("Stockage et destinataires", "Les destinataires doivent rester limités aux personnes et prestataires nécessaires au traitement.", [
+        ["Lieu ou outil", "Données concernées", "Accès"],
+        ["Navigateur de l'utilisateur", "Brouillons ou informations préparées localement si le parcours le prévoit", "Utilisateur uniquement, jusqu'à effacement local"],
+        ["Messagerie TVF", "Demandes envoyées par e-mail", "Personnes habilitées à traiter les demandes"],
+        ["Hébergement Vercel", "Données techniques liées au fonctionnement du site", "Prestataire d'hébergement et de déploiement"],
+        ["Future base Supabase", "Non activée pour les données publiques à ce stade", "À documenter avant toute connexion réelle"],
+      ]),
+      tableSection("Durées de conservation indicatives", "Ces durées servent de cadre de départ. Elles devront être validées dans le registre RGPD interne et adaptées aux obligations applicables.", [
+        ["Catégorie", "Durée recommandée", "Point de vigilance"],
+        ["Demande de contact sans suite", "Jusqu'à 3 ans après le dernier échange", "Supprimer ou anonymiser si la demande n'a plus d'utilité"],
+        ["Dossier en cours", "Durée d'instruction puis archivage proportionné", "Conserver les preuves utiles sans excès"],
+        ["Adhésion, comptabilité, pièces administratives", "Selon les obligations légales et statutaires", "Séparer les archives administratives des demandes ordinaires"],
+        ["Newsletter future", "Jusqu'au retrait du consentement", "Prévoir un lien de désinscription"],
+        ["Brouillon local", "Jusqu'à suppression par l'utilisateur", "Informer que l'utilisateur garde la maîtrise de son navigateur"],
+      ]),
+      textBlock(
+        "Vos droits",
+        "Toute personne concernée peut demander l'accès à ses données, leur rectification, leur effacement, la limitation du traitement, l'opposition au traitement ou, lorsque cela s'applique, la portabilité. Une personne peut également retirer son consentement lorsqu'un traitement repose sur le consentement. Les demandes peuvent être adressées à TVF par e-mail ou depuis la page contact. En cas de difficulté persistante, une réclamation peut être introduite auprès de la CNIL.",
+        [["Contacter TVF", "contact.html"], ["CNIL", "https://www.cnil.fr/fr/agir"]]
+      ),
+      tableSection("Cookies et traceurs", "Le site doit rester sobre tant qu'aucun outil de mesure d'audience ou de publicité n'est nécessaire.", [
+        ["Traceur", "Statut", "Action à prévoir"],
+        ["Cookies strictement nécessaires", "Possibles si requis par le fonctionnement du site", "Informer simplement"],
+        ["Mesure d'audience", "À activer seulement si nécessaire", "Vérifier l'exemption ou demander le consentement selon l'outil"],
+        ["Publicité, pixels sociaux, remarketing", "Non prévus dans la version actuelle", "Bannière de consentement obligatoire avant activation"],
+      ]),
+      faqSection([
+        ["Les formulaires créent-ils automatiquement une base de données ?", "Non. Le site public sert d'abord à préparer et orienter les demandes. Toute connexion à une base de données devra être documentée avant activation."],
+        ["Supabase est-il déjà utilisé pour les données publiques ?", "La structure peut être préparée, mais la politique publique doit être mise à jour uniquement lorsque la connexion réelle et les traitements effectifs sont confirmés."],
+        ["Comment demander la suppression d'une information ?", `Il suffit d'écrire à ${contact.email} en précisant la demande concernée et les informations permettant de retrouver le dossier.`],
+        ["TVF peut-elle publier un signalement reçu ?", "Pas sans qualification, anonymisation lorsque nécessaire et vérification des droits. Un bien privé ne doit pas être exposé publiquement sans cadre adapté."],
       ]),
     ],
   },
@@ -2003,7 +2084,7 @@ function saintEtienneDataSection() {
 }
 
 function saintEtienneAlignmentSection() {
-  return tableSection("Besoins du territoire et réponse TVF", "Cette lecture transforme les données de cadrage en pistes de travail concrètes pour le territoire pilote. Les dispositifs publics cités sont des cadres de référence à articuler avec les acteurs compétents, pas des financements acquis.", [
+  return tableSection("Besoins du territoire et réponse TVF", "Cette synthèse transforme les données de cadrage en pistes de travail concrètes pour le territoire pilote. Les dispositifs publics cités sont des cadres de référence à articuler avec les acteurs compétents, pas des financements acquis.", [
     ["Besoin observé", "Donnée ou source à mobiliser", "Cadre public compatible", "Réponse TVF", "Document à produire"],
     ["Logements vacants et habitat ancien", "INSEE : logements vacants, âge du parc, statut d'occupation", "Politiques habitat, rénovation, lutte contre l'habitat indigne, dispositifs locaux à confirmer", "Qualifier les biens, comprendre les blocages propriétaires, préparer des scénarios d'usage", "Fiche propriétaire, accord de principe, scénarios d'usage"],
     ["Commerces fermés et rues fragilisées", "Observation terrain, données économiques locales, informations collectivité", "Revitalisation de centre-ville, commerce de proximité, occupation temporaire", "Identifier les locaux, tester des usages, rapprocher propriétaires et porteurs", "Fiche signalement, note d'opportunité, fiche projet"],
@@ -2077,7 +2158,7 @@ function contactAppointmentSection() {
 }
 
 function contactProfileTriageSection() {
-  return tableSection("Quel message envoyer selon votre profil ?", "Cette grille transforme la page Contact en outil de tri. Elle évite les échanges trop généraux et aide TVF à orienter rapidement la demande.", [
+  return tableSection("Quel message envoyer selon votre profil ?", "Ce cadre de lecture transforme la page Contact en outil de tri. Elle évite les échanges trop généraux et aide TVF à orienter rapidement la demande.", [
     ["Profil", "Objet recommandé du message", "Informations essentielles", "Document utile"],
     ["Collectivité", "Demande de rendez-vous territorial", "Commune ou EPCI, périmètre, besoin public, données disponibles, calendrier", "Fiche collectivité"],
     ["Propriétaire", "Proposition de bien inutilisé", "Adresse, type de bien, état apparent, photos, contraintes, intention", "Fiche propriétaire"],
@@ -2099,7 +2180,7 @@ function firstMeetingSection() {
 }
 
 function publicEntryMatrixSection() {
-  return tableSection("Dossier minimum par profil", "Chaque demande doit pouvoir être orientée rapidement. Ce tableau indique le minimum utile à transmettre avant un échange approfondi.", [
+  return tableSection("Dossier minimum par profil", "Chaque demande doit pouvoir être orientée rapidement. Ce référentiel indique le minimum utile à transmettre avant un échange approfondi.", [
     ["Profil", "À préparer", "Document utile", "Décision attendue"],
     ["Collectivité", "Périmètre, besoin public, données disponibles, interlocuteur, calendrier", "Fiche collectivité + note d'opportunité", "Cadrer un diagnostic, une expérimentation ou une convention territoriale"],
     ["Propriétaire", "Adresse, type de bien, état apparent, photos, contraintes, intention du propriétaire", "Fiche propriétaire + accord de principe", "Étudier un usage, organiser une visite autorisée ou classer le dossier"],
@@ -2111,7 +2192,7 @@ function publicEntryMatrixSection() {
 }
 
 function fastJourneySection() {
-  return tableSection("Trouver son parcours en trois clics", "Cette table sert de boussole : elle indique la page, le document et l'action immédiate selon le profil du visiteur.", [
+  return tableSection("Trouver son parcours en trois clics", "Cette matrice sert de boussole : elle indique la page, le document et l'action immédiate selon le profil du visiteur.", [
     ["Je suis...", "Page à ouvrir", "Document à préparer", "Action immédiate"],
     ["Une collectivité", `<a href="${hrefFor("collectivites.html")}">Collectivités</a>`, "Fiche collectivité ou fiche territoire", "Décrire le périmètre, le besoin public et les interlocuteurs"],
     ["Un propriétaire", `<a href="${hrefFor("proprietaires.html")}">Propriétaires</a>`, "Fiche propriétaire ou accord de principe", "Présenter le bien, son état, les contraintes et l'intention"],
@@ -2158,7 +2239,7 @@ function polesOperationalMatrixSection() {
 }
 
 function polesCoordinationSection() {
-  return tableSection("Comment les pôles s'assemblent sur un dossier", "Un projet crédible ne dépend presque jamais d'un seul pôle. Cette lecture aide à comprendre qui porte le dossier principal et quels pôles interviennent en appui.", [
+  return tableSection("Comment les pôles s'assemblent sur un dossier", "Un projet crédible ne dépend presque jamais d'un seul pôle. Cette synthèse aide à comprendre qui porte le dossier principal et quels pôles interviennent en appui.", [
     ["Situation de départ", "Pôle principal", "Pôles associés", "Livrable final attendu"],
     ["Un logement vacant proposé par un propriétaire", "Habitat Vivant", "Matériauthèque Solidaire, Solidarité & Insertion, Financement", "Scénario d'usage, budget, accord propriétaire, convention possible"],
     ["Un commerce fermé en centre-ville", "Commerce Vivant", "Habitat Vivant, Matériauthèque Solidaire, Collectivités", "Note d'opportunité, usage compatible, porteur identifié ou besoin de recherche"],
@@ -2240,7 +2321,7 @@ function documentContactMatrixSection() {
   ]);
 }
 function pdfPresentationPackSection() {
-  return cards("Dossiers internes pr?ts ? pr?senter", "Ces supports sont transmis apr?s qualification d'un ?change. Les sources internes restent modifiables pour adapter chaque dossier.", [
+  return cards("Dossiers internes prêts à présenter", "Ces supports sont transmis après qualification d'un échange. Les sources internes restent modifiables pour adapter chaque dossier.", [
     ["Dossier TVF PDF", "Présentation générale de TVF, de sa méthode, de ses publics et de ses garanties de sérieux.", "output/pdf/dossier-presentation-tvf.pdf"],
     ["Dossier de contact PDF", "Coordonnées, services, pôles, actions et informations à préparer avant un échange.", "output/documents/dossier-contact-tvf.pdf"],
     ["Dossier prospection Saint-Étienne PDF", "Liste opérationnelle des acteurs à solliciter, priorités, scripts et suivi de prospection.", "output/documents/dossier-prospection-saint-etienne.pdf"],
@@ -2261,7 +2342,7 @@ function pdfPresentationPackSection() {
 }
 
 function documentVisibilitySection() {
-  return tableSection("Supports de pr?sentation et outils internes", "Tous les contenus restent disponibles, mais ils n'ont pas le même usage. Cette distinction évite de présenter un registre interne comme un support public.", [
+  return tableSection("Supports de présentation et outils internes", "Tous les contenus restent disponibles, mais ils n'ont pas le même usage. Cette distinction évite de présenter un registre interne comme un support public.", [
     ["Niveau", "À utiliser pour", "Exemples", "Lecture recommandée"],
     ["Documents publics", "Présenter TVF à une collectivité, un propriétaire, une entreprise ou un financeur", "Dossier TVF, dossiers PDF, fiche collectivité, fiche propriétaire, fiche entreprise", "À ouvrir en priorité"],
     ["Supports de rendez-vous", "Préparer une réunion, qualifier une demande ou structurer une suite", "Fiche projet, pièces à fournir, note d'opportunité, modèle de convention", "À choisir selon le profil"],
@@ -2329,7 +2410,7 @@ function ownerConventionSection() {
 }
 
 function ownerReadinessMatrixSection() {
-  return tableSection("Avant de proposer un bien", "Cette grille aide le propriétaire à savoir si son dossier est prêt pour un premier échange TVF.", [
+  return tableSection("Avant de proposer un bien", "Ce cadre de lecture aide le propriétaire à savoir si son dossier est prêt pour un premier échange TVF.", [
     ["Question", "Pourquoi TVF la pose", "Pièce ou réponse utile", "Suite possible"],
     ["Qui peut autoriser l'étude ?", "TVF doit éviter toute démarche sans personne habilitée", "Identité du propriétaire ou mandataire", "Accord de principe ou demande de précision"],
     ["Quel est l'état apparent ?", "La sécurité et la faisabilité conditionnent tout le reste", "Photos, diagnostics disponibles, accès, risques connus", "Visite autorisée, expertise à prévoir ou classement"],
@@ -2395,7 +2476,7 @@ function financerOperationalSection() {
 }
 
 function financerDueDiligenceSection() {
-  return tableSection("Lecture financeur en 15 minutes", "Cette grille permet à un financeur ou mécène de savoir si un dossier TVF est assez mûr pour être étudié.", [
+  return tableSection("Lecture financeur en 15 minutes", "Ce cadre de lecture permet à un financeur ou mécène de savoir si un dossier TVF est assez mûr pour être étudié.", [
     ["Point de vérification", "Question à poser", "Réponse attendue", "Document"],
     ["Maturité", "Le dossier est-il une idée, une instruction, une convention ou une réalisation ?", "Statut clair et daté", "Fiche décision"],
     ["Besoin", "Quel problème territorial est traité ?", "Bien, public, territoire, urgence ou opportunité", "Fiche projet"],
@@ -2430,7 +2511,7 @@ function contactSection() {
 }
 
 function legalSection() {
-  return `<section class="section" ${sectionAttrs("Mentions légales", "mentions-legales-detail")}><div class="container legal"><h2>Cadre légal du site</h2><h3>Éditeur</h3><p><strong>Territoires Vivants France</strong><br>${official.status}<br>RNA : ${official.rna}<br>${contact.address}<br>E-mail : <a href="mailto:${contact.email}">${contact.email}</a><br>Téléphone : <a href="tel:${contact.phoneHref}">${contact.phone}</a></p><h3>Responsables</h3><p>Président fondateur : Edryan Rangoly.<br>Secrétaire et trésorier : M. Lambeau Jordan.</p><h3>Références administratives</h3><p>${official.receiptLabel}. Déclaration en date du ${official.declarationDate}. Décision prise le ${official.decisionDate}. Récépissé délivré à ${official.receiptPlace} le ${official.receiptDate} par ${official.authority}. Numéro SIREN : à compléter uniquement si attribution ultérieure.</p><h3>Statuts</h3><p>Les statuts de Territoires Vivants France ont été établis à Saint-Étienne le 22 juin 2026. Ils prévoient notamment une durée indéterminée, un bureau composé d’un président, d’un secrétaire et d’un trésorier, des ressources autorisées par la loi et une attribution de l’actif net à un organisme d’intérêt général ou à objet similaire en cas de dissolution.</p><h3>H?bergement</h3><p>Le site territoiresvivantsfrance.fr est hébergé et déployé par <strong>Vercel Inc.</strong>, plateforme Vercel. Vercel fournit les services techniques d’hébergement, de déploiement et de diffusion du site. Site de l’hébergeur : <a href="https://vercel.com" rel="noopener">https://vercel.com</a>.</p><h3>Donn?es personnelles</h3><p>Les formulaires et parcours présentés servent à préparer les informations utiles à une demande. Les données transmises à TVF doivent être traitées dans le respect du RGPD, avec une finalité claire, une durée de conservation adaptée et un droit de contact pour les personnes concernées.</p><h3>Propriété intellectuelle</h3><p>Les textes, logos, documents, visuels et éléments graphiques du site sont destinés à présenter Territoires Vivants France. Toute réutilisation, modification ou diffusion doit faire l'objet d'une autorisation préalable.</p><h3>Responsabilité</h3><p>Les contenus du site présentent une démarche associative, des méthodes et des documents de travail. Ils ne constituent pas un conseil juridique, technique, financier ou administratif personnalisé. Chaque projet doit être vérifié et adapté avec les interlocuteurs compétents.</p></div></section>`;
+  return `<section class="section" ${sectionAttrs("Mentions légales", "mentions-legales-detail")}><div class="container legal"><h2>Cadre légal du site</h2><h3>Éditeur</h3><p><strong>Territoires Vivants France</strong><br>${official.status}<br>RNA : ${official.rna}<br>${contact.address}<br>E-mail : <a href="mailto:${contact.email}">${contact.email}</a><br>Téléphone : <a href="tel:${contact.phoneHref}">${contact.phone}</a></p><h3>Responsables</h3><p>Président fondateur : Edryan Rangoly.<br>Secrétaire et trésorier : M. Lambeau Jordan.</p><h3>Références administratives</h3><p>${official.receiptLabel}. Déclaration en date du ${official.declarationDate}. Décision prise le ${official.decisionDate}. Récépissé délivré à ${official.receiptPlace} le ${official.receiptDate} par ${official.authority}. Numéro SIREN : à compléter uniquement si attribution ultérieure.</p><h3>Statuts</h3><p>Les statuts de Territoires Vivants France ont été établis à Saint-Étienne le 22 juin 2026. Ils prévoient notamment une durée indéterminée, un bureau composé d’un président, d’un secrétaire et d’un trésorier, des ressources autorisées par la loi et une attribution de l’actif net à un organisme d’intérêt général ou à objet similaire en cas de dissolution.</p><h3>Hébergement</h3><p>Le site territoiresvivantsfrance.fr est hébergé et déployé par <strong>Vercel Inc.</strong>, plateforme Vercel. Vercel fournit les services techniques d’hébergement, de déploiement et de diffusion du site. Site de l’hébergeur : <a href="https://vercel.com" rel="noopener">https://vercel.com</a>.</p><h3>Données personnelles</h3><p>Les formulaires et parcours présentés servent à préparer les informations utiles à une demande. Les données transmises à TVF doivent être traitées dans le respect du RGPD, avec une finalité claire, une durée de conservation adaptée et un droit de contact pour les personnes concernées. La page <a href="politique-confidentialite.html">Politique de confidentialité</a> précise les finalités, les données concernées, les durées de conservation indicatives et les droits des personnes.</p><h3>Propriété intellectuelle</h3><p>Les textes, logos, documents, visuels et éléments graphiques du site sont destinés à présenter Territoires Vivants France. Toute réutilisation, modification ou diffusion doit faire l'objet d'une autorisation préalable.</p><h3>Responsabilité</h3><p>Les contenus du site présentent une démarche associative, des méthodes et des documents de travail. Ils ne constituent pas un conseil juridique, technique, financier ou administratif personnalisé. Chaque projet doit être vérifié et adapté avec les interlocuteurs compétents.</p></div></section>`;
 }
 
 function iconFor(text) {
@@ -2468,6 +2549,7 @@ function breadcrumbTrail(page) {
     "impact.html": [["Observatoire", "observatoire.html"]],
     "kit-media.html": [["Documents", "documents.html"]],
     "mentions-legales.html": [["Transparence", "transparence.html"]],
+    "politique-confidentialite.html": [["Mentions légales", "mentions-legales.html"]],
   };
 
   return [["Accueil", "index.html"], ...(parents[page.file] || []), [page.title, page.file]];
@@ -2620,9 +2702,9 @@ function jsonLd(page) {
 function ctaBandFor(page) {
   const map = {
     "index.html": ["Première étape", "Vous voulez savoir par où commencer ?", "Choisissez votre profil et préparez une première demande lisible en quelques minutes.", [["Choisir mon parcours", "agir-avec-nous.html"], ["Demander un échange", "contact.html"]]],
-    "contact.html": ["Contact direct", "Votre demande est pr?te ? ?tre envoy?e ?", `Envoyez le r?sum? pr?par? ? ${contact.email} ou appelez le ${contact.phone}.`, [["?crire ? TVF", `mailto:${contact.email}`], ["Demander les supports", "contact.html"]]],
+    "contact.html": ["Contact direct", "Votre demande est prête à être envoyée ?", `Envoyez le résumé préparé à ${contact.email} ou appelez le ${contact.phone}.`, [["écrire à TVF", `mailto:${contact.email}`], ["Demander les supports", "contact.html"]]],
     "documents.html": ["Documents", "Vous ne savez pas quel modèle choisir ?", "Commencez par les documents essentiels ou demandez une orientation avant de remplir un dossier complet.", [["Demander une orientation", "contact.html"], ["Voir les essentiels", "#les-documents-essentiels"]]],
-    "saint-etienne.html": ["Territoire pilote", "Vous ?tes acteur ? Saint-?tienne ?", "Pr?sentez un bien, une ressource, un besoin public ou une coop?ration possible pour alimenter le pilote.", [["Pr?senter une situation", "contact.html"], ["Demander le dossier pilote", "contact.html"]]],
+    "saint-etienne.html": ["Territoire pilote", "Vous êtes acteur à Saint-Étienne ?", "Présentez un bien, une ressource, un besoin public ou une coopération possible pour alimenter le pilote.", [["Présenter une situation", "contact.html"], ["Demander le dossier pilote", "contact.html"]]],
     "observatoire.html": ["Signalement", "Vous connaissez un lieu ou une ressource à qualifier ?", "Transmettez une information factuelle : TVF la traitera comme un signalement, pas comme un projet automatique.", [["Signaler une situation", "agir-avec-nous.html#signalement"], ["Voir la méthode", "notre-methode.html"]]],
     "impact.html": ["Preuve", "Vous souhaitez soutenir TVF avec un suivi clair ?", "Appuyez-vous sur la grille d'impact, le reporting et les statuts de preuve avant toute annonce.", [["Voir les financeurs", "financeurs-mecenes.html"], ["Demander la grille", "contact.html"]]],
     "collectivites.html": ["Territoire partenaire", "Votre collectivité veut tester un périmètre pilote ?", "Préparez une fiche collectivité avec le besoin public, les données disponibles et la décision attendue.", [["Préparer la fiche", "documents/fiche-collectivite.md"], ["Demander un rendez-vous", "contact.html"]]],
@@ -2638,78 +2720,159 @@ function ctaBandFor(page) {
     .join("")}</div></div></section>`;
 }
 
+function institutionalNarrativeFor(page) {
+  const narratives = {
+    "index.html": [
+      "Un portail de coopération territoriale",
+      "Territoires Vivants France se positionne comme un outil d'intérêt général destiné à relier des situations aujourd'hui dispersées : biens vacants, ressources inutilisées, besoins locaux, compétences techniques et capacités de financement. Le site doit être lu comme une porte d'entrée vers une méthode de travail, pas comme une simple vitrine associative.",
+      "La démarche proposée repose sur une exigence constante : qualifier avant d'annoncer, conventionner avant d'agir et documenter avant de publier un impact. Cette posture permet de dialoguer avec les collectivités, les propriétaires, les entreprises et les financeurs dans un cadre sérieux, compréhensible et vérifiable."
+    ],
+    "qui-sommes-nous.html": [
+      "Une association nationale en structuration",
+      "TVF porte une ambition nationale tout en assumant une étape de construction progressive. Son rôle n'est pas de se substituer aux politiques publiques, mais de créer les conditions opérationnelles d'une coopération entre acteurs qui, trop souvent, ne disposent pas du même langage, du même calendrier ou des mêmes outils.",
+      "L'association doit donc avancer avec une double exigence : une vision forte pour la revitalisation des territoires et une méthode prudente, documentée, compatible avec les responsabilités publiques, privées et associatives."
+    ],
+    "nos-actions.html": [
+      "Des actions conçues pour produire des décisions",
+      "Les actions de TVF ne sont pas présentées comme des promesses isolées. Elles constituent des cadres d'intervention permettant de transformer une situation bloquée en dossier lisible : un besoin identifié, un acteur responsable, des ressources mobilisables, des contraintes connues et une suite formalisable.",
+      "Cette approche donne aux collectivités, entreprises, propriétaires et financeurs une base commune pour arbitrer, prioriser et engager une coopération sans confusion entre intention, projet en instruction et action réalisée."
+    ],
+    "nos-poles.html": [
+      "Une organisation métier au service d'une chaîne complète",
+      "Les cinq pôles ne sont pas de simples catégories de communication. Ils structurent les compétences nécessaires à une revitalisation territoriale complète : identifier un bien, qualifier son usage, mobiliser les matériaux, sécuriser la participation humaine et préparer une remise en usage durable.",
+      "Chaque pôle permet d'isoler un enjeu technique ou social, tout en restant relié aux autres. C'est cette articulation qui donne à TVF sa valeur : une capacité à coordonner plutôt qu'à additionner des interventions dispersées."
+    ],
+    "observatoire.html": [
+      "Une observation au service de la décision publique et territoriale",
+      "L'observatoire TVF vise à transformer des informations éparses en données exploitables. Il ne s'agit pas d'exposer des biens ou de publier des signalements bruts, mais de construire une lecture territoriale utile à la priorisation, au dialogue et à l'instruction de dossiers.",
+      "Cette logique suppose un haut niveau de prudence : sources citées, statuts de vérification, respect des propriétaires, protection des données sensibles et distinction claire entre information publique, donnée réservée et décision interne."
+    ],
+    "saint-etienne.html": [
+      "Saint-Étienne comme première démonstration territoriale",
+      "Le territoire stéphanois constitue un terrain cohérent pour tester la méthode TVF : patrimoine existant, enjeux de centre-ville, reconversion, habitat ancien, économie circulaire et mobilisation d'acteurs locaux. L'objectif n'est pas d'afficher des résultats prématurés, mais de construire un pilote crédible.",
+      "Ce pilote doit permettre de produire des dossiers courts, des conventions adaptées, des indicateurs suivis et une méthode réplicable dans d'autres territoires lorsque les conditions de gouvernance, de financement et de partenariat seront réunies."
+    ],
+    "collectivites.html": [
+      "Un appui de structuration pour les territoires",
+      "Une collectivité confrontée à la vacance, aux friches, aux commerces fermés ou aux ressources inutilisées a souvent besoin d'un cadre de coordination plus que d'un dispositif supplémentaire. TVF propose une méthode pour relier diagnostic, acteurs, ressources, usages possibles et suivi d'impact.",
+      "La coopération doit toujours rester compatible avec les compétences de la collectivité, ses politiques publiques, ses procédures internes et ses règles de communication. C'est cette rigueur qui permet d'envisager une expérimentation locale crédible."
+    ],
+    "proprietaires.html": [
+      "Un cadre respectueux de la propriété privée",
+      "TVF s'adresse aux propriétaires qui souhaitent étudier une solution pour un bien vacant, dégradé ou sous-utilisé, sans perdre la maîtrise de leur patrimoine. La première étape reste une phase d'étude : comprendre l'état du bien, les contraintes, les usages envisageables et les conditions d'une coopération éventuelle.",
+      "Aucune intervention sérieuse ne peut être engagée sans autorisation, convention, assurance, règles d'accès et responsabilités clairement définies. Cette sécurisation protège à la fois le propriétaire, TVF, les partenaires et les futurs usagers."
+    ],
+    "entreprises.html": [
+      "Une contribution économique utile et traçable",
+      "Les entreprises peuvent jouer un rôle décisif dans la revitalisation territoriale : matériaux, équipements, logistique, compétences, mécénat, locaux ou soutien à l'insertion. TVF doit transformer ces apports en contributions utiles, affectées à un besoin réel et documentées.",
+      "La valeur du partenariat ne repose pas sur une visibilité immédiate, mais sur une preuve d'utilité territoriale : ressource qualifiée, destination validée, convention lorsque nécessaire et restitution claire de la contribution."
+    ],
+    "financeurs-mecenes.html": [
+      "Un financement adossé à des dossiers instruits",
+      "TVF doit offrir aux financeurs une lecture claire des projets : besoin territorial, phase financée, budget, risques, indicateurs et conditions de suivi. Cette exigence évite les promesses générales et permet de distinguer objectif, engagement, convention et résultat.",
+      "Le mécénat, les subventions, les contributions privées ou les financements solidaires n'ont de sens que s'ils soutiennent des objets précis, suivis et compatibles avec l'intérêt général poursuivi par l'association."
+    ],
+    "partenaires.html": [
+      "Des partenariats fondés sur un cadre écrit",
+      "TVF distingue clairement le contact exploratoire, la coopération en instruction et le partenariat officialisé. Cette progression protège la crédibilité de l'association et évite toute confusion sur les rôles, les engagements ou l'utilisation publique d'un nom ou d'un logo.",
+      "Un partenariat institutionnel ou économique doit préciser le périmètre, les responsabilités, la durée, les règles de communication, les livrables attendus et les conditions de suivi."
+    ],
+    "notre-methode.html": [
+      "Une méthode avant tout opérationnelle",
+      "La méthode TVF repose sur une conviction simple : un territoire ne manque pas toujours d'idées, mais souvent d'un cadre pour relier le bon bien, le bon usage, les bons acteurs et les bonnes ressources. La méthode sert à transformer cette complexité en décisions successives.",
+      "Elle organise le passage du signalement à l'instruction, de l'instruction à la convention, puis de l'action au suivi d'impact. Cette chaîne documentaire est essentielle pour inspirer confiance aux institutions et aux financeurs."
+    ],
+    "impact.html": [
+      "Une mesure d'impact fondée sur la preuve",
+      "TVF ne doit pas confondre ambition et résultat. Les indicateurs présentés doivent distinguer les objectifs, les dossiers qualifiés, les conventions signées, les actions réalisées et les impacts vérifiés. Cette discipline est indispensable pour dialoguer avec des collectivités, financeurs et journalistes.",
+      "La mesure d'impact doit être progressive, sourcée et datée. Elle permet de rendre compte sans surpromettre et de construire une crédibilité durable."
+    ],
+    "gouvernance.html": [
+      "Une gouvernance lisible pour sécuriser les décisions",
+      "La crédibilité de TVF dépend autant de sa mission que de sa capacité à décider proprement. Les critères de sélection, les responsabilités, les preuves, les conflits d'intérêts potentiels et les règles de communication doivent être documentés.",
+      "Cette gouvernance donne aux collectivités, entreprises et financeurs un cadre de confiance avant toute coopération formalisée."
+    ],
+  };
+
+  const item = narratives[page.file];
+  if (!item) return "";
+  const [title, first, second] = item;
+  return `<section class="institutional-narrative"><div class="container institutional-narrative-inner"><p class="section-kicker">Lecture institutionnelle</p><h2>${title}</h2><div><p>${first}</p><p>${second}</p></div></div></section>`;
+}
+
 function quickBriefFor(page) {
   const briefs = {
-    "index.html": ["TVF en 30 secondes", "Coordonner la remise en usage de biens, lieux et ressources inutilisés.", "Choisir votre profil puis demander un échange.", "Dossier TVF", "agir-avec-nous.html"],
-    "nos-actions.html": ["À lire en priorité", "Comprendre les leviers d'action : logements, commerces, matériaux, friches, insertion et financement.", "Identifier l'action qui correspond à votre situation.", "Fiche projet", "contact.html"],
-    "nos-poles.html": ["Organisation", "Voir comment les 5 pôles structurent le travail de terrain.", "Repérer le pôle principal d'un dossier.", "Grille d'instruction", "nos-actions.html"],
-    "observatoire.html": ["Lecture rapide", "Observer, qualifier, cartographier et prioriser sans exposer de données sensibles.", "Signaler une situation factuelle.", "Fiche signalement", "agir-avec-nous.html#signalement"],
-    "agir-avec-nous.html": ["Parcours", "Choisir le bon point d'entrée selon votre profil et la nature de la contribution.", "Préparer une situation courte puis passer par la page contact.", "Fiche signalement", "#proposer"],
-    "saint-etienne.html": ["Territoire pilote", "Utiliser Saint-Étienne pour tester la méthode TVF sur des cas concrets et vérifiables.", "Proposer un bien, une ressource ou un besoin local.", "Dossier Saint-Étienne", "documents/dossier-territorial-saint-etienne.md"],
-    "contact.html": ["Objectif", "Transformer un premier message en demande exploitable.", "Préparer profil, territoire, objet, pièces et suite attendue.", "Fiche adaptée au profil", "#contact-form"],
-    "documents.html": ["Mode d'emploi", "Commencer par les documents essentiels avant d'ouvrir la bibliothèque complète.", "Choisir un pack selon votre profil.", "Dossier TVF", "#les-documents-essentiels"],
-    "impact.html": ["Impact", "Distinguer objectif, instruction, convention et résultat vérifié.", "Lire les indicateurs avec leur preuve.", "Grille d'impact", "documents/grille-impact.md"],
-    "collectivites.html": ["Collectivités", "Cadrer un périmètre, un diagnostic, une convention et un suivi.", "Préparer une fiche collectivité.", "Fiche collectivité", "documents/fiche-collectivite.md"],
-    "proprietaires.html": ["Propriétaires", "Présenter un bien sans créer d'engagement prématuré.", "Décrire état, contraintes, usage et limites.", "Fiche propriétaire", "documents/fiche-proprietaire.md"],
-    "entreprises.html": ["Entreprises", "Transformer matériaux, locaux, compétences ou mécénat en contribution traçable.", "Décrire la ressource et ses conditions.", "Fiche entreprise", "documents/fiche-entreprise.md"],
-    "benevoles-citoyens.html": ["Engagement", "Signaler, documenter ou participer avec un cadre de sécurité.", "Choisir une mission adaptée au temps disponible.", "Fiche bénévole", "documents/fiche-benevole.md"],
-    "financeurs-mecenes.html": ["Financeurs", "Soutenir des dossiers instruits avec budget, risques, preuves et reporting.", "Demander une lecture financeur du dossier.", "Plan de financement", "documents/plan-financement-territorial.md"],
-    "partenaires.html": ["Partenariat", "Clarifier le périmètre, les responsabilités et la communication avant annonce.", "Qualifier la coopération possible.", "Fiche partenaire", "documents/fiche-partenaire-potentiel.md"],
-    "notre-methode.html": ["Méthode", "Passer d'un signalement à une décision documentée.", "Suivre les étapes sans brûler le cadrage.", "Grille d'instruction", "documents/grille-instruction-dossier.md"],
-    "qui-sommes-nous.html": ["Association", "Comprendre la mission, les limites et la logique de coopération de TVF.", "Lire la méthode ou contacter TVF.", "Dossier TVF", "documents/dossier-presentation-tvf.md"],
-    "gouvernance.html": ["Gouvernance", "Savoir qui décide, sur quels critères et avec quelles preuves.", "Vérifier le cadre avant tout engagement.", "Charte éthique", "documents/charte-ethique.md"],
-    "transparence.html": ["Transparence", "Distinguer établi, à instruire et publiable.", "Vérifier les statuts avant communication.", "Registre décisions", "documents/registre-suivi-decisions.md"],
-    "faq.html": ["FAQ", "Trouver une réponse courte puis rejoindre la page ou le document utile.", "Chercher par profil ou passer au contact.", "Documents essentiels", "documents.html#les-documents-essentiels"],
-    "kit-media.html": ["Kit média", "Utiliser les bons mots, le logo officiel et les limites de communication.", "Préparer une présentation publique sans exagération.", "Pitch officiel", "documents/pitch-officiel-tvf.md"],
-    "mentions-legales.html": ["Cadre légal", "Retrouver les informations publiques et les champs à actualiser.", "Contacter TVF pour toute précision.", "Mentions", "contact.html"],
+    "index.html": ["Positionnement", "TVF coordonne la remise en usage de biens, lieux et ressources inutilisés à partir d'un cadre de coopération territorial.", "Qualifier le profil, le territoire et le sujet à instruire.", "Dossier TVF", "agir-avec-nous.html"],
+    "nos-actions.html": ["Cadre d'intervention", "Les actions structurent les principaux leviers : habitat, commerce, matériaux, friches, insertion et financement.", "Orienter le dossier vers le levier prioritaire.", "Fiche projet", "contact.html"],
+    "nos-poles.html": ["Organisation opérationnelle", "Les cinq pôles donnent une lecture professionnelle des compétences mobilisables sur un dossier.", "Identifier le pôle pilote et les pôles associés.", "Grille d'instruction", "nos-actions.html"],
+    "observatoire.html": ["Observation territoriale", "L'observatoire rassemble données publiques, signalements qualifiés et décisions internes sans exposer d'informations sensibles.", "Documenter une situation factuelle.", "Fiche signalement", "agir-avec-nous.html#signalement"],
+    "agir-avec-nous.html": ["Parcours d'engagement", "Chaque contribution doit être reliée à un besoin, un territoire, un cadre et une suite identifiable.", "Présenter le profil et la contribution envisagée.", "Fiche signalement", "#proposer"],
+    "saint-etienne.html": ["Territoire pilote", "Saint-Étienne sert de socle d'expérimentation pour éprouver la méthode TVF sur des dossiers concrets et vérifiables.", "Proposer un bien, une ressource ou un besoin local.", "Dossier Saint-Étienne", "documents/dossier-territorial-saint-etienne.md"],
+    "contact.html": ["Relation institutionnelle", "La prise de contact doit permettre d'identifier le profil, le territoire, l'objet et le niveau de maturité du dossier.", "Transmettre les éléments utiles au premier cadrage.", "Fiche adaptée au profil", "#contact-form"],
+    "documents.html": ["Base documentaire", "Les supports cadrent les échanges, les conventions, les décisions et les preuves avant toute action publique.", "Sélectionner le pack adapté au rendez-vous.", "Dossier TVF", "#les-documents-essentiels"],
+    "impact.html": ["Suivi d'impact", "Les indicateurs distinguent objectifs, dossiers instruits, conventions et résultats vérifiés.", "Lire les chiffres avec leur source et leur statut.", "Grille d'impact", "documents/grille-impact.md"],
+    "collectivites.html": ["Territoires partenaires", "Le cadre collectivité articule diagnostic, périmètre, gouvernance, convention et suivi.", "Préparer un premier périmètre de coopération.", "Fiche collectivité", "documents/fiche-collectivite.md"],
+    "proprietaires.html": ["Biens privés", "Un bien peut être étudié sans engagement automatique, avec un cadre respectueux de la propriété et des responsabilités.", "Décrire le bien, ses contraintes et les usages envisageables.", "Fiche propriétaire", "documents/fiche-proprietaire.md"],
+    "entreprises.html": ["Contribution économique", "Matériaux, locaux, compétences ou mécénat doivent être qualifiés, traçables et affectés à un besoin réel.", "Présenter la ressource et ses conditions de mobilisation.", "Fiche entreprise", "documents/fiche-entreprise.md"],
+    "benevoles-citoyens.html": ["Mobilisation citoyenne", "L'engagement s'organise autour de missions utiles, sécurisées, limitées et documentées.", "Choisir une mission compatible avec le temps et les compétences disponibles.", "Fiche bénévole", "documents/fiche-benevole.md"],
+    "financeurs-mecenes.html": ["Financement responsable", "Un soutien doit s'appuyer sur un projet instruit, un budget, des risques identifiés et un reporting vérifiable.", "Demander une lecture financeur du dossier.", "Plan de financement", "documents/plan-financement-territorial.md"],
+    "partenaires.html": ["Coopération", "Un partenariat TVF repose sur un périmètre écrit, des responsabilités, une durée et une communication validée.", "Qualifier la forme de coopération possible.", "Fiche partenaire", "documents/fiche-partenaire-potentiel.md"],
+    "notre-methode.html": ["Méthodologie", "La méthode transforme un signalement ou une proposition en décision documentée, conventionnée ou classée.", "Suivre les étapes de qualification et de décision.", "Grille d'instruction", "documents/grille-instruction-dossier.md"],
+    "qui-sommes-nous.html": ["Identité", "TVF porte une mission de coopération nationale au service des territoires, des propriétaires et des ressources inutilisées.", "Lire la méthode ou engager un échange institutionnel.", "Dossier TVF", "documents/dossier-presentation-tvf.md"],
+    "gouvernance.html": ["Gouvernance", "Les décisions doivent être tracées, argumentées et compatibles avec l'objet statutaire de l'association.", "Vérifier le cadre avant tout engagement.", "Charte éthique", "documents/charte-ethique.md"],
+    "transparence.html": ["Transparence", "La communication distingue informations établies, dossiers en instruction, objectifs et résultats vérifiés.", "Appuyer toute annonce sur une preuve ou un statut clair.", "Registre décisions", "documents/registre-suivi-decisions.md"],
+    "faq.html": ["Questions clés", "Les réponses orientent vers les pages, documents et interlocuteurs utiles sans multiplier les détours.", "Rechercher par profil ou passer au contact.", "Documents essentiels", "documents.html#les-documents-essentiels"],
+    "kit-media.html": ["Communication", "Le kit média fixe les mots, visuels et limites de communication publique autour de TVF.", "Utiliser les éléments validés pour toute présentation.", "Pitch officiel", "documents/pitch-officiel-tvf.md"],
+    "mentions-legales.html": ["Cadre légal", "Les informations administratives publiques, les responsabilités et les mentions d'hébergement sont centralisées ici.", "Contacter TVF pour toute précision.", "Mentions", "contact.html"],
+    "politique-confidentialite.html": ["Données personnelles", "La politique précise les finalités, données concernées, durées indicatives, destinataires et droits des personnes.", "Adresser toute demande RGPD au contact officiel.", "Mentions légales", "mentions-legales.html"],
   };
 
   const brief = briefs[page.file];
   if (!brief) return "";
 
   const [label, objective, action, documentName, href] = brief;
-  return `<aside class="quick-brief" aria-label="À retenir"><div class="container quick-brief-grid"><div><p class="section-kicker">À retenir</p><strong>${label}</strong></div><p><span>Objectif</span>${objective}</p><p><span>Action</span>${action}</p><p><span>Document</span><a href="${hrefFor(href)}">${documentName}</a></p></div></aside>`;
+  return `<aside class="quick-brief institutional-brief" aria-label="Synthèse institutionnelle"><div class="container quick-brief-grid"><div><p class="section-kicker">Synthèse</p><strong>${label}</strong></div><p><span>Enjeu</span>${objective}</p><p><span>Suite</span>${action}</p><p><span>Référence</span><a href="${hrefFor(href)}">${documentName}</a></p></div></aside>`;
 }
 
 function decisionPanelFor(page) {
   const panels = {
     "index.html": {
-      kicker: "Décision",
-      title: "En arrivant ici, le visiteur doit savoir quoi faire.",
-      text: "La page d'accueil oriente vers le bon parcours sans demander au visiteur de comprendre tout le site.",
-      action: ["Choisir mon parcours", "agir-avec-nous.html"],
+      kicker: "Orientation",
+      title: "Une porte d'entrée vers la coopération territoriale.",
+      text: "La page d'accueil présente TVF comme une plateforme nationale capable de qualifier un besoin, d'orienter les acteurs et de préparer les premiers cadres de coopération.",
+      action: ["Engager une démarche", "agir-avec-nous.html"],
       items: [
-        ["Je comprends", "TVF coordonne des biens, lieux, matériaux et acteurs autour d'un usage utile."],
-        ["Je me situe", "Collectivité, propriétaire, entreprise, bénévole, financeur ou citoyen."],
-        ["Je passe à l'action", "Je prépare une demande courte et je contacte TVF avec les bons éléments."],
+        ["Mission", "Coordonner biens vacants, ressources inutilisées et acteurs territoriaux autour d'usages utiles."],
+        ["Publics", "Collectivités, propriétaires, entreprises, bénévoles, financeurs, associations et citoyens."],
+        ["Suite", "Un premier échange permet de qualifier le sujet, le territoire, les pièces disponibles et le niveau de maturité."],
       ],
     },
     "nos-actions.html": {
-      kicker: "Priorisation",
-      title: "Chaque action doit produire une sortie exploitable.",
-      text: "Une action TVF n'est pas une intention générale : elle doit conduire à une fiche, un scénario, une décision, une convention ou un indicateur.",
+      kicker: "Intervention",
+      title: "Des leviers opérationnels reliés à des livrables institutionnels.",
+      text: "Chaque action est pensée comme un cadre d'instruction : identifier un problème, qualifier les contraintes, formaliser les responsabilités et produire une décision exploitable.",
       action: ["Préparer une fiche projet", "documents/fiche-projet.md"],
       items: [
-        ["Problème", "Identifier le lieu, la ressource ou le besoin qui bloque le territoire."],
-        ["Réponse TVF", "Qualifier les acteurs, les contraintes, l'usage possible et les preuves."],
-        ["Livrable", "Sortir avec un document réutilisable en réunion ou en instruction."],
+        ["Diagnostic", "Localiser le bien, la ressource ou le besoin qui bloque une dynamique territoriale."],
+        ["Qualification", "Croiser acteurs, contraintes, usages possibles, risques et preuves disponibles."],
+        ["Décision", "Aboutir à une fiche, un scénario, une convention, un classement ou un indicateur."],
       ],
     },
     "nos-poles.html": {
       kicker: "Organisation",
-      title: "Les pôles structurent le travail, ils ne compliquent pas le parcours.",
-      text: "Le visiteur doit repérer le pôle principal d'un dossier puis comprendre quels pôles complémentaires peuvent intervenir.",
+      title: "Cinq pôles pour structurer une chaîne complète de revitalisation.",
+      text: "Les pôles donnent une lecture métier du dispositif : habitat, matériaux, commerce, friches et mobilisation humaine sont reliés dans un même cadre de décision.",
       action: ["Voir les actions", "nos-actions.html"],
       items: [
-        ["Pôle principal", "Habitat, matériaux, commerce, friche ou insertion selon le besoin dominant."],
-        ["Pôles associés", "Les autres pôles complètent le dossier quand une action est transversale."],
-        ["Décision", "TVF choisit la suite : compléter, visiter, instruire, conventionner ou classer."],
+        ["Pilotage", "Un pôle principal porte l'analyse selon la nature dominante du dossier."],
+        ["Coordination", "Les pôles associés complètent l'instruction lorsque le sujet devient transversal."],
+        ["Arbitrage", "TVF peut compléter, visiter, instruire, conventionner, reporter ou classer un dossier."],
       ],
     },
     "collectivites.html": {
-      kicker: "Collectivité",
-      title: "La bonne sortie d'un rendez-vous : un périmètre, un référent, un livrable.",
-      text: "Une commune ou un EPCI doit pouvoir tester TVF sans flou : sujet prioritaire, données disponibles, acteurs à mobiliser et décision à préparer.",
+      kicker: "Territoire partenaire",
+      title: "Un cadre lisible pour expérimenter avec une commune ou un EPCI.",
+      text: "La coopération avec une collectivité repose sur un périmètre défini, un référent identifié, des données mobilisables, des règles de communication et des livrables datés.",
       action: ["Remplir la fiche collectivité", "documents/fiche-collectivite.md"],
       items: [
         ["Périmètre", "Quartier, rue, typologie de biens, friche ou besoin public clairement délimité."],
@@ -2718,31 +2881,31 @@ function decisionPanelFor(page) {
       ],
     },
     "proprietaires.html": {
-      kicker: "Propriétaire",
-      title: "Proposer un bien ne crée pas d'engagement automatique.",
-      text: "Le parcours sécurise d'abord le propriétaire : propriété conservée, accès autorisé, usage étudié, responsabilités écrites.",
+      kicker: "Propriété sécurisée",
+      title: "Un parcours d'étude sans engagement prématuré du propriétaire.",
+      text: "TVF étudie les biens proposés dans un cadre respectueux de la propriété : accès autorisé, usage compatible, responsabilités écrites et convention adaptée lorsque le dossier avance.",
       action: ["Remplir la fiche propriétaire", "documents/fiche-proprietaire.md"],
       items: [
         ["Bien", "Type, adresse, état apparent, photos, diagnostics, contraintes et accès."],
         ["Intention", "Usage acceptable, durée possible, limites non négociables et attentes du propriétaire."],
-        ["Suite", "Étude, visite autorisée, scénarios d'usage, convention ou réorientation."],
+        ["Suite", "étude, visite autorisée, scénarios d'usage, convention ou réorientation."],
       ],
     },
     "entreprises.html": {
-      kicker: "Entreprise",
-      title: "Une contribution utile doit être qualifiée avant d'être valorisée.",
-      text: "TVF transforme matériaux, compétences, locaux ou mécénat en contribution territoriale traçable et orientée vers un besoin réel.",
+      kicker: "Contribution territoriale",
+      title: "Une contribution économique qualifiée, tracée et valorisable.",
+      text: "Matériaux, compétences, locaux ou mécénat sont intégrés à une logique de projet. L'entreprise dispose d'un cadre clair et TVF conserve une affectation maîtrisée des ressources.",
       action: ["Remplir la fiche entreprise", "documents/fiche-entreprise.md"],
       items: [
         ["Ressource", "Catégorie, quantité, état, localisation, délai, conditions de retrait ou disponibilité."],
         ["Affectation", "Acceptation, refus, stockage, mission, mise à disposition ou orientation vers un projet."],
-        ["Preuve", "Bordereau, convention, PV de remise, compte rendu ou reporting de contribution."],
+        ["Preuve", "Bordereau, convention, procès-verbal de remise, compte rendu ou reporting de contribution."],
       ],
     },
     "saint-etienne.html": {
-      kicker: "Pilote",
-      title: "Saint-Étienne doit démontrer la méthode, pas promettre des résultats prématurés.",
-      text: "Le territoire pilote sert à tester des dossiers courts, vérifiables et reproductibles avant tout déploiement national.",
+      kicker: "Territoire pilote",
+      title: "Saint-Étienne comme démonstrateur méthodologique.",
+      text: "Le pilote doit documenter des dossiers courts, vérifiables et reproductibles avant tout déploiement national : données, acteurs, blocages, conventions, coûts et conditions de duplication.",
       action: ["Lire le dossier Saint-Étienne", "documents/dossier-territorial-saint-etienne.md"],
       items: [
         ["Cadrage", "Données publiques, besoins locaux, acteurs et périmètres à prioriser."],
@@ -2752,8 +2915,8 @@ function decisionPanelFor(page) {
     },
     "financeurs-mecenes.html": {
       kicker: "Financement",
-      title: "Un soutien doit financer un objet clair, pas une promesse.",
-      text: "La page financeur prépare une lecture rapide : besoin, budget, risques, cadre juridique, preuves et reporting.",
+      title: "Un soutien relié à un objet, un budget et une preuve de suivi.",
+      text: "La page financeur prépare une lecture institutionnelle : besoin, phase financée, risques, cadre juridique, indicateurs, calendrier et reporting.",
       action: ["Préparer une demande de soutien", "documents/demande-soutien-financier.md"],
       items: [
         ["Objet", "Phase financée, territoire, bénéficiaires, dépenses et reste à financer."],
@@ -2762,9 +2925,9 @@ function decisionPanelFor(page) {
       ],
     },
     "contact.html": {
-      kicker: "Contact utile",
-      title: "Un bon message permet une réponse plus rapide.",
-      text: "La page Contact doit aider à préparer un échange exploitable, pas seulement envoyer une demande vague.",
+      kicker: "Relation qualifiée",
+      title: "Un premier contact orienté vers l'instruction du dossier.",
+      text: "La page Contact structure les informations nécessaires au premier échange : profil, territoire, objet, documents disponibles et niveau d'urgence.",
       action: ["Préparer l'envoi", "#contact-form"],
       items: [
         ["Profil", "Collectivité, propriétaire, entreprise, association, bénévole, financeur ou presse."],
@@ -2777,8 +2940,8 @@ function decisionPanelFor(page) {
   const panel = panels[page.file];
   if (!panel) return "";
 
-  return `<section class="decision-panel" ${sectionAttrs(panel.title)}><div class="container decision-panel-inner"><div class="decision-copy"><p class="section-kicker">${panel.kicker}</p><h2>${panel.title}</h2><p>${panel.text}</p><a class="btn primary" href="${hrefFor(panel.action[1])}">${panel.action[0]}</a></div><div class="decision-list">${panel.items
-    .map(([title, text], index) => `<article><span aria-hidden="true">${index + 1}</span><div><strong>${title}</strong><p>${text}</p></div></article>`)
+  return `<section class="decision-panel institutional-panel" ${sectionAttrs(panel.title)}><div class="container decision-panel-inner"><div class="decision-copy"><p class="section-kicker">${panel.kicker}</p><h2>${panel.title}</h2><p>${panel.text}</p><a class="btn primary" href="${hrefFor(panel.action[1])}">${panel.action[0]}</a></div><div class="decision-list">${panel.items
+    .map(([title, text], index) => `<article><span aria-hidden="true">${String(index + 1).padStart(2, "0")}</span><div><strong>${title}</strong><p>${text}</p></div></article>`)
     .join("")}</div></div></section>`;
 }
 
@@ -2848,6 +3011,7 @@ ${breadcrumbNav(page)}
       </div>
     </section>
     ${pageMiniNav(page)}
+    ${institutionalNarrativeFor(page)}
     ${quickBriefFor(page)}${decisionPanelFor(page)}
     ${page.sections.join("\n")}
     ${journeySection(page)}
@@ -2857,7 +3021,7 @@ ${breadcrumbNav(page)}
     <div class="container footer-grid">
       <div><span class="footer-logo-box"><img src="assets/logo-territoires-vivants-france-web.png" width="583" height="181" alt="Territoires Vivants France" class="footer-logo" loading="lazy" decoding="async"></span><p>Plateforme nationale de coopération pour redonner vie aux biens, lieux et ressources inutilisés.</p></div>
       <div><h3>Navigation</h3>${nav.slice(0, 7).map(([label, href]) => `<a href="${hrefFor(href)}">${label}</a>`).join("")}</div>
-      <div><h3>Ressources</h3><a href="${hrefFor("notre-methode.html")}">Notre méthode</a><a href="${hrefFor("impact.html")}">Impact</a><a href="${hrefFor("gouvernance.html")}">Gouvernance</a><a href="${hrefFor("kit-media.html")}">Kit média</a><a href="${hrefFor("faq.html")}">FAQ</a><a href="${hrefFor("transparence.html")}">Transparence</a><a href="${hrefFor("mentions-legales.html")}">Mentions légales</a><a href="${hrefFor("contact.html")}">Contact</a></div>
+      <div><h3>Ressources</h3><a href="${hrefFor("notre-methode.html")}">Notre méthode</a><a href="${hrefFor("impact.html")}">Impact</a><a href="${hrefFor("gouvernance.html")}">Gouvernance</a><a href="${hrefFor("kit-media.html")}">Kit média</a><a href="${hrefFor("faq.html")}">FAQ</a><a href="${hrefFor("transparence.html")}">Transparence</a><a href="${hrefFor("mentions-legales.html")}">Mentions légales</a><a href="${hrefFor("politique-confidentialite.html")}">Politique de confidentialité</a><a href="${hrefFor("contact.html")}">Contact</a></div>
       <div><h3>Siège</h3><p>25 rue Élise Gervais<br>42000 Saint-Étienne</p><p><a href="mailto:${contact.email}">${contact.email}</a><br><a href="tel:${contact.phoneHref}">${contact.phone}</a></p><a class="btn secondary" href="${hrefFor("contact.html")}">Contacter TVF</a></div>
     </div>
     <div class="container footer-bottom">© 2026 Territoires Vivants France - Tous droits réservés.</div>
