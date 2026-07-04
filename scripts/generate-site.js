@@ -1790,7 +1790,7 @@ function pageMiniNav(page) {
   if (anchors.length < 3) return "";
 
   return `<nav class="page-nav" aria-label="Dans cette page"><div class="container page-nav-inner"><span>Dans cette page</span>${anchors
-    .slice(0, 8)
+    .slice(0, 6)
     .map(([label, id]) => `<a href="#${id}" aria-label="Aller à la section : ${escapeAttr(label)}">${label}</a>`)
     .join("")}</div></nav>`;
 }
@@ -2788,8 +2788,8 @@ function ctaBandFor(page) {
     "partenaires.html": ["Coopération", "Vous envisagez une coopération avec TVF ?", "Avant toute communication, clarifions le périmètre, les responsabilités, la durée et les règles d'officialisation.", [["Préparer une coopération", "documents/fiche-partenaire-potentiel.md"], ["Contacter TVF", "contact.html"]]],
   };
   const [kicker, title, text, actions] = map[page.file] || ["Passer à l'étape suivante", "Vous avez un bien, une ressource ou un besoin territorial ?", "Présentez la situation à TVF pour préparer un premier échange clair et utile.", [["Agir avec nous", "agir-avec-nous.html"], ["Nous contacter", "contact.html"]]];
-  return `<section class="cta-band"><div class="container cta-band-inner"><div><p class="section-kicker">${kicker}</p><h3>${title}</h3><p class="section-lead">${text}</p></div><div class="cta-band-actions">${actions
-    .map(([label, href], index) => `<a class="btn ${index === 0 ? "primary" : "secondary"}" href="${hrefFor(href)}">${label}</a>`)
+  return `<section class="cta-band"><div class="container cta-band-inner"><div><p class="section-kicker">${kicker}</p><h3>${title}</h3><p class="section-lead">${text}</p></div><div class="cta-band-actions">${actions.slice(0, 1)
+    .map(([label, href]) => `<a class="btn primary" href="${hrefFor(href)}">${label}</a>`)
     .join("")}</div></div></section>`;
 }
 
