@@ -188,6 +188,8 @@ async function insertIntoSupabase(submission) {
   if (!restUrl || !key) {
     const error = new Error("Supabase n'est pas configure sur Vercel.");
     error.statusCode = 503;
+    error.code = "SUPABASE_NOT_CONFIGURED";
+    error.publicDetails = { stage: "supabase_config" };
     throw error;
   }
 
@@ -219,7 +221,9 @@ async function insertIntoSupabase(submission) {
 
   const error = new Error("Supabase a refuse l'enregistrement du formulaire.");
   error.statusCode = 502;
+  error.code = "SUPABASE_INSERT_FAILED";
   error.details = lastError;
+  error.publicDetails = { stage: "supabase_insert", upstreamStatus: lastError?.status || null };
   throw error;
 }
 
@@ -436,6 +440,8 @@ module.exports = async function handler(req, res) {
     sendJson(res, statusCode, {
       ok: false,
       error: statusCode >= 500 ? "Le formulaire n'a pas pu etre enregistre pour le moment." : error.message,
+      code: error.code || undefined,
+      diagnostic: error.publicDetails || undefined,
       details: process.env.NODE_ENV === "development" ? error.details || error.message : undefined,
     });
   }
