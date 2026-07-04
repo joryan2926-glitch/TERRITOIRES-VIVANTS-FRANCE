@@ -2407,3 +2407,97 @@ th {
     gap: 12px;
   }
 }
+
+/* Formulaires plus compacts et institutionnels */
+.form-panel {
+  max-width: 920px;
+  margin-inline: auto;
+  padding: 24px;
+  grid-template-columns: minmax(220px, 0.78fr) minmax(280px, 1fr);
+  gap: 22px;
+}
+
+.form-panel > div:first-child {
+  max-width: 360px;
+}
+
+.form-panel h2 {
+  font-size: clamp(1.22rem, 2vw, 1.72rem);
+}
+
+.form-panel form {
+  width: 100%;
+  max-width: 520px;
+  justify-self: end;
+  gap: 10px;
+}
+
+.form-panel label {
+  gap: 5px;
+  font-size: 0.88rem;
+  font-weight: 650;
+}
+
+.form-panel input,
+.form-panel select,
+.form-panel textarea {
+  min-height: 42px;
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 0.92rem;
+}
+
+.form-panel textarea {
+  min-height: 108px;
+}
+
+.form-panel .form-note,
+.form-panel .form-summary {
+  padding: 10px 12px;
+  border-radius: 10px;
+  font-size: 0.8rem;
+}
+
+.form-panel .btn {
+  min-height: 38px;
+  padding: 9px 14px;
+  justify-self: start;
+}
+
+@media (max-width: 980px) {
+  .form-panel {
+    max-width: min(92vw, 760px);
+    grid-template-columns: 1fr;
+    padding: 20px;
+  }
+
+  .form-panel > div:first-child,
+  .form-panel form {
+    max-width: 100%;
+    justify-self: stretch;
+  }
+}
+
+@media (max-width: 760px) {
+  .form-panel {
+    max-width: calc(100% - 28px);
+    padding: 15px;
+    gap: 16px;
+  }
+
+  .form-panel form {
+    gap: 9px;
+  }
+
+  .form-panel input,
+  .form-panel select,
+  .form-panel textarea {
+    min-height: 40px;
+    padding: 9px 10px;
+    font-size: 0.9rem;
+  }
+
+  .form-panel textarea {
+    min-height: 96px;
+  }
+}
