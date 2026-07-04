@@ -1,5 +1,7 @@
-﻿const MAX_BODY_SIZE = 32 * 1024;
+const MAX_BODY_SIZE = 32 * 1024;
 const CONTACT_TABLE = process.env.SUPABASE_CONTACTS_TABLE || "contacts";
+const DEFAULT_CONTACT_EMAIL = "contact@territoiresvivantsfrance.fr";
+const DEFAULT_FROM = "Territoires Vivants France <contact@territoiresvivantsfrance.fr>";
 
 function sendJson(res, statusCode, payload) {
   res.statusCode = statusCode;
@@ -211,6 +213,189 @@ async function insertIntoSupabase(submission) {
   throw error;
 }
 
+function parseAddress(value, fallbackEmail = DEFAULT_CONTACT_EMAIL) {
+  const input = clean(value || fallbackEmail, 300);
+  const match = input.match(/^(.*)<([^>]+)>$/);
+  if (match) {
+    return {
+      name: clean(match[1].replace(/^"|"$/g, ""), 120) || undefined,
+      email: clean(match[2], 220),
+    };
+  }
+  return { email: input };
+}
+
+function parseRecipients(value) {
+  return String(value || DEFAULT_CONTACT_EMAIL)
+    .split(/[;,]/)
+    .map((item) => parseAddress(item.trim()))
+    .filter((item) => validEmail(item.email));
+}
+
+function emailConfig() {
+  const provider = clean(process.env.EMAIL_PROVIDER, 40).toLowerCase() || (process.env.RESEND_API_KEY ? "resend" : process.env.BREVO_API_KEY ? "brevo" : "");
+  return {
+    provider,
+    resendKey: process.env.RESEND_API_KEY || "",
+    brevoKey: process.env.BREVO_API_KEY || "",
+    from: process.env.TVF_EMAIL_FROM || process.env.EMAIL_FROM || DEFAULT_FROM,
+    replyTo: process.env.TVF_EMAIL_REPLY_TO || process.env.EMAIL_REPLY_TO || DEFAULT_CONTACT_EMAIL,
+    notifyTo: process.env.TVF_NOTIFICATION_EMAIL || process.env.NOTIFICATION_EMAIL || DEFAULT_CONTACT_EMAIL,
+  };
+}
+
+function escapeHtml(value) {
+  return String(value || "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+function display(value, fallback = "Non renseigne") {
+  return clean(value, 500) || fallback;
+}
+
+function submissionRows(submission) {
+  return [
+    ["Profil", submission.profile],
+    ["Nom / structure", submission.name],
+    ["E-mail", submission.email],
+    ["Telephone", submission.phone],
+    ["Territoire", submission.territory],
+    ["Objet", submission.subject],
+    ["Page", submission.page],
+  ];
+}
+
+function submissionText(submission) {
+  const rows = submissionRows(submission)
+    .map(([label, value]) => `${label}: ${display(value)}`)
+    .join("\n");
+  return `${rows}\n\nMessage:\n${submission.message || submission.summary || "Non renseigne"}`;
+}
+
+function baseEmailLayout(title, intro, bodyHtml) {
+  return `<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${escapeHtml(title)}</title></head><body style="margin:0;background:#f4f7f1;color:#102236;font-family:Arial,Helvetica,sans-serif;"><div style="max-width:680px;margin:0 auto;padding:28px 16px;"><div style="background:#ffffff;border:1px solid #dbe6d7;border-radius:18px;overflow:hidden;"><div style="background:#123047;color:#ffffff;padding:22px 26px;"><p style="margin:0 0 6px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#cfe6c8;">Territoires Vivants France</p><h1 style="margin:0;font-size:24px;line-height:1.25;">${escapeHtml(title)}</h1></div><div style="padding:26px;"><p style="font-size:16px;line-height:1.65;margin:0 0 20px;">${escapeHtml(intro)}</p>${bodyHtml}<p style="margin:24px 0 0;font-size:13px;line-height:1.6;color:#53616c;">Ce message est envoye automatiquement depuis le site territoiresvivantsfrance.fr. Pour toute question, contactez ${escapeHtml(DEFAULT_CONTACT_EMAIL)}.</p></div></div></div></body></html>`;
+}
+
+function submissionTableHtml(submission) {
+  const rows = submissionRows(submission)
+    .map(([label, value]) => `<tr><th align="left" style="width:190px;padding:10px 12px;background:#eef5ea;border-bottom:1px solid #dbe6d7;color:#123047;">${escapeHtml(label)}</th><td style="padding:10px 12px;border-bottom:1px solid #dbe6d7;">${escapeHtml(display(value))}</td></tr>`)
+    .join("");
+  const message = escapeHtml(submission.message || submission.summary || "Non renseigne").replace(/\n/g, "<br>");
+  return `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;border:1px solid #dbe6d7;border-radius:12px;overflow:hidden;font-size:14px;">${rows}</table><div style="margin-top:18px;padding:16px 18px;background:#f8faf5;border:1px solid #dbe6d7;border-radius:12px;"><p style="margin:0 0 8px;font-weight:700;color:#123047;">Message</p><p style="margin:0;line-height:1.65;">${message}</p></div>`;
+}
+
+function internalEmail(submission) {
+  const subject = `Nouvelle demande TVF - ${submission.subject || submission.formKind || "formulaire"}`.slice(0, 180);
+  const text = `Une nouvelle demande a ete envoyee depuis le site TVF.\n\n${submissionText(submission)}\n\nAction conseillee: qualifier la demande, verifier le territoire, puis repondre au contact.`;
+  const html = baseEmailLayout(
+    "Nouvelle demande recue depuis le site",
+    "Une nouvelle demande a ete enregistree dans Supabase et doit etre qualifiee par l'equipe TVF.",
+    `${submissionTableHtml(submission)}<p style="margin:22px 0 0;"><strong>Suite conseillee :</strong> qualifier la demande, verifier le territoire, puis repondre au contact.</p>`
+  );
+  return { subject, text, html };
+}
+
+function confirmationEmail(submission) {
+  const subject = "TVF - confirmation de reception de votre demande";
+  const text = `Bonjour,\n\nTerritoires Vivants France confirme la reception de votre demande.\n\n${submissionText(submission)}\n\nL'equipe TVF pourra revenir vers vous pour qualifier la situation, demander des pieces complementaires ou proposer un rendez-vous.\n\nContact: ${DEFAULT_CONTACT_EMAIL}`;
+  const html = baseEmailLayout(
+    "Votre demande a bien ete recue",
+    "Merci pour votre message. Territoires Vivants France confirme la reception de votre demande. Elle pourra etre qualifiee afin d'identifier la suite la plus adaptee.",
+    `${submissionTableHtml(submission)}<p style="margin:22px 0 0;line-height:1.65;">L'equipe TVF pourra revenir vers vous pour qualifier la situation, demander des pieces complementaires ou proposer un rendez-vous.</p>`
+  );
+  return { subject, text, html };
+}
+
+async function sendWithResend(config, message) {
+  if (!config.resendKey) throw new Error("RESEND_API_KEY manquante.");
+  const response = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${config.resendKey}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      from: config.from,
+      to: message.to,
+      reply_to: message.replyTo || config.replyTo,
+      subject: message.subject,
+      html: message.html,
+      text: message.text,
+    }),
+  });
+  if (!response.ok) throw new Error(`Resend ${response.status}: ${await response.text().catch(() => "")}`);
+}
+
+async function sendWithBrevo(config, message) {
+  if (!config.brevoKey) throw new Error("BREVO_API_KEY manquante.");
+  const sender = parseAddress(config.from);
+  const replyTo = parseAddress(message.replyTo || config.replyTo);
+  const response = await fetch("https://api.brevo.com/v3/smtp/email", {
+    method: "POST",
+    headers: {
+      "api-key": config.brevoKey,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      sender,
+      to: parseRecipients(message.to),
+      replyTo,
+      subject: message.subject,
+      htmlContent: message.html,
+      textContent: message.text,
+    }),
+  });
+  if (!response.ok) throw new Error(`Brevo ${response.status}: ${await response.text().catch(() => "")}`);
+}
+
+async function sendEmail(config, message) {
+  if (config.provider === "resend") return sendWithResend(config, message);
+  if (config.provider === "brevo") return sendWithBrevo(config, message);
+  throw new Error("Aucun fournisseur e-mail configure.");
+}
+
+async function notifyByEmail(submission) {
+  const config = emailConfig();
+  if (!config.provider) {
+    return { configured: false, internal: "skipped", confirmation: submission.email ? "skipped" : "no_email" };
+  }
+
+  const results = { configured: true, internal: "skipped", confirmation: submission.email ? "skipped" : "no_email" };
+  const internal = internalEmail(submission);
+  try {
+    await sendEmail(config, {
+      to: parseRecipients(config.notifyTo).map((item) => item.email),
+      replyTo: submission.email || config.replyTo,
+      ...internal,
+    });
+    results.internal = "sent";
+  } catch (error) {
+    results.internal = "failed";
+    console.error("TVF internal email failed", error.message);
+  }
+
+  if (submission.email) {
+    const confirmation = confirmationEmail(submission);
+    try {
+      await sendEmail(config, {
+        to: [submission.email],
+        replyTo: config.replyTo,
+        ...confirmation,
+      });
+      results.confirmation = "sent";
+    } catch (error) {
+      results.confirmation = "failed";
+      console.error("TVF confirmation email failed", error.message);
+    }
+  }
+
+  return results;
+}
+
 module.exports = async function handler(req, res) {
   if (req.method === "OPTIONS") {
     res.statusCode = 204;
@@ -228,7 +413,8 @@ module.exports = async function handler(req, res) {
     const submission = buildSubmission(data, req);
     validateSubmission(data, submission);
     await insertIntoSupabase(submission);
-    sendJson(res, 200, { ok: true, message: "Demande enregistree." });
+    const email = await notifyByEmail(submission);
+    sendJson(res, 200, { ok: true, message: "Demande enregistree.", email });
   } catch (error) {
     if (error.statusCode === 204) {
       res.statusCode = 204;

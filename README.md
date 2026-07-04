@@ -190,3 +190,14 @@ Variables d'environnement attendues dans Vercel :
 - `SUPABASE_CONTACTS_TABLE` : optionnel, nom de la table de destination. Par défaut : `contacts`
 
 Le formulaire conserve un secours par e-mail si l'enregistrement Supabase échoue. Les documents internes ne sont pas rendus publics par ce branchement.
+
+Notifications e-mail optionnelles :
+
+- `EMAIL_PROVIDER` : `brevo` ou `resend`. Optionnel si une seule clé est présente.
+- `BREVO_API_KEY` : clé API Brevo pour l'envoi transactionnel.
+- `RESEND_API_KEY` : clé API Resend pour l'envoi transactionnel.
+- `TVF_EMAIL_FROM` : expéditeur vérifié, par exemple `Territoires Vivants France <contact@territoiresvivantsfrance.fr>`.
+- `TVF_EMAIL_REPLY_TO` : adresse de réponse. Par défaut : `contact@territoiresvivantsfrance.fr`.
+- `TVF_NOTIFICATION_EMAIL` : adresse qui reçoit les notifications internes. Par défaut : `contact@territoiresvivantsfrance.fr`.
+
+Fonctionnement : la demande est d'abord enregistrée dans Supabase. Ensuite, l'API tente d'envoyer une notification à TVF et un accusé de réception à l'utilisateur si son e-mail est renseigné. Une erreur d'e-mail ne bloque pas l'enregistrement de la demande.

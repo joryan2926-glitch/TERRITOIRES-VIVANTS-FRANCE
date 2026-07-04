@@ -1737,6 +1737,7 @@ const pages = [
         ["Messagerie TVF", "Demandes envoyées par e-mail", "Personnes habilitées à traiter les demandes"],
         ["Hébergement Vercel", "Données techniques liées au fonctionnement du site", "Prestataire d'hébergement et de déploiement"],
         ["Base Supabase des demandes", "Demandes envoyées depuis les formulaires publics lorsque l'utilisateur valide l'envoi", "Personnes habilitées TVF et prestataires techniques nécessaires au traitement"],
+        ["Fournisseur e-mail transactionnel", "Adresse e-mail et contenu nécessaire à la notification interne ou à l'accusé de réception", "Prestataire d'envoi configuré côté Vercel, uniquement si le service est activé"],
       ]),
       tableSection("Durées de conservation indicatives", "Ces durées servent de cadre de départ. Elles devront être validées dans le registre RGPD interne et adaptées aux obligations applicables.", [
         ["Catégorie", "Durée recommandée", "Point de vigilance"],
@@ -1760,6 +1761,7 @@ const pages = [
       faqSection([
         ["Les formulaires enregistrent-ils automatiquement une demande ?", "Oui, lorsque l'utilisateur clique sur le bouton d'envoi, la demande est transmise à l'API sécurisée du site puis enregistrée dans la table de contact Supabase configurée côté Vercel. Les boutons de préparation, copie, téléchargement et e-mail restent des outils locaux ou de secours."],
         ["Supabase est-il utilisé pour publier des données publiques ?", "Non. Supabase sert uniquement à enregistrer les demandes entrantes lorsque les variables Vercel sont configurées. Les informations transmises ne sont pas publiées automatiquement et restent destinées au traitement interne de TVF."],
+        ["Un e-mail de confirmation peut-il être envoyé ?", "Oui, si un fournisseur d'e-mail transactionnel est configuré côté Vercel et si l'utilisateur renseigne son adresse e-mail. Cet accusé de réception ne remplace pas l'instruction du dossier."],
         ["Comment demander la suppression d'une information ?", `Il suffit d'écrire à ${contact.email} en précisant la demande concernée et les informations permettant de retrouver le dossier.`],
         ["TVF peut-elle publier un signalement reçu ?", "Pas sans qualification, anonymisation lorsque nécessaire et vérification des droits. Un bien privé ne doit pas être exposé publiquement sans cadre adapté."],
       ]),
