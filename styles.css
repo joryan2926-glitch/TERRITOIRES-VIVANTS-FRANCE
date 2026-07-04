@@ -2321,3 +2321,89 @@ th {
     aspect-ratio: 16 / 10;
   }
 }
+
+/* Resserrement modere des respirations entre modules */
+.section:not(.hero) {
+  padding: 50px 0;
+}
+
+.institutional-narrative {
+  padding: 38px 0 24px;
+}
+
+.intro-grid,
+.feature-grid,
+.split,
+.form-panel {
+  gap: 26px;
+}
+
+.card-grid,
+.trust-grid,
+.journey-grid,
+.audience-grid,
+.compact-grid {
+  gap: 14px;
+}
+
+.card,
+.audience-grid article,
+.compact-grid article,
+.trust-grid article,
+.journey-card,
+.mini-list article {
+  padding: 18px;
+}
+
+.cta-band {
+  padding: 48px 0;
+}
+
+.footer-grid {
+  gap: 24px;
+}
+
+@media (max-width: 980px) {
+  .section:not(.hero) {
+    padding: 42px 0;
+  }
+
+  .intro-grid,
+  .feature-grid,
+  .split,
+  .form-panel,
+  .institutional-narrative-inner {
+    gap: 22px;
+  }
+
+  .cta-band {
+    padding: 42px 0;
+  }
+}
+
+@media (max-width: 760px) {
+  .section:not(.hero) {
+    padding: 34px 0;
+  }
+
+  .card,
+  .audience-grid article,
+  .compact-grid article,
+  .trust-grid article,
+  .journey-card,
+  .legal,
+  .form-panel,
+  .narrow,
+  .mini-list article {
+    padding: 15px;
+  }
+
+  .card-grid,
+  .trust-grid,
+  .journey-grid,
+  .audience-grid,
+  .compact-grid,
+  .mini-list {
+    gap: 12px;
+  }
+}
