@@ -1746,3 +1746,156 @@ tr:last-child td {
     line-height: 1.68;
   }
 }
+
+/* Harmonisation institutionnelle des paragraphes */
+:root {
+  --measure-text: 68ch;
+  --measure-wide: 82ch;
+  --paragraph-size: clamp(0.96rem, 0.22vw + 0.92rem, 1.04rem);
+  --paragraph-line: 1.72;
+  --paragraph-small: 0.94rem;
+  --paragraph-card-line: 1.62;
+}
+
+p {
+  margin-top: 0;
+  line-height: var(--paragraph-line);
+}
+
+.section-head {
+  max-width: var(--measure-wide);
+  display: grid;
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.section-head h2 {
+  max-width: 760px;
+}
+
+.section-lead {
+  max-width: var(--measure-text);
+  color: rgba(14, 45, 69, 0.76);
+  font-size: var(--paragraph-size);
+  line-height: var(--paragraph-line);
+}
+
+.section-head p:not(.section-kicker) {
+  max-width: var(--measure-text);
+  margin: 0;
+  color: rgba(14, 45, 69, 0.76);
+  font-size: var(--paragraph-size);
+  line-height: var(--paragraph-line);
+}
+
+.intro-grid > div:first-child,
+.feature-grid > div,
+.split > div,
+.form-panel > div:first-child,
+.narrow,
+.legal {
+  max-width: var(--measure-wide);
+}
+
+.intro-grid > div:first-child > p:not(.section-kicker),
+.feature-grid > div > p:not(.section-kicker),
+.split > div > p:not(.section-kicker),
+.form-panel > div:first-child > p:not(.section-kicker),
+.narrow > p:not(.section-kicker),
+.legal p {
+  max-width: var(--measure-text);
+  color: rgba(14, 45, 69, 0.78);
+  font-size: var(--paragraph-size);
+  line-height: var(--paragraph-line);
+}
+
+.institutional-narrative-inner > div {
+  display: grid;
+  gap: 16px;
+  max-width: var(--measure-wide);
+}
+
+.institutional-narrative p,
+.decision-copy p,
+.cta-band p {
+  max-width: var(--measure-text);
+  font-size: var(--paragraph-size);
+  line-height: var(--paragraph-line);
+}
+
+.card p,
+.trust-grid p,
+.decision-list p,
+.timeline p,
+.feature p,
+.faq-list details p,
+.document-archive summary small,
+.archive-guidance,
+.form-note,
+td {
+  font-size: var(--paragraph-small);
+  line-height: var(--paragraph-card-line);
+}
+
+.card p,
+.trust-grid p,
+.timeline p,
+.faq-list details p,
+td {
+  color: rgba(14, 45, 69, 0.72);
+}
+
+.card h3 + p,
+.card strong + p,
+.timeline h3 + p,
+.trust-grid strong + p {
+  margin-top: 8px;
+}
+
+.mini-list span {
+  display: block;
+  color: rgba(14, 45, 69, 0.72);
+  font-size: var(--paragraph-small);
+  line-height: var(--paragraph-card-line);
+}
+
+.quick-brief-grid p,
+.compact-grid p,
+.audience-grid p,
+.doc-count,
+.doc-empty {
+  color: rgba(14, 45, 69, 0.76);
+  font-size: var(--paragraph-small);
+  line-height: var(--paragraph-card-line);
+}
+
+.legal p + h3 {
+  margin-top: 28px;
+}
+
+.legal h3 + p {
+  margin-top: 10px;
+}
+
+.table-scroll-hint {
+  line-height: 1.5;
+}
+
+@media (max-width: 760px) {
+  :root {
+    --measure-text: 100%;
+    --measure-wide: 100%;
+    --paragraph-size: 0.96rem;
+    --paragraph-line: 1.66;
+    --paragraph-small: 0.9rem;
+  }
+
+  .section-head {
+    gap: 10px;
+    margin-bottom: 28px;
+  }
+
+  .institutional-narrative-inner > div {
+    gap: 12px;
+  }
+}

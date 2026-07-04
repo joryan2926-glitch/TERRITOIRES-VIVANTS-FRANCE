@@ -1931,7 +1931,7 @@ function journeyCopyFor(page) {
 }
 
 function sectionIntro(title, text, items) {
-  return `<section class="section" ${sectionAttrs(title)}><div class="container intro-grid"><div><p class="section-kicker">Fondation</p><h2>${title}</h2><p>${text}</p></div><div class="mini-list">${items
+  return `<section class="section" ${sectionAttrs(title)}><div class="container intro-grid"><div><p class="section-kicker">Fondation</p><h2>${title}</h2><p class="section-lead">${text}</p></div><div class="mini-list">${items
     .map(([h, p]) => `<article><strong>${h}</strong><span>${p}</span></article>`)
     .join("")}</div></div></section>`;
 }
@@ -1945,7 +1945,7 @@ function homeTrustSection() {
 }
 
 function cards(title, intro, items) {
-  return `<section class="section soft" ${sectionAttrs(title)}><div class="container"><div class="section-head"><p class="section-kicker">Repères</p><h2>${title}</h2><p>${intro}</p></div><div class="card-grid">${items
+  return `<section class="section soft" ${sectionAttrs(title)}><div class="container"><div class="section-head"><p class="section-kicker">Repères</p><h2>${title}</h2><p class="section-lead">${intro}</p></div><div class="card-grid">${items
     .map(([h, p, href]) => `<article class="card"><span class="card-icon" aria-hidden="true">${iconFor(h)}</span><h3>${h}</h3><p>${p}</p>${href ? smartCardLink(h, href) : ""}</article>`)
     .join("")}</div></div></section>`;
 }
@@ -1968,7 +1968,7 @@ function documentTools() {
 }
 
 function documentCards(title, intro, items) {
-  return `<section class="section soft document-library" ${sectionAttrs(title, "documents-library")}><div class="container"><div class="section-head"><p class="section-kicker">Repères</p><h2>${title}</h2><p>${intro}</p></div><div class="card-grid">${items
+  return `<section class="section soft document-library" ${sectionAttrs(title, "documents-library")}><div class="container"><div class="section-head"><p class="section-kicker">Repères</p><h2>${title}</h2><p class="section-lead">${intro}</p></div><div class="card-grid">${items
     .map(([h, p, href]) => `<article class="card" data-doc-card data-doc-category="${docCategory(h, p, href)}"><span class="card-icon" aria-hidden="true">${iconFor(h)}</span><h3>${h}</h3><p>${p}</p>${documentCardLink(h, href)}</article>`)
     .join("")}</div><p class="doc-empty" data-doc-empty hidden>Aucun document ne correspond à cette recherche. Essayez un autre mot-clé ou un autre filtre.</p></div></section>`;
 }
@@ -1981,7 +1981,7 @@ function documentArchiveSection(title, intro, items) {
     })
     .join("");
 
-  return `<section class="section soft document-library document-archive-section" ${sectionAttrs(title)}><div class="container"><div class="section-head"><p class="section-kicker">Archive</p><h2>${title}</h2><p>${intro}</p></div><details class="document-archive"><summary><span>Afficher l'archive complète</span><small>Modèles avancés, registres et supports internes restent disponibles en PDF.</small></summary><p class="archive-guidance">Cette archive est volontairement secondaire. Commencez par les documents essentiels, puis ouvrez cette liste uniquement si votre dossier nécessite une pièce spécialisée.</p><div class="card-grid">${cardsMarkup}</div></details></div></section>`;
+  return `<section class="section soft document-library document-archive-section" ${sectionAttrs(title)}><div class="container"><div class="section-head"><p class="section-kicker">Archive</p><h2>${title}</h2><p class="section-lead">${intro}</p></div><details class="document-archive"><summary><span>Afficher l'archive complète</span><small>Modèles avancés, registres et supports internes restent disponibles en PDF.</small></summary><p class="archive-guidance">Cette archive est volontairement secondaire. Commencez par les documents essentiels, puis ouvrez cette liste uniquement si votre dossier nécessite une pièce spécialisée.</p><div class="card-grid">${cardsMarkup}</div></details></div></section>`;
 }
 
 function smartCardLink(title, href) {
@@ -2035,7 +2035,7 @@ function timeline(title, items) {
 
 function tableSection(title, intro, rows) {
   const [head, ...body] = rows;
-  return `<section class="section" ${sectionAttrs(title)}><div class="container"><div class="section-head"><p class="section-kicker">Cadre</p><h2>${title}</h2><p>${intro}</p></div><p class="table-scroll-hint" aria-hidden="true">Faire glisser le tableau horizontalement sur mobile.</p><div class="table-wrap"><table><caption class="sr-only">${title}</caption><thead><tr>${head.map((cell) => `<th scope="col">${cell}</th>`).join("")}</tr></thead><tbody>${body
+  return `<section class="section" ${sectionAttrs(title)}><div class="container"><div class="section-head"><p class="section-kicker">Cadre</p><h2>${title}</h2><p class="section-lead">${intro}</p></div><p class="table-scroll-hint" aria-hidden="true">Faire glisser le tableau horizontalement sur mobile.</p><div class="table-wrap"><table><caption class="sr-only">${title}</caption><thead><tr>${head.map((cell) => `<th scope="col">${cell}</th>`).join("")}</tr></thead><tbody>${body
     .map((row) => `<tr>${row.map((cell) => `<td>${cell}</td>`).join("")}</tr>`)
     .join("")}</tbody></table></div></div></section>`;
 }
@@ -2047,15 +2047,15 @@ function faqSection(items) {
 }
 
 function highlight(title, text, label, href, image) {
-  return `<section class="section feature" ${sectionAttrs(title)}><div class="container feature-grid"><img src="${image}" ${imageAttrs(image)} alt="Vue urbaine française liée à la revitalisation territoriale" loading="lazy" decoding="async"><div><p class="section-kicker">Pilote</p><h2>${title}</h2><p>${text}</p><a class="btn primary" href="${hrefFor(href)}">${label}</a></div></div></section>`;
+  return `<section class="section feature" ${sectionAttrs(title)}><div class="container feature-grid"><img src="${image}" ${imageAttrs(image)} alt="Vue urbaine française liée à la revitalisation territoriale" loading="lazy" decoding="async"><div><p class="section-kicker">Pilote</p><h2>${title}</h2><p class="section-lead">${text}</p><a class="btn primary" href="${hrefFor(href)}">${label}</a></div></div></section>`;
 }
 
 function split(title, text, image) {
-  return `<section class="section" ${sectionAttrs(title)}><div class="container split"><img src="${image}" ${imageAttrs(image)} alt="${title}" loading="lazy" decoding="async"><div><p class="section-kicker">Approche</p><h3>${title}</h3><p>${text}</p></div></div></section>`;
+  return `<section class="section" ${sectionAttrs(title)}><div class="container split"><img src="${image}" ${imageAttrs(image)} alt="${title}" loading="lazy" decoding="async"><div><p class="section-kicker">Approche</p><h3>${title}</h3><p class="section-lead">${text}</p></div></div></section>`;
 }
 
 function textBlock(title, text) {
-  return `<section class="section" ${sectionAttrs(title)}><div class="container narrow"><p class="section-kicker">Analyse</p><h2>${title}</h2><p>${text}</p></div></section>`;
+  return `<section class="section" ${sectionAttrs(title)}><div class="container narrow"><p class="section-kicker">Analyse</p><h2>${title}</h2><p class="section-lead">${text}</p></div></section>`;
 }
 
 function extLink(label, url) {
@@ -2715,7 +2715,7 @@ function ctaBandFor(page) {
     "partenaires.html": ["Coopération", "Vous envisagez une coopération avec TVF ?", "Avant toute communication, clarifions le périmètre, les responsabilités, la durée et les règles d'officialisation.", [["Préparer une coopération", "documents/fiche-partenaire-potentiel.md"], ["Contacter TVF", "contact.html"]]],
   };
   const [kicker, title, text, actions] = map[page.file] || ["Passer à l'étape suivante", "Vous avez un bien, une ressource ou un besoin territorial ?", "Présentez la situation à TVF pour préparer un premier échange clair et utile.", [["Agir avec nous", "agir-avec-nous.html"], ["Nous contacter", "contact.html"]]];
-  return `<section class="cta-band"><div class="container cta-band-inner"><div><p class="section-kicker">${kicker}</p><h3>${title}</h3><p>${text}</p></div><div class="cta-band-actions">${actions
+  return `<section class="cta-band"><div class="container cta-band-inner"><div><p class="section-kicker">${kicker}</p><h3>${title}</h3><p class="section-lead">${text}</p></div><div class="cta-band-actions">${actions
     .map(([label, href], index) => `<a class="btn ${index === 0 ? "primary" : "secondary"}" href="${hrefFor(href)}">${label}</a>`)
     .join("")}</div></div></section>`;
 }
