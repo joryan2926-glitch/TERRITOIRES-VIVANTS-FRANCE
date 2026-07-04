@@ -4,7 +4,7 @@ const path = require("path");
 const site = {
   name: "Territoires Vivants France",
   url: "https://www.territoiresvivantsfrance.fr",
-  lastModified: "2026-07-03",
+  lastModified: "2026-07-04",
   description:
     "Plateforme nationale de coopération pour remettre en usage les logements, commerces, bâtiments, terrains et matériaux inutilisés.",
 };
@@ -14,6 +14,17 @@ const contact = {
   phone: "06 22 03 93 24",
   phoneHref: "+33622039324",
   address: "25 rue Élise Gervais, 42000 Saint-Étienne",
+};
+
+const official = {
+  status: "Association loi 1901 déclarée",
+  rna: "W423016361",
+  declarationDate: "1er juillet 2026",
+  decisionDate: "22 juin 2026",
+  receiptDate: "2 juillet 2026",
+  receiptPlace: "Roanne",
+  authority: "Préfet de la Loire - Sous-préfecture de Roanne",
+  receiptLabel: "Récépissé de déclaration de création n° W423016361",
 };
 
 const nav = [
@@ -1299,7 +1310,7 @@ const pages = [
         ["Complémentarité", "Coopérer avec les acteurs existants sans se présenter comme substitut aux dispositifs publics."],
         ["Sobriété", "Communiquer uniquement sur les faits établis, les objectifs assumés et les documents disponibles."],
       ]),
-      tableSection("Responsabilités à formaliser", "Cette organisation prépare une gouvernance lisible sans préjuger des informations administratives officielles à compléter.", [
+      tableSection("Responsabilités déclarées et à tenir", "Cette organisation prépare une gouvernance lisible sans préjuger des informations administratives officielles à compléter.", [
         ["Fonction", "Rôle attendu", "Preuve ou document associé"],
         ["Présidence", "Porter la vision, représenter l'association et arbitrer les priorités structurantes", "Statuts, registre de décisions, délégations éventuelles"],
         ["Secrétariat", "Tenir les documents, convocations, comptes rendus, registres et suivi administratif", "Procès-verbaux, registre adhérents, registre décisions"],
@@ -1339,7 +1350,7 @@ const pages = [
       ]),
       textBlock(
         "Responsabilités identifiées",
-        "Président fondateur : Edryan Rangoly. Secrétaire et trésorier : M. Lambeau Jordan. Les responsabilités pourront être complétées après formalisation officielle de l'association et publication des documents administratifs à jour."
+        "Président fondateur : Edryan Rangoly. Secrétaire et trésorier : M. Lambeau Jordan. TVF dispose d’un récépissé de déclaration de création sous le numéro RNA W423016361 ; toute évolution de gouvernance devra être déclarée et mise à jour sur les supports officiels."
       ),
       faqSection([
         ["Pourquoi une page gouvernance dès maintenant ?", "Parce que la confiance institutionnelle se construit avant les premiers projets. Les règles de décision doivent être visibles dès le départ."],
@@ -1404,7 +1415,7 @@ const pages = [
       ]),
       tableSection("Formulations recommandées", "Les mots utilisés doivent rester précis et crédibles.", [
         ["Sujet", "Formulation recommandée", "À éviter"],
-        ["Nature", "Association nationale en structuration", "Institution publique ou opérateur officiel"],
+        ["Nature", "Association loi 1901 déclarée, en déploiement progressif", "Institution publique ou opérateur officiel"],
         ["Rôle", "Plateforme de coopération et de coordination territoriale", "Remplacement des collectivités ou dispositifs existants"],
         ["Impact", "Indicateurs à mesurer après projets conventionnés", "Résultats chiffrés non vérifiés"],
         ["Partenaires", "Partenaires à afficher uniquement après accord réel", "Logos ou références non officialisés"],
@@ -1484,7 +1495,7 @@ const pages = [
       ]),
       textBlock(
         "Siège national",
-        `Territoires Vivants France - ${contact.address}. E-mail : ${contact.email}. Téléphone : ${contact.phone}. Président fondateur : Edryan Rangoly. Secrétaire et trésorier : M. Lambeau Jordan.`
+        `Territoires Vivants France - ${official.status}. RNA : ${official.rna}. Siège national : ${contact.address}. E-mail : ${contact.email}. Téléphone : ${contact.phone}. Président fondateur : Edryan Rangoly. Secrétaire et trésorier : M. Lambeau Jordan.`
       ),
       faqSection([
         ["Que faut-il écrire dans le premier message ?", "Indiquez votre profil, le territoire concerné, le type de demande, les informations déjà disponibles et ce que vous attendez de TVF."],
@@ -1525,15 +1536,15 @@ const pages = [
       ]),
       tableSection("Éléments officiels mis en attente", "Ces informations doivent rester en attente tant qu'elles ne sont pas vérifiées, attribuées ou autorisées à la publication.", [
         ["Élément", "Statut de publication", "Preuve attendue"],
-        ["Références administratives", "Ne pas inventer ; compléter uniquement après disponibilité officielle", "Récépissé, avis ou document officiel"],
+        ["Références administratives", `RNA ${official.rna} publié sur le site ; SIREN à compléter uniquement si attribution`, `${official.receiptLabel}`],
         ["Partenaires", "Ne pas afficher sans accord réel", "Convention, courrier, autorisation de logo"],
         ["Financeurs ou mécènes", "Ne pas présenter comme acquis sans décision", "Convention, notification, accord écrit"],
         ["Projets réalisés", "Ne pas communiquer avant réalisation vérifiée", "Compte rendu, convention, photos autorisées, indicateurs"],
         ["Chiffres d'impact", "Ne pas publier sans méthode de calcul", "Grille d'impact, source, date, preuve"],
       ]),
       textBlock(
-        "Informations administratives à compléter",
-        "Les références administratives définitives seront ajoutées lorsque les pièces officielles seront disponibles : numéro RNA, numéro SIREN le cas échéant, statut juridique exact, informations complètes d'hébergement et documents officiels actualisés. En attendant, TVF conserve une rédaction volontairement sobre pour ne pas publier d'information approximative."
+        "Références administratives publiées",
+        "TVF dispose désormais du numéro RNA W423016361, issu du récépissé de déclaration de création délivré à Roanne le 2 juillet 2026. Le numéro SIREN sera ajouté uniquement s’il est attribué ultérieurement. Les informations d’hébergement et toute évolution statutaire devront rester appuyées par une pièce officielle."
       ),
       tableSection("Ce qui peut être publié", "Chaque information doit être reliée à son niveau de preuve.", [
         ["Information", "Publication possible", "Condition"],
@@ -1597,22 +1608,22 @@ const pages = [
         ["Information", "Statut actuel", "Action à prévoir"],
         ["Adresse du siège", "25 rue Élise Gervais, 42000 Saint-Étienne", "Maintenir à jour en cas de changement"],
         ["Responsables", "Président fondateur, secrétaire et trésorier identifiés", "Actualiser après toute décision statutaire"],
-        ["Numéro RNA", "À compléter après formalisation officielle", "Ajouter la référence dès disponibilité"],
+        ["Numéro RNA", `${official.rna}`, `${official.receiptLabel}, délivré à ${official.receiptPlace} le ${official.receiptDate}`],
         ["Numéro SIREN", "À compléter si attribution", "Ajouter uniquement si l'association en dispose"],
         ["Contact officiel", `${contact.email} - ${contact.phone}`, "Maintenir à jour les canaux publics de contact"],
         ["Hébergement", "À maintenir à jour", "Indiquer l'hébergeur et les informations légales nécessaires"],
       ]),
       tableSection("Procédure de mise à jour légale", "Les mentions légales doivent être actualisées dès qu'une information officielle change.", [
         ["Déclencheur", "Vérification à faire", "Pièce attendue"],
-        ["Déclaration officielle", "Ajouter les références administratives attribuées", "Récépissé ou publication officielle"],
+        ["Déclaration officielle", `RNA ${official.rna} - déclaration du ${official.declarationDate}`, `${official.receiptLabel}`],
         ["Attribution SIREN", "Compléter l'identification si l'association en dispose", "Avis de situation ou document officiel"],
-        ["Changement d'adresse", "Mettre à jour siège, contact et documents publics", "Décision interne ou document administratif"],
+        ["Changement d'adresse", "Mettre à jour siège, contact et supports publics", "Décision interne ou document administratif"],
         ["Évolution des responsables", "Actualiser les noms, fonctions et responsabilités affichées", "Procès-verbal ou décision statutaire"],
         ["Changement d'hébergement", "Mettre à jour l'identité de l'hébergeur et les informations obligatoires", "Contrat, facture ou fiche hébergeur"],
       ]),
       legalSection(),
       faqSection([
-        ["Pourquoi cette page mentionne-t-elle des informations à compléter ?", "Parce que TVF est une association en structuration. La page est conçue pour intégrer les références officielles dès qu'elles seront disponibles."],
+        ["Pourquoi certaines informations restent-elles à compléter ?", `TVF dispose désormais du RNA ${official.rna}. Seuls les éléments non attribués ou évolutifs, comme le SIREN le cas échéant, l’hébergement ou une modification statutaire, doivent être complétés après preuve officielle.`],
         ["Les documents du site ont-ils une valeur juridique automatique ?", "Non. Ils servent de bases de travail et doivent être adaptés, relus et validés avant toute signature ou engagement."],
         ["Qui contacter en cas de demande relative aux données personnelles ?", `Les demandes peuvent être adressées à ${contact.email} ou préparées depuis la page contact. TVF devra ensuite traiter chaque demande selon le RGPD et les finalités réellement concernées.`],
       ]),
@@ -2382,7 +2393,7 @@ function contactSection() {
 }
 
 function legalSection() {
-  return `<section class="section" ${sectionAttrs("Mentions légales", "mentions-legales-detail")}><div class="container legal"><h2>Cadre légal du site</h2><h3>Éditeur</h3><p><strong>Territoires Vivants France</strong><br>Association nationale en structuration<br>${contact.address}<br>E-mail : <a href="mailto:${contact.email}">${contact.email}</a><br>Téléphone : <a href="tel:${contact.phoneHref}">${contact.phone}</a></p><h3>Responsables</h3><p>Président fondateur : Edryan Rangoly.<br>Secrétaire et trésorier : M. Lambeau Jordan.</p><h3>Références administratives</h3><p>Les références administratives telles que le numéro RNA, le numéro SIREN le cas échéant et les informations de publication officielle doivent être ajoutées dès leur attribution. Cette rubrique est conçue pour être actualisée sans modifier la structure du site.</p><h3>Hébergement</h3><p>Le site est diffusé sur le domaine territoiresvivantsfrance.fr. Les informations relatives à l'hébergeur, au domaine et aux responsabilités techniques doivent rester à jour dans cette rubrique.</p><h3>Données personnelles</h3><p>Les formulaires et parcours présentés servent à préparer les informations utiles à une demande. Les données transmises à TVF doivent être traitées dans le respect du RGPD, avec une finalité claire, une durée de conservation adaptée et un droit de contact pour les personnes concernées.</p><h3>Propriété intellectuelle</h3><p>Les textes, logos, documents, visuels et éléments graphiques du site sont destinés à présenter Territoires Vivants France. Toute réutilisation, modification ou diffusion doit faire l'objet d'une autorisation préalable.</p><h3>Responsabilité</h3><p>Les contenus du site présentent une démarche associative, des méthodes et des documents de travail. Ils ne constituent pas un conseil juridique, technique, financier ou administratif personnalisé. Chaque projet doit être vérifié et adapté avec les interlocuteurs compétents.</p></div></section>`;
+  return `<section class="section" ${sectionAttrs("Mentions légales", "mentions-legales-detail")}><div class="container legal"><h2>Cadre légal du site</h2><h3>Éditeur</h3><p><strong>Territoires Vivants France</strong><br>${official.status}<br>RNA : ${official.rna}<br>${contact.address}<br>E-mail : <a href="mailto:${contact.email}">${contact.email}</a><br>Téléphone : <a href="tel:${contact.phoneHref}">${contact.phone}</a></p><h3>Responsables</h3><p>Président fondateur : Edryan Rangoly.<br>Secrétaire et trésorier : M. Lambeau Jordan.</p><h3>Références administratives</h3><p>${official.receiptLabel}. Déclaration en date du ${official.declarationDate}. Décision prise le ${official.decisionDate}. Récépissé délivré à ${official.receiptPlace} le ${official.receiptDate} par ${official.authority}. Numéro SIREN : à compléter uniquement si attribution ultérieure.</p><h3>Hébergement</h3><p>Le site est diffusé sur le domaine territoiresvivantsfrance.fr. Les informations relatives à l'hébergeur, au domaine et aux responsabilités techniques doivent rester à jour dans cette rubrique.</p><h3>Données personnelles</h3><p>Les formulaires et parcours présentés servent à préparer les informations utiles à une demande. Les données transmises à TVF doivent être traitées dans le respect du RGPD, avec une finalité claire, une durée de conservation adaptée et un droit de contact pour les personnes concernées.</p><h3>Propriété intellectuelle</h3><p>Les textes, logos, documents, visuels et éléments graphiques du site sont destinés à présenter Territoires Vivants France. Toute réutilisation, modification ou diffusion doit faire l'objet d'une autorisation préalable.</p><h3>Responsabilité</h3><p>Les contenus du site présentent une démarche associative, des méthodes et des documents de travail. Ils ne constituent pas un conseil juridique, technique, financier ou administratif personnalisé. Chaque projet doit être vérifié et adapté avec les interlocuteurs compétents.</p></div></section>`;
 }
 
 function iconFor(text) {
