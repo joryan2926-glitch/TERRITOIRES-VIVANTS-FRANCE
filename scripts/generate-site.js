@@ -60,6 +60,9 @@ const imageSizes = {
   "assets/photos/france-commerce-paris.jpg": [330, 495],
   "assets/photos/france-friche-pcuk.jpg": [960, 324],
   "assets/photos/france-ressourcerie-vichy.jpg": [960, 720],
+  "assets/photos/materiaux-reemploi-echantillons.jpg": [1536, 1024],
+  "assets/photos/materiaux-renovation-outils.jpg": [1536, 1024],
+  "assets/photos/materiaux-durables-reemploi.jpg": [877, 887],
   "assets/photos/immeuble-renovation-meudon.jpg": [1400, 934],
   "assets/photos/jardin-partage-france.jpg": [1400, 1050],
   "assets/photos/saint-etienne-centre-commerce.jpg": [1200, 902],
@@ -253,7 +256,7 @@ const pages = [
       split(
         "La Banque de matériaux est un outil de projet",
         "Les matériaux proposés à TVF ne sont pas distribués librement. Ils sont qualifiés, tracés puis orientés vers des besoins utiles : remise en état d'un local associatif, aménagement d'un lieu partagé, soutien à un chantier encadré ou expérimentation territoriale. Cette logique protège les contributeurs et garantit que chaque ressource garde une utilité collective.",
-        "assets/photos/france-ressourcerie-vichy.jpg"
+        "assets/photos/materiaux-reemploi-echantillons.jpg"
       ),
       timeline("Méthode d'intervention", [
         ["1", "Recevoir", "Une demande, un signalement ou une contribution est enregistré avec un numéro de dossier."],
@@ -334,7 +337,7 @@ const pages = [
       split(
         "Matériauthèque Solidaire",
         "Ce pôle transforme les matériaux disponibles en ressources de projet. Une porte, du bois, du carrelage, du mobilier ou un équipement technique ne sont utiles que s'ils sont identifiés, stockables, sécurisés et affectés à un usage concret.",
-        "assets/photos/france-ressourcerie-vichy.jpg"
+        "assets/photos/materiaux-durables-reemploi.jpg"
       ),
       split(
         "Commerce Vivant",
@@ -693,7 +696,7 @@ const pages = [
     title: "Entreprises",
     meta:
       "Parcours entreprises TVF : matériaux, compétences, locaux, mécénat, RSE et contribution territoriale.",
-    heroImage: "assets/photos/artisan-menuiserie-bois.jpg",
+    heroImage: "assets/photos/materiaux-renovation-outils.jpg",
     eyebrow: "Entreprises",
     h1: "Transformer une contribution en impact territorial.",
     intro:

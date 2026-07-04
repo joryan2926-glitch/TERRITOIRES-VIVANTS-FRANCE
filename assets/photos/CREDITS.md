@@ -80,10 +80,21 @@ Cette table sert de contrôle qualité pour garder une cohérence entre le sujet
 | Nos actions / centre-ville | `centre-ville-nantes.jpg` | Revitalisation urbaine, mobilité, centre-ville français |
 | Nos pôles / travaux | `chantier-renovation-lyon.jpg` | Rénovation, méthode, intervention sur patrimoine existant |
 | Habitat / propriétaires | `immeuble-renovation-meudon.jpg` | Bien bâti, rénovation, logement |
-| Matériaux / entreprises | `france-ressourcerie-vichy.jpg` | Ressourcerie, matériaux et objets réemployables, économie circulaire |
+| Matériaux / entreprises | `materiaux-reemploi-echantillons.jpg`, `materiaux-renovation-outils.jpg`, `materiaux-durables-reemploi.jpg` | Matériaux de construction, outils de rénovation, ressources durables et réemploi |
 | Commerces | `commerce-ferme-vichy.jpg` ou `saint-etienne-centre-commerce.jpg` | Local fermé ou rue commerçante française |
 | Friches / observatoire | `friche-industrielle-ronchamp.jpg` | Friche, recyclage foncier, site à qualifier |
 | Citoyens / bénévoles | `jardin-partage-france.jpg` | Action collective, espace vert, participation |
 | Saint-Étienne | `saint-etienne-rue-resistance.jpg`, `saint-etienne-panorama.jpg`, `france-saint-etienne-jean-jaures.jpg` | Images réelles du territoire pilote |
 
 Contrôle réalisé : les visuels du site sont français, sourcés, thématiquement cohérents et ne sont pas présentés comme des réalisations TVF.
+
+## Visuels fournis par Territoires Vivants France
+
+- `materiaux-reemploi-echantillons.jpg`  
+  Source : visuel fourni par Territoires Vivants France pour illustrer les matériaux de construction réemployables.
+
+- `materiaux-renovation-outils.jpg`  
+  Source : visuel fourni par Territoires Vivants France pour illustrer les matériaux, outils et ressources de rénovation.
+
+- `materiaux-durables-reemploi.jpg`  
+  Source : visuel fourni par Territoires Vivants France pour illustrer les matériaux durables et le réemploi.
