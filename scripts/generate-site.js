@@ -16,6 +16,13 @@ const contact = {
   address: "25 rue Élise Gervais, 42000 Saint-Étienne",
 };
 
+const socialLinks = {
+  whatsapp: "https://wa.me/message/SKYLJHX46E43C1",
+  facebook: "https://www.facebook.com/share/18wj5mVw1w/",
+};
+
+const whatsappQr = "assets/qr-whatsapp-tvf.png";
+
 const official = {
   status: "Association loi 1901 déclarée",
   rna: "W423016361",
@@ -70,6 +77,7 @@ const imageSizes = {
   "assets/photos/france-saint-etienne-jean-jaures.jpg": [1200, 800],
   "assets/photos/saint-etienne-panorama.jpg": [1600, 215],
   "assets/photos/saint-etienne-rue-resistance.jpg": [955, 1200],
+  "assets/qr-whatsapp-tvf.png": [900, 1600],
 };
 
 const pages = [
@@ -1507,6 +1515,7 @@ const pages = [
       contactAppointmentSection(),
       contactProfileTriageSection(),
       contactDetailsSection(),
+      socialContactSection(),
       contactSection(),
       firstMeetingSection(),
       tableSection("Informations utiles à transmettre", "Ces éléments facilitent un premier tri sans créer d'engagement automatique.", [
@@ -2217,8 +2226,14 @@ function contactDetailsSection() {
     ["Canal", "Information", "Usage recommandé"],
     ["E-mail", `<a href="mailto:${contact.email}">${contact.email}</a>`, "Premier contact écrit, transmission d'une demande, prise de rendez-vous ou envoi d'un dossier."],
     ["Téléphone", `<a href="tel:${contact.phoneHref}">${contact.phone}</a>`, "Contact court, orientation rapide ou confirmation d'un rendez-vous."],
+    ["WhatsApp", `<a href="${socialLinks.whatsapp}" target="_blank" rel="noopener noreferrer">Écrire à TVF sur WhatsApp</a>`, "Canal rapide pour démarrer une discussion ou demander une orientation courte."],
+    ["Facebook", `<a href="${socialLinks.facebook}" target="_blank" rel="noopener noreferrer">Suivre TVF sur Facebook</a>`, "Suivi des actualités publiques et relais des communications de lancement."],
     ["Siège national", contact.address, "Adresse institutionnelle de référence pour les mentions et documents TVF."],
   ]);
+}
+
+function socialContactSection() {
+  return `<section class="section soft social-contact-section" ${sectionAttrs("WhatsApp et réseaux sociaux")}><div class="container social-contact-grid"><div class="social-contact-copy"><p class="section-kicker">Canaux rapides</p><h2>Écrire à TVF ou suivre l'association.</h2><p class="section-lead">Pour un premier échange court, WhatsApp permet de démarrer une discussion simplement. Facebook sert à suivre les communications publiques de lancement et les prochaines actualités de Territoires Vivants France.</p><div class="social-actions"><a class="social-action whatsapp" href="${socialLinks.whatsapp}" target="_blank" rel="noopener noreferrer" aria-label="Écrire à Territoires Vivants France sur WhatsApp"><span aria-hidden="true">WA</span><strong>WhatsApp</strong><small>Démarrer une discussion</small></a><a class="social-action facebook" href="${socialLinks.facebook}" target="_blank" rel="noopener noreferrer" aria-label="Suivre Territoires Vivants France sur Facebook"><span aria-hidden="true">FB</span><strong>Facebook</strong><small>Suivre les actualités</small></a></div></div><figure class="qr-card"><img src="${whatsappQr}" ${imageAttrs(whatsappQr)} alt="QR code WhatsApp pour contacter Territoires Vivants France" loading="lazy" decoding="async"><figcaption>Scannez le QR code pour ouvrir directement la conversation WhatsApp TVF.</figcaption></figure></div></section>`;
 }
 
 function contactAppointmentSection() {
@@ -2704,6 +2719,7 @@ function jsonLd(page) {
       logo: `${site.url}/assets/logo-territoires-vivants-france.png`,
       email: contact.email,
       telephone: contact.phoneHref,
+      sameAs: [socialLinks.facebook, socialLinks.whatsapp],
       address: {
         "@type": "PostalAddress",
         streetAddress: "25 rue Élise Gervais",
@@ -3095,7 +3111,7 @@ ${breadcrumbNav(page)}
       <div><span class="footer-logo-box"><img src="assets/logo-territoires-vivants-france-web.png" width="583" height="181" alt="Territoires Vivants France" class="footer-logo" loading="lazy" decoding="async"></span><p>Plateforme nationale de coopération pour redonner vie aux biens, lieux et ressources inutilisés.</p></div>
       <div><h3>Navigation</h3>${nav.slice(0, 7).map(([label, href]) => `<a href="${hrefFor(href)}">${label}</a>`).join("")}</div>
       <div><h3>Ressources</h3><a href="${hrefFor("contact.html")}">Demander les documents</a><a href="${hrefFor("faq.html")}">FAQ</a><a href="${hrefFor("kit-media.html")}">Kit média</a><a href="${hrefFor("gouvernance.html")}">Gouvernance</a><a href="${hrefFor("mentions-legales.html")}">Mentions légales</a><a href="${hrefFor("politique-confidentialite.html")}">Politique de confidentialité</a></div>
-      <div><h3>Siège</h3><p>25 rue Élise Gervais<br>42000 Saint-Étienne</p><p><a href="mailto:${contact.email}">${contact.email}</a><br><a href="tel:${contact.phoneHref}">${contact.phone}</a></p><a class="btn secondary" href="${hrefFor("contact.html")}">Contacter TVF</a></div>
+      <div><h3>Siège</h3><p>25 rue Élise Gervais<br>42000 Saint-Étienne</p><p><a href="mailto:${contact.email}">${contact.email}</a><br><a href="tel:${contact.phoneHref}">${contact.phone}</a></p><div class="footer-social" aria-label="Réseaux et messagerie TVF"><a href="${socialLinks.whatsapp}" target="_blank" rel="noopener noreferrer" aria-label="Écrire à TVF sur WhatsApp"><span aria-hidden="true">WA</span><span>WhatsApp</span></a><a href="${socialLinks.facebook}" target="_blank" rel="noopener noreferrer" aria-label="Suivre TVF sur Facebook"><span aria-hidden="true">FB</span><span>Facebook</span></a></div><a class="btn secondary" href="${hrefFor("contact.html")}">Contacter TVF</a></div>
     </div>
     <div class="container footer-bottom">© 2026 Territoires Vivants France - Tous droits réservés.</div>
   </footer>

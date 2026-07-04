@@ -2616,3 +2616,132 @@ tr:nth-child(even) td {
     padding-left: 14px;
   }
 }
+
+
+/* Contact WhatsApp et r?seaux sociaux */
+.social-contact-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(220px, 300px);
+  gap: 28px;
+  align-items: center;
+}
+
+.social-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 22px;
+}
+
+.social-action {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 2px 12px;
+  min-width: 220px;
+  padding: 14px 16px;
+  color: var(--blue-900);
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(14, 45, 69, 0.11);
+  border-radius: 10px;
+  transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.social-action:hover,
+.social-action:focus-visible {
+  transform: translateY(-2px);
+  border-color: rgba(47, 125, 50, 0.32);
+  box-shadow: var(--shadow-hover);
+}
+
+.social-action > span {
+  grid-row: span 2;
+  display: inline-grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  color: var(--white);
+  background: var(--green-800);
+  border-radius: 50%;
+  font-size: 0.78rem;
+  font-weight: 850;
+  letter-spacing: 0.03em;
+}
+
+.social-action.facebook > span {
+  background: var(--blue-900);
+}
+
+.social-action strong {
+  line-height: 1.2;
+}
+
+.social-action small {
+  color: rgba(20, 33, 43, 0.68);
+  font-size: 0.8rem;
+}
+
+.qr-card {
+  margin: 0;
+  padding: 16px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid rgba(14, 45, 69, 0.11);
+  border-radius: 12px;
+}
+
+.qr-card img {
+  width: min(100%, 220px);
+  height: auto;
+  margin-inline: auto;
+  border-radius: 10px;
+}
+
+.qr-card figcaption {
+  margin-top: 10px;
+  color: rgba(20, 33, 43, 0.72);
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.footer-social {
+  display: grid;
+  gap: 6px;
+  margin: 10px 0 14px;
+}
+
+.footer-social a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+}
+
+.footer-social a span:first-child {
+  display: inline-grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  color: var(--blue-900);
+  background: rgba(255, 255, 255, 0.88);
+  border-radius: 50%;
+  font-size: 0.66rem;
+  font-weight: 850;
+}
+
+@media (max-width: 760px) {
+  .social-contact-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .social-action {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .qr-card img {
+    width: min(100%, 190px);
+  }
+}
