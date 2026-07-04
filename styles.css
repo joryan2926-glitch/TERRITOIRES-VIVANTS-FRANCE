@@ -2506,3 +2506,113 @@ th {
     min-height: 96px;
   }
 }
+
+/* Finition institutionnelle globale */
+:root {
+  --container: 1120px;
+  --page-border: rgba(14, 45, 69, 0.08);
+}
+
+body {
+  background:
+    linear-gradient(180deg, #fbfaf6 0%, #f7faf5 44%, #fbfaf6 100%);
+}
+
+.site-header {
+  box-shadow: 0 8px 24px rgba(14, 45, 69, 0.045);
+}
+
+.header-inner {
+  min-height: 74px;
+}
+
+.main-nav {
+  gap: 18px;
+  font-size: 0.98rem;
+}
+
+.main-nav a::after {
+  left: 12%;
+  right: 12%;
+  height: 1px;
+}
+
+.section:not(.hero) {
+  border-top: 1px solid var(--page-border);
+}
+
+.section-head {
+  border-left: 3px solid rgba(47, 125, 50, 0.32);
+  padding-left: 18px;
+}
+
+.card,
+.audience-grid article,
+.compact-grid article,
+.trust-grid article,
+.journey-card,
+.mini-list article,
+.form-panel,
+.table-wrap,
+.faq-list details {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.card h3,
+.journey-card strong,
+.trust-grid strong,
+.mini-list strong {
+  color: var(--blue-900);
+}
+
+.card p,
+.trust-grid p,
+.timeline p,
+.faq-list details p,
+.decision-list p,
+.quick-brief-grid p,
+.compact-grid p,
+.audience-grid p,
+td {
+  color: rgba(20, 33, 43, 0.78);
+}
+
+.btn {
+  letter-spacing: 0.005em;
+}
+
+.btn.secondary {
+  background: rgba(255, 255, 255, 0.92);
+}
+
+table {
+  background: var(--white);
+}
+
+th {
+  color: var(--blue-900);
+}
+
+tr:nth-child(even) td {
+  background: rgba(238, 245, 248, 0.42);
+}
+
+.site-footer {
+  border-top: 4px solid var(--green-700);
+}
+
+.site-footer h3 {
+  text-transform: none;
+}
+
+@media (max-width: 1120px) {
+  .main-nav {
+    font-size: 0.96rem;
+  }
+}
+
+@media (max-width: 760px) {
+  .section-head {
+    padding-left: 14px;
+  }
+}
