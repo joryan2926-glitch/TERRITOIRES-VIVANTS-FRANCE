@@ -156,6 +156,9 @@ const pages = [
         "Objet social inscrit dans les statuts",
         "Les statuts signés à Saint-Étienne le 22 juin 2026 donnent à TVF un objet large : participer à la revitalisation, la réhabilitation et la valorisation des territoires urbains, ruraux et ultramarins. Cet objet couvre notamment le logement, l'habitat, la vacance immobilière, la réhabilitation de bâtiments dégradés, la revitalisation commerciale, le réemploi des matériaux, les friches, l'insertion, la solidarité, l'environnement, l'économie circulaire, la formation et l'accompagnement des collectivités, entreprises et habitants."
       ),
+      nationalDataSection("Pourquoi une association comme TVF est utile"),
+      associationNeedMatrixSection(),
+      associationProofSection(),
       sectionIntro(
         "Ce que TVF apporte concrètement",
         "L'association se positionne comme un cadre de travail : elle transforme une intention en dossier lisible, un signalement en situation qualifiée et une ressource inutilisée en contribution possible à un projet territorial.",
@@ -468,7 +471,10 @@ const pages = [
         ]
       ),
       saintEtienneDataSection(),
+      saintEtienneUsefulnessSection(),
       saintEtienneAlignmentSection(),
+      saintEtienneProjectExamplesSection(),
+      saintEtienneCommerceIdeasSection(),
       cards("Axes prioritaires", "Les priorités restent à formaliser avec les acteurs locaux.", [
         ["Habitat", "Repérer les logements vacants ou dégradés et comprendre les blocages."],
         ["Commerce", "Identifier les locaux fermés et les possibilités de réactivation."],
@@ -2054,9 +2060,16 @@ function highlight(title, text, label, href, image) {
 }
 
 function split(title, text, image) {
-  return `<section class="section" ${sectionAttrs(title)}><div class="container split"><img src="${image}" ${imageAttrs(image)} alt="${title}" loading="lazy" decoding="async"><div><p class="section-kicker">Approche</p><h3>${title}</h3><p class="section-lead">${text}</p></div></div></section>`;
+  return `<section class="section" ${sectionAttrs(title)}><div class="container split"><img src="${image}" ${imageAttrs(image)} alt="${splitAlt(title, image)}" loading="lazy" decoding="async"><div><p class="section-kicker">Approche</p><h3>${title}</h3><p class="section-lead">${text}</p></div></div></section>`;
 }
 
+function splitAlt(title, image) {
+  const alts = {
+    "assets/photos/materiaux-reemploi-echantillons.jpg": "Échantillons de matériaux de construction réemployables : bois, briques, verre, isolants et carrelage",
+    "assets/photos/materiaux-durables-reemploi.jpg": "Matériaux durables, bois, briques, isolants et ressources de réemploi pour la Matériauthèque Solidaire",
+  };
+  return escapeAttr(alts[image] || title);
+}
 function textBlock(title, text) {
   return `<section class="section" ${sectionAttrs(title)}><div class="container narrow"><p class="section-kicker">Analyse</p><h2>${title}</h2><p class="section-lead">${text}</p></div></section>`;
 }
@@ -2075,22 +2088,79 @@ function nationalDataSection(title = "Chiffres publics de contexte") {
   ]);
 }
 
-function saintEtienneDataSection() {
-  return tableSection("Données publiques de cadrage - Saint-Étienne", "Ces données INSEE 2023 donnent un socle vérifiable au territoire pilote. Elles ne constituent pas des résultats TVF.", [
-    ["Indicateur", "Donnée publique", "Source", "Lecture TVF"],
-    ["Population", "173 136 habitants en 2023.", extLink("INSEE, dossier complet Commune de Saint-Étienne, paru le 25/06/2026", "https://www.insee.fr/fr/statistiques/2011101?geo=COM-42218"), "Un territoire de taille suffisante pour tester une méthode structurée et duplicable."],
-    ["Logements vacants", "12 175 logements vacants en 2023, soit 12,0 % du parc de logements de la commune.", extLink("INSEE, LOG T1 et LOG T2, RP2023", "https://www.insee.fr/fr/statistiques/2011101?geo=COM-42218"), "Un enjeu direct pour Habitat Vivant, les propriétaires et les scénarios de remise en usage."],
-    ["Parc ancien", "Plus de la moitié des résidences principales datent d'avant 1971 selon les tableaux logement INSEE.", extLink("INSEE, LOG T8, RP2023", "https://www.insee.fr/fr/statistiques/2011101?geo=COM-42218"), "Un besoin potentiel de qualification fine : état, sécurité, rénovation, usages et coûts."],
-    ["Chômage", "Taux de chômage au sens du recensement : 19,0 % des 15-64 ans en 2023.", extLink("INSEE, EMP T4, RP2023", "https://www.insee.fr/fr/statistiques/2011101?geo=COM-42218"), "Justifie de relier certains projets à l'insertion, à la formation et aux chantiers encadrés."],
-    ["Pauvreté", "Taux de pauvreté à 60 % de la médiane : 30,4 % en 2023.", extLink("INSEE-DGFiP-Cnaf-Cnav-Ccmsa, Filosofi 2023", "https://www.insee.fr/fr/statistiques/2011101?geo=COM-42218"), "Renforce l'intérêt d'usages utiles : locaux associatifs, services, économie circulaire et logement solidaire."],
+function associationNeedMatrixSection() {
+  return tableSection("Le besoin global auquel TVF répond", "TVF existe parce que plusieurs enjeux publics se croisent sans toujours être traités dans un même parcours : vacance, réemploi, friches, commerces, insertion et financement. Cette lecture reste prudente : elle s'appuie sur des repères publics et transforme ces constats en méthode de travail, pas en promesse de résultat.", [
+    ["Besoin observé", "Repère public vérifiable", "Source", "Réponse TVF"],
+    ["Logements vacants", "3,1 millions de logements vacants en France en 2023.", extLink("INSEE, relayé par Banque des Territoires / Localtis, janvier 2024", "https://www.banquedesterritoires.fr/la-france-compte-plus-de-3-millions-de-logements-vacants"), "Repérer les biens, qualifier les blocages, dialoguer avec les propriétaires et préparer des usages réalistes."],
+    ["Déchets et matériaux du bâtiment", "Environ 42 millions de tonnes de déchets par an pour le bâtiment ; la filière REP PMCB vise collecte, traçabilité, réemploi et recyclage.", extLink("Ministère de la Transition écologique, PMCB, mise à jour novembre 2025", "https://www.ecologie.gouv.fr/politiques-publiques/produits-materiaux-construction-du-secteur-du-batiment-pmcb"), "Transformer des ressources inutilisées en apports affectés à des projets validés, avec critères d'acceptation et traçabilité."],
+    ["Friches et foncier déjà artificialisé", "Cartofriches consolide des données ouvertes et observatoires locaux sur les friches.", extLink("Cerema, Cartofriches", "https://cartofriches.cerema.fr/cartofriches/"), "Aider à passer d'une localisation à une note d'opportunité : propriété, risques, accès, usages temporaires ou reconversion."],
+    ["Commerces et rez-de-chaussée", "Les bases locales d'équipements et les diagnostics de centre-ville permettent d'objectiver l'offre existante avant d'imaginer un nouvel usage.", extLink("INSEE, Base permanente des équipements", "https://www.insee.fr/fr/statistiques/2011101?geo=COM-42218"), "Étudier les besoins de rue et éviter les commerces hors-sol : activité utile, porteur, convention, modèle économique et calendrier."],
+    ["Insertion et engagement citoyen", "Les indicateurs d'emploi, de pauvreté et de formation doivent guider les projets qui mobilisent habitants, bénévoles ou publics en parcours.", extLink("INSEE, dossiers communaux et intercommunaux", "https://www.insee.fr/fr/statistiques/2011101?geo=EPCI-244200770"), "Créer des missions encadrées, limitées, utiles et documentées, sans confondre bénévolat, chantier d'insertion et prestation professionnelle."],
   ]);
 }
 
+function associationProofSection() {
+  return tableSection("Ce qui rend l'association crédible avant les premiers projets", "La crédibilité de TVF ne repose pas sur des annonces, mais sur des preuves de méthode. Chaque demande doit pouvoir être comprise, tracée, décidée et suivie.", [
+    ["Exigence", "Pourquoi c'est important", "Document ou preuve attendue"],
+    ["Numéroter les dossiers", "Permettre le suivi d'une demande sans perte d'information entre les interlocuteurs.", "Fiche de contact, fiche projet, registre de décision."],
+    ["Distinguer objectif, instruction et résultat", "Éviter de présenter une intention comme une réalisation.", "Statut du dossier : reçu, qualifié, en instruction, conventionné, réalisé, clôturé."],
+    ["Sourcer les chiffres", "Rendre les constats vérifiables pour une collectivité, un financeur ou un journaliste.", "Lien INSEE, Cerema, ministère, collectivité ou source publique datée."],
+    ["Encadrer les conventions", "Protéger propriétaires, collectivités, entreprises, bénévoles et bénéficiaires.", "Convention de coopération, autorisation de visite, bordereau matériaux, note de risques."],
+    ["Mesurer l'impact après action", "Ne publier que des résultats établis, vérifiables et utiles au territoire.", "Tableau d'indicateurs, preuves photos autorisées, compte rendu, bilan."],
+  ]);
+}
+function saintEtienneDataSection() {
+  return tableSection("Données publiques de cadrage - Saint-Étienne", "Ces repères publics donnent un socle vérifiable au territoire pilote. Ils ne constituent pas des résultats TVF : ils servent à comprendre les besoins, prioriser les dossiers et préparer les échanges avec les acteurs locaux.", [
+    ["Indicateur", "Donnée publique", "Source", "Lecture TVF"],
+    ["Population communale", "172 569 habitants en 2022.", extLink("INSEE, dossier complet Commune de Saint-Étienne, RP2022, paru le 03/07/2026", "https://www.insee.fr/fr/statistiques/2011101?geo=COM-42218"), "Un territoire urbain suffisamment dense pour tester une méthode de coopération reproductible."],
+    ["Parc de logements", "101 006 logements en 2022, dont 86 292 résidences principales.", extLink("INSEE, LOG T1, Commune de Saint-Étienne, RP2022", "https://www.insee.fr/fr/statistiques/2011101?geo=COM-42218"), "La méthode Habitat Vivant peut partir d'un cadrage chiffré avant tout contact propriétaire."],
+    ["Logements vacants", "12 313 logements vacants en 2022, soit 12,2 % du parc communal.", extLink("INSEE, LOG T2, Commune de Saint-Étienne, RP2022", "https://www.insee.fr/fr/statistiques/2011101?geo=COM-42218"), "Un besoin direct de qualification : vacance courte, vacance structurelle, état, propriétaire, usage possible."],
+    ["Typologie du parc", "86,5 % d'appartements et 10,8 % de maisons en 2022.", extLink("INSEE, LOG T2, Commune de Saint-Étienne, RP2022", "https://www.insee.fr/fr/statistiques/2011101?geo=COM-42218"), "Les scénarios doivent tenir compte d'un parc majoritairement collectif : copropriété, accès, parties communes, coûts et sécurité."],
+    ["Contexte emploi métropolitain", "Saint-Étienne Métropole affiche un taux de chômage de 14,4 % des 15-64 ans en 2022 ; 24,5 % chez les 15-24 ans.", extLink("INSEE, dossier complet Saint-Étienne Métropole, EMP T4, RP2022", "https://www.insee.fr/fr/statistiques/2011101?geo=EPCI-244200770"), "Justifie de relier certains projets à des parcours d'insertion, de formation, de bénévolat encadré et de découverte métiers."],
+    ["Équipements et commerces", "La Base permanente des équipements 2024 recense notamment 145 boulangeries-pâtisseries, 121 épiceries ou supérettes, 230 coiffeurs et 53 pharmacies.", extLink("INSEE, BPE 2024, Commune de Saint-Étienne", "https://www.insee.fr/fr/statistiques/2011101?geo=COM-42218"), "Les idées de commerces doivent être étudiées par quartier : compléter l'offre, éviter les doublons et tester les besoins réels."],
+    ["Matériaux du bâtiment", "À l'échelle nationale, le bâtiment génère environ 42 millions de tonnes de déchets par an.", extLink("Ministère de la Transition écologique, PMCB, mise à jour novembre 2025", "https://www.ecologie.gouv.fr/politiques-publiques/produits-materiaux-construction-du-secteur-du-batiment-pmcb"), "Le pilote peut tester une chaîne locale : repérage, tri, acceptation, stockage, affectation et preuve de réemploi."],
+  ]);
+}
+
+function saintEtienneUsefulnessSection() {
+  return tableSection("Pourquoi le programme est utile à Saint-Étienne", "Le pilote TVF doit transformer les constats publics en dossiers de terrain. L'utilité se mesure par la qualité des situations qualifiées, des acteurs réunis et des décisions rendues possibles.", [
+    ["Constat local", "Besoin opérationnel", "Ce que TVF peut apporter", "Sortie concrète"],
+    ["Un volume significatif de logements vacants", "Comprendre quels biens peuvent réellement être remis en usage.", "Fiche propriétaire, prédiagnostic, scénarios d'usage et orientation vers les bons dispositifs.", "Liste de dossiers qualifiés, non publiée sans accord."],
+    ["Des rez-de-chaussée commerciaux à réactiver", "Éviter les vitrines vides et tester des usages adaptés aux rues concernées.", "Analyse du local, besoin de quartier, porteurs possibles, usage temporaire ou pérenne.", "Note commerce et scénario de réactivation."],
+    ["Des matériaux potentiellement récupérables", "Limiter le gaspillage et réduire certains coûts de projets locaux.", "Bordereau matériaux, critères d'acceptation, stockage possible, affectation à un projet validé.", "Registre de réemploi et preuve d'affectation."],
+    ["Des besoins sociaux et d'emploi", "Créer des missions utiles sans improviser les responsabilités.", "Fiche mission, partenaires d'insertion à solliciter, cadre sécurité, compte rendu.", "Chantier participatif ou mission encadrée."],
+    ["Des acteurs nombreux", "Mettre autour de la table propriétaires, collectivités, entreprises, associations et citoyens.", "Réunion de cadrage, matrice décisionnelle, documents communs.", "Dossier prêt à présenter."],
+  ]);
+}
+
+function saintEtienneProjectExamplesSection() {
+  return tableSection("Exemples de projets faisables à instruire", "Ces exemples sont des pistes réalistes à étudier. Ils ne sont pas annoncés comme des projets TVF réalisés : chaque cas devra être vérifié, autorisé, chiffré et conventionné.", [
+    ["Situation possible", "Usage à étudier", "Pourquoi c'est pertinent", "Conditions à verrouiller"],
+    ["Appartement vacant dans un immeuble collectif", "Logement temporaire, logement étudiant, logement solidaire ou habitat intergénérationnel.", "Le parc stéphanois est majoritairement collectif ; certains biens peuvent redevenir utiles si l'état, la copropriété et le propriétaire le permettent.", "Autorisation propriétaire, état technique, coût, assurances, convention d'usage, gestion locative ou associative."],
+    ["Cellule commerciale fermée en centre-ville", "Atelier de réparation, boutique de réemploi, commerce de proximité, local associatif ou occupation temporaire.", "Un rez-de-chaussée actif améliore la rue, la sécurité perçue et l'accès aux services.", "Bail ou convention, accessibilité, modèle économique, horaires, porteur, sécurité du local."],
+    ["Local ou bâtiment inutilisé", "Maison des associations, atelier partagé, espace de formation, stockage de proximité ou tiers-lieu sobre.", "Les associations et porteurs locaux ont souvent besoin de lieux accessibles, modestes et bien encadrés.", "Propriété, accès, normes, gouvernance du lieu, charges, responsabilité, calendrier."],
+    ["Terrain délaissé ou friche légère", "Jardin partagé, verger citoyen, espace pédagogique, zone de biodiversité ou usage transitoire.", "Un espace non utilisé peut devenir un support de lien social et de transition écologique.", "Statut foncier, pollution éventuelle, eau, clôture, entretien, assurance, convention temporaire."],
+    ["Lots de matériaux disponibles", "Réhabilitation d'un local associatif, aménagement d'un atelier, mobilier de réemploi, chantier pédagogique.", "Le réemploi devient crédible lorsqu'un matériau est affecté à un besoin précis et tracé.", "État, quantité, stockage, transport, refus des matériaux à risque, preuve d'utilisation."],
+    ["Immeuble dégradé avec propriétaire volontaire", "Bien Solidaire à Usage Partagé : rénovation contre usage temporaire encadré.", "Le propriétaire conserve son bien, le territoire gagne un usage, TVF coordonne une convention adaptée.", "Étude juridique, budget, durée, répartition des charges, gouvernance, fin de convention."],
+  ]);
+}
+
+function saintEtienneCommerceIdeasSection() {
+  return tableSection("Idées de commerces et services à étudier par quartier", "Ces pistes doivent être confirmées par diagnostic de rue, échanges avec les acteurs économiques et analyse de viabilité. Elles servent à orienter la réflexion, pas à imposer un modèle unique.", [
+    ["Besoin à vérifier", "Activité possible", "Intérêt territorial", "Vigilance"],
+    ["Réemploi et réparation", "Atelier vélo, réparation électroménager, boutique de seconde main, dépôt-atelier matériaux.", "Réduit les déchets, crée des services de proximité et peut accueillir des missions bénévoles ou formatives.", "Ne pas concurrencer inutilement l'existant ; cadrer sécurité, garanties et responsabilités."],
+    ["Alimentation de proximité", "Épicerie de quartier, produits locaux, vrac, panier solidaire ou commerce hybride.", "Renforce la vie de rue et peut répondre à des besoins d'accès quotidien.", "Étudier flux, concurrence, prix, logistique, fournisseurs et modèle économique."],
+    ["Artisanat et savoir-faire", "Atelier partagé, réparation textile, menuiserie légère, upcycling, petite fabrication locale.", "Relie économie locale, formation, insertion et réemploi de matériaux.", "Vérifier nuisances, normes, assurances, stockage et capacité d'encadrement."],
+    ["Services aux habitants", "Conciergerie de quartier, aide administrative, permanence associative, espace numérique accompagné.", "Un local vacant peut devenir un service utile si le besoin est confirmé par les habitants.", "Définir public cible, horaires, confidentialité, partenaires et financement de fonctionnement."],
+    ["Jeunes, étudiants et actifs", "Café associatif, coworking de proximité, espace projet, lieu d'information logement ou emploi.", "Saint-Étienne dispose d'un tissu universitaire et de jeunes actifs ; certains quartiers peuvent bénéficier de lieux souples.", "Tester la demande, éviter le lieu vitrine sans usage réel, prévoir animation et gouvernance."],
+    ["Culture et lien social", "Micro-galerie, scène ouverte, atelier artistique, ressourcerie culturelle, lieu d'exposition temporaire.", "Réactive les vitrines et rend visible la transformation d'un local.", "Convention courte, règles bruit/sécurité, calendrier, assurance, respect du voisinage."],
+  ]);
+}
 function saintEtienneAlignmentSection() {
   return tableSection("Besoins du territoire et réponse TVF", "Cette synthèse transforme les données de cadrage en pistes de travail concrètes pour le territoire pilote. Les dispositifs publics cités sont des cadres de référence à articuler avec les acteurs compétents, pas des financements acquis.", [
     ["Besoin observé", "Donnée ou source à mobiliser", "Cadre public compatible", "Réponse TVF", "Document à produire"],
     ["Logements vacants et habitat ancien", "INSEE : logements vacants, âge du parc, statut d'occupation", "Politiques habitat, rénovation, lutte contre l'habitat indigne, dispositifs locaux à confirmer", "Qualifier les biens, comprendre les blocages propriétaires, préparer des scénarios d'usage", "Fiche propriétaire, accord de principe, scénarios d'usage"],
-    ["Commerces fermés et rues fragilisées", "Observation terrain, données économiques locales, informations collectivité", "Revitalisation de centre-ville, commerce de proximité, occupation temporaire", "Identifier les locaux, tester des usages, rapprocher propriétaires et porteurs", "Fiche signalement, note d'opportunité, fiche projet"],
+    ["Commerces fermés et rues fragilisées", extLink("EPASE : réhabilitation de cellules commerciales vacantes du centre-ville et accompagnement de porteurs de projet", "https://www.epase.fr/implanter-son-commerce/"), "Revitalisation de centre-ville, commerce de proximité, occupation temporaire", "Identifier les locaux, tester des usages, rapprocher propriétaires et porteurs, en complément des démarches publiques existantes", "Fiche signalement, note d'opportunité, fiche projet"],
     ["Friches et foncier délaissé", extLink("Cartofriches - Cerema", "https://cartofriches.cerema.fr/cartofriches/"), "Recyclage foncier, sobriété foncière, renaturation ou usage transitoire", "Qualifier sécurité, accès, propriété, usages verts ou collectifs", "Fiche d'audit terrain, matrice des risques, plan d'action"],
     ["Matériaux et ressources inutilisées", extLink("PMCB - Ministère de la Transition écologique", "https://www.ecologie.gouv.fr/politiques-publiques/produits-materiaux-construction-du-secteur-du-batiment-pmcb"), "Économie circulaire, réemploi, réduction des déchets du bâtiment", "Recenser, tracer, accepter ou refuser puis affecter les ressources à des projets validés", "Bordereau matériaux, registre de réemploi, PV de remise"],
     ["Insertion et mobilisation citoyenne", "INSEE : chômage, pauvreté, contexte social du territoire", "ESS, bénévolat, participation citoyenne, parcours d'insertion à articuler avec les acteurs locaux", "Créer des missions encadrées, utiles, limitées et documentées", "Fiche mission, feuille d'émargement, compte rendu terrain"],
