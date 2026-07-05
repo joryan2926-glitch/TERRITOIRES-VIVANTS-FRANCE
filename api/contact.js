@@ -145,6 +145,15 @@ function candidateRows(submission) {
 
   return [
     compactObject({
+      full_name: submission.name || submission.profile || "Contact TVF",
+      email: submission.email || "contact@territoiresvivantsfrance.fr",
+      subject: submission.subject || submission.formKind || "Demande TVF",
+      message: submission.message || submission.summary || submission.subject || "Demande transmise depuis le site TVF.",
+      consent: false,
+      source_page: submission.page || submission.referer,
+      user_agent: submission.userAgent,
+    }),
+    compactObject({
       profile: submission.profile,
       name: submission.name,
       email: submission.email,
