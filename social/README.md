@@ -7,8 +7,10 @@ Ce dossier regroupe les supports de communication de Territoires Vivants France 
 - `strategie-marketing-tvf.md` : positionnement, publics cibles, messages et entonnoir marketing.
 - `calendrier-editorial-30-jours.md` : plan de publication sur 30 jours avec textes, formats, CTA et bios.
 - `10-posts-lancement-prets-a-publier.md` : les 10 premiers posts complets, prets a adapter et publier.
+- `prospection-saint-etienne-tableau.md` / `.csv` : tableau de ciblage et suivi pour lancer la prospection Saint-Etienne.
 - `scripts-prospection-saint-etienne.md` : e-mails, messages LinkedIn, WhatsApp et scripts telephone par public.
 - `campagnes-visuelles-tvf.md` : concepts de visuels Instagram, LinkedIn, Facebook et reels.
+- `checklist-lancement-marketing.md` : routine hebdomadaire pour publier, prospecter, relancer et suivre les demandes.
 
 ## Brand kit reseaux sociaux
 
