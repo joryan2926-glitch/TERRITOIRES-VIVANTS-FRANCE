@@ -11,9 +11,20 @@ function sendJson(res, statusCode, payload) {
   res.end(JSON.stringify(payload));
 }
 
+function cleanEnvToken(value, max = 3000) {
+  return clean(value || "", max)
+    .replace(/^[`'",;]+|[`'",;]+$/g, "")
+    .replace(/\s+/g, "");
+}
+
+function cleanEnvUrl(value) {
+  return clean(value || "", 600).replace(/^[`'",;]+|[`'",;]+$/g, "");
+}
+
 function normalizeSupabaseRestUrl(rawUrl) {
-  if (!rawUrl) return "";
-  const trimmed = String(rawUrl).trim().replace(/\/+$/, "");
+  const cleaned = cleanEnvUrl(rawUrl);
+  if (!cleaned) return "";
+  const trimmed = cleaned.replace(/\/+$/, "");
   return trimmed.endsWith("/rest/v1") ? trimmed : `${trimmed}/rest/v1`;
 }
 
@@ -185,7 +196,7 @@ function supabaseKeys() {
   return Array.from(
     new Set(
       [process.env.SUPABASE_SERVICE_ROLE_KEY, process.env.SUPABASE_ANON_KEY, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY]
-        .map((value) => clean(value || "", 3000))
+        .map((value) => cleanEnvToken(value, 3000))
         .filter(Boolean)
     )
   );

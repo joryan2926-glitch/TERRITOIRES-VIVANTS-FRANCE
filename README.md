@@ -203,3 +203,5 @@ Notifications e-mail optionnelles :
 - `TVF_OUTBOUND_TIMEOUT_MS` : optionnel, délai maximal des appels Supabase/e-mail. Par défaut : `9000`.
 
 Fonctionnement : la demande est d'abord enregistrée dans Supabase. Ensuite, l'API tente d'envoyer une notification à TVF et un accusé de réception à l'utilisateur si son e-mail est renseigné. Une erreur d'e-mail ne bloque pas l'enregistrement de la demande.
+
+Les valeurs sont nettoyées côté API pour tolérer une virgule, un guillemet ou un espace collé par erreur en début/fin de variable. Une clé Supabase réellement invalide restera toutefois refusée par Supabase.
