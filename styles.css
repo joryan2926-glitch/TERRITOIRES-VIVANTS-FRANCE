@@ -2794,3 +2794,37 @@ tr:nth-child(even) td {
     font-size: 0.96rem;
   }
 }
+/* Consentement formulaire */
+.consent-field {
+  display: grid;
+  grid-template-columns: 18px 1fr;
+  align-items: start;
+  gap: 10px;
+  margin: 4px 0 10px;
+  padding: 12px 14px;
+  color: rgba(14, 45, 69, 0.82);
+  background: rgba(234, 244, 232, 0.52);
+  border: 1px solid rgba(47, 125, 50, 0.18);
+  border-radius: 8px;
+  font-size: 0.86rem;
+  line-height: 1.5;
+}
+
+.consent-field input {
+  width: 16px;
+  height: 16px;
+  margin-top: 2px;
+  accent-color: var(--green-700);
+}
+
+.consent-field a {
+  color: var(--green-800);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.consent-field input[aria-invalid="true"] {
+  outline: 2px solid #b55222;
+  outline-offset: 2px;
+}

@@ -90,6 +90,8 @@ function buildSubmission(data, req) {
   const summary = cleanMultiline(data.summary || "", 5000);
   const page = clean(data.page || "", 500);
   const section = clean(data.section || "", 160);
+  const consent = ["true", "1", "yes", "oui", "on"].includes(String(fields.consent || data.consent || "").toLowerCase());
+  const submittedAfterMs = Number(data.submittedAfterMs || 0) || 0;
 
   return {
     profile,
@@ -103,6 +105,8 @@ function buildSubmission(data, req) {
     summary,
     page,
     section,
+    consent,
+    submittedAfterMs,
     userAgent: clean(req.headers["user-agent"] || "", 500),
     referer: clean(req.headers.referer || req.headers.referrer || "", 500),
     ip: clean(req.headers["x-forwarded-for"] || req.socket?.remoteAddress || "", 120),
@@ -123,6 +127,20 @@ function validateSubmission(data, submission) {
     throw error;
   }
 
+  if (!submission.consent) {
+    const error = new Error("Vous devez accepter l'utilisation de vos informations pour que TVF puisse traiter votre demande.");
+    error.statusCode = 400;
+    error.code = "CONSENT_REQUIRED";
+    throw error;
+  }
+
+  if (submission.submittedAfterMs > 0 && submission.submittedAfterMs < 1200) {
+    const error = new Error("L'envoi a ete effectue trop rapidement. Merci de relire votre demande avant validation.");
+    error.statusCode = 400;
+    error.code = "TOO_FAST";
+    throw error;
+  }
+
   const hasMeaningfulContent = Boolean(submission.subject || submission.message || submission.summary || submission.territory);
   if (!hasMeaningfulContent) {
     const error = new Error("La demande est trop courte.");
@@ -131,6 +149,24 @@ function validateSubmission(data, submission) {
   }
 }
 
+
+function formatSubmissionForStorage(submission) {
+  const lines = [
+    ["Profil", submission.profile],
+    ["Nom / structure", submission.name],
+    ["E-mail", submission.email],
+    ["Telephone", submission.phone],
+    ["Territoire", submission.territory],
+    ["Objet", submission.subject],
+    ["Page", submission.page],
+  ]
+    .filter(([, value]) => value)
+    .map(([label, value]) => `${label} : ${value}`);
+
+  const message = submission.message || submission.summary || "Demande transmise depuis le site TVF.";
+  const summary = submission.summary && submission.summary !== message ? `\n\nResume prepare :\n${submission.summary}` : "";
+  return `${lines.join("\n")}\n\nMessage :\n${message}${summary}`.trim();
+}
 function candidateRows(submission) {
   const metadata = compactObject({
     form_kind: submission.formKind,
@@ -141,6 +177,8 @@ function candidateRows(submission) {
     referer: submission.referer,
     ip: submission.ip,
     raw_fields: submission.raw,
+    consent: submission.consent,
+    submitted_after_ms: submission.submittedAfterMs,
   });
 
   return [
@@ -148,8 +186,8 @@ function candidateRows(submission) {
       full_name: submission.name || submission.profile || "Contact TVF",
       email: submission.email || "contact@territoiresvivantsfrance.fr",
       subject: submission.subject || submission.formKind || "Demande TVF",
-      message: submission.message || submission.summary || submission.subject || "Demande transmise depuis le site TVF.",
-      consent: false,
+      message: formatSubmissionForStorage(submission),
+      consent: submission.consent,
       source_page: submission.page || submission.referer,
       user_agent: submission.userAgent,
     }),

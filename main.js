@@ -106,7 +106,15 @@ function labelForField(field) {
   return field.name || "Champ";
 }
 
+function isUserField(field) {
+  return !field.closest(".hp-field") && field.type !== "hidden" && !field.disabled;
+}
+
 function valueForField(field) {
+  if (field.type === "checkbox" || field.type === "radio") {
+    return field.checked ? field.dataset.summaryValue || "Oui" : "";
+  }
+
   if (field.tagName === "SELECT") {
     return field.options[field.selectedIndex]?.textContent.trim() || field.value.trim();
   }
@@ -115,8 +123,8 @@ function valueForField(field) {
 }
 
 function summaryForForm(form) {
-  const fields = Array.from(form.querySelectorAll("input, select, textarea"));
-  const hasTypedValue = fields.some((field) => field.tagName !== "SELECT" && valueForField(field));
+  const fields = fieldsForForm(form);
+  const hasTypedValue = fields.some((field) => field.tagName !== "SELECT" && field.type !== "checkbox" && field.type !== "radio" && valueForField(field));
   const lines = fields
     .filter((field) => {
       if (field.tagName !== "SELECT") return valueForField(field);
@@ -141,7 +149,7 @@ function clearFieldErrors(form) {
 }
 
 function focusFirstRequiredField(form) {
-  const field = Array.from(form.querySelectorAll("input, textarea")).find((item) => !valueForField(item));
+  const field = fieldsForForm(form).find((item) => item.tagName !== "SELECT" && !valueForField(item));
   if (!field) return;
 
   field.setAttribute("aria-invalid", "true");
@@ -149,7 +157,7 @@ function focusFirstRequiredField(form) {
 }
 
 function fieldsForForm(form) {
-  return Array.from(form.querySelectorAll("input, select, textarea"));
+  return Array.from(form.querySelectorAll("input, select, textarea")).filter(isUserField);
 }
 
 function storageKeyForForm(form, index) {
@@ -166,7 +174,7 @@ function saveLocalFormDraft(form, key) {
 
     const draft = {};
     fieldsForForm(form).forEach((field) => {
-      draft[field.id || field.name] = field.value;
+      draft[field.id || field.name] = field.type === "checkbox" || field.type === "radio" ? field.checked : field.value;
     });
     sessionStorage.setItem(key, JSON.stringify(draft));
   } catch {
@@ -192,7 +200,9 @@ function restoreLocalFormDraft(form, key) {
 
     fieldsForForm(form).forEach((field) => {
       const value = draft[field.id || field.name];
-      if (typeof value === "string") {
+      if (typeof value === "boolean" && (field.type === "checkbox" || field.type === "radio")) {
+        field.checked = value;
+      } else if (typeof value === "string") {
         field.value = value;
       }
     });
@@ -223,6 +233,7 @@ if (contactMessage) {
 }
 
 document.querySelectorAll("[data-prepare-form]").forEach((form, index) => {
+  form.dataset.loadedAt = String(Date.now());
   const button = form.querySelector("[data-prepare-summary]");
   const copyButton = form.querySelector("[data-copy-summary]");
   const downloadButton = form.querySelector("[data-download-summary]");
@@ -287,8 +298,12 @@ document.querySelectorAll("[data-prepare-form]").forEach((form, index) => {
 
   function payloadForForm(summary) {
     const fields = {};
-    fieldsForForm(form).forEach((field) => {
+    Array.from(form.querySelectorAll("input, select, textarea")).forEach((field) => {
       if (!field.name) return;
+      if (field.type === "checkbox" || field.type === "radio") {
+        fields[field.name] = field.checked ? field.value || "true" : "";
+        return;
+      }
       fields[field.name] = field.value.trim();
     });
 
@@ -299,6 +314,7 @@ document.querySelectorAll("[data-prepare-form]").forEach((form, index) => {
       section: section?.id || "",
       summary: summary.text,
       fields,
+      submittedAfterMs: Date.now() - Number(form.dataset.loadedAt || Date.now()),
       site: fields.site || fields.website || "",
     };
   }
@@ -320,6 +336,14 @@ document.querySelectorAll("[data-prepare-form]").forEach((form, index) => {
     if (!submitButton) return;
 
     clearFieldErrors(form);
+    const consentField = form.querySelector("[name=\"consent\"]");
+    if (consentField && !consentField.checked) {
+      consentField.setAttribute("aria-invalid", "true");
+      consentField.focus();
+      setSubmitStatus("Vous devez accepter l'utilisation de vos informations pour que TVF puisse traiter votre demande.", "error");
+      return;
+    }
+
     hideSubmitStatus();
     submitButton.disabled = true;
     submitButton.textContent = "Envoi en cours...";
