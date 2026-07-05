@@ -10,6 +10,10 @@ Ce dossier regroupe les supports de communication de Territoires Vivants France 
 - `scripts-prospection-saint-etienne.md` : e-mails, messages LinkedIn, WhatsApp et scripts telephone par public.
 - `campagnes-visuelles-tvf.md` : concepts de visuels Instagram, LinkedIn, Facebook et reels.
 
+## Brand kit reseaux sociaux
+
+- `brand-kit/` : avatar, bannieres LinkedIn/Facebook, story de lancement et carte QR WhatsApp.
+
 ## Visuels existants
 
 - `instagram/lancement-tvf/exports/` : 5 visuels PNG de lancement.
