@@ -408,13 +408,15 @@ function parseRecipients(value) {
 
 function emailConfig() {
   const provider = clean(process.env.EMAIL_PROVIDER, 40).toLowerCase() || (process.env.RESEND_API_KEY ? "resend" : process.env.BREVO_API_KEY ? "brevo" : "");
+  const configuredNotifyTo = clean(process.env.TVF_NOTIFICATION_EMAIL || process.env.NOTIFICATION_EMAIL || "", 500);
+  const notifyTo = Array.from(new Set([configuredNotifyTo, DEFAULT_NOTIFICATION_EMAIL].filter(Boolean))).join(";");
   return {
     provider,
     resendKey: process.env.RESEND_API_KEY || "",
     brevoKey: process.env.BREVO_API_KEY || "",
     from: process.env.TVF_EMAIL_FROM || process.env.EMAIL_FROM || DEFAULT_FROM,
     replyTo: process.env.TVF_EMAIL_REPLY_TO || process.env.EMAIL_REPLY_TO || DEFAULT_NOTIFICATION_EMAIL,
-    notifyTo: process.env.TVF_NOTIFICATION_EMAIL || process.env.NOTIFICATION_EMAIL || DEFAULT_NOTIFICATION_EMAIL,
+    notifyTo,
   };
 }
 
