@@ -24,6 +24,19 @@ const categoryLabels = {
   "presse-institutionnel": "Presse",
   "demande-generale": "Generale",
 };
+const responseTemplates = {
+  auto: "Modele adapte a la categorie",
+  "collectivite-territoire": "Reponse collectivite",
+  "bien-vacant-proprietaire": "Reponse proprietaire",
+  "materiaux-reemploi": "Reponse materiaux",
+  "entreprise-partenariat": "Reponse entreprise",
+  "benevolat-insertion": "Reponse benevole / association",
+  "financement-mecenat": "Reponse financeur / mecene",
+  "presse-institutionnel": "Reponse presse / institution",
+  pieces: "Demande de pieces complementaires",
+  rendezvous: "Proposer un rendez-vous",
+  refus: "Reponse non compatible",
+};
 
 const loginSection = document.querySelector("[data-admin-login]");
 const appSection = document.querySelector("[data-admin-app]");
@@ -80,7 +93,7 @@ function escapeHtml(value) {
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
+    .replace(/\"/g, "&quot;")
     .replace(/'/g, "&#39;");
 }
 
@@ -96,6 +109,42 @@ function formatDate(value) {
 
 function label(map, value) {
   return map[value] || value || "Non classe";
+}
+
+function contactName(contact) {
+  return contact?.full_name || "Madame, Monsieur";
+}
+
+function templateCategory(contact, key) {
+  if (!key || key === "auto") return contact?.category || "demande-generale";
+  return key;
+}
+
+function responseSubject(contact) {
+  return `Suite a votre demande TVF - ${contact?.subject || "contact"}`;
+}
+
+function responseTemplate(contact, key = "auto") {
+  const name = contactName(contact);
+  const category = templateCategory(contact, key);
+  const commonIntro = `Bonjour ${name},\n\nMerci pour votre message et pour l'interet porte a Territoires Vivants France. Votre demande a bien ete recue et va etre qualifiee afin d'identifier la suite la plus adaptee.`;
+  const signature = `\n\nCordialement,\n\nTerritoires Vivants France\ncontact@territoiresvivantsfrance.fr\n06 22 03 93 24`;
+
+  const templates = {
+    "collectivite-territoire": `${commonIntro}\n\nPour preparer un premier echange territorial, pouvez-vous nous transmettre les elements suivants :\n\n- commune ou EPCI concerne ;\n- besoin public identifie ;\n- perimetre geographique ;\n- donnees deja disponibles ;\n- interlocuteur referent ;\n- calendrier souhaite.\n\nNous pourrons ensuite proposer un rendez-vous de cadrage afin d'evaluer les modalites possibles de cooperation.`,
+    "bien-vacant-proprietaire": `${commonIntro}\n\nPour qualifier le bien propose, pouvez-vous nous transmettre :\n\n- adresse precise du bien ;\n- type de bien : logement, immeuble, commerce, local, terrain ou friche ;\n- etat apparent ;\n- photos recentes ;\n- contraintes connues ;\n- situation de propriete ou mandat ;\n- objectif recherche : remise en usage, convention, location solidaire ou autre scenario.\n\nApres reception, nous pourrons indiquer si une visite ou une etude preliminaire est pertinente.`,
+    "materiaux-reemploi": `${commonIntro}\n\nPour etudier la valorisation des materiaux, merci de preciser :\n\n- nature des materiaux ;\n- quantite approximative ;\n- etat ;\n- localisation ;\n- delai de disponibilite ;\n- conditions d'enlevement ;\n- photos si disponibles.\n\nTVF n'est pas une plateforme de distribution libre : les materiaux sont qualifies puis orientes vers des projets compatibles avec l'interet territorial.`,
+    "entreprise-partenariat": `${commonIntro}\n\nPour evaluer une cooperation avec votre entreprise, pouvez-vous preciser :\n\n- type de contribution envisagee : materiaux, locaux, competences, transport, mecanat, financement ;\n- localisation ;\n- calendrier ;\n- contact referent ;\n- contraintes RSE ou reporting attendues.\n\nNous pourrons ensuite proposer un cadre de partenariat adapte et tracable.`,
+    "benevolat-insertion": `${commonIntro}\n\nPour vous orienter vers une mission adaptee, merci de nous indiquer :\n\n- commune ou secteur d'intervention ;\n- disponibilites ;\n- competences ou envies ;\n- mobilite ;\n- limites d'intervention ;\n- experience eventuelle sur chantier, animation, diagnostic ou mobilisation citoyenne.\n\nLes missions TVF doivent rester encadrees et compatibles avec la securite des personnes.`,
+    "financement-mecenat": `${commonIntro}\n\nPour preparer un echange financeur ou mecene, pouvez-vous nous indiquer :\n\n- type de soutien envisage ;\n- territoire ou thematique prioritaire ;\n- calendrier de decision ;\n- criteres de selection ;\n- attentes de reporting ;\n- personne referente.\n\nTVF pourra ensuite transmettre une note d'opportunite ou un dossier adapte.`,
+    "presse-institutionnel": `${commonIntro}\n\nPour orienter votre demande, pouvez-vous nous preciser :\n\n- media ou institution ;\n- sujet souhaite ;\n- format attendu ;\n- delai ;\n- contact referent.\n\nNous pouvons transmettre les elements de presentation, le kit media et les informations institutionnelles disponibles.`,
+    pieces: `${commonIntro}\n\nPour poursuivre l'instruction, il nous manque quelques elements :\n\n- commune ou territoire concerne ;\n- description precise de la situation ;\n- photos ou documents utiles ;\n- delai souhaite ;\n- interlocuteur a contacter ;\n- contraintes deja identifiees.\n\nDes reception, nous pourrons qualifier la demande et proposer une suite adaptee.`,
+    rendezvous: `${commonIntro}\n\nVotre demande semble justifier un premier echange. Nous vous proposons d'organiser un rendez-vous court afin de cadrer :\n\n- le besoin ;\n- le territoire ;\n- les acteurs concernes ;\n- les pieces disponibles ;\n- les suites possibles.\n\nMerci de nous transmettre deux ou trois disponibilites.`,
+    refus: `Bonjour ${name},\n\nMerci pour votre message et pour l'interet porte a Territoires Vivants France.\n\nApres premiere lecture, votre demande ne semble pas entrer dans le cadre d'intervention actuel de TVF, ou elle necessite des conditions qui ne sont pas reunies a ce stade.\n\nNous conservons une trace de votre message afin de pouvoir le reexaminer si le cadre evolue.`,
+    "demande-generale": `${commonIntro}\n\nPour bien orienter votre demande, pouvez-vous nous transmettre les precisions suivantes :\n\n- votre profil ;\n- territoire concerne ;\n- objet exact de la demande ;\n- pieces ou photos disponibles ;\n- suite attendue.\n\nNous reviendrons ensuite vers vous avec l'orientation la plus adaptee.`,
+  };
+
+  return `${templates[category] || templates["demande-generale"]}${signature}`;
 }
 
 function filtersParams() {
@@ -163,6 +212,12 @@ function selectedContact() {
   return contacts.find((item) => item.id === selectedId) || null;
 }
 
+function templateOptions(contact) {
+  return Object.entries(responseTemplates)
+    .map(([value, text]) => `<option value="${value}" ${value === "auto" ? "selected" : ""}>${escapeHtml(text)}</option>`)
+    .join("");
+}
+
 function renderDetail() {
   if (!detailEl) return;
   const contact = selectedContact();
@@ -171,6 +226,7 @@ function renderDetail() {
     return;
   }
 
+  const initialTemplate = responseTemplate(contact);
   detailEl.innerHTML = `<form class="admin-detail-form" data-admin-detail-form>
     <div class="admin-detail-title">
       <p class="section-kicker">Demande recue le ${escapeHtml(formatDate(contact.created_at))}</p>
@@ -183,6 +239,13 @@ function renderDetail() {
       <div><span>Source</span><strong>${escapeHtml(contact.source_page || "Site TVF")}</strong></div>
       <div><span>Creation</span><strong>${escapeHtml(formatDate(contact.created_at))}</strong></div>
       <div><span>Mise a jour</span><strong>${escapeHtml(formatDate(contact.updated_at))}</strong></div>
+    </div>
+
+    <div class="admin-quick-actions" aria-label="Actions rapides">
+      <button class="btn secondary" type="button" data-quick-status="a_qualifier">A qualifier</button>
+      <button class="btn secondary" type="button" data-quick-status="en_cours">En cours</button>
+      <button class="btn secondary" type="button" data-quick-status="rendez_vous">Rendez-vous</button>
+      <button class="btn ghost" type="button" data-quick-status="archive">Archiver</button>
     </div>
 
     <label>Statut
@@ -211,6 +274,25 @@ function renderDetail() {
       <textarea name="internal_notes" rows="6" placeholder="Historique, relance, prochaine action...">${escapeHtml(contact.internal_notes || "")}</textarea>
     </label>
 
+    <section class="admin-response-panel" aria-label="Modele de reponse">
+      <div class="admin-response-head">
+        <div>
+          <p class="section-kicker">Reponse</p>
+          <h4>Modele pret a adapter</h4>
+        </div>
+        <label>Modele
+          <select data-response-template>
+            ${templateOptions(contact)}
+          </select>
+        </label>
+      </div>
+      <textarea data-response-body rows="11">${escapeHtml(initialTemplate)}</textarea>
+      <div class="admin-detail-actions">
+        <button class="btn secondary" type="button" data-admin-copy-response>Copier la reponse</button>
+        <button class="btn secondary" type="button" data-admin-open-response>Ouvrir l'e-mail prepare</button>
+      </div>
+    </section>
+
     <div class="admin-message">
       <h4>Message recu</h4>
       <pre>${escapeHtml(contact.message || "Non renseigne")}</pre>
@@ -218,18 +300,16 @@ function renderDetail() {
 
     <div class="admin-detail-actions">
       <button class="btn primary" type="submit">Enregistrer</button>
-      <a class="btn secondary" href="mailto:${escapeHtml(contact.email || "")}?subject=${encodeURIComponent(`Suite a votre demande TVF - ${contact.subject || "contact"}`)}">Repondre par e-mail</a>
+      <a class="btn secondary" href="mailto:${escapeHtml(contact.email || "")}?subject=${encodeURIComponent(responseSubject(contact))}">Repondre par e-mail</a>
       <button class="btn ghost" type="button" data-admin-copy-email>Copier l'e-mail</button>
     </div>
     <p class="form-note" data-admin-save-status role="status" hidden></p>
   </form>`;
 }
 
-async function saveSelected(form) {
+async function updateSelected(data, statusEl) {
   const contact = selectedContact();
   if (!contact) return;
-  const statusEl = form.querySelector("[data-admin-save-status]");
-  const data = Object.fromEntries(new FormData(form));
   data.id = contact.id;
   try {
     if (statusEl) {
@@ -247,7 +327,28 @@ async function saveSelected(form) {
     if (statusEl) {
       statusEl.hidden = false;
       statusEl.textContent = error.message;
+    } else {
+      alert(error.message);
     }
+  }
+}
+
+async function saveSelected(form) {
+  const statusEl = form.querySelector("[data-admin-save-status]");
+  const data = Object.fromEntries(new FormData(form));
+  await updateSelected(data, statusEl);
+}
+
+async function copyText(text, button, doneLabel) {
+  try {
+    await navigator.clipboard.writeText(text);
+    if (button) {
+      const initial = button.textContent;
+      button.textContent = doneLabel;
+      window.setTimeout(() => { button.textContent = initial; }, 1600);
+    }
+  } catch {
+    window.prompt("Copiez le texte", text);
   }
 }
 
@@ -297,16 +398,44 @@ function bindEvents() {
     saveSelected(form);
   });
 
-  detailEl?.addEventListener("click", async (event) => {
-    if (!event.target.closest("[data-admin-copy-email]")) return;
+  detailEl?.addEventListener("change", (event) => {
+    const select = event.target.closest("[data-response-template]");
+    if (!select) return;
     const contact = selectedContact();
-    if (!contact?.email) return;
-    try {
-      await navigator.clipboard.writeText(contact.email);
-      event.target.textContent = "E-mail copie";
-      window.setTimeout(() => { event.target.textContent = "Copier l'e-mail"; }, 1600);
-    } catch {
-      alert(contact.email);
+    const textarea = detailEl.querySelector("[data-response-body]");
+    if (contact && textarea) textarea.value = responseTemplate(contact, select.value);
+  });
+
+  detailEl?.addEventListener("click", async (event) => {
+    const contact = selectedContact();
+    if (!contact) return;
+
+    const quickStatus = event.target.closest("[data-quick-status]");
+    if (quickStatus) {
+      await updateSelected({ status: quickStatus.dataset.quickStatus });
+      return;
+    }
+
+    const copyEmail = event.target.closest("[data-admin-copy-email]");
+    if (copyEmail) {
+      if (!contact.email) return;
+      await copyText(contact.email, copyEmail, "E-mail copie");
+      return;
+    }
+
+    const copyResponse = event.target.closest("[data-admin-copy-response]");
+    if (copyResponse) {
+      const textarea = detailEl.querySelector("[data-response-body]");
+      await copyText(textarea?.value || "", copyResponse, "Reponse copiee");
+      return;
+    }
+
+    const openResponse = event.target.closest("[data-admin-open-response]");
+    if (openResponse) {
+      const textarea = detailEl.querySelector("[data-response-body]");
+      const body = textarea?.value || "";
+      const href = `mailto:${encodeURIComponent(contact.email || "")}?subject=${encodeURIComponent(responseSubject(contact))}&body=${encodeURIComponent(body)}`;
+      window.location.href = href;
     }
   });
 }

@@ -1,4 +1,4 @@
-﻿# Processus de traitement des demandes entrantes TVF
+# Processus de traitement des demandes entrantes TVF
 
 Ce document sert de mode d'emploi interne pour traiter les formulaires recus depuis le site Territoires Vivants France.
 
@@ -101,3 +101,39 @@ Chaque semaine :
 3. Relancer les demandes en attente.
 4. Creer les fiches projet pour les dossiers retenus.
 5. Mettre a jour les indicateurs : demandes recues, demandes qualifiees, rendez-vous, dossiers acceptes, dossiers archives.
+
+## 9. Utilisation du back-office
+
+Acces : `admin-demandes.html`.
+
+Routine conseillee :
+
+1. Ouvrir le back-office avec le token admin.
+2. Filtrer les demandes `nouveau`.
+3. Lire chaque demande.
+4. Verifier la categorie et la priorite.
+5. Ajouter une note interne courte.
+6. Passer le statut a `a_qualifier`, `en_cours`, `rendez_vous`, `refuse` ou `archive`.
+7. Utiliser le modele de reponse adapte.
+8. Repondre depuis la messagerie Gmail ou la messagerie officielle.
+
+## 10. Modeles de reponse disponibles dans le back-office
+
+Le back-office contient des modeles prets a adapter :
+
+- reponse collectivite ;
+- reponse proprietaire ;
+- reponse materiaux ;
+- reponse entreprise ;
+- reponse benevole / association ;
+- reponse financeur / mecene ;
+- reponse presse / institution ;
+- demande de pieces complementaires ;
+- proposition de rendez-vous ;
+- reponse non compatible.
+
+Ces modeles sont des bases de travail : ils doivent etre relus avant envoi et adaptes au contexte. Aucun engagement financier, technique ou partenarial ne doit etre formule sans validation interne.
+
+## 11. Nettoyage des tests
+
+Les demandes techniques dont l'objet commence par `[TEST` doivent etre passees en `archive` apres verification. Elles ne doivent pas etre supprimees si elles servent a documenter un controle de fonctionnement recent.
