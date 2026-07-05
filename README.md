@@ -239,7 +239,8 @@ Elle permet de :
 - modifier le statut interne ;
 - ajouter la personne chargee du suivi ;
 - ajouter des notes internes ;
-- copier l'e-mail ou repondre depuis la messagerie.
+- copier l'e-mail ou repondre depuis la messagerie;
+- exporter les demandes filtrees en CSV pour le suivi interne.
 
 Configuration obligatoire dans Vercel :
 

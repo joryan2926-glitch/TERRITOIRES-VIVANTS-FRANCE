@@ -1,4 +1,4 @@
-﻿const ADMIN_TOKEN_KEY = "tvfAdminToken";
+const ADMIN_TOKEN_KEY = "tvfAdminToken";
 const statusLabels = {
   nouveau: "Nouveau",
   a_qualifier: "A qualifier",
@@ -93,7 +93,7 @@ function escapeHtml(value) {
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
-    .replace(/\"/g, "&quot;")
+    .replace(/"/g, "&quot;")
     .replace(/'/g, "&#39;");
 }
 
@@ -208,6 +208,58 @@ function renderList() {
   if (countEl) countEl.textContent = `${contacts.length} demande${contacts.length > 1 ? "s" : ""} affichee${contacts.length > 1 ? "s" : ""}`;
 }
 
+function csvCell(value) {
+  const text = String(value || "").replace(/\r?\n|\r/g, " ").trim();
+  return `"${text.replace(/"/g, '""')}"`;
+}
+
+function exportContactsCsv() {
+  if (!contacts.length) {
+    alert("Aucune demande a exporter avec les filtres actuels.");
+    return;
+  }
+  const headers = [
+    "Date",
+    "Statut",
+    "Priorite",
+    "Categorie",
+    "Nom",
+    "Structure",
+    "Email",
+    "Telephone",
+    "Commune",
+    "Sujet",
+    "Message",
+    "Charge du suivi",
+    "Notes internes",
+  ];
+  const rows = contacts.map((contact) => [
+    formatDate(contact.created_at),
+    label(statusLabels, contact.status),
+    label(priorityLabels, contact.priority),
+    label(categoryLabels, contact.category),
+    contact.full_name,
+    contact.organization,
+    contact.email,
+    contact.phone,
+    contact.city || contact.territory,
+    contact.subject,
+    contact.message,
+    contact.assigned_to,
+    contact.internal_notes,
+  ]);
+  const csv = [headers, ...rows].map((row) => row.map(csvCell).join(";")).join("\n");
+  const blob = new Blob(["\ufeff" + csv], { type: "text/csv;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  const stamp = new Date().toISOString().slice(0, 10);
+  link.href = url;
+  link.download = `demandes-tvf-${stamp}.csv`;
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  URL.revokeObjectURL(url);
+}
 function selectedContact() {
   return contacts.find((item) => item.id === selectedId) || null;
 }
@@ -378,6 +430,7 @@ function bindEvents() {
   });
   filtersForm?.addEventListener("change", () => loadContacts().catch((error) => alert(error.message)));
   refreshButton?.addEventListener("click", () => loadContacts().catch((error) => alert(error.message)));
+  exportButton?.addEventListener("click", exportContactsCsv);
   logoutButton?.addEventListener("click", () => {
     setToken("");
     showLogin();

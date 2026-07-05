@@ -116,6 +116,7 @@ Routine conseillee :
 6. Passer le statut a `a_qualifier`, `en_cours`, `rendez_vous`, `refuse` ou `archive`.
 7. Utiliser le modele de reponse adapte.
 8. Repondre depuis la messagerie Gmail ou la messagerie officielle.
+9. Exporter les demandes filtrees en CSV avant une reunion de suivi ou un bilan hebdomadaire.
 
 ## 10. Modeles de reponse disponibles dans le back-office
 
@@ -137,3 +138,14 @@ Ces modeles sont des bases de travail : ils doivent etre relus avant envoi et ad
 ## 11. Nettoyage des tests
 
 Les demandes techniques dont l'objet commence par `[TEST` doivent etre passees en `archive` apres verification. Elles ne doivent pas etre supprimees si elles servent a documenter un controle de fonctionnement recent.
+
+## 12. Export de suivi
+
+Le bouton `Exporter CSV` du back-office exporte uniquement les demandes affichees avec les filtres actifs. Utilisations recommandees :
+
+- preparation d'un point hebdomadaire ;
+- transmission interne des demandes a qualifier ;
+- suivi des demandes en attente ;
+- archivage d'un etat de reception avant une reunion.
+
+Le fichier CSV contient des donnees personnelles. Il doit rester interne, etre stocke dans un espace securise et etre supprime lorsqu'il n'est plus utile.
