@@ -224,3 +224,26 @@ Ordre recommande :
 5. Traiter les demandes selon le guide interne.
 
 Les documents operationnels restent des supports internes tant qu'ils ne sont pas explicitement publies sur le site.
+
+## Back-office demandes
+
+Une page privee de suivi des demandes est disponible hors navigation publique :
+
+- `admin-demandes.html`
+
+Elle permet de :
+
+- lister les demandes recues depuis Supabase ;
+- filtrer par statut, priorite et categorie ;
+- rechercher par nom, e-mail, sujet ou message ;
+- modifier le statut interne ;
+- ajouter la personne chargee du suivi ;
+- ajouter des notes internes ;
+- copier l'e-mail ou repondre depuis la messagerie.
+
+Configuration obligatoire dans Vercel :
+
+- `TVF_ADMIN_TOKEN` : token long et secret a saisir dans la page admin.
+- `SUPABASE_SERVICE_ROLE_KEY` : necessaire cote serveur pour lire et mettre a jour les demandes.
+
+La page est en `noindex` et bloquee dans `robots.txt`, mais elle doit rester protegee par le token. Ne jamais partager le token dans un document public.
