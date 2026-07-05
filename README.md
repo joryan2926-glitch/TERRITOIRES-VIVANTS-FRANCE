@@ -205,3 +205,22 @@ Notifications e-mail optionnelles :
 Fonctionnement : la demande est d'abord enregistrée dans Supabase. Ensuite, l'API tente d'envoyer une notification à TVF et un accusé de réception à l'utilisateur si son e-mail est renseigné. Une erreur d'e-mail ne bloque pas l'enregistrement de la demande.
 
 Les valeurs sont nettoyées côté API pour tolérer une virgule, un guillemet ou un espace collé par erreur en début/fin de variable. Une clé Supabase réellement invalide restera toutefois refusée par Supabase.
+
+## Suivi operationnel des formulaires
+
+Le site est pret pour une phase de reception des premieres demandes. Les demandes sont classees automatiquement par categorie, priorite et statut interne.
+
+Fichiers utiles :
+
+- `SUIVI_OPERATIONNEL_FORMULAIRES.md` : procedure interne de traitement des demandes.
+- `supabase/contacts-operational-upgrade.sql` : migration facultative pour ajouter les colonnes `status`, `priority`, `category`, `assigned_to`, `internal_notes`, `last_follow_up_at`, `closed_at` et `updated_at` dans Supabase.
+
+Ordre recommande :
+
+1. Verifier dans Vercel que `TVF_NOTIFICATION_EMAIL` et `TVF_EMAIL_REPLY_TO` pointent vers l'adresse temporaire de reception.
+2. Tester un formulaire depuis le site public.
+3. Verifier la ligne dans Supabase, table `contacts`.
+4. Executer la migration SQL si vous voulez piloter les demandes directement par statut/priorite/categorie dans Supabase.
+5. Traiter les demandes selon le guide interne.
+
+Les documents operationnels restent des supports internes tant qu'ils ne sont pas explicitement publies sur le site.

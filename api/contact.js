@@ -77,6 +77,49 @@ function validEmail(value) {
 function compactObject(input) {
   return Object.fromEntries(Object.entries(input).filter(([, value]) => value !== "" && value !== undefined && value !== null));
 }
+function normalizeForMatch(value) {
+  return String(value || "")
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
+}
+
+function inferCategory(input) {
+  const text = normalizeForMatch([
+    input.profile,
+    input.subject,
+    input.message,
+    input.summary,
+    input.page,
+    input.section,
+    input.formKind,
+  ].join(" "));
+
+  if (/presse|journaliste|media|communication/.test(text)) return "presse-institutionnel";
+  if (/financeur|mecene|mecenat|fondation|investisseur|subvention|don\b|financement/.test(text)) return "financement-mecenat";
+  if (/materiau|materiaux|reemploi|stock|palettes|bois|fenetre|porte|mobilier|don de materiaux/.test(text)) return "materiaux-reemploi";
+  if (/proprietaire|logement|immeuble|bien|local|commerce|terrain|friche|batiment/.test(text)) return "bien-vacant-proprietaire";
+  if (/collectivite|mairie|commune|epci|metropole|departement|region|territoire partenaire|diagnostic/.test(text)) return "collectivite-territoire";
+  if (/entreprise|artisan|rse|competence|partenariat|partenaire|local de stockage/.test(text)) return "entreprise-partenariat";
+  if (/benevole|citoyen|insertion|chantier|association|volontaire/.test(text)) return "benevolat-insertion";
+  return "demande-generale";
+}
+
+function inferPriority(input) {
+  const text = normalizeForMatch([
+    input.profile,
+    input.subject,
+    input.message,
+    input.summary,
+    input.page,
+    input.section,
+    input.formKind,
+  ].join(" "));
+
+  if (/urgent|danger|securite|sinistre|risque|insalubre|habitat indigne/.test(text)) return "urgente";
+  if (/collectivite|mairie|commune|epci|metropole|financeur|mecene|fondation|rendez-vous/.test(text)) return "haute";
+  return "normale";
+}
 
 function buildSubmission(data, req) {
   const fields = data.fields && typeof data.fields === "object" ? data.fields : {};
@@ -93,6 +136,10 @@ function buildSubmission(data, req) {
   const section = clean(data.section || "", 160);
   const consent = ["true", "1", "yes", "oui", "on"].includes(String(fields.consent || data.consent || "").toLowerCase());
   const submittedAfterMs = Number(data.submittedAfterMs || 0) || 0;
+  const classificationInput = { profile, subject, message, summary, page, section, formKind };
+  const category = clean(fields.categorie || fields.category || data.category || inferCategory(classificationInput), 120);
+  const priority = clean(fields.priorite || fields.priority || data.priority || inferPriority(classificationInput), 80);
+  const status = "nouveau";
 
   return {
     profile,
@@ -106,6 +153,9 @@ function buildSubmission(data, req) {
     summary,
     page,
     section,
+    category,
+    priority,
+    status,
     consent,
     submittedAfterMs,
     userAgent: clean(req.headers["user-agent"] || "", 500),
@@ -159,6 +209,9 @@ function formatSubmissionForStorage(submission) {
     ["Telephone", submission.phone],
     ["Territoire", submission.territory],
     ["Objet", submission.subject],
+    ["Categorie interne", submission.category],
+    ["Priorite", submission.priority],
+    ["Statut interne", submission.status],
     ["Page", submission.page],
   ]
     .filter(([, value]) => value)
@@ -180,9 +233,26 @@ function candidateRows(submission) {
     raw_fields: submission.raw,
     consent: submission.consent,
     submitted_after_ms: submission.submittedAfterMs,
+    category: submission.category,
+    priority: submission.priority,
+    status: submission.status,
   });
 
   return [
+    compactObject({
+      full_name: submission.name || submission.profile || "Contact TVF",
+      email: submission.email || "contact@territoiresvivantsfrance.fr",
+      subject: submission.subject || submission.formKind || "Demande TVF",
+      message: formatSubmissionForStorage(submission),
+      consent: submission.consent,
+      source_page: submission.page || submission.referer,
+      user_agent: submission.userAgent,
+      status: submission.status,
+      priority: submission.priority,
+      category: submission.category,
+      assigned_to: "",
+      internal_notes: "",
+    }),
     compactObject({
       full_name: submission.name || submission.profile || "Contact TVF",
       email: submission.email || "contact@territoiresvivantsfrance.fr",
@@ -200,7 +270,9 @@ function candidateRows(submission) {
       territory: submission.territory,
       subject: submission.subject,
       message: submission.message || submission.summary,
-      status: "nouveau",
+      status: submission.status,
+      priority: submission.priority,
+      category: submission.category,
       source: "site_web",
       metadata,
     }),
@@ -212,7 +284,9 @@ function candidateRows(submission) {
       territoire: submission.territory,
       objet: submission.subject,
       message: submission.message || submission.summary,
-      statut: "nouveau",
+      statut: submission.status,
+      priorite: submission.priority,
+      categorie: submission.category,
       source: "site_web",
       metadata,
     }),
@@ -224,7 +298,9 @@ function candidateRows(submission) {
       sujet: submission.subject,
       message: submission.message || submission.summary,
       donnees: metadata,
-      statut: "nouveau",
+      statut: submission.status,
+      priorite: submission.priority,
+      categorie: submission.category,
     }),
     compactObject({
       name: submission.name,
@@ -363,6 +439,9 @@ function submissionRows(submission) {
     ["Telephone", submission.phone],
     ["Territoire", submission.territory],
     ["Objet", submission.subject],
+    ["Categorie interne", submission.category],
+    ["Priorite", submission.priority],
+    ["Statut interne", submission.status],
     ["Page", submission.page],
   ];
 }
