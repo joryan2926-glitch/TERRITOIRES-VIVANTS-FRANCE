@@ -2769,3 +2769,28 @@ tr:nth-child(even) td {
   opacity: 0.72;
   transform: none;
 }
+/* Ajustement typographique mobile léger */
+@media (max-width: 760px) {
+  :root {
+    --paragraph-size: 0.98rem;
+    --paragraph-small: 0.9rem;
+    --paragraph-line: 1.66;
+    --paragraph-card-line: 1.56;
+  }
+
+  html {
+    font-size: 14.5px;
+  }
+
+  .btn {
+    font-size: 0.9rem;
+  }
+
+  table {
+    font-size: 0.82rem;
+  }
+
+  .faq-list summary {
+    font-size: 0.96rem;
+  }
+}
