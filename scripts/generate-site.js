@@ -108,6 +108,7 @@ const pages = [
       ),
       homeClaritySection(),
       homeTrustSection(),
+      launchNeedsSection(),
       tableSection("Ce que vous pouvez faire dès maintenant", "L'accueil doit orienter vite vers le bon parcours, sans perdre le visiteur dans tout le site.", [
         ["Votre situation", "Action utile", "Page à consulter"],
         ["Vous représentez une collectivité", "Préparer un périmètre pilote, un besoin public ou une coopération", "Collectivités"],
@@ -479,6 +480,7 @@ const pages = [
         ]
       ),
       saintEtienneDataSection(),
+      launchNeedsSection(),
       saintEtienneUsefulnessSection(),
       saintEtienneAlignmentSection(),
       saintEtienneProjectExamplesSection(),
@@ -561,6 +563,7 @@ const pages = [
         ["Je souhaite financer", "Soutenir un projet avec un cadre de suivi et de transparence.", "financeurs-mecenes.html"],
       ]),
       fastJourneySection(),
+      launchNeedsSection(),
       tableSection("Parcours d'entrée", "Chaque demande doit être orientée vers une suite lisible.", [
         ["Profil", "Ce que vous pouvez proposer", "Première étape", "Suite possible"],
         ["Collectivité", "Données, périmètre, besoin public, expérimentation", "Décrire le territoire et le problème à résoudre", "Diagnostic, réunion de cadrage, convention"],
@@ -1964,6 +1967,11 @@ function homeTrustSection() {
   return `<section class="section soft trust-section" ${sectionAttrs("Ce qui rend TVF présentable à une institution")}><div class="container"><div class="section-head"><p class="section-kicker">Crédibilité</p><h2>Ce qui rend TVF présentable à une institution.</h2><p>Avant de promettre un résultat, TVF prépare un cadre lisible : données sourcées, responsabilités écrites, preuves d'action et indicateurs vérifiables.</p></div><div class="trust-grid"><article><span class="card-icon" aria-hidden="true">S</span><strong>Données sourcées</strong><p>Chaque diagnostic doit distinguer données publiques, signalement, visite autorisée et décision interne.</p></article><article><span class="card-icon" aria-hidden="true">C</span><strong>Conventions</strong><p>Les rôles, usages, durées, limites, assurances, données et communications sont écrits avant action.</p></article><article><span class="card-icon" aria-hidden="true">I</span><strong>Impact vérifiable</strong><p>Les résultats ne sont publiés qu'après preuve : registre, compte rendu, PV, photos autorisées ou indicateurs.</p></article><article><span class="card-icon" aria-hidden="true">P</span><strong>Parcours par public</strong><p>Collectivité, propriétaire, entreprise, bénévole ou financeur disposent d'une entrée et d'un document adapté.</p></article></div></div></section>`;
 }
 
+
+function launchNeedsSection() {
+  return `<section class="section launch-needs" ${sectionAttrs("Ce que TVF recherche maintenant à Saint-Étienne")}><div class="container"><div class="section-head"><p class="section-kicker">Lancement terrain</p><h2>Ce que TVF recherche maintenant à Saint-Étienne.</h2><p class="section-lead">Pour passer du portail au terrain, TVF doit identifier des ressources concrètes, des interlocuteurs utiles et des contributions compatibles avec une première phase pilote.</p></div><div class="need-grid"><article><span class="card-icon" aria-hidden="true">L</span><h3>Local de stockage</h3><p>Un espace sec, accessible et encadré pour qualifier, stocker temporairement et organiser des matériaux réutilisables.</p></article><article><span class="card-icon" aria-hidden="true">T</span><h3>Transport et logistique</h3><p>Des solutions ponctuelles de transport, manutention ou prêt de véhicule pour tester une chaîne locale de réemploi.</p></article><article><span class="card-icon" aria-hidden="true">M</span><h3>Matériaux réutilisables</h3><p>Bois, portes, fenêtres, mobilier, sanitaires, outils ou équipements encore utiles, à qualifier avant toute affectation.</p></article><article><span class="card-icon" aria-hidden="true">B</span><h3>Biens à qualifier</h3><p>Logement, commerce, local, bâtiment, terrain ou friche pouvant faire l'objet d'une première étude sans engagement automatique.</p></article><article><span class="card-icon" aria-hidden="true">E</span><h3>Entreprises et artisans</h3><p>Acteurs du BTP, commerces, bureaux, transporteurs ou entreprises prêtes à étudier une contribution RSE concrète.</p></article><article><span class="card-icon" aria-hidden="true">C</span><h3>Bénévoles et relais locaux</h3><p>Habitants, associations et personnes ressources capables d'aider à signaler, relayer, organiser ou documenter les besoins.</p></article></div><div class="launch-actions"><a class="btn primary" href="${hrefFor("contact.html")}">Présenter une ressource</a><a class="btn secondary" href="${socialLinks.whatsapp}" target="_blank" rel="noopener noreferrer">Écrire sur WhatsApp</a></div></div></section>`;
+}
+
 function cards(title, intro, items) {
   return `<section class="section soft" ${sectionAttrs(title)}><div class="container"><div class="section-head"><p class="section-kicker">Repères</p><h2>${title}</h2><p class="section-lead">${intro}</p></div><div class="card-grid">${items
     .map(([h, p, href]) => `<article class="card"><span class="card-icon" aria-hidden="true">${iconFor(h)}</span><h3>${h}</h3><p>${p}</p>${href ? smartCardLink(h, href) : ""}</article>`)
@@ -3131,7 +3139,7 @@ for (const page of pages) {
 
 fs.writeFileSync(
   "robots.txt",
-  `User-agent: *\nAllow: /\nDisallow: /documents\nDisallow: /documents/\nDisallow: /output/\nDisallow: /tmp/\nSitemap: ${site.url}/sitemap.xml\n`,
+  `User-agent: *\nAllow: /\nDisallow: /documents\nDisallow: /documents/\nDisallow: /output/\nDisallow: /tmp/\nDisallow: /admin-demandes\nDisallow: /admin-demandes.html\nSitemap: ${site.url}/sitemap.xml\n`,
   "utf8"
 );
 
