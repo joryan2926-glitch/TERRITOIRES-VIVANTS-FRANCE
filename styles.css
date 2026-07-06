@@ -1330,11 +1330,29 @@ tr:last-child td {
 }
 
 .footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
   margin-top: 24px;
   padding-top: 14px;
   border-top: 1px solid rgba(255, 255, 255, 0.15);
   color: rgba(255, 255, 255, 0.65);
   font-size: 0.8rem;
+}
+
+.footer-admin-link {
+  color: rgba(255, 255, 255, 0.52);
+  font-size: 0.76rem;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.footer-admin-link:hover,
+.footer-admin-link:focus-visible {
+  color: #ffffff;
+  text-decoration: underline;
+  transform: none;
 }
 
 @media (max-width: 1120px) {
@@ -3258,5 +3276,12 @@ tr:nth-child(even) td {
 
   .launch-actions .btn {
     width: 100%;
+  }
+}
+
+@media (max-width: 640px) {
+  .footer-bottom {
+    align-items: flex-start;
+    flex-direction: column;
   }
 }

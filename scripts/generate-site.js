@@ -3126,7 +3126,7 @@ ${breadcrumbNav(page)}
       <div><h3>Ressources</h3><a href="${hrefFor("contact.html")}">Demander les documents</a><a href="${hrefFor("faq.html")}">FAQ</a><a href="${hrefFor("kit-media.html")}">Kit média</a><a href="${hrefFor("gouvernance.html")}">Gouvernance</a><a href="${hrefFor("mentions-legales.html")}">Mentions légales</a><a href="${hrefFor("politique-confidentialite.html")}">Politique de confidentialité</a></div>
       <div><h3>Siège</h3><p>25 rue Élise Gervais<br>42000 Saint-Étienne</p><p><a href="mailto:${contact.email}">${contact.email}</a><br><a href="tel:${contact.phoneHref}">${contact.phone}</a></p><div class="footer-social" aria-label="Réseaux et messagerie TVF"><a href="${socialLinks.whatsapp}" target="_blank" rel="noopener noreferrer" aria-label="Écrire à TVF sur WhatsApp"><span aria-hidden="true">WA</span><span>WhatsApp</span></a><a href="${socialLinks.facebook}" target="_blank" rel="noopener noreferrer" aria-label="Suivre TVF sur Facebook"><span aria-hidden="true">FB</span><span>Facebook</span></a></div><a class="btn secondary" href="${hrefFor("contact.html")}">Contacter TVF</a></div>
     </div>
-    <div class="container footer-bottom">© 2026 Territoires Vivants France - Tous droits réservés.</div>
+    <div class="container footer-bottom"><span>© 2026 Territoires Vivants France - Tous droits réservés.</span><a class="footer-admin-link" href="${hrefFor("admin-demandes.html")}" rel="nofollow">Accès administrateur</a></div>
   </footer>
   <script src="main.js" defer></script>
 </body>
