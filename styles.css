@@ -3435,3 +3435,46 @@ tr:nth-child(even) td {
     max-height: 190px;
   }
 }
+
+/* Checklists partenaires - pièces à préparer */
+.partner-prep {
+  background: linear-gradient(180deg, #f8faf5 0%, #eef6ea 100%);
+}
+
+.prep-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.prep-card {
+  padding: 20px;
+  border: 1px solid rgba(14, 45, 69, 0.12);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 12px 28px rgba(16, 34, 54, 0.07);
+}
+
+.prep-card h3 {
+  margin: 0 0 10px;
+  color: var(--blue-900);
+  font-size: 1rem;
+}
+
+.prep-card ul {
+  margin: 0 0 14px;
+  padding-left: 18px;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.prep-card li + li {
+  margin-top: 4px;
+}
+
+@media (max-width: 820px) {
+  .prep-grid {
+    grid-template-columns: 1fr;
+  }
+}

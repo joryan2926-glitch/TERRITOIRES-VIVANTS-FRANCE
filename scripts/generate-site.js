@@ -905,13 +905,17 @@ const pages = [
           ["Preuve", "Chaque contribution peut être suivie : matériau, compétence, financement, local, temps bénévole ou donnée."],
         ]
       ),
-      cards("Qui peut coopérer avec TVF ?", "Chaque partenariat doit avoir un objectif, des responsabilités et des preuves.", [
-        ["Collectivités", "Diagnostic, mise à disposition d'informations, expérimentation locale, animation territoriale."],
-        ["Entreprises", "Dons de matériaux, compétences, mécénat, locaux, logistique ou expertise technique."],
-        ["Associations", "Besoins locaux, bénévolat, usage futur, relais habitants, actions solidaires."],
-        ["Propriétaires", "Signalement de biens, convention d'usage, projet de remise en activité."],
-        ["Financeurs", "Soutien à des dossiers instruits, reporting, indicateurs et transparence."],
+      cards("Qui peut coopérer avec TVF ?", "Chaque partenariat doit avoir un objectif, des responsabilités et des preuves. Chaque carte renvoie vers les éléments à préparer avant étude.", [
+        ["Collectivités", "Diagnostic, données, périmètre pilote, mise à disposition ou expérimentation locale.", "#pieces-collectivite"],
+        ["Entreprises", "Matériaux, compétences, mécénat, locaux, logistique ou expertise technique.", "#pieces-entreprise"],
+        ["Associations", "Besoins locaux, usage futur, relais habitants, bénévolat ou projet solidaire.", "#pieces-association"],
+        ["Propriétaires", "Bien vacant, commerce, terrain, bâtiment ou immeuble à étudier sans engagement automatique.", "#pieces-proprietaire"],
+        ["Particuliers", "Signalement, matériaux disponibles, bénévolat, connaissance locale ou proposition citoyenne.", "#pieces-particulier"],
+        ["Financeurs", "Soutien financier, mécénat, investissement à impact, reporting et transparence.", "#pieces-financeur"],
+        ["Artisans", "Compétences, diagnostic technique, intervention, devis, conseil ou accompagnement chantier.", "#pieces-artisan"],
+        ["Logistique", "Stockage, transport, véhicule, manutention ou mise à disposition temporaire.", "#pieces-logistique"],
       ]),
+      partnerPreparationSection(),
       tableSection("Bénéfices par type d'acteur", "Un partenariat TVF doit produire un bénéfice partagé, sans contrepartie floue ni promesse non écrite.", [
         ["Acteur", "Contribution possible", "Bénéfice recherché", "Point à formaliser"],
         ["Collectivité", "Données, locaux, relais institutionnel, expérimentation", "Accélérer une réponse locale et mieux suivre les effets", "Périmètre, gouvernance, usage des données, calendrier"],
@@ -1989,6 +1993,21 @@ function launchNeedsSection() {
   return `<section class="section launch-needs" ${sectionAttrs("Ce que TVF recherche maintenant à Saint-Étienne")}><div class="container"><div class="section-head"><p class="section-kicker">Lancement terrain</p><h2>Ce que TVF recherche maintenant à Saint-Étienne.</h2><p class="section-lead">Pour passer du portail au terrain, TVF doit identifier des ressources concrètes, des interlocuteurs utiles et des contributions compatibles avec une première phase pilote.</p></div><div class="need-grid"><article><span class="card-icon" aria-hidden="true">L</span><h3>Local de stockage</h3><p>Un espace sec, accessible et encadré pour qualifier, stocker temporairement et organiser des matériaux réutilisables.</p></article><article><span class="card-icon" aria-hidden="true">T</span><h3>Transport et logistique</h3><p>Des solutions ponctuelles de transport, manutention ou prêt de véhicule pour tester une chaîne locale de réemploi.</p></article><article><span class="card-icon" aria-hidden="true">M</span><h3>Matériaux réutilisables</h3><p>Bois, portes, fenêtres, mobilier, sanitaires, outils ou équipements encore utiles, à qualifier avant toute affectation.</p></article><article><span class="card-icon" aria-hidden="true">B</span><h3>Biens à qualifier</h3><p>Logement, commerce, local, bâtiment, terrain ou friche pouvant faire l'objet d'une première étude sans engagement automatique.</p></article><article><span class="card-icon" aria-hidden="true">E</span><h3>Entreprises et artisans</h3><p>Acteurs du BTP, commerces, bureaux, transporteurs ou entreprises prêtes à étudier une contribution RSE concrète.</p></article><article><span class="card-icon" aria-hidden="true">C</span><h3>Bénévoles et relais locaux</h3><p>Habitants, associations et personnes ressources capables d'aider à signaler, relayer, organiser ou documenter les besoins.</p></article></div><div class="launch-actions"><a class="btn primary" href="${hrefFor("contact.html")}">Présenter une ressource</a><a class="btn secondary" href="${socialLinks.whatsapp}" target="_blank" rel="noopener noreferrer">Écrire sur WhatsApp</a></div></div></section>`;
 }
 
+
+function partnerPreparationSection() {
+  const groups = [
+    ["pieces-collectivite", "Collectivité ou EPCI", ["territoire concerné et périmètre envisagé", "besoin public identifié", "service ou élu référent", "données disponibles", "calendrier souhaité", "objectif de la coopération", "contraintes connues"]],
+    ["pieces-entreprise", "Entreprise", ["raison sociale et contact référent", "type de contribution", "matériaux, locaux, compétences ou soutien proposé", "quantité ou volume estimé", "localisation", "disponibilité", "conditions de retrait ou d'intervention", "photos si utile"]],
+    ["pieces-association", "Association", ["objet de l'association", "besoin ou projet local", "publics concernés", "lieu ou territoire visé", "capacité d'animation", "ressources déjà mobilisées", "contraintes d'accueil ou de sécurité"]],
+    ["pieces-proprietaire", "Propriétaire", ["adresse ou secteur du bien", "type de bien", "état général", "photos récentes", "surface approximative", "statut d'occupation", "intention du propriétaire", "contraintes juridiques ou techniques connues"]],
+    ["pieces-particulier", "Particulier / citoyen", ["type de proposition", "commune concernée", "description simple", "photos si possible", "coordonnées de contact", "disponibilités", "accord pour être recontacté", "limites à respecter"]],
+    ["pieces-financeur", "Financeur, mécène ou investisseur solidaire", ["type de soutien envisagé", "montant ou enveloppe indicative si connue", "thématique prioritaire", "territoire visé", "critères de sélection", "attentes de reporting", "calendrier de décision"]],
+    ["pieces-artisan", "Artisan ou professionnel technique", ["activité et compétences", "zone d'intervention", "type d'appui possible", "références ou assurances utiles", "disponibilités", "conditions d'intervention", "contraintes de sécurité"]],
+    ["pieces-logistique", "Stockage, transport ou logistique", ["type de ressource proposée", "adresse ou zone", "surface ou capacité", "conditions d'accès", "durée possible", "contraintes d'assurance", "contact référent", "photos ou plan si disponible"]],
+  ];
+  return `<section class="section soft partner-prep" ${sectionAttrs("Pièces à préparer avant étude", "pieces-a-preparer")}><div class="container"><div class="section-head"><p class="section-kicker">Pré-instruction</p><h2>Pièces à préparer avant étude de la demande</h2><p class="section-lead">Ces listes ne créent aucun engagement. Elles servent uniquement à vérifier si la demande peut être étudiée, orientée ou transformée ensuite en dossier complet.</p></div><div class="prep-grid">${groups.map(([id, title, items]) => `<article id="${id}" class="prep-card"><h3>${title}</h3><ul>${items.map((item) => `<li>${item}</li>`).join("")}</ul><a class="text-link" href="${hrefFor("contact.html")}">Transmettre ces éléments</a></article>`).join("")}</div></div></section>`;
+}
+
 function cards(title, intro, items) {
   return `<section class="section soft" ${sectionAttrs(title)}><div class="container"><div class="section-head"><p class="section-kicker">Repères</p><h2>${title}</h2><p class="section-lead">${intro}</p></div><div class="card-grid">${items
     .map(([h, p, href]) => `<article class="card"><span class="card-icon" aria-hidden="true">${iconFor(h)}</span><h3>${h}</h3><p>${p}</p>${href ? smartCardLink(h, href) : ""}</article>`)
@@ -2034,7 +2053,8 @@ function smartCardLink(title, href) {
   if (/^(documents\/|output\/documents\/|output\/pdf\/)/i.test(href) || /\.pdf(?:$|[#?])/i.test(href)) {
     return documentCardLink(title, href);
   }
-  return `<a class="text-link" href="${hrefFor(href)}" aria-label="Découvrir : ${escapeAttr(title)}">Découvrir</a>`;
+  const label = String(href).startsWith("#pieces-") ? "Voir les pièces à préparer" : "Découvrir";
+  return `<a class="text-link" href="${hrefFor(href)}" aria-label="${label} : ${escapeAttr(title)}">${label}</a>`;
 }
 
 function documentCardLink(title, href) {
