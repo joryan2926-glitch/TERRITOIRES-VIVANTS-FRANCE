@@ -660,7 +660,7 @@ const pages = [
     h1: "Proposer un bien sans perdre le cadre.",
     intro:
       "Un propriétaire peut présenter un logement, commerce, bâtiment ou terrain inutilisé. TVF étudie ensuite les usages possibles, les contraintes et les conditions d'une convention.",
-    ctas: [["Remplir la fiche", "documents/fiche-proprietaire.md"], ["Nous contacter", "contact.html"]],
+    ctas: [["Présenter un bien", "contact.html"], ["Voir la méthode", "notre-methode.html"]],
     sections: [
       sectionIntro(
         "Le propriétaire reste au centre de la décision",
@@ -777,7 +777,7 @@ const pages = [
     h1: "Agir utilement, avec un cadre clair.",
     intro:
       "Les citoyens et bénévoles peuvent aider TVF à repérer les situations, documenter les besoins, participer à des actions encadrées et relayer les projets locaux.",
-    ctas: [["Remplir la fiche", "documents/fiche-benevole.md"], ["Nous contacter", "contact.html"]],
+    ctas: [["Proposer mon aide", "contact.html"], ["Choisir mon parcours", "agir-avec-nous.html"]],
     sections: [
       sectionIntro(
         "Un engagement utile, encadré et progressif",
@@ -1810,6 +1810,8 @@ function pageMiniNav(page) {
 }
 
 function journeySection(page) {
+  const skipJourney = new Set(["contact.html", "mentions-legales.html", "politique-confidentialite.html", "kit-media.html"]);
+  if (skipJourney.has(page.file)) return "";
   const links = {
     "index.html": [
       ["Comprendre l'association", "qui-sommes-nous.html", "Lire le rôle de TVF, son cadre et sa logique d'action."],
@@ -1930,7 +1932,22 @@ function journeySection(page) {
   ];
 
   const copy = journeyCopyFor(page);
-  return `<section class="section journey-section"><div class="container"><div class="section-head"><p class="section-kicker">${copy.kicker}</p><h3>${copy.title}</h3><p>${copy.text}</p></div><div class="journey-grid">${items
+  const normalizedItems = items.map(([title, href, text]) => {
+    if (isPrivateDocumentHref(href)) {
+      return [title.startsWith("Demander") ? title : `Demander : ${title}`, "contact.html", "TVF transmettra le modèle adapté après qualification du besoin."];
+    }
+    return [title, href, text];
+  });
+  const dedupedItems = [];
+  const seenHrefs = new Set();
+  for (const item of normalizedItems) {
+    const key = hrefFor(item[1]);
+    if (seenHrefs.has(key)) continue;
+    seenHrefs.add(key);
+    dedupedItems.push(item);
+  }
+  return `<section class="section journey-section"><div class="container"><div class="section-head"><p class="section-kicker">${copy.kicker}</p><h3>${copy.title}</h3><p>${copy.text}</p></div><div class="journey-grid">${dedupedItems
+    .slice(0, 3)
     .map(([title, href, text]) => `<a class="journey-card" href="${hrefFor(href)}"><span class="card-icon" aria-hidden="true">${iconFor(title)}</span><strong>${title}</strong><small>${text}</small></a>`)
     .join("")}</div></div></section>`;
 }
@@ -2802,19 +2819,21 @@ function jsonLd(page) {
 }
 
 function ctaBandFor(page) {
+  const skipCta = new Set(["contact.html", "mentions-legales.html", "politique-confidentialite.html"]);
+  if (skipCta.has(page.file)) return "";
   const map = {
     "index.html": ["Première étape", "Vous voulez savoir par où commencer ?", "Choisissez votre profil et préparez une première demande lisible en quelques minutes.", [["Choisir mon parcours", "agir-avec-nous.html"], ["Demander un échange", "contact.html"]]],
-    "contact.html": ["Contact direct", "Votre demande est prête à être envoyée ?", `Envoyez le résumé préparé à ${contact.email} ou appelez le ${contact.phone}.`, [["Écrire à TVF", `mailto:${contact.email}`], ["Demander les supports", "contact.html"]]],
+    "contact.html": ["Contact direct", "Votre demande est prête à être envoyée ?", `Envoyez le résumé préparé à ${contact.email} ou appelez le ${contact.phone}.`, [["Écrire à TVF", `mailto:${contact.email}`]]],
     "documents.html": ["Documents", "Vous ne savez pas quel modèle choisir ?", "Commencez par les documents essentiels ou demandez une orientation avant de remplir un dossier complet.", [["Demander une orientation", "contact.html"], ["Voir les essentiels", "#les-documents-essentiels"]]],
-    "saint-etienne.html": ["Territoire pilote", "Vous êtes acteur à Saint-Étienne ?", "Présentez un bien, une ressource, un besoin public ou une coopération possible pour alimenter le pilote.", [["Présenter une situation", "contact.html"], ["Demander le dossier pilote", "contact.html"]]],
+    "saint-etienne.html": ["Territoire pilote", "Vous êtes acteur à Saint-Étienne ?", "Présentez un bien, une ressource, un besoin public ou une coopération possible pour alimenter le pilote.", [["Présenter une situation", "contact.html"]]],
     "observatoire.html": ["Signalement", "Vous connaissez un lieu ou une ressource à qualifier ?", "Transmettez une information factuelle : TVF la traitera comme un signalement, pas comme un projet automatique.", [["Signaler une situation", "agir-avec-nous.html#signalement"], ["Voir la méthode", "notre-methode.html"]]],
     "impact.html": ["Preuve", "Vous souhaitez soutenir TVF avec un suivi clair ?", "Appuyez-vous sur la grille d'impact, le reporting et les statuts de preuve avant toute annonce.", [["Voir les financeurs", "financeurs-mecenes.html"], ["Demander la grille", "contact.html"]]],
-    "collectivites.html": ["Territoire partenaire", "Votre collectivité veut tester un périmètre pilote ?", "Préparez une fiche collectivité avec le besoin public, les données disponibles et la décision attendue.", [["Préparer la fiche", "documents/fiche-collectivite.md"], ["Demander un rendez-vous", "contact.html"]]],
-    "proprietaires.html": ["Bien inutilisé", "Vous souhaitez étudier un bien sans engagement prématuré ?", "Présentez le bien, son état, vos intentions et les limites à respecter.", [["Remplir la fiche propriétaire", "documents/fiche-proprietaire.md"], ["Demander un échange", "contact.html"]]],
-    "entreprises.html": ["Contribution", "Votre entreprise peut apporter une ressource utile ?", "Décrivez les matériaux, locaux, compétences ou soutiens disponibles pour vérifier leur affectation possible.", [["Remplir la fiche entreprise", "documents/fiche-entreprise.md"], ["Contacter TVF", "contact.html"]]],
-    "benevoles-citoyens.html": ["Engagement", "Vous voulez aider sans improvisation ?", "Indiquez votre territoire, vos disponibilités et le type de mission que vous pouvez réaliser.", [["Remplir la fiche bénévole", "documents/fiche-benevole.md"], ["Nous contacter", "contact.html"]]],
-    "financeurs-mecenes.html": ["Soutien", "Vous souhaitez financer une démarche vérifiable ?", "Demandez un échange sur un dossier instruit, avec budget, risques, indicateurs et reporting.", [["Préparer un soutien", "documents/demande-soutien-financier.md"], ["Contacter TVF", "contact.html"]]],
-    "partenaires.html": ["Coopération", "Vous envisagez une coopération avec TVF ?", "Avant toute communication, clarifions le périmètre, les responsabilités, la durée et les règles d'officialisation.", [["Préparer une coopération", "documents/fiche-partenaire-potentiel.md"], ["Contacter TVF", "contact.html"]]],
+    "collectivites.html": ["Territoire partenaire", "Votre collectivité veut tester un périmètre pilote ?", "Préparez une fiche collectivité avec le besoin public, les données disponibles et la décision attendue.", [["Demander un rendez-vous", "contact.html"]]],
+    "proprietaires.html": ["Bien inutilisé", "Vous souhaitez étudier un bien sans engagement prématuré ?", "Présentez le bien, son état, vos intentions et les limites à respecter.", [["Demander un échange", "contact.html"]]],
+    "entreprises.html": ["Contribution", "Votre entreprise peut apporter une ressource utile ?", "Décrivez les matériaux, locaux, compétences ou soutiens disponibles pour vérifier leur affectation possible.", [["Contacter TVF", "contact.html"]]],
+    "benevoles-citoyens.html": ["Engagement", "Vous voulez aider sans improvisation ?", "Indiquez votre territoire, vos disponibilités et le type de mission que vous pouvez réaliser.", [["Nous contacter", "contact.html"]]],
+    "financeurs-mecenes.html": ["Soutien", "Vous souhaitez financer une démarche vérifiable ?", "Demandez un échange sur un dossier instruit, avec budget, risques, indicateurs et reporting.", [["Contacter TVF", "contact.html"]]],
+    "partenaires.html": ["Coopération", "Vous envisagez une coopération avec TVF ?", "Avant toute communication, clarifions le périmètre, les responsabilités, la durée et les règles d'officialisation.", [["Contacter TVF", "contact.html"]]],
   };
   const [kicker, title, text, actions] = map[page.file] || ["Passer à l'étape suivante", "Vous avez un bien, une ressource ou un besoin territorial ?", "Présentez la situation à TVF pour préparer un premier échange clair et utile.", [["Agir avec nous", "agir-avec-nous.html"], ["Nous contacter", "contact.html"]]];
   return `<section class="cta-band"><div class="container cta-band-inner"><div><p class="section-kicker">${kicker}</p><h3>${title}</h3><p class="section-lead">${text}</p></div><div class="cta-band-actions">${actions.slice(0, 1)
