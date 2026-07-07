@@ -58,14 +58,17 @@ Validee le 07/07/2026 :
 - triggers 5/5 : OK ;
 - donnee de test `TEST-DOCUMENTS-001` creee et rattachee au modele `test-demande-pieces-complementaires`.
 
-## Verification production attendue
+## Verification production
 
-1. Publier le code.
-2. Ouvrir `/admin-documents`.
-3. Tester l'acces avec `TVF_ADMIN_TOKEN`.
-4. Verifier les KPI, la liste, la fiche, l'upload, la creation modele, la generation brouillon, le telechargement et l'export CSV.
-5. Verifier `/api/admin-documents` sans token : attendu `401`.
+Validee partiellement le 07/07/2026 apres push `39f81ba` :
+
+- `/admin-documents` retourne `200 OK` en production ;
+- `/api/admin-documents` sans token retourne `401 Unauthorized` ;
+- le lien Documents est visible dans `/dashboard` en production ;
+- le code est publie via GitHub/Vercel.
+
+Reste a confirmer pour verrouillage 100 % : acces avec `TVF_ADMIN_TOKEN`, chargement des KPI, ouverture du document `TEST-DOCUMENTS-001`, creation d'un modele, generation d'un brouillon, depot/telechargement d'un petit fichier et export CSV depuis l'interface reelle. Le token admin n'est pas disponible dans l'environnement local Codex, donc cette verification authentifiee necessite une confirmation utilisateur ou une variable locale temporaire.
 
 ## Decision de verrouillage
 
-Le module Gestion documentaire pourra etre verrouille apres validation production reelle avec migration appliquee, tests executes et confirmation utilisateur.
+Le module Gestion documentaire n'est pas encore verrouille definitivement. Il est conforme techniquement et migre en production, mais la validation fonctionnelle authentifiee doit encore etre confirmee avant ouverture du module suivant.
