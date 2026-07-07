@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="fr">
 <head>
   <meta charset="utf-8">
@@ -19,7 +19,7 @@
       <p class="admin-kicker">Back-office</p>
       <h1>Demandes entrantes TVF</h1>
     </div>
-    <a class="btn secondary" href="contact">Retour au site</a>
+    <div class="admin-top-actions"><a class="btn secondary" href="dashboard">Dashboard</a><a class="btn secondary" href="contact">Retour au site</a></div>
   </header>
 
   <main id="admin-main" class="admin-shell">
@@ -45,6 +45,7 @@
           <p data-admin-count>Chargement des demandes...</p>
         </div>
         <div class="admin-toolbar-actions">
+          <button class="btn primary" type="button" data-admin-create>Nouvelle demande</button>
           <button class="btn secondary" type="button" data-admin-refresh>Actualiser</button>
           <button class="btn secondary" type="button" data-admin-export>Exporter CSV</button>
           <button class="btn ghost" type="button" data-admin-logout>Deconnexion</button>
@@ -91,6 +92,15 @@
         </label>
       </form>
 
+      <nav class="admin-status-tabs" aria-label="Vues rapides demandes">
+        <button type="button" data-status-shortcut="all">Toutes</button>
+        <button type="button" data-status-shortcut="nouveau">Nouvelles</button>
+        <button type="button" data-status-shortcut="a_qualifier">A qualifier</button>
+        <button type="button" data-status-shortcut="en_cours">En cours</button>
+        <button type="button" data-status-shortcut="rendez_vous">Rendez-vous</button>
+        <button type="button" data-status-shortcut="archive">Archivees</button>
+      </nav>
+
       <div class="admin-layout">
         <section class="admin-list" aria-label="Liste des demandes">
           <div data-admin-list class="admin-request-list"></div>
@@ -106,8 +116,77 @@
         </aside>
       </div>
     </section>
+
+    <section class="admin-modal" data-admin-create-modal hidden aria-label="Creation manuelle d'une demande">
+      <div class="admin-modal-panel">
+        <div class="admin-modal-head">
+          <div>
+            <p class="section-kicker">Import manuel</p>
+            <h2>Nouvelle demande entrante</h2>
+          </div>
+          <button class="btn ghost" type="button" data-admin-close-create>Fermer</button>
+        </div>
+        <form class="admin-create-form" data-admin-create-form>
+          <label>Canal
+            <select name="channel">
+              <option value="telephone">Telephone</option>
+              <option value="email">E-mail</option>
+              <option value="whatsapp">WhatsApp</option>
+              <option value="rendez_vous">Rendez-vous</option>
+              <option value="import">Import manuel</option>
+            </select>
+          </label>
+          <label>Nom / structure
+            <input name="full_name" type="text" placeholder="Contact ou organisme">
+          </label>
+          <label>E-mail
+            <input name="email" type="email" placeholder="contact@exemple.fr">
+          </label>
+          <label>Objet
+            <input name="subject" type="text" placeholder="Ex. Bien vacant a qualifier">
+          </label>
+          <label class="admin-create-wide">Message
+            <textarea name="message" rows="7" placeholder="Resume de l'appel, de l'e-mail, du WhatsApp ou du rendez-vous"></textarea>
+          </label>
+          <label>Categorie
+            <select name="category">
+              <option value="">IA propose automatiquement</option>
+              <option value="collectivite-territoire">Collectivite</option>
+              <option value="bien-vacant-proprietaire">Bien vacant</option>
+              <option value="materiaux-reemploi">Materiaux</option>
+              <option value="entreprise-partenariat">Entreprise</option>
+              <option value="benevolat-insertion">Benevolat / insertion</option>
+              <option value="financement-mecenat">Financement</option>
+              <option value="presse-institutionnel">Presse</option>
+              <option value="demande-generale">Generale</option>
+            </select>
+          </label>
+          <label>Priorite
+            <select name="priority">
+              <option value="">IA propose automatiquement</option>
+              <option value="normale">P3 - Normale</option>
+              <option value="haute">P2 - Haute</option>
+              <option value="urgente">P1 - Urgente</option>
+            </select>
+          </label>
+          <label>Responsable
+            <input name="assigned_to" type="text" placeholder="Personne ou role">
+          </label>
+          <label>Prochaine action
+            <input name="next_action" type="text" placeholder="Ex. Demander les photos">
+          </label>
+          <div class="admin-detail-actions admin-create-wide">
+            <button class="btn primary" type="submit">Creer la demande</button>
+            <button class="btn secondary" type="button" data-admin-close-create>Annuler</button>
+          </div>
+          <p class="form-note admin-create-wide" data-admin-create-status role="status" hidden></p>
+        </form>
+      </div>
+    </section>
   </main>
 
   <script src="admin-demandes.js" defer></script>
 </body>
 </html>
+
+

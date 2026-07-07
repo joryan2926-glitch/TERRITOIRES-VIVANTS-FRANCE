@@ -1,4 +1,4 @@
-node_modules/
+﻿node_modules/
 .env
 .vercel/
 dist/
@@ -6,3 +6,5 @@ dist/
 tmp/
 output/presentations/
 *.inspect.ndjson
+supabase/.temp/
+

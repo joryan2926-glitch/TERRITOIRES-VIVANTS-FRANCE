@@ -1,18 +1,26 @@
-const ADMIN_TOKEN_KEY = "tvfAdminToken";
+﻿const ADMIN_TOKEN_KEY = "tvfAdminToken";
 const statusLabels = {
   nouveau: "Nouveau",
   a_qualifier: "A qualifier",
   en_cours: "En cours",
   rendez_vous: "Rendez-vous",
   en_attente: "En attente",
-  accepte: "Accepte",
+  accepte: "Accepte pour etude",
   refuse: "Refuse",
   archive: "Archive",
 };
 const priorityLabels = {
-  normale: "Normale",
-  haute: "Haute",
-  urgente: "Urgente",
+  normale: "P3 - Normale",
+  haute: "P2 - Haute",
+  urgente: "P1 - Urgente",
+};
+const channelLabels = {
+  site_web: "Site web",
+  email: "E-mail",
+  telephone: "Telephone",
+  whatsapp: "WhatsApp",
+  rendez_vous: "Rendez-vous",
+  import: "Import manuel",
 };
 const categoryLabels = {
   "collectivite-territoire": "Collectivite",
@@ -48,7 +56,14 @@ const detailEl = document.querySelector("[data-admin-detail]");
 const countEl = document.querySelector("[data-admin-count]");
 const emptyEl = document.querySelector("[data-admin-empty]");
 const refreshButton = document.querySelector("[data-admin-refresh]");
+const exportButton = document.querySelector("[data-admin-export]");
 const logoutButton = document.querySelector("[data-admin-logout]");
+const createButton = document.querySelector("[data-admin-create]");
+const createModal = document.querySelector("[data-admin-create-modal]");
+const createForm = document.querySelector("[data-admin-create-form]");
+const createStatus = document.querySelector("[data-admin-create-status]");
+const closeCreateButtons = document.querySelectorAll("[data-admin-close-create]");
+const statusShortcuts = document.querySelectorAll("[data-status-shortcut]");
 
 let contacts = [];
 let selectedId = null;
@@ -107,6 +122,22 @@ function formatDate(value) {
   }).format(date);
 }
 
+function toDateTimeLocal(value) {
+  if (!value) return "";
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return "";
+  const offset = date.getTimezoneOffset();
+  const local = new Date(date.getTime() - offset * 60 * 1000);
+  return local.toISOString().slice(0, 16);
+}
+
+function fromDateTimeLocal(value) {
+  if (!value) return "";
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return value;
+  return date.toISOString();
+}
+
 function label(map, value) {
   return map[value] || value || "Non classe";
 }
@@ -116,18 +147,29 @@ function contactName(contact) {
 }
 
 function templateCategory(contact, key) {
-  if (!key || key === "auto") return contact?.category || "demande-generale";
+  if (!key || key === "auto") return contact?.category || contact?.assistant?.suggested_category || "demande-generale";
   return key;
 }
 
 function responseSubject(contact) {
-  return `Suite a votre demande TVF - ${contact?.subject || "contact"}`;
+  return `Suite a votre demande ${contact?.request_number || "TVF"} - ${contact?.subject || "contact"}`;
+}
+
+function piecesText(contact) {
+  const pieces = contact?.missing_pieces || contact?.assistant?.missing_pieces || [];
+  return Array.isArray(pieces) ? pieces.join("\n") : String(pieces || "");
 }
 
 function responseTemplate(contact, key = "auto") {
   const name = contactName(contact);
   const category = templateCategory(contact, key);
-  const commonIntro = `Bonjour ${name},\n\nMerci pour votre message et pour l'interet porte a Territoires Vivants France. Votre demande a bien ete recue et va etre qualifiee afin d'identifier la suite la plus adaptee.`;
+  const missing = piecesText(contact)
+    .split(/\n/)
+    .map((item) => item.trim())
+    .filter(Boolean)
+    .map((item) => `- ${item}`)
+    .join("\n");
+  const commonIntro = `Bonjour ${name},\n\nMerci pour votre message et pour l'interet porte a Territoires Vivants France. Votre demande ${contact?.request_number || "TVF"} a bien ete recue et va etre qualifiee afin d'identifier la suite la plus adaptee.`;
   const signature = `\n\nCordialement,\n\nTerritoires Vivants France\ncontact@territoiresvivantsfrance.fr\n06 22 03 93 24`;
 
   const templates = {
@@ -138,7 +180,7 @@ function responseTemplate(contact, key = "auto") {
     "benevolat-insertion": `${commonIntro}\n\nPour vous orienter vers une mission adaptee, merci de nous indiquer :\n\n- commune ou secteur d'intervention ;\n- disponibilites ;\n- competences ou envies ;\n- mobilite ;\n- limites d'intervention ;\n- experience eventuelle sur chantier, animation, diagnostic ou mobilisation citoyenne.\n\nLes missions TVF doivent rester encadrees et compatibles avec la securite des personnes.`,
     "financement-mecenat": `${commonIntro}\n\nPour preparer un echange financeur ou mecene, pouvez-vous nous indiquer :\n\n- type de soutien envisage ;\n- territoire ou thematique prioritaire ;\n- calendrier de decision ;\n- criteres de selection ;\n- attentes de reporting ;\n- personne referente.\n\nTVF pourra ensuite transmettre une note d'opportunite ou un dossier adapte.`,
     "presse-institutionnel": `${commonIntro}\n\nPour orienter votre demande, pouvez-vous nous preciser :\n\n- media ou institution ;\n- sujet souhaite ;\n- format attendu ;\n- delai ;\n- contact referent.\n\nNous pouvons transmettre les elements de presentation, le kit media et les informations institutionnelles disponibles.`,
-    pieces: `${commonIntro}\n\nPour poursuivre l'instruction, il nous manque quelques elements :\n\n- commune ou territoire concerne ;\n- description precise de la situation ;\n- photos ou documents utiles ;\n- delai souhaite ;\n- interlocuteur a contacter ;\n- contraintes deja identifiees.\n\nDes reception, nous pourrons qualifier la demande et proposer une suite adaptee.`,
+    pieces: `${commonIntro}\n\nPour poursuivre l'instruction, il nous manque les elements suivants :\n\n${missing || "- commune ou territoire concerne ;\n- description precise de la situation ;\n- photos ou documents utiles ;\n- delai souhaite ;\n- interlocuteur a contacter."}\n\nDes reception, nous pourrons qualifier la demande et proposer une suite adaptee.`,
     rendezvous: `${commonIntro}\n\nVotre demande semble justifier un premier echange. Nous vous proposons d'organiser un rendez-vous court afin de cadrer :\n\n- le besoin ;\n- le territoire ;\n- les acteurs concernes ;\n- les pieces disponibles ;\n- les suites possibles.\n\nMerci de nous transmettre deux ou trois disponibilites.`,
     refus: `Bonjour ${name},\n\nMerci pour votre message et pour l'interet porte a Territoires Vivants France.\n\nApres premiere lecture, votre demande ne semble pas entrer dans le cadre d'intervention actuel de TVF, ou elle necessite des conditions qui ne sont pas reunies a ce stade.\n\nNous conservons une trace de votre message afin de pouvoir le reexaminer si le cadre evolue.`,
     "demande-generale": `${commonIntro}\n\nPour bien orienter votre demande, pouvez-vous nous transmettre les precisions suivantes :\n\n- votre profil ;\n- territoire concerne ;\n- objet exact de la demande ;\n- pieces ou photos disponibles ;\n- suite attendue.\n\nNous reviendrons ensuite vers vous avec l'orientation la plus adaptee.`,
@@ -183,8 +225,21 @@ async function loadContacts() {
   const result = await api(`/api/admin-contacts?${filtersParams().toString()}`);
   contacts = result.contacts || [];
   if (!contacts.some((item) => item.id === selectedId)) selectedId = contacts[0]?.id || null;
+  renderStatusShortcuts();
   renderList();
   renderDetail();
+}
+
+function isOverdue(contact) {
+  if (!contact?.next_action_due_at || ["archive", "refuse"].includes(contact.status)) return false;
+  return new Date(contact.next_action_due_at).getTime() < Date.now();
+}
+
+function renderStatusShortcuts() {
+  const current = filtersForm?.elements.status?.value || "all";
+  statusShortcuts.forEach((button) => {
+    button.classList.toggle("is-active", button.dataset.statusShortcut === current);
+  });
 }
 
 function renderList() {
@@ -192,13 +247,16 @@ function renderList() {
   listEl.innerHTML = contacts
     .map((contact) => {
       const active = contact.id === selectedId ? " is-active" : "";
-      return `<button class="admin-request${active}" type="button" data-contact-id="${escapeHtml(contact.id)}">
-        <span class="admin-request-head"><strong>${escapeHtml(contact.full_name || "Contact sans nom")}</strong><small>${escapeHtml(formatDate(contact.created_at))}</small></span>
+      const overdue = isOverdue(contact) ? " is-overdue" : "";
+      return `<button class="admin-request${active}${overdue}" type="button" data-contact-id="${escapeHtml(contact.id)}">
+        <span class="admin-request-head"><strong>${escapeHtml(contact.request_number || contact.full_name || "Demande TVF")}</strong><small>${escapeHtml(formatDate(contact.created_at))}</small></span>
         <span>${escapeHtml(contact.subject || "Sans objet")}</span>
+        <span class="admin-request-sub">${escapeHtml(contact.full_name || "Contact sans nom")} - ${escapeHtml(label(channelLabels, contact.channel))}</span>
         <span class="admin-badges">
           <em data-kind="status">${escapeHtml(label(statusLabels, contact.status))}</em>
           <em data-kind="priority">${escapeHtml(label(priorityLabels, contact.priority))}</em>
           <em data-kind="category">${escapeHtml(label(categoryLabels, contact.category))}</em>
+          <em data-kind="score">${escapeHtml(String(contact.qualification_score || contact.assistant?.qualification_score || 0))}%</em>
         </span>
       </button>`;
     })
@@ -219,32 +277,38 @@ function exportContactsCsv() {
     return;
   }
   const headers = [
+    "Numero",
     "Date",
     "Statut",
     "Priorite",
     "Categorie",
+    "Pole",
+    "Canal",
     "Nom",
-    "Structure",
     "Email",
-    "Telephone",
-    "Commune",
     "Sujet",
-    "Message",
+    "Prochaine action",
+    "Echeance",
+    "Score qualification",
+    "Pieces manquantes",
     "Charge du suivi",
     "Notes internes",
   ];
   const rows = contacts.map((contact) => [
+    contact.request_number,
     formatDate(contact.created_at),
     label(statusLabels, contact.status),
     label(priorityLabels, contact.priority),
     label(categoryLabels, contact.category),
+    contact.pole,
+    label(channelLabels, contact.channel),
     contact.full_name,
-    contact.organization,
     contact.email,
-    contact.phone,
-    contact.city || contact.territory,
     contact.subject,
-    contact.message,
+    contact.next_action,
+    formatDate(contact.next_action_due_at),
+    contact.qualification_score,
+    piecesText(contact),
     contact.assigned_to,
     contact.internal_notes,
   ]);
@@ -260,14 +324,49 @@ function exportContactsCsv() {
   link.remove();
   URL.revokeObjectURL(url);
 }
+
 function selectedContact() {
   return contacts.find((item) => item.id === selectedId) || null;
 }
 
-function templateOptions(contact) {
+function templateOptions() {
   return Object.entries(responseTemplates)
     .map(([value, text]) => `<option value="${value}" ${value === "auto" ? "selected" : ""}>${escapeHtml(text)}</option>`)
     .join("");
+}
+
+function selectOptions(map, selected) {
+  return Object.entries(map)
+    .map(([value, text]) => `<option value="${value}" ${selected === value ? "selected" : ""}>${escapeHtml(text)}</option>`)
+    .join("");
+}
+
+function renderAssistant(contact) {
+  const assistant = contact.assistant || {};
+  const pieces = piecesText(contact)
+    .split(/\n/)
+    .map((item) => item.trim())
+    .filter(Boolean);
+  return `<section class="admin-ai-panel" aria-label="Qualification assistee">
+    <div class="admin-panel-head">
+      <div>
+        <p class="section-kicker">Assistant IA</p>
+        <h4>Qualification proposee</h4>
+      </div>
+      <strong>${escapeHtml(String(contact.qualification_score || assistant.qualification_score || 0))}%</strong>
+    </div>
+    <div class="admin-ai-grid">
+      <div><span>Categorie</span><strong>${escapeHtml(label(categoryLabels, assistant.suggested_category || contact.category))}</strong></div>
+      <div><span>Pole</span><strong>${escapeHtml(assistant.suggested_pole || contact.pole || "Accueil & orientation")}</strong></div>
+      <div><span>Priorite</span><strong>${escapeHtml(label(priorityLabels, assistant.suggested_priority || contact.priority))}</strong></div>
+      <div><span>Echeance</span><strong>${escapeHtml(formatDate(assistant.next_action_due_at || contact.next_action_due_at))}</strong></div>
+    </div>
+    <p>${escapeHtml(assistant.ai_summary || contact.ai_summary || "Analyse automatique indisponible.")}</p>
+    <div class="admin-missing-pieces">
+      <span>Pieces manquantes</span>
+      ${pieces.length ? `<ul>${pieces.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>` : "<p>Aucune piece bloquante detectee.</p>"}
+    </div>
+  </section>`;
 }
 
 function renderDetail() {
@@ -281,45 +380,76 @@ function renderDetail() {
   const initialTemplate = responseTemplate(contact);
   detailEl.innerHTML = `<form class="admin-detail-form" data-admin-detail-form>
     <div class="admin-detail-title">
-      <p class="section-kicker">Demande recue le ${escapeHtml(formatDate(contact.created_at))}</p>
+      <p class="section-kicker">${escapeHtml(contact.request_number || "Demande TVF")} - recue le ${escapeHtml(formatDate(contact.created_at))}</p>
       <h3>${escapeHtml(contact.subject || "Demande TVF")}</h3>
       <p>${escapeHtml(contact.full_name || "Nom non renseigne")}</p>
     </div>
 
     <div class="admin-meta-grid">
       <div><span>E-mail</span><a href="mailto:${escapeHtml(contact.email || "")}">${escapeHtml(contact.email || "Non renseigne")}</a></div>
+      <div><span>Canal</span><strong>${escapeHtml(label(channelLabels, contact.channel))}</strong></div>
       <div><span>Source</span><strong>${escapeHtml(contact.source_page || "Site TVF")}</strong></div>
-      <div><span>Creation</span><strong>${escapeHtml(formatDate(contact.created_at))}</strong></div>
       <div><span>Mise a jour</span><strong>${escapeHtml(formatDate(contact.updated_at))}</strong></div>
     </div>
+
+    ${renderAssistant(contact)}
 
     <div class="admin-quick-actions" aria-label="Actions rapides">
       <button class="btn secondary" type="button" data-quick-status="a_qualifier">A qualifier</button>
       <button class="btn secondary" type="button" data-quick-status="en_cours">En cours</button>
       <button class="btn secondary" type="button" data-quick-status="rendez_vous">Rendez-vous</button>
+      <button class="btn secondary" type="button" data-quick-template="pieces">Demander pieces</button>
+      <button class="btn secondary" type="button" data-prepare-case>Preparer dossier</button>
+      <button class="btn ghost" type="button" data-quick-status="refuse">Refuser</button>
       <button class="btn ghost" type="button" data-quick-status="archive">Archiver</button>
     </div>
 
     <label>Statut
       <select name="status">
-        ${Object.entries(statusLabels).map(([value, text]) => `<option value="${value}" ${contact.status === value ? "selected" : ""}>${text}</option>`).join("")}
+        ${selectOptions(statusLabels, contact.status)}
       </select>
     </label>
 
     <label>Priorite
       <select name="priority">
-        ${Object.entries(priorityLabels).map(([value, text]) => `<option value="${value}" ${contact.priority === value ? "selected" : ""}>${text}</option>`).join("")}
+        ${selectOptions(priorityLabels, contact.priority)}
       </select>
     </label>
 
     <label>Categorie
       <select name="category">
-        ${Object.entries(categoryLabels).map(([value, text]) => `<option value="${value}" ${contact.category === value ? "selected" : ""}>${text}</option>`).join("")}
+        ${selectOptions(categoryLabels, contact.category)}
       </select>
+    </label>
+
+    <label>Canal
+      <select name="channel">
+        ${selectOptions(channelLabels, contact.channel)}
+      </select>
+    </label>
+
+    <label>Pole concerne
+      <input name="pole" type="text" value="${escapeHtml(contact.pole || "")}" placeholder="Ex. Habitat vivant">
     </label>
 
     <label>Charge du suivi
       <input name="assigned_to" type="text" value="${escapeHtml(contact.assigned_to || "")}" placeholder="Ex. TVF, Edryan, Jordan">
+    </label>
+
+    <label>Prochaine action
+      <input name="next_action" type="text" value="${escapeHtml(contact.next_action || "")}" placeholder="Ex. Relancer pour les photos">
+    </label>
+
+    <label>Echeance prochaine action
+      <input name="next_action_due_at" type="datetime-local" value="${escapeHtml(toDateTimeLocal(contact.next_action_due_at))}">
+    </label>
+
+    <label>Pieces manquantes
+      <textarea name="missing_pieces" rows="4" placeholder="Une piece par ligne">${escapeHtml(piecesText(contact))}</textarea>
+    </label>
+
+    <label>Motif de cloture ou refus
+      <textarea name="closure_reason" rows="3" placeholder="A renseigner si refus, reorientation ou archivage">${escapeHtml(contact.closure_reason || "")}</textarea>
     </label>
 
     <label>Notes internes
@@ -329,8 +459,8 @@ function renderDetail() {
     <section class="admin-response-panel" aria-label="Modele de reponse">
       <div class="admin-response-head">
         <div>
-          <p class="section-kicker">Reponse</p>
-          <h4>Modele pret a adapter</h4>
+          <p class="section-kicker">Reponse externe</p>
+          <h4>Brouillon pret a adapter</h4>
         </div>
         <label>Modele
           <select data-response-template>
@@ -343,6 +473,15 @@ function renderDetail() {
         <button class="btn secondary" type="button" data-admin-copy-response>Copier la reponse</button>
         <button class="btn secondary" type="button" data-admin-open-response>Ouvrir l'e-mail prepare</button>
       </div>
+    </section>
+
+    <section class="admin-conversion-panel" aria-label="Conversion future en dossier">
+      <div>
+        <p class="section-kicker">Conversion dossier</p>
+        <h4>Prete pour le module Dossiers</h4>
+        <p>Cette action marque la demande comme acceptee pour etude et conserve la prochaine action. La creation du dossier metier sera activee quand le module Dossiers sera developpe.</p>
+      </div>
+      <button class="btn secondary" type="button" data-prepare-case>Marquer pret dossier</button>
     </section>
 
     <div class="admin-message">
@@ -373,6 +512,7 @@ async function updateSelected(data, statusEl) {
       body: JSON.stringify(data),
     });
     contacts = contacts.map((item) => (item.id === contact.id ? result.contact : item));
+    renderStatusShortcuts();
     renderList();
     renderDetail();
   } catch (error) {
@@ -388,6 +528,7 @@ async function updateSelected(data, statusEl) {
 async function saveSelected(form) {
   const statusEl = form.querySelector("[data-admin-save-status]");
   const data = Object.fromEntries(new FormData(form));
+  data.next_action_due_at = fromDateTimeLocal(data.next_action_due_at);
   await updateSelected(data, statusEl);
 }
 
@@ -401,6 +542,43 @@ async function copyText(text, button, doneLabel) {
     }
   } catch {
     window.prompt("Copiez le texte", text);
+  }
+}
+
+function openCreateModal() {
+  if (!createModal) return;
+  createModal.hidden = false;
+  createForm?.querySelector("input, select, textarea")?.focus();
+}
+
+function closeCreateModal() {
+  if (!createModal) return;
+  createModal.hidden = true;
+  if (createStatus) createStatus.hidden = true;
+}
+
+async function createContactFromForm(event) {
+  event.preventDefault();
+  if (!createForm) return;
+  const data = Object.fromEntries(new FormData(createForm));
+  if (createStatus) {
+    createStatus.hidden = false;
+    createStatus.textContent = "Creation de la demande...";
+  }
+  try {
+    const result = await api("/api/admin-contacts", {
+      method: "POST",
+      body: JSON.stringify(data),
+    });
+    createForm.reset();
+    contacts = [result.contact, ...contacts.filter((item) => item.id !== result.contact.id)];
+    selectedId = result.contact.id;
+    closeCreateModal();
+    renderStatusShortcuts();
+    renderList();
+    renderDetail();
+  } catch (error) {
+    if (createStatus) createStatus.textContent = error.message;
   }
 }
 
@@ -435,6 +613,21 @@ function bindEvents() {
     setToken("");
     showLogin();
   });
+  createButton?.addEventListener("click", openCreateModal);
+  createForm?.addEventListener("submit", createContactFromForm);
+  closeCreateButtons.forEach((button) => button.addEventListener("click", closeCreateModal));
+  createModal?.addEventListener("click", (event) => {
+    if (event.target === createModal) closeCreateModal();
+  });
+
+  statusShortcuts.forEach((button) => {
+    button.addEventListener("click", () => {
+      const select = filtersForm?.elements.status;
+      if (!select) return;
+      select.value = button.dataset.statusShortcut || "all";
+      loadContacts().catch((error) => alert(error.message));
+    });
+  });
 
   listEl?.addEventListener("click", (event) => {
     const button = event.target.closest("[data-contact-id]");
@@ -466,6 +659,23 @@ function bindEvents() {
     const quickStatus = event.target.closest("[data-quick-status]");
     if (quickStatus) {
       await updateSelected({ status: quickStatus.dataset.quickStatus });
+      return;
+    }
+
+    const quickTemplate = event.target.closest("[data-quick-template]");
+    if (quickTemplate) {
+      await updateSelected({ status: "en_attente", next_action: "Attendre les pieces demandees" });
+      const updated = selectedContact();
+      const select = detailEl.querySelector("[data-response-template]");
+      const textarea = detailEl.querySelector("[data-response-body]");
+      if (select) select.value = quickTemplate.dataset.quickTemplate;
+      if (textarea) textarea.value = responseTemplate(updated || contact, quickTemplate.dataset.quickTemplate);
+      return;
+    }
+
+    const prepareCase = event.target.closest("[data-prepare-case]");
+    if (prepareCase) {
+      await updateSelected({ status: "accepte", next_action: "Creer le dossier metier quand le module Dossiers sera ouvert" });
       return;
     }
 
@@ -504,3 +714,4 @@ if (token()) {
 } else {
   showLogin();
 }
+
