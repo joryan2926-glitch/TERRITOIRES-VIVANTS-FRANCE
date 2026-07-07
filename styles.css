@@ -4309,3 +4309,25 @@ tr:nth-child(even) td {
 .cases-modal-panel { width: min(900px, 100%); }
 .cases-create-form textarea { min-height: 120px; }
 @media (max-width: 900px) { .cases-layout, .cases-detail-form, .cases-checklist article { grid-template-columns: 1fr; } }
+
+/* Module Documents TVF OS */
+.documents-body { background: #f5f7f4; }
+.documents-shell { max-width: 1380px; }
+.documents-app { display: grid; }
+.documents-layout { grid-template-columns: minmax(350px, .9fr) minmax(0, 1.5fr); }
+.documents-card .admin-request-head strong { color: var(--blue-900); }
+.documents-card.is-sensitive { border-color: rgba(154, 52, 18, .35); background: #fff8f3; }
+.documents-detail-form { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.documents-detail-form > .admin-detail-title,
+.documents-detail-form > .admin-meta-grid,
+.documents-detail-form > .documents-ai-panel,
+.documents-detail-form > .documents-panel,
+.documents-detail-form > .documents-wide-field { grid-column: 1 / -1; }
+.documents-ai-panel { background: linear-gradient(180deg, #fff 0%, #f7faf5 100%); }
+.documents-panel { display: grid; gap: 12px; padding: 16px; border: 1px solid rgba(14,45,69,.12); border-radius: 16px; background: #fff; }
+.documents-panel .admin-detail-actions { justify-content: flex-start; }
+.documents-modal-panel { width: min(940px, 100%); }
+.documents-create-form textarea { min-height: 120px; }
+.documents-create-form input[type="file"],
+.documents-detail-form input[type="file"] { min-height: 44px; padding: 10px; border: 1px solid rgba(14,45,69,.18); border-radius: 10px; background: #fff; }
+@media (max-width: 900px) { .documents-layout, .documents-detail-form { grid-template-columns: 1fr; } }

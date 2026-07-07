@@ -1,0 +1,177 @@
+﻿<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Documents | TVF OS</title>
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="theme-color" content="#183f22">
+  <link rel="icon" href="assets/favicon-32.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="admin-body documents-body">
+  <a class="skip-link" href="#documents-main">Aller au contenu</a>
+  <header class="admin-topbar documents-topbar">
+    <a class="admin-brand" href="index" aria-label="Retour au site Territoires Vivants France">
+      <img src="assets/logo-territoires-vivants-france-web.png" alt="Territoires Vivants France" width="320" height="132">
+    </a>
+    <div>
+      <p class="admin-kicker">TVF OS</p>
+      <h1>Gestion documentaire</h1>
+    </div>
+    <div class="admin-top-actions">
+      <a class="btn secondary" href="dashboard">Dashboard</a>
+      <a class="btn secondary" href="admin-demandes">Demandes</a>
+      <a class="btn secondary" href="admin-crm">CRM</a>
+      <a class="btn secondary" href="admin-dossiers">Dossiers</a>
+    </div>
+  </header>
+
+  <main id="documents-main" class="admin-shell documents-shell">
+    <section class="admin-login" data-documents-login>
+      <div>
+        <p class="section-kicker">Acces securise</p>
+        <h2>Connexion aux documents TVF</h2>
+        <p>Les documents peuvent contenir des pieces sensibles, des modeles officiels et des preuves internes.</p>
+      </div>
+      <form data-documents-token-form>
+        <label for="documents-token">Token admin</label>
+        <input id="documents-token" name="token" type="password" autocomplete="current-password" placeholder="TVF_ADMIN_TOKEN">
+        <button class="btn primary" type="submit">Ouvrir les documents</button>
+        <p class="form-note" data-documents-login-status role="status" hidden></p>
+      </form>
+    </section>
+
+    <section class="admin-app documents-app" data-documents-app hidden>
+      <div class="admin-toolbar documents-toolbar">
+        <div>
+          <p class="section-kicker">Bibliotheque</p>
+          <h2>Classer, valider et proteger les documents TVF</h2>
+          <p data-documents-count>Chargement des documents...</p>
+        </div>
+        <div class="admin-toolbar-actions">
+          <button class="btn primary" type="button" data-documents-create>Deposer document</button>
+          <button class="btn secondary" type="button" data-templates-create>Nouveau modele</button>
+          <button class="btn secondary" type="button" data-documents-refresh>Actualiser</button>
+          <button class="btn secondary" type="button" data-documents-export>Exporter CSV</button>
+          <button class="btn ghost" type="button" data-documents-logout>Deconnexion</button>
+        </div>
+      </div>
+
+      <section class="crm-kpis documents-kpis" data-documents-kpis aria-label="Indicateurs documents"></section>
+
+      <nav class="admin-status-tabs documents-tabs" aria-label="Vues documentaires">
+        <button type="button" data-documents-view="documents" class="is-active">Documents</button>
+        <button type="button" data-documents-view="a_classer">A classer</button>
+        <button type="button" data-documents-view="a_valider">A valider</button>
+        <button type="button" data-documents-view="valide">Valides</button>
+        <button type="button" data-documents-view="templates">Modeles</button>
+        <button type="button" data-documents-view="archive">Archives</button>
+      </nav>
+
+      <form class="admin-filters documents-filters" data-documents-filters>
+        <label>Recherche
+          <input name="q" type="search" placeholder="Numero, titre, resume, classement">
+        </label>
+        <label>Type document
+          <select name="document_type">
+            <option value="all">Tous</option>
+            <option value="piece">Piece</option>
+            <option value="photo">Photo</option>
+            <option value="convention">Convention</option>
+            <option value="courrier">Courrier</option>
+            <option value="email">E-mail</option>
+            <option value="budget">Budget</option>
+            <option value="compte_rendu">Compte rendu</option>
+            <option value="fiche">Fiche</option>
+            <option value="registre">Registre</option>
+            <option value="formulaire">Formulaire</option>
+            <option value="kit">Kit</option>
+            <option value="preuve">Preuve</option>
+            <option value="modele_genere">Modele genere</option>
+            <option value="autre">Autre</option>
+          </select>
+        </label>
+        <label>Confidentialite
+          <select name="confidentiality_level">
+            <option value="all">Toutes</option>
+            <option value="public">Public</option>
+            <option value="interne">Interne</option>
+            <option value="confidentiel">Confidentiel</option>
+            <option value="sensible">Sensible</option>
+          </select>
+        </label>
+        <label>Rattachement
+          <select name="related_object_type">
+            <option value="all">Tous</option>
+            <option value="case">Dossier</option>
+            <option value="request">Demande</option>
+            <option value="contact">Contact</option>
+            <option value="organization">Organisation</option>
+            <option value="project">Projet</option>
+            <option value="branch">Antenne</option>
+            <option value="none">Aucun</option>
+          </select>
+        </label>
+      </form>
+
+      <div class="admin-layout documents-layout">
+        <section class="admin-list documents-list" aria-label="Liste documents">
+          <div data-documents-list class="admin-request-list"></div>
+          <p class="form-note" data-documents-empty hidden>Aucun element ne correspond aux filtres.</p>
+        </section>
+        <aside class="admin-detail documents-detail" data-documents-detail aria-label="Detail document">
+          <div class="admin-detail-empty">
+            <p class="section-kicker">Detail</p>
+            <h3>Selectionnez un document</h3>
+            <p>La fiche permet de classer, valider, lier et telecharger les documents.</p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="admin-modal" data-documents-modal hidden aria-label="Depot document">
+      <div class="admin-modal-panel documents-modal-panel">
+        <div class="admin-modal-head">
+          <div><p class="section-kicker">Document</p><h2>Deposer un document</h2></div>
+          <button class="btn ghost" type="button" data-documents-close-modal>Fermer</button>
+        </div>
+        <form class="admin-create-form documents-create-form" data-documents-form>
+          <label>Titre<input name="title" required placeholder="Ex. Autorisation de visite signee"></label>
+          <label>Type<select name="document_type"><option value="piece">Piece</option><option value="photo">Photo</option><option value="convention">Convention</option><option value="courrier">Courrier</option><option value="budget">Budget</option><option value="preuve">Preuve</option><option value="autre">Autre</option></select></label>
+          <label>Statut<select name="status"><option value="a_classer">A classer</option><option value="brouillon">Brouillon</option><option value="a_valider">A valider</option><option value="valide">Valide</option></select></label>
+          <label>Confidentialite<select name="confidentiality_level"><option value="interne">Interne</option><option value="confidentiel">Confidentiel</option><option value="sensible">Sensible</option><option value="public">Public</option></select></label>
+          <label>Rattachement<select name="related_object_type"><option value="none">Aucun</option><option value="case">Dossier</option><option value="request">Demande</option><option value="contact">Contact</option><option value="organization">Organisation</option><option value="project">Projet</option><option value="branch">Antenne</option></select></label>
+          <label>ID rattache<input name="related_object_id" placeholder="UUID si connu"></label>
+          <label class="admin-create-wide">Fichier<input name="file" type="file" accept=".pdf,.docx,.xlsx,.pptx,.txt,.md,.csv,.jpg,.jpeg,.png,.webp,application/pdf,image/*"></label>
+          <label class="admin-create-wide">Resume / classement<textarea name="summary" rows="4" placeholder="Contexte, pieces sensibles, dossier concerne"></textarea></label>
+          <div class="admin-detail-actions admin-create-wide"><button class="btn primary" type="submit">Deposer</button><button class="btn secondary" type="button" data-documents-close-modal>Annuler</button></div>
+          <p class="form-note admin-create-wide" data-documents-modal-status hidden></p>
+        </form>
+      </div>
+    </section>
+
+    <section class="admin-modal" data-templates-modal hidden aria-label="Creation modele">
+      <div class="admin-modal-panel documents-modal-panel">
+        <div class="admin-modal-head">
+          <div><p class="section-kicker">Modele</p><h2>Nouveau modele</h2></div>
+          <button class="btn ghost" type="button" data-templates-close-modal>Fermer</button>
+        </div>
+        <form class="admin-create-form documents-create-form" data-templates-form>
+          <label>Titre<input name="title" required placeholder="Ex. Demande de pieces complementaires"></label>
+          <label>Type<select name="template_type"><option value="courrier">Courrier</option><option value="email">E-mail</option><option value="convention">Convention</option><option value="fiche">Fiche</option><option value="registre">Registre</option><option value="budget">Budget</option><option value="kit_antenne">Kit antenne</option><option value="formulaire">Formulaire</option><option value="grille">Grille</option><option value="financeur">Financeur</option><option value="autre">Autre</option></select></label>
+          <label>Statut<select name="status"><option value="brouillon">Brouillon</option><option value="a_valider">A valider</option><option value="officiel">Officiel</option></select></label>
+          <label>Validation nationale<select name="national_validated"><option value="false">Non</option><option value="true">Oui</option></select></label>
+          <label class="admin-create-wide">Champs requis<input name="required_fields" placeholder="nom, adresse, date, responsable"></label>
+          <label class="admin-create-wide">Fichier modele<input name="file" type="file" accept=".pdf,.docx,.xlsx,.pptx,.txt,.md,.csv,application/pdf"></label>
+          <label class="admin-create-wide">Description<textarea name="description" rows="4" placeholder="Usage, limites, pieces a joindre"></textarea></label>
+          <div class="admin-detail-actions admin-create-wide"><button class="btn primary" type="submit">Creer le modele</button><button class="btn secondary" type="button" data-templates-close-modal>Annuler</button></div>
+          <p class="form-note admin-create-wide" data-templates-modal-status hidden></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <script src="admin-documents.js" defer></script>
+</body>
+</html>

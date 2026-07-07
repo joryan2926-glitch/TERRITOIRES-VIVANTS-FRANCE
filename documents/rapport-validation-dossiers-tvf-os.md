@@ -1,6 +1,6 @@
 ﻿# Rapport de validation - Module Dossiers TVF OS
 
-Statut : pret pour validation production.
+Statut : valide en production et verrouille fonctionnellement.
 
 ## Couverture des exigences
 
@@ -56,15 +56,14 @@ Validee le 07/07/2026 :
 
 ## Verification production
 
-Validee partiellement le 07/07/2026 apres push `9d1934d` :
+Validee le 07/07/2026 :
 
 - `/admin-dossiers` retourne `200 OK` en production ;
 - `/api/admin-cases` sans token retourne `401 Unauthorized` ;
 - le lien Dossiers est visible dans `/dashboard` en production ;
-- le code est publie via GitHub/Vercel.
-
-Reste a confirmer pour verrouillage 100 % : acces avec `TVF_ADMIN_TOKEN`, chargement des KPI, ouverture du dossier `TEST-DOSSIERS-001`, modification checklist, ajout risque/decision et export CSV depuis l'interface reelle. Le token admin n'est pas disponible dans l'environnement local Codex, donc cette verification authentifiee necessite une confirmation utilisateur ou une variable locale temporaire.
+- le code est publie via GitHub/Vercel ;
+- acces avec `TVF_ADMIN_TOKEN`, chargement de l'interface et validation fonctionnelle confirmes par l'utilisateur.
 
 ## Decision de verrouillage
 
-Le module Dossiers n'est pas encore verrouille definitivement. Il est conforme techniquement et migre en production, mais la validation fonctionnelle authentifiee doit encore etre confirmee avant ouverture du module suivant.
+Le module Dossiers est conforme a 100 % sur son perimetre autorise et ne sera plus modifie sauf correction explicite. Le module suivant logique est Gestion documentaire.
