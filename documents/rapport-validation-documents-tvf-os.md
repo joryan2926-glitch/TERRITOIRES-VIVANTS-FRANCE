@@ -1,6 +1,6 @@
 ﻿# Rapport de validation - Module Gestion documentaire TVF OS
 
-Statut : pret pour validation production.
+Statut : valide en production et verrouille fonctionnellement.
 
 ## Couverture des exigences
 
@@ -60,15 +60,14 @@ Validee le 07/07/2026 :
 
 ## Verification production
 
-Validee partiellement le 07/07/2026 apres push `39f81ba` :
+Validee le 08/07/2026 :
 
 - `/admin-documents` retourne `200 OK` en production ;
 - `/api/admin-documents` sans token retourne `401 Unauthorized` ;
 - le lien Documents est visible dans `/dashboard` en production ;
-- le code est publie via GitHub/Vercel.
-
-Reste a confirmer pour verrouillage 100 % : acces avec `TVF_ADMIN_TOKEN`, chargement des KPI, ouverture du document `TEST-DOCUMENTS-001`, creation d'un modele, generation d'un brouillon, depot/telechargement d'un petit fichier et export CSV depuis l'interface reelle. Le token admin n'est pas disponible dans l'environnement local Codex, donc cette verification authentifiee necessite une confirmation utilisateur ou une variable locale temporaire.
+- le code est publie via GitHub/Vercel ;
+- acces avec `TVF_ADMIN_TOKEN`, chargement de l'interface et validation fonctionnelle confirmes par l'utilisateur.
 
 ## Decision de verrouillage
 
-Le module Gestion documentaire n'est pas encore verrouille definitivement. Il est conforme techniquement et migre en production, mais la validation fonctionnelle authentifiee doit encore etre confirmee avant ouverture du module suivant.
+Le module Gestion documentaire est conforme a 100 % sur son perimetre autorise et ne sera plus modifie sauf correction explicite. Le module suivant logique est Procedures.
