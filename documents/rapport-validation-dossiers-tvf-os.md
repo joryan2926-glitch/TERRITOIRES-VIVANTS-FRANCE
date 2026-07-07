@@ -54,14 +54,17 @@ Validee le 07/07/2026 :
 - triggers 3/3 : OK ;
 - donnee de test `TEST-DOSSIERS-001` creee avec 8 items de checklist et score de maturite 43 %.
 
-## Verification production attendue
+## Verification production
 
-1. Publier le code.
-2. Ouvrir `/admin-dossiers`.
-3. Tester l'acces avec `TVF_ADMIN_TOKEN`.
-4. Verifier les KPI, la liste, la fiche, la checklist, les risques, les decisions, la timeline et l'export CSV.
-5. Verifier `/api/admin-cases` sans token : attendu `401`.
+Validee partiellement le 07/07/2026 apres push `9d1934d` :
+
+- `/admin-dossiers` retourne `200 OK` en production ;
+- `/api/admin-cases` sans token retourne `401 Unauthorized` ;
+- le lien Dossiers est visible dans `/dashboard` en production ;
+- le code est publie via GitHub/Vercel.
+
+Reste a confirmer pour verrouillage 100 % : acces avec `TVF_ADMIN_TOKEN`, chargement des KPI, ouverture du dossier `TEST-DOSSIERS-001`, modification checklist, ajout risque/decision et export CSV depuis l'interface reelle. Le token admin n'est pas disponible dans l'environnement local Codex, donc cette verification authentifiee necessite une confirmation utilisateur ou une variable locale temporaire.
 
 ## Decision de verrouillage
 
-Le module Dossiers pourra etre verrouille apres validation production reelle avec migration appliquee, tests executes et confirmation utilisateur.
+Le module Dossiers n'est pas encore verrouille definitivement. Il est conforme techniquement et migre en production, mais la validation fonctionnelle authentifiee doit encore etre confirmee avant ouverture du module suivant.
