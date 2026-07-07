@@ -1,0 +1,246 @@
+﻿<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dashboard TVF OS | Territoires Vivants France</title>
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="theme-color" content="#183f22">
+  <link rel="icon" href="assets/favicon-32.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="admin-body dashboard-body">
+  <a class="skip-link" href="#dashboard-main">Aller au contenu</a>
+  <header class="admin-topbar dashboard-topbar">
+    <a class="admin-brand" href="index" aria-label="Retour au site Territoires Vivants France">
+      <img src="assets/logo-territoires-vivants-france-web.png" alt="Territoires Vivants France" width="320" height="132">
+    </a>
+    <div>
+      <p class="admin-kicker">TVF OS</p>
+      <h1>Tableau de bord</h1>
+      <p>Vue operationnelle des demandes entrantes, priorites et alertes.</p>
+    </div>
+    <nav class="dashboard-top-actions" aria-label="Navigation dashboard">
+      <a class="btn secondary" href="admin-demandes">Demandes</a>
+      <a class="btn secondary" href="contact">Retour au site</a>
+    </nav>
+  </header>
+
+  <main id="dashboard-main" class="admin-shell dashboard-shell">
+    <section class="admin-login" data-dashboard-login>
+      <div>
+        <p class="section-kicker">Acces securise</p>
+        <h2>Connexion au Dashboard TVF OS</h2>
+        <p>Entrez le token admin configure dans Vercel. Les indicateurs sont calcules cote serveur depuis Supabase.</p>
+      </div>
+      <form data-dashboard-token-form>
+        <label for="dashboard-token">Token admin</label>
+        <input id="dashboard-token" name="token" type="password" autocomplete="current-password" placeholder="TVF_ADMIN_TOKEN">
+        <button class="btn primary" type="submit">Ouvrir le dashboard</button>
+        <p class="form-note" data-dashboard-login-status role="status" hidden></p>
+      </form>
+    </section>
+
+    <section class="dashboard-app" data-dashboard-app hidden>
+      <div class="dashboard-toolbar">
+        <div>
+          <p class="section-kicker">Pilotage</p>
+          <h2>Priorites operationnelles</h2>
+          <p data-dashboard-summary>Chargement du tableau de bord...</p>
+        </div>
+        <form class="dashboard-controls" data-dashboard-controls>
+          <label>Periode
+            <select name="range">
+              <option value="7">7 jours</option>
+              <option value="30" selected>30 jours</option>
+              <option value="90">90 jours</option>
+              <option value="365">12 mois</option>
+            </select>
+          </label>
+          <label>Statut
+            <select name="status">
+              <option value="all" selected>Tous</option>
+              <option value="nouveau">Nouveau</option>
+              <option value="a_qualifier">A qualifier</option>
+              <option value="en_cours">En cours</option>
+              <option value="rendez_vous">Rendez-vous</option>
+              <option value="en_attente">En attente</option>
+              <option value="accepte">Accepte</option>
+              <option value="refuse">Refuse</option>
+              <option value="archive">Archive</option>
+            </select>
+          </label>
+          <label>Priorite
+            <select name="priority">
+              <option value="all" selected>Toutes</option>
+              <option value="urgente">Urgente</option>
+              <option value="haute">Haute</option>
+              <option value="normale">Normale</option>
+            </select>
+          </label>
+          <label>Pole
+            <select name="category">
+              <option value="all" selected>Tous</option>
+              <option value="collectivite-territoire">Collectivites</option>
+              <option value="bien-vacant-proprietaire">Habitat vivant</option>
+              <option value="materiaux-reemploi">Materiautheque</option>
+              <option value="entreprise-partenariat">Entreprises</option>
+              <option value="benevolat-insertion">Solidarite / insertion</option>
+              <option value="financement-mecenat">Financement</option>
+              <option value="presse-institutionnel">Communication</option>
+              <option value="demande-generale">Accueil</option>
+            </select>
+          </label>
+          <button class="btn secondary" type="button" data-dashboard-refresh>Actualiser</button>
+          <button class="btn secondary" type="button" data-dashboard-export>Exporter</button>
+          <button class="btn secondary" type="button" data-dashboard-print>Imprimer</button>
+          <button class="btn ghost" type="button" data-dashboard-logout>Deconnexion</button>
+        </form>
+      </div>
+
+      <section class="dashboard-kpis" aria-label="Indicateurs principaux" data-dashboard-kpis></section>
+
+      <div class="dashboard-grid">
+        <section class="dashboard-panel dashboard-panel-wide" aria-labelledby="trend-title">
+          <div class="dashboard-panel-head">
+            <div>
+              <p class="section-kicker">Activite</p>
+              <h3 id="trend-title">Demandes recues</h3>
+            </div>
+            <span data-dashboard-generated>--</span>
+          </div>
+          <div class="dashboard-trend" data-dashboard-trend></div>
+        </section>
+
+        <aside class="dashboard-panel" aria-labelledby="assistant-title">
+          <div class="dashboard-panel-head">
+            <div>
+              <p class="section-kicker">Assistant</p>
+              <h3 id="assistant-title">Lecture operationnelle</h3>
+            </div>
+          </div>
+          <p class="dashboard-ai-summary" data-dashboard-ai-summary></p>
+          <div class="dashboard-insights" data-dashboard-insights></div>
+        </aside>
+      </div>
+
+      <div class="dashboard-grid">
+        <section class="dashboard-panel" aria-labelledby="views-title">
+          <div class="dashboard-panel-head">
+            <div>
+              <p class="section-kicker">Vues</p>
+              <h3 id="views-title">National / antenne</h3>
+            </div>
+          </div>
+          <div class="dashboard-bars" data-dashboard-views></div>
+        </section>
+
+        <section class="dashboard-panel" aria-labelledby="pole-title">
+          <div class="dashboard-panel-head">
+            <div>
+              <p class="section-kicker">Poles</p>
+              <h3 id="pole-title">Repartition operationnelle</h3>
+            </div>
+          </div>
+          <div class="dashboard-bars" data-dashboard-pole></div>
+        </section>
+
+        <section class="dashboard-panel" aria-labelledby="source-title">
+          <div class="dashboard-panel-head">
+            <div>
+              <p class="section-kicker">Canaux</p>
+              <h3 id="source-title">Origine des demandes</h3>
+            </div>
+          </div>
+          <div class="dashboard-bars" data-dashboard-source></div>
+        </section>
+      </div>
+
+      <div class="dashboard-grid">
+        <section class="dashboard-panel" aria-labelledby="status-title">
+          <div class="dashboard-panel-head">
+            <div>
+              <p class="section-kicker">Statuts</p>
+              <h3 id="status-title">Repartition</h3>
+            </div>
+          </div>
+          <div class="dashboard-bars" data-dashboard-status></div>
+        </section>
+
+        <section class="dashboard-panel" aria-labelledby="priority-title">
+          <div class="dashboard-panel-head">
+            <div>
+              <p class="section-kicker">Priorites</p>
+              <h3 id="priority-title">Charge par urgence</h3>
+            </div>
+          </div>
+          <div class="dashboard-bars" data-dashboard-priority></div>
+        </section>
+
+        <section class="dashboard-panel" aria-labelledby="category-title">
+          <div class="dashboard-panel-head">
+            <div>
+              <p class="section-kicker">Categories</p>
+              <h3 id="category-title">Origine metier</h3>
+            </div>
+          </div>
+          <div class="dashboard-bars" data-dashboard-category></div>
+        </section>
+      </div>
+
+      <div class="dashboard-grid">
+        <section class="dashboard-panel" aria-labelledby="alerts-title">
+          <div class="dashboard-panel-head">
+            <div>
+              <p class="section-kicker">Alertes</p>
+              <h3 id="alerts-title">Retards a traiter</h3>
+            </div>
+          </div>
+          <div class="dashboard-alerts" data-dashboard-alerts></div>
+        </section>
+
+        <section class="dashboard-panel dashboard-panel-wide" aria-labelledby="recent-title">
+          <div class="dashboard-panel-head">
+            <div>
+              <p class="section-kicker">Demandes</p>
+              <h3 id="recent-title">Dernieres entrees</h3>
+            </div>
+            <a class="text-link" href="admin-demandes">Ouvrir le back-office</a>
+          </div>
+          <div class="dashboard-table-wrap">
+            <table class="dashboard-table">
+              <thead>
+                <tr>
+                  <th scope="col">Demande</th>
+                  <th scope="col">Statut</th>
+                  <th scope="col">Priorite</th>
+                  <th scope="col">Categorie</th>
+                  <th scope="col">Responsable</th>
+                </tr>
+              </thead>
+              <tbody data-dashboard-recent></tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+
+            <section class="dashboard-panel dashboard-compliance" aria-labelledby="compliance-title">
+        <div class="dashboard-panel-head">
+          <div>
+            <p class="section-kicker">Conformite</p>
+            <h3 id="compliance-title">Couverture des exigences Dashboard</h3>
+          </div>
+          <strong data-dashboard-coverage-score>--</strong>
+        </div>
+        <div class="dashboard-compliance-list" data-dashboard-coverage></div>
+      </section>
+
+      <p class="form-note" data-dashboard-runtime-status role="status" hidden></p>
+    </section>
+  </main>
+
+  <script src="dashboard.js" defer></script>
+</body>
+</html>
+
+
