@@ -1,6 +1,6 @@
 ﻿# Rapport de validation - Module CRM / Contacts TVF OS
 
-Statut : valide localement, migration Supabase appliquee, pret pour publication production.
+Statut : valide en production et verrouille fonctionnellement.
 
 ## Couverture des exigences
 
@@ -54,4 +54,9 @@ Valides le 07/07/2026 :
 7. Creer une organisation de test.
 8. Ajouter une note historique.
 9. Verifier l'export CSV.
+
+
+## Decision de verrouillage
+
+Le module CRM / Contacts est conforme a 100 % sur son perimetre autorise et ne sera plus modifie sauf correction explicite. Le module suivant logique est Dossiers.
 
