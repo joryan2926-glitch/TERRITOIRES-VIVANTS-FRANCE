@@ -217,7 +217,7 @@ Fichiers utiles :
 
 Ordre recommande :
 
-1. Verifier dans Vercel que `TVF_NOTIFICATION_EMAIL` et `TVF_EMAIL_REPLY_TO` pointent vers l'adresse temporaire de reception.
+1. Verifier dans Vercel que `TVF_NOTIFICATION_EMAIL` et `TVF_EMAIL_REPLY_TO` pointent vers l'adresse officielle de reception : `contact@territoiresvivantsfrance.fr`.
 2. Tester un formulaire depuis le site public.
 3. Verifier la ligne dans Supabase, table `contacts`.
 4. Executer la migration SQL si vous voulez piloter les demandes directement par statut/priorite/categorie dans Supabase.

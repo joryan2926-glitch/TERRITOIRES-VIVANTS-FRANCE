@@ -10,7 +10,7 @@ Chaque formulaire envoye depuis le site suit trois chemins :
 2. Notification interne envoyee a l'adresse configuree dans Vercel (`TVF_NOTIFICATION_EMAIL`).
 3. Accuse de reception envoye automatiquement au demandeur si son e-mail est renseigne.
 
-Adresse temporaire conseillee pour la phase de lancement : `territoiresvivantsfrance@gmail.com`.
+Adresse officielle de reception pour la phase de lancement : `contact@territoiresvivantsfrance.fr`.
 
 ## 2. Lecture d'une demande
 

@@ -1,7 +1,7 @@
 const MAX_BODY_SIZE = 32 * 1024;
 const CONTACT_TABLE = process.env.SUPABASE_CONTACTS_TABLE || "contacts";
 const DEFAULT_CONTACT_EMAIL = "contact@territoiresvivantsfrance.fr";
-const DEFAULT_NOTIFICATION_EMAIL = "territoiresvivantsfrance@gmail.com";
+const DEFAULT_NOTIFICATION_EMAIL = "contact@territoiresvivantsfrance.fr";
 const DEFAULT_FROM = "Territoires Vivants France <contact@territoiresvivantsfrance.fr>";
 const OUTBOUND_TIMEOUT_MS = Number(process.env.TVF_OUTBOUND_TIMEOUT_MS || 9000);
 

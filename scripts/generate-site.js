@@ -26,6 +26,13 @@ const whatsappQr = "assets/qr-whatsapp-tvf.png";
 const official = {
   status: "Association loi 1901 déclarée",
   rna: "W423016361",
+  siren: "107 226 128",
+  siret: "107 226 128 00018",
+  legalCategory: "9220 - Association d?clar?e",
+  ape: "94.99Z - Autres organisations fonctionnant par adh?sion volontaire",
+  ess: "Oui",
+  sireneDate: "7 juillet 2026",
+  activeSince: "1er juillet 2026",
   declarationDate: "1er juillet 2026",
   decisionDate: "22 juin 2026",
   receiptDate: "2 juillet 2026",
@@ -1541,7 +1548,7 @@ const pages = [
       ]),
       textBlock(
         "Siège national",
-        `Territoires Vivants France - ${official.status}. RNA : ${official.rna}. Siège national : ${contact.address}. E-mail : ${contact.email}. Téléphone : ${contact.phone}. Président fondateur : Edryan Rangoly. Secrétaire et trésorier : M. Lambeau Jordan.`
+        `Territoires Vivants France - ${official.status}. RNA : ${official.rna}. SIREN : ${official.siren}. SIRET du siège : ${official.siret}. Siège national : ${contact.address}. E-mail : ${contact.email}. Téléphone : ${contact.phone}. Président fondateur : Edryan Rangoly. Secrétaire et trésorier : M. Lambeau Jordan.`
       ),
       faqSection([
         ["Que faut-il écrire dans le premier message ?", "Indiquez votre profil, le territoire concerné, le type de demande, les informations déjà disponibles et ce que vous attendez de TVF."],
@@ -1582,7 +1589,7 @@ const pages = [
       ]),
       tableSection("Éléments officiels mis en attente", "Ces informations doivent rester en attente tant qu'elles ne sont pas vérifiées, attribuées ou autorisées à la publication.", [
         ["Élément", "Statut de publication", "Preuve attendue"],
-        ["Références administratives", `RNA ${official.rna} publié sur le site ; SIREN à compléter uniquement si attribution`, `${official.receiptLabel}`],
+        ["Références administratives", `RNA ${official.rna} ; SIREN ${official.siren} ; SIRET du siège ${official.siret}`, `Avis de situation SIRENE du ${official.sireneDate}`],
         ["Partenaires", "Ne pas afficher sans accord réel", "Convention, courrier, autorisation de logo"],
         ["Financeurs ou mécènes", "Ne pas présenter comme acquis sans décision", "Convention, notification, accord écrit"],
         ["Projets réalisés", "Ne pas communiquer avant réalisation vérifiée", "Compte rendu, convention, photos autorisées, indicateurs"],
@@ -1590,7 +1597,7 @@ const pages = [
       ]),
       textBlock(
         "Références administratives publiées",
-        "TVF dispose désormais du numéro RNA W423016361, issu du récépissé de déclaration de création délivré à Roanne le 2 juillet 2026. Le numéro SIREN sera ajouté uniquement s’il est attribué ultérieurement. Les informations d’hébergement et toute évolution statutaire devront rester appuyées par une pièce officielle."
+        "TVF dispose du numéro RNA W423016361 et de l’identifiant SIREN 107 226 128, avec SIRET du siège 107 226 128 00018, selon l’avis de situation SIRENE du 7 juillet 2026. Les informations d’hébergement et toute évolution statutaire devront rester appuyées par une pièce officielle."
       ),
       tableSection("Statuts et transparence associative", "Les statuts précisent le cadre de fonctionnement interne et les ressources autorisées. Le site en publie une synthèse sans rendre les documents internes librement téléchargeables.", [
         ["Point statutaire", "Ce qui est prévu", "Publication sur le site"],
@@ -1662,17 +1669,19 @@ const pages = [
         ["Adresse du siège", "25 rue Élise Gervais, 42000 Saint-Étienne", "Maintenir à jour en cas de changement"],
         ["Responsables", "Président fondateur, secrétaire et trésorier identifiés", "Actualiser après toute décision statutaire"],
         ["Numéro RNA", `${official.rna}`, `${official.receiptLabel}, délivré à ${official.receiptPlace} le ${official.receiptDate}`],
-        ["Numéro SIREN", "À compléter si attribution", "Ajouter uniquement si l'association en dispose"],
+        ["Numéro SIREN", `${official.siren}`, `Avis de situation SIRENE du ${official.sireneDate}`],
         ["Contact officiel", `${contact.email} - ${contact.phone}`, "Maintenir à jour les canaux publics de contact"],
-        ["Hébergement", "Vercel Inc. - https://vercel.com", "Site hébergé et déployé via Vercel ; informations à vérifier en cas de changement de prestataire"],
+        ["Hébergement", "Vercel Inc. - https://vercel.com", "Site hébergé et déployé via Vercel ; coordonnées complètes à vérifier depuis le compte contractuel"],
+        ["Prestataires techniques", "Vercel, Supabase, Brevo et GitHub selon les services activés", "Maintenir à jour les services réellement utilisés pour l'hébergement, les formulaires, les notifications et le déploiement"],
       ]),
       tableSection("Procédure de mise à jour légale", "Les mentions légales doivent être actualisées dès qu'une information officielle change.", [
         ["Déclencheur", "Vérification à faire", "Pièce attendue"],
         ["Déclaration officielle", `RNA ${official.rna} - déclaration du ${official.declarationDate}`, `${official.receiptLabel}`],
-        ["Attribution SIREN", "Compléter l'identification si l'association en dispose", "Avis de situation ou document officiel"],
+        ["Attribution SIREN", `${official.siren} - SIRET du siège ${official.siret}`, `Avis de situation SIRENE du ${official.sireneDate}`],
         ["Changement d'adresse", "Mettre à jour siège, contact et supports publics", "Décision interne ou document administratif"],
         ["Évolution des responsables", "Actualiser les noms, fonctions et responsabilités affichées", "Procès-verbal ou décision statutaire"],
         ["Changement d'hébergement", "Mettre à jour l'identité de l'hébergeur et les informations obligatoires", "Contrat, facture ou fiche hébergeur"],
+        ["Activation d'un nouveau prestataire", "Mettre à jour les mentions légales et la politique de confidentialité", "Contrat, documentation RGPD, finalité et lieu de traitement"],
       ]),
       tableSection("Informations issues des statuts", "Les statuts signés le 22 juin 2026 complètent les informations administratives issues du récépissé.", [
         ["Information", "Contenu statutaire", "Publication"],
@@ -1685,7 +1694,7 @@ const pages = [
       ]),
       legalSection(),
       faqSection([
-        ["Pourquoi certaines informations restent-elles à compléter ?", `TVF dispose désormais du RNA ${official.rna}. Seuls les éléments non attribués ou évolutifs, comme le SIREN le cas échéant, l’hébergement ou une modification statutaire, doivent être complétés après preuve officielle.`],
+        ["Pourquoi certaines informations restent-elles à compléter ?", `TVF dispose désormais du RNA ${official.rna}, du SIREN ${official.siren} et du SIRET du siège ${official.siret}. Seuls les éléments évolutifs, comme les coordonnées contractuelles complètes de l’hébergeur, une modification statutaire ou une évolution de gouvernance, doivent être complétés après preuve officielle.`],
         ["Les documents du site ont-ils une valeur juridique automatique ?", "Non. Ils servent de bases de travail et doivent être adaptés, relus et validés avant toute signature ou engagement."],
         ["Qui contacter en cas de demande relative aux données personnelles ?", `Les demandes peuvent être adressées à ${contact.email} ou préparées depuis la page contact. TVF devra ensuite traiter chaque demande selon le RGPD et les finalités réellement concernées.`],
       ]),
@@ -2649,7 +2658,7 @@ function contactSection() {
 }
 
 function legalSection() {
-  return `<section class="section" ${sectionAttrs("Mentions légales", "mentions-legales-detail")}><div class="container legal"><h2>Cadre légal du site</h2><h3>Éditeur</h3><p><strong>Territoires Vivants France</strong><br>${official.status}<br>RNA : ${official.rna}<br>${contact.address}<br>E-mail : <a href="mailto:${contact.email}">${contact.email}</a><br>Téléphone : <a href="tel:${contact.phoneHref}">${contact.phone}</a></p><h3>Responsables</h3><p>Président fondateur : Edryan Rangoly.<br>Secrétaire et trésorier : M. Lambeau Jordan.</p><h3>Références administratives</h3><p>${official.receiptLabel}. Déclaration en date du ${official.declarationDate}. Décision prise le ${official.decisionDate}. Récépissé délivré à ${official.receiptPlace} le ${official.receiptDate} par ${official.authority}. Numéro SIREN : à compléter uniquement si attribution ultérieure.</p><h3>Statuts</h3><p>Les statuts de Territoires Vivants France ont été établis à Saint-Étienne le 22 juin 2026. Ils prévoient notamment une durée indéterminée, un bureau composé d’un président, d’un secrétaire et d’un trésorier, des ressources autorisées par la loi et une attribution de l’actif net à un organisme d’intérêt général ou à objet similaire en cas de dissolution.</p><h3>Hébergement</h3><p>Le site territoiresvivantsfrance.fr est hébergé et déployé par <strong>Vercel Inc.</strong>, plateforme Vercel. Vercel fournit les services techniques d’hébergement, de déploiement et de diffusion du site. Site de l’hébergeur : <a href="https://vercel.com" rel="noopener">https://vercel.com</a>.</p><h3>Données personnelles</h3><p>Les formulaires et parcours présentés servent à préparer les informations utiles à une demande. Les données transmises à TVF doivent être traitées dans le respect du RGPD, avec une finalité claire, une durée de conservation adaptée et un droit de contact pour les personnes concernées. La page <a href="politique-confidentialite.html">Politique de confidentialité</a> précise les finalités, les données concernées, les durées de conservation indicatives et les droits des personnes.</p><h3>Propriété intellectuelle</h3><p>Les textes, logos, documents, visuels et éléments graphiques du site sont destinés à présenter Territoires Vivants France. Toute réutilisation, modification ou diffusion doit faire l'objet d'une autorisation préalable.</p><h3>Responsabilité</h3><p>Les contenus du site présentent une démarche associative, des méthodes et des documents de travail. Ils ne constituent pas un conseil juridique, technique, financier ou administratif personnalisé. Chaque projet doit être vérifié et adapté avec les interlocuteurs compétents.</p></div></section>`;
+  return `<section class="section" ${sectionAttrs("Mentions légales", "mentions-legales-detail")}><div class="container legal"><h2>Cadre légal du site</h2><h3>Éditeur du site</h3><p><strong>Territoires Vivants France</strong><br>Nom du site : Territoires Vivants France<br>Adresse du site : <a href="https://www.territoiresvivantsfrance.fr" rel="noopener">www.territoiresvivantsfrance.fr</a><br>${official.status}<br>RNA : ${official.rna}<br>SIREN : ${official.siren}<br>SIRET du si?ge : ${official.siret}<br>${contact.address}<br>E-mail : <a href="mailto:${contact.email}">${contact.email}</a><br>Téléphone : <a href="tel:${contact.phoneHref}">${contact.phone}</a></p><h3>Directeur de la publication</h3><p>Directeur de la publication : Edryan Rangoly, président fondateur de Territoires Vivants France.</p><h3>Responsables associatifs</h3><p>Président fondateur : Edryan Rangoly.<br>Secrétaire et trésorier : M. Lambeau Jordan.</p><h3>Références administratives</h3><p>${official.receiptLabel}. Déclaration en date du ${official.declarationDate}. Décision prise le ${official.decisionDate}. Récépissé délivré à ${official.receiptPlace} le ${official.receiptDate} par ${official.authority}. SIREN : ${official.siren}. SIRET du siège : ${official.siret}. Catégorie juridique : ${official.legalCategory}. Activité principale exercée (APE) : ${official.ape}. Appartenance au champ de l’ESS : ${official.ess}. Entreprise active depuis le ${official.activeSince}. Informations issues de l’avis de situation au répertoire SIRENE à la date du ${official.sireneDate}.</p><h3>Statuts</h3><p>Les statuts de Territoires Vivants France ont été établis à Saint-Étienne le 22 juin 2026. Ils prévoient notamment une durée indéterminée, un bureau composé d’un président, d’un secrétaire et d’un trésorier, des ressources autorisées par la loi et une attribution de l’actif net à un organisme d’intérêt général ou à objet similaire en cas de dissolution.</p><h3>Hébergement</h3><p>Le site territoiresvivantsfrance.fr est hébergé et déployé par <strong>Vercel Inc.</strong>, plateforme Vercel. Vercel fournit les services techniques d’hébergement, de déploiement et de diffusion du site. Site de l’hébergeur : <a href="https://vercel.com" rel="noopener">https://vercel.com</a>. Les coordonnées postales et téléphoniques de l’hébergeur doivent être vérifiées à partir des informations contractuelles du compte Vercel avant publication d’une version définitive des mentions.</p><h3>Prestataires techniques</h3><p>Le fonctionnement du site peut mobiliser plusieurs prestataires : Vercel pour l’hébergement et le déploiement, Supabase pour l’enregistrement technique des demandes issues des formulaires lorsque le service est activé, Brevo pour les notifications e-mail et accusés de réception lorsque le service est configuré, et GitHub pour la gestion du dépôt de code et le déclenchement du déploiement. Ces prestataires interviennent uniquement dans le cadre technique nécessaire au fonctionnement du site et au traitement des demandes.</p><h3>Données personnelles et RGPD</h3><p>TVF est responsable du traitement des données personnelles transmises via le site. Les formulaires et parcours présentés servent à préparer les informations utiles à une demande : contact, signalement, proposition de bien, proposition de matériaux, partenariat ou demande de rendez-vous. Les données doivent être traitées avec une finalité claire, une durée de conservation adaptée, un accès limité aux personnes habilitées et un droit de contact pour les personnes concernées. La page <a href="politique-confidentialite.html">Politique de confidentialité</a> précise les finalités, les données concernées, les destinataires, les durées de conservation indicatives et les droits des personnes.</p><h3>Délégué à la protection des données</h3><p>TVF n’a pas désigné de délégué à la protection des données à ce stade. Toute demande relative aux données personnelles peut être adressée à <a href="mailto:${contact.email}">${contact.email}</a>.</p><h3>Cookies et traceurs</h3><p>Le site ne prévoit pas, à ce stade, de cookies publicitaires ou de traceurs de mesure d’audience nécessitant un consentement préalable. Si un outil de mesure d’audience, de publicité, de suivi social ou de remarketing est activé ultérieurement, TVF devra mettre à jour cette information et, lorsque nécessaire, recueillir le consentement de l’utilisateur.</p><h3>Crédits et propriété intellectuelle</h3><p>Le logo, les textes, documents, visuels, gabarits et éléments graphiques associés à Territoires Vivants France sont protégés. Toute réutilisation, modification, reproduction ou diffusion doit faire l’objet d’une autorisation préalable. Les photographies et illustrations utilisées sur le site doivent provenir de sources autorisées : images fournies par TVF, images libres de droits, licences adaptées ou créations spécifiquement produites pour TVF.</p><h3>Responsabilité éditoriale</h3><p>Les contenus du site présentent une démarche associative, des méthodes et des documents de travail. Ils ne constituent pas un conseil juridique, technique, financier ou administratif personnalisé. Chaque projet doit être vérifié et adapté avec les interlocuteurs compétents, les propriétaires, les collectivités, les professionnels qualifiés et les autorités concernées lorsque nécessaire.</p><h3>Dons, fiscalité et reçus</h3><p>Les informations relatives aux dons, reçus fiscaux, avantages fiscaux ou dispositifs de mécénat seront précisées selon le cadre légal applicable à l’association et uniquement après vérification des conditions d’éligibilité. Aucune réduction fiscale ne doit être considérée comme acquise sans confirmation officielle.</p><h3>Signalement, rectification et contact</h3><p>Toute demande de correction, signalement de contenu, demande relative aux droits d’auteur, demande RGPD ou question sur les mentions légales peut être adressée à <a href="mailto:${contact.email}">${contact.email}</a>.</p><p><strong>Dernière mise à jour :</strong> juillet 2026.</p></div></section>`;
 }
 
 function iconFor(text) {
