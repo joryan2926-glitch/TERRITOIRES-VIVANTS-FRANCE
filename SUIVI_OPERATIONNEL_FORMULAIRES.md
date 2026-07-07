@@ -1,4 +1,4 @@
-# Processus de traitement des demandes entrantes TVF
+﻿# Processus de traitement des demandes entrantes TVF
 
 Ce document sert de mode d'emploi interne pour traiter les formulaires recus depuis le site Territoires Vivants France.
 
@@ -149,3 +149,25 @@ Le bouton `Exporter CSV` du back-office exporte uniquement les demandes affichee
 - archivage d'un etat de reception avant une reunion.
 
 Le fichier CSV contient des donnees personnelles. Il doit rester interne, etre stocke dans un espace securise et etre supprime lorsqu'il n'est plus utile.
+
+## 10. Outils operationnels ajoutes
+
+Les documents suivants completent le processus de traitement :
+
+| Document | Usage |
+|---|---|
+| `documents/procedure-traitement-formulaires-tvf.md` | Procedure complete pour recevoir, qualifier, prioriser et archiver les demandes |
+| `documents/modeles-reponses-email-formulaires-tvf.md` | Modeles d'emails prets a adapter selon le profil du demandeur |
+| `documents/tableau-suivi-demandes-operationnelles.md` | Tableau de pilotage manuel pour suivre les dossiers et les relances |
+| `documents/checklist-brevo-dns-rgpd-formulaires.md` | Points de controle email, DNS, Brevo, delivrabilite et RGPD |
+| `documents/plan-nettoyage-tests-supabase.md` | Methode prudente pour identifier et nettoyer les donnees de test |
+
+## 11. Suite logique apres activation
+
+1. Tester chaque formulaire avec une vraie adresse email externe.
+2. Verifier que l'email interne arrive sur `contact@territoiresvivantsfrance.fr`.
+3. Verifier que l'accuse de reception arrive chez le demandeur.
+4. Reporter chaque test dans le tableau de suivi.
+5. Nettoyer les tests dans Supabase avant les premiers usages publics.
+6. Configurer ou verifier DKIM et DMARC pour ameliorer la delivrabilite.
+7. Utiliser les modeles de reponse pour traiter les premieres demandes reelles.
