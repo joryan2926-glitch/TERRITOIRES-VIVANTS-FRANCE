@@ -74,3 +74,19 @@ TVF doit respecter les principes suivants :
 ## 6. Message RGPD court à utiliser dans les formulaires
 
 Les informations transmises sont utilisées par TERRITOIRES VIVANTS FRANCE pour traiter votre demande et vous recontacter. Elles ne sont pas revendues. Vous pouvez demander l'accès, la rectification ou la suppression de vos données à l'adresse contact@territoiresvivantsfrance.fr.
+
+
+## 7. Verification DNS realisee le 07/07/2026
+
+| Controle | Resultat observe | Suite a donner |
+|---|---|---|
+| MX Google Workspace | OK : aspmx.l.google.com et serveurs alternatifs visibles | Rien a corriger |
+| SPF racine | OK : `v=spf1 include:_spf.google.com ~all` visible | Ajouter Brevo au SPF uniquement si Brevo le demande explicitement |
+| Verification Brevo | OK : `brevo-code:...` visible | Rien a corriger |
+| DMARC | OK : `_dmarc` publie avec `p=none` | Garder en observation puis durcir plus tard si besoin |
+| DKIM Brevo | OK : `brevo1._domainkey` et `brevo2._domainkey` visibles | Rien a corriger cote Brevo |
+| DKIM Google | Non visible avec le selecteur `google._domainkey` | A verifier dans Google Workspace si l'envoi Gmail officiel est utilise |
+
+## 8. Conclusion email
+
+La chaine Brevo fonctionne en production : les tests de formulaires ont ete recus sur `contact@territoiresvivantsfrance.fr` et les confirmations ont ete envoyees. Le dernier point de confort consiste a verifier DKIM Google dans l'administration Google Workspace si TVF envoie aussi des emails directement depuis Gmail.
