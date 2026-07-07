@@ -43,20 +43,18 @@ Valides le 07/07/2026 :
 - `node --check admin-crm.js` : OK ;
 - controle statique HTML/JS/API/SQL : OK.
 
-## Verification production attendue
+## Verification production
 
-1. Appliquer `supabase/tvf-os-crm.sql`.
-2. Executer `supabase/tvf-os-crm-verification.sql`.
-3. Publier le code.
-4. Ouvrir `/admin-crm`.
-5. Tester l'acces avec `TVF_ADMIN_TOKEN`.
-6. Creer un contact de test.
-7. Creer une organisation de test.
-8. Ajouter une note historique.
-9. Verifier l'export CSV.
+Validee le 07/07/2026 :
 
-
+- migration `supabase/tvf-os-crm.sql` appliquee ;
+- verification Supabase CRM conforme ;
+- code publie via GitHub/Vercel ;
+- `/admin-crm` accessible en production ;
+- `admin-crm.js` et les styles sont servis ;
+- `/api/admin-crm` sans token retourne `401` ;
+- bouton CRM visible depuis Dashboard et Demandes ;
+- acces avec `TVF_ADMIN_TOKEN` confirme par l'utilisateur.
 ## Decision de verrouillage
 
 Le module CRM / Contacts est conforme a 100 % sur son perimetre autorise et ne sera plus modifie sauf correction explicite. Le module suivant logique est Dossiers.
-

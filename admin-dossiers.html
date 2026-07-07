@@ -1,0 +1,140 @@
+﻿<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dossiers | TVF OS</title>
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="theme-color" content="#183f22">
+  <link rel="icon" href="assets/favicon-32.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="admin-body cases-body">
+  <a class="skip-link" href="#cases-main">Aller au contenu</a>
+  <header class="admin-topbar cases-topbar">
+    <a class="admin-brand" href="index" aria-label="Retour au site Territoires Vivants France">
+      <img src="assets/logo-territoires-vivants-france-web.png" alt="Territoires Vivants France" width="320" height="132">
+    </a>
+    <div>
+      <p class="admin-kicker">TVF OS</p>
+      <h1>Dossiers metier</h1>
+    </div>
+    <div class="admin-top-actions">
+      <a class="btn secondary" href="dashboard">Dashboard</a>
+      <a class="btn secondary" href="admin-demandes">Demandes</a>
+      <a class="btn secondary" href="admin-crm">CRM</a>
+    </div>
+  </header>
+
+  <main id="cases-main" class="admin-shell cases-shell">
+    <section class="admin-login" data-cases-login>
+      <div>
+        <p class="section-kicker">Acces securise</p>
+        <h2>Connexion aux dossiers TVF</h2>
+        <p>Les dossiers contiennent les instructions, risques, decisions et historiques internes.</p>
+      </div>
+      <form data-cases-token-form>
+        <label for="cases-token">Token admin</label>
+        <input id="cases-token" name="token" type="password" autocomplete="current-password" placeholder="TVF_ADMIN_TOKEN">
+        <button class="btn primary" type="submit">Ouvrir les dossiers</button>
+        <p class="form-note" data-cases-login-status role="status" hidden></p>
+      </form>
+    </section>
+
+    <section class="admin-app cases-app" data-cases-app hidden>
+      <div class="admin-toolbar cases-toolbar">
+        <div>
+          <p class="section-kicker">Instruction</p>
+          <h2>Suivre chaque dossier jusqu'a decision ou cloture</h2>
+          <p data-cases-count>Chargement des dossiers...</p>
+        </div>
+        <div class="admin-toolbar-actions">
+          <button class="btn primary" type="button" data-cases-create>Nouveau dossier</button>
+          <button class="btn secondary" type="button" data-cases-refresh>Actualiser</button>
+          <button class="btn secondary" type="button" data-cases-export>Exporter CSV</button>
+          <button class="btn ghost" type="button" data-cases-logout>Deconnexion</button>
+        </div>
+      </div>
+
+      <section class="crm-kpis cases-kpis" data-cases-kpis aria-label="Indicateurs dossiers"></section>
+
+      <nav class="admin-status-tabs cases-tabs" aria-label="Vues dossiers">
+        <button type="button" data-case-status="all" class="is-active">Tous</button>
+        <button type="button" data-case-status="qualification">Qualification</button>
+        <button type="button" data-case-status="instruction">Instruction</button>
+        <button type="button" data-case-status="attente_pieces">Pieces</button>
+        <button type="button" data-case-status="a_decision">A decision</button>
+        <button type="button" data-case-status="cloture">Clotures</button>
+      </nav>
+
+      <form class="admin-filters cases-filters" data-cases-filters>
+        <label>Recherche
+          <input name="q" type="search" placeholder="Numero, titre, territoire, responsable">
+        </label>
+        <label>Type
+          <select name="case_type">
+            <option value="all">Tous</option>
+            <option value="bien_vacant">Bien vacant</option>
+            <option value="commerce_inoccupe">Commerce inoccupe</option>
+            <option value="materiaux">Materiaux</option>
+            <option value="collectivite">Collectivite</option>
+            <option value="entreprise">Entreprise</option>
+            <option value="benevole">Benevole</option>
+            <option value="financeur">Financeur</option>
+            <option value="signalement">Signalement</option>
+            <option value="friche_terrain">Friche / terrain</option>
+            <option value="presse">Presse</option>
+            <option value="gouvernance">Gouvernance</option>
+            <option value="autre">Autre</option>
+          </select>
+        </label>
+        <label>Priorite
+          <select name="priority">
+            <option value="all">Toutes</option>
+            <option value="normale">Normale</option>
+            <option value="haute">Haute</option>
+            <option value="urgente">Urgente</option>
+          </select>
+        </label>
+        <input type="hidden" name="status" value="all" data-cases-status-filter>
+      </form>
+
+      <div class="admin-layout cases-layout">
+        <section class="admin-list cases-list" aria-label="Liste dossiers">
+          <div data-cases-list class="admin-request-list"></div>
+          <p class="form-note" data-cases-empty hidden>Aucun dossier ne correspond aux filtres.</p>
+        </section>
+        <aside class="admin-detail cases-detail" data-cases-detail aria-label="Detail dossier">
+          <div class="admin-detail-empty">
+            <p class="section-kicker">Detail</p>
+            <h3>Selectionnez un dossier</h3>
+            <p>La fiche permet de suivre checklist, risques, decision et historique.</p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="admin-modal" data-cases-modal hidden aria-label="Creation dossier">
+      <div class="admin-modal-panel cases-modal-panel">
+        <div class="admin-modal-head">
+          <div><p class="section-kicker">Dossier</p><h2>Nouveau dossier</h2></div>
+          <button class="btn ghost" type="button" data-cases-close-modal>Fermer</button>
+        </div>
+        <form class="admin-create-form cases-create-form" data-cases-form>
+          <label>Titre<input name="title" required placeholder="Ex. Bien vacant rue..." /></label>
+          <label>Type<select name="case_type"><option value="bien_vacant">Bien vacant</option><option value="materiaux">Materiaux</option><option value="collectivite">Collectivite</option><option value="entreprise">Entreprise</option><option value="financeur">Financeur</option><option value="autre">Autre</option></select></label>
+          <label>Priorite<select name="priority"><option value="normale">Normale</option><option value="haute">Haute</option><option value="urgente">Urgente</option></select></label>
+          <label>Responsable<input name="assigned_to" placeholder="Referent TVF" /></label>
+          <label>Territoire<input name="territory" placeholder="Commune, quartier, departement" /></label>
+          <label>Pole principal<input name="main_pole" placeholder="IA propose si vide" /></label>
+          <label class="admin-create-wide">Resume<textarea name="summary" rows="5" placeholder="Objet de l'instruction, contexte, parties prenantes connues"></textarea></label>
+          <div class="admin-detail-actions admin-create-wide"><button class="btn primary" type="submit">Creer le dossier</button><button class="btn secondary" type="button" data-cases-close-modal>Annuler</button></div>
+          <p class="form-note admin-create-wide" data-cases-modal-status hidden></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <script src="admin-dossiers.js" defer></script>
+</body>
+</html>

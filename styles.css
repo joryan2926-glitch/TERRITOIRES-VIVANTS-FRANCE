@@ -4284,3 +4284,28 @@ tr:nth-child(even) td {
 }
 
 
+
+/* Module Dossiers TVF OS */
+.cases-body { background: #f4f7f1; }
+.cases-shell { max-width: 1380px; }
+.cases-app { display: grid; }
+.cases-layout { grid-template-columns: minmax(350px, 0.9fr) minmax(0, 1.5fr); }
+.cases-card .admin-request-head strong { color: var(--blue-900); }
+.cases-detail-form { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.cases-detail-form > .admin-detail-title,
+.cases-detail-form > .admin-meta-grid,
+.cases-detail-form > .cases-ai-panel,
+.cases-detail-form > .cases-panel,
+.cases-detail-form > .admin-detail-actions,
+.cases-detail-form > [data-cases-save-status],
+.cases-detail-form > .cases-wide-field { grid-column: 1 / -1; }
+.cases-ai-panel { background: linear-gradient(180deg, #ffffff 0%, #f8faf5 100%); }
+.cases-panel { display: grid; gap: 12px; padding: 16px; border: 1px solid rgba(14,45,69,.12); border-radius: 16px; background: #fff; }
+.cases-panel article { display: grid; gap: 5px; padding: 12px; border: 1px solid var(--line); border-radius: 12px; background: var(--paper); }
+.cases-panel article strong { color: var(--blue-900); }
+.cases-panel article span { color: var(--muted); font-size: .8rem; font-weight: 750; }
+.cases-checklist article { grid-template-columns: minmax(0, 1fr) minmax(150px, 220px); align-items: center; }
+.cases-checklist select { min-height: 40px; padding: 8px 10px; border: 1px solid rgba(14,45,69,.18); border-radius: 10px; background: #fff; font: inherit; }
+.cases-modal-panel { width: min(900px, 100%); }
+.cases-create-form textarea { min-height: 120px; }
+@media (max-width: 900px) { .cases-layout, .cases-detail-form, .cases-checklist article { grid-template-columns: 1fr; } }
