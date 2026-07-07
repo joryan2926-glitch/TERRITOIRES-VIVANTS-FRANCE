@@ -1,0 +1,154 @@
+﻿<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CRM Contacts | TVF OS</title>
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="theme-color" content="#183f22">
+  <link rel="icon" href="assets/favicon-32.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="admin-body crm-body">
+  <a class="skip-link" href="#crm-main">Aller au contenu</a>
+  <header class="admin-topbar crm-topbar">
+    <a class="admin-brand" href="index" aria-label="Retour au site Territoires Vivants France">
+      <img src="assets/logo-territoires-vivants-france-web.png" alt="Territoires Vivants France" width="320" height="132">
+    </a>
+    <div>
+      <p class="admin-kicker">TVF OS</p>
+      <h1>CRM Contacts & Organisations</h1>
+    </div>
+    <div class="admin-top-actions">
+      <a class="btn secondary" href="dashboard">Dashboard</a>
+      <a class="btn secondary" href="admin-demandes">Demandes</a>
+    </div>
+  </header>
+
+  <main id="crm-main" class="admin-shell crm-shell">
+    <section class="admin-login" data-crm-login>
+      <div>
+        <p class="section-kicker">Acces securise</p>
+        <h2>Connexion au CRM TVF</h2>
+        <p>Entrez le token admin. Les donnees relationnelles restent servies cote serveur via Supabase service role.</p>
+      </div>
+      <form data-crm-token-form>
+        <label for="crm-token">Token admin</label>
+        <input id="crm-token" name="token" type="password" autocomplete="current-password" placeholder="TVF_ADMIN_TOKEN">
+        <button class="btn primary" type="submit">Ouvrir le CRM</button>
+        <p class="form-note" data-crm-login-status role="status" hidden></p>
+      </form>
+    </section>
+
+    <section class="admin-app crm-app" data-crm-app hidden>
+      <div class="admin-toolbar crm-toolbar">
+        <div>
+          <p class="section-kicker">Socle relationnel</p>
+          <h2>Contacts, organisations, historique et consentements</h2>
+          <p data-crm-count>Chargement du CRM...</p>
+        </div>
+        <div class="admin-toolbar-actions">
+          <button class="btn primary" type="button" data-crm-create-contact>Nouveau contact</button>
+          <button class="btn primary" type="button" data-crm-create-organization>Nouvelle organisation</button>
+          <button class="btn secondary" type="button" data-crm-refresh>Actualiser</button>
+          <button class="btn secondary" type="button" data-crm-export>Exporter CSV</button>
+          <button class="btn ghost" type="button" data-crm-logout>Deconnexion</button>
+        </div>
+      </div>
+
+      <section class="crm-kpis" data-crm-kpis aria-label="Indicateurs CRM"></section>
+
+      <nav class="admin-status-tabs crm-tabs" aria-label="Sections CRM">
+        <button type="button" data-crm-view="contacts" class="is-active">Contacts</button>
+        <button type="button" data-crm-view="organizations">Organisations</button>
+        <button type="button" data-crm-view="duplicates">Doublons</button>
+      </nav>
+
+      <form class="admin-filters crm-filters" data-crm-filters>
+        <label>Recherche
+          <input name="q" type="search" placeholder="Nom, e-mail, telephone, ville, notes">
+        </label>
+        <label data-contact-filter>Type contact
+          <select name="contact_type">
+            <option value="all">Tous</option>
+            <option value="proprietaire">Proprietaire</option>
+            <option value="elu">Elu</option>
+            <option value="technicien">Technicien</option>
+            <option value="entreprise_contact">Entreprise</option>
+            <option value="benevole">Benevole</option>
+            <option value="financeur">Financeur</option>
+            <option value="journaliste">Journaliste</option>
+            <option value="citoyen">Citoyen</option>
+            <option value="partenaire">Partenaire</option>
+            <option value="autre">Autre</option>
+          </select>
+        </label>
+        <label data-contact-filter>Consentement
+          <select name="consent_status">
+            <option value="all">Tous</option>
+            <option value="unknown">Inconnu</option>
+            <option value="pending">A demander</option>
+            <option value="granted">Accorde</option>
+            <option value="refused">Refuse</option>
+            <option value="expired">Expire</option>
+          </select>
+        </label>
+        <label data-organization-filter hidden>Type organisation
+          <select name="organization_type">
+            <option value="all">Toutes</option>
+            <option value="collectivite">Collectivite</option>
+            <option value="entreprise">Entreprise</option>
+            <option value="association">Association</option>
+            <option value="financeur">Financeur</option>
+            <option value="institution">Institution</option>
+            <option value="media">Media</option>
+            <option value="proprietaire_personne_morale">Proprietaire moral</option>
+            <option value="partenaire">Partenaire</option>
+            <option value="fournisseur">Fournisseur</option>
+            <option value="autre">Autre</option>
+          </select>
+        </label>
+        <label data-organization-filter hidden>Niveau relation
+          <select name="relation_status">
+            <option value="all">Tous</option>
+            <option value="prospect">Prospect</option>
+            <option value="actif">Actif</option>
+            <option value="conventionne">Conventionne</option>
+            <option value="ancien">Ancien</option>
+            <option value="sensible">Sensible</option>
+          </select>
+        </label>
+      </form>
+
+      <div class="admin-layout crm-layout">
+        <section class="admin-list crm-list" aria-label="Annuaire CRM">
+          <div data-crm-list class="admin-request-list"></div>
+          <p class="form-note" data-crm-empty hidden>Aucun resultat ne correspond aux filtres.</p>
+        </section>
+        <aside class="admin-detail crm-detail" data-crm-detail aria-label="Detail CRM">
+          <div class="admin-detail-empty">
+            <p class="section-kicker">Detail</p>
+            <h3>Selectionnez une fiche</h3>
+            <p>Le CRM centralise les personnes, structures, consentements, historiques et prochaines actions.</p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="admin-modal" data-crm-modal hidden aria-label="Creation CRM">
+      <div class="admin-modal-panel crm-modal-panel">
+        <div class="admin-modal-head">
+          <div>
+            <p class="section-kicker" data-crm-modal-kicker>CRM</p>
+            <h2 data-crm-modal-title>Nouvelle fiche</h2>
+          </div>
+          <button class="btn ghost" type="button" data-crm-close-modal>Fermer</button>
+        </div>
+        <form class="admin-create-form crm-create-form" data-crm-form></form>
+      </div>
+    </section>
+  </main>
+
+  <script src="admin-crm.js" defer></script>
+</body>
+</html>

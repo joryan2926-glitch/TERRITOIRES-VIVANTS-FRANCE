@@ -1,4 +1,4 @@
-:root {
+﻿:root {
   --green-900: #183f22;
   --green-800: #245c2b;
   --green-700: #2a6c30;
@@ -654,7 +654,7 @@ table a:focus-visible {
 }
 
 .document-archive[open] summary::after {
-  content: "−";
+  content: "âˆ’";
 }
 
 .document-archive .doc-tool-panel,
@@ -2787,7 +2787,7 @@ tr:nth-child(even) td {
   opacity: 0.72;
   transform: none;
 }
-/* Ajustement typographique mobile léger */
+/* Ajustement typographique mobile lÃ©ger */
 @media (max-width: 760px) {
   :root {
     --paragraph-size: 0.98rem;
@@ -3377,7 +3377,7 @@ tr:nth-child(even) td {
   }
 }
 
-/* Ajustement léger des grands visuels de début de page */
+/* Ajustement lÃ©ger des grands visuels de dÃ©but de page */
 .hero {
   width: min(100% - 40px, 1500px);
   margin: 14px auto 0;
@@ -3436,7 +3436,7 @@ tr:nth-child(even) td {
   }
 }
 
-/* Checklists partenaires - pièces à préparer */
+/* Checklists partenaires - piÃ¨ces Ã  prÃ©parer */
 .partner-prep {
   background: linear-gradient(180deg, #f8faf5 0%, #eef6ea 100%);
 }
@@ -4121,3 +4121,166 @@ tr:nth-child(even) td {
     width: 100%;
   }
 }
+
+/* Module CRM / Contacts TVF OS */
+.crm-body {
+  background: #f4f7f1;
+}
+
+.crm-shell {
+  max-width: 1380px;
+}
+
+.crm-app {
+  display: grid;
+  gap: 0;
+}
+
+.crm-kpis {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 12px;
+  padding: 18px 26px;
+  border-bottom: 1px solid var(--line);
+  background: #fff;
+}
+
+.crm-kpis article {
+  min-height: 94px;
+  display: grid;
+  gap: 4px;
+  padding: 14px;
+  border: 1px solid rgba(24, 63, 34, 0.1);
+  border-radius: 14px;
+  background: #f8faf5;
+}
+
+.crm-kpis article[data-tone="warning"] {
+  background: #fffaf0;
+  border-color: rgba(213, 162, 56, 0.32);
+}
+
+.crm-kpis article[data-tone="danger"] {
+  background: #fff7f5;
+  border-color: rgba(180, 45, 38, 0.24);
+}
+
+.crm-kpis article[data-tone="info"] {
+  background: #f3f8fb;
+  border-color: rgba(14, 45, 69, 0.16);
+}
+
+.crm-kpis span,
+.crm-kpis small {
+  color: var(--muted);
+  font-size: 0.76rem;
+  font-weight: 750;
+}
+
+.crm-kpis strong {
+  color: var(--blue-900);
+  font-size: clamp(1.5rem, 2.4vw, 2rem);
+  line-height: 1;
+}
+
+.crm-tabs {
+  border-top: 0;
+}
+
+.crm-layout {
+  grid-template-columns: minmax(340px, 0.85fr) minmax(0, 1.55fr);
+}
+
+.crm-card .admin-request-head strong {
+  color: var(--blue-900);
+}
+
+.crm-detail-form {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.crm-detail-form > .admin-detail-title,
+.crm-detail-form > .admin-meta-grid,
+.crm-detail-form > .crm-ai-panel,
+.crm-detail-form > .crm-relations,
+.crm-detail-form > .crm-history-panel,
+.crm-detail-form > .admin-detail-actions,
+.crm-detail-form > [data-crm-save-status],
+.crm-detail-form > .crm-wide-field {
+  grid-column: 1 / -1;
+}
+
+.crm-ai-panel {
+  background: linear-gradient(180deg, #ffffff 0%, #f8faf5 100%);
+}
+
+.crm-history-panel,
+.crm-relations {
+  display: grid;
+  gap: 12px;
+  padding: 16px;
+  border: 1px solid rgba(14, 45, 69, 0.12);
+  border-radius: 16px;
+  background: #fff;
+}
+
+.crm-relations article,
+.crm-history-list article {
+  display: grid;
+  gap: 4px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--paper);
+}
+
+.crm-relations strong,
+.crm-history-list strong {
+  color: var(--blue-900);
+}
+
+.crm-relations span,
+.crm-history-list span {
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 750;
+}
+
+.crm-history-list {
+  display: grid;
+  gap: 10px;
+}
+
+.crm-history-list p {
+  margin: 0;
+}
+
+.crm-modal-panel {
+  width: min(900px, 100%);
+}
+
+.crm-create-form textarea {
+  min-height: 110px;
+}
+
+@media (max-width: 1100px) {
+  .crm-kpis {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 900px) {
+  .crm-layout,
+  .crm-detail-form {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .crm-kpis {
+    grid-template-columns: 1fr;
+    padding: 14px 18px;
+  }
+}
+
+

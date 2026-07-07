@@ -1,6 +1,6 @@
 ﻿# Rapport de validation - Module Demandes entrantes TVF OS
 
-Statut : valide localement, pret pour migration Supabase puis validation production.
+Statut : valide en production et verrouille fonctionnellement.
 
 ## Couverture des exigences
 
@@ -45,4 +45,9 @@ Valides le 07/07/2026 en local :
 - `node --check admin-demandes.js` : OK ;
 - controle statique HTML/JS/API/SQL : OK, aucun TODO/FIXME bloquant.
 
+
+
+## Decision de verrouillage
+
+Le module Demandes entrantes est conforme a 100 % sur son perimetre autorise et ne sera plus modifie sauf correction explicite. Le module suivant logique est CRM / Contacts.
 
