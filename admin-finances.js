@@ -1,4 +1,4 @@
-﻿const FIN_TOKEN_KEY = "tvfAdminToken";
+const FIN_TOKEN_KEY = "tvfAdminToken";
 const viewLabels = { budgets: "Budgets", expenses: "Depenses", funders: "Financeurs", opportunities: "Appels a projets", applications: "Demandes", payments: "Paiements", reports: "Reporting" };
 const typeMaps = {
   budgets: { project: "Projet", branch: "Antenne", national: "National", action: "Action", grant: "Subvention" },
@@ -28,6 +28,7 @@ const filtersForm = document.querySelector("[data-finances-filters]");
 const typeFilter = document.querySelector("[data-finances-type-filter]");
 const statusFilter = document.querySelector("[data-finances-status-filter]");
 const kpisEl = document.querySelector("[data-finances-kpis]");
+const controlEl = document.querySelector("[data-finances-control]");
 const listEl = document.querySelector("[data-finances-list]");
 const detailEl = document.querySelector("[data-finances-detail]");
 const countEl = document.querySelector("[data-finances-count]");
@@ -93,7 +94,7 @@ async function loadItems() {
   if (!items().some((item) => item.id === selectedId)) selectedId = items()[0]?.id || null;
   renderAll();
 }
-function renderAll() { renderFilters(); renderTabs(); renderKpis(); renderAssistant(); renderList(); renderDetail(); }
+function renderAll() { renderFilters(); renderTabs(); renderKpis(); renderControlPanel(); renderAssistant(); renderList(); renderDetail(); }
 function renderFilters() {
   if (typeFilter) typeFilter.innerHTML = `<option value="all">Tous</option>${optionList(typeMaps[currentView] || {}, typeFilter.value)}`;
   if (statusFilter) statusFilter.innerHTML = `<option value="all">Tous</option>${optionList(statusMaps[currentView] || {}, statusFilter.value)}`;
@@ -103,7 +104,17 @@ function renderKpis() {
   if (!kpisEl || !dashboard) return;
   kpisEl.innerHTML = `<article><span>Budgets</span><strong>${dashboard.budgets_total || 0}</strong><small>${dashboard.active_budgets || 0} actifs</small></article><article><span>Depenses</span><strong>${money(dashboard.spent_amount || 0)}</strong><small>${dashboard.execution_ratio || 0}% execute</small></article><article data-tone="warning"><span>A approuver</span><strong>${dashboard.expenses_to_approve || 0}</strong><small>Depenses</small></article><article data-tone="danger"><span>Justificatifs</span><strong>${dashboard.missing_receipts || 0}</strong><small>Manquants</small></article><article data-tone="info"><span>Financements</span><strong>${money(dashboard.funding_granted || 0)}</strong><small>Confirmes</small></article>`;
 }
-function renderAssistant() {
+function renderControlPanel() {
+  if (!controlEl || !dashboard) return;
+  const toApprove = Number(dashboard.expenses_to_approve || 0);
+  const missingReceipts = Number(dashboard.missing_receipts || 0);
+  const reportsDue = Number(dashboard.reports_due || 0);
+  const execution = Number(dashboard.execution_ratio || 0);
+  const granted = Number(dashboard.funding_granted || 0);
+  const nextDecision = missingReceipts ? "Completer les justificatifs" : toApprove ? "Arbitrer les depenses" : reportsDue ? "Preparer les reportings" : granted ? "Suivre les financements" : "Qualifier les financeurs";
+  const status = missingReceipts || toApprove ? "Controle requis" : execution > 85 ? "Budget a surveiller" : "Pilotage stable";
+  controlEl.innerHTML = `<div class="admin-panel-head"><div><p class="section-kicker">Decision financiere</p><h3>Relier besoins, budgets et preuves</h3><p>Cette synthese aide a savoir ce qui peut etre engage, finance ou presente a un financeur sans perdre les justificatifs.</p></div><strong>${escapeHtml(status)}</strong></div><div class="finances-control-grid"><article><span>Decision suivante</span><strong>${escapeHtml(nextDecision)}</strong><small>priorite immediate</small></article><article><span>Execution</span><strong>${escapeHtml(execution)}%</strong><small>budget consomme</small></article><article><span>A approuver</span><strong>${escapeHtml(toApprove)}</strong><small>depenses</small></article><article><span>Justificatifs</span><strong>${escapeHtml(missingReceipts)}</strong><small>pieces manquantes</small></article><article><span>Finance confirme</span><strong>${money(granted)}</strong><small>accorde</small></article></div><div class="finances-control-links"><a class="btn secondary" href="admin-dossiers">Dossiers</a><a class="btn secondary" href="admin-impact">Impact</a><a class="btn secondary" href="admin-documents">Justificatifs</a><a class="btn secondary" href="admin-crm">Financeurs</a><a class="btn secondary" href="admin-governance">Decision</a></div>`;
+}function renderAssistant() {
   const item = selectedItem();
   const assistant = item?.assistant || {};
   if (aiScoreEl) aiScoreEl.textContent = `${dashboard?.execution_ratio || assistant.execution_ratio || 0}%`;
