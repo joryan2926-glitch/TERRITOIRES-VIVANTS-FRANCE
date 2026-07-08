@@ -52,6 +52,90 @@ function isOverdue(item) { return item.next_action_due_at && !["cloture", "archi
 function caseInstructionIndex(status) { const order = ["ouvert", "qualification", "instruction", "attente_pieces", "visite", "a_decision", "decision_validee", "cloture"]; return Math.max(0, order.indexOf(status || "ouvert")); }
 function quickDue(days = 7) { const date = new Date(); date.setDate(date.getDate() + days); date.setHours(17, 0, 0, 0); return date.toISOString(); }
 function workPriorityFromCase(item) { if (item.priority === "urgente") return "p1"; if (item.priority === "haute") return "p2"; return "p3"; }
+const caseWorkflows = {
+  bien_vacant: {
+    title: "Bien vacant / proprietaire",
+    objective: "Verifier la qualite du demandeur, comprendre l'etat du bien et cadrer une suite prudente avant toute visite ou convention.",
+    steps: ["Verifier le proprietaire ou mandataire", "Demander adresse, photos et situation connue", "Evaluer securite, acces et contraintes", "Obtenir autorisation de visite", "Preparer scenario d'usage ou orientation"],
+    pieces: ["Coordonnees du proprietaire", "Adresse precise", "Photos recentes", "Elements de propriete ou mandat", "Autorisation de visite"],
+    risks: ["Propriete non verifiee", "Acces dangereux", "Promesse d'usage trop precoce", "Donnees personnelles", "Assurance et responsabilite"]
+  },
+  commerce_inoccupe: {
+    title: "Commerce inoccupe",
+    objective: "Qualifier le local, le contexte de rue et les usages possibles avant mobilisation d'acteurs economiques ou associatifs.",
+    steps: ["Identifier le local et son statut", "Qualifier surface, vitrine et accessibilite", "Recenser contraintes techniques", "Evaluer usages possibles", "Preparer contact proprietaire ou collectivite"],
+    pieces: ["Adresse", "Photos vitrine/interieur", "Surface approximative", "Contact proprietaire ou gestionnaire", "Contraintes connues"],
+    risks: ["Bail ou droit d'usage incertain", "Travaux lourds", "Normes ERP", "Conflit avec acteur existant", "Communication prematuree"]
+  },
+  materiaux: {
+    title: "Materiaux de reemploi",
+    objective: "Verifier la nature, l'etat, le volume et la logistique avant acceptation, stockage ou affectation a un projet.",
+    steps: ["Identifier donneur et localisation", "Qualifier categories et volumes", "Verifier etat et delai de retrait", "Decider stockage ou affectation", "Tracer remise ou refus"],
+    pieces: ["Photos", "Liste des materiaux", "Quantites", "Etat general", "Adresse et delai d'enlevement"],
+    risks: ["Materiaux dangereux", "Volume incompatible", "Stockage indisponible", "Transport non organise", "Confusion avec distribution libre"]
+  },
+  collectivite: {
+    title: "Collectivite / territoire",
+    objective: "Comprendre le besoin public, le service referent et le cadre de cooperation avant proposition TVF.",
+    steps: ["Identifier l'interlocuteur habilite", "Qualifier besoin territorial", "Rattacher aux politiques publiques", "Preparer rendez-vous de cadrage", "Proposer cooperation ou diagnostic"],
+    pieces: ["Nom collectivite", "Service referent", "Besoin exprime", "Perimetre territorial", "Calendrier attendu"],
+    risks: ["Interlocuteur non decisionnaire", "Attentes hors perimetre", "Confusion avec prestataire", "Absence de cadre juridique", "Engagement financier premature"]
+  },
+  entreprise: {
+    title: "Entreprise partenaire",
+    objective: "Identifier la contribution possible, les contraintes et le cadre RSE ou mecenat avant toute valorisation publique.",
+    steps: ["Qualifier l'entreprise", "Identifier contribution", "Verifier contraintes", "Proposer cadre de cooperation", "Preparer convention ou suivi"],
+    pieces: ["Fiche entreprise", "Contact referent", "Contribution proposee", "Contraintes logistiques", "Accord de principe"],
+    risks: ["Promesse non formalisee", "Visibilite avant validation", "Materiaux non conformes", "Responsabilite transport", "Donnees commerciales sensibles"]
+  },
+  benevole: {
+    title: "Benevole / mission solidaire",
+    objective: "Orienter la personne vers une mission encadree, compatible avec ses disponibilites et le niveau de risque.",
+    steps: ["Verifier coordonnees", "Identifier disponibilites", "Qualifier competences", "Associer a une mission", "Transmettre consignes et suivi"],
+    pieces: ["Coordonnees", "Disponibilites", "Competences", "Territoire", "Consentement RGPD"],
+    risks: ["Mission non encadree", "Securite terrain", "Donnees personnelles", "Promesse de mission inexistante", "Absence de consignes"]
+  },
+  financeur: {
+    title: "Financeur / mecene",
+    objective: "Qualifier les criteres, le calendrier et les pieces attendues avant preparation d'une demande de soutien.",
+    steps: ["Identifier financeur", "Analyser criteres", "Selectionner projet compatible", "Preparer note et budget", "Organiser depot ou rendez-vous"],
+    pieces: ["Fiche financeur", "Criteres", "Calendrier", "Budget previsionnel", "Note d'opportunite"],
+    risks: ["Projet non eligible", "Chiffres non prouves", "Delai court", "Engagement non valide", "Reporting sous-estime"]
+  },
+  signalement: {
+    title: "Signalement citoyen",
+    objective: "Verifier prudemment les informations sans publication ni accusation, puis classer, completer ou transformer en dossier.",
+    steps: ["Verifier localisation", "Controler photos et description", "Rechercher doublon", "Qualifier type de sujet", "Classer ou transformer en dossier"],
+    pieces: ["Adresse ou localisation", "Photos", "Description", "Contact facultatif", "Date du signalement"],
+    risks: ["Atteinte a la reputation", "Erreur de proprietaire", "Publication non autorisee", "Donnees personnelles", "Signalement incomplet"]
+  },
+  friche_terrain: {
+    title: "Friche / terrain delaisse",
+    objective: "Qualifier le site, les contraintes d'acces et les usages temporaires possibles avant mobilisation territoriale.",
+    steps: ["Localiser le site", "Identifier proprietaire ou gestionnaire", "Evaluer risques et acces", "Imaginer usages compatibles", "Preparer cadrage territorial"],
+    pieces: ["Localisation", "Photos", "Surface approximative", "Proprietaire connu", "Contraintes visibles"],
+    risks: ["Pollution", "Securite", "Propriete incertaine", "Usage non autorise", "Cout de remise en etat"]
+  },
+  autre: {
+    title: "Dossier general",
+    objective: "Qualifier le besoin, rattacher les bons acteurs et choisir le workflow specialise si necessaire.",
+    steps: ["Identifier demandeur", "Qualifier sujet", "Rattacher pole", "Lister pieces", "Decider suite"],
+    pieces: ["Coordonnees", "Contexte", "Besoin", "Pieces disponibles", "Prochaine action"],
+    risks: ["Sujet flou", "Mauvais rattachement", "Pieces absentes", "Delai non precise", "Decision prematuree"]
+  }
+};
+function workflowForCase(item) { return caseWorkflows[item.case_type] || caseWorkflows.autre; }
+function workflowPanel(item) {
+  const workflow = workflowForCase(item);
+  return `<section class="cases-panel cases-workflow-panel"><div class="admin-panel-head"><div><p class="section-kicker">Procedure applicable</p><h4>${escapeHtml(workflow.title)}</h4></div><strong>${escapeHtml(label(typeLabels, item.case_type))}</strong></div><p>${escapeHtml(workflow.objective)}</p><div class="cases-workflow-grid"><div><h5>Etapes</h5><ol>${workflow.steps.map((step) => `<li>${escapeHtml(step)}</li>`).join("")}</ol></div><div><h5>Pieces a demander</h5><ul>${workflow.pieces.map((piece) => `<li>${escapeHtml(piece)}</li>`).join("")}</ul></div><div><h5>Points de vigilance</h5><ul>${workflow.risks.map((risk) => `<li>${escapeHtml(risk)}</li>`).join("")}</ul></div></div></section>`;
+}
+function nextActionForWorkflow(item, action) {
+  const workflow = workflowForCase(item);
+  if (action === "pieces") return `Demander les pieces : ${workflow.pieces.slice(0, 4).join(", ")}`;
+  if (action === "rdv") return `Preparer rendez-vous de cadrage - ${workflow.title}`;
+  if (action === "convention") return `Preparer cadre de cooperation ou convention - ${workflow.title}`;
+  return item.next_action || "Action a definir";
+}
 function instructionPathPanel(item) {
   const current = caseInstructionIndex(item.status);
   const steps = [
@@ -68,7 +152,7 @@ function instructionPathPanel(item) {
 function renderList() { if (!listEl) return; listEl.innerHTML = cases.map((item) => `<button class="admin-request cases-card${item.id === selectedId ? " is-active" : ""}${isOverdue(item) ? " is-overdue" : ""}" type="button" data-case-id="${escapeHtml(item.id)}"><span class="admin-request-head"><strong>${escapeHtml(item.case_number || "Dossier")}</strong><small>${escapeHtml(label(statusLabels, item.status))}</small></span><span>${escapeHtml(item.title)}</span><span class="admin-request-sub">${escapeHtml(label(typeLabels, item.case_type))} - ${escapeHtml(item.main_pole || "Pole non renseigne")}</span><span class="admin-badges"><em data-kind="priority">${escapeHtml(label(priorityLabels, item.priority))}</em><em data-kind="category">${escapeHtml(item.maturity_score || 0)}%</em><em data-kind="status">${escapeHtml(label(riskLabels, item.risk_level))}</em></span></button>`).join(""); if (emptyEl) emptyEl.hidden = cases.length !== 0; if (countEl) countEl.textContent = `${cases.length} dossier${cases.length > 1 ? "s" : ""} affiche${cases.length > 1 ? "s" : ""}`; }
 function options(map, selected) { return Object.entries(map).map(([value, text]) => `<option value="${value}" ${value === selected ? "selected" : ""}>${escapeHtml(text)}</option>`).join(""); }
 function assistantPanel(item) { const assistant = item.assistant || {}; const missing = assistant.missing_items || []; return `<section class="admin-ai-panel cases-ai-panel"><div class="admin-panel-head"><div><p class="section-kicker">Assistant dossier</p><h4>Synthese d'instruction</h4></div><strong>${escapeHtml(String(item.maturity_score || assistant.maturity_score || 0))}%</strong></div><p>${escapeHtml(assistant.summary || item.ai_summary || "Synthese indisponible.")}</p><div class="admin-ai-grid"><div><span>Statut propose</span><strong>${escapeHtml(label(statusLabels, assistant.suggested_status))}</strong></div><div><span>Decision</span><strong>${escapeHtml(assistant.suggested_decision || "A preparer")}</strong></div><div><span>Blocage</span><strong>${assistant.blocked ? "Oui" : "Non"}</strong></div><div><span>Echeance</span><strong>${escapeHtml(formatDate(item.next_action_due_at))}</strong></div></div><div class="admin-missing-pieces"><span>Elements manquants</span>${missing.length ? `<ul>${missing.map((m) => `<li>${escapeHtml(m)}</li>`).join("")}</ul>` : "<p>Checklist suffisamment avancee.</p>"}</div></section>`; }
-function renderDetail() { const item = selectedCase(); if (!detailEl) return; if (!item) { detailEl.innerHTML = `<div class="admin-detail-empty"><p class="section-kicker">Detail</p><h3>Selectionnez un dossier</h3><p>Aucun dossier disponible.</p></div>`; return; } const checklist = item.case_checklist_items || []; const risks = item.case_risks || []; const decisions = item.case_decisions || []; const history = item.case_status_history || []; detailEl.innerHTML = `<form class="admin-detail-form cases-detail-form" data-cases-detail-form><input type="hidden" name="id" value="${escapeHtml(item.id)}"><div class="admin-detail-title"><p class="section-kicker">${escapeHtml(item.case_number || "Dossier")}</p><h3>${escapeHtml(item.title)}</h3><p>${escapeHtml(label(typeLabels, item.case_type))} - ${escapeHtml(item.territory || "Territoire non renseigne")}</p></div><div class="admin-meta-grid"><div><span>Responsable</span><strong>${escapeHtml(item.assigned_to || "Non assigne")}</strong></div><div><span>Pole</span><strong>${escapeHtml(item.main_pole || "Non renseigne")}</strong></div><div><span>Decision</span><strong>${escapeHtml(label(decisionLabels, item.decision_status))}</strong></div><div><span>Ouverture</span><strong>${escapeHtml(formatDate(item.opened_at))}</strong></div></div>${assistantPanel(item)}${instructionPathPanel(item)}<label>Titre<input name="title" value="${escapeHtml(item.title || "")}"></label><label>Statut<select name="status">${options(statusLabels, item.status)}</select></label><label>Type<select name="case_type">${options(typeLabels, item.case_type)}</select></label><label>Priorite<select name="priority">${options(priorityLabels, item.priority)}</select></label><label>Pole principal<input name="main_pole" value="${escapeHtml(item.main_pole || "")}"></label><label>Responsable<input name="assigned_to" value="${escapeHtml(item.assigned_to || "")}"></label><label>Territoire<input name="territory" value="${escapeHtml(item.territory || "")}"></label><label>Niveau risque<select name="risk_level">${options(riskLabels, item.risk_level)}</select></label><label>Prochaine action<input name="next_action" value="${escapeHtml(item.next_action || "")}"></label><label>Echeance<input name="next_action_due_at" type="datetime-local" value="${escapeHtml(toDateTimeLocal(item.next_action_due_at))}"></label><label>Statut decision<select name="decision_status">${options(decisionLabels, item.decision_status)}</select></label><label class="cases-wide-field">Resume<textarea name="summary" rows="5">${escapeHtml(item.summary || "")}</textarea></label><label class="cases-wide-field">Synthese decision<textarea name="decision_summary" rows="4">${escapeHtml(item.decision_summary || "")}</textarea></label>${checklistPanel(checklist)}${risksPanel(risks)}${decisionsPanel(decisions)}${historyPanel(history)}<div class="admin-detail-actions cases-actions"><button class="btn primary" type="submit">Enregistrer</button><button class="btn secondary" type="button" data-case-quick="attente_pieces">Attente pieces</button><button class="btn secondary" type="button" data-case-quick="visite">Planifier visite</button><button class="btn secondary" type="button" data-case-create-task>Creer tache</button><button class="btn secondary" type="button" data-case-quick="a_decision">Preparer decision</button><button class="btn secondary" type="button" data-case-quick="decision_validee">Decision validee</button><button class="btn ghost" type="button" data-case-quick="cloture">Cloturer</button></div><p class="form-note" data-cases-save-status hidden></p></form>`; }
+function renderDetail() { const item = selectedCase(); if (!detailEl) return; if (!item) { detailEl.innerHTML = `<div class="admin-detail-empty"><p class="section-kicker">Detail</p><h3>Selectionnez un dossier</h3><p>Aucun dossier disponible.</p></div>`; return; } const checklist = item.case_checklist_items || []; const risks = item.case_risks || []; const decisions = item.case_decisions || []; const history = item.case_status_history || []; detailEl.innerHTML = `<form class="admin-detail-form cases-detail-form" data-cases-detail-form><input type="hidden" name="id" value="${escapeHtml(item.id)}"><div class="admin-detail-title"><p class="section-kicker">${escapeHtml(item.case_number || "Dossier")}</p><h3>${escapeHtml(item.title)}</h3><p>${escapeHtml(label(typeLabels, item.case_type))} - ${escapeHtml(item.territory || "Territoire non renseigne")}</p></div><div class="admin-meta-grid"><div><span>Responsable</span><strong>${escapeHtml(item.assigned_to || "Non assigne")}</strong></div><div><span>Pole</span><strong>${escapeHtml(item.main_pole || "Non renseigne")}</strong></div><div><span>Decision</span><strong>${escapeHtml(label(decisionLabels, item.decision_status))}</strong></div><div><span>Ouverture</span><strong>${escapeHtml(formatDate(item.opened_at))}</strong></div></div>${assistantPanel(item)}${instructionPathPanel(item)}${workflowPanel(item)}<label>Titre<input name="title" value="${escapeHtml(item.title || "")}"></label><label>Statut<select name="status">${options(statusLabels, item.status)}</select></label><label>Type<select name="case_type">${options(typeLabels, item.case_type)}</select></label><label>Priorite<select name="priority">${options(priorityLabels, item.priority)}</select></label><label>Pole principal<input name="main_pole" value="${escapeHtml(item.main_pole || "")}"></label><label>Responsable<input name="assigned_to" value="${escapeHtml(item.assigned_to || "")}"></label><label>Territoire<input name="territory" value="${escapeHtml(item.territory || "")}"></label><label>Niveau risque<select name="risk_level">${options(riskLabels, item.risk_level)}</select></label><label>Prochaine action<input name="next_action" value="${escapeHtml(item.next_action || "")}"></label><label>Echeance<input name="next_action_due_at" type="datetime-local" value="${escapeHtml(toDateTimeLocal(item.next_action_due_at))}"></label><label>Statut decision<select name="decision_status">${options(decisionLabels, item.decision_status)}</select></label><label class="cases-wide-field">Resume<textarea name="summary" rows="5">${escapeHtml(item.summary || "")}</textarea></label><label class="cases-wide-field">Synthese decision<textarea name="decision_summary" rows="4">${escapeHtml(item.decision_summary || "")}</textarea></label>${checklistPanel(checklist)}${risksPanel(risks)}${decisionsPanel(decisions)}${historyPanel(history)}<div class="admin-detail-actions cases-actions"><button class="btn primary" type="submit">Enregistrer</button><button class="btn secondary" type="button" data-case-quick="attente_pieces">Attente pieces</button><button class="btn secondary" type="button" data-case-quick="visite">Planifier visite</button><button class="btn secondary" type="button" data-case-workflow="pieces">Demander pieces</button><button class="btn secondary" type="button" data-case-workflow="rdv">Preparer RDV</button><button class="btn secondary" type="button" data-case-workflow="convention">Convention</button><button class="btn secondary" type="button" data-case-create-task>Creer tache</button><button class="btn secondary" type="button" data-case-quick="a_decision">Preparer decision</button><button class="btn secondary" type="button" data-case-quick="decision_validee">Decision validee</button><button class="btn ghost" type="button" data-case-quick="cloture">Cloturer</button></div><p class="form-note" data-cases-save-status hidden></p></form>`; }
 function checklistPanel(items) { return `<section class="cases-panel cases-checklist"><div class="admin-panel-head"><div><p class="section-kicker">Checklist</p><h4>Instruction</h4></div></div>${items.length ? items.map((item) => `<article><div><strong>${escapeHtml(item.label)}</strong><span>${item.required ? "Obligatoire" : "Optionnel"}</span></div><select data-checklist-id="${escapeHtml(item.id)}">${options(checklistLabels, item.status)}</select></article>`).join("") : "<p>Checklist non generee.</p>"}</section>`; }
 function risksPanel(items) { return `<section class="cases-panel"><div class="admin-panel-head"><div><p class="section-kicker">Risques</p><h4>Mesures de maitrise</h4></div><button class="btn secondary" type="button" data-add-risk>Ajouter risque</button></div>${items.length ? items.map((r) => `<article><strong>${escapeHtml(r.risk_label)}</strong><span>${escapeHtml(label(riskLabels, r.risk_level))} - ${escapeHtml(r.mitigation || "Mesure a definir")}</span></article>`).join("") : "<p>Aucun risque saisi.</p>"}</section>`; }
 function decisionsPanel(items) { return `<section class="cases-panel"><div class="admin-panel-head"><div><p class="section-kicker">Decision</p><h4>Validation humaine</h4></div><button class="btn secondary" type="button" data-add-decision>Ajouter decision</button></div>${items.length ? items.map((d) => `<article><strong>${escapeHtml(d.proposed_decision)}</strong><span>${escapeHtml(d.final_decision || label(decisionLabels, d.decision_status))}</span></article>`).join("") : "<p>Aucune decision tracee.</p>"}</section>`; }
@@ -85,6 +169,14 @@ async function quickStatus(status) {
   if (status === "decision_validee") { payload.decision_status = "validee"; payload.next_action = "Formaliser la suite operationnelle"; payload.next_action_due_at = quickDue(7); }
   if (status === "cloture") { payload.decision_status = item.decision_status === "non_preparee" ? "ajournee" : item.decision_status; payload.next_action = "Dossier cloture"; }
   await api("/api/admin-cases", { method: "PATCH", body: JSON.stringify(payload) });
+  await loadCases();
+}
+async function applyWorkflowAction(action) {
+  const item = selectedCase();
+  if (!item) return;
+  const next_action = nextActionForWorkflow(item, action);
+  const status = action === "convention" ? "a_decision" : action === "rdv" ? "visite" : "attente_pieces";
+  await api("/api/admin-cases", { method: "PATCH", body: JSON.stringify({ type: "case", id: item.id, status, next_action, next_action_due_at: quickDue(action === "rdv" ? 5 : 7), decision_status: action === "convention" ? "a_preparer" : item.decision_status, status_note: "Workflow applique" }) });
   await loadCases();
 }
 async function createFollowupTask() {
@@ -117,6 +209,8 @@ function exportCsv() { if (!cases.length) return alert("Aucun dossier a exporter
 function bindEvents() { tokenForm?.addEventListener("submit", async (event) => { event.preventDefault(); const value = String(new FormData(tokenForm).get("token") || "").trim(); if (!value) return setStatus("Entrez le token admin.", "error"); setToken(value); try { showApp(); await loadCases(); setStatus(""); } catch (error) { setToken(""); showLogin(); setStatus(error.message, "error"); } }); filtersForm?.addEventListener("input", () => { clearTimeout(debounceTimer); debounceTimer = setTimeout(() => loadCases().catch((e) => alert(e.message)), 280); }); filtersForm?.addEventListener("change", () => loadCases().catch((e) => alert(e.message))); statusButtons.forEach((button) => button.addEventListener("click", () => { if (statusFilter) statusFilter.value = button.dataset.caseStatus || "all"; loadCases().catch((e) => alert(e.message)); })); refreshButton?.addEventListener("click", () => loadCases().catch((e) => alert(e.message))); logoutButton?.addEventListener("click", () => { setToken(""); window.location.href = "admin"; }); exportButton?.addEventListener("click", exportCsv); createButton?.addEventListener("click", openModal); closeModalButtons.forEach((button) => button.addEventListener("click", closeModal)); modal?.addEventListener("click", (event) => { if (event.target === modal) closeModal(); }); modalForm?.addEventListener("submit", createCase); listEl?.addEventListener("click", (event) => { const button = event.target.closest("[data-case-id]"); if (!button) return; selectedId = button.dataset.caseId; renderList(); renderDetail(); }); detailEl?.addEventListener("submit", (event) => { const form = event.target.closest("[data-cases-detail-form]"); if (!form) return; event.preventDefault(); saveDetail(form); }); detailEl?.addEventListener("change", (event) => { const select = event.target.closest("[data-checklist-id]"); if (select) updateChecklist(select.dataset.checklistId, select.value).catch((e) => alert(e.message)); }); detailEl?.addEventListener("click", (event) => {
     const quick = event.target.closest("[data-case-quick]");
     if (quick) quickStatus(quick.dataset.caseQuick).catch((e) => alert(e.message));
+    const workflow = event.target.closest("[data-case-workflow]");
+    if (workflow) applyWorkflowAction(workflow.dataset.caseWorkflow).catch((e) => alert(e.message));
     if (event.target.closest("[data-case-create-task]")) createFollowupTask().catch((e) => alert(e.message));
     if (event.target.closest("[data-add-risk]")) addRisk().catch((e) => alert(e.message));
     if (event.target.closest("[data-add-decision]")) addDecision().catch((e) => alert(e.message));
