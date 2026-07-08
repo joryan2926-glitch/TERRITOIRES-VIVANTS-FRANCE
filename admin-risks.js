@@ -1,4 +1,4 @@
-﻿const RISKS_TOKEN_KEY = "tvfAdminToken";
+const RISKS_TOKEN_KEY = "tvfAdminToken";
 const statusLabels = { open: "Ouvert", mitigating: "Mitigation", blocked: "Bloque", accepted: "Accepte", resolved: "Resolu", closed: "Clos", archive: "Archive", missing: "Manquant", to_review: "A verifier", valid: "Valide", expired: "Expire", rejected: "Refuse", waived: "Ignore", new: "Nouveau", triage: "Qualification", investigating: "Investigation", corrective_action: "Action corrective", pending: "En attente", revoked: "Revoque" };
 const viewLabels = { risks: "Risques", checks: "Conformite", incidents: "Incidents", consents: "Autorisations", audit: "Audit" };
 const entityByView = { risks: "risks", checks: "checks", incidents: "incidents", consents: "consents", audit: "audit" };
@@ -9,6 +9,7 @@ const tokenForm = document.querySelector("[data-risks-token-form]");
 const loginStatus = document.querySelector("[data-risks-login-status]");
 const filtersForm = document.querySelector("[data-risks-filters]");
 const kpisEl = document.querySelector("[data-risks-kpis]");
+const controlEl = document.querySelector("[data-risks-control]");
 const listEl = document.querySelector("[data-risks-list]");
 const detailEl = document.querySelector("[data-risks-detail]");
 const countEl = document.querySelector("[data-risks-count]");
@@ -55,9 +56,19 @@ async function loadAll() {
   if (!currentItems().some((item) => item.id === selectedId)) selectedId = currentItems()[0]?.id || null;
   renderAll();
 }
-function renderAll() { renderKpis(); renderAssistant(); renderTabs(); renderList(); renderDetail(); }
+function renderAll() { renderKpis(); renderControlPanel(); renderAssistant(); renderTabs(); renderList(); renderDetail(); }
 function renderKpis() { if (!kpisEl) return; kpisEl.innerHTML = `<article><span>Score</span><strong>${dashboard?.compliance_score || 0}%</strong><small>conformite</small></article><article data-tone="danger"><span>Blocages</span><strong>${dashboard?.blocking_checks || 0}</strong><small>controles</small></article><article data-tone="warning"><span>Risques ouverts</span><strong>${dashboard?.open_risks || 0}</strong><small>${dashboard?.critical_risks || 0} critiques/eleves</small></article><article><span>Incidents</span><strong>${dashboard?.open_incidents || 0}</strong><small>ouverts</small></article><article data-tone="info"><span>Autorisations</span><strong>${dashboard?.pending_consents || 0}</strong><small>a regulariser</small></article>`; if (countEl) countEl.textContent = `${dashboard?.open_risks || 0} risque(s) ouvert(s), ${dashboard?.blocking_checks || 0} blocage(s), ${dashboard?.open_incidents || 0} incident(s).`; }
-function renderAssistant() { const item = selectedItem(); const assistant = item?.assistant || dashboard?.assistant || {}; if (aiScoreEl) aiScoreEl.textContent = item?.assistant?.level || `${dashboard?.compliance_score || 0}%`; if (aiSummaryEl) aiSummaryEl.textContent = assistant.summary || dashboard?.assistant?.summary || "Aucune analyse disponible."; if (!aiGridEl) return; const priorities = assistant.recommended_actions || dashboard?.assistant?.priorities || []; aiGridEl.innerHTML = priorities.length ? priorities.slice(0, 4).map((action) => `<div><span>Action</span><strong>${escapeHtml(action)}</strong></div>`).join("") : `<div><span>Action</span><strong>Controle a jour</strong></div>`; }
+function renderControlPanel() {
+  if (!controlEl || !dashboard) return;
+  const score = Number(dashboard.compliance_score || 0);
+  const blocking = Number(dashboard.blocking_checks || 0);
+  const openRisks = Number(dashboard.open_risks || 0);
+  const incidents = Number(dashboard.open_incidents || 0);
+  const consents = Number(dashboard.pending_consents || 0);
+  const nextDecision = blocking ? "Lever les controles bloquants" : incidents ? "Traiter les incidents" : openRisks ? "Reduire les risques ouverts" : consents ? "Regulariser les autorisations" : "Maintenir la conformite";
+  const status = blocking || incidents ? "Blocage a traiter" : score < 70 ? "Conformite a renforcer" : "Controle stable";
+  controlEl.innerHTML = `<div class="admin-panel-head"><div><p class="section-kicker">Priorite conformite</p><h3>Eviter les blocages avant action terrain</h3><p>Cette synthese met en avant les risques juridiques, RGPD, assurances, securite et pieces bloquantes avant engagement.</p></div><strong>${escapeHtml(status)}</strong></div><div class="risks-control-grid"><article><span>Decision suivante</span><strong>${escapeHtml(nextDecision)}</strong><small>priorite</small></article><article><span>Score</span><strong>${escapeHtml(score)}%</strong><small>conformite</small></article><article><span>Blocages</span><strong>${escapeHtml(blocking)}</strong><small>controles</small></article><article><span>Incidents</span><strong>${escapeHtml(incidents)}</strong><small>ouverts</small></article><article><span>Autorisations</span><strong>${escapeHtml(consents)}</strong><small>a regulariser</small></article></div><div class="risks-control-links"><a class="btn secondary" href="admin-governance">Decision</a><a class="btn secondary" href="admin-documents">Pieces</a><a class="btn secondary" href="admin-work">Taches</a><a class="btn secondary" href="admin-dossiers">Dossiers</a><a class="btn secondary" href="admin-users">Acces</a></div>`;
+}function renderAssistant() { const item = selectedItem(); const assistant = item?.assistant || dashboard?.assistant || {}; if (aiScoreEl) aiScoreEl.textContent = item?.assistant?.level || `${dashboard?.compliance_score || 0}%`; if (aiSummaryEl) aiSummaryEl.textContent = assistant.summary || dashboard?.assistant?.summary || "Aucune analyse disponible."; if (!aiGridEl) return; const priorities = assistant.recommended_actions || dashboard?.assistant?.priorities || []; aiGridEl.innerHTML = priorities.length ? priorities.slice(0, 4).map((action) => `<div><span>Action</span><strong>${escapeHtml(action)}</strong></div>`).join("") : `<div><span>Action</span><strong>Controle a jour</strong></div>`; }
 function renderTabs() { tabs.forEach((button) => button.classList.toggle("is-active", button.dataset.risksView === view)); }
 function titleFor(item) { return item.title || item.person_name || item.action || "Element"; }
 function subFor(item) { return item.risk_key || item.check_key || item.incident_key || item.consent_type || item.object_type || item.owner_name || ""; }
