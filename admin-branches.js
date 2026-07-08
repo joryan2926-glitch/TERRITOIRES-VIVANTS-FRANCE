@@ -1,6 +1,20 @@
-﻿const BRANCHES_TOKEN_KEY = "tvfAdminToken";
+const BRANCHES_TOKEN_KEY = "tvfAdminToken";
 const statusLabels = { prefiguration: "Prefiguration", launching: "Lancement", operational: "Operationnelle", paused: "En pause", closed: "Cloturee", archive: "Archive", todo: "A faire", in_progress: "En cours", blocked: "Bloque", done: "Fait", waived: "Ignore", invited: "Invite", active: "Actif", left: "Parti", planned: "Planifie" };
 const maturityLabels = { idee: "Idee", prefiguration: "Prefiguration", lancement: "Lancement", operationnelle: "Operationnelle", confirmee: "Confirmee", formatrice: "Formatrice" };
+const maturitySteps = [
+  ["idee", "Idee", "Besoin local identifie"],
+  ["prefiguration", "Prefiguration", "Referent et territoire cadres"],
+  ["lancement", "Lancement", "Partenaires, lieux et moyens mobilises"],
+  ["operationnelle", "Operationnelle", "Demandes traitees et actions suivies"],
+  ["confirmee", "Confirmee", "Reporting stable et gouvernance locale"],
+  ["formatrice", "Formatrice", "Antenne capable d'accompagner d'autres territoires"]
+];
+const launchSteps = [
+  ["30 jours", "Cadrer le territoire", "Diagnostic initial, interlocuteurs publics, besoins logistiques et registre des demandes."],
+  ["60 jours", "Mobiliser les moyens", "Rendez-vous partenaires, local de stockage, transport, benevoles, documents et premiers dossiers."],
+  ["90 jours", "Passer en pilotage", "Comite local, plan d'action, indicateurs, reporting national et decisions de lancement."]
+];
+const defaultNeeds = ["Local de stockage", "Vehicule ou solution de transport", "Collectivite referente", "Entreprises materiaux", "Benevoles terrain", "Financement de demarrage"];
 
 const loginSection = document.querySelector("[data-branches-login]");
 const appSection = document.querySelector("[data-branches-app]");
@@ -44,6 +58,7 @@ function label(map, value) { return map[value] || value || "Non renseigne"; }
 function formatDate(value) { if (!value) return "Non renseigne"; const date = new Date(value); if (Number.isNaN(date.getTime())) return value; return new Intl.DateTimeFormat("fr-FR", { dateStyle: "short" }).format(date); }
 function selectedBranch() { return branches.find((branch) => branch.id === selectedId) || branches[0] || null; }
 function selectedItems(key) { return (branchData[key] || []).filter((item) => item.branch_id === selectedId); }
+function dueIso(days) { const due = new Date(); due.setDate(due.getDate() + days); due.setHours(17, 0, 0, 0); return due.toISOString(); }
 
 async function api(path, options = {}) {
   const response = await fetch(path, { ...options, headers: { "Content-Type": "application/json", Authorization: `Bearer ${token()}`, ...(options.headers || {}) } });
@@ -126,13 +141,32 @@ function rowList(items, type) {
   if (!items.length) return `<p class="form-note">Aucun element dans cette vue.</p>`;
   return `<div class="branches-row-list">${items.map((item) => `<article><div><strong>${escapeHtml(item.label || item.full_name || item.title || item.pole_key || "Element")}</strong><span>${escapeHtml(item.category || item.role_label || item.assigned_to || item.referent_name || item.notes || "")}</span></div><form data-branches-inline-form><input type="hidden" name="id" value="${escapeHtml(item.id)}"><input type="hidden" name="type" value="${type}"><select name="status">${statusSelect(type, item.status)}</select><button class="btn secondary" type="submit">OK</button></form></article>`).join("")}</div>`;
 }
+function branchMaturityIndex(branch = {}) {
+  const value = branch.maturity_level || (branch.status === "operational" ? "operationnelle" : branch.status === "launching" ? "lancement" : "prefiguration");
+  return Math.max(0, maturitySteps.findIndex((step) => step[0] === value));
+}
+function branchMaturityPath(branch = {}) {
+  const current = branchMaturityIndex(branch);
+  return `<ol class="branches-maturity-path" aria-label="Parcours de maturite de l'antenne">${maturitySteps.map((step, index) => `<li class="${index <= current ? "is-done" : ""}"><span>${index + 1}</span><strong>${escapeHtml(step[1])}</strong><small>${escapeHtml(step[2])}</small></li>`).join("")}</ol>`;
+}
+function branchLaunchPlanPanel(branch = {}) {
+  return `<section class="branches-launch-panel"><div class="admin-panel-head"><div><p class="section-kicker">Deploiement local</p><h3>Plan d'installation 30 / 60 / 90 jours</h3></div><strong>${escapeHtml(label(maturityLabels, branch.maturity_level))}</strong></div><div class="branches-launch-grid">${launchSteps.map((step) => `<article><span>${escapeHtml(step[0])}</span><h4>${escapeHtml(step[1])}</h4><p>${escapeHtml(step[2])}</p></article>`).join("")}</div></section>`;
+}
+function branchNeedsPanel(branch = {}) {
+  const needs = Array.isArray(branch.needs) && branch.needs.length ? branch.needs : defaultNeeds;
+  return `<section class="branches-needs-panel"><div><p class="section-kicker">Besoins de lancement</p><h3>Moyens a securiser</h3><p>La fiche antenne sert a verrouiller les moyens indispensables avant de passer du contact territorial a l'action de terrain.</p></div><ul>${needs.map((need) => `<li>${escapeHtml(need)}</li>`).join("")}</ul></section>`;
+}
+function branchActionPanel() {
+  return `<section class="branches-action-panel"><div><p class="section-kicker">Actions rapides</p><h3>Transformer la fiche antenne en taches TVF OS</h3><p>Ces actions creent des taches dans le module Planning afin de suivre le lancement sans perdre le fil entre antennes, dossiers et projets.</p></div><div class="admin-detail-actions"><button class="btn secondary" type="button" data-branch-action="launch90">Creer le plan 90 jours</button><button class="btn secondary" type="button" data-branch-action="review">Planifier revue antenne</button><button class="btn secondary" type="button" data-branch-action="report">Preparer reporting</button></div></section>`;
+}
 function renderDetail() {
   const branch = selectedBranch();
   if (!detailEl) return;
   if (!branch) { detailEl.innerHTML = `<p class="form-note">Aucune antenne selectionnee.</p>`; return; }
   const assistant = branch.assistant || {};
   const blocks = { overview: overview(branch), checklist: rowList(selectedItems("checklist"), "checklist"), team: rowList(selectedItems("team"), "team"), training: rowList(selectedItems("training"), "training"), poles: rowList(selectedItems("branch_poles"), "pole") };
-  detailEl.innerHTML = `<div class="admin-panel-head"><div><p class="section-kicker">${escapeHtml(branch.code)}</p><h2>${escapeHtml(branch.name)}</h2><p>${escapeHtml(branch.territory_name || "Territoire non renseigne")}</p></div><span>${escapeHtml(assistant.readiness_score ?? 0)}%</span></div><section class="branches-readiness"><article><span>Checklist</span><strong>${escapeHtml(assistant.checklist_score ?? 0)}%</strong></article><article><span>Formation</span><strong>${escapeHtml(assistant.training_score ?? 0)}%</strong></article><article><span>Equipe active</span><strong>${escapeHtml(assistant.active_team ?? 0)}</strong></article><article><span>Poles actifs</span><strong>${escapeHtml(assistant.active_poles ?? 0)}</strong></article></section>${blocks[view] || blocks.overview}`;
+  const operationalPanels = view === "overview" ? `${branchMaturityPath(branch)}${branchLaunchPlanPanel(branch)}${branchNeedsPanel(branch)}${branchActionPanel(branch)}` : "";
+  detailEl.innerHTML = `<div class="admin-panel-head"><div><p class="section-kicker">${escapeHtml(branch.code)}</p><h2>${escapeHtml(branch.name)}</h2><p>${escapeHtml(branch.territory_name || "Territoire non renseigne")}</p></div><span>${escapeHtml(assistant.readiness_score ?? 0)}%</span></div><section class="branches-readiness"><article><span>Checklist</span><strong>${escapeHtml(assistant.checklist_score ?? 0)}%</strong></article><article><span>Formation</span><strong>${escapeHtml(assistant.training_score ?? 0)}%</strong></article><article><span>Equipe active</span><strong>${escapeHtml(assistant.active_team ?? 0)}</strong></article><article><span>Poles actifs</span><strong>${escapeHtml(assistant.active_poles ?? 0)}</strong></article></section>${operationalPanels}${blocks[view] || blocks.overview}`;
 }
 
 function openModal() { if (relatedIdInput) relatedIdInput.value = selectedId || ""; if (modal) modal.hidden = false; }
@@ -141,6 +175,23 @@ function payloadFromForm(form) { const data = new FormData(form); const payload 
 async function saveInline(form) { await api("/api/admin-branches", { method: "PATCH", body: JSON.stringify(Object.fromEntries(new FormData(form))) }); await loadAll(); }
 async function saveBranch(form) { await api("/api/admin-branches", { method: "PATCH", body: JSON.stringify(Object.fromEntries(new FormData(form))) }); await loadAll(); }
 async function createItem(event) { event.preventDefault(); await api("/api/admin-branches", { method: "POST", body: JSON.stringify(payloadFromForm(modalForm)) }); closeModal(); await loadAll(); }
+async function createBranchTask(branch, title, description, days = 7, priority = "P2") {
+  await api("/api/admin-work", { method: "POST", body: JSON.stringify({ type: "task", branch_id: branch.id, related_object_type: "branch", related_object_id: branch.id, title, description, status: "todo", priority, pole: "Antennes locales", assigned_to: branch.responsible_name || "TVF", due_at: dueIso(days) }) });
+}
+async function applyBranchAction(action) {
+  const branch = selectedBranch();
+  if (!branch) return;
+  if (action === "launch90") {
+    await createBranchTask(branch, `Diagnostic initial - ${branch.name}`, "Formaliser territoire, besoins, contacts publics, risques et opportunites locales.", 7, "P2");
+    await createBranchTask(branch, `Securiser local et transport - ${branch.name}`, "Identifier local de stockage, solution vehicule, assurance, acces et responsable logistique.", 21, "P2");
+    await createBranchTask(branch, `Cartographier partenaires - ${branch.name}`, "Lister collectivites, entreprises, associations, chantiers d'insertion, financeurs et contacts utiles.", 30, "P2");
+    await createBranchTask(branch, `Comite local de lancement - ${branch.name}`, "Preparer ordre du jour, participants, pieces et decisions attendues pour le comite local.", 60, "P1");
+    await createBranchTask(branch, `Reporting national antenne - ${branch.name}`, "Mettre a jour indicateurs, besoins, blocages, documents et prochaines decisions.", 90, "P3");
+  }
+  if (action === "review") await createBranchTask(branch, `Revue antenne - ${branch.name}`, "Verifier maturite, checklist, equipe, formations, poles actifs et blocages avant decision nationale.", 5, "P2");
+  if (action === "report") await createBranchTask(branch, `Reporting antenne - ${branch.name}`, "Preparer synthese : avancement, contacts, besoins logistiques, risques, documents et indicateurs.", 14, "P3");
+  await loadAll();
+}
 async function generatePack() { const branch = selectedBranch(); if (!branch) return alert("Selectionnez une antenne."); const result = await api("/api/admin-branches", { method: "POST", body: JSON.stringify({ type: "generate_pack", branch_id: branch.id }) }); const pack = result.launch_pack; alert(`${pack.pack.title}\n\nPreparation : ${pack.assistant.readiness_score}%\nActions : ${pack.pack.next_actions.join("; ")}`); }
 function exportCsv() { const rows = [["Code", "Nom", "Territoire", "Statut", "Maturite", "Preparation"], ...branches.map((branch) => [branch.code, branch.name, branch.territory_name, label(statusLabels, branch.status), label(maturityLabels, branch.maturity_level), `${branch.assistant?.readiness_score || 0}%`])]; const csv = rows.map((row) => row.map((cell) => `"${String(cell ?? "").replace(/"/g, '""')}"`).join(";")).join("\n"); const blob = new Blob(["\ufeff" + csv], { type: "text/csv;charset=utf-8" }); const url = URL.createObjectURL(blob); const link = document.createElement("a"); link.href = url; link.download = `antennes-tvf-os-${new Date().toISOString().slice(0, 10)}.csv`; document.body.appendChild(link); link.click(); link.remove(); URL.revokeObjectURL(url); }
 
@@ -159,6 +210,7 @@ function bindEvents() {
   logoutButton?.addEventListener("click", () => { setToken(""); window.location.href = "admin"; });
   listEl?.addEventListener("click", (event) => { const button = event.target.closest("[data-branch-id]"); if (!button) return; selectedId = button.dataset.branchId; renderAll(); });
   detailEl?.addEventListener("submit", (event) => { const form = event.target.closest("[data-branch-detail-form], [data-branches-inline-form]"); if (!form) return; event.preventDefault(); if (form.matches("[data-branch-detail-form]")) saveBranch(form).catch((e) => alert(e.message)); else saveInline(form).catch((e) => alert(e.message)); });
+  detailEl?.addEventListener("click", (event) => { const button = event.target.closest("[data-branch-action]"); if (!button) return; applyBranchAction(button.dataset.branchAction).catch((e) => alert(e.message)); });
 }
 
 bindEvents();
