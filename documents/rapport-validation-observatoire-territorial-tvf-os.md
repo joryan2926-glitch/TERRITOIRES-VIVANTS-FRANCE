@@ -1,8 +1,8 @@
-﻿# Rapport de validation - Module Observatoire territorial TVF OS
+# Rapport de validation - Module Observatoire territorial TVF OS
 
 Date : 2026-07-08
 
-Statut : developpement et migration Supabase valides, production publique a verifier apres deploiement.
+Statut : developpement, migration Supabase et production publique valides. Validation authentifiee utilisateur requise avant verrouillage.
 
 ## Perimetre valide
 
@@ -22,7 +22,7 @@ Statut : developpement et migration Supabase valides, production publique a veri
 | RLS et permissions | Conforme |
 | Automatisations metier | Conforme |
 | Tests API | Conforme |
-| Validation production publique | A executer apres push/deploiement |
+| Validation production publique | Conforme |
 | Validation production authentifiee | A confirmer par utilisateur |
 
 ## Couverture fonctionnelle
@@ -31,7 +31,7 @@ Couverture mesuree sur le perimetre developpe : 100 % en environnement de develo
 
 Couverture Supabase production : 100 % sur la migration et les donnees de test.
 
-Couverture production applicative : en attente du deploiement Vercel et de la validation authentifiee.
+Couverture production applicative publique : 100 %. Validation authentifiee : en attente de test utilisateur avec TVF_ADMIN_TOKEN.
 
 ## Fichiers livres
 
@@ -69,12 +69,11 @@ A completer apres execution :
   - `observatoire_test_indicator = 1`
   - `observatoire_test_diagnostic = 1`
   - `observatoire_watch_to_qualify = 1`
-- Page publique `/admin-observatoire` :
-- API sans token :
-- Test authentifie :
+- Page publique `/admin-observatoire` : OK, HTTP 200
+- API sans token : OK, HTTP 401
+- Bouton Dashboard production : OK, lien `admin-observatoire` visible
+- Test authentifie : en attente utilisateur, token non disponible localement
 
 ## Decision
 
 Le module Observatoire territorial ne sera verrouille qu'apres validation production a 100 %.
-
-
