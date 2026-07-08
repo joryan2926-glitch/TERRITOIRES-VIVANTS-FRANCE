@@ -84,8 +84,80 @@
                 ],
     "rewrites":  [
                      {
-                         "destination":  "/admin.html",
-                         "source":  "/admin"
+                         "source":  "/api/admin-ai",
+                         "destination":  "/api/admin/ai"
+                     },
+                     {
+                         "source":  "/api/admin-branches",
+                         "destination":  "/api/admin/branches"
+                     },
+                     {
+                         "source":  "/api/admin-cases",
+                         "destination":  "/api/admin/cases"
+                     },
+                     {
+                         "source":  "/api/admin-contacts",
+                         "destination":  "/api/admin/contacts"
+                     },
+                     {
+                         "source":  "/api/admin-crm",
+                         "destination":  "/api/admin/crm"
+                     },
+                     {
+                         "source":  "/api/admin-documents",
+                         "destination":  "/api/admin/documents"
+                     },
+                     {
+                         "source":  "/api/admin-emails",
+                         "destination":  "/api/admin/emails"
+                     },
+                     {
+                         "source":  "/api/admin-finances",
+                         "destination":  "/api/admin/finances"
+                     },
+                     {
+                         "source":  "/api/admin-governance",
+                         "destination":  "/api/admin/governance"
+                     },
+                     {
+                         "source":  "/api/admin-impact",
+                         "destination":  "/api/admin/impact"
+                     },
+                     {
+                         "source":  "/api/admin-knowledge",
+                         "destination":  "/api/admin/knowledge"
+                     },
+                     {
+                         "source":  "/api/admin-map",
+                         "destination":  "/api/admin/map"
+                     },
+                     {
+                         "source":  "/api/admin-observatoire",
+                         "destination":  "/api/admin/observatoire"
+                     },
+                     {
+                         "source":  "/api/admin-procedures",
+                         "destination":  "/api/admin/procedures"
+                     },
+                     {
+                         "source":  "/api/admin-risks",
+                         "destination":  "/api/admin/risks"
+                     },
+                     {
+                         "source":  "/api/admin-session",
+                         "destination":  "/api/admin/session"
+                     },
+                     {
+                         "source":  "/api/admin-settings",
+                         "destination":  "/api/admin/settings"
+                     },
+                     {
+                         "source":  "/api/admin-users",
+                         "destination":  "/api/admin/users"
+                     },
+                     {
+                         "source":  "/api/admin-work",
+                         "destination":  "/api/admin/work"
                      },
                      {
                          "destination":  "/admin-ai.html",
