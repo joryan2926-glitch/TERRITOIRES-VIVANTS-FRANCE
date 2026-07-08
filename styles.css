@@ -5530,3 +5530,65 @@ tr:nth-child(even) td {
   .branches-action-panel { grid-template-columns: 1fr; }
   .branches-action-panel .admin-detail-actions { justify-content: flex-start; }
 }
+
+/* CRM TVF OS - qualification partenaires territoriaux */
+.crm-detail-form > .crm-cooperation-panel,
+.crm-detail-form > .crm-documents-panel {
+  grid-column: 1 / -1;
+}
+.crm-cooperation-panel,
+.crm-documents-panel {
+  display: grid;
+  gap: 14px;
+  padding: 16px;
+  border: 1px solid rgba(14,45,69,.12);
+  border-radius: 10px;
+  background: linear-gradient(180deg, #ffffff 0%, #f8faf5 100%);
+  box-shadow: var(--shadow-soft);
+}
+.crm-cooperation-panel {
+  grid-template-columns: minmax(260px, .9fr) minmax(0, 1.1fr);
+}
+.crm-cooperation-panel h4,
+.crm-documents-panel h4 {
+  margin: 0;
+  color: var(--blue-900);
+}
+.crm-cooperation-panel p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.5;
+}
+.crm-cooperation-panel span {
+  display: block;
+  margin: 0 0 5px;
+  color: var(--green-800);
+  font-size: .76rem;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+.crm-cooperation-panel span + p + span {
+  margin-top: 12px;
+}
+.crm-documents-panel ul {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.crm-documents-panel li {
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: #fff;
+  border: 1px solid rgba(47,125,50,.14);
+  color: var(--blue-900);
+  font-weight: 720;
+}
+@media (max-width: 900px) {
+  .crm-cooperation-panel,
+  .crm-documents-panel ul {
+    grid-template-columns: 1fr;
+  }
+}

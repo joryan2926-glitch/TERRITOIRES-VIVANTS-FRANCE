@@ -53,6 +53,83 @@ const historyLabels = {
   relance: "Relance",
   decision: "Decision",
 };
+const partnerProfiles = {
+  collectivite: {
+    title: "Collectivite / EPCI",
+    contribution: "Local de stockage, orientation des biens vacants, relais institutionnel, mise en relation territoriale.",
+    documents: ["Courrier de sollicitation", "Note de presentation TVF", "Fiche besoin local", "Projet de convention de cooperation", "Calendrier de rendez-vous"],
+    approach: "Proposer un rendez-vous de cadrage avec les services habitat, commerce, ESS, transition ecologique ou patrimoine.",
+    benefit: "Aide a structurer un outil local complementaire des politiques publiques, sans remplacer les dispositifs existants."
+  },
+  entreprise: {
+    title: "Entreprise / artisan / BTP",
+    contribution: "Dons ou mise a disposition de materiaux, vehicule, competences, stockage, mecenat ou chantier solidaire.",
+    documents: ["Fiche entreprise", "Liste des materiaux disponibles", "Photos et volumes", "Conditions d'enlevement", "Attestation ou convention de valorisation"],
+    approach: "Identifier le responsable RSE, dirigeant, chef de depot ou conducteur de travaux et proposer une valorisation territoriale claire.",
+    benefit: "Valorisation RSE, reduction du gaspillage, ancrage local et contribution visible a des projets utiles."
+  },
+  association: {
+    title: "Association / insertion / ESS",
+    contribution: "Benevolat, chantier participatif, accompagnement social, formation, mobilisation citoyenne ou gestion d'un lieu.",
+    documents: ["Presentation de la structure", "Assurance", "References d'actions", "Capacites d'encadrement", "Besoins humains et materiels"],
+    approach: "Qualifier les capacites terrain et cadrer un premier chantier ou une action commune simple.",
+    benefit: "Acces a des projets concrets, visibilite locale et cooperation avec des acteurs publics et prives."
+  },
+  financeur: {
+    title: "Financeur / mecene / fondation",
+    contribution: "Financement de demarrage, fonds d'amorcage, soutien projet, mecenat financier ou accompagnement methodologique.",
+    documents: ["Dossier de presentation", "Budget previsionnel", "Objectifs d'impact", "Gouvernance", "Modalites de reporting"],
+    approach: "Presenter un besoin clair, un territoire pilote, des indicateurs suivis et une trajectoire de deploiement.",
+    benefit: "Financement a impact territorial lisible, suivi, documente et rattache a des usages concrets."
+  },
+  institution: {
+    title: "Institution / service de l'Etat",
+    contribution: "Orientation, cadre public, dispositifs compatibles, expertise, donnees territoriales et mise en reseau.",
+    documents: ["Note d'alignement territorial", "Statuts TVF", "Recepisse", "Dossier pilote", "Matrice besoins / reponse TVF"],
+    approach: "Se positionner comme outil de coordination et demander un avis de cadrage ou une mise en relation technique.",
+    benefit: "Meilleure coordination locale, tracabilite des besoins, mobilisation citoyenne et appui au passage a l'action."
+  },
+  proprietaire_personne_morale: {
+    title: "Proprietaire / bailleur / fonciere",
+    contribution: "Bien vacant, local, terrain, convention d'usage, projet de rehabilitation ou occupation temporaire.",
+    documents: ["Adresse du bien", "Titre ou justificatif de propriete", "Photos", "Etat connu", "Objectif souhaite", "Contraintes juridiques"],
+    approach: "Clarifier la situation du bien, les contraintes et l'interet d'une convention de valorisation territoriale.",
+    benefit: "Valorisation patrimoniale, remise en usage progressive, securisation d'un cadre conventionnel et utilite locale."
+  },
+  fournisseur: {
+    title: "Fournisseur / logistique",
+    contribution: "Materiel, transport, stockage, outillage, assurance, maintenance, equipement technique.",
+    documents: ["Fiche materiel", "Conditions de mise a disposition", "Duree", "Assurance", "Responsable operationnel"],
+    approach: "Qualifier la capacite disponible, le calendrier et les conditions pratiques avant toute mobilisation.",
+    benefit: "Participation concrete au lancement TVF, visibilite locale et contribution utile au territoire pilote."
+  },
+  partenaire: {
+    title: "Partenaire territorial",
+    contribution: "Mise en relation, expertise, appui projet, relais local, mobilisation de ressources ou contribution ponctuelle.",
+    documents: ["Presentation de la structure", "Contacts utiles", "Contribution possible", "Territoire concerne", "Contraintes ou disponibilites"],
+    approach: "Qualifier le role exact attendu et proposer une prochaine action simple, datee et suivie.",
+    benefit: "Cooperation claire, traçable et orientee impact territorial."
+  },
+  autre: {
+    title: "Acteur a qualifier",
+    contribution: "Contribution a preciser selon le besoin TVF : local, materiaux, financement, expertise, benevolat ou relais.",
+    documents: ["Coordonnees", "Presentation", "Contribution possible", "Territoire concerne", "Prochaine action"],
+    approach: "Commencer par une qualification courte avant d'engager une demande formelle.",
+    benefit: "Orientation rapide vers le bon parcours de cooperation."
+  }
+};
+const contactProfiles = {
+  elu: "collectivite",
+  technicien: "institution",
+  entreprise_contact: "entreprise",
+  benevole: "association",
+  financeur: "financeur",
+  proprietaire: "proprietaire_personne_morale",
+  partenaire: "partenaire",
+  journaliste: "institution",
+  citoyen: "partenaire",
+  autre: "autre"
+};
 
 const loginSection = document.querySelector("[data-crm-login]");
 const appSection = document.querySelector("[data-crm-app]");
@@ -302,6 +379,21 @@ function isCrmOverdue(item) {
   return item?.next_action_due_at && new Date(item.next_action_due_at).getTime() < Date.now();
 }
 
+function crmSectorKey(item = {}, type = "contact") {
+  if (type === "organization") return item.organization_type || "partenaire";
+  return contactProfiles[item.contact_type || "autre"] || "autre";
+}
+function crmPartnerProfile(item = {}, type = "contact") {
+  return partnerProfiles[crmSectorKey(item, type)] || partnerProfiles.autre;
+}
+function partnerCooperationPanel(item, type) {
+  const profile = crmPartnerProfile(item, type);
+  return `<section class="crm-cooperation-panel"><div><p class="section-kicker">Cooperation territoriale</p><h4>${escapeHtml(profile.title)}</h4><p>${escapeHtml(profile.contribution)}</p></div><div><span>Approche recommandee</span><p>${escapeHtml(profile.approach)}</p><span>Interet pour TVF</span><p>${escapeHtml(profile.benefit)}</p></div></section>`;
+}
+function partnerDocumentsPanel(item, type) {
+  const profile = crmPartnerProfile(item, type);
+  return `<section class="crm-documents-panel"><div class="admin-panel-head"><div><p class="section-kicker">Pieces a demander</p><h4>Dossier de qualification</h4></div><strong>${escapeHtml(profile.documents.length)} pieces</strong></div><ul>${profile.documents.map((doc) => `<li>${escapeHtml(doc)}</li>`).join("")}</ul></section>`;
+}
 function relationPathPanel(item, type) {
   const stage = type === "organization" ? item.relation_status : item.consent_status;
   const steps = type === "organization"
@@ -358,6 +450,8 @@ function renderContactDetail(item, historyItems) {
     <div class="admin-meta-grid"><div><span>E-mail</span><a href="mailto:${escapeHtml(item.email || "")}">${escapeHtml(item.email || "Non renseigne")}</a></div><div><span>Telephone</span><strong>${escapeHtml(item.phone || item.mobile || "Non renseigne")}</strong></div><div><span>Consentement</span><strong>${escapeHtml(label(consentLabels, item.consent_status))}</strong></div><div><span>Dernier echange</span><strong>${escapeHtml(formatDate(item.last_interaction_at))}</strong></div></div>
     ${assistantPanel(item, "contact")}
     ${relationPathPanel(item, "contact")}
+    ${partnerCooperationPanel(item, "contact")}
+    ${partnerDocumentsPanel(item, "contact")}
     <label>Nom affiche<input name="display_name" value="${escapeHtml(item.display_name || "")}"></label>
     <label>Type contact<select name="contact_type">${options(contactTypeLabels, item.contact_type)}</select></label>
     <label>Consentement RGPD<select name="consent_status">${options(consentLabels, item.consent_status)}</select></label>
@@ -372,7 +466,7 @@ function renderContactDetail(item, historyItems) {
     <label class="crm-wide-field">Notes internes<textarea name="notes" rows="5">${escapeHtml(item.notes || "")}</textarea></label>
     <section class="crm-relations"><p class="section-kicker">Organisations rattachees</p>${orgs.length ? orgs.map((link) => `<article><strong>${escapeHtml(link.organizations?.name || "Organisation")}</strong><span>${escapeHtml(link.role_label || "Role non renseigne")}${link.is_primary ? " - principal" : ""}</span></article>`).join("") : "<p>Aucune organisation rattachee.</p>"}</section>
     ${historyPanel(historyItems)}
-    <div class="admin-detail-actions"><button class="btn primary" type="submit">Enregistrer</button><button class="btn secondary" type="button" data-crm-quick="relance_7j">Relance 7 jours</button><button class="btn secondary" type="button" data-crm-quick="consent_granted">Consentement OK</button><a class="btn secondary" href="mailto:${escapeHtml(item.email || "")}">Ecrire</a><a class="btn secondary" href="tel:${escapeHtml(item.phone || item.mobile || "")}">Appeler</a></div>
+    <div class="admin-detail-actions"><button class="btn primary" type="submit">Enregistrer</button><button class="btn secondary" type="button" data-crm-quick="relance_7j">Relance 7 jours</button><button class="btn secondary" type="button" data-crm-quick="consent_granted">Consentement OK</button><button class="btn secondary" type="button" data-crm-partner-action="qualify">Qualifier partenariat</button><button class="btn secondary" type="button" data-crm-partner-action="task">Creer tache de contact</button><a class="btn secondary" href="mailto:${escapeHtml(item.email || "")}">Ecrire</a><a class="btn secondary" href="tel:${escapeHtml(item.phone || item.mobile || "")}">Appeler</a></div>
     <p class="form-note" data-crm-save-status role="status" hidden></p>
   </form>`;
 }
@@ -385,6 +479,8 @@ function renderOrganizationDetail(item, historyItems) {
     <div class="admin-meta-grid"><div><span>E-mail</span><a href="mailto:${escapeHtml(item.email || "")}">${escapeHtml(item.email || "Non renseigne")}</a></div><div><span>Telephone</span><strong>${escapeHtml(item.phone || "Non renseigne")}</strong></div><div><span>Territoire</span><strong>${escapeHtml(item.city || item.department || item.region || "Non renseigne")}</strong></div><div><span>Dernier echange</span><strong>${escapeHtml(formatDate(item.last_interaction_at))}</strong></div></div>
     ${assistantPanel(item, "organization")}
     ${relationPathPanel(item, "organization")}
+    ${partnerCooperationPanel(item, "organization")}
+    ${partnerDocumentsPanel(item, "organization")}
     <label>Nom organisation<input name="name" value="${escapeHtml(item.name || "")}"></label>
     <label>Type organisation<select name="organization_type">${options(organizationTypeLabels, item.organization_type)}</select></label>
     <label>Niveau relation<select name="relation_status">${options(relationLabels, item.relation_status)}</select></label>
@@ -403,7 +499,7 @@ function renderOrganizationDetail(item, historyItems) {
     <label class="crm-wide-field">Notes internes<textarea name="notes" rows="5">${escapeHtml(item.notes || "")}</textarea></label>
     <section class="crm-relations"><p class="section-kicker">Contacts associes</p>${links.length ? links.map((link) => `<article><strong>${escapeHtml(link.crm_contacts?.display_name || "Contact")}</strong><span>${escapeHtml(link.role_label || link.crm_contacts?.contact_type || "Role non renseigne")}${link.is_primary ? " - principal" : ""}</span></article>`).join("") : "<p>Aucun contact rattache.</p>"}</section>
     ${historyPanel(historyItems)}
-    <div class="admin-detail-actions"><button class="btn primary" type="submit">Enregistrer</button><button class="btn secondary" type="button" data-crm-quick="relance_7j">Relance 7 jours</button><button class="btn secondary" type="button" data-crm-quick="relation_active">Relation active</button><a class="btn secondary" href="mailto:${escapeHtml(item.email || "")}">Ecrire</a><button class="btn secondary" type="button" data-crm-create-linked-contact>Creer contact rattache</button></div>
+    <div class="admin-detail-actions"><button class="btn primary" type="submit">Enregistrer</button><button class="btn secondary" type="button" data-crm-quick="relance_7j">Relance 7 jours</button><button class="btn secondary" type="button" data-crm-quick="relation_active">Relation active</button><button class="btn secondary" type="button" data-crm-partner-action="qualify">Qualifier partenariat</button><button class="btn secondary" type="button" data-crm-partner-action="task">Creer tache de contact</button><a class="btn secondary" href="mailto:${escapeHtml(item.email || "")}">Ecrire</a><button class="btn secondary" type="button" data-crm-create-linked-contact>Creer contact rattache</button></div>
     <p class="form-note" data-crm-save-status role="status" hidden></p>
   </form>`;
 }
@@ -545,6 +641,24 @@ async function updateDuplicate(id, status) {
   await loadDashboard().catch(() => {});
 }
 
+async function createCrmWorkTask(item, type, profile) {
+  const title = type === "organization" ? `Contacter ${item.name}` : `Contacter ${item.display_name}`;
+  const description = `Objectif : ${profile.approach}\nPieces a demander : ${profile.documents.join("; ")}`;
+  await api("/api/admin-work", { method: "POST", body: JSON.stringify({ type: "task", related_object_type: type === "organization" ? "organization" : "contact", related_object_id: item.id, title, description, status: "todo", priority: "P2", pole: "Partenariats", assigned_to: "TVF", due_at: quickDue(7) }) });
+}
+async function createCrmQualificationNote(item, type, profile) {
+  await api("/api/admin-crm", { method: "POST", body: JSON.stringify({ type: "history", interaction_type: "demande", subject: `Qualification partenariat - ${profile.title}`, summary: `Contribution possible : ${profile.contribution}\nApproche : ${profile.approach}\nPieces a demander : ${profile.documents.join("; ")}`, contact_id: type === "contact" ? item.id : "", organization_id: type === "organization" ? item.id : "" }) });
+}
+async function applyPartnerAction(action) {
+  const item = selectedItem();
+  if (!item || currentView === "duplicates") return;
+  const type = currentView === "organizations" ? "organization" : "contact";
+  const profile = crmPartnerProfile(item, type);
+  if (action === "qualify") await createCrmQualificationNote(item, type, profile);
+  if (action === "task") await createCrmWorkTask(item, type, profile);
+  await loadDashboard().catch(() => {});
+  await renderDetail();
+}
 async function quickCrmAction(action) {
   const item = selectedItem();
   if (!item || currentView === "duplicates") return;
@@ -597,6 +711,8 @@ function bindEvents() {
   detailEl?.addEventListener("click", async (event) => {
     const quickButton = event.target.closest("[data-crm-quick]");
     if (quickButton) { await quickCrmAction(quickButton.dataset.crmQuick); return; }
+    const partnerButton = event.target.closest("[data-crm-partner-action]");
+    if (partnerButton) { await applyPartnerAction(partnerButton.dataset.crmPartnerAction); return; }
     const historyButton = event.target.closest("[data-crm-add-history]");
     if (historyButton) { const item = selectedItem(); openModal("history", { id: item.id, type: currentView === "organizations" ? "organization" : "contact" }); return; }
     const linkedContact = event.target.closest("[data-crm-create-linked-contact]");
