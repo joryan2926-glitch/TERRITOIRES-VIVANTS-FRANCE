@@ -4717,7 +4717,12 @@ tr:nth-child(even) td {
 .admin-home-command-copy { max-width: 760px; }
 .admin-home-command h2 { margin: 0; color: var(--blue-900); font-size: clamp(1.55rem, 2vw, 2.25rem); line-height: 1.08; }
 .admin-home-command p { margin-bottom: 0; color: var(--muted); }
-.admin-home-priority { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.admin-home-control { display: grid; gap: 12px; padding: 18px; border: 1px solid rgba(14,45,69,.12); border-radius: 8px; background: linear-gradient(180deg, #ffffff 0%, #f8faf5 100%); box-shadow: var(--shadow-soft); }
+.admin-home-control-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; }
+.admin-home-control-grid article { display: grid; gap: 6px; min-height: 104px; padding: 13px; border: 1px solid rgba(14,45,69,.12); border-radius: 8px; background: #fff; }
+.admin-home-control-grid span { display: inline-grid; place-items: center; width: 28px; height: 28px; border-radius: 8px; background: rgba(47,125,50,.1); color: var(--green-700); font-weight: 900; }
+.admin-home-control-grid strong { color: var(--blue-900); }
+.admin-home-control-grid small { color: var(--muted); font-weight: 700; line-height: 1.3; }.admin-home-priority { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
 .admin-home-priority a { display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: 12px; row-gap: 4px; align-items: center; min-height: 86px; padding: 16px; border: 1px solid rgba(14,45,69,.12); border-radius: 8px; background: #fff; color: inherit; text-decoration: none; box-shadow: var(--shadow-soft); transition: transform .18s ease, border-color .18s ease, background .18s ease; }
 .admin-home-priority a:hover { transform: translateY(-1px); border-color: rgba(47,125,50,.38); background: #fbfdf9; }
 .admin-home-priority span { grid-row: span 2; display: inline-grid; place-items: center; width: 38px; height: 38px; border-radius: 8px; background: rgba(47,125,50,.1); color: var(--green-700); font-size: .82rem; font-weight: 900; }
@@ -4744,7 +4749,7 @@ tr:nth-child(even) td {
 .admin-top-actions .btn,
 .dashboard-top-actions .btn,
 .admin-home-actions .btn { min-height: 34px; padding: 8px 11px; font-size: .82rem; }
-@media (max-width: 1120px) { .admin-home-command, .admin-home-flow, .admin-home-grid, .admin-home-priority, .admin-home-flow ol, .admin-home-group-large .admin-home-module-list { grid-template-columns: 1fr; } .admin-home-header-actions { justify-content: flex-start; } .admin-top-actions, .dashboard-top-actions { max-width: none; justify-content: flex-start; } }
+@media (max-width: 1120px) { .admin-home-command, .admin-home-control-grid, .admin-home-flow, .admin-home-grid, .admin-home-priority, .admin-home-flow ol, .admin-home-group-large .admin-home-module-list { grid-template-columns: 1fr; } .admin-home-header-actions { justify-content: flex-start; } .admin-top-actions, .dashboard-top-actions { max-width: none; justify-content: flex-start; } }
 @media (max-width: 760px) { .admin-home-actions, .admin-home-header-actions { display: grid; grid-template-columns: 1fr; } .admin-home-actions .btn, .admin-home-header-actions .btn { width: 100%; } .admin-home-command, .admin-home-flow, .admin-home-group { padding: 16px; } .admin-home-priority a { min-height: 74px; } }
 
 /* Module Gestion des antennes TVF OS */
