@@ -5377,3 +5377,88 @@ tr:nth-child(even) td {
     grid-template-columns: 1fr;
   }
 }
+
+/* Module Travail TVF OS - portefeuille projets */
+.work-project-path {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
+  margin: 14px 0;
+  padding: 0;
+  list-style: none;
+}
+.work-project-path li {
+  min-height: 78px;
+  display: grid;
+  gap: 4px;
+  padding: 13px;
+  border: 1px solid rgba(14,45,69,.12);
+  border-radius: 14px;
+  background: rgba(255,255,255,.84);
+  box-shadow: 0 12px 28px rgba(14,45,69,.07);
+}
+.work-project-path span {
+  width: 28px;
+  height: 28px;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 999px;
+  background: rgba(14,45,69,.09);
+  color: var(--blue-900);
+  font-weight: 850;
+  font-size: .78rem;
+}
+.work-project-path strong {
+  color: var(--blue-900);
+  line-height: 1.16;
+}
+.work-project-path small {
+  color: var(--muted);
+  font-size: .74rem;
+  font-weight: 750;
+  line-height: 1.22;
+}
+.work-project-path li.is-done {
+  border-color: rgba(47,125,50,.28);
+  background: #f4fbf1;
+}
+.work-project-path li.is-done span {
+  background: var(--green-800);
+  color: #fff;
+}
+.work-project-control {
+  display: grid;
+  gap: 12px;
+  padding: 16px;
+  border: 1px solid rgba(14,45,69,.12);
+  border-radius: 16px;
+  background: #fff;
+  margin-bottom: 14px;
+}
+.work-project-control-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+.work-project-control-grid div {
+  padding: 12px;
+  border-radius: 12px;
+  background: #f8faf5;
+  border: 1px solid rgba(14,45,69,.09);
+}
+.work-project-control-grid span {
+  display: block;
+  color: var(--muted);
+  font-size: .76rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+.work-project-control-grid strong {
+  color: var(--blue-900);
+}
+@media (max-width: 900px) {
+  .work-project-path,
+  .work-project-control-grid {
+    grid-template-columns: 1fr;
+  }
+}
