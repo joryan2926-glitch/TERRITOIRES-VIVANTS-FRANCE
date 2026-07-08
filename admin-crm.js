@@ -130,6 +130,17 @@ const contactProfiles = {
   citoyen: "partenaire",
   autre: "autre"
 };
+const profileCaseTypes = {
+  collectivite: "collectivite",
+  entreprise: "entreprise",
+  association: "benevole",
+  financeur: "financeur",
+  institution: "gouvernance",
+  proprietaire_personne_morale: "bien_vacant",
+  fournisseur: "materiaux",
+  partenaire: "autre",
+  autre: "autre"
+};
 
 const loginSection = document.querySelector("[data-crm-login]");
 const appSection = document.querySelector("[data-crm-app]");
@@ -466,7 +477,7 @@ function renderContactDetail(item, historyItems) {
     <label class="crm-wide-field">Notes internes<textarea name="notes" rows="5">${escapeHtml(item.notes || "")}</textarea></label>
     <section class="crm-relations"><p class="section-kicker">Organisations rattachees</p>${orgs.length ? orgs.map((link) => `<article><strong>${escapeHtml(link.organizations?.name || "Organisation")}</strong><span>${escapeHtml(link.role_label || "Role non renseigne")}${link.is_primary ? " - principal" : ""}</span></article>`).join("") : "<p>Aucune organisation rattachee.</p>"}</section>
     ${historyPanel(historyItems)}
-    <div class="admin-detail-actions"><button class="btn primary" type="submit">Enregistrer</button><button class="btn secondary" type="button" data-crm-quick="relance_7j">Relance 7 jours</button><button class="btn secondary" type="button" data-crm-quick="consent_granted">Consentement OK</button><button class="btn secondary" type="button" data-crm-partner-action="qualify">Qualifier partenariat</button><button class="btn secondary" type="button" data-crm-partner-action="task">Creer tache de contact</button><a class="btn secondary" href="mailto:${escapeHtml(item.email || "")}">Ecrire</a><a class="btn secondary" href="tel:${escapeHtml(item.phone || item.mobile || "")}">Appeler</a></div>
+    <div class="admin-detail-actions"><button class="btn primary" type="submit">Enregistrer</button><button class="btn secondary" type="button" data-crm-quick="relance_7j">Relance 7 jours</button><button class="btn secondary" type="button" data-crm-quick="consent_granted">Consentement OK</button><button class="btn secondary" type="button" data-crm-partner-action="qualify">Qualifier partenariat</button><button class="btn secondary" type="button" data-crm-partner-action="task">Creer tache de contact</button><button class="btn secondary" type="button" data-crm-partner-action="case">Ouvrir dossier</button><a class="btn secondary" href="mailto:${escapeHtml(item.email || "")}">Ecrire</a><a class="btn secondary" href="tel:${escapeHtml(item.phone || item.mobile || "")}">Appeler</a></div>
     <p class="form-note" data-crm-save-status role="status" hidden></p>
   </form>`;
 }
@@ -499,7 +510,7 @@ function renderOrganizationDetail(item, historyItems) {
     <label class="crm-wide-field">Notes internes<textarea name="notes" rows="5">${escapeHtml(item.notes || "")}</textarea></label>
     <section class="crm-relations"><p class="section-kicker">Contacts associes</p>${links.length ? links.map((link) => `<article><strong>${escapeHtml(link.crm_contacts?.display_name || "Contact")}</strong><span>${escapeHtml(link.role_label || link.crm_contacts?.contact_type || "Role non renseigne")}${link.is_primary ? " - principal" : ""}</span></article>`).join("") : "<p>Aucun contact rattache.</p>"}</section>
     ${historyPanel(historyItems)}
-    <div class="admin-detail-actions"><button class="btn primary" type="submit">Enregistrer</button><button class="btn secondary" type="button" data-crm-quick="relance_7j">Relance 7 jours</button><button class="btn secondary" type="button" data-crm-quick="relation_active">Relation active</button><button class="btn secondary" type="button" data-crm-partner-action="qualify">Qualifier partenariat</button><button class="btn secondary" type="button" data-crm-partner-action="task">Creer tache de contact</button><a class="btn secondary" href="mailto:${escapeHtml(item.email || "")}">Ecrire</a><button class="btn secondary" type="button" data-crm-create-linked-contact>Creer contact rattache</button></div>
+    <div class="admin-detail-actions"><button class="btn primary" type="submit">Enregistrer</button><button class="btn secondary" type="button" data-crm-quick="relance_7j">Relance 7 jours</button><button class="btn secondary" type="button" data-crm-quick="relation_active">Relation active</button><button class="btn secondary" type="button" data-crm-partner-action="qualify">Qualifier partenariat</button><button class="btn secondary" type="button" data-crm-partner-action="task">Creer tache de contact</button><button class="btn secondary" type="button" data-crm-partner-action="case">Ouvrir dossier</button><a class="btn secondary" href="mailto:${escapeHtml(item.email || "")}">Ecrire</a><button class="btn secondary" type="button" data-crm-create-linked-contact>Creer contact rattache</button></div>
     <p class="form-note" data-crm-save-status role="status" hidden></p>
   </form>`;
 }
@@ -641,6 +652,24 @@ async function updateDuplicate(id, status) {
   await loadDashboard().catch(() => {});
 }
 
+function crmCaseType(profileKey) {
+  return profileCaseTypes[profileKey] || "autre";
+}
+function crmCaseTitle(item, type, profile) {
+  return type === "organization" ? `${profile.title} - ${item.name}` : `${profile.title} - ${item.display_name}`;
+}
+async function createCrmCase(item, type, profile) {
+  const profileKey = crmSectorKey(item, type);
+  const territory = item.city || item.department || item.region || "";
+  const summary = [
+    `Origine CRM : ${type === "organization" ? item.name : item.display_name}`,
+    `Contribution possible : ${profile.contribution}`,
+    `Approche recommandee : ${profile.approach}`,
+    `Pieces a demander : ${profile.documents.join("; ")}`,
+    item.notes ? `Notes CRM : ${item.notes}` : ""
+  ].filter(Boolean).join("\n\n");
+  await api("/api/admin-cases", { method: "POST", body: JSON.stringify({ type: "case", case_type: crmCaseType(profileKey), title: crmCaseTitle(item, type, profile), status: "qualification", priority: profileKey === "financeur" || profileKey === "collectivite" ? "haute" : "normale", main_pole: profileKey === "fournisseur" ? "Materiautheque solidaire" : profileKey === "proprietaire_personne_morale" ? "Habitat vivant" : "Partenariats", assigned_to: "TVF", summary, territory, next_action: `Qualifier la demande et demander les pieces : ${profile.documents.slice(0, 3).join(", ")}`, risk_level: profileKey === "proprietaire_personne_morale" || profileKey === "fournisseur" ? "modere" : "faible", decision_status: "non_preparee" }) });
+}
 async function createCrmWorkTask(item, type, profile) {
   const title = type === "organization" ? `Contacter ${item.name}` : `Contacter ${item.display_name}`;
   const description = `Objectif : ${profile.approach}\nPieces a demander : ${profile.documents.join("; ")}`;
