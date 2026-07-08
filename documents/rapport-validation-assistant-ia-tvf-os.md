@@ -1,6 +1,6 @@
 ﻿# Rapport de validation - Module Assistant IA global TVF OS
 
-Statut : valide en developpement local, migrations Supabase production a appliquer avant verrouillage.
+Statut : migrations Supabase appliquees et production publique verifiee ; validation authentifiee avec TVF_ADMIN_TOKEN requise avant verrouillage definitif.
 
 ## Couverture des exigences
 
@@ -19,10 +19,10 @@ Statut : valide en developpement local, migrations Supabase production a appliqu
 | Taches a realiser | Conforme MVP | proposition JSON |
 | Feedback/apprentissage | Conforme MVP | `ai_feedback` |
 | Automatisations preparees | Conforme MVP | `ai_automation_rules`, `ai_automation_runs` |
-| RLS | Conforme a appliquer | `supabase/tvf-os-ai.sql` |
+| RLS | Conforme production | `supabase/tvf-os-ai.sql`, verification distante 5/5 |
 | API securisee | Conforme | `TVF_ADMIN_TOKEN` |
 | Frontend complet | Conforme | conversation, e-mail, suggestions, historique, sources |
-| Tests API | Conforme a executer | `tests/admin-ai-api.test.js` |
+| Tests API | Conforme local | `tests/admin-ai-api.test.js` |
 | Documentation | Conforme | `documents/module-assistant-ia-tvf-os.md` |
 
 Couverture fonctionnelle mesuree : 100 % sur le perimetre autorise du module Assistant IA global MVP. Les extensions futures concernent les modules non encore ouverts : e-mails connectes, agenda, taches, notifications, workflows automatiques executes, modele IA externe et recherche vectorielle avancee.
@@ -43,35 +43,35 @@ Valides le 08/07/2026 :
 - `node tests/admin-knowledge-api.test.js` : OK ;
 - `git diff --check` : OK.
 
-## Verification Supabase attendue
+## Verification Supabase production
 
-Appliquer dans l'ordre :
+Applique le 08/07/2026 sur le projet Supabase lie `iwzdpmtlcirtdaseyqdi` :
 
 1. `supabase/tvf-os-ai.sql` ;
 2. `supabase/tvf-os-ai-test-data.sql` ;
 3. `supabase/tvf-os-ai-verification.sql`.
 
-Seuils attendus :
+Resultats verifies :
 
 - tables : 5/5 ;
 - RLS : 5/5 ;
 - politiques : 10/10 ;
 - indexes : 10/10 ;
 - regles d'automatisation seed : 4/4 ;
-- interaction test : au moins 1 ;
-- suggestion test : au moins 1.
+- interaction test : 1 ;
+- suggestion test : 1.
 
-## Verification production attendue
+## Verification production
 
-- `/admin-ai` retourne `200 OK` ;
-- `/api/admin-ai` sans token retourne `401 Unauthorized` ;
-- le lien Assistant IA est visible dans le Dashboard et les modules admin ;
-- connexion avec `TVF_ADMIN_TOKEN` ;
-- question globale sourcee ;
-- analyse e-mail cree une suggestion ;
-- suggestion acceptee/refusee depuis l'interface ;
-- dashboard IA charge les indicateurs.
+- `/admin-ai` retourne `200 OK` : OK ;
+- `/api/admin-ai` sans token retourne `401 Unauthorized` : OK ;
+- le lien Assistant IA est visible dans le Dashboard de production : OK ;
+- connexion avec `TVF_ADMIN_TOKEN` : a confirmer par test utilisateur, token non present dans l'environnement local Codex ;
+- question globale sourcee : a confirmer en session authentifiee ;
+- analyse e-mail cree une suggestion : a confirmer en session authentifiee ;
+- suggestion acceptee/refusee depuis l'interface : a confirmer en session authentifiee ;
+- dashboard IA charge les indicateurs : a confirmer en session authentifiee.
 
 ## Decision de verrouillage
 
-Le module ne pourra etre verrouille qu'apres migrations appliquees, tests locaux OK et verification production confirmee par l'utilisateur.
+Le module ne pourra etre verrouille qu'apres confirmation utilisateur de la session authentifiee en production avec `TVF_ADMIN_TOKEN`. Les migrations Supabase, les tests locaux et les controles publics production sont deja valides.
