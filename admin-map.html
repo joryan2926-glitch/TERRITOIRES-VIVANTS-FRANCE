@@ -1,0 +1,115 @@
+﻿<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cartographie | TVF OS</title>
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="theme-color" content="#183f22">
+  <link rel="icon" href="assets/favicon-32.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="admin-body map-body">
+  <a class="skip-link" href="#map-main">Aller au contenu</a>
+  <header class="admin-topbar map-topbar">
+    <a class="admin-brand" href="index" aria-label="Retour au site Territoires Vivants France">
+      <img src="assets/logo-territoires-vivants-france-web.png" alt="Territoires Vivants France" width="320" height="132">
+    </a>
+    <div>
+      <p class="admin-kicker">TVF OS</p>
+      <h1>Cartographie</h1>
+    </div>
+    <div class="admin-top-actions">
+      <a class="btn secondary" href="dashboard">Dashboard</a>
+      <a class="btn secondary" href="admin-dossiers">Dossiers</a>
+      <a class="btn secondary" href="admin-documents">Documents</a>
+      <a class="btn secondary" href="admin-knowledge">Connaissances</a>
+      <a class="btn secondary" href="admin-ai">Assistant IA</a>
+    </div>
+  </header>
+
+  <main id="map-main" class="admin-shell map-shell">
+    <section class="admin-login" data-map-login>
+      <div>
+        <p class="section-kicker">Acces securise</p>
+        <h2>Connexion a la carte TVF</h2>
+        <p>La cartographie contient des localisations internes, parfois sensibles. Les coordonnees exactes doivent rester controlees.</p>
+      </div>
+      <form data-map-token-form>
+        <label for="map-token">Token admin</label>
+        <input id="map-token" name="token" type="password" autocomplete="current-password" placeholder="TVF_ADMIN_TOKEN">
+        <button class="btn primary" type="submit">Ouvrir la carte</button>
+        <p class="form-note" data-map-login-status role="status" hidden></p>
+      </form>
+    </section>
+
+    <section class="admin-app map-app" data-map-app hidden>
+      <div class="admin-toolbar map-toolbar">
+        <div>
+          <p class="section-kicker">Pilotage territorial</p>
+          <h2>Biens, ressources, partenaires et signalements</h2>
+          <p data-map-count>Chargement de la carte...</p>
+        </div>
+        <div class="admin-toolbar-actions">
+          <button class="btn primary" type="button" data-map-create>Nouveau point</button>
+          <button class="btn secondary" type="button" data-map-refresh>Actualiser</button>
+          <button class="btn secondary" type="button" data-map-export>Exporter CSV</button>
+          <button class="btn ghost" type="button" data-map-logout>Deconnexion</button>
+        </div>
+      </div>
+
+      <section class="crm-kpis map-kpis" data-map-kpis aria-label="Indicateurs cartographie"></section>
+
+      <form class="admin-filters map-filters" data-map-filters>
+        <label>Recherche<input name="q" type="search" placeholder="Libelle, ville, adresse, description"></label>
+        <label>Couche<select name="point_type"><option value="all">Toutes</option><option value="bien">Biens</option><option value="commerce">Commerces</option><option value="friche">Friches</option><option value="materiau">Materiaux</option><option value="partenaire">Partenaires</option><option value="projet">Projets</option><option value="signalement">Signalements</option><option value="antenne">Antennes</option></select></label>
+        <label>Statut<select name="status"><option value="all">Tous</option><option value="actif">Actifs</option><option value="a_verifier">A verifier</option><option value="inactif">Inactifs</option><option value="archive">Archives</option></select></label>
+        <label>Visibilite<select name="visibility_level"><option value="all">Toutes</option><option value="public">Public</option><option value="interne">Interne</option><option value="confidentiel">Confidentiel</option><option value="sensible">Sensible</option></select></label>
+      </form>
+
+      <section class="admin-ai-panel map-ai-panel">
+        <div class="admin-panel-head"><div><p class="section-kicker">Assistant cartographie</p><h3>Alertes territoriales</h3></div><strong data-map-alert-count>0</strong></div>
+        <div data-map-alerts class="map-alerts"></div>
+      </section>
+
+      <div class="map-main-grid">
+        <section class="map-canvas-panel" aria-label="Carte interne">
+          <div class="map-board" data-map-board><p class="map-empty">Aucun point geolocalise a afficher.</p></div>
+          <div class="map-legend" data-map-legend></div>
+        </section>
+        <section class="admin-list map-list" aria-label="Liste des points">
+          <div data-map-list class="admin-request-list"></div>
+          <p class="form-note" data-map-empty hidden>Aucun point ne correspond aux filtres.</p>
+        </section>
+        <aside class="admin-detail map-detail" data-map-detail aria-label="Detail point cartographique">
+          <div class="admin-detail-empty"><p class="section-kicker">Detail</p><h3>Selectionnez un point</h3><p>Controlez la precision, la confidentialite, l'objet lie et les alertes.</p></div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="admin-modal" data-map-modal hidden aria-label="Creation point cartographique">
+      <div class="admin-modal-panel map-modal-panel">
+        <div class="admin-modal-head"><div><p class="section-kicker">Cartographie</p><h2>Nouveau point</h2></div><button class="btn ghost" type="button" data-map-close-modal>Fermer</button></div>
+        <form class="admin-create-form map-create-form" data-map-form>
+          <label>Libelle<input name="label" required placeholder="Ex. Immeuble vacant Chateaucreux"></label>
+          <label>Type<select name="point_type"><option value="bien">Bien</option><option value="commerce">Commerce</option><option value="friche">Friche</option><option value="materiau">Materiaux</option><option value="partenaire">Partenaire</option><option value="projet">Projet</option><option value="signalement">Signalement</option><option value="antenne">Antenne</option><option value="autre">Autre</option></select></label>
+          <label>Latitude<input name="latitude" inputmode="decimal" placeholder="45.4397"></label>
+          <label>Longitude<input name="longitude" inputmode="decimal" placeholder="4.3872"></label>
+          <label>Precision<select name="precision_level"><option value="quartier">Quartier</option><option value="exact">Exacte</option><option value="rue">Rue</option><option value="commune">Commune</option><option value="masque">Masquee</option></select></label>
+          <label>Visibilite<select name="visibility_level"><option value="interne">Interne</option><option value="confidentiel">Confidentiel</option><option value="sensible">Sensible</option><option value="public">Public</option></select></label>
+          <label>Statut<select name="status"><option value="a_verifier">A verifier</option><option value="actif">Actif</option><option value="inactif">Inactif</option><option value="archive">Archive</option></select></label>
+          <label>Risque<select name="risk_level"><option value="modere">Modere</option><option value="faible">Faible</option><option value="eleve">Eleve</option><option value="critique">Critique</option></select></label>
+          <label class="admin-create-wide">Adresse<input name="address_text" placeholder="Adresse ou secteur"></label>
+          <label>Ville<input name="city" placeholder="Saint-Etienne"></label>
+          <label>Departement<input name="department" placeholder="Loire"></label>
+          <label class="admin-create-wide">Description<textarea name="description" rows="5" placeholder="Contexte, opportunite, contraintes, source"></textarea></label>
+          <div class="admin-detail-actions admin-create-wide"><button class="btn primary" type="submit">Creer</button><button class="btn secondary" type="button" data-map-close-modal>Annuler</button></div>
+          <p class="form-note admin-create-wide" data-map-modal-status hidden></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <script src="admin-map.js" defer></script>
+</body>
+</html>
