@@ -5251,3 +5251,54 @@ tr:nth-child(even) td {
     grid-template-columns: 1fr;
   }
 }
+
+/* Module Dossiers TVF OS - journal d'audit */
+.cases-history-panel .admin-panel-head strong {
+  min-width: 34px;
+  height: 34px;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 999px;
+  background: rgba(47,125,50,.12);
+  color: var(--green-900);
+}
+.cases-history-list {
+  display: grid;
+  gap: 10px;
+}
+.cases-history-list article {
+  display: grid;
+  gap: 6px;
+  padding: 12px 14px;
+  border: 1px solid rgba(14,45,69,.1);
+  border-left: 4px solid var(--green-700);
+  border-radius: 12px;
+  background: #f8faf5;
+}
+.cases-history-list article > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.cases-history-list strong {
+  color: var(--blue-900);
+}
+.cases-history-list small,
+.cases-history-list span,
+.cases-history-list em {
+  color: var(--muted);
+  font-size: .8rem;
+  font-weight: 750;
+}
+.cases-history-list em {
+  font-style: normal;
+  color: var(--green-900);
+}
+@media (max-width: 680px) {
+  .cases-history-list article > div {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 4px;
+  }
+}
