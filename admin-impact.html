@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Impact et statistiques | TVF OS</title>
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="theme-color" content="#183f22">
+  <link rel="icon" href="assets/favicon-32.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="admin-body impact-body">
+  <a class="skip-link" href="#impact-main">Aller au contenu</a>
+  <header class="admin-topbar impact-topbar">
+    <a class="admin-brand" href="index" aria-label="Retour au site Territoires Vivants France">
+      <img src="assets/logo-territoires-vivants-france-web.png" alt="Territoires Vivants France" width="320" height="132">
+    </a>
+    <div>
+      <p class="admin-kicker">TVF OS</p>
+      <h1>Impact et statistiques</h1>
+    </div>
+    <div class="admin-top-actions">
+      <a class="btn secondary" href="dashboard">Dashboard</a>
+      <a class="btn secondary" href="admin-finances">Finances</a>
+      <a class="btn secondary" href="admin-documents">Documents</a>
+      <a class="btn secondary" href="admin-observatoire">Observatoire</a>
+      <a class="btn secondary" href="admin-ai">Assistant IA</a>
+    </div>
+  </header>
+
+  <main id="impact-main" class="admin-shell impact-shell">
+    <section class="admin-login" data-impact-login>
+      <div>
+        <p class="section-kicker">Acces securise</p>
+        <h2>Connexion a l'impact TVF</h2>
+        <p>Seuls les resultats documentes et prouves doivent alimenter les bilans et exports.</p>
+      </div>
+      <form data-impact-token-form>
+        <label for="impact-token">Token admin</label>
+        <input id="impact-token" name="token" type="password" autocomplete="current-password" placeholder="TVF_ADMIN_TOKEN">
+        <button class="btn primary" type="submit">Ouvrir l'impact</button>
+        <p class="form-note" data-impact-login-status role="status" hidden></p>
+      </form>
+    </section>
+
+    <section class="admin-app impact-app" data-impact-app hidden>
+      <div class="admin-toolbar impact-toolbar">
+        <div>
+          <p class="section-kicker">Resultats prouves</p>
+          <h2>Indicateurs, preuves, bilans et exports</h2>
+          <p data-impact-count>Chargement de l'impact...</p>
+        </div>
+        <div class="admin-toolbar-actions">
+          <button class="btn primary" type="button" data-impact-create>Nouvel element</button>
+          <button class="btn secondary" type="button" data-impact-report>Generer bilan</button>
+          <button class="btn secondary" type="button" data-impact-refresh>Actualiser</button>
+          <button class="btn secondary" type="button" data-impact-export>Exporter CSV</button>
+          <button class="btn ghost" type="button" data-impact-logout>Deconnexion</button>
+        </div>
+      </div>
+
+      <section class="crm-kpis impact-kpis" data-impact-kpis aria-label="Indicateurs impact"></section>
+
+      <div class="admin-status-tabs impact-tabs" role="tablist" aria-label="Vues impact">
+        <button type="button" class="is-active" data-impact-view="metrics">Indicateurs</button>
+        <button type="button" data-impact-view="values">Valeurs</button>
+        <button type="button" data-impact-view="proofs">Preuves</button>
+        <button type="button" data-impact-view="reports">Bilans</button>
+        <button type="button" data-impact-view="exports">Exports</button>
+      </div>
+
+      <form class="admin-filters impact-filters" data-impact-filters>
+        <label>Recherche<input name="q" type="search" placeholder="Indicateur, preuve, bilan"></label>
+        <label>Type<select name="type" data-impact-type-filter><option value="all">Tous</option></select></label>
+        <label>Statut<select name="status" data-impact-status-filter><option value="all">Tous</option></select></label>
+      </form>
+
+      <section class="admin-ai-panel impact-ai-panel">
+        <div class="admin-panel-head">
+          <div>
+            <p class="section-kicker">Assistant impact</p>
+            <h3>Fiabilite des resultats</h3>
+          </div>
+          <strong data-impact-ai-score>0%</strong>
+        </div>
+        <p data-impact-ai-summary>Les donnees non validees sont exclues des bilans.</p>
+        <div class="admin-ai-grid" data-impact-ai-grid></div>
+      </section>
+
+      <div class="impact-layout admin-layout">
+        <section class="admin-list impact-list" aria-label="Liste impact">
+          <div data-impact-list class="admin-request-list"></div>
+          <p class="form-note" data-impact-empty hidden>Aucun element ne correspond aux filtres.</p>
+        </section>
+        <aside class="admin-detail impact-detail" data-impact-detail aria-label="Detail impact">
+          <div class="admin-detail-empty">
+            <p class="section-kicker">Detail</p>
+            <h3>Selectionnez un element</h3>
+            <p>Controlez la preuve, la fiabilite, le statut et la publication.</p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="admin-modal" data-impact-modal hidden aria-label="Creation impact">
+      <div class="admin-modal-panel impact-modal-panel">
+        <div class="admin-modal-head">
+          <div>
+            <p class="section-kicker">Impact</p>
+            <h2>Nouvel element</h2>
+          </div>
+          <button class="btn ghost" type="button" data-impact-close-modal>Fermer</button>
+        </div>
+        <form class="admin-create-form impact-create-form" data-impact-form>
+          <label>Element<select name="type" data-impact-entity-select><option value="metric">Indicateur</option><option value="proof">Preuve</option><option value="report">Bilan</option><option value="export">Export</option></select></label>
+          <label class="impact-field-metric impact-field-proof impact-field-report impact-field-export">Titre / nom<input name="title" placeholder="Nom clair"></label>
+          <label class="impact-field-metric">Type indicateur<select name="metric_type"><option value="impact">Impact</option><option value="activity">Activite</option><option value="finance">Finance</option><option value="territory">Territoire</option><option value="volunteer">Benevolat</option><option value="material">Materiaux</option><option value="partner">Partenaires</option><option value="case">Dossiers</option><option value="other">Autre</option></select></label>
+          <label class="impact-field-metric">Portee<select name="metric_scope"><option value="national">National</option><option value="branch">Antenne</option><option value="pole">Pole</option><option value="project">Projet</option><option value="case">Dossier</option></select></label>
+          <label class="impact-field-metric">Unite<input name="unit" placeholder="heures, dossiers, kg, EUR"></label>
+          <label class="impact-field-proof">Type preuve<select name="proof_type"><option value="document">Document</option><option value="photo">Photo</option><option value="report">Rapport</option><option value="invoice">Facture</option><option value="attendance">Emargement</option><option value="decision">Decision</option><option value="external_source">Source externe</option><option value="other">Autre</option></select></label>
+          <label class="impact-field-proof impact-field-export">URL<input name="url" placeholder="https://..."></label>
+          <label class="impact-field-report">Type bilan<select name="report_type"><option value="national">National</option><option value="branch">Antenne</option><option value="pole">Pole</option><option value="project">Projet</option><option value="funder">Financeur</option><option value="public">Public</option></select></label>
+          <label class="impact-field-export">Format<select name="export_format"><option value="csv">CSV</option><option value="json">JSON</option><option value="pdf">PDF</option></select></label>
+          <label class="admin-create-wide">Description / synthese<textarea name="summary" rows="5" placeholder="Definition, source, methode de calcul ou commentaire"></textarea></label>
+          <div class="admin-detail-actions admin-create-wide">
+            <button class="btn primary" type="submit">Creer</button>
+            <button class="btn secondary" type="button" data-impact-close-modal>Annuler</button>
+          </div>
+          <p class="form-note admin-create-wide" data-impact-modal-status hidden></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <script src="admin-impact.js" defer></script>
+</body>
+</html>
