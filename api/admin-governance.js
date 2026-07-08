@@ -1,4 +1,4 @@
-﻿const crypto = require("crypto");
+const crypto = require("crypto");
 
 const OUTBOUND_TIMEOUT_MS = Number(process.env.TVF_OUTBOUND_TIMEOUT_MS || 9000);
 const DECISION_TYPES = new Set(["strategic", "operational", "financial", "legal", "branch", "partnership", "risk", "hr", "other"]);
@@ -18,7 +18,28 @@ function cleanEnvUrl(value) { return clean(value || "", 600).replace(/^[`'\",;]+
 function normalizeSupabaseRestUrl(rawUrl) { const cleaned = cleanEnvUrl(rawUrl).replace(/\/+$/, ""); if (!cleaned) return ""; return cleaned.endsWith("/rest/v1") ? cleaned : `${cleaned}/rest/v1`; }
 async function readJsonBody(req) { let body = ""; for await (const chunk of req) { body += chunk; if (body.length > 90 * 1024) throw Object.assign(new Error("Payload trop volumineux."), { statusCode: 413 }); } if (!body) return {}; try { return JSON.parse(body); } catch { throw Object.assign(new Error("JSON invalide."), { statusCode: 400 }); } }
 function adminToken() { return cleanEnvToken(process.env.TVF_ADMIN_TOKEN || process.env.ADMIN_TOKEN || "", 3000); }
-function tokenFromRequest(req) { const authorization = clean(req.headers.authorization || "", 4000); if (authorization.toLowerCase().startsWith("bearer ")) return cleanEnvToken(authorization.slice(7), 3000); return cleanEnvToken(req.headers["x-admin-token"] || "", 3000); }
+function adminCookieSignature() {
+  const token = adminToken();
+  if (!token) return "";
+  return crypto.createHmac("sha256", token).update("tvf-os-admin-session-v1").digest("hex");
+}
+function cookieValue(req, name = "tvf_admin_session") {
+  const cookieHeader = clean(req.headers.cookie || "", 6000);
+  const cookies = cookieHeader.split(";").map((item) => item.trim());
+  const found = cookies.find((item) => item.startsWith(`${name}=`));
+  return found ? cleanEnvToken(decodeURIComponent(found.slice(name.length + 1)), 3000) : "";
+}
+function tokenFromRequest(req) {
+  const expectedCookie = adminCookieSignature();
+  const receivedCookie = cookieValue(req);
+  if (expectedCookie && receivedCookie && safeEqual(receivedCookie, expectedCookie)) return adminToken();
+  const authorization = clean(req.headers.authorization || "", 4000);
+  if (authorization.toLowerCase().startsWith("bearer ")) {
+    const bearer = cleanEnvToken(authorization.slice(7), 3000);
+    if (bearer) return bearer;
+  }
+  return cleanEnvToken(req.headers["x-admin-token"] || "", 3000);
+}
 function safeEqual(a, b) { if (!a || !b) return false; const left = Buffer.from(a); const right = Buffer.from(b); if (left.length !== right.length) return false; return crypto.timingSafeEqual(left, right); }
 function requireAdmin(req) { const expected = adminToken(); if (!expected) throw Object.assign(new Error("Back-office non configure : ajoutez TVF_ADMIN_TOKEN dans Vercel."), { statusCode: 503, code: "ADMIN_TOKEN_MISSING" }); if (!safeEqual(tokenFromRequest(req), expected)) throw Object.assign(new Error("Acces admin refuse."), { statusCode: 401, code: "ADMIN_UNAUTHORIZED" }); }
 function supabaseConfig() { const restUrl = normalizeSupabaseRestUrl(process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL); const key = cleanEnvToken(process.env.SUPABASE_SERVICE_ROLE_KEY || "", 3000); if (!restUrl || !key) throw Object.assign(new Error("Supabase admin non configure : SUPABASE_URL et SUPABASE_SERVICE_ROLE_KEY sont requis."), { statusCode: 503, code: "SUPABASE_ADMIN_NOT_CONFIGURED" }); return { restUrl, key }; }

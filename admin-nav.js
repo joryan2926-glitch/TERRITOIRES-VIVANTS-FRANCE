@@ -1,3 +1,6 @@
+const TVF_ADMIN_TOKEN_KEY = "tvfAdminToken";
+const TVF_ADMIN_COOKIE_SENTINEL = "__tvf_cookie_session__";
+const TVF_ADMIN_COOKIE_CHECK_KEY = "tvfAdminCookieHydrated";
 const TVF_ADMIN_MODULES = [
   { href: "admin", label: "Accueil" },
   { href: "dashboard", label: "Dashboard" },
@@ -18,6 +21,66 @@ const TVF_ADMIN_MODULES = [
   { href: "admin-risks", label: "Risques" },
   { href: "admin-users", label: "Utilisateurs" }
 ];
+
+function readSessionToken() {
+  try { return sessionStorage.getItem(TVF_ADMIN_TOKEN_KEY) || ""; } catch { return ""; }
+}
+
+function writeSessionToken(value) {
+  try { if (value) sessionStorage.setItem(TVF_ADMIN_TOKEN_KEY, value); else sessionStorage.removeItem(TVF_ADMIN_TOKEN_KEY); } catch {}
+}
+
+function markCookieChecked(value) {
+  try { if (value) sessionStorage.setItem(TVF_ADMIN_COOKIE_CHECK_KEY, "1"); else sessionStorage.removeItem(TVF_ADMIN_COOKIE_CHECK_KEY); } catch {}
+}
+
+function cookieChecked() {
+  try { return sessionStorage.getItem(TVF_ADMIN_COOKIE_CHECK_KEY) === "1"; } catch { return false; }
+}
+
+function clearAdminSession() {
+  writeSessionToken("");
+  markCookieChecked(false);
+  try { fetch("/api/admin-session", { method: "DELETE", keepalive: true }); } catch {}
+}
+
+async function hydrateSessionFromCookie() {
+  if (readSessionToken() || cookieChecked()) return;
+  markCookieChecked(true);
+  try {
+    const response = await fetch("/api/admin-session", { method: "GET", headers: { "Content-Type": "application/json" } });
+    if (!response.ok) return;
+    writeSessionToken(TVF_ADMIN_COOKIE_SENTINEL);
+    window.location.reload();
+  } catch {}
+}
+
+function bindAdminSessionBridge() {
+  document.addEventListener("submit", (event) => {
+    const form = event.target?.closest?.("form");
+    if (!form || !form.matches('[data-admin-home-token-form], [data-dashboard-token-form], [data-admin-token-form], [data-crm-token-form], [data-cases-token-form], [data-documents-token-form], [data-procedures-token-form], [data-knowledge-token-form], [data-ai-token-form], [data-map-token-form], [data-observatoire-token-form], [data-finances-token-form], [data-impact-token-form], [data-branches-token-form], [data-governance-token-form], [data-risks-token-form], [data-users-token-form], [data-emails-token-form]')) return;
+    const value = String(new FormData(form).get("token") || "").trim();
+    if (!value) return;
+    markCookieChecked(false);
+    try { fetch("/api/admin-session", { method: "POST", headers: { "Content-Type": "application/json", Authorization: `Bearer ${value}` }, keepalive: true }); } catch {}
+  }, true);
+
+  document.addEventListener("click", (event) => {
+    if (event.target?.closest?.('[data-admin-home-logout], [data-dashboard-logout], [data-admin-logout], [data-crm-logout], [data-cases-logout], [data-documents-logout], [data-procedures-logout], [data-knowledge-logout], [data-ai-logout], [data-map-logout], [data-observatoire-logout], [data-finances-logout], [data-impact-logout], [data-branches-logout], [data-governance-logout], [data-risks-logout], [data-users-logout], [data-emails-logout]')) clearAdminSession();
+  }, true);
+
+  if (window.fetch && !window.fetch.__tvfAdminTokenGuard) {
+    const originalFetch = window.fetch.bind(window);
+    const guardedFetch = async (...args) => {
+      const response = await originalFetch(...args);
+      const url = String(args[0]?.url || args[0] || "");
+      if (response.status === 401 && url.includes("/api/admin")) clearAdminSession();
+      return response;
+    };
+    guardedFetch.__tvfAdminTokenGuard = true;
+    window.fetch = guardedFetch;
+  }
+}
 
 function normalizePath(pathname) {
   const clean = String(pathname || "").split("/").filter(Boolean).pop() || "index";
@@ -41,4 +104,6 @@ function createAdminModuleNav() {
   topbar.insertAdjacentElement("afterend", nav);
 }
 
+bindAdminSessionBridge();
+hydrateSessionFromCookie();
 createAdminModuleNav();

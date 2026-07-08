@@ -1,4 +1,4 @@
-﻿const crypto = require("crypto");
+const crypto = require("crypto");
 
 const CONTACT_TABLE = process.env.SUPABASE_CONTACTS_TABLE || "contacts";
 const OUTBOUND_TIMEOUT_MS = Number(process.env.TVF_OUTBOUND_TIMEOUT_MS || 9000);
@@ -67,14 +67,28 @@ function adminToken() {
   return cleanEnvToken(process.env.TVF_ADMIN_TOKEN || process.env.ADMIN_TOKEN || "", 3000);
 }
 
+function adminCookieSignature() {
+  const token = adminToken();
+  if (!token) return "";
+  return crypto.createHmac("sha256", token).update("tvf-os-admin-session-v1").digest("hex");
+}
+function cookieValue(req, name = "tvf_admin_session") {
+  const cookieHeader = clean(req.headers.cookie || "", 6000);
+  const cookies = cookieHeader.split(";").map((item) => item.trim());
+  const found = cookies.find((item) => item.startsWith(`${name}=`));
+  return found ? cleanEnvToken(decodeURIComponent(found.slice(name.length + 1)), 3000) : "";
+}
 function tokenFromRequest(req) {
+  const expectedCookie = adminCookieSignature();
+  const receivedCookie = cookieValue(req);
+  if (expectedCookie && receivedCookie && safeEqual(receivedCookie, expectedCookie)) return adminToken();
   const authorization = clean(req.headers.authorization || "", 4000);
   if (authorization.toLowerCase().startsWith("bearer ")) {
-    return cleanEnvToken(authorization.slice(7), 3000);
+    const bearer = cleanEnvToken(authorization.slice(7), 3000);
+    if (bearer) return bearer;
   }
   return cleanEnvToken(req.headers["x-admin-token"] || "", 3000);
 }
-
 function safeEqual(a, b) {
   if (!a || !b) return false;
   const left = Buffer.from(a);
@@ -531,6 +545,3 @@ module.exports._private = {
   createPayload,
   updatePayload,
 };
-
-
-
