@@ -55,14 +55,17 @@ Validee le 08/07/2026 :
 - triggers 5/5 : OK ;
 - donnee de test `test-qualification-bien-vacant` creee avec 3 etapes et 1 application active.
 
-## Verification production attendue
+## Verification production
 
-1. Publier le code.
-2. Ouvrir `/admin-procedures`.
-3. Tester l'acces avec `TVF_ADMIN_TOKEN`.
-4. Verifier les KPI, la liste, la fiche, l'ajout d'etape, l'application d'une procedure, la checklist active, la question rapide et l'export CSV.
-5. Verifier `/api/admin-procedures` sans token : attendu `401`.
+Validee partiellement le 08/07/2026 apres push `35afcf1` :
+
+- `/admin-procedures` retourne `200 OK` en production ;
+- `/api/admin-procedures` sans token retourne `401 Unauthorized` ;
+- le lien Procedures est visible dans `/dashboard` en production ;
+- le code est publie via GitHub/Vercel.
+
+Reste a confirmer pour verrouillage 100 % : acces avec `TVF_ADMIN_TOKEN`, chargement des KPI, ouverture de la procedure `test-qualification-bien-vacant`, ajout d'etape, application a un objet, checklist active, question rapide et export CSV depuis l'interface reelle. Le token admin n'est pas disponible dans l'environnement local Codex, donc cette verification authentifiee necessite une confirmation utilisateur ou une variable locale temporaire.
 
 ## Decision de verrouillage
 
-Le module Procedures pourra etre verrouille apres validation production reelle avec migration appliquee, tests executes et confirmation utilisateur.
+Le module Procedures n'est pas encore verrouille definitivement. Il est conforme techniquement et migre en production, mais la validation fonctionnelle authentifiee doit encore etre confirmee avant ouverture du module suivant.
