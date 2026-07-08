@@ -1,4 +1,4 @@
-﻿const ADMIN_TOKEN_KEY = "tvfAdminToken";
+const ADMIN_TOKEN_KEY = "tvfAdminToken";
 const statusLabels = {
   nouveau: "Nouveau",
   a_qualifier: "A qualifier",
@@ -64,6 +64,8 @@ const createForm = document.querySelector("[data-admin-create-form]");
 const createStatus = document.querySelector("[data-admin-create-status]");
 const closeCreateButtons = document.querySelectorAll("[data-admin-close-create]");
 const statusShortcuts = document.querySelectorAll("[data-status-shortcut]");
+const priorityShortcuts = document.querySelectorAll("[data-priority-shortcut]");
+const kpiEl = document.querySelector("[data-admin-kpis]");
 
 let contacts = [];
 let selectedId = null;
@@ -235,10 +237,32 @@ function isOverdue(contact) {
   return new Date(contact.next_action_due_at).getTime() < Date.now();
 }
 
+function averageScore() {
+  if (!contacts.length) return 0;
+  const total = contacts.reduce((sum, contact) => sum + Number(contact.qualification_score || contact.assistant?.qualification_score || 0), 0);
+  return Math.round(total / contacts.length);
+}
+
+function updateKpis() {
+  if (!kpiEl) return;
+  const values = [
+    contacts.length,
+    contacts.filter((contact) => ["nouveau", "a_qualifier"].includes(contact.status)).length,
+    contacts.filter(isOverdue).length,
+    contacts.filter((contact) => contact.status === "rendez_vous").length,
+    `${averageScore()}%`,
+  ];
+  kpiEl.querySelectorAll("strong").forEach((node, index) => { node.textContent = values[index] ?? 0; });
+}
+
 function renderStatusShortcuts() {
-  const current = filtersForm?.elements.status?.value || "all";
+  const currentStatus = filtersForm?.elements.status?.value || "all";
+  const currentPriority = filtersForm?.elements.priority?.value || "all";
   statusShortcuts.forEach((button) => {
-    button.classList.toggle("is-active", button.dataset.statusShortcut === current);
+    button.classList.toggle("is-active", button.dataset.statusShortcut === currentStatus && currentPriority === "all");
+  });
+  priorityShortcuts.forEach((button) => {
+    button.classList.toggle("is-active", button.dataset.priorityShortcut === currentPriority);
   });
 }
 
@@ -263,7 +287,10 @@ function renderList() {
     .join("");
 
   if (emptyEl) emptyEl.hidden = contacts.length !== 0;
-  if (countEl) countEl.textContent = `${contacts.length} demande${contacts.length > 1 ? "s" : ""} affichee${contacts.length > 1 ? "s" : ""}`;
+  if (countEl) {
+    const late = contacts.filter(isOverdue).length;
+    countEl.textContent = `${contacts.length} demande${contacts.length > 1 ? "s" : ""} affichee${contacts.length > 1 ? "s" : ""}${late ? ` - ${late} en retard` : ""}`;
+  }
 }
 
 function csvCell(value) {
@@ -390,7 +417,16 @@ function renderDetail() {
       <div><span>Canal</span><strong>${escapeHtml(label(channelLabels, contact.channel))}</strong></div>
       <div><span>Source</span><strong>${escapeHtml(contact.source_page || "Site TVF")}</strong></div>
       <div><span>Mise a jour</span><strong>${escapeHtml(formatDate(contact.updated_at))}</strong></div>
+      <div><span>Suivi</span><strong>${escapeHtml(contact.assigned_to || "A affecter")}</strong></div>
+      <div><span>Prochaine action</span><strong>${escapeHtml(contact.next_action || contact.assistant?.next_action || "A definir")}</strong></div>
     </div>
+
+    <ol class="admin-case-flow" aria-label="Parcours de traitement">
+      <li class="${contact.status ? "is-done" : ""}"><span>1</span><strong>Reception</strong><small>Demande enregistree</small></li>
+      <li class="${["a_qualifier", "en_cours", "rendez_vous", "en_attente", "accepte", "refuse", "archive"].includes(contact.status) ? "is-done" : ""}"><span>2</span><strong>Qualification</strong><small>Categorie, pieces, priorite</small></li>
+      <li class="${["en_cours", "rendez_vous", "en_attente", "accepte", "archive"].includes(contact.status) ? "is-done" : ""}"><span>3</span><strong>Suivi</strong><small>Relance ou rendez-vous</small></li>
+      <li class="${["accepte", "refuse", "archive"].includes(contact.status) ? "is-done" : ""}"><span>4</span><strong>Decision</strong><small>Dossier, refus ou archive</small></li>
+    </ol>
 
     ${renderAssistant(contact)}
 
@@ -399,6 +435,7 @@ function renderDetail() {
       <button class="btn secondary" type="button" data-quick-status="en_cours">En cours</button>
       <button class="btn secondary" type="button" data-quick-status="rendez_vous">Rendez-vous</button>
       <button class="btn secondary" type="button" data-quick-template="pieces">Demander pieces</button>
+      <button class="btn secondary" type="button" data-quick-followup="48h">Relance 48h</button>
       <button class="btn secondary" type="button" data-prepare-case>Preparer dossier</button>
       <button class="btn ghost" type="button" data-quick-status="refuse">Refuser</button>
       <button class="btn ghost" type="button" data-quick-status="archive">Archiver</button>
@@ -619,9 +656,22 @@ function bindEvents() {
 
   statusShortcuts.forEach((button) => {
     button.addEventListener("click", () => {
-      const select = filtersForm?.elements.status;
-      if (!select) return;
-      select.value = button.dataset.statusShortcut || "all";
+      const statusSelect = filtersForm?.elements.status;
+      const prioritySelect = filtersForm?.elements.priority;
+      if (!statusSelect) return;
+      statusSelect.value = button.dataset.statusShortcut || "all";
+      if (prioritySelect) prioritySelect.value = "all";
+      loadContacts().catch((error) => alert(error.message));
+    });
+  });
+
+  priorityShortcuts.forEach((button) => {
+    button.addEventListener("click", () => {
+      const statusSelect = filtersForm?.elements.status;
+      const prioritySelect = filtersForm?.elements.priority;
+      if (!prioritySelect) return;
+      prioritySelect.value = button.dataset.priorityShortcut || "all";
+      if (statusSelect) statusSelect.value = "all";
       loadContacts().catch((error) => alert(error.message));
     });
   });
@@ -667,6 +717,13 @@ function bindEvents() {
       const textarea = detailEl.querySelector("[data-response-body]");
       if (select) select.value = quickTemplate.dataset.quickTemplate;
       if (textarea) textarea.value = responseTemplate(updated || contact, quickTemplate.dataset.quickTemplate);
+      return;
+    }
+
+    const quickFollowup = event.target.closest("[data-quick-followup]");
+    if (quickFollowup) {
+      const due = new Date(Date.now() + 48 * 60 * 60 * 1000).toISOString();
+      await updateSelected({ status: "en_cours", next_action: "Relancer le demandeur sous 48h", next_action_due_at: due });
       return;
     }
 

@@ -654,7 +654,7 @@ table a:focus-visible {
 }
 
 .document-archive[open] summary::after {
-  content: "Ã¢Ë†â€™";
+  content: "ÃƒÆ’Ã‚Â¢Ãƒâ€¹Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢";
 }
 
 .document-archive .doc-tool-panel,
@@ -2787,7 +2787,7 @@ tr:nth-child(even) td {
   opacity: 0.72;
   transform: none;
 }
-/* Ajustement typographique mobile lÃƒÂ©ger */
+/* Ajustement typographique mobile lÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â©ger */
 @media (max-width: 760px) {
   :root {
     --paragraph-size: 0.98rem;
@@ -3377,7 +3377,7 @@ tr:nth-child(even) td {
   }
 }
 
-/* Ajustement lÃƒÂ©ger des grands visuels de dÃƒÂ©but de page */
+/* Ajustement lÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â©ger des grands visuels de dÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â©but de page */
 .hero {
   width: min(100% - 40px, 1500px);
   margin: 14px auto 0;
@@ -3436,7 +3436,7 @@ tr:nth-child(even) td {
   }
 }
 
-/* Checklists partenaires - piÃƒÂ¨ces ÃƒÂ  prÃƒÂ©parer */
+/* Checklists partenaires - piÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¨ces ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â  prÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â©parer */
 .partner-prep {
   background: linear-gradient(180deg, #f8faf5 0%, #eef6ea 100%);
 }
@@ -4108,7 +4108,9 @@ tr:nth-child(even) td {
   }
 
   .admin-ai-grid,
-  .admin-create-form {
+  .admin-create-form,
+  .admin-kpi-strip,
+  .admin-case-flow {
     grid-template-columns: 1fr;
   }
 
@@ -4120,6 +4122,102 @@ tr:nth-child(even) td {
   .admin-top-actions .btn {
     width: 100%;
   }
+}
+
+
+.admin-kpi-strip {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 12px;
+  padding: 18px 26px;
+  border-bottom: 1px solid var(--line);
+  background: #fff;
+}
+
+.admin-kpi-strip article {
+  min-height: 92px;
+  display: grid;
+  gap: 3px;
+  padding: 14px;
+  border: 1px solid rgba(14, 45, 69, 0.1);
+  border-radius: 14px;
+  background: #f8faf5;
+}
+
+.admin-kpi-strip article[data-tone="warning"] {
+  background: #fffaf0;
+  border-color: rgba(213, 162, 56, 0.28);
+}
+
+.admin-kpi-strip article[data-tone="urgent"] {
+  background: #fff3ef;
+  border-color: rgba(179, 58, 24, 0.24);
+}
+
+.admin-kpi-strip span,
+.admin-kpi-strip small {
+  color: var(--muted);
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.admin-kpi-strip strong {
+  color: var(--blue-900);
+  font-size: clamp(1.35rem, 2vw, 1.85rem);
+  line-height: 1;
+}
+
+.admin-case-flow {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.admin-case-flow li {
+  display: grid;
+  gap: 4px;
+  min-height: 88px;
+  padding: 14px;
+  border: 1px solid rgba(14, 45, 69, 0.1);
+  border-radius: 14px;
+  background: #fbfaf6;
+}
+
+.admin-case-flow span {
+  width: 28px;
+  height: 28px;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 999px;
+  background: rgba(14, 45, 69, 0.09);
+  color: var(--blue-900);
+  font-size: 0.8rem;
+  font-weight: 900;
+}
+
+.admin-case-flow strong {
+  color: var(--blue-900);
+  line-height: 1.18;
+}
+
+.admin-case-flow small {
+  color: var(--muted);
+  line-height: 1.25;
+}
+
+.admin-case-flow li.is-done {
+  border-color: rgba(47, 125, 50, 0.28);
+  background: #f4fbf1;
+}
+
+.admin-case-flow li.is-done span {
+  background: var(--green-800);
+  color: #fff;
 }
 
 /* Module CRM / Contacts TVF OS */
