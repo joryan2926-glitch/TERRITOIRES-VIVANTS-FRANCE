@@ -1,4 +1,4 @@
-﻿const IMPACT_TOKEN_KEY = "tvfAdminToken";
+const IMPACT_TOKEN_KEY = "tvfAdminToken";
 const viewLabels = { metrics: "Indicateurs", values: "Valeurs", proofs: "Preuves", reports: "Bilans", exports: "Exports" };
 const typeMaps = {
   metrics: { activity: "Activite", impact: "Impact", finance: "Finance", territory: "Territoire", volunteer: "Benevolat", material: "Materiaux", partner: "Partenaires", case: "Dossiers", other: "Autre" },
@@ -24,6 +24,7 @@ const filtersForm = document.querySelector("[data-impact-filters]");
 const typeFilter = document.querySelector("[data-impact-type-filter]");
 const statusFilter = document.querySelector("[data-impact-status-filter]");
 const kpisEl = document.querySelector("[data-impact-kpis]");
+const controlEl = document.querySelector("[data-impact-control]");
 const listEl = document.querySelector("[data-impact-list]");
 const detailEl = document.querySelector("[data-impact-detail]");
 const countEl = document.querySelector("[data-impact-count]");
@@ -85,7 +86,7 @@ async function loadItems() {
   if (!items().some((item) => item.id === selectedId)) selectedId = items()[0]?.id || null;
   renderAll();
 }
-function renderAll() { renderFilters(); renderTabs(); renderKpis(); renderAssistant(); renderList(); renderDetail(); }
+function renderAll() { renderFilters(); renderTabs(); renderKpis(); renderControlPanel(); renderAssistant(); renderList(); renderDetail(); }
 function renderFilters() {
   if (typeFilter) typeFilter.innerHTML = `<option value="all">Tous</option>${optionList(typeMaps[currentView] || {}, typeFilter.value)}`;
   if (statusFilter) statusFilter.innerHTML = `<option value="all">Tous</option>${optionList(statusMaps[currentView] || {}, statusFilter.value)}`;
@@ -94,6 +95,17 @@ function renderTabs() { tabs.forEach((button) => button.classList.toggle("is-act
 function renderKpis() {
   if (!kpisEl || !dashboard) return;
   kpisEl.innerHTML = `<article><span>Indicateurs</span><strong>${dashboard.metrics_total || 0}</strong><small>${dashboard.active_metrics || 0} actifs</small></article><article><span>Valeurs validees</span><strong>${dashboard.validated_values || 0}</strong><small>${dashboard.publishable_ratio || 0}% validable</small></article><article data-tone="warning"><span>Brouillons</span><strong>${dashboard.draft_values || 0}</strong><small>Exclus bilans</small></article><article data-tone="danger"><span>Preuves a verifier</span><strong>${dashboard.pending_proofs || 0}</strong><small>Controle</small></article><article data-tone="info"><span>Bilans</span><strong>${dashboard.reports_total || 0}</strong><small>${dashboard.reports_to_validate || 0} a valider</small></article>`;
+}
+function renderControlPanel() {
+  if (!controlEl || !dashboard) return;
+  const publishableRatio = Number(dashboard.publishable_ratio || 0);
+  const pendingProofs = Number(dashboard.pending_proofs || 0);
+  const draftValues = Number(dashboard.draft_values || 0);
+  const reportsToValidate = Number(dashboard.reports_to_validate || 0);
+  const validatedValues = Number(dashboard.validated_values || 0);
+  const nextDecision = pendingProofs ? "Verifier les preuves" : draftValues ? "Valider les valeurs" : reportsToValidate ? "Valider les bilans" : validatedValues ? "Preparer le bilan public" : "Creer les premiers indicateurs";
+  const reportStatus = publishableRatio >= 80 && pendingProofs === 0 ? "Bilan exploitable" : publishableRatio >= 50 ? "Bilan a consolider" : "Base a documenter";
+  controlEl.innerHTML = `<div class="admin-panel-head"><div><p class="section-kicker">Pilotage impact</p><h3>Passer des actions aux resultats prouvables</h3><p>Cette synthese distingue les donnees internes, les preuves a verifier et les elements pouvant alimenter un bilan presentable a une collectivite ou a un financeur.</p></div><strong>${escapeHtml(reportStatus)}</strong></div><div class="impact-control-grid"><article><span>Decision suivante</span><strong>${escapeHtml(nextDecision)}</strong><small>priorite immediate</small></article><article><span>Taux publiable</span><strong>${escapeHtml(publishableRatio)}%</strong><small>qualite des donnees</small></article><article><span>Preuves ouvertes</span><strong>${escapeHtml(pendingProofs)}</strong><small>controle requis</small></article><article><span>Valeurs brouillon</span><strong>${escapeHtml(draftValues)}</strong><small>hors bilan</small></article><article><span>Bilans a valider</span><strong>${escapeHtml(reportsToValidate)}</strong><small>decision interne</small></article></div><div class="impact-control-links"><a class="btn secondary" href="admin-demandes">Demandes</a><a class="btn secondary" href="admin-dossiers">Dossiers</a><a class="btn secondary" href="admin-map">Carte</a><a class="btn secondary" href="admin-documents">Preuves</a><a class="btn secondary" href="admin-finances">Finances</a></div>`;
 }
 function renderAssistant() {
   const item = selectedItem();
