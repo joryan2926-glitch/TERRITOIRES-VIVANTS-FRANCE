@@ -4572,6 +4572,21 @@ tr:nth-child(even) td {
 .map-legend { display: flex; flex-wrap: wrap; gap: 8px; }
 .map-legend span { display: inline-flex; align-items: center; gap: 6px; padding: 7px 10px; border: 1px solid var(--line); border-radius: 999px; background: #fff; font-size: .8rem; font-weight: 800; color: var(--blue-900); }
 .map-legend i { width: 10px; height: 10px; border-radius: 999px; display: inline-block; }
+.map-control-panel {
+  display: grid;
+  gap: 12px;
+  padding: 16px;
+  border: 1px solid rgba(14,45,69,.12);
+  border-radius: 12px;
+  background: linear-gradient(180deg, #ffffff 0%, #f8faf5 100%);
+  box-shadow: var(--shadow-soft);
+}
+.map-control-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; }
+.map-control-grid article { display: grid; gap: 5px; min-height: 104px; padding: 13px; border: 1px solid rgba(14,45,69,.12); border-radius: 10px; background: #fff; }
+.map-control-grid span { color: var(--muted); font-size: .72rem; font-weight: 850; text-transform: uppercase; letter-spacing: .03em; }
+.map-control-grid strong { color: var(--blue-900); font-size: 1.08rem; line-height: 1.2; }
+.map-control-grid small { color: var(--muted); font-size: .76rem; font-weight: 700; }
+.map-control-links { display: flex; flex-wrap: wrap; gap: 8px; }
 .map-card.is-sensitive { border-color: rgba(180,59,47,.35); background: #fff8f5; }
 .map-alerts { display: grid; gap: 10px; }
 .map-alerts article { display: grid; gap: 4px; padding: 12px; border: 1px solid rgba(180,59,47,.2); border-radius: 12px; background: #fff8f5; }
@@ -4583,7 +4598,7 @@ tr:nth-child(even) td {
 .map-detail-form > .map-wide-field { grid-column: 1 / -1; }
 .map-modal-panel { width: min(960px, 100%); }
 .map-create-form textarea { min-height: 110px; }
-@media (max-width: 1180px) { .map-main-grid { grid-template-columns: 1fr; } .map-board { min-height: 460px; } }
+@media (max-width: 1180px) { .map-main-grid, .map-control-grid { grid-template-columns: 1fr; } .map-board { min-height: 460px; } }
 @media (max-width: 900px) { .map-detail-form { grid-template-columns: 1fr; } }
 
 /* Module Observatoire territorial TVF OS */

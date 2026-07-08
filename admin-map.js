@@ -1,4 +1,4 @@
-﻿const MAP_TOKEN_KEY = "tvfAdminToken";
+const MAP_TOKEN_KEY = "tvfAdminToken";
 const typeLabels = { bien: "Bien", commerce: "Commerce", friche: "Friche", materiau: "Materiaux", partenaire: "Partenaire", projet: "Projet", signalement: "Signalement", antenne: "Antenne", autre: "Autre" };
 const statusLabels = { actif: "Actif", a_verifier: "A verifier", inactif: "Inactif", archive: "Archive" };
 const visibilityLabels = { public: "Public", interne: "Interne", confidentiel: "Confidentiel", sensible: "Sensible" };
@@ -11,6 +11,7 @@ const tokenForm = document.querySelector("[data-map-token-form]");
 const loginStatus = document.querySelector("[data-map-login-status]");
 const filtersForm = document.querySelector("[data-map-filters]");
 const kpisEl = document.querySelector("[data-map-kpis]");
+const controlEl = document.querySelector("[data-map-control]");
 const countEl = document.querySelector("[data-map-count]");
 const boardEl = document.querySelector("[data-map-board]");
 const legendEl = document.querySelector("[data-map-legend]");
@@ -45,8 +46,18 @@ async function api(path, options = {}) { const response = await fetch(path, { ..
 function filtersParams() { const data = new FormData(filtersForm); const params = new URLSearchParams({ limit: "240" }); ["q", "point_type", "status", "visibility_level"].forEach((name) => { const value = String(data.get(name) || "").trim(); if (value) params.set(name, value); }); return params; }
 async function loadDashboard() { const result = await api("/api/admin-map?entity=dashboard"); dashboard = result.dashboard || {}; renderKpis(); }
 async function loadAlerts() { const result = await api("/api/admin-map?entity=alerts&status=ouverte"); alerts = result.alerts || []; renderAlerts(); }
-async function loadItems() { if (countEl) countEl.textContent = "Chargement de la carte..."; const result = await api(`/api/admin-map?${filtersParams().toString()}`); points = result.points || []; layers = result.layers || []; if (!points.some((p) => p.id === selectedId)) selectedId = points[0]?.id || null; await Promise.all([loadDashboard().catch(() => {}), loadAlerts().catch(() => {})]); renderLegend(); renderBoard(); renderList(); renderDetail(); }
+async function loadItems() { if (countEl) countEl.textContent = "Chargement de la carte..."; const result = await api(`/api/admin-map?${filtersParams().toString()}`); points = result.points || []; layers = result.layers || []; if (!points.some((p) => p.id === selectedId)) selectedId = points[0]?.id || null; await Promise.all([loadDashboard().catch(() => {}), loadAlerts().catch(() => {})]); renderKpis(); renderControlPanel(); renderLegend(); renderBoard(); renderList(); renderDetail(); }
 function renderKpis() { if (!kpisEl || !dashboard) return; kpisEl.innerHTML = `<article><span>Points</span><strong>${dashboard.points_total || 0}</strong><small>Total</small></article><article><span>Geolocalises</span><strong>${dashboard.geolocated || 0}</strong><small>Affichables</small></article><article data-tone="warning"><span>A verifier</span><strong>${dashboard.to_verify || 0}</strong><small>Controle</small></article><article data-tone="danger"><span>Sensibles</span><strong>${dashboard.sensitive || 0}</strong><small>Confidentialite</small></article><article data-tone="info"><span>Alertes</span><strong>${dashboard.open_alerts || 0}</strong><small>Ouvertes</small></article>`; }
+function renderControlPanel() {
+  if (!controlEl) return;
+  const toVerify = points.filter((point) => point.status === "a_verifier").length;
+  const sensitive = points.filter((point) => ["sensible", "confidentiel"].includes(point.visibility_level)).length;
+  const missingGeo = points.filter((point) => point.latitude == null || point.longitude == null).length;
+  const projectPotential = points.filter((point) => ["bien", "commerce", "friche", "materiau", "signalement"].includes(point.point_type)).length;
+  const activeCities = [...new Set(points.map((point) => point.city).filter(Boolean))].length;
+  const nextDecision = missingGeo ? "Completer les localisations" : toVerify ? "Qualifier les points a verifier" : sensitive ? "Controler les donnees sensibles" : "Prioriser les projets terrain";
+  controlEl.innerHTML = `<div class="admin-panel-head"><div><p class="section-kicker">Lecture territoriale</p><h3>Transformer la carte en decisions de terrain</h3><p>Cette vue sert a reperer les points exploitables, les informations sensibles et les territoires ou lancer une action coordonnee.</p></div><strong>${escapeHtml(nextDecision)}</strong></div><div class="map-control-grid"><article><span>A verifier</span><strong>${escapeHtml(toVerify)}</strong><small>points a qualifier</small></article><article><span>Sans coordonnees</span><strong>${escapeHtml(missingGeo)}</strong><small>geocodage a completer</small></article><article><span>Confidentialite</span><strong>${escapeHtml(sensitive)}</strong><small>points sensibles</small></article><article><span>Potentiel projet</span><strong>${escapeHtml(projectPotential)}</strong><small>biens, friches, commerces, materiaux</small></article><article><span>Communes</span><strong>${escapeHtml(activeCities)}</strong><small>territoires visibles</small></article></div><div class="map-control-links"><a class="btn secondary" href="admin-demandes">Demandes</a><a class="btn secondary" href="admin-branches">Antennes</a><a class="btn secondary" href="admin-dossiers">Dossiers</a><a class="btn secondary" href="admin-impact">Impact</a><a class="btn secondary" href="admin-observatoire">Observatoire</a></div>`;
+}
 function bounds(items) { const geo = items.filter((p) => p.latitude != null && p.longitude != null); if (!geo.length) return null; const lats = geo.map((p) => Number(p.latitude)); const lons = geo.map((p) => Number(p.longitude)); const minLat = Math.min(...lats); const maxLat = Math.max(...lats); const minLon = Math.min(...lons); const maxLon = Math.max(...lons); return { minLat, maxLat: maxLat === minLat ? maxLat + 0.01 : maxLat, minLon, maxLon: maxLon === minLon ? maxLon + 0.01 : maxLon };
 }
 function pointPosition(point, b) { const x = ((Number(point.longitude) - b.minLon) / (b.maxLon - b.minLon)) * 88 + 6; const y = (1 - (Number(point.latitude) - b.minLat) / (b.maxLat - b.minLat)) * 82 + 9; return { x, y }; }
