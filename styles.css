@@ -5831,3 +5831,104 @@ tr:nth-child(even) td {
     min-height: 0;
   }
 }
+
+.admin-operational-path {
+  grid-column: 1 / -1;
+  display: grid;
+  gap: 14px;
+  padding: 18px;
+  border: 1px solid rgba(24, 63, 34, 0.12);
+  border-radius: 18px;
+  background: linear-gradient(135deg, #ffffff 0%, #f7fbf3 100%);
+}
+
+.admin-operational-path .admin-panel-head p:not(.section-kicker) {
+  margin: 6px 0 0;
+  color: var(--muted);
+}
+
+.admin-operational-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.admin-operational-card {
+  display: grid;
+  gap: 8px;
+  min-height: 162px;
+  padding: 14px;
+  border: 1px solid rgba(14, 45, 69, 0.1);
+  border-radius: 15px;
+  background: rgba(255,255,255,0.86);
+  box-shadow: 0 10px 26px rgba(12,31,46,0.06);
+}
+
+.admin-operational-card > span {
+  width: fit-content;
+  min-width: 34px;
+  padding: 5px 8px;
+  color: var(--green-900);
+  background: #edf6e8;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 850;
+}
+
+.admin-operational-card strong {
+  color: var(--blue-900);
+  font-size: 0.94rem;
+  line-height: 1.25;
+}
+
+.admin-operational-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.78rem;
+  line-height: 1.45;
+}
+
+.admin-operational-card .text-link {
+  width: fit-content;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--green-900);
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 850;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.admin-operational-card .text-link:hover,
+.admin-operational-card .text-link:focus-visible {
+  color: var(--green-700);
+  text-decoration: underline;
+  outline: none;
+}
+
+.admin-operational-card[data-done="true"] {
+  border-color: rgba(47, 125, 50, 0.24);
+  background: #f5fbf3;
+}
+
+.admin-operational-card[data-done="true"] > span::after {
+  content: " OK";
+  color: var(--green-900);
+}
+
+@media (max-width: 1180px) {
+  .admin-operational-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 680px) {
+  .admin-operational-grid {
+    grid-template-columns: 1fr;
+  }
+  .admin-operational-card {
+    min-height: 0;
+  }
+}

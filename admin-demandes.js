@@ -451,6 +451,93 @@ function selectOptions(map, selected) {
     .join("");
 }
 
+function workflowState(contact) {
+  const hasOwner = Boolean(contact?.assigned_to);
+  const score = Number(contact?.qualification_score || contact?.assistant?.qualification_score || 0);
+  const hasPieces = !piecesText(contact).trim();
+  const hasCase = String(contact?.next_action || "").toLowerCase().includes("dossier cree");
+  return {
+    crm: hasOwner || score >= 50,
+    case: hasCase || ["accepte", "archive"].includes(contact?.status),
+    documents: hasCase || piecesText(contact).trim().length > 0,
+    task: Boolean(contact?.next_action_due_at),
+    branch: Boolean(contact?.pole || contact?.category),
+  };
+}
+
+function renderOperationalPath(contact) {
+  const state = workflowState(contact);
+  const cards = [
+    {
+      key: "crm",
+      step: "01",
+      title: "Qualifier en CRM",
+      detail: "Identifier l'acteur, son organisation, son besoin et le niveau de relation.",
+      href: "admin-crm",
+      done: state.crm,
+      action: "Ouvrir le CRM",
+    },
+    {
+      key: "case",
+      step: "02",
+      title: "Ouvrir un dossier",
+      detail: "Transformer la demande qualifiee en dossier TVF avec responsable et suivi.",
+      button: "Creer dossier",
+      done: state.case,
+      action: "Creer le dossier",
+    },
+    {
+      key: "documents",
+      step: "03",
+      title: "Preparer les pieces",
+      detail: "Rassembler courriers, justificatifs, photos, conventions et traces utiles.",
+      href: "admin-documents",
+      done: state.documents,
+      action: "Voir documents",
+    },
+    {
+      key: "task",
+      step: "04",
+      title: "Planifier l'action",
+      detail: "Creer une tache de relance, visite, rendez-vous ou instruction interne.",
+      button: "Creer tache",
+      done: state.task,
+      action: "Creer la tache",
+    },
+    {
+      key: "branch",
+      step: "05",
+      title: "Rattacher au territoire",
+      detail: "Verifier l'antenne, le pole concerne et les besoins de deploiement local.",
+      href: "admin-branches",
+      done: state.branch,
+      action: "Voir antennes",
+    },
+  ];
+  return `<section class="admin-operational-path" aria-label="Suite operationnelle TVF OS">
+    <div class="admin-panel-head">
+      <div>
+        <p class="section-kicker">Suite operationnelle</p>
+        <h4>Transformer cette demande en action suivie</h4>
+        <p>Le parcours garde une trace claire : relation, dossier, pieces, taches et territoire.</p>
+      </div>
+      <a class="text-link" href="dashboard">Retour dashboard</a>
+    </div>
+    <div class="admin-operational-grid">
+      ${cards.map((card) => {
+        const action = card.href
+          ? `<a class="text-link" href="${escapeHtml(card.href)}">${escapeHtml(card.action)}</a>`
+          : `<button class="text-link" type="button" ${card.key === "case" ? "data-create-case" : "data-create-task"}>${escapeHtml(card.action)}</button>`;
+        return `<article class="admin-operational-card" data-done="${card.done ? "true" : "false"}">
+          <span>${escapeHtml(card.step)}</span>
+          <strong>${escapeHtml(card.title)}</strong>
+          <p>${escapeHtml(card.detail)}</p>
+          ${action}
+        </article>`;
+      }).join("")}
+    </div>
+  </section>`;
+}
 function renderAssistant(contact) {
   const assistant = contact.assistant || {};
   const pieces = piecesText(contact)
@@ -513,14 +600,18 @@ function renderDetail() {
 
     ${renderAssistant(contact)}
 
+    ${renderOperationalPath(contact)}
+
     <div class="admin-quick-actions" aria-label="Actions rapides">
       <button class="btn secondary" type="button" data-quick-status="a_qualifier">A qualifier</button>
       <button class="btn secondary" type="button" data-quick-status="en_cours">En cours</button>
       <button class="btn secondary" type="button" data-quick-status="rendez_vous">Rendez-vous</button>
       <button class="btn secondary" type="button" data-quick-template="pieces">Demander pieces</button>
       <button class="btn secondary" type="button" data-quick-followup="48h">Relance 48h</button>
+      <a class="btn secondary" href="admin-crm">Ouvrir CRM</a>
       <button class="btn secondary" type="button" data-create-task>Creer tache</button>
       <button class="btn secondary" type="button" data-create-case>Creer dossier</button>
+      <a class="btn secondary" href="admin-documents">Documents</a>
       <button class="btn ghost" type="button" data-quick-status="refuse">Refuser</button>
       <button class="btn ghost" type="button" data-quick-status="archive">Archiver</button>
     </div>
