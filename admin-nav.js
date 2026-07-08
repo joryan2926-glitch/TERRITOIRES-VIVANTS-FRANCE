@@ -6,6 +6,7 @@ const TVF_ADMIN_MODULES = [
   { href: "dashboard", label: "Dashboard" },
   { href: "admin-demandes", label: "Demandes" },
   { href: "admin-emails", label: "E-mails" },
+  { href: "admin-work", label: "Taches" },
   { href: "admin-crm", label: "CRM" },
   { href: "admin-dossiers", label: "Dossiers" },
   { href: "admin-documents", label: "Documents" },
@@ -58,7 +59,7 @@ async function hydrateSessionFromCookie() {
 function bindAdminSessionBridge() {
   document.addEventListener("submit", (event) => {
     const form = event.target?.closest?.("form");
-    if (!form || !form.matches('[data-admin-home-token-form], [data-dashboard-token-form], [data-admin-token-form], [data-crm-token-form], [data-cases-token-form], [data-documents-token-form], [data-procedures-token-form], [data-knowledge-token-form], [data-ai-token-form], [data-map-token-form], [data-observatoire-token-form], [data-finances-token-form], [data-impact-token-form], [data-branches-token-form], [data-governance-token-form], [data-risks-token-form], [data-users-token-form], [data-emails-token-form]')) return;
+    if (!form || !form.matches('[data-admin-home-token-form], [data-dashboard-token-form], [data-admin-token-form], [data-crm-token-form], [data-cases-token-form], [data-documents-token-form], [data-procedures-token-form], [data-knowledge-token-form], [data-ai-token-form], [data-map-token-form], [data-observatoire-token-form], [data-finances-token-form], [data-impact-token-form], [data-branches-token-form], [data-governance-token-form], [data-risks-token-form], [data-users-token-form], [data-emails-token-form], [data-work-token-form]')) return;
     const value = String(new FormData(form).get("token") || "").trim();
     if (!value) return;
     markCookieChecked(false);
@@ -66,7 +67,7 @@ function bindAdminSessionBridge() {
   }, true);
 
   document.addEventListener("click", (event) => {
-    if (event.target?.closest?.('[data-admin-home-logout], [data-dashboard-logout], [data-admin-logout], [data-crm-logout], [data-cases-logout], [data-documents-logout], [data-procedures-logout], [data-knowledge-logout], [data-ai-logout], [data-map-logout], [data-observatoire-logout], [data-finances-logout], [data-impact-logout], [data-branches-logout], [data-governance-logout], [data-risks-logout], [data-users-logout], [data-emails-logout]')) clearAdminSession();
+    if (event.target?.closest?.('[data-admin-home-logout], [data-dashboard-logout], [data-admin-logout], [data-crm-logout], [data-cases-logout], [data-documents-logout], [data-procedures-logout], [data-knowledge-logout], [data-ai-logout], [data-map-logout], [data-observatoire-logout], [data-finances-logout], [data-impact-logout], [data-branches-logout], [data-governance-logout], [data-risks-logout], [data-users-logout], [data-emails-logout], [data-work-logout]')) clearAdminSession();
   }, true);
 
   if (window.fetch && !window.fetch.__tvfAdminTokenGuard) {

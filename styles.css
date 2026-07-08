@@ -654,7 +654,7 @@ table a:focus-visible {
 }
 
 .document-archive[open] summary::after {
-  content: "âˆ’";
+  content: "Ã¢Ë†â€™";
 }
 
 .document-archive .doc-tool-panel,
@@ -2787,7 +2787,7 @@ tr:nth-child(even) td {
   opacity: 0.72;
   transform: none;
 }
-/* Ajustement typographique mobile lÃ©ger */
+/* Ajustement typographique mobile lÃƒÂ©ger */
 @media (max-width: 760px) {
   :root {
     --paragraph-size: 0.98rem;
@@ -3377,7 +3377,7 @@ tr:nth-child(even) td {
   }
 }
 
-/* Ajustement lÃ©ger des grands visuels de dÃ©but de page */
+/* Ajustement lÃƒÂ©ger des grands visuels de dÃƒÂ©but de page */
 .hero {
   width: min(100% - 40px, 1500px);
   margin: 14px auto 0;
@@ -3436,7 +3436,7 @@ tr:nth-child(even) td {
   }
 }
 
-/* Checklists partenaires - piÃ¨ces Ã  prÃ©parer */
+/* Checklists partenaires - piÃƒÂ¨ces ÃƒÂ  prÃƒÂ©parer */
 .partner-prep {
   background: linear-gradient(180deg, #f8faf5 0%, #eef6ea 100%);
 }
@@ -4672,3 +4672,25 @@ tr:nth-child(even) td {
 .emails-draft textarea { width: 100%; min-height: 180px; padding: 12px; border: 1px solid rgba(14,45,69,.16); border-radius: 8px; font: inherit; }
 .emails-modal-panel { width: min(960px, 100%); }
 @media (max-width: 1100px) { .emails-kpis, .emails-ai-panel, .emails-layout, .emails-detail-form, .emails-create-form, .emails-ai-grid { grid-template-columns: 1fr; } }
+
+/* Module Taches et agenda TVF OS */
+.work-body { background: #f4f7f3; }
+.work-shell { max-width: 1480px; }
+.work-kpis { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; }
+.work-kpis article { display: grid; gap: 4px; padding: 14px; border: 1px solid var(--line); border-radius: 8px; background: #fff; box-shadow: var(--shadow-soft); }
+.work-kpis span { color: var(--muted); font-size: .78rem; font-weight: 800; text-transform: uppercase; }
+.work-kpis strong { color: var(--blue-900); font-size: 1.75rem; }
+.work-ai-panel { display: grid; grid-template-columns: minmax(260px, .7fr) minmax(0, 1.3fr); gap: 16px; padding: 18px; border: 1px solid rgba(14,45,69,.12); border-radius: 8px; background: linear-gradient(180deg, #fff 0%, #f7faf6 100%); box-shadow: var(--shadow-soft); }
+.work-ai-panel h2 { margin: 0; color: var(--green-700); font-size: 2.1rem; }
+.work-ai-panel p { margin-bottom: 0; color: var(--muted); }
+.work-ai-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.work-ai-grid div { display: grid; gap: 5px; padding: 12px; border: 1px solid var(--line); border-radius: 8px; background: #fff; }
+.work-ai-grid span { color: var(--muted); font-size: .76rem; font-weight: 800; text-transform: uppercase; }
+.work-ai-grid strong { color: var(--blue-900); font-size: .92rem; line-height: 1.35; }
+.work-layout { grid-template-columns: minmax(320px, .78fr) minmax(0, 1.22fr); }
+.work-card.is-risk { border-color: rgba(180,59,47,.34); background: #fff8f5; }
+.work-detail-form,
+.work-create-form { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-top: 14px; }
+.work-wide-field { grid-column: 1 / -1; }
+.work-modal-panel { width: min(960px, 100%); }
+@media (max-width: 1100px) { .work-kpis, .work-ai-panel, .work-layout, .work-detail-form, .work-create-form, .work-ai-grid { grid-template-columns: 1fr; } }
