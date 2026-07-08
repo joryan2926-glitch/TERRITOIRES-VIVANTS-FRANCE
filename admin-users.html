@@ -1,0 +1,57 @@
+﻿<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Utilisateurs et permissions | TVF OS</title>
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="theme-color" content="#183f22">
+  <link rel="icon" href="assets/favicon-32.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="admin-body users-body">
+  <a class="skip-link" href="#users-main">Aller au contenu</a>
+  <header class="admin-topbar">
+    <a class="admin-brand" href="index" aria-label="Retour au site Territoires Vivants France">
+      <img src="assets/logo-territoires-vivants-france-web.png" alt="Territoires Vivants France" width="320" height="132">
+    </a>
+    <div>
+      <p class="admin-kicker">TVF OS</p>
+      <h1>Utilisateurs et permissions</h1>
+      <p>Profils, roles, permissions, rattachements antennes, invitations et revues d'acces.</p>
+    </div>
+    <div class="admin-top-actions">
+      <a class="btn secondary" href="admin">Accueil admin</a>
+      <a class="btn secondary" href="dashboard">Dashboard</a>
+      <a class="btn secondary" href="contact">Retour au site</a>
+    </div>
+  </header>
+
+  <main id="users-main" class="admin-shell users-shell">
+    <section class="admin-login" data-users-login>
+      <div><p class="section-kicker">Acces securise</p><h2>Connexion utilisateurs</h2><p>Entrez le token admin. Les modifications de roles sont des actions sensibles.</p></div>
+      <form data-users-token-form><label for="users-token">Token admin</label><input id="users-token" name="token" type="password" autocomplete="current-password" placeholder="TVF_ADMIN_TOKEN"><button class="btn primary" type="submit">Ouvrir utilisateurs</button><p class="form-note" data-users-login-status role="status" hidden></p></form>
+    </section>
+
+    <section class="admin-app users-app" data-users-app hidden>
+      <div class="admin-toolbar">
+        <div><p class="section-kicker">Controle des acces</p><h2>Attribuer les bons droits, au bon endroit</h2><p data-users-count>Chargement des utilisateurs...</p></div>
+        <div class="admin-toolbar-actions"><button class="btn primary" type="button" data-users-create>Nouvel element</button><button class="btn secondary" type="button" data-users-refresh>Actualiser</button><button class="btn secondary" type="button" data-users-export>Exporter CSV</button><button class="btn ghost" type="button" data-users-logout>Deconnexion</button></div>
+      </div>
+
+      <section class="users-kpis" data-users-kpis></section>
+      <section class="users-ai-panel"><div><p class="section-kicker">Assistant acces</p><h2 data-users-ai-score>--%</h2><p data-users-ai-summary>Analyse en attente.</p></div><div class="users-ai-grid" data-users-ai-grid></div></section>
+
+      <form class="admin-filters" data-users-filters><label>Recherche<input name="q" type="search" placeholder="Nom, email, role, invitation"></label><label>Statut<select name="status"><option value="all">Tous</option><option value="invited">Invite</option><option value="active">Actif</option><option value="paused">En pause</option><option value="suspended">Suspendu</option><option value="pending">En attente</option><option value="archive">Archive</option></select></label></form>
+
+      <div class="admin-tabs" role="tablist" aria-label="Vues utilisateurs"><button type="button" data-users-view="profiles" class="is-active">Profils</button><button type="button" data-users-view="roles">Roles</button><button type="button" data-users-view="permissions">Permissions</button><button type="button" data-users-view="invitations">Invitations</button><button type="button" data-users-view="reviews">Revues</button></div>
+
+      <section class="admin-layout users-layout"><aside class="admin-list-panel"><div class="admin-panel-head"><h2 data-users-list-title>Profils</h2><span data-users-list-count>0</span></div><div class="admin-request-list" data-users-list></div><p class="form-note" data-users-empty hidden>Aucun element trouve.</p></aside><section class="admin-detail-panel" data-users-detail><p class="form-note">Selectionnez un element.</p></section></section>
+    </section>
+  </main>
+
+  <div class="admin-modal" data-users-modal hidden><div class="admin-modal-panel users-modal-panel" role="dialog" aria-modal="true" aria-labelledby="users-modal-title"><div class="admin-modal-head"><div><p class="section-kicker">Creation rapide</p><h2 id="users-modal-title">Ajouter un element utilisateurs</h2></div><button class="btn ghost" type="button" data-users-close-modal>Fermer</button></div><form class="admin-form users-create-form" data-users-form><label>Element<select name="type"><option value="profile">Profil</option><option value="invitation">Invitation</option><option value="role">Role</option><option value="user_role">Attribution role</option><option value="review">Revue acces</option></select></label><label>Email<input name="email" type="email" placeholder="prenom.nom@example.fr"></label><label>Nom<input name="last_name" placeholder="Nom"></label><label>Prenom<input name="first_name" placeholder="Prenom"></label><label>Statut<input name="status" placeholder="active, invited, pending..."></label><label>Role key<input name="role_key" placeholder="responsable_antenne"></label><label>Profil ID<input name="profile_id" placeholder="UUID profil"></label><label>Role ID<input name="role_id" placeholder="UUID role"></label><label class="users-wide-field">Notes<textarea name="summary" rows="4" placeholder="Contexte, perimetre, action attendue..."></textarea></label><button class="btn primary" type="submit">Enregistrer</button></form></div></div>
+
+  <script src="admin-users.js" defer></script>
+</body>
+</html>
