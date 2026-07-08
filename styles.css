@@ -4694,3 +4694,27 @@ tr:nth-child(even) td {
 .work-wide-field { grid-column: 1 / -1; }
 .work-modal-panel { width: min(960px, 100%); }
 @media (max-width: 1100px) { .work-kpis, .work-ai-panel, .work-layout, .work-detail-form, .work-create-form, .work-ai-grid { grid-template-columns: 1fr; } }
+
+/* Module Parametres TVF OS */
+.settings-kpis { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; }
+.settings-kpis article { display: grid; gap: 4px; padding: 14px; border: 1px solid var(--line); border-radius: 8px; background: #fff; box-shadow: var(--shadow-soft); }
+.settings-kpis span { color: var(--muted); font-size: .78rem; font-weight: 800; text-transform: uppercase; }
+.settings-kpis strong { color: var(--blue-900); font-size: 1.75rem; }
+.settings-ai-panel { display: grid; grid-template-columns: minmax(260px, .7fr) minmax(0, 1.3fr); gap: 16px; padding: 18px; border: 1px solid rgba(14,45,69,.12); border-radius: 8px; background: linear-gradient(180deg, #fff 0%, #f7faf6 100%); box-shadow: var(--shadow-soft); }
+.settings-ai-panel h2 { margin: 0; color: var(--green-700); font-size: 2.1rem; }
+.settings-ai-panel p { margin-bottom: 0; color: var(--muted); }
+.settings-ai-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.settings-ai-grid div { display: grid; gap: 5px; padding: 12px; border: 1px solid var(--line); border-radius: 8px; background: #fff; }
+.settings-ai-grid span { color: var(--muted); font-size: .76rem; font-weight: 800; text-transform: uppercase; }
+.settings-ai-grid strong { color: var(--blue-900); font-size: .92rem; line-height: 1.35; }
+.settings-layout { grid-template-columns: minmax(320px, .78fr) minmax(0, 1.22fr); }
+.settings-card.is-risk { border-color: rgba(180,59,47,.34); background: #fff8f5; }
+.settings-detail-form,
+.settings-create-form { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-top: 14px; }
+.settings-wide-field { grid-column: 1 / -1; }
+.settings-env-list { display: grid; gap: 8px; margin: 14px 0; }
+.settings-env-list article { display: flex; justify-content: space-between; gap: 12px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--paper); }
+.settings-env-list span { color: var(--blue-900); font-weight: 800; }
+.settings-env-list strong { color: var(--green-700); }
+.settings-modal-panel { width: min(960px, 100%); }
+@media (max-width: 1100px) { .settings-kpis, .settings-ai-panel, .settings-layout, .settings-detail-form, .settings-create-form, .settings-ai-grid { grid-template-columns: 1fr; } }
