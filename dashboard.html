@@ -23,6 +23,9 @@
     <nav class="dashboard-top-actions" aria-label="Navigation dashboard">
       <a class="btn secondary" href="admin">Accueil admin</a>
       <a class="btn secondary" href="admin-demandes">Demandes</a>
+            <a class="btn secondary" href="admin-crm">CRM</a>
+      <a class="btn secondary" href="admin-dossiers">Dossiers</a>
+      <a class="btn secondary" href="admin-documents">Documents</a>
       <a class="btn secondary" href="admin-emails">E-mails</a>
       <a class="btn secondary" href="admin-work">Taches</a>
       <a class="btn secondary" href="admin-impact">Impact</a>
@@ -108,6 +111,19 @@
       </div>
 
       <section class="dashboard-kpis" aria-label="Indicateurs principaux" data-dashboard-kpis></section>
+
+      <section class="dashboard-panel dashboard-flow" aria-labelledby="flow-title">
+        <div class="dashboard-panel-head">
+          <div>
+            <p class="section-kicker">Flux TVF OS</p>
+            <h3 id="flow-title">De la demande entrante au pilotage territorial</h3>
+            <p>Suivez le parcours logique d'une sollicitation : qualifier, rattacher, documenter, planifier et piloter.</p>
+          </div>
+          <a class="text-link" href="admin">Voir tous les modules</a>
+        </div>
+        <div class="dashboard-flow-grid" data-dashboard-flow></div>
+        <div class="dashboard-next-actions" data-dashboard-next-actions></div>
+      </section>
 
       <div class="dashboard-grid">
         <section class="dashboard-panel dashboard-panel-wide" aria-labelledby="trend-title">

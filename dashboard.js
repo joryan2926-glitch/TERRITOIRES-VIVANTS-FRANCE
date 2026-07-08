@@ -1,4 +1,4 @@
-﻿const DASHBOARD_TOKEN_KEY = "tvfAdminToken";
+const DASHBOARD_TOKEN_KEY = "tvfAdminToken";
 
 const labels = {
   status: {
@@ -36,6 +36,8 @@ const loginStatus = document.querySelector("[data-dashboard-login-status]");
 const controls = document.querySelector("[data-dashboard-controls]");
 const summaryEl = document.querySelector("[data-dashboard-summary]");
 const kpisEl = document.querySelector("[data-dashboard-kpis]");
+const flowEl = document.querySelector("[data-dashboard-flow]");
+const nextActionsEl = document.querySelector("[data-dashboard-next-actions]");
 const trendEl = document.querySelector("[data-dashboard-trend]");
 const statusEl = document.querySelector("[data-dashboard-status]");
 const priorityEl = document.querySelector("[data-dashboard-priority]");
@@ -174,6 +176,92 @@ function renderKpis(metrics) {
     kpiCard("Qualification", `${metrics.qualificationRate}%`, "hors statut nouveau"),
     kpiCard("Cloture", `${metrics.closureRate}%`, "refusees ou archivees"),
   ].join("");
+}
+
+function renderFlow(dashboard) {
+  if (!flowEl) return;
+  const metrics = dashboard.metrics || {};
+  const cards = [
+    {
+      step: "01",
+      title: "Demandes entrantes",
+      value: metrics.total || 0,
+      detail: `${metrics.open || 0} active(s) a suivre`,
+      href: "admin-demandes",
+      tone: metrics.overdue ? "danger" : "info",
+    },
+    {
+      step: "02",
+      title: "CRM partenaires",
+      value: metrics.unassigned ? "A qualifier" : "A jour",
+      detail: "Identifier l'acteur, le besoin, le niveau d'engagement et la prochaine relance.",
+      href: "admin-crm",
+      tone: metrics.unassigned ? "warning" : "success",
+    },
+    {
+      step: "03",
+      title: "Dossiers",
+      value: "Instruction",
+      detail: "Transformer une sollicitation qualifiee en dossier suivi, avec pieces et responsable.",
+      href: "admin-dossiers",
+      tone: "neutral",
+    },
+    {
+      step: "04",
+      title: "Documents",
+      value: "Preuves",
+      detail: "Classer les courriers, conventions, pieces et modeles rattaches au dossier.",
+      href: "admin-documents",
+      tone: "neutral",
+    },
+    {
+      step: "05",
+      title: "Taches et agenda",
+      value: "Execution",
+      detail: "Planifier appels, visites, relances, rendez-vous et actions terrain.",
+      href: "admin-work",
+      tone: "neutral",
+    },
+    {
+      step: "06",
+      title: "Antennes locales",
+      value: "Deploiement",
+      detail: "Piloter Saint-Etienne puis dupliquer la methode sur les futurs territoires.",
+      href: "admin-branches",
+      tone: "neutral",
+    },
+  ];
+  flowEl.innerHTML = cards
+    .map((card) => `<a class="dashboard-flow-card" data-tone="${escapeHtml(card.tone)}" href="${escapeHtml(card.href)}">
+      <span>${escapeHtml(card.step)}</span>
+      <div>
+        <strong>${escapeHtml(card.title)}</strong>
+        <em>${escapeHtml(card.value)}</em>
+        <small>${escapeHtml(card.detail)}</small>
+      </div>
+    </a>`)
+    .join("");
+}
+
+function renderNextActions(dashboard) {
+  if (!nextActionsEl) return;
+  const metrics = dashboard.metrics || {};
+  const actions = [];
+  if (metrics.overdue > 0) {
+    actions.push({ label: "Traiter les retards", detail: `${metrics.overdue} demande(s) depassent le delai cible.`, href: "admin-demandes" });
+  }
+  if (metrics.unassigned > 0) {
+    actions.push({ label: "Assigner les responsables", detail: `${metrics.unassigned} demande(s) actives sans pilote.`, href: "admin-demandes" });
+  }
+  if ((metrics.open || 0) > 0) {
+    actions.push({ label: "Qualifier en CRM", detail: "Relier les demandes utiles aux acteurs et organisations.", href: "admin-crm" });
+    actions.push({ label: "Ouvrir les dossiers", detail: "Passer des contacts qualifies aux dossiers operationnels.", href: "admin-dossiers" });
+  }
+  actions.push({ label: "Preparer les pieces", detail: "Verifier les conventions, courriers et justificatifs avant transmission.", href: "admin-documents" });
+  actions.push({ label: "Suivre Saint-Etienne", detail: "Actualiser le plan antenne, les besoins locaux et les prochaines etapes.", href: "admin-branches" });
+  nextActionsEl.innerHTML = actions.slice(0, 5)
+    .map((action) => `<a href="${escapeHtml(action.href)}"><strong>${escapeHtml(action.label)}</strong><span>${escapeHtml(action.detail)}</span></a>`)
+    .join("");
 }
 
 function maxValue(items) {
@@ -322,6 +410,8 @@ function renderDashboard(data) {
   if (summaryEl) summaryEl.textContent = dashboard.assistant.summary;
   if (generatedEl) generatedEl.textContent = `Mis a jour : ${formatDate(dashboard.generatedAt)}`;
   renderKpis(metrics);
+  renderFlow(dashboard);
+  renderNextActions(dashboard);
   renderTrend(metrics.trend || []);
   renderBars(statusEl, metrics.byStatus, "status");
   renderBars(priorityEl, metrics.byPriority, "priority");
