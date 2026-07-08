@@ -1,0 +1,147 @@
+﻿<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Procedures | TVF OS</title>
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="theme-color" content="#183f22">
+  <link rel="icon" href="assets/favicon-32.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="admin-body procedures-body">
+  <a class="skip-link" href="#procedures-main">Aller au contenu</a>
+  <header class="admin-topbar procedures-topbar">
+    <a class="admin-brand" href="index" aria-label="Retour au site Territoires Vivants France">
+      <img src="assets/logo-territoires-vivants-france-web.png" alt="Territoires Vivants France" width="320" height="132">
+    </a>
+    <div>
+      <p class="admin-kicker">TVF OS</p>
+      <h1>Procedures</h1>
+    </div>
+    <div class="admin-top-actions">
+      <a class="btn secondary" href="dashboard">Dashboard</a>
+      <a class="btn secondary" href="admin-demandes">Demandes</a>
+      <a class="btn secondary" href="admin-crm">CRM</a>
+      <a class="btn secondary" href="admin-dossiers">Dossiers</a>
+      <a class="btn secondary" href="admin-documents">Documents</a>
+    </div>
+  </header>
+
+  <main id="procedures-main" class="admin-shell procedures-shell">
+    <section class="admin-login" data-procedures-login>
+      <div>
+        <p class="section-kicker">Acces securise</p>
+        <h2>Connexion aux procedures TVF</h2>
+        <p>Les procedures structurent les methodes nationales, les variantes locales autorisees et les checklists actives.</p>
+      </div>
+      <form data-procedures-token-form>
+        <label for="procedures-token">Token admin</label>
+        <input id="procedures-token" name="token" type="password" autocomplete="current-password" placeholder="TVF_ADMIN_TOKEN">
+        <button class="btn primary" type="submit">Ouvrir les procedures</button>
+        <p class="form-note" data-procedures-login-status role="status" hidden></p>
+      </form>
+    </section>
+
+    <section class="admin-app procedures-app" data-procedures-app hidden>
+      <div class="admin-toolbar procedures-toolbar">
+        <div>
+          <p class="section-kicker">Methode TVF</p>
+          <h2>Appliquer les memes circuits partout en France</h2>
+          <p data-procedures-count>Chargement des procedures...</p>
+        </div>
+        <div class="admin-toolbar-actions">
+          <button class="btn primary" type="button" data-procedures-create>Nouvelle procedure</button>
+          <button class="btn secondary" type="button" data-procedures-refresh>Actualiser</button>
+          <button class="btn secondary" type="button" data-procedures-export>Exporter CSV</button>
+          <button class="btn ghost" type="button" data-procedures-logout>Deconnexion</button>
+        </div>
+      </div>
+
+      <section class="crm-kpis procedures-kpis" data-procedures-kpis aria-label="Indicateurs procedures"></section>
+
+      <nav class="admin-status-tabs procedures-tabs" aria-label="Vues procedures">
+        <button type="button" data-procedures-view="procedures" class="is-active">Procedures</button>
+        <button type="button" data-procedures-view="obligatoire">Obligatoires</button>
+        <button type="button" data-procedures-view="en_revision">En revision</button>
+        <button type="button" data-procedures-view="applications">Checklists actives</button>
+        <button type="button" data-procedures-view="archivee">Archives</button>
+      </nav>
+
+      <form class="admin-filters procedures-filters" data-procedures-filters>
+        <label>Recherche
+          <input name="q" type="search" placeholder="Cle, titre, module, pole">
+        </label>
+        <label>Perimetre
+          <select name="scope">
+            <option value="all">Tous</option>
+            <option value="national">National</option>
+            <option value="local">Local</option>
+            <option value="pole">Pole</option>
+            <option value="module">Module</option>
+          </select>
+        </label>
+        <label>Niveau
+          <select name="mandatory_level">
+            <option value="all">Tous</option>
+            <option value="obligatoire">Obligatoire</option>
+            <option value="recommande">Recommande</option>
+            <option value="optionnel">Optionnel</option>
+            <option value="experimental">Experimental</option>
+          </select>
+        </label>
+      </form>
+
+      <section class="admin-ai-panel procedures-question-panel">
+        <div class="admin-panel-head">
+          <div><p class="section-kicker">Assistant procedures</p><h3>Question rapide</h3></div>
+        </div>
+        <form data-procedures-question-form class="procedures-question-form">
+          <input name="question" placeholder="Ex. Quelle procedure appliquer pour un bien vacant ?">
+          <button class="btn secondary" type="submit">Demander</button>
+        </form>
+        <p class="form-note" data-procedures-question-answer hidden></p>
+      </section>
+
+      <div class="admin-layout procedures-layout">
+        <section class="admin-list procedures-list" aria-label="Liste procedures">
+          <div data-procedures-list class="admin-request-list"></div>
+          <p class="form-note" data-procedures-empty hidden>Aucun element ne correspond aux filtres.</p>
+        </section>
+        <aside class="admin-detail procedures-detail" data-procedures-detail aria-label="Detail procedure">
+          <div class="admin-detail-empty">
+            <p class="section-kicker">Detail</p>
+            <h3>Selectionnez une procedure</h3>
+            <p>La fiche permet de gerer etapes, validations, versions et applications.</p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="admin-modal" data-procedures-modal hidden aria-label="Creation procedure">
+      <div class="admin-modal-panel procedures-modal-panel">
+        <div class="admin-modal-head">
+          <div><p class="section-kicker">Procedure</p><h2>Nouvelle procedure</h2></div>
+          <button class="btn ghost" type="button" data-procedures-close-modal>Fermer</button>
+        </div>
+        <form class="admin-create-form procedures-create-form" data-procedures-form>
+          <label>Titre<input name="title" required placeholder="Ex. Qualification d'un bien vacant"></label>
+          <label>Perimetre<select name="scope"><option value="national">National</option><option value="local">Local</option><option value="pole">Pole</option><option value="module">Module</option></select></label>
+          <label>Niveau<select name="mandatory_level"><option value="obligatoire">Obligatoire</option><option value="recommande">Recommande</option><option value="optionnel">Optionnel</option><option value="experimental">Experimental</option></select></label>
+          <label>Statut<select name="status"><option value="brouillon">Brouillon</option><option value="active">Active</option><option value="en_revision">En revision</option></select></label>
+          <label>Module<input name="module_key" placeholder="Dossiers, Documents, CRM..."></label>
+          <label>Pole<input name="pole" placeholder="Habitat vivant, Materiautheque..."></label>
+          <label>Responsable<input name="owner_label" placeholder="Referent procedure"></label>
+          <label>Prochaine revision<input name="next_review_at" type="datetime-local"></label>
+          <label class="admin-create-wide">Tags<input name="tags" placeholder="bien vacant, visite, decision"></label>
+          <label class="admin-create-wide">Resume<textarea name="summary" rows="5" placeholder="Objectif, cas d'usage, points de vigilance"></textarea></label>
+          <div class="admin-detail-actions admin-create-wide"><button class="btn primary" type="submit">Creer</button><button class="btn secondary" type="button" data-procedures-close-modal>Annuler</button></div>
+          <p class="form-note admin-create-wide" data-procedures-modal-status hidden></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <script src="admin-procedures.js" defer></script>
+</body>
+</html>
