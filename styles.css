@@ -5302,3 +5302,78 @@ tr:nth-child(even) td {
     gap: 4px;
   }
 }
+
+/* Module Documents TVF OS - modeles et conventions */
+.templates-workflow-path {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.templates-workflow-path li {
+  min-height: 80px;
+  display: grid;
+  gap: 4px;
+  padding: 13px;
+  border: 1px solid rgba(14,45,69,.12);
+  border-radius: 14px;
+  background: rgba(255,255,255,.82);
+  box-shadow: 0 12px 28px rgba(14,45,69,.07);
+}
+.templates-workflow-path span {
+  width: 28px;
+  height: 28px;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 999px;
+  background: rgba(14,45,69,.09);
+  color: var(--blue-900);
+  font-weight: 850;
+  font-size: .78rem;
+}
+.templates-workflow-path strong {
+  color: var(--blue-900);
+  line-height: 1.16;
+}
+.templates-workflow-path small {
+  color: var(--muted);
+  font-size: .74rem;
+  font-weight: 750;
+  line-height: 1.22;
+}
+.templates-workflow-path li.is-done {
+  border-color: rgba(47,125,50,.28);
+  background: #f4fbf1;
+}
+.templates-workflow-path li.is-done span {
+  background: var(--green-800);
+  color: #fff;
+}
+.templates-use-panel ul {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.templates-use-panel li {
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: #f7faf5;
+  color: var(--blue-900);
+  font-weight: 750;
+}
+.templates-use-panel p {
+  margin: 0;
+  color: var(--muted);
+}
+@media (max-width: 900px) {
+  .templates-workflow-path,
+  .templates-use-panel ul {
+    grid-template-columns: 1fr;
+  }
+}
