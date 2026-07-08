@@ -4281,6 +4281,13 @@ tr:nth-child(even) td {
   line-height: 1;
 }
 
+.crm-control-panel { display: grid; gap: 12px; padding: 16px; border: 1px solid rgba(14,45,69,.12); border-radius: 12px; background: linear-gradient(180deg, #ffffff 0%, #f8faf5 100%); box-shadow: var(--shadow-soft); }
+.crm-control-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; }
+.crm-control-grid article { display: grid; gap: 5px; min-height: 104px; padding: 13px; border: 1px solid rgba(14,45,69,.12); border-radius: 10px; background: #fff; }
+.crm-control-grid span { color: var(--muted); font-size: .72rem; font-weight: 850; text-transform: uppercase; letter-spacing: .03em; }
+.crm-control-grid strong { color: var(--blue-900); font-size: 1.02rem; line-height: 1.2; }
+.crm-control-grid small { color: var(--muted); font-size: .76rem; font-weight: 700; }
+.crm-control-links { display: flex; flex-wrap: wrap; gap: 8px; }
 .crm-tabs {
   border-top: 0;
 }

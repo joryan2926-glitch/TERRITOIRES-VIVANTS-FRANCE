@@ -152,6 +152,7 @@ const detailEl = document.querySelector("[data-crm-detail]");
 const countEl = document.querySelector("[data-crm-count]");
 const emptyEl = document.querySelector("[data-crm-empty]");
 const kpisEl = document.querySelector("[data-crm-kpis]");
+const controlEl = document.querySelector("[data-crm-control]");
 const refreshButton = document.querySelector("[data-crm-refresh]");
 const logoutButton = document.querySelector("[data-crm-logout]");
 const exportButton = document.querySelector("[data-crm-export]");
@@ -312,7 +313,17 @@ function renderKpis() {
     <article data-tone="info"><span>Doublons</span><strong>${escapeHtml(dashboard.duplicates_pending || 0)}</strong><small>A verifier</small></article>`;
 }
 
-function currentItems() {
+function renderControlPanel() {
+  if (!controlEl || !dashboard) return;
+  const contacts = Number(dashboard.contacts_total || 0);
+  const orgs = Number(dashboard.organizations_total || 0);
+  const missingConsent = Number(dashboard.consent_missing || 0);
+  const overdue = Number(dashboard.overdue_actions || 0);
+  const duplicates = Number(dashboard.duplicates_pending || 0);
+  const nextDecision = overdue ? "Relancer les contacts" : missingConsent ? "Verifier les consentements" : duplicates ? "Fusionner les doublons" : contacts ? "Qualifier en dossier" : "Creer les premiers contacts";
+  const status = overdue || missingConsent ? "Suivi requis" : duplicates ? "Nettoyage requis" : "CRM exploitable";
+  controlEl.innerHTML = `<div class="admin-panel-head"><div><p class="section-kicker">Conversion relationnelle</p><h3>Transformer les contacts en dossiers utiles</h3><p>Cette synthese sert a passer du contact au parcours operationnel : consentement, relance, dossier, pieces, decision.</p></div><strong>${escapeHtml(status)}</strong></div><div class="crm-control-grid"><article><span>Decision suivante</span><strong>${escapeHtml(nextDecision)}</strong><small>priorite</small></article><article><span>Contacts</span><strong>${escapeHtml(contacts)}</strong><small>personnes</small></article><article><span>Organisations</span><strong>${escapeHtml(orgs)}</strong><small>structures</small></article><article><span>Consentements</span><strong>${escapeHtml(missingConsent)}</strong><small>a verifier</small></article><article><span>Relances</span><strong>${escapeHtml(overdue)}</strong><small>en retard</small></article></div><div class="crm-control-links"><a class="btn secondary" href="admin-demandes">Demandes</a><a class="btn secondary" href="admin-dossiers">Dossiers</a><a class="btn secondary" href="admin-documents">Pieces</a><a class="btn secondary" href="admin-work">Taches</a><a class="btn secondary" href="admin-branches">Antennes</a></div>`;
+}function currentItems() {
   if (currentView === "organizations") return organizations;
   if (currentView === "duplicates") return duplicates;
   return contacts;
