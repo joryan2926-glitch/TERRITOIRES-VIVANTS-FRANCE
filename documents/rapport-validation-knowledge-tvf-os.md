@@ -47,14 +47,17 @@ Validee le 08/07/2026 :
 - triggers 3/3 : OK ;
 - donnee de test `test-pieces-bien-vacant` creee avec statut valide, type FAQ et 1 source citee.
 
-## Verification production attendue
+## Verification production
 
-1. Publier le code.
-2. Ouvrir `/admin-knowledge`.
-3. Tester l'acces avec `TVF_ADMIN_TOKEN`.
-4. Verifier les KPI, la recherche, la fiche article, l'ajout source, le retour d'experience, la capitalisation, la question assistee et l'export CSV.
-5. Verifier `/api/admin-knowledge` sans token : attendu `401`.
+Validee partiellement le 08/07/2026 apres push `2f5a3a4` :
+
+- `/admin-knowledge` retourne `200 OK` en production ;
+- `/api/admin-knowledge` sans token retourne `401 Unauthorized` ;
+- le lien Connaissances est visible dans `/dashboard` en production ;
+- le code est publie via GitHub/Vercel.
+
+Reste a confirmer pour verrouillage 100 % : acces avec `TVF_ADMIN_TOKEN`, chargement des KPI, ouverture de l'article `test-pieces-bien-vacant`, ajout d'une source, creation d'un retour d'experience, capitalisation en article, question assistee et export CSV depuis l'interface reelle. Le token admin n'est pas disponible dans l'environnement local Codex, donc cette verification authentifiee necessite une confirmation utilisateur ou une variable locale temporaire.
 
 ## Decision de verrouillage
 
-Le module Base de connaissances pourra etre verrouille apres validation production reelle avec migration appliquee, tests executes et confirmation utilisateur.
+Le module Base de connaissances n'est pas encore verrouille definitivement. Il est conforme techniquement et migre en production, mais la validation fonctionnelle authentifiee doit encore etre confirmee avant ouverture du module suivant.
