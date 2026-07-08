@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Accueil admin | TVF OS</title>
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="theme-color" content="#183f22">
+  <link rel="icon" href="assets/favicon-32.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="admin-body admin-home-body">
+  <a class="skip-link" href="#admin-home-main">Aller au contenu</a>
+  <header class="admin-topbar admin-home-topbar">
+    <a class="admin-brand" href="index" aria-label="Retour au site Territoires Vivants France">
+      <img src="assets/logo-territoires-vivants-france-web.png" alt="Territoires Vivants France" width="320" height="132">
+    </a>
+    <div>
+      <p class="admin-kicker">TVF OS</p>
+      <h1>Accueil admin</h1>
+      <p>Point d'entree unique du back-office Territoires Vivants France.</p>
+    </div>
+    <nav class="admin-home-actions" aria-label="Actions admin">
+      <a class="btn secondary" href="dashboard">Dashboard</a>
+      <a class="btn secondary" href="contact">Retour au site</a>
+    </nav>
+  </header>
+
+  <main id="admin-home-main" class="admin-shell admin-home-shell">
+    <section class="admin-login admin-home-login" data-admin-home-login>
+      <div>
+        <p class="section-kicker">Acces securise</p>
+        <h2>Connexion a TVF OS</h2>
+        <p>Entrez le token admin pour afficher les modules internes. Le meme token sera conserve pour ouvrir les modules securises pendant la session.</p>
+      </div>
+      <form data-admin-home-token-form>
+        <label for="admin-home-token">Token admin</label>
+        <input id="admin-home-token" name="token" type="password" autocomplete="current-password" placeholder="TVF_ADMIN_TOKEN">
+        <button class="btn primary" type="submit">Ouvrir TVF OS</button>
+        <p class="form-note" data-admin-home-login-status role="status" hidden></p>
+      </form>
+    </section>
+
+    <section class="admin-home-app" data-admin-home-app hidden>
+      <div class="admin-home-header">
+        <div>
+          <p class="section-kicker">Navigation interne</p>
+          <h2>Modules TVF OS</h2>
+          <p>Choisissez le module a ouvrir. Les modules verrouilles restent disponibles en consultation et exploitation.</p>
+        </div>
+        <div class="admin-home-header-actions">
+          <a class="btn primary" href="dashboard">Ouvrir le dashboard</a>
+          <button class="btn ghost" type="button" data-admin-home-logout>Deconnexion</button>
+        </div>
+      </div>
+
+      <section class="admin-home-grid" aria-label="Modules principaux">
+        <article class="admin-home-group">
+          <div class="admin-home-group-head">
+            <p class="section-kicker">Operationnel</p>
+            <h3>Suivi quotidien</h3>
+          </div>
+          <div class="admin-home-module-list">
+            <a href="dashboard"><strong>Dashboard</strong><span>Priorites, alertes, pilotage global</span></a>
+            <a href="admin-demandes"><strong>Demandes</strong><span>Entrees, qualification, conversion</span></a>
+            <a href="admin-crm"><strong>CRM</strong><span>Contacts, organisations, relations</span></a>
+            <a href="admin-dossiers"><strong>Dossiers</strong><span>Cas, pieces, decisions, suivi</span></a>
+          </div>
+        </article>
+
+        <article class="admin-home-group">
+          <div class="admin-home-group-head">
+            <p class="section-kicker">Capitalisation</p>
+            <h3>Documents et savoir</h3>
+          </div>
+          <div class="admin-home-module-list">
+            <a href="admin-documents"><strong>Documents</strong><span>Pieces, modeles, justificatifs</span></a>
+            <a href="admin-procedures"><strong>Procedures</strong><span>Methodes, workflows, controles</span></a>
+            <a href="admin-knowledge"><strong>Connaissances</strong><span>Base de savoir et retours terrain</span></a>
+            <a href="admin-ai"><strong>Assistant IA</strong><span>Recherche, synthese, propositions</span></a>
+          </div>
+        </article>
+
+        <article class="admin-home-group">
+          <div class="admin-home-group-head">
+            <p class="section-kicker">Pilotage avance</p>
+            <h3>Territoires, finances, impact</h3>
+          </div>
+          <div class="admin-home-module-list">
+            <a href="admin-map"><strong>Cartographie</strong><span>Biens, ressources, signalements</span></a>
+            <a href="admin-observatoire"><strong>Observatoire</strong><span>Sources, indicateurs, diagnostics</span></a>
+            <a href="admin-finances"><strong>Finances</strong><span>Budgets, depenses, financeurs</span></a>
+            <a href="admin-impact"><strong>Impact</strong><span>Resultats prouves, bilans, exports</span></a>
+          </div>
+        </article>
+      </section>
+    </section>
+  </main>
+
+  <script src="admin.js" defer></script>
+</body>
+</html>
