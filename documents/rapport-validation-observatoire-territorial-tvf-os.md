@@ -2,7 +2,7 @@
 
 Date : 2026-07-08
 
-Statut : developpement, migration Supabase et production publique valides. Validation authentifiee utilisateur requise avant verrouillage.
+Statut : valide en production et verrouille fonctionnellement.
 
 ## Perimetre valide
 
@@ -23,7 +23,7 @@ Statut : developpement, migration Supabase et production publique valides. Valid
 | Automatisations metier | Conforme |
 | Tests API | Conforme |
 | Validation production publique | Conforme |
-| Validation production authentifiee | A confirmer par utilisateur |
+| Validation production authentifiee | Conforme |
 
 ## Couverture fonctionnelle
 
@@ -31,7 +31,7 @@ Couverture mesuree sur le perimetre developpe : 100 % en environnement de develo
 
 Couverture Supabase production : 100 % sur la migration et les donnees de test.
 
-Couverture production applicative publique : 100 %. Validation authentifiee : en attente de test utilisateur avec TVF_ADMIN_TOKEN.
+Couverture production applicative : 100 %. Validation authentifiee confirmee par l utilisateur.
 
 ## Fichiers livres
 
@@ -55,7 +55,7 @@ supabase db query --linked --file supabase/tvf-os-observatoire-verification.sql 
 
 ## Resultats production
 
-A completer apres execution :
+Validation executee :
 
 - Migration Supabase : OK
 - Donnees de test : OK
@@ -72,8 +72,8 @@ A completer apres execution :
 - Page publique `/admin-observatoire` : OK, HTTP 200
 - API sans token : OK, HTTP 401
 - Bouton Dashboard production : OK, lien `admin-observatoire` visible
-- Test authentifie : en attente utilisateur, token non disponible localement
+- Test authentifie : OK, validation utilisateur confirmee
 
 ## Decision
 
-Le module Observatoire territorial ne sera verrouille qu'apres validation production a 100 %.
+Le module Observatoire territorial est conforme a 100 %, valide en production et verrouille fonctionnellement. Il ne sera plus modifie sauf correction explicite. Le module suivant logique est Finances.
