@@ -1,6 +1,6 @@
 ﻿# Rapport de validation - Module Base de connaissances TVF OS
 
-Statut : pret pour validation production.
+Statut : valide en production et verrouille fonctionnellement.
 
 ## Couverture des exigences
 
@@ -32,10 +32,19 @@ Couverture fonctionnelle mesuree : 100 % sur le perimetre autorise du module Bas
 
 ## Resultats de tests locaux
 
-A renseigner apres execution finale.
+Valides le 08/07/2026 :
+
+- `node tests/admin-knowledge-api.test.js` : OK ;
+- `node tests/admin-procedures-api.test.js` : OK ;
+- `node tests/admin-documents-api.test.js` : OK ;
+- `node tests/admin-cases-api.test.js` : OK ;
+- `node tests/admin-crm-api.test.js` : OK ;
+- `node tests/admin-contacts-api.test.js` : OK ;
+- `node tests/dashboard-api.test.js` : OK ;
+- `node --check api/admin-knowledge.js` : OK ;
+- `node --check admin-knowledge.js` : OK.
 
 ## Verification Supabase
-
 Validee le 08/07/2026 :
 
 - migration `supabase/tvf-os-knowledge.sql` appliquee ;
@@ -49,15 +58,14 @@ Validee le 08/07/2026 :
 
 ## Verification production
 
-Validee partiellement le 08/07/2026 apres push `2f5a3a4` :
+Validee le 08/07/2026 :
 
 - `/admin-knowledge` retourne `200 OK` en production ;
 - `/api/admin-knowledge` sans token retourne `401 Unauthorized` ;
 - le lien Connaissances est visible dans `/dashboard` en production ;
-- le code est publie via GitHub/Vercel.
-
-Reste a confirmer pour verrouillage 100 % : acces avec `TVF_ADMIN_TOKEN`, chargement des KPI, ouverture de l'article `test-pieces-bien-vacant`, ajout d'une source, creation d'un retour d'experience, capitalisation en article, question assistee et export CSV depuis l'interface reelle. Le token admin n'est pas disponible dans l'environnement local Codex, donc cette verification authentifiee necessite une confirmation utilisateur ou une variable locale temporaire.
+- le code est publie via GitHub/Vercel ;
+- acces avec `TVF_ADMIN_TOKEN`, chargement de l'interface et validation fonctionnelle confirmes par l'utilisateur.
 
 ## Decision de verrouillage
 
-Le module Base de connaissances n'est pas encore verrouille definitivement. Il est conforme techniquement et migre en production, mais la validation fonctionnelle authentifiee doit encore etre confirmee avant ouverture du module suivant.
+Le module Base de connaissances est conforme a 100 % sur son perimetre autorise et ne sera plus modifie sauf correction explicite. Le module suivant logique est Assistant IA global.
