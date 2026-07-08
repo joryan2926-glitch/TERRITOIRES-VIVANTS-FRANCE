@@ -1,4 +1,4 @@
-﻿const USERS_TOKEN_KEY = "tvfAdminToken";
+const USERS_TOKEN_KEY = "tvfAdminToken";
 const statusLabels = {
   invited: "Invite",
   active: "Actif",
@@ -29,6 +29,7 @@ const tokenForm = document.querySelector("[data-users-token-form]");
 const loginStatus = document.querySelector("[data-users-login-status]");
 const filtersForm = document.querySelector("[data-users-filters]");
 const kpisEl = document.querySelector("[data-users-kpis]");
+const controlEl = document.querySelector("[data-users-control]");
 const listEl = document.querySelector("[data-users-list]");
 const detailEl = document.querySelector("[data-users-detail]");
 const countEl = document.querySelector("[data-users-count]");
@@ -79,9 +80,19 @@ async function loadAll() {
   if (!currentItems().some((item) => item.id === selectedId)) selectedId = currentItems()[0]?.id || null;
   renderAll();
 }
-function renderAll() { renderKpis(); renderAssistant(); renderTabs(); renderList(); renderDetail(); }
+function renderAll() { renderKpis(); renderControlPanel(); renderAssistant(); renderTabs(); renderList(); renderDetail(); }
 function renderKpis() { if (!kpisEl) return; kpisEl.innerHTML = `<article><span>Score acces</span><strong>${dashboard?.access_score || 0}%</strong><small>controle IA</small></article><article><span>Profils actifs</span><strong>${dashboard?.active_profiles || 0}</strong><small>${dashboard?.total_profiles || 0} au total</small></article><article data-tone="warning"><span>Invitations</span><strong>${dashboard?.pending_invitations || 0}</strong><small>en attente</small></article><article><span>Roles</span><strong>${dashboard?.roles_total || 0}</strong><small>${dashboard?.permissions_total || 0} permissions</small></article><article data-tone="danger"><span>Revues</span><strong>${dashboard?.pending_reviews || 0}</strong><small>${dashboard?.sensitive_assignments || 0} roles sensibles</small></article>`; if (countEl) countEl.textContent = `${dashboard?.total_profiles || 0} profil(s), ${dashboard?.pending_invitations || 0} invitation(s), ${dashboard?.pending_reviews || 0} revue(s) en attente.`; }
-function renderAssistant() { const item = selectedItem(); const assistant = item?.assistant || dashboard?.assistant || {}; if (aiScoreEl) aiScoreEl.textContent = item?.assistant?.access_score !== undefined ? `${item.assistant.access_score}%` : `${dashboard?.access_score || 0}%`; if (aiSummaryEl) aiSummaryEl.textContent = assistant.summary || dashboard?.assistant?.summary || "Analyse en attente."; if (!aiGridEl) return; const actions = assistant.next_actions || dashboard?.assistant?.priorities || []; aiGridEl.innerHTML = actions.length ? actions.slice(0, 4).map((action) => `<div><span>Action</span><strong>${escapeHtml(action)}</strong></div>`).join("") : `<div><span>Action</span><strong>Acces sous controle</strong></div>`; }
+function renderControlPanel() {
+  if (!controlEl || !dashboard) return;
+  const score = Number(dashboard.access_score || 0);
+  const profiles = Number(dashboard.active_profiles || 0);
+  const invitations = Number(dashboard.pending_invitations || 0);
+  const reviews = Number(dashboard.pending_reviews || 0);
+  const sensitive = Number(dashboard.sensitive_assignments || 0);
+  const nextDecision = reviews ? "Faire la revue d'acces" : invitations ? "Traiter les invitations" : sensitive ? "Verifier les roles sensibles" : "Maintenir les acces";
+  const status = reviews || sensitive ? "Controle requis" : score >= 80 ? "Acces maitrises" : "Acces a renforcer";
+  controlEl.innerHTML = `<div class="admin-panel-head"><div><p class="section-kicker">Securite des acces</p><h3>Attribuer les bons droits au bon moment</h3><p>Cette synthese evite les acces inutiles, les invitations dormantes et les roles sensibles non revus.</p></div><strong>${escapeHtml(status)}</strong></div><div class="users-control-grid"><article><span>Decision suivante</span><strong>${escapeHtml(nextDecision)}</strong><small>priorite</small></article><article><span>Score</span><strong>${escapeHtml(score)}%</strong><small>controle</small></article><article><span>Profils actifs</span><strong>${escapeHtml(profiles)}</strong><small>utilisateurs</small></article><article><span>Invitations</span><strong>${escapeHtml(invitations)}</strong><small>en attente</small></article><article><span>Roles sensibles</span><strong>${escapeHtml(sensitive)}</strong><small>a revoir</small></article></div><div class="users-control-links"><a class="btn secondary" href="admin-risks">Risques</a><a class="btn secondary" href="admin-governance">Validation</a><a class="btn secondary" href="admin-settings">Parametres</a><a class="btn secondary" href="admin-work">Taches</a></div>`;
+}function renderAssistant() { const item = selectedItem(); const assistant = item?.assistant || dashboard?.assistant || {}; if (aiScoreEl) aiScoreEl.textContent = item?.assistant?.access_score !== undefined ? `${item.assistant.access_score}%` : `${dashboard?.access_score || 0}%`; if (aiSummaryEl) aiSummaryEl.textContent = assistant.summary || dashboard?.assistant?.summary || "Analyse en attente."; if (!aiGridEl) return; const actions = assistant.next_actions || dashboard?.assistant?.priorities || []; aiGridEl.innerHTML = actions.length ? actions.slice(0, 4).map((action) => `<div><span>Action</span><strong>${escapeHtml(action)}</strong></div>`).join("") : `<div><span>Action</span><strong>Acces sous controle</strong></div>`; }
 function renderTabs() { tabs.forEach((button) => button.classList.toggle("is-active", button.dataset.usersView === view)); }
 function titleFor(item) { if (view === "profiles") return [item.first_name, item.last_name].filter(Boolean).join(" ") || item.email || "Profil"; if (view === "roles") return item.role_name || item.role_key || "Role"; if (view === "permissions") return item.permission_name || item.permission_key || "Permission"; if (view === "invitations") return item.email || "Invitation"; return item.reviewer_name || item.profile_id || "Revue d'acces"; }
 function subFor(item) { if (view === "profiles") return item.email || item.notes || ""; if (view === "roles") return item.role_key || item.role_family || ""; if (view === "permissions") return `${item.module_key || "module"} / ${item.permission_key || "permission"}`; if (view === "invitations") return item.invited_role_key || item.message || ""; return item.risk_level || item.findings || ""; }

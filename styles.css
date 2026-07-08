@@ -4855,6 +4855,13 @@ tr:nth-child(even) td {
 .users-readiness span { color: var(--muted); font-size: .78rem; font-weight: 800; text-transform: uppercase; }
 .users-kpis strong,
 .users-readiness strong { color: var(--blue-900); font-size: 1.75rem; }
+.users-control-panel { display: grid; gap: 12px; padding: 16px; border: 1px solid rgba(14,45,69,.12); border-radius: 12px; background: linear-gradient(180deg, #ffffff 0%, #f8faf5 100%); box-shadow: var(--shadow-soft); }
+.users-control-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; }
+.users-control-grid article { display: grid; gap: 5px; min-height: 104px; padding: 13px; border: 1px solid rgba(14,45,69,.12); border-radius: 10px; background: #fff; }
+.users-control-grid span { color: var(--muted); font-size: .72rem; font-weight: 850; text-transform: uppercase; letter-spacing: .03em; }
+.users-control-grid strong { color: var(--blue-900); font-size: 1.02rem; line-height: 1.2; }
+.users-control-grid small { color: var(--muted); font-size: .76rem; font-weight: 700; }
+.users-control-links { display: flex; flex-wrap: wrap; gap: 8px; }
 .users-ai-panel { display: grid; grid-template-columns: minmax(260px, .7fr) minmax(0, 1.3fr); gap: 16px; padding: 18px; border: 1px solid rgba(14,45,69,.12); border-radius: 8px; background: linear-gradient(180deg, #fff 0%, #f7faf6 100%); box-shadow: var(--shadow-soft); }
 .users-ai-panel h2 { margin: 0; color: var(--green-700); font-size: 2.1rem; }
 .users-ai-panel p { margin-bottom: 0; color: var(--muted); }
@@ -4874,7 +4881,7 @@ tr:nth-child(even) td {
 .users-row-list article span { display: block; margin-top: 4px; color: var(--muted); font-size: .86rem; }
 .users-row-list article small { color: var(--muted); font-weight: 800; }
 .users-modal-panel { width: min(960px, 100%); }
-@media (max-width: 1100px) { .users-kpis, .users-ai-panel, .users-layout, .users-readiness, .users-detail-form, .users-create-form { grid-template-columns: 1fr; } .users-ai-grid { grid-template-columns: 1fr; } }
+@media (max-width: 1100px) { .users-kpis, .users-control-grid, .users-ai-panel, .users-layout, .users-readiness, .users-detail-form, .users-create-form { grid-template-columns: 1fr; } .users-ai-grid { grid-template-columns: 1fr; } }
 @media (max-width: 760px) { .users-row-list article { grid-template-columns: 1fr; } }
 
 /* Navigation complete TVF OS */
