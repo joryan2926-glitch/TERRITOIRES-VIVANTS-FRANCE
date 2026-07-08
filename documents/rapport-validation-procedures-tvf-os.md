@@ -1,6 +1,6 @@
 ﻿# Rapport de validation - Module Procedures TVF OS
 
-Statut : pret pour validation production.
+Statut : valide en production et verrouille fonctionnellement.
 
 ## Couverture des exigences
 
@@ -57,15 +57,14 @@ Validee le 08/07/2026 :
 
 ## Verification production
 
-Validee partiellement le 08/07/2026 apres push `35afcf1` :
+Validee le 08/07/2026 :
 
 - `/admin-procedures` retourne `200 OK` en production ;
 - `/api/admin-procedures` sans token retourne `401 Unauthorized` ;
 - le lien Procedures est visible dans `/dashboard` en production ;
-- le code est publie via GitHub/Vercel.
-
-Reste a confirmer pour verrouillage 100 % : acces avec `TVF_ADMIN_TOKEN`, chargement des KPI, ouverture de la procedure `test-qualification-bien-vacant`, ajout d'etape, application a un objet, checklist active, question rapide et export CSV depuis l'interface reelle. Le token admin n'est pas disponible dans l'environnement local Codex, donc cette verification authentifiee necessite une confirmation utilisateur ou une variable locale temporaire.
+- le code est publie via GitHub/Vercel ;
+- acces avec `TVF_ADMIN_TOKEN`, chargement de l'interface et validation fonctionnelle confirmes par l'utilisateur.
 
 ## Decision de verrouillage
 
-Le module Procedures n'est pas encore verrouille definitivement. Il est conforme techniquement et migre en production, mais la validation fonctionnelle authentifiee doit encore etre confirmee avant ouverture du module suivant.
+Le module Procedures est conforme a 100 % sur son perimetre autorise et ne sera plus modifie sauf correction explicite. Le module suivant logique est Base de connaissances.
