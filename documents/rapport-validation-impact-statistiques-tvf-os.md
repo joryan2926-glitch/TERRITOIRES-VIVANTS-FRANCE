@@ -2,7 +2,7 @@
 
 Date : 2026-07-08
 
-Statut : en cours de validation.
+Statut : developpement et migration Supabase valides. Validation production applicative en attente de deploiement Vercel visible.
 
 ## Perimetre valide
 
@@ -23,7 +23,7 @@ Statut : en cours de validation.
 | Tables Supabase | Conforme |
 | RLS et permissions | Conforme |
 | Tests API | Conforme |
-| Validation production publique | A executer |
+| Validation production publique | En attente de deploiement |
 | Validation production authentifiee | A confirmer par utilisateur |
 
 ## Couverture fonctionnelle
@@ -32,7 +32,7 @@ Couverture developpement mesuree : 100 % sur le perimetre Impact MVP autorise.
 
 Couverture Supabase production : 100 % sur la migration et les donnees de test.
 
-Couverture production applicative : en attente du deploiement Vercel et de la validation authentifiee.
+Couverture production applicative : en attente. Le commit `190f8f89` est bien pousse sur `main`, mais `/admin-impact` et `/api/admin-impact` repondent encore HTTP 404 au moment du controle.
 
 ## Fichiers livres
 
@@ -71,9 +71,10 @@ A completer apres execution :
   - `impact_validated_proofs = 1`
   - `impact_reports_to_validate = 1`
   - `impact_exports_ready = 1`
-- Page publique `/admin-impact` :
-- API sans token :
-- Test authentifie :
+- Page publique `/admin-impact` : en attente, HTTP 404 apres push
+- API sans token : en attente, HTTP 404 apres push
+- Bouton Dashboard production : en attente, lien non encore servi en production
+- Test authentifie : impossible tant que le deploiement production ne sert pas le module
 
 ## Decision
 
