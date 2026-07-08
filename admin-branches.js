@@ -149,6 +149,17 @@ function branchMaturityPath(branch = {}) {
   const current = branchMaturityIndex(branch);
   return `<ol class="branches-maturity-path" aria-label="Parcours de maturite de l'antenne">${maturitySteps.map((step, index) => `<li class="${index <= current ? "is-done" : ""}"><span>${index + 1}</span><strong>${escapeHtml(step[1])}</strong><small>${escapeHtml(step[2])}</small></li>`).join("")}</ol>`;
 }
+function branchTerritorialControlPanel(branch = {}) {
+  const assistant = branch.assistant || {};
+  const checklist = selectedItems("checklist");
+  const blocked = checklist.filter((item) => item.status === "blocked").length;
+  const pending = checklist.filter((item) => !["done", "waived"].includes(item.status)).length;
+  const team = selectedItems("team").filter((item) => item.status === "active").length;
+  const poles = selectedItems("branch_poles").filter((item) => item.status === "active").length;
+  const nextDecision = blocked ? "Lever les blocages" : pending ? "Finaliser la checklist" : "Preparer validation nationale";
+  const readiness = assistant.readiness_score ?? 0;
+  return `<section class="branches-control-panel"><div class="admin-panel-head"><div><p class="section-kicker">Pilotage territorial</p><h3>Transformer une antenne en dispositif duplicable</h3><p>Cette synthese aide a verifier rapidement si le territoire dispose des moyens, des interlocuteurs et du suivi necessaires avant toute ouverture officielle.</p></div><strong>${escapeHtml(readiness)}%</strong></div><div class="branches-control-grid"><article><span>Decision suivante</span><strong>${escapeHtml(nextDecision)}</strong><small>Priorite de pilotage</small></article><article><span>Blocages</span><strong>${escapeHtml(blocked)}</strong><small>points a arbitrer</small></article><article><span>Checklist ouverte</span><strong>${escapeHtml(pending)}</strong><small>items a cloturer</small></article><article><span>Equipe active</span><strong>${escapeHtml(team)}</strong><small>personnes mobilisees</small></article><article><span>Poles actifs</span><strong>${escapeHtml(poles)}</strong><small>leviers deployes</small></article></div><div class="branches-control-links" aria-label="Raccourcis de pilotage antenne"><a class="btn secondary" href="admin-demandes">Voir demandes</a><a class="btn secondary" href="admin-crm">Contacts locaux</a><a class="btn secondary" href="admin-dossiers">Dossiers lies</a><a class="btn secondary" href="admin-documents">Documents</a><a class="btn secondary" href="admin-map">Carte</a></div></section>`;
+}
 function branchLaunchPlanPanel(branch = {}) {
   return `<section class="branches-launch-panel"><div class="admin-panel-head"><div><p class="section-kicker">Deploiement local</p><h3>Plan d'installation 30 / 60 / 90 jours</h3></div><strong>${escapeHtml(label(maturityLabels, branch.maturity_level))}</strong></div><div class="branches-launch-grid">${launchSteps.map((step) => `<article><span>${escapeHtml(step[0])}</span><h4>${escapeHtml(step[1])}</h4><p>${escapeHtml(step[2])}</p></article>`).join("")}</div></section>`;
 }
@@ -157,7 +168,7 @@ function branchNeedsPanel(branch = {}) {
   return `<section class="branches-needs-panel"><div><p class="section-kicker">Besoins de lancement</p><h3>Moyens a securiser</h3><p>La fiche antenne sert a verrouiller les moyens indispensables avant de passer du contact territorial a l'action de terrain.</p></div><ul>${needs.map((need) => `<li>${escapeHtml(need)}</li>`).join("")}</ul></section>`;
 }
 function branchActionPanel() {
-  return `<section class="branches-action-panel"><div><p class="section-kicker">Actions rapides</p><h3>Transformer la fiche antenne en taches TVF OS</h3><p>Ces actions creent des taches dans le module Planning afin de suivre le lancement sans perdre le fil entre antennes, dossiers et projets.</p></div><div class="admin-detail-actions"><button class="btn secondary" type="button" data-branch-action="launch90">Creer le plan 90 jours</button><button class="btn secondary" type="button" data-branch-action="review">Planifier revue antenne</button><button class="btn secondary" type="button" data-branch-action="report">Preparer reporting</button></div></section>`;
+  return `<section class="branches-action-panel"><div><p class="section-kicker">Actions rapides</p><h3>Transformer la fiche antenne en taches TVF OS</h3><p>Ces actions creent des taches dans le module Planning afin de suivre le lancement sans perdre le fil entre antennes, dossiers et projets.</p></div><div class="admin-detail-actions"><button class="btn secondary" type="button" data-branch-action="launch90">Creer le plan 90 jours</button><button class="btn secondary" type="button" data-branch-action="review">Planifier revue antenne</button><button class="btn secondary" type="button" data-branch-action="report">Preparer reporting</button><button class="btn secondary" type="button" data-branch-action="territoryPack">Preparer comite territorial</button></div></section>`;
 }
 function renderDetail() {
   const branch = selectedBranch();
@@ -165,7 +176,7 @@ function renderDetail() {
   if (!branch) { detailEl.innerHTML = `<p class="form-note">Aucune antenne selectionnee.</p>`; return; }
   const assistant = branch.assistant || {};
   const blocks = { overview: overview(branch), checklist: rowList(selectedItems("checklist"), "checklist"), team: rowList(selectedItems("team"), "team"), training: rowList(selectedItems("training"), "training"), poles: rowList(selectedItems("branch_poles"), "pole") };
-  const operationalPanels = view === "overview" ? `${branchMaturityPath(branch)}${branchLaunchPlanPanel(branch)}${branchNeedsPanel(branch)}${branchActionPanel(branch)}` : "";
+  const operationalPanels = view === "overview" ? `${branchMaturityPath(branch)}${branchTerritorialControlPanel(branch)}${branchLaunchPlanPanel(branch)}${branchNeedsPanel(branch)}${branchActionPanel(branch)}` : "";
   detailEl.innerHTML = `<div class="admin-panel-head"><div><p class="section-kicker">${escapeHtml(branch.code)}</p><h2>${escapeHtml(branch.name)}</h2><p>${escapeHtml(branch.territory_name || "Territoire non renseigne")}</p></div><span>${escapeHtml(assistant.readiness_score ?? 0)}%</span></div><section class="branches-readiness"><article><span>Checklist</span><strong>${escapeHtml(assistant.checklist_score ?? 0)}%</strong></article><article><span>Formation</span><strong>${escapeHtml(assistant.training_score ?? 0)}%</strong></article><article><span>Equipe active</span><strong>${escapeHtml(assistant.active_team ?? 0)}</strong></article><article><span>Poles actifs</span><strong>${escapeHtml(assistant.active_poles ?? 0)}</strong></article></section>${operationalPanels}${blocks[view] || blocks.overview}`;
 }
 
@@ -190,6 +201,10 @@ async function applyBranchAction(action) {
   }
   if (action === "review") await createBranchTask(branch, `Revue antenne - ${branch.name}`, "Verifier maturite, checklist, equipe, formations, poles actifs et blocages avant decision nationale.", 5, "P2");
   if (action === "report") await createBranchTask(branch, `Reporting antenne - ${branch.name}`, "Preparer synthese : avancement, contacts, besoins logistiques, risques, documents et indicateurs.", 14, "P3");
+  if (action === "territoryPack") {
+    await createBranchTask(branch, `Dossier comite territorial - ${branch.name}`, "Assembler note de contexte, besoins publics, contacts, convention, moyens logistiques et decisions a prendre.", 10, "P1");
+    await createBranchTask(branch, `Liste pieces antenne - ${branch.name}`, "Verifier recepisse, statuts, assurance, contacts, locaux, vehicule, documents partenaires et trame de convention.", 12, "P2");
+  }
   await loadAll();
 }
 async function generatePack() { const branch = selectedBranch(); if (!branch) return alert("Selectionnez une antenne."); const result = await api("/api/admin-branches", { method: "POST", body: JSON.stringify({ type: "generate_pack", branch_id: branch.id }) }); const pack = result.launch_pack; alert(`${pack.pack.title}\n\nPreparation : ${pack.assistant.readiness_score}%\nActions : ${pack.pack.next_actions.join("; ")}`); }

@@ -5498,6 +5498,7 @@ tr:nth-child(even) td {
 .branches-maturity-path small { color: var(--muted); font-size: .74rem; font-weight: 700; line-height: 1.25; }
 .branches-maturity-path li.is-done { border-color: rgba(47,125,50,.28); background: #f4fbf1; }
 .branches-maturity-path li.is-done span { background: var(--green-800); color: #fff; }
+.branches-control-panel,
 .branches-launch-panel,
 .branches-needs-panel,
 .branches-action-panel {
@@ -5510,6 +5511,12 @@ tr:nth-child(even) td {
   background: linear-gradient(180deg, #ffffff 0%, #f8faf5 100%);
   box-shadow: var(--shadow-soft);
 }
+.branches-control-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; }
+.branches-control-grid article { display: grid; gap: 5px; min-height: 104px; padding: 13px; border: 1px solid rgba(14,45,69,.12); border-radius: 10px; background: #fff; }
+.branches-control-grid span { color: var(--muted); font-size: .72rem; font-weight: 850; text-transform: uppercase; letter-spacing: .03em; }
+.branches-control-grid strong { color: var(--blue-900); font-size: 1rem; line-height: 1.25; }
+.branches-control-grid small { color: var(--muted); font-size: .76rem; font-weight: 700; }
+.branches-control-links { display: flex; flex-wrap: wrap; gap: 8px; }
 .branches-launch-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
 .branches-launch-grid article { padding: 13px; border: 1px solid rgba(47,125,50,.16); border-radius: 10px; background: #fff; }
 .branches-launch-grid span { color: var(--green-800); font-size: .78rem; font-weight: 850; text-transform: uppercase; }
@@ -5524,6 +5531,7 @@ tr:nth-child(even) td {
 .branches-action-panel .admin-detail-actions { justify-content: flex-end; }
 @media (max-width: 1100px) {
   .branches-maturity-path,
+  .branches-control-grid,
   .branches-launch-grid,
   .branches-needs-panel,
   .branches-needs-panel ul,
