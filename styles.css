@@ -4487,6 +4487,13 @@ tr:nth-child(even) td {
 .procedures-shell { max-width: 1380px; }
 .procedures-app { display: grid; }
 .procedures-layout { grid-template-columns: minmax(350px, .9fr) minmax(0, 1.5fr); }
+.procedures-control-panel { display: grid; gap: 12px; padding: 16px; border: 1px solid rgba(14,45,69,.12); border-radius: 12px; background: linear-gradient(180deg, #ffffff 0%, #f8faf5 100%); box-shadow: var(--shadow-soft); }
+.procedures-control-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; }
+.procedures-control-grid article { display: grid; gap: 5px; min-height: 104px; padding: 13px; border: 1px solid rgba(14,45,69,.12); border-radius: 10px; background: #fff; }
+.procedures-control-grid span { color: var(--muted); font-size: .72rem; font-weight: 850; text-transform: uppercase; letter-spacing: .03em; }
+.procedures-control-grid strong { color: var(--blue-900); font-size: 1.02rem; line-height: 1.2; }
+.procedures-control-grid small { color: var(--muted); font-size: .76rem; font-weight: 700; }
+.procedures-control-links { display: flex; flex-wrap: wrap; gap: 8px; }
 .procedures-card .admin-request-head strong { color: var(--blue-900); }
 .procedures-card.is-sensitive { border-color: rgba(154,52,18,.35); background: #fff8f3; }
 .procedures-detail-form { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -4505,7 +4512,7 @@ tr:nth-child(even) td {
 .procedures-steps select { min-height: 40px; padding: 8px 10px; border: 1px solid rgba(14,45,69,.18); border-radius: 10px; background: #fff; font: inherit; }
 .procedures-modal-panel { width: min(940px, 100%); }
 .procedures-create-form textarea { min-height: 120px; }
-@media (max-width: 900px) { .procedures-layout, .procedures-detail-form, .procedures-question-form { grid-template-columns: 1fr; } }
+@media (max-width: 900px) { .procedures-layout, .procedures-detail-form, .procedures-question-form, .procedures-control-grid { grid-template-columns: 1fr; } }
 
 /* Module Base de connaissances TVF OS */
 .knowledge-body { background: #f4f7f3; }
