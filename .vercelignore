@@ -1,5 +1,5 @@
-# Internal workspaces and generated deliverables.
-# The public site and /api functions do not need these files at deploy time.
+# Internal workspaces and heavy generated deliverables.
+# Keep scripts/ and documents/ available in case Vercel runs the site generator.
 .agents/
 .codex/
 .vercel/
@@ -7,13 +7,10 @@ node_modules/
 tmp/
 output/
 social/
-documents/
 supabase/
 tests/
-scripts/
 
-# Local-only metadata and documentation.
-*.md
+# Local-only metadata.
 *.ndjson
 *.log
 .env
