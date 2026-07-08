@@ -4775,7 +4775,13 @@ tr:nth-child(even) td {
 .governance-readiness span { color: var(--muted); font-size: .78rem; font-weight: 800; text-transform: uppercase; }
 .governance-kpis strong,
 .governance-readiness strong { color: var(--blue-900); font-size: 1.75rem; }
-.governance-ai-panel { display: grid; grid-template-columns: minmax(260px, .7fr) minmax(0, 1.3fr); gap: 16px; padding: 18px; border: 1px solid rgba(14,45,69,.12); border-radius: 8px; background: linear-gradient(180deg, #fff 0%, #f8faf5 100%); box-shadow: var(--shadow-soft); }
+.governance-control-panel { display: grid; gap: 12px; padding: 16px; border: 1px solid rgba(14,45,69,.12); border-radius: 12px; background: linear-gradient(180deg, #ffffff 0%, #f8faf5 100%); box-shadow: var(--shadow-soft); }
+.governance-control-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; }
+.governance-control-grid article { display: grid; gap: 5px; min-height: 104px; padding: 13px; border: 1px solid rgba(14,45,69,.12); border-radius: 10px; background: #fff; }
+.governance-control-grid span { color: var(--muted); font-size: .72rem; font-weight: 850; text-transform: uppercase; letter-spacing: .03em; }
+.governance-control-grid strong { color: var(--blue-900); font-size: 1.02rem; line-height: 1.2; }
+.governance-control-grid small { color: var(--muted); font-size: .76rem; font-weight: 700; }
+.governance-control-links { display: flex; flex-wrap: wrap; gap: 8px; }.governance-ai-panel { display: grid; grid-template-columns: minmax(260px, .7fr) minmax(0, 1.3fr); gap: 16px; padding: 18px; border: 1px solid rgba(14,45,69,.12); border-radius: 8px; background: linear-gradient(180deg, #fff 0%, #f8faf5 100%); box-shadow: var(--shadow-soft); }
 .governance-ai-panel h2 { margin: 0; color: var(--green-700); font-size: 2.1rem; }
 .governance-ai-panel p { margin-bottom: 0; color: var(--muted); }
 .governance-ai-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
@@ -4789,7 +4795,7 @@ tr:nth-child(even) td {
 .governance-create-form { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
 .governance-wide-field { grid-column: 1 / -1; }
 .governance-modal-panel { width: min(960px, 100%); }
-@media (max-width: 1100px) { .governance-kpis, .governance-ai-panel, .governance-layout, .governance-readiness, .governance-detail-form, .governance-create-form { grid-template-columns: 1fr; } .governance-ai-grid { grid-template-columns: 1fr; } }
+@media (max-width: 1100px) { .governance-kpis, .governance-control-grid, .governance-ai-panel, .governance-layout, .governance-readiness, .governance-detail-form, .governance-create-form { grid-template-columns: 1fr; } .governance-ai-grid { grid-template-columns: 1fr; } }
 
 /* Module Risques et conformite TVF OS */
 .risks-body { background: #f5f7f4; }

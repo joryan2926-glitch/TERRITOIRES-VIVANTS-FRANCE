@@ -1,4 +1,4 @@
-﻿const GOVERNANCE_TOKEN_KEY = "tvfAdminToken";
+const GOVERNANCE_TOKEN_KEY = "tvfAdminToken";
 const statusLabels = { draft: "Brouillon", to_validate: "A valider", validated: "Validee", rejected: "Refusee", executing: "Execution", done: "Terminee", archive: "Archive", scheduled: "Planifie", in_progress: "En cours", closed: "Clos", cancelled: "Annule", active: "Active", paused: "En pause", expired: "Expiree", revoked: "Revoquee", todo: "A faire", blocked: "Bloque" };
 const typeLabels = { decisions: "Decisions", committees: "Comites", actions: "Actions", delegations: "Delegations" };
 const entityByView = { decisions: "decisions", committees: "committees", actions: "actions", delegations: "delegations" };
@@ -9,6 +9,7 @@ const tokenForm = document.querySelector("[data-governance-token-form]");
 const loginStatus = document.querySelector("[data-governance-login-status]");
 const filtersForm = document.querySelector("[data-governance-filters]");
 const kpisEl = document.querySelector("[data-governance-kpis]");
+const controlEl = document.querySelector("[data-governance-control]");
 const listEl = document.querySelector("[data-governance-list]");
 const detailEl = document.querySelector("[data-governance-detail]");
 const countEl = document.querySelector("[data-governance-count]");
@@ -69,13 +70,23 @@ async function loadAll() {
   if (!currentItems().some((item) => item.id === selectedId)) selectedId = currentItems()[0]?.id || null;
   renderAll();
 }
-function renderAll() { renderKpis(); renderAssistant(); renderTabs(); renderList(); renderDetail(); }
+function renderAll() { renderKpis(); renderControlPanel(); renderAssistant(); renderTabs(); renderList(); renderDetail(); }
 function renderKpis() {
   if (!kpisEl || !dashboard) return;
   kpisEl.innerHTML = `<article><span>Decisions</span><strong>${dashboard.total_decisions || 0}</strong><small>${dashboard.validated || 0} validees</small></article><article data-tone="warning"><span>A valider</span><strong>${dashboard.to_validate || 0}</strong><small>decision humaine</small></article><article><span>Comites ouverts</span><strong>${dashboard.committees_open || 0}</strong><small>agenda/PV</small></article><article data-tone="danger"><span>Actions retard</span><strong>${dashboard.overdue_actions || 0}</strong><small>${dashboard.open_actions || 0} ouvertes</small></article><article data-tone="info"><span>Delegations</span><strong>${dashboard.active_delegations || 0}</strong><small>actives</small></article>`;
   if (countEl) countEl.textContent = `${dashboard.total_decisions || 0} decision(s), ${dashboard.open_actions || 0} action(s) ouverte(s), ${dashboard.minutes_to_validate || 0} PV a valider.`;
 }
-function renderAssistant() {
+function renderControlPanel() {
+  if (!controlEl || !dashboard) return;
+  const toValidate = Number(dashboard.to_validate || 0);
+  const overdue = Number(dashboard.overdue_actions || 0);
+  const minutes = Number(dashboard.minutes_to_validate || 0);
+  const openActions = Number(dashboard.open_actions || 0);
+  const delegations = Number(dashboard.active_delegations || 0);
+  const nextDecision = toValidate ? "Valider les decisions" : minutes ? "Valider les PV" : overdue ? "Relancer les actions" : "Maintenir le registre";
+  const status = overdue ? "Arbitrage urgent" : toValidate || minutes ? "Validation requise" : "Gouvernance tenue";
+  controlEl.innerHTML = `<div class="admin-panel-head"><div><p class="section-kicker">Decision humaine</p><h3>Suivre les validations engageantes</h3><p>Cette synthese relie decisions, comites, PV, delegations et actions pour eviter toute decision non tracee.</p></div><strong>${escapeHtml(status)}</strong></div><div class="governance-control-grid"><article><span>Decision suivante</span><strong>${escapeHtml(nextDecision)}</strong><small>priorite</small></article><article><span>A valider</span><strong>${escapeHtml(toValidate)}</strong><small>decisions</small></article><article><span>PV</span><strong>${escapeHtml(minutes)}</strong><small>a valider</small></article><article><span>Actions retard</span><strong>${escapeHtml(overdue)}</strong><small>${escapeHtml(openActions)} ouvertes</small></article><article><span>Delegations</span><strong>${escapeHtml(delegations)}</strong><small>actives</small></article></div><div class="governance-control-links"><a class="btn secondary" href="admin-dossiers">Dossiers</a><a class="btn secondary" href="admin-risks">Risques</a><a class="btn secondary" href="admin-documents">PV / pieces</a><a class="btn secondary" href="admin-work">Actions</a><a class="btn secondary" href="admin-finances">Finances</a></div>`;
+}function renderAssistant() {
   const item = selectedItem(); const assistant = item?.assistant || dashboard?.assistant || {};
   if (aiScoreEl) aiScoreEl.textContent = item?.assistant?.validation_score !== undefined ? `${item.assistant.validation_score}%` : `${dashboard?.to_validate || 0}`;
   if (aiSummaryEl) aiSummaryEl.textContent = assistant.summary || dashboard?.assistant?.summary || "Aucune analyse disponible.";
