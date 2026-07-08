@@ -5625,3 +5625,62 @@ tr:nth-child(even) td {
     grid-template-columns: 1fr;
   }
 }
+
+/* Module Documents TVF OS - contexte et filtres rapides */
+.documents-context-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 12px 18px 0;
+}
+.documents-context-bar button {
+  min-height: 38px;
+  padding: 8px 13px;
+  border: 1px solid rgba(14,45,69,.12);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--blue-900);
+  font: inherit;
+  font-size: .86rem;
+  font-weight: 760;
+  cursor: pointer;
+  transition: background .2s ease, border-color .2s ease, transform .2s ease;
+}
+.documents-context-bar button:hover {
+  transform: translateY(-1px);
+  border-color: rgba(47,125,50,.28);
+  background: #f4fbf1;
+}
+.documents-context-panel .admin-detail-actions {
+  justify-content: flex-start;
+}
+.documents-context-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+.documents-context-grid div {
+  display: grid;
+  gap: 5px;
+  padding: 12px;
+  border: 1px solid rgba(14,45,69,.1);
+  border-radius: 10px;
+  background: #f8faf5;
+}
+.documents-context-grid span {
+  color: var(--muted);
+  font-size: .76rem;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+.documents-context-grid strong,
+.documents-context-grid code {
+  color: var(--blue-900);
+  font-size: .9rem;
+  overflow-wrap: anywhere;
+}
+@media (max-width: 900px) {
+  .documents-context-grid {
+    grid-template-columns: 1fr;
+  }
+}
