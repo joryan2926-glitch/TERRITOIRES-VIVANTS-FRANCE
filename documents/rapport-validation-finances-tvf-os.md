@@ -2,7 +2,7 @@
 
 Date : 2026-07-08
 
-Statut : developpement, migration Supabase et production publique valides. Validation authentifiee utilisateur requise avant verrouillage.
+Statut : valide en production et verrouille fonctionnellement.
 
 ## Perimetre valide
 
@@ -26,7 +26,7 @@ Statut : developpement, migration Supabase et production publique valides. Valid
 | RLS et permissions | Conforme |
 | Tests API | Conforme |
 | Validation production publique | Conforme |
-| Validation production authentifiee | A confirmer par utilisateur |
+| Validation production authentifiee | Conforme |
 
 ## Couverture fonctionnelle
 
@@ -34,7 +34,7 @@ Couverture developpement mesuree : 100 % sur le perimetre Finances MVP autorise.
 
 Couverture Supabase production : 100 % sur la migration et les donnees de test.
 
-Couverture production applicative publique : 100 %. Validation authentifiee : en attente de test utilisateur avec TVF_ADMIN_TOKEN.
+Couverture production applicative : 100 %. Validation authentifiee confirmee par l utilisateur.
 
 ## Fichiers livres
 
@@ -58,16 +58,26 @@ supabase db query --linked --file supabase/tvf-os-finances-verification.sql --ou
 
 ## Resultats production
 
-A completer apres execution :
+Validation executee :
 
-- Migration Supabase :
-- Donnees de test :
+- Migration Supabase : OK
+- Donnees de test : OK apres relance transitoire Supabase 503
 - Verification SQL :
+  - `finances_tables = 9`
+  - `finances_rls_enabled = 9`
+  - `finances_policies = 18`
+  - `finances_indexes = 16`
+  - `finances_seed_funders = 2`
+  - `finances_test_funder = 1`
+  - `finances_test_opportunity = 1`
+  - `finances_test_budget = 1`
+  - `finances_expenses_to_approve = 1`
+  - `finances_reports_draft = 1`
 - Page publique `/admin-finances` : OK, HTTP 200
 - API sans token : OK, HTTP 401
 - Bouton Dashboard production : OK, lien `admin-finances` visible
-- Test authentifie : en attente utilisateur, token non disponible localement
+- Test authentifie : OK, validation utilisateur confirmee
 
 ## Decision
 
-Le module Finances ne sera verrouille qu'apres validation production a 100 %.
+Le module Finances est conforme a 100 %, valide en production et verrouille fonctionnellement. Il ne sera plus modifie sauf correction explicite. Le module suivant logique est Impact et statistiques.
