@@ -5592,3 +5592,36 @@ tr:nth-child(even) td {
     grid-template-columns: 1fr;
   }
 }
+
+/* Module Dossiers TVF OS - documents rattaches */
+.cases-documents-panel > p {
+  margin: 0;
+  color: var(--muted);
+  font-weight: 650;
+  line-height: 1.5;
+}
+.cases-documents-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+.cases-documents-grid article {
+  align-content: start;
+}
+.cases-documents-grid p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.45;
+}
+.cases-documents-grid .btn {
+  width: fit-content;
+  margin-top: 4px;
+}
+.cases-documents-panel .admin-detail-actions {
+  justify-content: flex-start;
+}
+@media (max-width: 900px) {
+  .cases-documents-grid {
+    grid-template-columns: 1fr;
+  }
+}
