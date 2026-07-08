@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Finances | TVF OS</title>
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="theme-color" content="#183f22">
+  <link rel="icon" href="assets/favicon-32.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="admin-body finances-body">
+  <a class="skip-link" href="#finances-main">Aller au contenu</a>
+  <header class="admin-topbar finances-topbar">
+    <a class="admin-brand" href="index" aria-label="Retour au site Territoires Vivants France">
+      <img src="assets/logo-territoires-vivants-france-web.png" alt="Territoires Vivants France" width="320" height="132">
+    </a>
+    <div>
+      <p class="admin-kicker">TVF OS</p>
+      <h1>Finances</h1>
+    </div>
+    <div class="admin-top-actions">
+      <a class="btn secondary" href="dashboard">Dashboard</a>
+      <a class="btn secondary" href="admin-dossiers">Dossiers</a>
+      <a class="btn secondary" href="admin-documents">Documents</a>
+      <a class="btn secondary" href="admin-observatoire">Observatoire</a>
+      <a class="btn secondary" href="admin-ai">Assistant IA</a>
+    </div>
+  </header>
+
+  <main id="finances-main" class="admin-shell finances-shell">
+    <section class="admin-login" data-finances-login>
+      <div>
+        <p class="section-kicker">Acces securise</p>
+        <h2>Connexion aux finances TVF</h2>
+        <p>Les budgets, depenses, justificatifs et obligations financeurs sont controles avant toute decision.</p>
+      </div>
+      <form data-finances-token-form>
+        <label for="finances-token">Token admin</label>
+        <input id="finances-token" name="token" type="password" autocomplete="current-password" placeholder="TVF_ADMIN_TOKEN">
+        <button class="btn primary" type="submit">Ouvrir les finances</button>
+        <p class="form-note" data-finances-login-status role="status" hidden></p>
+      </form>
+    </section>
+
+    <section class="admin-app finances-app" data-finances-app hidden>
+      <div class="admin-toolbar finances-toolbar">
+        <div>
+          <p class="section-kicker">Pilotage financier</p>
+          <h2>Budgets, depenses, financeurs et reporting</h2>
+          <p data-finances-count>Chargement des finances...</p>
+        </div>
+        <div class="admin-toolbar-actions">
+          <button class="btn primary" type="button" data-finances-create>Nouvel element</button>
+          <button class="btn secondary" type="button" data-finances-report>Generer reporting</button>
+          <button class="btn secondary" type="button" data-finances-refresh>Actualiser</button>
+          <button class="btn secondary" type="button" data-finances-export>Exporter CSV</button>
+          <button class="btn ghost" type="button" data-finances-logout>Deconnexion</button>
+        </div>
+      </div>
+
+      <section class="crm-kpis finances-kpis" data-finances-kpis aria-label="Indicateurs financiers"></section>
+
+      <div class="admin-status-tabs finances-tabs" role="tablist" aria-label="Vues finances">
+        <button type="button" class="is-active" data-finances-view="budgets">Budgets</button>
+        <button type="button" data-finances-view="expenses">Depenses</button>
+        <button type="button" data-finances-view="funders">Financeurs</button>
+        <button type="button" data-finances-view="opportunities">Appels a projets</button>
+        <button type="button" data-finances-view="applications">Demandes</button>
+        <button type="button" data-finances-view="payments">Paiements</button>
+        <button type="button" data-finances-view="reports">Reporting</button>
+      </div>
+
+      <form class="admin-filters finances-filters" data-finances-filters>
+        <label>Recherche<input name="q" type="search" placeholder="Budget, depense, financeur, reporting"></label>
+        <label>Type<select name="type" data-finances-type-filter><option value="all">Tous</option></select></label>
+        <label>Statut<select name="status" data-finances-status-filter><option value="all">Tous</option></select></label>
+      </form>
+
+      <section class="admin-ai-panel finances-ai-panel">
+        <div class="admin-panel-head">
+          <div>
+            <p class="section-kicker">Assistant finance</p>
+            <h3>Controle budgetaire</h3>
+          </div>
+          <strong data-finances-ai-score>0%</strong>
+        </div>
+        <p data-finances-ai-summary>Les alertes budgetaires apparaitront apres chargement.</p>
+        <div class="admin-ai-grid" data-finances-ai-grid></div>
+      </section>
+
+      <div class="finances-layout admin-layout">
+        <section class="admin-list finances-list" aria-label="Liste finances">
+          <div data-finances-list class="admin-request-list"></div>
+          <p class="form-note" data-finances-empty hidden>Aucun element ne correspond aux filtres.</p>
+        </section>
+        <aside class="admin-detail finances-detail" data-finances-detail aria-label="Detail finances">
+          <div class="admin-detail-empty">
+            <p class="section-kicker">Detail</p>
+            <h3>Selectionnez un element</h3>
+            <p>Controlez budget, depenses, justificatifs, obligations et reporting.</p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="admin-modal" data-finances-modal hidden aria-label="Creation finances">
+      <div class="admin-modal-panel finances-modal-panel">
+        <div class="admin-modal-head">
+          <div>
+            <p class="section-kicker">Finances</p>
+            <h2>Nouvel element</h2>
+          </div>
+          <button class="btn ghost" type="button" data-finances-close-modal>Fermer</button>
+        </div>
+        <form class="admin-create-form finances-create-form" data-finances-form>
+          <label>Element<select name="type" data-finances-entity-select><option value="budget">Budget</option><option value="expense">Depense</option><option value="funder">Financeur</option><option value="opportunity">Appel a projets</option><option value="application">Demande de financement</option><option value="payment">Paiement</option><option value="report">Reporting</option></select></label>
+          <label class="finances-field-budget finances-field-expense finances-field-funder finances-field-opportunity finances-field-application finances-field-report">Titre / nom<input name="title" placeholder="Nom clair"></label>
+          <label class="finances-field-budget">Type budget<select name="budget_type"><option value="project">Projet</option><option value="branch">Antenne</option><option value="national">National</option><option value="action">Action</option><option value="grant">Subvention</option></select></label>
+          <label class="finances-field-budget">Statut budget<select name="budget_status"><option value="draft">Brouillon</option><option value="active">Actif</option><option value="to_review">A reviser</option><option value="closed">Clos</option></select></label>
+          <label class="finances-field-budget">Recettes prevues<input name="planned_income" inputmode="decimal" placeholder="0"></label>
+          <label class="finances-field-budget">Depenses prevues<input name="planned_expenses" inputmode="decimal" placeholder="0"></label>
+          <label class="finances-field-expense finances-field-payment">Montant<input name="amount" inputmode="decimal" placeholder="0"></label>
+          <label class="finances-field-expense">Fournisseur<input name="vendor_name" placeholder="Nom fournisseur"></label>
+          <label class="finances-field-expense">Statut depense<select name="expense_status"><option value="draft">Brouillon</option><option value="to_approve">A approuver</option><option value="approved">Approuvee</option><option value="paid">Payee</option></select></label>
+          <label class="finances-field-funder">Type financeur<select name="funder_type"><option value="public">Public</option><option value="foundation">Fondation</option><option value="corporate">Entreprise</option><option value="private">Prive</option><option value="individual">Particulier</option><option value="institution">Institution</option><option value="other">Autre</option></select></label>
+          <label class="finances-field-funder">Email<input name="contact_email" type="email" placeholder="contact@..."></label>
+          <label class="finances-field-opportunity">Type financement<select name="opportunity_type"><option value="grant">Subvention</option><option value="call_for_projects">Appel a projets</option><option value="sponsorship">Mecenat</option><option value="donation">Don</option><option value="public_subsidy">Aide publique</option><option value="loan">Pret</option><option value="other">Autre</option></select></label>
+          <label class="finances-field-opportunity">Echeance<input name="deadline_at" type="date"></label>
+          <label class="finances-field-application">Montant demande<input name="requested_amount" inputmode="decimal" placeholder="0"></label>
+          <label class="finances-field-payment">Statut paiement<select name="payment_status"><option value="pending">En attente</option><option value="succeeded">Reussi</option><option value="failed">Echoue</option><option value="refunded">Rembourse</option></select></label>
+          <label class="finances-field-report">Type reporting<select name="report_type"><option value="funder_report">Financeur</option><option value="budget_review">Revue budget</option><option value="expense_summary">Depenses</option><option value="grant_report">Subvention</option></select></label>
+          <label class="finances-field-report">Echeance reporting<input name="due_at" type="date"></label>
+          <label class="admin-create-wide">Notes / synthese<textarea name="summary" rows="5" placeholder="Restrictions, obligations, justificatifs, contexte"></textarea></label>
+          <div class="admin-detail-actions admin-create-wide">
+            <button class="btn primary" type="submit">Creer</button>
+            <button class="btn secondary" type="button" data-finances-close-modal>Annuler</button>
+          </div>
+          <p class="form-note admin-create-wide" data-finances-modal-status hidden></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <script src="admin-finances.js" defer></script>
+</body>
+</html>
