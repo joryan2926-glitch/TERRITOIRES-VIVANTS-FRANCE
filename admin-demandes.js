@@ -65,10 +65,12 @@ const createStatus = document.querySelector("[data-admin-create-status]");
 const closeCreateButtons = document.querySelectorAll("[data-admin-close-create]");
 const statusShortcuts = document.querySelectorAll("[data-status-shortcut]");
 const priorityShortcuts = document.querySelectorAll("[data-priority-shortcut]");
+const viewShortcuts = document.querySelectorAll("[data-view-shortcut]");
 const kpiEl = document.querySelector("[data-admin-kpis]");
 
 let contacts = [];
 let selectedId = null;
+let currentView = "all";
 let debounceTimer;
 
 function token() {
@@ -157,6 +159,69 @@ function responseSubject(contact) {
   return `Suite a votre demande ${contact?.request_number || "TVF"} - ${contact?.subject || "contact"}`;
 }
 
+function caseTypeFromCategory(category) {
+  return {
+    "collectivite-territoire": "collectivite",
+    "bien-vacant-proprietaire": "bien_vacant",
+    "materiaux-reemploi": "materiaux",
+    "entreprise-partenariat": "entreprise",
+    "benevolat-insertion": "benevole",
+    "financement-mecenat": "financeur",
+    "presse-institutionnel": "presse",
+    "demande-generale": "autre",
+  }[category || ""] || "autre";
+}
+
+function workPriorityFromContact(contact) {
+  if (contact?.priority === "urgente") return "P1";
+  if (contact?.priority === "haute") return "P2";
+  return "P3";
+}
+
+function casePayloadFromContact(contact) {
+  const type = caseTypeFromCategory(contact?.category);
+  const title = contact?.subject || contact?.full_name || contact?.request_number || "Demande TVF a instruire";
+  const missing = piecesText(contact);
+  return {
+    type: "case",
+    source_request_id: contact?.id || "",
+    case_type: type,
+    title,
+    status: "qualification",
+    priority: contact?.priority || "normale",
+    main_pole: contact?.pole || contact?.assistant?.suggested_pole || "Accueil & orientation",
+    assigned_to: contact?.assigned_to || "",
+    summary: [
+      contact?.message || "Demande recue via TVF OS.",
+      missing ? `Pieces a demander : ${missing}` : "",
+    ].filter(Boolean).join("\n\n"),
+    next_action: contact?.next_action || "Completer la qualification du dossier",
+    next_action_due_at: contact?.next_action_due_at || contact?.assistant?.next_action_due_at || "",
+    territory: contact?.territory || contact?.commune || "",
+    decision_status: "non_preparee",
+    risk_level: type === "bien_vacant" || type === "materiaux" ? "modere" : "faible",
+  };
+}
+
+function taskPayloadFromContact(contact, label = "Relancer le demandeur") {
+  const due = new Date(Date.now() + 48 * 60 * 60 * 1000).toISOString();
+  return {
+    type: "task",
+    related_object_type: "contact_request",
+    related_object_id: contact?.id || "",
+    title: `${label} - ${contact?.request_number || contact?.subject || "demande TVF"}`,
+    description: `Demande : ${contact?.subject || "sans objet"}\nContact : ${contact?.full_name || "non renseigne"}\nE-mail : ${contact?.email || "non renseigne"}\nAction : ${contact?.next_action || "reprendre contact"}`,
+    status: "todo",
+    priority: workPriorityFromContact(contact),
+    pole: contact?.pole || contact?.assistant?.suggested_pole || "Accueil & orientation",
+    assigned_to: contact?.assigned_to || "TVF",
+    due_at: due,
+    checklist: "Verifier les pieces disponibles; Contacter le demandeur; Mettre a jour la demande",
+    automation_source: "admin-demandes",
+    created_by: "TVF OS",
+  };
+}
+
 function piecesText(contact) {
   const pieces = contact?.missing_pieces || contact?.assistant?.missing_pieces || [];
   return Array.isArray(pieces) ? pieces.join("\n") : String(pieces || "");
@@ -226,7 +291,8 @@ async function loadContacts() {
   if (countEl) countEl.textContent = "Chargement des demandes...";
   const result = await api(`/api/admin-contacts?${filtersParams().toString()}`);
   contacts = result.contacts || [];
-  if (!contacts.some((item) => item.id === selectedId)) selectedId = contacts[0]?.id || null;
+  const visible = visibleContacts();
+  if (!visible.some((item) => item.id === selectedId)) selectedId = visible[0]?.id || contacts[0]?.id || null;
   renderStatusShortcuts();
   renderList();
   renderDetail();
@@ -235,6 +301,21 @@ async function loadContacts() {
 function isOverdue(contact) {
   if (!contact?.next_action_due_at || ["archive", "refuse"].includes(contact.status)) return false;
   return new Date(contact.next_action_due_at).getTime() < Date.now();
+}
+
+function isDueToday(contact) {
+  if (["archive", "refuse"].includes(contact?.status)) return false;
+  if (["nouveau", "a_qualifier"].includes(contact?.status)) return true;
+  if (!contact?.next_action_due_at) return false;
+  const due = new Date(contact.next_action_due_at).getTime();
+  const end = new Date();
+  end.setHours(23, 59, 59, 999);
+  return due <= end.getTime();
+}
+
+function visibleContacts() {
+  if (currentView === "today") return contacts.filter(isDueToday);
+  return contacts;
 }
 
 function averageScore() {
@@ -259,16 +340,19 @@ function renderStatusShortcuts() {
   const currentStatus = filtersForm?.elements.status?.value || "all";
   const currentPriority = filtersForm?.elements.priority?.value || "all";
   statusShortcuts.forEach((button) => {
-    button.classList.toggle("is-active", button.dataset.statusShortcut === currentStatus && currentPriority === "all");
+    button.classList.toggle("is-active", button.dataset.statusShortcut === currentStatus && currentPriority === "all" && currentView === "all");
   });
   priorityShortcuts.forEach((button) => {
-    button.classList.toggle("is-active", button.dataset.priorityShortcut === currentPriority);
+    button.classList.toggle("is-active", button.dataset.priorityShortcut === currentPriority && currentView === "all");
+  });
+  viewShortcuts.forEach((button) => {
+    button.classList.toggle("is-active", button.dataset.viewShortcut === currentView);
   });
 }
-
 function renderList() {
   if (!listEl) return;
-  listEl.innerHTML = contacts
+  const rows = visibleContacts();
+  listEl.innerHTML = rows
     .map((contact) => {
       const active = contact.id === selectedId ? " is-active" : "";
       const overdue = isOverdue(contact) ? " is-overdue" : "";
@@ -286,20 +370,20 @@ function renderList() {
     })
     .join("");
 
-  if (emptyEl) emptyEl.hidden = contacts.length !== 0;
+  if (emptyEl) emptyEl.hidden = rows.length !== 0;
   if (countEl) {
-    const late = contacts.filter(isOverdue).length;
-    countEl.textContent = `${contacts.length} demande${contacts.length > 1 ? "s" : ""} affichee${contacts.length > 1 ? "s" : ""}${late ? ` - ${late} en retard` : ""}`;
+    const late = rows.filter(isOverdue).length;
+    countEl.textContent = `${rows.length} demande${rows.length > 1 ? "s" : ""} affichee${rows.length > 1 ? "s" : ""}${currentView === "today" ? " - vue a traiter" : ""}${late ? ` - ${late} en retard` : ""}`;
   }
 }
-
 function csvCell(value) {
   const text = String(value || "").replace(/\r?\n|\r/g, " ").trim();
   return `"${text.replace(/"/g, '""')}"`;
 }
 
 function exportContactsCsv() {
-  if (!contacts.length) {
+  const exportRows = visibleContacts();
+  if (!exportRows.length) {
     alert("Aucune demande a exporter avec les filtres actuels.");
     return;
   }
@@ -321,7 +405,7 @@ function exportContactsCsv() {
     "Charge du suivi",
     "Notes internes",
   ];
-  const rows = contacts.map((contact) => [
+  const rows = exportRows.map((contact) => [
     contact.request_number,
     formatDate(contact.created_at),
     label(statusLabels, contact.status),
@@ -351,7 +435,6 @@ function exportContactsCsv() {
   link.remove();
   URL.revokeObjectURL(url);
 }
-
 function selectedContact() {
   return contacts.find((item) => item.id === selectedId) || null;
 }
@@ -436,7 +519,8 @@ function renderDetail() {
       <button class="btn secondary" type="button" data-quick-status="rendez_vous">Rendez-vous</button>
       <button class="btn secondary" type="button" data-quick-template="pieces">Demander pieces</button>
       <button class="btn secondary" type="button" data-quick-followup="48h">Relance 48h</button>
-      <button class="btn secondary" type="button" data-prepare-case>Preparer dossier</button>
+      <button class="btn secondary" type="button" data-create-task>Creer tache</button>
+      <button class="btn secondary" type="button" data-create-case>Creer dossier</button>
       <button class="btn ghost" type="button" data-quick-status="refuse">Refuser</button>
       <button class="btn ghost" type="button" data-quick-status="archive">Archiver</button>
     </div>
@@ -516,9 +600,9 @@ function renderDetail() {
       <div>
         <p class="section-kicker">Conversion dossier</p>
         <h4>Prete pour le module Dossiers</h4>
-        <p>Cette action marque la demande comme acceptee pour etude et conserve la prochaine action. La creation du dossier metier sera activee quand le module Dossiers sera developpe.</p>
+        <p>Cette action cree un dossier de suivi TVF a partir de la demande, puis conserve le lien avec la demande source pour poursuivre l instruction dans le module Dossiers.</p>
       </div>
-      <button class="btn secondary" type="button" data-prepare-case>Marquer pret dossier</button>
+      <button class="btn secondary" type="button" data-create-case>Creer le dossier</button>
     </section>
 
     <div class="admin-message">
@@ -670,9 +754,19 @@ function bindEvents() {
       const statusSelect = filtersForm?.elements.status;
       const prioritySelect = filtersForm?.elements.priority;
       if (!prioritySelect) return;
+      currentView = "all";
       prioritySelect.value = button.dataset.priorityShortcut || "all";
       if (statusSelect) statusSelect.value = "all";
       loadContacts().catch((error) => alert(error.message));
+    });
+  });
+
+  viewShortcuts.forEach((button) => {
+    button.addEventListener("click", () => {
+      currentView = button.dataset.viewShortcut || "all";
+      renderStatusShortcuts();
+      renderList();
+      renderDetail();
     });
   });
 
@@ -727,9 +821,32 @@ function bindEvents() {
       return;
     }
 
-    const prepareCase = event.target.closest("[data-prepare-case]");
-    if (prepareCase) {
-      await updateSelected({ status: "accepte", next_action: "Creer le dossier metier quand le module Dossiers sera ouvert" });
+    const createTask = event.target.closest("[data-create-task]");
+    if (createTask) {
+      try {
+        await api("/api/admin-work", {
+          method: "POST",
+          body: JSON.stringify(taskPayloadFromContact(contact)),
+        });
+        await updateSelected({ status: "en_cours", next_action: "Tache de relance creee dans TVF OS", next_action_due_at: new Date(Date.now() + 48 * 60 * 60 * 1000).toISOString() });
+      } catch (error) {
+        alert(error.message || "Creation de la tache impossible.");
+      }
+      return;
+    }
+
+    const createCase = event.target.closest("[data-create-case]");
+    if (createCase) {
+      try {
+        const result = await api("/api/admin-cases", {
+          method: "POST",
+          body: JSON.stringify(casePayloadFromContact(contact)),
+        });
+        await updateSelected({ status: "accepte", next_action: `Dossier cree : ${result.case?.case_number || result.case?.title || "module Dossiers"}` });
+        if (window.confirm("Dossier cree. Ouvrir le module Dossiers maintenant ?")) window.location.href = "admin-dossiers";
+      } catch (error) {
+        alert(error.message || "Creation du dossier impossible.");
+      }
       return;
     }
 
