@@ -6024,3 +6024,101 @@ tr:nth-child(even) td {
     width: 100%;
   }
 }
+
+/* Module Documents TVF OS - panneau de pilotage documentaire */
+.documents-control-panel {
+  grid-column: 1 / -1;
+  display: grid;
+  gap: 14px;
+  padding: 18px;
+  border: 1px solid rgba(24, 63, 34, 0.12);
+  border-radius: 18px;
+  background: linear-gradient(135deg, #ffffff 0%, #f7fbf3 100%);
+  box-shadow: 0 12px 30px rgba(12,31,46,.06);
+}
+
+.documents-control-panel .admin-panel-head p:not(.section-kicker) {
+  margin: 6px 0 0;
+  color: var(--muted);
+}
+
+.documents-control-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.documents-control-grid-template {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.documents-control-grid article {
+  display: grid;
+  gap: 5px;
+  min-height: 112px;
+  padding: 13px 14px;
+  border: 1px solid rgba(14,45,69,.1);
+  border-radius: 15px;
+  background: rgba(255,255,255,.88);
+}
+
+.documents-control-grid span,
+.documents-control-grid small {
+  color: var(--muted);
+  font-size: .76rem;
+  font-weight: 800;
+  line-height: 1.35;
+}
+
+.documents-control-grid strong {
+  color: var(--blue-900);
+  font-size: 1rem;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+
+.documents-control-grid article[data-tone="success"] {
+  border-color: rgba(47,125,50,.24);
+  background: #f5fbf3;
+}
+
+.documents-control-grid article[data-tone="warning"] {
+  border-color: rgba(213,162,56,.34);
+  background: #fffaf0;
+}
+
+.documents-control-grid article[data-tone="danger"] {
+  border-color: rgba(180,45,38,.28);
+  background: #fff7f5;
+}
+
+.documents-control-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+
+.documents-control-actions .btn {
+  min-height: 38px;
+  padding: 9px 13px;
+}
+
+@media (max-width: 1180px) {
+  .documents-control-grid,
+  .documents-control-grid-template {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 680px) {
+  .documents-control-grid,
+  .documents-control-grid-template {
+    grid-template-columns: 1fr;
+  }
+  .documents-control-actions {
+    display: grid;
+  }
+  .documents-control-actions .btn {
+    width: 100%;
+  }
+}
