@@ -4356,3 +4356,26 @@ tr:nth-child(even) td {
 .procedures-modal-panel { width: min(940px, 100%); }
 .procedures-create-form textarea { min-height: 120px; }
 @media (max-width: 900px) { .procedures-layout, .procedures-detail-form, .procedures-question-form { grid-template-columns: 1fr; } }
+
+/* Module Base de connaissances TVF OS */
+.knowledge-body { background: #f4f7f3; }
+.knowledge-shell { max-width: 1380px; }
+.knowledge-app { display: grid; }
+.knowledge-layout { grid-template-columns: minmax(350px, .9fr) minmax(0, 1.5fr); }
+.knowledge-card .admin-request-head strong { color: var(--blue-900); }
+.knowledge-card.is-sensitive { border-color: rgba(154, 52, 18, .35); background: #fff8f3; }
+.knowledge-question-panel { margin-bottom: 18px; }
+.knowledge-question-form { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 10px; }
+.knowledge-question-form input { min-height: 44px; padding: 10px 12px; border: 1px solid rgba(14,45,69,.16); border-radius: 10px; font: inherit; }
+.knowledge-detail-form { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.knowledge-detail-form > .admin-detail-title,
+.knowledge-detail-form > .admin-meta-grid,
+.knowledge-detail-form > .knowledge-ai-panel,
+.knowledge-detail-form > .knowledge-panel,
+.knowledge-detail-form > .knowledge-wide-field { grid-column: 1 / -1; }
+.knowledge-ai-panel { background: linear-gradient(180deg, #fff 0%, #f7faf4 100%); }
+.knowledge-panel { display: grid; gap: 12px; padding: 16px; border: 1px solid rgba(14,45,69,.12); border-radius: 16px; background: #fff; }
+.knowledge-panel article { display: grid; gap: 5px; padding: 12px; border: 1px solid var(--line); border-radius: 12px; background: var(--paper); }
+.knowledge-modal-panel { width: min(960px, 100%); }
+.knowledge-create-form textarea { min-height: 120px; }
+@media (max-width: 900px) { .knowledge-layout, .knowledge-detail-form, .knowledge-question-form { grid-template-columns: 1fr; } }

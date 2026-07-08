@@ -1,0 +1,163 @@
+﻿<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Base de connaissances | TVF OS</title>
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="theme-color" content="#183f22">
+  <link rel="icon" href="assets/favicon-32.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="admin-body knowledge-body">
+  <a class="skip-link" href="#knowledge-main">Aller au contenu</a>
+  <header class="admin-topbar knowledge-topbar">
+    <a class="admin-brand" href="index" aria-label="Retour au site Territoires Vivants France">
+      <img src="assets/logo-territoires-vivants-france-web.png" alt="Territoires Vivants France" width="320" height="132">
+    </a>
+    <div>
+      <p class="admin-kicker">TVF OS</p>
+      <h1>Base de connaissances</h1>
+    </div>
+    <div class="admin-top-actions">
+      <a class="btn secondary" href="dashboard">Dashboard</a>
+      <a class="btn secondary" href="admin-dossiers">Dossiers</a>
+      <a class="btn secondary" href="admin-documents">Documents</a>
+      <a class="btn secondary" href="admin-procedures">Procedures</a>
+    </div>
+  </header>
+
+  <main id="knowledge-main" class="admin-shell knowledge-shell">
+    <section class="admin-login" data-knowledge-login>
+      <div>
+        <p class="section-kicker">Acces securise</p>
+        <h2>Connexion a la memoire TVF</h2>
+        <p>Les connaissances publiees servent de sources fiables aux equipes et aux futures reponses IA.</p>
+      </div>
+      <form data-knowledge-token-form>
+        <label for="knowledge-token">Token admin</label>
+        <input id="knowledge-token" name="token" type="password" autocomplete="current-password" placeholder="TVF_ADMIN_TOKEN">
+        <button class="btn primary" type="submit">Ouvrir la base</button>
+        <p class="form-note" data-knowledge-login-status role="status" hidden></p>
+      </form>
+    </section>
+
+    <section class="admin-app knowledge-app" data-knowledge-app hidden>
+      <div class="admin-toolbar knowledge-toolbar">
+        <div>
+          <p class="section-kicker">Memoire collective</p>
+          <h2>Repondre vite avec des sources fiables</h2>
+          <p data-knowledge-count>Chargement des connaissances...</p>
+        </div>
+        <div class="admin-toolbar-actions">
+          <button class="btn primary" type="button" data-knowledge-create>Nouvel article</button>
+          <button class="btn secondary" type="button" data-lessons-create>Retour d'experience</button>
+          <button class="btn secondary" type="button" data-knowledge-refresh>Actualiser</button>
+          <button class="btn secondary" type="button" data-knowledge-export>Exporter CSV</button>
+          <button class="btn ghost" type="button" data-knowledge-logout>Deconnexion</button>
+        </div>
+      </div>
+
+      <section class="crm-kpis knowledge-kpis" data-knowledge-kpis aria-label="Indicateurs connaissance"></section>
+
+      <section class="admin-ai-panel knowledge-question-panel">
+        <div class="admin-panel-head"><div><p class="section-kicker">Question TVF</p><h3>Reponse avec sources</h3></div></div>
+        <form data-knowledge-question-form class="knowledge-question-form">
+          <input name="question" placeholder="Ex. Quelles pieces demander pour un bien vacant ?">
+          <button class="btn secondary" type="submit">Demander</button>
+        </form>
+        <p class="form-note" data-knowledge-question-answer hidden></p>
+      </section>
+
+      <nav class="admin-status-tabs knowledge-tabs" aria-label="Vues connaissance">
+        <button type="button" data-knowledge-view="articles" class="is-active">Articles</button>
+        <button type="button" data-knowledge-view="faq">FAQ</button>
+        <button type="button" data-knowledge-view="retour_experience">Retours</button>
+        <button type="button" data-knowledge-view="erreur_a_eviter">Erreurs</button>
+        <button type="button" data-knowledge-view="a_valider">A valider</button>
+        <button type="button" data-knowledge-view="lessons">A capitaliser</button>
+      </nav>
+
+      <form class="admin-filters knowledge-filters" data-knowledge-filters>
+        <label>Recherche
+          <input name="q" type="search" placeholder="Titre, contenu, source, tag">
+        </label>
+        <label>Type
+          <select name="article_type">
+            <option value="all">Tous</option>
+            <option value="article">Article</option>
+            <option value="faq">FAQ</option>
+            <option value="retour_experience">Retour d'experience</option>
+            <option value="decision_type">Decision type</option>
+            <option value="erreur_a_eviter">Erreur a eviter</option>
+            <option value="cas_usage">Cas d'usage</option>
+            <option value="source_territoriale">Source territoriale</option>
+            <option value="lecon_apprise">Lecon apprise</option>
+            <option value="procedure">Procedure</option>
+            <option value="modele">Modele</option>
+          </select>
+        </label>
+        <label>Confidentialite
+          <select name="confidentiality_level">
+            <option value="all">Toutes</option>
+            <option value="public">Public</option>
+            <option value="interne">Interne</option>
+            <option value="confidentiel">Confidentiel</option>
+            <option value="sensible">Sensible</option>
+          </select>
+        </label>
+      </form>
+
+      <div class="admin-layout knowledge-layout">
+        <section class="admin-list knowledge-list" aria-label="Liste connaissance">
+          <div data-knowledge-list class="admin-request-list"></div>
+          <p class="form-note" data-knowledge-empty hidden>Aucun element ne correspond aux filtres.</p>
+        </section>
+        <aside class="admin-detail knowledge-detail" data-knowledge-detail aria-label="Detail connaissance">
+          <div class="admin-detail-empty">
+            <p class="section-kicker">Detail</p>
+            <h3>Selectionnez un article</h3>
+            <p>Chaque connaissance doit etre sourcee, revisee et validee avant usage par les equipes.</p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="admin-modal" data-knowledge-modal hidden aria-label="Creation article">
+      <div class="admin-modal-panel knowledge-modal-panel">
+        <div class="admin-modal-head"><div><p class="section-kicker">Connaissance</p><h2>Nouvel article</h2></div><button class="btn ghost" type="button" data-knowledge-close-modal>Fermer</button></div>
+        <form class="admin-create-form knowledge-create-form" data-knowledge-form>
+          <label>Titre<input name="title" required placeholder="Ex. Pieces a demander pour un bien vacant"></label>
+          <label>Type<select name="article_type"><option value="article">Article</option><option value="faq">FAQ</option><option value="retour_experience">Retour d'experience</option><option value="erreur_a_eviter">Erreur a eviter</option><option value="cas_usage">Cas d'usage</option><option value="procedure">Procedure</option><option value="modele">Modele</option></select></label>
+          <label>Statut<select name="status"><option value="brouillon">Brouillon</option><option value="a_valider">A valider</option><option value="valide">Valide</option></select></label>
+          <label>Confidentialite<select name="confidentiality_level"><option value="interne">Interne</option><option value="confidentiel">Confidentiel</option><option value="sensible">Sensible</option><option value="public">Public</option></select></label>
+          <label class="admin-create-wide">Tags<input name="tags" placeholder="bien vacant, pieces, instruction"></label>
+          <label class="admin-create-wide">Resume<input name="summary" placeholder="Synthese courte utilisable par l'assistant"></label>
+          <label class="admin-create-wide">Contenu<textarea name="content" rows="7" placeholder="Reponse, methode, limites, sources a citer"></textarea></label>
+          <div class="admin-detail-actions admin-create-wide"><button class="btn primary" type="submit">Creer</button><button class="btn secondary" type="button" data-knowledge-close-modal>Annuler</button></div>
+          <p class="form-note admin-create-wide" data-knowledge-modal-status hidden></p>
+        </form>
+      </div>
+    </section>
+
+    <section class="admin-modal" data-lessons-modal hidden aria-label="Retour experience">
+      <div class="admin-modal-panel knowledge-modal-panel">
+        <div class="admin-modal-head"><div><p class="section-kicker">Retour</p><h2>Nouveau retour d'experience</h2></div><button class="btn ghost" type="button" data-lessons-close-modal>Fermer</button></div>
+        <form class="admin-create-form knowledge-create-form" data-lessons-form>
+          <label>Titre<input name="title" required placeholder="Ex. Visite reportee faute de photos"></label>
+          <label>Type<select name="lesson_type"><option value="bonne_pratique">Bonne pratique</option><option value="risque">Risque</option><option value="erreur">Erreur</option><option value="amelioration">Amelioration</option><option value="decision">Decision</option><option value="terrain">Terrain</option><option value="autre">Autre</option></select></label>
+          <label>Impact<select name="impact_level"><option value="moyen">Moyen</option><option value="fort">Fort</option><option value="faible">Faible</option></select></label>
+          <label class="admin-create-wide">Tags<input name="tags" placeholder="visite, photos, proprietaire"></label>
+          <label class="admin-create-wide">Contexte<textarea name="context" rows="4"></textarea></label>
+          <label class="admin-create-wide">Enseignement<textarea name="lesson" rows="5"></textarea></label>
+          <label class="admin-create-wide">Action proposee<textarea name="proposed_action" rows="3"></textarea></label>
+          <div class="admin-detail-actions admin-create-wide"><button class="btn primary" type="submit">Enregistrer</button><button class="btn secondary" type="button" data-lessons-close-modal>Annuler</button></div>
+          <p class="form-note admin-create-wide" data-lessons-modal-status hidden></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <script src="admin-knowledge.js" defer></script>
+</body>
+</html>
