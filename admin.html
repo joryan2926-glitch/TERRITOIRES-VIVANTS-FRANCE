@@ -42,31 +42,62 @@
     </section>
 
     <section class="admin-home-app" data-admin-home-app hidden>
-      <div class="admin-home-header">
-        <div>
-          <p class="section-kicker">Navigation interne</p>
-          <h2>Modules TVF OS</h2>
-          <p>Choisissez le module a ouvrir. Les modules verrouilles restent disponibles en consultation et exploitation.</p>
+      <div class="admin-home-command">
+        <div class="admin-home-command-copy">
+          <p class="section-kicker">Centre d'exploitation national</p>
+          <h2>Piloter TVF OS avec une lecture claire des priorites</h2>
+          <p>Cette page sert de point d'entree institutionnel : traiter les demandes, suivre les dossiers, administrer les antennes et controler la configuration depuis un parcours unique.</p>
         </div>
         <div class="admin-home-header-actions">
           <a class="btn primary" href="dashboard">Ouvrir le dashboard</a>
+          <a class="btn secondary" href="admin-settings">Verifier la configuration</a>
           <button class="btn ghost" type="button" data-admin-home-logout>Deconnexion</button>
         </div>
       </div>
 
-      <section class="admin-home-grid" aria-label="Modules principaux">
-        <article class="admin-home-group">
+      <section class="admin-home-priority" aria-label="Acces prioritaires">
+        <a href="admin-demandes"><span>01</span><strong>Traiter les entrees</strong><small>Demandes, qualification, conversion</small></a>
+        <a href="admin-emails"><span>02</span><strong>Trier les e-mails</strong><small>Lecture IA, reponses, pieces, taches</small></a>
+        <a href="admin-work"><span>03</span><strong>Organiser l'action</strong><small>Taches, agenda, projets, relances</small></a>
+        <a href="admin-dossiers"><span>04</span><strong>Suivre les dossiers</strong><small>Cas, decisions, documents, cloture</small></a>
+      </section>
+
+      <section class="admin-home-flow" aria-label="Parcours operationnel TVF OS">
+        <div>
+          <p class="section-kicker">Parcours logique</p>
+          <h3>De la demande terrain au pilotage national</h3>
+        </div>
+        <ol>
+          <li><strong>Reception</strong><span>Demandes et e-mails entrants</span></li>
+          <li><strong>Qualification</strong><span>CRM, pole, priorite, responsable</span></li>
+          <li><strong>Execution</strong><span>Taches, agenda, dossiers, documents</span></li>
+          <li><strong>Capitalisation</strong><span>Procedures, connaissances, IA</span></li>
+          <li><strong>Pilotage</strong><span>Finances, impact, risques, gouvernance</span></li>
+        </ol>
+      </section>
+
+      <section class="admin-home-grid" aria-label="Modules TVF OS">
+        <article class="admin-home-group admin-home-group-large">
           <div class="admin-home-group-head">
-            <p class="section-kicker">Operationnel</p>
-            <h3>Suivi quotidien</h3>
+            <p class="section-kicker">Operations</p>
+            <h3>Faire fonctionner une antenne au quotidien</h3>
           </div>
           <div class="admin-home-module-list">
             <a href="dashboard"><strong>Dashboard</strong><span>Priorites, alertes, pilotage global</span></a>
             <a href="admin-demandes"><strong>Demandes</strong><span>Entrees, qualification, conversion</span></a>
-            <a href="admin-emails"><strong>E-mails</strong><span>Triage IA, reponses, taches</span></a>
+            <a href="admin-emails"><strong>E-mails</strong><span>Triage IA, reponses, pieces, taches</span></a>
             <a href="admin-work"><strong>Taches & agenda</strong><span>Planning, relances, projets</span></a>
             <a href="admin-crm"><strong>CRM</strong><span>Contacts, organisations, relations</span></a>
             <a href="admin-dossiers"><strong>Dossiers</strong><span>Cas, pieces, decisions, suivi</span></a>
+          </div>
+        </article>
+
+        <article class="admin-home-group">
+          <div class="admin-home-group-head">
+            <p class="section-kicker">Institutionnel</p>
+            <h3>Structurer TVF partout en France</h3>
+          </div>
+          <div class="admin-home-module-list">
             <a href="admin-branches"><strong>Antennes</strong><span>Lancement, equipes, maturite</span></a>
             <a href="admin-governance"><strong>Gouvernance</strong><span>Decisions, comites, PV</span></a>
             <a href="admin-risks"><strong>Risques</strong><span>Conformite, incidents, audit</span></a>
@@ -77,8 +108,8 @@
 
         <article class="admin-home-group">
           <div class="admin-home-group-head">
-            <p class="section-kicker">Capitalisation</p>
-            <h3>Documents et savoir</h3>
+            <p class="section-kicker">Savoir</p>
+            <h3>Capitaliser les methodes et l'experience</h3>
           </div>
           <div class="admin-home-module-list">
             <a href="admin-documents"><strong>Documents</strong><span>Pieces, modeles, justificatifs</span></a>
@@ -90,8 +121,8 @@
 
         <article class="admin-home-group">
           <div class="admin-home-group-head">
-            <p class="section-kicker">Pilotage avance</p>
-            <h3>Territoires, finances, impact</h3>
+            <p class="section-kicker">Pilotage</p>
+            <h3>Mesurer, financer et orienter l'action</h3>
           </div>
           <div class="admin-home-module-list">
             <a href="admin-map"><strong>Cartographie</strong><span>Biens, ressources, signalements</span></a>
