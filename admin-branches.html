@@ -1,0 +1,161 @@
+﻿<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gestion des antennes | TVF OS</title>
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="theme-color" content="#183f22">
+  <link rel="icon" href="assets/favicon-32.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="admin-body branches-body">
+  <a class="skip-link" href="#branches-main">Aller au contenu</a>
+  <header class="admin-topbar">
+    <a class="admin-brand" href="index" aria-label="Retour au site Territoires Vivants France">
+      <img src="assets/logo-territoires-vivants-france-web.png" alt="Territoires Vivants France" width="320" height="132">
+    </a>
+    <div>
+      <p class="admin-kicker">TVF OS</p>
+      <h1>Gestion des antennes</h1>
+      <p>Creation, lancement, equipe, poles actifs et supervision nationale.</p>
+    </div>
+    <div class="admin-top-actions">
+      <a class="btn secondary" href="admin">Accueil admin</a>
+      <a class="btn secondary" href="dashboard">Dashboard</a>
+      <a class="btn secondary" href="contact">Retour au site</a>
+    </div>
+  </header>
+
+  <main id="branches-main" class="admin-shell branches-shell">
+    <section class="admin-login" data-branches-login>
+      <div>
+        <p class="section-kicker">Acces securise</p>
+        <h2>Connexion a la gestion des antennes</h2>
+        <p>Entrez le token admin configure dans Vercel. Les donnees sont servies par l'API protegee et Supabase.</p>
+      </div>
+      <form data-branches-token-form>
+        <label for="branches-token">Token admin</label>
+        <input id="branches-token" name="token" type="password" autocomplete="current-password" placeholder="TVF_ADMIN_TOKEN">
+        <button class="btn primary" type="submit">Ouvrir les antennes</button>
+        <p class="form-note" data-branches-login-status role="status" hidden></p>
+      </form>
+    </section>
+
+    <section class="admin-app branches-app" data-branches-app hidden>
+      <div class="admin-toolbar">
+        <div>
+          <p class="section-kicker">Supervision nationale</p>
+          <h2>Creer et faire grandir les antennes TVF</h2>
+          <p data-branches-count>Chargement des antennes...</p>
+        </div>
+        <div class="admin-toolbar-actions">
+          <button class="btn primary" type="button" data-branches-create>Nouvelle antenne</button>
+          <button class="btn secondary" type="button" data-branches-pack>Generer pack</button>
+          <button class="btn secondary" type="button" data-branches-refresh>Actualiser</button>
+          <button class="btn secondary" type="button" data-branches-export>Exporter CSV</button>
+          <button class="btn ghost" type="button" data-branches-logout>Deconnexion</button>
+        </div>
+      </div>
+
+      <section class="branches-kpis" data-branches-kpis></section>
+
+      <section class="branches-ai-panel">
+        <div>
+          <p class="section-kicker">Assistant antennes</p>
+          <h2 data-branches-ai-score>--%</h2>
+          <p data-branches-ai-summary>Analyse de maturite en attente.</p>
+        </div>
+        <div class="branches-ai-grid" data-branches-ai-grid></div>
+      </section>
+
+      <form class="admin-filters" data-branches-filters>
+        <label>Recherche
+          <input name="q" type="search" placeholder="Nom, code, ville, departement, region">
+        </label>
+        <label>Statut
+          <select name="status">
+            <option value="all">Tous</option>
+            <option value="prefiguration">Prefiguration</option>
+            <option value="launching">Lancement</option>
+            <option value="operational">Operationnelle</option>
+            <option value="paused">En pause</option>
+            <option value="closed">Cloturee</option>
+          </select>
+        </label>
+        <label>Maturite
+          <select name="maturity">
+            <option value="all">Toutes</option>
+            <option value="idee">Idee</option>
+            <option value="prefiguration">Prefiguration</option>
+            <option value="lancement">Lancement</option>
+            <option value="operationnelle">Operationnelle</option>
+            <option value="confirmee">Confirmee</option>
+            <option value="formatrice">Formatrice</option>
+          </select>
+        </label>
+      </form>
+
+      <div class="admin-tabs" role="tablist" aria-label="Vues antennes">
+        <button type="button" data-branches-view="overview" class="is-active">Antenne</button>
+        <button type="button" data-branches-view="checklist">Checklist</button>
+        <button type="button" data-branches-view="team">Equipe</button>
+        <button type="button" data-branches-view="training">Formation</button>
+        <button type="button" data-branches-view="poles">Poles</button>
+      </div>
+
+      <section class="admin-layout branches-layout">
+        <aside class="admin-list-panel">
+          <div class="admin-panel-head"><h2>Antennes</h2><span data-branches-list-count>0</span></div>
+          <div class="admin-request-list" data-branches-list></div>
+          <p class="form-note" data-branches-empty hidden>Aucune antenne trouvee.</p>
+        </aside>
+
+        <section class="admin-detail-panel" data-branches-detail>
+          <p class="form-note">Selectionnez une antenne pour afficher sa fiche.</p>
+        </section>
+      </section>
+    </section>
+  </main>
+
+  <div class="admin-modal" data-branches-modal hidden>
+    <div class="admin-modal-panel branches-modal-panel" role="dialog" aria-modal="true" aria-labelledby="branches-modal-title">
+      <div class="admin-modal-head">
+        <div>
+          <p class="section-kicker">Creation rapide</p>
+          <h2 id="branches-modal-title">Ajouter dans le module Antennes</h2>
+        </div>
+        <button class="btn ghost" type="button" data-branches-close-modal>Fermer</button>
+      </div>
+      <form class="admin-form branches-create-form" data-branches-form>
+        <label>Element
+          <select name="type" data-branches-entity-select>
+            <option value="branch">Antenne</option>
+            <option value="checklist">Checklist</option>
+            <option value="team">Membre equipe</option>
+            <option value="training">Formation</option>
+            <option value="pole">Pole actif</option>
+          </select>
+        </label>
+        <label>Antenne liee<input name="branch_id" data-branches-related-id placeholder="Automatique si une antenne est selectionnee"></label>
+        <label>Nom / titre<input name="name" placeholder="TVF Saint-Etienne"></label>
+        <label>Code / cle<input name="code" placeholder="TVF-42-STETIENNE"></label>
+        <label>Territoire<input name="territory_name" placeholder="Saint-Etienne Metropole"></label>
+        <label>Ville<input name="city" placeholder="Saint-Etienne"></label>
+        <label>Departement<input name="department" placeholder="Loire"></label>
+        <label>Region<input name="region" placeholder="Auvergne-Rhone-Alpes"></label>
+        <label>Responsable<input name="responsible_name" placeholder="Nom responsable"></label>
+        <label>E-mail<input name="responsible_email" type="email" placeholder="contact@territoiresvivantsfrance.fr"></label>
+        <label>Cle pole / formation / checklist<input name="item_key" placeholder="kit_lancement"></label>
+        <label>Libelle role / categorie<input name="category" placeholder="gouvernance"></label>
+        <label>Statut<input name="status" placeholder="launching, todo, active..."></label>
+        <label>Echeance<input name="due_date" type="date"></label>
+        <label class="branches-wide-field">Notes / description<textarea name="description" rows="4" placeholder="Contexte, besoins, risques, prochaines actions..."></textarea></label>
+        <button class="btn primary" type="submit">Enregistrer</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="admin-branches.js" defer></script>
+</body>
+</html>

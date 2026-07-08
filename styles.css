@@ -4523,3 +4523,35 @@ tr:nth-child(even) td {
 .admin-home-actions .btn { min-height: 34px; padding: 8px 11px; font-size: .82rem; }
 @media (max-width: 1120px) { .admin-home-grid { grid-template-columns: 1fr; } .admin-home-header { display: grid; } .admin-top-actions, .dashboard-top-actions { max-width: none; justify-content: flex-start; } }
 @media (max-width: 760px) { .admin-home-actions, .admin-home-header-actions { display: grid; grid-template-columns: 1fr; } .admin-home-actions .btn, .admin-home-header-actions .btn { width: 100%; } .admin-home-header { padding: 18px; } }
+
+/* Module Gestion des antennes TVF OS */
+.branches-body { background: #f4f7f3; }
+.branches-shell { max-width: 1480px; }
+.branches-kpis { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; }
+.branches-kpis article,
+.branches-readiness article { display: grid; gap: 4px; padding: 14px; border: 1px solid var(--line); border-radius: 8px; background: #fff; box-shadow: var(--shadow-soft); }
+.branches-kpis span,
+.branches-readiness span { color: var(--muted); font-size: .78rem; font-weight: 800; text-transform: uppercase; }
+.branches-kpis strong,
+.branches-readiness strong { color: var(--blue-900); font-size: 1.8rem; }
+.branches-ai-panel { display: grid; grid-template-columns: minmax(260px, .7fr) minmax(0, 1.3fr); gap: 16px; align-items: stretch; padding: 18px; border: 1px solid rgba(24,63,34,.12); border-radius: 8px; background: linear-gradient(180deg, #fff 0%, #f8faf5 100%); box-shadow: var(--shadow-soft); }
+.branches-ai-panel h2 { margin: 0; color: var(--green-700); font-size: 2.2rem; }
+.branches-ai-panel p { margin-bottom: 0; color: var(--muted); }
+.branches-ai-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.branches-ai-grid div { display: grid; gap: 5px; padding: 12px; border: 1px solid var(--line); border-radius: 8px; background: #fff; }
+.branches-ai-grid span { color: var(--muted); font-size: .76rem; font-weight: 800; text-transform: uppercase; }
+.branches-ai-grid strong { color: var(--blue-900); font-size: .92rem; line-height: 1.35; }
+.branches-layout { grid-template-columns: minmax(320px, .78fr) minmax(0, 1.22fr); }
+.branches-card .admin-badges em:first-child { background: rgba(47,125,50,.12); color: var(--green-700); }
+.branches-readiness { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin-bottom: 16px; }
+.branches-detail-form,
+.branches-create-form { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.branches-wide-field { grid-column: 1 / -1; }
+.branches-row-list { display: grid; gap: 10px; }
+.branches-row-list article { display: grid; grid-template-columns: minmax(0, 1fr) minmax(190px, 260px); gap: 14px; align-items: center; padding: 13px; border: 1px solid var(--line); border-radius: 8px; background: var(--paper); }
+.branches-row-list article span { display: block; margin-top: 4px; color: var(--muted); font-size: .86rem; }
+.branches-row-list form { display: flex; gap: 8px; justify-content: flex-end; }
+.branches-row-list select { min-height: 40px; padding: 8px 10px; border: 1px solid rgba(14,45,69,.18); border-radius: 8px; background: #fff; font: inherit; }
+.branches-modal-panel { width: min(960px, 100%); }
+@media (max-width: 1100px) { .branches-kpis, .branches-ai-panel, .branches-layout, .branches-readiness, .branches-detail-form, .branches-create-form { grid-template-columns: 1fr; } .branches-ai-grid { grid-template-columns: 1fr; } }
+@media (max-width: 760px) { .branches-row-list article { grid-template-columns: 1fr; } .branches-row-list form { justify-content: stretch; } .branches-row-list form .btn, .branches-row-list select { width: 100%; } }
