@@ -1,0 +1,143 @@
+﻿<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Assistant IA | TVF OS</title>
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="theme-color" content="#183f22">
+  <link rel="icon" href="assets/favicon-32.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="admin-body ai-body">
+  <a class="skip-link" href="#ai-main">Aller au contenu</a>
+  <header class="admin-topbar ai-topbar">
+    <a class="admin-brand" href="index" aria-label="Retour au site Territoires Vivants France">
+      <img src="assets/logo-territoires-vivants-france-web.png" alt="Territoires Vivants France" width="320" height="132">
+    </a>
+    <div>
+      <p class="admin-kicker">TVF OS</p>
+      <h1>Assistant IA</h1>
+    </div>
+    <div class="admin-top-actions">
+      <a class="btn secondary" href="dashboard">Dashboard</a>
+      <a class="btn secondary" href="admin-demandes">Demandes</a>
+      <a class="btn secondary" href="admin-dossiers">Dossiers</a>
+      <a class="btn secondary" href="admin-documents">Documents</a>
+      <a class="btn secondary" href="admin-procedures">Procedures</a>
+      <a class="btn secondary" href="admin-knowledge">Connaissances</a>
+    </div>
+  </header>
+
+  <main id="ai-main" class="admin-shell ai-shell">
+    <section class="admin-login" data-ai-login>
+      <div>
+        <p class="section-kicker">Acces securise</p>
+        <h2>Connexion a l'assistant TVF</h2>
+        <p>L'assistant lit les sources internes autorisees, propose des actions et attend toujours une validation humaine.</p>
+      </div>
+      <form data-ai-token-form>
+        <label for="ai-token">Token admin</label>
+        <input id="ai-token" name="token" type="password" autocomplete="current-password" placeholder="TVF_ADMIN_TOKEN">
+        <button class="btn primary" type="submit">Ouvrir l'assistant</button>
+        <p class="form-note" data-ai-login-status role="status" hidden></p>
+      </form>
+    </section>
+
+    <section class="admin-app ai-app" data-ai-app hidden>
+      <div class="admin-toolbar ai-toolbar">
+        <div>
+          <p class="section-kicker">Copilote operationnel</p>
+          <h2>Comprendre, proposer, sourcer, faire valider</h2>
+          <p data-ai-count>Chargement de l'assistant...</p>
+        </div>
+        <div class="admin-toolbar-actions">
+          <button class="btn secondary" type="button" data-ai-refresh>Actualiser</button>
+          <button class="btn secondary" type="button" data-ai-export>Exporter CSV</button>
+          <button class="btn ghost" type="button" data-ai-logout>Deconnexion</button>
+        </div>
+      </div>
+
+      <section class="crm-kpis ai-kpis" data-ai-kpis aria-label="Indicateurs assistant IA"></section>
+
+      <nav class="admin-status-tabs ai-tabs" aria-label="Vues assistant IA">
+        <button type="button" data-ai-view="conversation" class="is-active">Conversation</button>
+        <button type="button" data-ai-view="email">E-mail</button>
+        <button type="button" data-ai-view="suggestions">Suggestions</button>
+        <button type="button" data-ai-view="history">Historique</button>
+        <button type="button" data-ai-view="automations">Automatisations</button>
+        <button type="button" data-ai-view="sources">Sources</button>
+      </nav>
+
+      <div class="ai-view" data-ai-panel="conversation">
+        <section class="admin-ai-panel ai-question-panel">
+          <div class="admin-panel-head"><div><p class="section-kicker">Question globale</p><h3>Reponse sourcee</h3></div></div>
+          <form class="ai-question-form" data-ai-question-form>
+            <label>Contexte
+              <select name="context_object_type">
+                <option value="none">General</option>
+                <option value="request">Demande</option>
+                <option value="case">Dossier</option>
+                <option value="document">Document</option>
+                <option value="procedure">Procedure</option>
+                <option value="knowledge">Connaissance</option>
+                <option value="email">E-mail</option>
+              </select>
+            </label>
+            <label>Identifiant objet
+              <input name="context_object_id" placeholder="UUID optionnel">
+            </label>
+            <label class="ai-wide-field">Question
+              <textarea name="prompt" rows="5" required placeholder="Ex. Quelle suite proposer pour une demande de proprietaire avec un bien vacant ?"></textarea>
+            </label>
+            <div class="admin-detail-actions ai-wide-field"><button class="btn primary" type="submit">Demander a l'IA</button></div>
+          </form>
+        </section>
+        <section class="ai-answer" data-ai-answer hidden></section>
+      </div>
+
+      <div class="ai-view" data-ai-panel="email" hidden>
+        <section class="admin-ai-panel ai-question-panel">
+          <div class="admin-panel-head"><div><p class="section-kicker">E-mail entrant</p><h3>Lecture automatique a valider</h3></div></div>
+          <form class="ai-question-form" data-ai-email-form>
+            <label>Sujet<input name="subject" placeholder="Sujet du message"></label>
+            <label>Emetteur<input name="from_label" placeholder="Nom ou e-mail"></label>
+            <label class="ai-wide-field">Message<textarea name="message" rows="8" required placeholder="Collez ici le contenu de l'e-mail entrant"></textarea></label>
+            <div class="admin-detail-actions ai-wide-field"><button class="btn primary" type="submit">Analyser l'e-mail</button></div>
+          </form>
+        </section>
+        <section class="ai-answer" data-ai-email-answer hidden></section>
+      </div>
+
+      <div class="ai-view" data-ai-panel="suggestions" hidden>
+        <form class="admin-filters ai-filters" data-ai-suggestion-filters>
+          <label>Statut
+            <select name="status"><option value="all">Tous</option><option value="proposed">A valider</option><option value="accepted">Acceptees</option><option value="rejected">Refusees</option><option value="applied">Appliquees</option></select>
+          </label>
+          <label>Type
+            <select name="suggestion_type"><option value="all">Tous</option><option value="email_triage">Tri e-mail</option><option value="classification">Classification</option><option value="next_action">Prochaine action</option><option value="draft_response">Brouillon</option><option value="risk">Risque</option><option value="procedure">Procedure</option></select>
+          </label>
+        </form>
+        <div class="admin-layout ai-layout">
+          <section class="admin-list ai-list" aria-label="Suggestions IA"><div data-ai-suggestions class="admin-request-list"></div><p class="form-note" data-ai-suggestions-empty hidden>Aucune suggestion.</p></section>
+          <aside class="admin-detail ai-detail" data-ai-suggestion-detail aria-label="Detail suggestion"></aside>
+        </div>
+      </div>
+
+      <div class="ai-view" data-ai-panel="history" hidden>
+        <section class="knowledge-panel ai-history-panel"><div class="admin-panel-head"><div><p class="section-kicker">Journal IA</p><h3>Interactions conservees</h3></div></div><div data-ai-history></div></section>
+      </div>
+
+      <div class="ai-view" data-ai-panel="automations" hidden>
+        <section class="knowledge-panel ai-history-panel"><div class="admin-panel-head"><div><p class="section-kicker">Workflows prepares</p><h3>Automatisations IA</h3></div></div><div data-ai-automations></div></section>
+      </div>
+
+      <div class="ai-view" data-ai-panel="sources" hidden>
+        <section class="knowledge-panel ai-history-panel"><div class="admin-panel-head"><div><p class="section-kicker">Contexte autorise</p><h3>Sources interrogeables</h3></div></div><div class="ai-source-grid" data-ai-sources></div></section>
+      </div>
+    </section>
+  </main>
+
+  <script src="admin-ai.js" defer></script>
+</body>
+</html>
