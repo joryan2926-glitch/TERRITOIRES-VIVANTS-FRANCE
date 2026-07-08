@@ -1,0 +1,136 @@
+﻿<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Risques et conformite | TVF OS</title>
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="theme-color" content="#183f22">
+  <link rel="icon" href="assets/favicon-32.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="admin-body risks-body">
+  <a class="skip-link" href="#risks-main">Aller au contenu</a>
+  <header class="admin-topbar">
+    <a class="admin-brand" href="index" aria-label="Retour au site Territoires Vivants France">
+      <img src="assets/logo-territoires-vivants-france-web.png" alt="Territoires Vivants France" width="320" height="132">
+    </a>
+    <div>
+      <p class="admin-kicker">TVF OS</p>
+      <h1>Risques et conformite</h1>
+      <p>RGPD, droits d'image, autorisations, assurances, incidents et audit.</p>
+    </div>
+    <div class="admin-top-actions">
+      <a class="btn secondary" href="admin">Accueil admin</a>
+      <a class="btn secondary" href="dashboard">Dashboard</a>
+      <a class="btn secondary" href="contact">Retour au site</a>
+    </div>
+  </header>
+
+  <main id="risks-main" class="admin-shell risks-shell">
+    <section class="admin-login" data-risks-login>
+      <div>
+        <p class="section-kicker">Acces securise</p>
+        <h2>Connexion aux risques et conformite</h2>
+        <p>Entrez le token admin configure dans Vercel. Les actions sensibles doivent rester bloquees tant que les preuves manquent.</p>
+      </div>
+      <form data-risks-token-form>
+        <label for="risks-token">Token admin</label>
+        <input id="risks-token" name="token" type="password" autocomplete="current-password" placeholder="TVF_ADMIN_TOKEN">
+        <button class="btn primary" type="submit">Ouvrir risques</button>
+        <p class="form-note" data-risks-login-status role="status" hidden></p>
+      </form>
+    </section>
+
+    <section class="admin-app risks-app" data-risks-app hidden>
+      <div class="admin-toolbar">
+        <div>
+          <p class="section-kicker">Controle avant erreur</p>
+          <h2>Voir les blocages et reduire les risques</h2>
+          <p data-risks-count>Chargement des risques...</p>
+        </div>
+        <div class="admin-toolbar-actions">
+          <button class="btn primary" type="button" data-risks-create>Nouvel element</button>
+          <button class="btn secondary" type="button" data-risks-refresh>Actualiser</button>
+          <button class="btn secondary" type="button" data-risks-export>Exporter CSV</button>
+          <button class="btn ghost" type="button" data-risks-logout>Deconnexion</button>
+        </div>
+      </div>
+
+      <section class="risks-kpis" data-risks-kpis></section>
+
+      <section class="risks-ai-panel">
+        <div>
+          <p class="section-kicker">Assistant conformite</p>
+          <h2 data-risks-ai-score>--%</h2>
+          <p data-risks-ai-summary>Analyse en attente.</p>
+        </div>
+        <div class="risks-ai-grid" data-risks-ai-grid></div>
+      </section>
+
+      <form class="admin-filters" data-risks-filters>
+        <label>Recherche<input name="q" type="search" placeholder="Risque, controle, incident, personne"></label>
+        <label>Statut
+          <select name="status">
+            <option value="all">Tous</option>
+            <option value="open">Ouvert</option>
+            <option value="mitigating">Mitigation</option>
+            <option value="blocked">Bloque</option>
+            <option value="resolved">Resolu</option>
+            <option value="missing">Manquant</option>
+            <option value="valid">Valide</option>
+            <option value="new">Nouveau</option>
+            <option value="triage">Qualification</option>
+            <option value="pending">En attente</option>
+          </select>
+        </label>
+      </form>
+
+      <div class="admin-tabs" role="tablist" aria-label="Vues risques">
+        <button type="button" data-risks-view="risks" class="is-active">Risques</button>
+        <button type="button" data-risks-view="checks">Conformite</button>
+        <button type="button" data-risks-view="incidents">Incidents</button>
+        <button type="button" data-risks-view="consents">Autorisations</button>
+        <button type="button" data-risks-view="audit">Audit</button>
+      </div>
+
+      <section class="admin-layout risks-layout">
+        <aside class="admin-list-panel">
+          <div class="admin-panel-head"><h2 data-risks-list-title>Risques</h2><span data-risks-list-count>0</span></div>
+          <div class="admin-request-list" data-risks-list></div>
+          <p class="form-note" data-risks-empty hidden>Aucun element trouve.</p>
+        </aside>
+        <section class="admin-detail-panel" data-risks-detail>
+          <p class="form-note">Selectionnez un element pour afficher sa fiche.</p>
+        </section>
+      </section>
+    </section>
+  </main>
+
+  <div class="admin-modal" data-risks-modal hidden>
+    <div class="admin-modal-panel risks-modal-panel" role="dialog" aria-modal="true" aria-labelledby="risks-modal-title">
+      <div class="admin-modal-head">
+        <div>
+          <p class="section-kicker">Creation rapide</p>
+          <h2 id="risks-modal-title">Ajouter un element risque/conformite</h2>
+        </div>
+        <button class="btn ghost" type="button" data-risks-close-modal>Fermer</button>
+      </div>
+      <form class="admin-form risks-create-form" data-risks-form>
+        <label>Element<select name="type"><option value="risk">Risque</option><option value="check">Controle conformite</option><option value="incident">Incident</option><option value="consent">Autorisation / consentement</option></select></label>
+        <label>Titre / personne<input name="title" placeholder="Consentement manquant"></label>
+        <label>Statut<input name="status" placeholder="open, missing, triage..."></label>
+        <label>Type<input name="risk_type" placeholder="rgpd, field_safety..."></label>
+        <label>Severite<input name="severity" placeholder="medium, high, critical"></label>
+        <label>Probabilite<input name="likelihood" placeholder="possible, likely"></label>
+        <label>Responsable<input name="owner_name" placeholder="Referent conformite"></label>
+        <label>Echeance<input name="due_at" type="date"></label>
+        <label class="risks-wide-field">Description / mesure<textarea name="summary" rows="4" placeholder="Contexte, preuve attendue, mesure corrective..."></textarea></label>
+        <button class="btn primary" type="submit">Enregistrer</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="admin-risks.js" defer></script>
+</body>
+</html>
