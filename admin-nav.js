@@ -1,28 +1,61 @@
 const TVF_ADMIN_TOKEN_KEY = "tvfAdminToken";
 const TVF_ADMIN_COOKIE_SENTINEL = "__tvf_cookie_session__";
 const TVF_ADMIN_COOKIE_CHECK_KEY = "tvfAdminCookieHydrated";
-const TVF_ADMIN_MODULES = [
-  { href: "admin", label: "Accueil" },
-  { href: "dashboard", label: "Dashboard" },
-  { href: "admin-demandes", label: "Demandes" },
-  { href: "admin-emails", label: "E-mails" },
-  { href: "admin-work", label: "Taches" },
-  { href: "admin-crm", label: "CRM" },
-  { href: "admin-dossiers", label: "Dossiers" },
-  { href: "admin-documents", label: "Documents" },
-  { href: "admin-procedures", label: "Procedures" },
-  { href: "admin-knowledge", label: "Connaissances" },
-  { href: "admin-ai", label: "Assistant IA" },
-  { href: "admin-map", label: "Cartographie" },
-  { href: "admin-observatoire", label: "Observatoire" },
-  { href: "admin-finances", label: "Finances" },
-  { href: "admin-impact", label: "Impact" },
-  { href: "admin-branches", label: "Antennes" },
-  { href: "admin-governance", label: "Gouvernance" },
-  { href: "admin-risks", label: "Risques" },
-  { href: "admin-users", label: "Utilisateurs" },
-  { href: "admin-settings", label: "Parametres" }
+
+const TVF_ADMIN_GROUPS = [
+  {
+    label: "Pilotage",
+    description: "Vue d'ensemble et priorites",
+    modules: [
+      { href: "admin", label: "Accueil", icon: "âŒ‚" },
+      { href: "dashboard", label: "Dashboard", icon: "â–¦" },
+    ],
+  },
+  {
+    label: "Demandes & relation",
+    description: "Entrants, contacts et suivi",
+    modules: [
+      { href: "admin-demandes", label: "Demandes", icon: "âœ‰" },
+      { href: "admin-crm", label: "CRM", icon: "â—Ž" },
+      { href: "admin-emails", label: "E-mails", icon: "@" },
+      { href: "admin-work", label: "Taches", icon: "âœ“" },
+      { href: "admin-dossiers", label: "Dossiers", icon: "â–£" },
+    ],
+  },
+  {
+    label: "Ressources",
+    description: "Documents, procedures et savoir",
+    modules: [
+      { href: "admin-documents", label: "Documents", icon: "â–¡" },
+      { href: "admin-procedures", label: "Procedures", icon: "Â§" },
+      { href: "admin-knowledge", label: "Connaissances", icon: "i" },
+      { href: "admin-ai", label: "Assistant IA", icon: "âœ¦" },
+    ],
+  },
+  {
+    label: "Territoires & impact",
+    description: "Carte, observatoire et resultats",
+    modules: [
+      { href: "admin-map", label: "Cartographie", icon: "âŒ–" },
+      { href: "admin-observatoire", label: "Observatoire", icon: "â—Œ" },
+      { href: "admin-finances", label: "Finances", icon: "â‚¬" },
+      { href: "admin-impact", label: "Impact", icon: "%" },
+      { href: "admin-branches", label: "Antennes", icon: "âŒ¬" },
+    ],
+  },
+  {
+    label: "Administration",
+    description: "Gouvernance, risques et acces",
+    modules: [
+      { href: "admin-governance", label: "Gouvernance", icon: "â—‡" },
+      { href: "admin-risks", label: "Risques", icon: "!" },
+      { href: "admin-users", label: "Utilisateurs", icon: "â—‰" },
+      { href: "admin-settings", label: "Parametres", icon: "âš™" },
+    ],
+  },
 ];
+
+const TVF_ADMIN_MODULES = TVF_ADMIN_GROUPS.flatMap((group) => group.modules);
 
 function readSessionToken() {
   try { return sessionStorage.getItem(TVF_ADMIN_TOKEN_KEY) || ""; } catch { return ""; }
@@ -30,6 +63,7 @@ function readSessionToken() {
 
 function writeSessionToken(value) {
   try { if (value) sessionStorage.setItem(TVF_ADMIN_TOKEN_KEY, value); else sessionStorage.removeItem(TVF_ADMIN_TOKEN_KEY); } catch {}
+  document.body?.classList.toggle("admin-session-active", Boolean(value));
 }
 
 function markCookieChecked(value) {
@@ -47,14 +81,23 @@ function clearAdminSession() {
 }
 
 async function hydrateSessionFromCookie() {
-  if (readSessionToken() || cookieChecked()) return;
+  if (readSessionToken()) {
+    document.body?.classList.add("admin-session-active");
+    return;
+  }
+  if (cookieChecked()) return;
   markCookieChecked(true);
+  document.body?.classList.add("admin-session-checking");
   try {
     const response = await fetch("/api/admin-session", { method: "GET", headers: { "Content-Type": "application/json" } });
     if (!response.ok) return;
     writeSessionToken(TVF_ADMIN_COOKIE_SENTINEL);
     window.location.reload();
-  } catch {}
+  } catch {
+    // La page affichera son ecran de connexion si aucune session valide n'existe.
+  } finally {
+    document.body?.classList.remove("admin-session-checking");
+  }
 }
 
 function bindAdminSessionBridge() {
@@ -89,6 +132,14 @@ function normalizePath(pathname) {
   return clean.replace(/\.html$/i, "") || "index";
 }
 
+function moduleIsActive(current, moduleHref) {
+  return current === moduleHref || (current === "dashboard" && moduleHref === "dashboard") || (current === "admin" && moduleHref === "admin");
+}
+
+function groupIsActive(current, group) {
+  return group.modules.some((module) => moduleIsActive(current, module.href));
+}
+
 function createAdminModuleNav() {
   if (!document.body?.classList.contains("admin-body")) return;
   if (document.querySelector("[data-admin-module-nav]")) return;
@@ -98,14 +149,44 @@ function createAdminModuleNav() {
   const nav = document.createElement("nav");
   nav.className = "admin-module-nav";
   nav.dataset.adminModuleNav = "";
-  nav.setAttribute("aria-label", "Navigation complete TVF OS");
-  nav.innerHTML = `<div class="admin-module-nav-inner">${TVF_ADMIN_MODULES.map((module) => {
-    const active = current === module.href || (current === "dashboard" && module.href === "dashboard") || (current === "admin" && module.href === "admin");
-    return `<a href="${module.href}"${active ? ' aria-current="page" class="is-active"' : ""}>${module.label}</a>`;
-  }).join("")}</div>`;
+  nav.setAttribute("aria-label", "Navigation TVF OS");
+  nav.innerHTML = `
+    <div class="admin-module-shell">
+      <div class="admin-module-title">
+        <span>TVF OS</span>
+        <strong>Centre operationnel</strong>
+      </div>
+      <div class="admin-module-groups">
+        ${TVF_ADMIN_GROUPS.map((group) => {
+          const activeGroup = groupIsActive(current, group);
+          return `<section class="admin-module-group${activeGroup ? " is-active" : ""}">
+            <button class="admin-module-group-head" type="button" aria-expanded="${activeGroup ? "true" : "false"}">
+              <span>${group.label}</span>
+              <small>${group.description}</small>
+            </button>
+            <div class="admin-module-links">
+              ${group.modules.map((module) => {
+                const active = moduleIsActive(current, module.href);
+                return `<a href="${module.href}"${active ? ' aria-current="page" class="is-active"' : ""}><i>${module.icon}</i><span>${module.label}</span></a>`;
+              }).join("")}
+            </div>
+          </section>`;
+        }).join("")}
+      </div>
+    </div>`;
   topbar.insertAdjacentElement("afterend", nav);
+
+  nav.addEventListener("click", (event) => {
+    const button = event.target.closest(".admin-module-group-head");
+    if (!button) return;
+    const group = button.closest(".admin-module-group");
+    const open = !group.classList.contains("is-open");
+    group.classList.toggle("is-open", open);
+    button.setAttribute("aria-expanded", String(open));
+  });
 }
 
+document.body?.classList.toggle("admin-session-active", Boolean(readSessionToken()));
 bindAdminSessionBridge();
 hydrateSessionFromCookie();
 createAdminModuleNav();
