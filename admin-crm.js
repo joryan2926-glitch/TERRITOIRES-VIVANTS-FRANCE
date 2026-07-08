@@ -1,4 +1,4 @@
-﻿const CRM_TOKEN_KEY = "tvfAdminToken";
+const CRM_TOKEN_KEY = "tvfAdminToken";
 const contactTypeLabels = {
   proprietaire: "Proprietaire",
   elu: "Elu",
@@ -298,6 +298,37 @@ function historyPanel(items) {
   </section>`;
 }
 
+function isCrmOverdue(item) {
+  return item?.next_action_due_at && new Date(item.next_action_due_at).getTime() < Date.now();
+}
+
+function relationPathPanel(item, type) {
+  const stage = type === "organization" ? item.relation_status : item.consent_status;
+  const steps = type === "organization"
+    ? [
+        ["prospect", "Identifier"],
+        ["actif", "Qualifier"],
+        ["conventionne", "Conventionner"],
+        ["ancien", "Capitaliser"],
+      ]
+    : [
+        ["unknown", "Identifier"],
+        ["pending", "Consentement"],
+        ["granted", "Qualifier"],
+        ["granted", "Mobiliser"],
+      ];
+  const doneIndex = Math.max(0, steps.findIndex(([key]) => key === stage));
+  return `<ol class="crm-relation-path" aria-label="Parcours relationnel">
+    ${steps.map(([key, text], index) => `<li class="${index <= doneIndex ? "is-done" : ""}"><span>${index + 1}</span><strong>${escapeHtml(text)}</strong><small>${escapeHtml(key)}</small></li>`).join("")}
+  </ol>`;
+}
+
+function quickDue(days = 7) {
+  const date = new Date();
+  date.setDate(date.getDate() + days);
+  return date.toISOString();
+}
+
 async function renderDetail() {
   if (!detailEl) return;
   const item = selectedItem();
@@ -326,6 +357,7 @@ function renderContactDetail(item, historyItems) {
     <div class="admin-detail-title"><p class="section-kicker">Fiche contact</p><h3>${escapeHtml(item.display_name)}</h3><p>${escapeHtml(item.email || item.phone || "Coordonnees a completer")}</p></div>
     <div class="admin-meta-grid"><div><span>E-mail</span><a href="mailto:${escapeHtml(item.email || "")}">${escapeHtml(item.email || "Non renseigne")}</a></div><div><span>Telephone</span><strong>${escapeHtml(item.phone || item.mobile || "Non renseigne")}</strong></div><div><span>Consentement</span><strong>${escapeHtml(label(consentLabels, item.consent_status))}</strong></div><div><span>Dernier echange</span><strong>${escapeHtml(formatDate(item.last_interaction_at))}</strong></div></div>
     ${assistantPanel(item, "contact")}
+    ${relationPathPanel(item, "contact")}
     <label>Nom affiche<input name="display_name" value="${escapeHtml(item.display_name || "")}"></label>
     <label>Type contact<select name="contact_type">${options(contactTypeLabels, item.contact_type)}</select></label>
     <label>Consentement RGPD<select name="consent_status">${options(consentLabels, item.consent_status)}</select></label>
@@ -340,7 +372,7 @@ function renderContactDetail(item, historyItems) {
     <label class="crm-wide-field">Notes internes<textarea name="notes" rows="5">${escapeHtml(item.notes || "")}</textarea></label>
     <section class="crm-relations"><p class="section-kicker">Organisations rattachees</p>${orgs.length ? orgs.map((link) => `<article><strong>${escapeHtml(link.organizations?.name || "Organisation")}</strong><span>${escapeHtml(link.role_label || "Role non renseigne")}${link.is_primary ? " - principal" : ""}</span></article>`).join("") : "<p>Aucune organisation rattachee.</p>"}</section>
     ${historyPanel(historyItems)}
-    <div class="admin-detail-actions"><button class="btn primary" type="submit">Enregistrer</button><a class="btn secondary" href="mailto:${escapeHtml(item.email || "")}">Ecrire</a><a class="btn secondary" href="tel:${escapeHtml(item.phone || item.mobile || "")}">Appeler</a></div>
+    <div class="admin-detail-actions"><button class="btn primary" type="submit">Enregistrer</button><button class="btn secondary" type="button" data-crm-quick="relance_7j">Relance 7 jours</button><button class="btn secondary" type="button" data-crm-quick="consent_granted">Consentement OK</button><a class="btn secondary" href="mailto:${escapeHtml(item.email || "")}">Ecrire</a><a class="btn secondary" href="tel:${escapeHtml(item.phone || item.mobile || "")}">Appeler</a></div>
     <p class="form-note" data-crm-save-status role="status" hidden></p>
   </form>`;
 }
@@ -352,6 +384,7 @@ function renderOrganizationDetail(item, historyItems) {
     <div class="admin-detail-title"><p class="section-kicker">Fiche organisation</p><h3>${escapeHtml(item.name)}</h3><p>${escapeHtml(label(organizationTypeLabels, item.organization_type))} - ${escapeHtml(label(relationLabels, item.relation_status))}</p></div>
     <div class="admin-meta-grid"><div><span>E-mail</span><a href="mailto:${escapeHtml(item.email || "")}">${escapeHtml(item.email || "Non renseigne")}</a></div><div><span>Telephone</span><strong>${escapeHtml(item.phone || "Non renseigne")}</strong></div><div><span>Territoire</span><strong>${escapeHtml(item.city || item.department || item.region || "Non renseigne")}</strong></div><div><span>Dernier echange</span><strong>${escapeHtml(formatDate(item.last_interaction_at))}</strong></div></div>
     ${assistantPanel(item, "organization")}
+    ${relationPathPanel(item, "organization")}
     <label>Nom organisation<input name="name" value="${escapeHtml(item.name || "")}"></label>
     <label>Type organisation<select name="organization_type">${options(organizationTypeLabels, item.organization_type)}</select></label>
     <label>Niveau relation<select name="relation_status">${options(relationLabels, item.relation_status)}</select></label>
@@ -370,7 +403,7 @@ function renderOrganizationDetail(item, historyItems) {
     <label class="crm-wide-field">Notes internes<textarea name="notes" rows="5">${escapeHtml(item.notes || "")}</textarea></label>
     <section class="crm-relations"><p class="section-kicker">Contacts associes</p>${links.length ? links.map((link) => `<article><strong>${escapeHtml(link.crm_contacts?.display_name || "Contact")}</strong><span>${escapeHtml(link.role_label || link.crm_contacts?.contact_type || "Role non renseigne")}${link.is_primary ? " - principal" : ""}</span></article>`).join("") : "<p>Aucun contact rattache.</p>"}</section>
     ${historyPanel(historyItems)}
-    <div class="admin-detail-actions"><button class="btn primary" type="submit">Enregistrer</button><a class="btn secondary" href="mailto:${escapeHtml(item.email || "")}">Ecrire</a><button class="btn secondary" type="button" data-crm-create-linked-contact>Creer contact rattache</button></div>
+    <div class="admin-detail-actions"><button class="btn primary" type="submit">Enregistrer</button><button class="btn secondary" type="button" data-crm-quick="relance_7j">Relance 7 jours</button><button class="btn secondary" type="button" data-crm-quick="relation_active">Relation active</button><a class="btn secondary" href="mailto:${escapeHtml(item.email || "")}">Ecrire</a><button class="btn secondary" type="button" data-crm-create-linked-contact>Creer contact rattache</button></div>
     <p class="form-note" data-crm-save-status role="status" hidden></p>
   </form>`;
 }
@@ -512,6 +545,34 @@ async function updateDuplicate(id, status) {
   await loadDashboard().catch(() => {});
 }
 
+async function quickCrmAction(action) {
+  const item = selectedItem();
+  if (!item || currentView === "duplicates") return;
+  const type = currentView === "organizations" ? "organization" : "contact";
+  const data = { type, id: item.id };
+  if (action === "relance_7j") {
+    data.next_action = "Relancer et mettre a jour la fiche relationnelle";
+    data.next_action_due_at = quickDue(7);
+  }
+  if (action === "consent_granted" && type === "contact") {
+    data.consent_status = "granted";
+    data.consent_source = item.consent_source || "Validation manuelle TVF OS";
+    data.next_action = "Qualifier la relation et rattacher une organisation si besoin";
+    data.next_action_due_at = quickDue(14);
+  }
+  if (action === "relation_active" && type === "organization") {
+    data.relation_status = "actif";
+    data.next_action = "Planifier un echange de cadrage ou une proposition de cooperation";
+    data.next_action_due_at = quickDue(14);
+  }
+  const result = await api("/api/admin-crm", { method: "PATCH", body: JSON.stringify(data) });
+  if (type === "organization") organizations = organizations.map((entry) => entry.id === item.id ? result.organization : entry);
+  else contacts = contacts.map((entry) => entry.id === item.id ? result.contact : entry);
+  renderList();
+  await renderDetail();
+  await loadDashboard().catch(() => {});
+}
+
 function bindEvents() {
   tokenForm?.addEventListener("submit", async (event) => {
     event.preventDefault();
@@ -534,6 +595,8 @@ function bindEvents() {
   listEl?.addEventListener("click", (event) => { const button = event.target.closest("[data-crm-id]"); if (!button) return; selectedId = button.dataset.crmId; renderList(); renderDetail(); });
   detailEl?.addEventListener("submit", (event) => { const form = event.target.closest("[data-crm-detail-form]"); if (!form) return; event.preventDefault(); saveDetail(form); });
   detailEl?.addEventListener("click", async (event) => {
+    const quickButton = event.target.closest("[data-crm-quick]");
+    if (quickButton) { await quickCrmAction(quickButton.dataset.crmQuick); return; }
     const historyButton = event.target.closest("[data-crm-add-history]");
     if (historyButton) { const item = selectedItem(); openModal("history", { id: item.id, type: currentView === "organizations" ? "organization" : "contact" }); return; }
     const linkedContact = event.target.closest("[data-crm-create-linked-contact]");
