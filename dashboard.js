@@ -382,10 +382,7 @@ controls?.addEventListener("change", () => {
   loadDashboard().catch((error) => setRuntimeStatus(error.message, "error"));
 });
 
-logoutButton?.addEventListener("click", () => {
-  setToken("");
-  showLogin();
-});
+logoutButton?.addEventListener("click", () => { setToken(""); window.location.href = "admin"; });
 
 if (token()) {
   unlockDashboard(token());

@@ -609,10 +609,7 @@ function bindEvents() {
   filtersForm?.addEventListener("change", () => loadContacts().catch((error) => alert(error.message)));
   refreshButton?.addEventListener("click", () => loadContacts().catch((error) => alert(error.message)));
   exportButton?.addEventListener("click", exportContactsCsv);
-  logoutButton?.addEventListener("click", () => {
-    setToken("");
-    showLogin();
-  });
+  logoutButton?.addEventListener("click", () => { setToken(""); window.location.href = "admin"; });
   createButton?.addEventListener("click", openCreateModal);
   createForm?.addEventListener("submit", createContactFromForm);
   closeCreateButtons.forEach((button) => button.addEventListener("click", closeCreateModal));

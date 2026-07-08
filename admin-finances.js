@@ -1,4 +1,4 @@
-const FIN_TOKEN_KEY = "tvfAdminToken";
+﻿const FIN_TOKEN_KEY = "tvfAdminToken";
 const viewLabels = { budgets: "Budgets", expenses: "Depenses", funders: "Financeurs", opportunities: "Appels a projets", applications: "Demandes", payments: "Paiements", reports: "Reporting" };
 const typeMaps = {
   budgets: { project: "Projet", branch: "Antenne", national: "National", action: "Action", grant: "Subvention" },
@@ -263,7 +263,7 @@ function bindEvents() {
   reportButton?.addEventListener("click", () => generateReport().catch((error) => alert(error.message)));
   refreshButton?.addEventListener("click", () => loadItems().catch((error) => alert(error.message)));
   exportButton?.addEventListener("click", exportCsv);
-  logoutButton?.addEventListener("click", () => { setToken(""); showLogin(); });
+  logoutButton?.addEventListener("click", () => { setToken(""); window.location.href = "admin"; });
   closeModalButtons.forEach((button) => button.addEventListener("click", closeModal));
   modal?.addEventListener("click", (event) => { if (event.target === modal) closeModal(); });
   entitySelect?.addEventListener("change", updateModalFields);

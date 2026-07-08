@@ -524,7 +524,7 @@ function bindEvents() {
   filtersForm?.addEventListener("input", () => { clearTimeout(debounceTimer); debounceTimer = setTimeout(() => loadCurrent().catch((error) => alert(error.message)), 280); });
   filtersForm?.addEventListener("change", () => loadCurrent().catch((error) => alert(error.message)));
   refreshButton?.addEventListener("click", () => loadCurrent().catch((error) => alert(error.message)));
-  logoutButton?.addEventListener("click", () => { setToken(""); showLogin(); });
+  logoutButton?.addEventListener("click", () => { setToken(""); window.location.href = "admin"; });
   exportButton?.addEventListener("click", exportCsv);
   createContactButton?.addEventListener("click", () => openModal("contact"));
   createOrganizationButton?.addEventListener("click", () => openModal("organization"));
