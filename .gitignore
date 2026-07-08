@@ -1,4 +1,4 @@
-﻿node_modules/
+node_modules/
 .env
 .vercel/
 dist/
@@ -8,3 +8,10 @@ output/presentations/
 *.inspect.ndjson
 supabase/.temp/
 
+
+output/documents/annuaire-recuperation-materiaux-saint-etienne.pdf
+output/documents/fiche-identification-officielle-tvf-sirene.pdf
+output/documents/kit-courriers-tvf-prets-a-remplir.pdf
+output/documents/kit-materiaux-tvf-pret-a-utiliser.pdf
+output/documents/signature-mail-officielle-tvf.pdf
+output/documents/topo-post-activation-tvf.pdf

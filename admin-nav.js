@@ -1,7 +1,8 @@
-﻿const TVF_ADMIN_MODULES = [
+const TVF_ADMIN_MODULES = [
   { href: "admin", label: "Accueil" },
   { href: "dashboard", label: "Dashboard" },
   { href: "admin-demandes", label: "Demandes" },
+  { href: "admin-emails", label: "E-mails" },
   { href: "admin-crm", label: "CRM" },
   { href: "admin-dossiers", label: "Dossiers" },
   { href: "admin-documents", label: "Documents" },

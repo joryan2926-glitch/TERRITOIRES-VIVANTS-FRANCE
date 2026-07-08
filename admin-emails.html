@@ -1,0 +1,44 @@
+﻿<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>E-mails intelligents | TVF OS</title>
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="theme-color" content="#183f22">
+  <link rel="icon" href="assets/favicon-32.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="admin-body emails-body">
+  <a class="skip-link" href="#emails-main">Aller au contenu</a>
+  <header class="admin-topbar">
+    <a class="admin-brand" href="index" aria-label="Retour au site Territoires Vivants France"><img src="assets/logo-territoires-vivants-france-web.png" alt="Territoires Vivants France" width="320" height="132"></a>
+    <div><p class="admin-kicker">TVF OS</p><h1>E-mails intelligents</h1><p>Lecture, triage IA, brouillons de reponse, taches et conversion en demande.</p></div>
+    <div class="admin-top-actions"><a class="btn secondary" href="admin">Accueil admin</a><a class="btn secondary" href="dashboard">Dashboard</a><a class="btn secondary" href="contact">Retour au site</a></div>
+  </header>
+
+  <main id="emails-main" class="admin-shell emails-shell">
+    <section class="admin-login" data-emails-login>
+      <div><p class="section-kicker">Acces securise</p><h2>Connexion aux e-mails TVF OS</h2><p>Entrez le token admin. Les reponses externes restent toujours a valider humainement.</p></div>
+      <form data-emails-token-form><label for="emails-token">Token admin</label><input id="emails-token" name="token" type="password" autocomplete="current-password" placeholder="TVF_ADMIN_TOKEN"><button class="btn primary" type="submit">Ouvrir les e-mails</button><p class="form-note" data-emails-login-status role="status" hidden></p></form>
+    </section>
+
+    <section class="admin-app emails-app" data-emails-app hidden>
+      <div class="admin-toolbar">
+        <div><p class="section-kicker">Boite de reception</p><h2>Transformer chaque e-mail en action claire</h2><p data-emails-count>Chargement des e-mails...</p></div>
+        <div class="admin-toolbar-actions"><button class="btn primary" type="button" data-emails-create>Nouvel e-mail</button><button class="btn secondary" type="button" data-emails-refresh>Actualiser</button><button class="btn secondary" type="button" data-emails-export>Exporter CSV</button><button class="btn ghost" type="button" data-emails-logout>Deconnexion</button></div>
+      </div>
+
+      <section class="emails-kpis" data-emails-kpis></section>
+      <section class="emails-ai-panel"><div><p class="section-kicker">Assistant e-mail</p><h2 data-emails-ai-score>--</h2><p data-emails-ai-summary>Analyse en attente.</p></div><div class="emails-ai-grid" data-emails-ai-grid></div></section>
+      <form class="admin-filters" data-emails-filters><label>Recherche<input name="q" type="search" placeholder="Expediteur, sujet, pole, contenu"></label><label>Statut<select name="status"><option value="all">Tous</option><option value="new">Nouveau</option><option value="analyzed">Analyse</option><option value="to_reply">A repondre</option><option value="waiting_info">Infos manquantes</option><option value="converted">Converti</option><option value="closed">Clos</option><option value="archive">Archive</option></select></label></form>
+      <div class="admin-tabs" role="tablist" aria-label="Vues e-mails"><button type="button" data-emails-view="messages" class="is-active">E-mails</button><button type="button" data-emails-view="suggestions">Suggestions IA</button><button type="button" data-emails-view="tasks">Taches</button><button type="button" data-emails-view="events">Evenements</button></div>
+      <section class="admin-layout emails-layout"><aside class="admin-list-panel"><div class="admin-panel-head"><h2 data-emails-list-title>E-mails</h2><span data-emails-list-count>0</span></div><div class="admin-request-list" data-emails-list></div><p class="form-note" data-emails-empty hidden>Aucun element trouve.</p></aside><section class="admin-detail-panel" data-emails-detail><p class="form-note">Selectionnez un e-mail.</p></section></section>
+    </section>
+  </main>
+
+  <div class="admin-modal" data-emails-modal hidden><div class="admin-modal-panel emails-modal-panel" role="dialog" aria-modal="true" aria-labelledby="emails-modal-title"><div class="admin-modal-head"><div><p class="section-kicker">Creation rapide</p><h2 id="emails-modal-title">Ajouter un e-mail</h2></div><button class="btn ghost" type="button" data-emails-close-modal>Fermer</button></div><form class="admin-form emails-create-form" data-emails-form><label>Expediteur<input name="from_email" type="email" placeholder="contact@example.fr"></label><label>Nom<input name="from_name" placeholder="Nom expediteur"></label><label>Sujet<input name="subject" placeholder="Objet du message"></label><label>Responsable<input name="assigned_to" placeholder="Referent"></label><label class="emails-wide-field">Message<textarea name="body_text" rows="7" placeholder="Contenu de l'e-mail entrant"></textarea></label><button class="btn primary" type="submit">Analyser et creer</button></form></div></div>
+  <script src="admin-nav.js" defer></script>
+  <script src="admin-emails.js" defer></script>
+</body>
+</html>
