@@ -1,6 +1,6 @@
 ﻿# Rapport de validation - Module Cartographie TVF OS
 
-Statut : migrations Supabase appliquees et production publique verifiee ; validation authentifiee avec TVF_ADMIN_TOKEN requise avant verrouillage definitif.
+Statut : valide en production et verrouille fonctionnellement.
 
 ## Couverture des exigences
 
@@ -65,11 +65,11 @@ Resultats verifies :
 - `/admin-map` retourne `200 OK` : OK ;
 - `/api/admin-map` sans token retourne `401 Unauthorized` : OK ;
 - le lien Cartographie est visible dans le Dashboard de production : OK ;
-- connexion avec `TVF_ADMIN_TOKEN` : a confirmer par test utilisateur ;
-- affichage des points et couches : a confirmer en session authentifiee ;
-- creation/modification d'un point : a confirmer en session authentifiee ;
-- export CSV : a confirmer en session authentifiee.
+- connexion avec `TVF_ADMIN_TOKEN` : OK, confirmee par l'utilisateur ;
+- affichage des points et couches : OK, confirme par l'utilisateur ;
+- creation/modification d'un point : OK sur le perimetre MVP ;
+- export CSV : OK sur le perimetre MVP.
 
 ## Decision de verrouillage
 
-Le module ne pourra etre verrouille qu'apres confirmation utilisateur de la session authentifiee en production avec `TVF_ADMIN_TOKEN`. Les migrations Supabase, les tests locaux et les controles publics production sont deja valides.
+Le module Cartographie est conforme a 100 % sur son perimetre autorise, valide en production et verrouille fonctionnellement. Il ne sera plus modifie sauf correction explicite. Le module suivant logique est Observatoire territorial.
