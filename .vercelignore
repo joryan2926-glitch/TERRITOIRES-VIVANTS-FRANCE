@@ -1,0 +1,20 @@
+# Internal workspaces and generated deliverables.
+# The public site and /api functions do not need these files at deploy time.
+.agents/
+.codex/
+.vercel/
+node_modules/
+tmp/
+output/
+social/
+documents/
+supabase/
+tests/
+scripts/
+
+# Local-only metadata and documentation.
+*.md
+*.ndjson
+*.log
+.env
+.env.*
