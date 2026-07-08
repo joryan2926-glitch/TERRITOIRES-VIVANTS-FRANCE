@@ -1,8 +1,8 @@
-﻿# Rapport de validation - Module Finances TVF OS
+# Rapport de validation - Module Finances TVF OS
 
 Date : 2026-07-08
 
-Statut : en cours de validation.
+Statut : developpement, migration Supabase et production publique valides. Validation authentifiee utilisateur requise avant verrouillage.
 
 ## Perimetre valide
 
@@ -25,7 +25,7 @@ Statut : en cours de validation.
 | Tables Supabase | Conforme |
 | RLS et permissions | Conforme |
 | Tests API | Conforme |
-| Validation production publique | A executer |
+| Validation production publique | Conforme |
 | Validation production authentifiee | A confirmer par utilisateur |
 
 ## Couverture fonctionnelle
@@ -34,7 +34,7 @@ Couverture developpement mesuree : 100 % sur le perimetre Finances MVP autorise.
 
 Couverture Supabase production : 100 % sur la migration et les donnees de test.
 
-Couverture production applicative : en attente du deploiement Vercel et de la validation authentifiee.
+Couverture production applicative publique : 100 %. Validation authentifiee : en attente de test utilisateur avec TVF_ADMIN_TOKEN.
 
 ## Fichiers livres
 
@@ -63,11 +63,11 @@ A completer apres execution :
 - Migration Supabase :
 - Donnees de test :
 - Verification SQL :
-- Page publique `/admin-finances` :
-- API sans token :
-- Test authentifie :
+- Page publique `/admin-finances` : OK, HTTP 200
+- API sans token : OK, HTTP 401
+- Bouton Dashboard production : OK, lien `admin-finances` visible
+- Test authentifie : en attente utilisateur, token non disponible localement
 
 ## Decision
 
 Le module Finances ne sera verrouille qu'apres validation production a 100 %.
-
