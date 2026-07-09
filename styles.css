@@ -5189,6 +5189,18 @@ tr:nth-child(even) td {
 .settings-env-list span { color: var(--blue-900); font-weight: 800; }
 .settings-env-list strong { color: var(--green-700); }
 .settings-modal-panel { width: min(960px, 100%); }
+
+.settings-audit-detail { display: grid; gap: 14px; margin-top: 14px; }
+.settings-audit-summary { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+.settings-audit-summary article { display: grid; gap: 5px; padding: 12px; border: 1px solid rgba(14,45,69,.12); border-radius: 10px; background: #fff; box-shadow: var(--shadow-soft); }
+.settings-audit-summary span { color: var(--muted); font-size: .72rem; font-weight: 850; text-transform: uppercase; letter-spacing: .03em; }
+.settings-audit-summary strong { color: var(--blue-900); font-size: .95rem; line-height: 1.25; overflow-wrap: anywhere; }
+.settings-audit-text, .settings-audit-meta { padding: 14px; border: 1px solid rgba(14,45,69,.12); border-radius: 12px; background: linear-gradient(180deg, #ffffff 0%, #f8faf5 100%); }
+.settings-audit-text h3, .settings-audit-meta h3 { margin: 0 0 8px; color: var(--blue-900); font-size: 1rem; }
+.settings-audit-text p { margin: 0; color: var(--text); line-height: 1.55; }
+.settings-audit-meta pre { max-height: 360px; overflow: auto; margin: 0; padding: 12px; border-radius: 8px; background: #0f2638; color: #f6fbf7; font-size: .78rem; line-height: 1.45; }
+@media (max-width: 900px) { .settings-audit-summary { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 560px) { .settings-audit-summary { grid-template-columns: 1fr; } }
 @media (max-width: 1100px) { .settings-kpis, .settings-control-grid, .settings-ai-panel, .settings-layout, .settings-detail-form, .settings-create-form, .settings-ai-grid { grid-template-columns: 1fr; } }
 /* Module Dossiers TVF OS - parcours d'instruction */
 .cases-instruction-path {
