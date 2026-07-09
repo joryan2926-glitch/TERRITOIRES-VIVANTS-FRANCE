@@ -195,6 +195,16 @@ function setStatus(message, type = "info") {
   loginStatus.dataset.status = type;
 }
 
+function notify(message, type = "info") {
+  if (window.tvfAdminNotice) window.tvfAdminNotice(message, type);
+  else if (type === "error") console.error(message);
+  else console.log(message);
+}
+
+function notifyError(error, fallback = "Action impossible pour le moment.") {
+  notify(error?.message || fallback, "error");
+}
+
 function showApp() {
   if (loginSection) loginSection.hidden = true;
   if (appSection) appSection.hidden = false;
@@ -537,7 +547,7 @@ function csvCell(value) {
 
 function exportCsv() {
   const items = currentItems();
-  if (!items.length) return alert("Aucune donnee a exporter.");
+  if (!items.length) return notify("Aucune donnee a exporter.", "warning");
   const headers = currentView === "organizations" ? ["Nom", "Type", "Relation", "Email", "Telephone", "Ville", "Prochaine action"] : ["Nom", "Type", "Consentement", "Email", "Telephone", "Prochaine action"];
   const rows = currentView === "organizations"
     ? organizations.map((item) => [item.name, label(organizationTypeLabels, item.organization_type), label(relationLabels, item.relation_status), item.email, item.phone, item.city, item.next_action])
@@ -552,6 +562,7 @@ function exportCsv() {
   link.click();
   link.remove();
   URL.revokeObjectURL(url);
+  notify("Export CRM prepare.", "success");
 }
 
 function openModal(type, defaults = {}) {
@@ -617,9 +628,11 @@ async function saveDetail(form) {
     else contacts = contacts.map((item) => item.id === data.id ? result.contact : item);
     renderList();
     await renderDetail();
+    notify("Fiche CRM enregistree.", "success");
   } catch (error) {
     statusEl.hidden = false;
     statusEl.textContent = error.message;
+    notifyError(error);
   }
 }
 
@@ -638,6 +651,7 @@ async function submitModal(event) {
     } else if (modalType === "history") {
       closeModal();
       await renderDetail();
+      notify("Note CRM ajoutee.", "success");
       return;
     } else {
       contacts = [result.contact, ...contacts];
@@ -649,8 +663,10 @@ async function submitModal(event) {
     renderList();
     await renderDetail();
     await loadDashboard().catch(() => {});
+    notify("Fiche CRM creee.", "success");
   } catch (error) {
     if (statusEl) statusEl.textContent = error.message;
+    notifyError(error);
   }
 }
 
@@ -661,6 +677,7 @@ async function updateDuplicate(id, status) {
   renderList();
   await renderDetail();
   await loadDashboard().catch(() => {});
+  notify("Doublon CRM traite.", "success");
 }
 
 function crmCaseType(profileKey) {
@@ -698,6 +715,7 @@ async function applyPartnerAction(action) {
   if (action === "task") await createCrmWorkTask(item, type, profile);
   await loadDashboard().catch(() => {});
   await renderDetail();
+  notify("Action partenaire appliquee.", "success");
 }
 async function quickCrmAction(action) {
   const item = selectedItem();
@@ -725,6 +743,7 @@ async function quickCrmAction(action) {
   renderList();
   await renderDetail();
   await loadDashboard().catch(() => {});
+  notify("Action CRM appliquee.", "success");
 }
 
 function bindEvents() {
@@ -735,10 +754,10 @@ function bindEvents() {
     setToken(value);
     try { showApp(); await loadCurrent(); setStatus(""); } catch (error) { setToken(""); showLogin(); setStatus(error.message, "error"); }
   });
-  viewButtons.forEach((button) => button.addEventListener("click", () => { currentView = button.dataset.crmView; selectedId = null; loadCurrent().catch((error) => alert(error.message)); }));
-  filtersForm?.addEventListener("input", () => { clearTimeout(debounceTimer); debounceTimer = setTimeout(() => loadCurrent().catch((error) => alert(error.message)), 280); });
-  filtersForm?.addEventListener("change", () => loadCurrent().catch((error) => alert(error.message)));
-  refreshButton?.addEventListener("click", () => loadCurrent().catch((error) => alert(error.message)));
+  viewButtons.forEach((button) => button.addEventListener("click", () => { currentView = button.dataset.crmView; selectedId = null; loadCurrent().catch((error) => notifyError(error)); }));
+  filtersForm?.addEventListener("input", () => { clearTimeout(debounceTimer); debounceTimer = setTimeout(() => loadCurrent().catch((error) => notifyError(error)), 280); });
+  filtersForm?.addEventListener("change", () => loadCurrent().catch((error) => notifyError(error)));
+  refreshButton?.addEventListener("click", () => loadCurrent().catch((error) => notifyError(error)));
   logoutButton?.addEventListener("click", () => { setToken(""); window.location.href = "admin"; });
   exportButton?.addEventListener("click", exportCsv);
   createContactButton?.addEventListener("click", () => openModal("contact"));
@@ -749,16 +768,20 @@ function bindEvents() {
   listEl?.addEventListener("click", (event) => { const button = event.target.closest("[data-crm-id]"); if (!button) return; selectedId = button.dataset.crmId; renderList(); renderDetail(); });
   detailEl?.addEventListener("submit", (event) => { const form = event.target.closest("[data-crm-detail-form]"); if (!form) return; event.preventDefault(); saveDetail(form); });
   detailEl?.addEventListener("click", async (event) => {
-    const quickButton = event.target.closest("[data-crm-quick]");
-    if (quickButton) { await quickCrmAction(quickButton.dataset.crmQuick); return; }
-    const partnerButton = event.target.closest("[data-crm-partner-action]");
-    if (partnerButton) { await applyPartnerAction(partnerButton.dataset.crmPartnerAction); return; }
-    const historyButton = event.target.closest("[data-crm-add-history]");
-    if (historyButton) { const item = selectedItem(); openModal("history", { id: item.id, type: currentView === "organizations" ? "organization" : "contact" }); return; }
-    const linkedContact = event.target.closest("[data-crm-create-linked-contact]");
-    if (linkedContact) { const org = selectedItem(); openModal("contact", { notes: `Contact rattache a ${org?.name || "organisation"}` }); return; }
-    const duplicateButton = event.target.closest("[data-crm-duplicate-status]");
-    if (duplicateButton) { const item = selectedItem(); if (item) await updateDuplicate(item.id, duplicateButton.dataset.crmDuplicateStatus); }
+    try {
+      const quickButton = event.target.closest("[data-crm-quick]");
+      if (quickButton) { await quickCrmAction(quickButton.dataset.crmQuick); return; }
+      const partnerButton = event.target.closest("[data-crm-partner-action]");
+      if (partnerButton) { await applyPartnerAction(partnerButton.dataset.crmPartnerAction); return; }
+      const historyButton = event.target.closest("[data-crm-add-history]");
+      if (historyButton) { const item = selectedItem(); openModal("history", { id: item.id, type: currentView === "organizations" ? "organization" : "contact" }); return; }
+      const linkedContact = event.target.closest("[data-crm-create-linked-contact]");
+      if (linkedContact) { const org = selectedItem(); openModal("contact", { notes: `Contact rattache a ${org?.name || "organisation"}` }); return; }
+      const duplicateButton = event.target.closest("[data-crm-duplicate-status]");
+      if (duplicateButton) { const item = selectedItem(); if (item) await updateDuplicate(item.id, duplicateButton.dataset.crmDuplicateStatus); }
+    } catch (error) {
+      notifyError(error);
+    }
   });
 }
 
@@ -769,4 +792,3 @@ if (token()) {
 } else {
   showLogin();
 }
-
