@@ -5202,6 +5202,16 @@ tr:nth-child(even) td {
 @media (max-width: 900px) { .settings-audit-summary { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 560px) { .settings-audit-summary { grid-template-columns: 1fr; } }
 @media (max-width: 1100px) { .settings-kpis, .settings-control-grid, .settings-ai-panel, .settings-layout, .settings-detail-form, .settings-create-form, .settings-ai-grid { grid-template-columns: 1fr; } }
+
+/* Module Activite TVF OS */
+.activity-kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.activity-kpis article { display: grid; gap: 4px; padding: 14px; border: 1px solid rgba(14,45,69,.12); border-radius: 8px; background: #fff; box-shadow: var(--shadow-soft); }
+.activity-kpis span { color: var(--muted); font-size: .78rem; font-weight: 800; text-transform: uppercase; }
+.activity-kpis strong { color: var(--blue-900); font-size: 1.45rem; line-height: 1.15; overflow-wrap: anywhere; }
+.activity-layout { grid-template-columns: minmax(320px, .78fr) minmax(0, 1.22fr); }
+.activity-card .admin-request-head small { background: rgba(46,125,50,.1); color: var(--green-700); }
+.activity-filters { align-items: end; }
+@media (max-width: 1100px) { .activity-kpis, .activity-layout { grid-template-columns: 1fr; } }
 /* Module Dossiers TVF OS - parcours d'instruction */
 .cases-instruction-path {
   grid-column: 1 / -1;
