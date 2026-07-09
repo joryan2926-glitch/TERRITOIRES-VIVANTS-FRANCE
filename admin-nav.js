@@ -4,53 +4,59 @@ const TVF_ADMIN_COOKIE_CHECK_KEY = "tvfAdminCookieHydrated";
 
 const TVF_ADMIN_GROUPS = [
   {
-    label: "Pilotage",
-    description: "Vue d'ensemble et priorites",
+    label: "Accueil",
+    description: "Vue d'ensemble",
     modules: [
       { href: "admin", label: "Accueil", icon: "&#8962;" },
       { href: "dashboard", label: "Dashboard", icon: "&#9638;" },
     ],
   },
   {
-    label: "Demandes & relation",
-    description: "Entrants, contacts et suivi",
+    label: "Entrees",
+    description: "Demandes et relation",
     modules: [
       { href: "admin-demandes", label: "Demandes", icon: "&#9993;" },
-      { href: "admin-crm", label: "CRM", icon: "&#9673;" },
       { href: "admin-emails", label: "E-mails", icon: "@" },
-      { href: "admin-work", label: "Taches", icon: "&#10003;" },
-      { href: "admin-dossiers", label: "Dossiers", icon: "&#9635;" },
+      { href: "admin-crm", label: "CRM", icon: "&#9673;" },
     ],
   },
   {
-    label: "Ressources",
-    description: "Documents, procedures et savoir",
+    label: "Instruction",
+    description: "Dossiers et action",
     modules: [
+      { href: "admin-dossiers", label: "Dossiers", icon: "&#9635;" },
+      { href: "admin-work", label: "Taches", icon: "&#10003;" },
       { href: "admin-documents", label: "Documents", icon: "&#9633;" },
       { href: "admin-procedures", label: "Procedures", icon: "&#167;" },
-      { href: "admin-knowledge", label: "Connaissances", icon: "i" },
-      { href: "admin-ai", label: "Assistant IA", icon: "&#10022;" },
     ],
   },
   {
-    label: "Territoires & impact",
-    description: "Carte, observatoire et resultats",
+    label: "Territoires",
+    description: "Carte et antennes",
     modules: [
       { href: "admin-map", label: "Cartographie", icon: "&#8982;" },
       { href: "admin-observatoire", label: "Observatoire", icon: "&#9676;" },
-      { href: "admin-finances", label: "Finances", icon: "&euro;" },
-      { href: "admin-impact", label: "Impact", icon: "%" },
       { href: "admin-branches", label: "Antennes", icon: "&#8962;" },
+      { href: "admin-impact", label: "Impact", icon: "%" },
     ],
   },
   {
-    label: "Administration",
-    description: "Gouvernance, risques et acces",
+    label: "Pilotage",
+    description: "Moyens et controle",
     modules: [
+      { href: "admin-finances", label: "Finances", icon: "&euro;" },
       { href: "admin-governance", label: "Gouvernance", icon: "&#9671;" },
       { href: "admin-risks", label: "Risques", icon: "!" },
+    ],
+  },
+  {
+    label: "Systeme",
+    description: "Acces, savoir et IA",
+    modules: [
       { href: "admin-users", label: "Utilisateurs", icon: "&#9678;" },
       { href: "admin-settings", label: "Parametres", icon: "&#9881;" },
+      { href: "admin-knowledge", label: "Connaissances", icon: "i" },
+      { href: "admin-ai", label: "Assistant IA", icon: "&#10022;" },
     ],
   },
 ];
@@ -63,9 +69,29 @@ function readSessionToken() {
 
 function writeSessionToken(value) {
   try { if (value) sessionStorage.setItem(TVF_ADMIN_TOKEN_KEY, value); else sessionStorage.removeItem(TVF_ADMIN_TOKEN_KEY); } catch {}
-  document.body?.classList.toggle("admin-session-active", Boolean(value));
+  syncAdminSessionPanels();
 }
 
+
+function isAdminPanel(element, suffix) {
+  if (!element?.attributes) return false;
+  return Array.from(element.attributes).some((attribute) => /^data-[a-z0-9-]+$/.test(attribute.name) && attribute.name.endsWith(suffix));
+}
+
+function syncAdminSessionPanels() {
+  const active = Boolean(readSessionToken());
+  document.body?.classList.toggle("admin-session-active", active);
+  document.querySelectorAll("section, div, main").forEach((element) => {
+    if (isAdminPanel(element, "-login")) {
+      element.hidden = active;
+      element.classList.toggle("tvf-admin-login-panel", true);
+    }
+    if (isAdminPanel(element, "-app")) {
+      element.classList.toggle("tvf-admin-app-panel", true);
+      if (active) element.hidden = false;
+    }
+  });
+}
 function markCookieChecked(value) {
   try { if (value) sessionStorage.setItem(TVF_ADMIN_COOKIE_CHECK_KEY, "1"); else sessionStorage.removeItem(TVF_ADMIN_COOKIE_CHECK_KEY); } catch {}
 }
@@ -82,7 +108,7 @@ function clearAdminSession() {
 
 async function hydrateSessionFromCookie() {
   if (readSessionToken()) {
-    document.body?.classList.add("admin-session-active");
+    syncAdminSessionPanels();
     return;
   }
   if (cookieChecked()) return;
@@ -186,7 +212,8 @@ function createAdminModuleNav() {
   });
 }
 
-document.body?.classList.toggle("admin-session-active", Boolean(readSessionToken()));
+syncAdminSessionPanels();
 bindAdminSessionBridge();
 hydrateSessionFromCookie();
 createAdminModuleNav();
+syncAdminSessionPanels();
