@@ -6459,3 +6459,28 @@ tr:nth-child(even) td {
 .cases-entry-panel .admin-create-form {
   grid-template-columns: 1fr;
 }
+
+.documents-entry-panel {
+  max-width: 780px;
+}
+
+.documents-entry-panel .admin-modal-head p:not(.section-kicker) {
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+.documents-entry-form {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.documents-entry-form label:nth-child(n + 4) {
+  grid-column: 1 / -1;
+}
+
+@media (max-width: 720px) {
+  .documents-entry-form {
+    grid-template-columns: 1fr;
+  }
+}
