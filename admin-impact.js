@@ -54,6 +54,8 @@ function setToken(value) { try { if (value) sessionStorage.setItem(IMPACT_TOKEN_
 function showApp() { if (loginSection) loginSection.hidden = true; if (appSection) appSection.hidden = false; }
 function showLogin() { if (loginSection) loginSection.hidden = false; if (appSection) appSection.hidden = true; }
 function setStatus(message, type = "info") { if (!loginStatus) return; loginStatus.hidden = !message; loginStatus.textContent = message; loginStatus.dataset.status = type; }
+function notify(message, type = "info") { if (window.tvfAdminNotice) window.tvfAdminNotice(message, type); else if (type === "error") console.error(message); else console.log(message); }
+function notifyError(error, fallback = "Action impossible pour le moment.") { notify(error?.message || fallback, "error"); }
 function escapeHtml(value) { return String(value ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;"); }
 function label(map, value) { return map[value] || value || "Non renseigne"; }
 function formatDate(value) { if (!value) return "Non renseigne"; const date = new Date(value); if (Number.isNaN(date.getTime())) return value; return new Intl.DateTimeFormat("fr-FR", { dateStyle: "short" }).format(date); }
@@ -172,21 +174,22 @@ async function createElement(event) {
   event.preventDefault();
   const statusEl = modalForm.querySelector("[data-impact-modal-status]");
   const payload = normalizePayload(Object.fromEntries(new FormData(modalForm)));
-  try { statusEl.hidden = false; statusEl.textContent = "Creation..."; await api("/api/admin-impact", { method: "POST", body: JSON.stringify(payload) }); closeModal(); modalForm.reset(); updateModalFields(); await loadItems(); } catch (error) { statusEl.hidden = false; statusEl.textContent = error.message; }
+  try { statusEl.hidden = false; statusEl.textContent = "Creation..."; await api("/api/admin-impact", { method: "POST", body: JSON.stringify(payload) }); closeModal(); modalForm.reset(); updateModalFields(); await loadItems(); notify("Element impact cree.", "success"); } catch (error) { statusEl.hidden = false; statusEl.textContent = error.message; notifyError(error); }
 }
 async function saveElement(form) {
   const statusEl = form.querySelector("[data-impact-save-status]");
   const payload = Object.fromEntries(new FormData(form));
-  try { statusEl.hidden = false; statusEl.textContent = "Enregistrement..."; await api("/api/admin-impact", { method: "PATCH", body: JSON.stringify(payload) }); await loadItems(); } catch (error) { statusEl.hidden = false; statusEl.textContent = error.message; }
+  try { statusEl.hidden = false; statusEl.textContent = "Enregistrement..."; await api("/api/admin-impact", { method: "PATCH", body: JSON.stringify(payload) }); await loadItems(); notify("Element impact enregistre.", "success"); } catch (error) { statusEl.hidden = false; statusEl.textContent = error.message; notifyError(error); }
 }
 async function generateReport() {
   await api("/api/admin-impact", { method: "POST", body: JSON.stringify({ type: "generate_report", report_title: "Bilan impact TVF" }) });
   currentView = "reports";
   selectedId = null;
   await loadItems();
+  notify("Bilan impact genere.", "success");
 }
 function exportCsv() {
-  if (!items().length) return alert("Aucun element a exporter.");
+  if (!items().length) return notify("Aucun element a exporter.", "warning");
   const headers = ["Vue", "Titre", "Type", "Statut", "Score", "Date"];
   const rows = items().map((item) => [viewLabels[currentView], itemTitle(item), itemType(item), itemStatus(item), item.assistant?.reliability_score ?? item.value_numeric ?? "", item.updated_at || item.created_at || ""]);
   const csv = [headers, ...rows].map((row) => row.map((value) => `"${String(value ?? "").replace(/"/g, '""')}"`).join(";")).join("\n");
@@ -199,21 +202,22 @@ function exportCsv() {
   link.click();
   link.remove();
   URL.revokeObjectURL(url);
+  notify("Export impact prepare.", "success");
 }
 function openModal() { if (modal) modal.hidden = false; updateModalFields(); modalForm?.querySelector("input, select, textarea")?.focus(); }
 function closeModal() { if (modal) modal.hidden = true; }
 function updateModalFields() { const selected = entitySelect?.value || "metric"; modalForm?.querySelectorAll("[class*='impact-field-']").forEach((field) => { field.hidden = !field.classList.contains(`impact-field-${selected}`); }); }
 function bindEvents() {
   tokenForm?.addEventListener("submit", async (event) => { event.preventDefault(); const value = String(new FormData(tokenForm).get("token") || "").trim(); if (!value) return setStatus("Entrez le token admin.", "error"); setToken(value); try { showApp(); await loadItems(); setStatus(""); } catch (error) { setToken(""); showLogin(); setStatus(error.message, "error"); } });
-  tabs.forEach((button) => button.addEventListener("click", () => { currentView = button.dataset.impactView; selectedId = null; loadItems().catch((error) => alert(error.message)); }));
-  filtersForm?.addEventListener("input", () => { clearTimeout(debounceTimer); debounceTimer = setTimeout(() => loadItems().catch((error) => alert(error.message)), 280); });
-  filtersForm?.addEventListener("change", () => loadItems().catch((error) => alert(error.message)));
+  tabs.forEach((button) => button.addEventListener("click", () => { currentView = button.dataset.impactView; selectedId = null; loadItems().catch((error) => notifyError(error)); }));
+  filtersForm?.addEventListener("input", () => { clearTimeout(debounceTimer); debounceTimer = setTimeout(() => loadItems().catch((error) => notifyError(error)), 280); });
+  filtersForm?.addEventListener("change", () => loadItems().catch((error) => notifyError(error)));
   listEl?.addEventListener("click", (event) => { const button = event.target.closest("[data-item-id]"); if (!button) return; selectedId = button.dataset.itemId; renderAll(); });
   detailEl?.addEventListener("submit", (event) => { const form = event.target.closest("[data-impact-detail-form]"); if (!form) return; event.preventDefault(); saveElement(form); });
   detailEl?.addEventListener("click", (event) => { if (!event.target.closest("[data-impact-archive]")) return; const form = detailEl.querySelector("[data-impact-detail-form]"); if (!form) return; if (form.status) form.status.value = "archive"; saveElement(form); });
   createButton?.addEventListener("click", openModal);
-  reportButton?.addEventListener("click", () => generateReport().catch((error) => alert(error.message)));
-  refreshButton?.addEventListener("click", () => loadItems().catch((error) => alert(error.message)));
+  reportButton?.addEventListener("click", () => generateReport().catch((error) => notifyError(error)));
+  refreshButton?.addEventListener("click", () => loadItems().catch((error) => notifyError(error)));
   exportButton?.addEventListener("click", exportCsv);
   logoutButton?.addEventListener("click", () => { setToken(""); window.location.href = "admin"; });
   closeModalButtons.forEach((button) => button.addEventListener("click", closeModal));
