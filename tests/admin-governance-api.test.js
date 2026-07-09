@@ -1,5 +1,5 @@
 ﻿const assert = require("assert");
-const handler = require("../api/admin-governance");
+const handler = require("../lib/api/admin-governance");
 const { normalizeSupabaseRestUrl, decisionPayload, committeePayload, actionPayload, decisionAssistant, committeeAssistant } = handler._private;
 
 function createResponse() { return { statusCode: 0, headers: {}, body: "", setHeader(name, value) { this.headers[name] = value; }, end(value = "") { this.body = value; } }; }

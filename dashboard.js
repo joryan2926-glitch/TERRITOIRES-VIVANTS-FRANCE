@@ -472,7 +472,7 @@ controls?.addEventListener("change", () => {
   loadDashboard().catch((error) => setRuntimeStatus(error.message, "error"));
 });
 
-logoutButton?.addEventListener("click", () => { setToken(""); window.location.href = "admin"; });
+logoutButton?.addEventListener("click", () => { setToken(""); window.location.href = "admin-login"; });
 
 if (token()) {
   unlockDashboard(token());

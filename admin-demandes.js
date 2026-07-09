@@ -856,7 +856,7 @@ function bindEvents() {
   filtersForm?.addEventListener("change", () => loadContacts().catch((error) => notifyError(error)));
   refreshButton?.addEventListener("click", () => loadContacts().catch((error) => notifyError(error)));
   exportButton?.addEventListener("click", () => { if (exportContactsCsv()) notify("Export CSV prepare avec les filtres actifs.", "success"); });
-  logoutButton?.addEventListener("click", () => { setToken(""); window.location.href = "admin"; });
+  logoutButton?.addEventListener("click", () => { setToken(""); window.location.href = "admin-login"; });
   createButton?.addEventListener("click", openCreateModal);
   createForm?.addEventListener("submit", createContactFromForm);
   closeCreateButtons.forEach((button) => button.addEventListener("click", closeCreateModal));

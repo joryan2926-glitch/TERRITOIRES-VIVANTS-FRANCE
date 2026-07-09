@@ -1,5 +1,5 @@
 ﻿const assert = require("assert");
-const knowledgeHandler = require("../api/admin-knowledge");
+const knowledgeHandler = require("../lib/api/admin-knowledge");
 
 const {
   normalizeSupabaseRestUrl,

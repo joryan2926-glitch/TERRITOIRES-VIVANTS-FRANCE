@@ -1,6 +1,7 @@
 const TVF_ADMIN_TOKEN_KEY = "tvfAdminToken";
 const TVF_ADMIN_COOKIE_SENTINEL = "__tvf_cookie_session__";
 const TVF_ADMIN_COOKIE_CHECK_KEY = "tvfAdminCookieHydrated";
+const TVF_ADMIN_LOGIN_ROUTE = "admin-login";
 
 const TVF_ADMIN_GROUPS = [
   {
@@ -78,16 +79,33 @@ function isAdminPanel(element, suffix) {
   return Array.from(element.attributes).some((attribute) => /^data-[a-z0-9-]+$/.test(attribute.name) && attribute.name.endsWith(suffix));
 }
 
+function currentAdminRoute() {
+  return normalizePath(window.location.pathname);
+}
+
+function isAdminLoginRoute() {
+  return currentAdminRoute() === TVF_ADMIN_LOGIN_ROUTE;
+}
+
+function redirectToAdminLogin() {
+  if (isAdminLoginRoute()) return;
+  const target = `${TVF_ADMIN_LOGIN_ROUTE}?next=${encodeURIComponent(currentAdminRoute())}`;
+  window.location.replace(target);
+}
+
 function syncAdminSessionPanels() {
   const active = Boolean(readSessionToken());
+  const loginRoute = isAdminLoginRoute();
   document.body?.classList.toggle("admin-session-active", active);
+  document.body?.classList.toggle("admin-session-required", !active && !loginRoute);
   document.querySelectorAll("section, div, main").forEach((element) => {
     if (isAdminPanel(element, "-login")) {
-      element.hidden = active;
+      element.hidden = active || !loginRoute;
       element.classList.toggle("tvf-admin-login-panel", true);
     }
     if (isAdminPanel(element, "-app")) {
       element.classList.toggle("tvf-admin-app-panel", true);
+      element.hidden = !active;
       if (active) element.hidden = false;
     }
   });
@@ -111,16 +129,25 @@ async function hydrateSessionFromCookie() {
     syncAdminSessionPanels();
     return;
   }
-  if (cookieChecked()) return;
+  if (cookieChecked()) {
+    syncAdminSessionPanels();
+    redirectToAdminLogin();
+    return;
+  }
   markCookieChecked(true);
   document.body?.classList.add("admin-session-checking");
   try {
     const response = await fetch("/api/admin-session", { method: "GET", headers: { "Content-Type": "application/json" } });
-    if (!response.ok) return;
+    if (!response.ok) {
+      syncAdminSessionPanels();
+      redirectToAdminLogin();
+      return;
+    }
     writeSessionToken(TVF_ADMIN_COOKIE_SENTINEL);
     window.location.reload();
   } catch {
-    // La page affichera son ecran de connexion si aucune session valide n'existe.
+    syncAdminSessionPanels();
+    redirectToAdminLogin();
   } finally {
     document.body?.classList.remove("admin-session-checking");
   }

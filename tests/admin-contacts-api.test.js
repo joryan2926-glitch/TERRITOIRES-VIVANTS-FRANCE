@@ -1,5 +1,5 @@
 ﻿const assert = require("assert");
-const adminContactsHandler = require("../api/admin-contacts");
+const adminContactsHandler = require("../lib/api/admin-contacts");
 
 const {
   inferCategory,

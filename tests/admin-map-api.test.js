@@ -1,5 +1,5 @@
 ﻿const assert = require("assert");
-const mapHandler = require("../api/admin-map");
+const mapHandler = require("../lib/api/admin-map");
 const { normalizeSupabaseRestUrl, inferPointType, maskCoordinates, distanceMeters, priorityScore, assistantForPoint, pointPayload, geocodeCheckPayload, alertPayload } = mapHandler._private;
 
 function createResponse() { return { statusCode: 0, headers: {}, body: "", setHeader(name, value) { this.headers[name] = value; }, end(value = "") { this.body = value; } }; }

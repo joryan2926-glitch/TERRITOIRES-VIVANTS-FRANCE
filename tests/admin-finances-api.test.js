@@ -1,5 +1,5 @@
 ﻿const assert = require("assert");
-const financesHandler = require("../api/admin-finances");
+const financesHandler = require("../lib/api/admin-finances");
 const { normalizeSupabaseRestUrl, opportunityScore, budgetHealth, assistantForBudget, assistantForExpense, assistantForReport, funderPayload, opportunityPayload, applicationPayload, budgetPayload, linePayload, expensePayload, paymentPayload, reportPayload } = financesHandler._private;
 
 function createResponse() { return { statusCode: 0, headers: {}, body: "", setHeader(name, value) { this.headers[name] = value; }, end(value = "") { this.body = value; } }; }

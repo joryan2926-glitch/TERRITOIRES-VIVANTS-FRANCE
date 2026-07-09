@@ -274,7 +274,7 @@ function bindEvents() {
   diagnosticButton?.addEventListener("click", () => generateDiagnostic().catch((error) => notifyError(error)));
   refreshButton?.addEventListener("click", () => loadItems().catch((error) => notifyError(error)));
   exportButton?.addEventListener("click", exportCsv);
-  logoutButton?.addEventListener("click", () => { setToken(""); window.location.href = "admin"; });
+  logoutButton?.addEventListener("click", () => { setToken(""); window.location.href = "admin-login"; });
   closeModalButtons.forEach((button) => button.addEventListener("click", closeModal));
   modal?.addEventListener("click", (event) => { if (event.target === modal) closeModal(); });
   entitySelect?.addEventListener("change", updateModalFields);

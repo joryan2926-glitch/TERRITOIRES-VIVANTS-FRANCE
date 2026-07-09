@@ -1,5 +1,5 @@
 ﻿const assert = require("assert");
-const handler = require("../api/admin-work");
+const handler = require("../lib/api/admin-work");
 const { normalizeSupabaseRestUrl, inferPriority, taskAssistant, projectPayload, taskPayload, eventPayload } = handler._private;
 function createResponse() { return { statusCode: 0, headers: {}, body: "", setHeader(name, value) { this.headers[name] = value; }, end(value = "") { this.body = value; } }; }
 function createRequest({ method = "GET", url = "/api/admin-work", token = "secret", body = null }) { return { method, url, headers: token ? { authorization: `Bearer ${token}` } : {}, async *[Symbol.asyncIterator]() { if (body) yield JSON.stringify(body); } }; }

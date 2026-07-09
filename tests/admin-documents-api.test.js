@@ -1,5 +1,5 @@
 ﻿const assert = require("assert");
-const documentsHandler = require("../api/admin-documents");
+const documentsHandler = require("../lib/api/admin-documents");
 
 const {
   normalizeSupabaseUrl,

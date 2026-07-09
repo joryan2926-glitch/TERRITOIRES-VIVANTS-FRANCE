@@ -1,5 +1,5 @@
 ﻿const assert = require("assert");
-const proceduresHandler = require("../api/admin-procedures");
+const proceduresHandler = require("../lib/api/admin-procedures");
 
 const {
   normalizeSupabaseRestUrl,

@@ -1,5 +1,5 @@
 ﻿const assert = require("assert");
-const handler = require("../api/admin-emails");
+const handler = require("../lib/api/admin-emails");
 const { normalizeSupabaseRestUrl, inferCategory, inferPriority, analyzeEmail, emailPayload, taskPayload } = handler._private;
 
 function createResponse() { return { statusCode: 0, headers: {}, body: "", setHeader(name, value) { this.headers[name] = value; }, end(value = "") { this.body = value; } }; }

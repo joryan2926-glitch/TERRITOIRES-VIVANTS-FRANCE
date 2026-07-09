@@ -1,5 +1,5 @@
 ﻿const assert = require("assert");
-const casesHandler = require("../api/admin-cases");
+const casesHandler = require("../lib/api/admin-cases");
 
 const {
   inferCaseType,
@@ -132,8 +132,16 @@ async function testUpdateChecklist() {
   process.env.SUPABASE_URL = "https://demo.supabase.co";
   process.env.SUPABASE_SERVICE_ROLE_KEY = "sb_secret_demo";
   const originalFetch = global.fetch;
-  global.fetch = async (url, options) => {
-    assert.ok(String(url).includes("/case_checklist_items?id=eq.00000000-0000-0000-0000-000000000403"));
+  global.fetch = async (url, options = {}) => {
+    const target = String(url);
+    if (target.includes("/case_status_history")) {
+      assert.strictEqual(options.method, "POST");
+      return { ok: true, status: 201, async text() { return JSON.stringify([]); } };
+    }
+    assert.ok(target.includes("/case_checklist_items?id=eq.00000000-0000-0000-0000-000000000403"));
+    if (!options.method || options.method === "GET") {
+      return { ok: true, status: 200, async text() { return JSON.stringify([{ id: "00000000-0000-0000-0000-000000000403", case_id: "00000000-0000-0000-0000-000000000001", label: "Autorisation", status: "recu" }]); } };
+    }
     assert.strictEqual(options.method, "PATCH");
     const payload = JSON.parse(options.body);
     assert.strictEqual(payload.status, "valide");

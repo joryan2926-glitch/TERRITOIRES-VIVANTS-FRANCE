@@ -1,5 +1,5 @@
 ﻿const assert = require("assert");
-const crmHandler = require("../api/admin-crm");
+const crmHandler = require("../lib/api/admin-crm");
 
 const {
   inferContactType,

@@ -1,5 +1,5 @@
 ﻿const assert = require("assert");
-const aiHandler = require("../api/admin-ai");
+const aiHandler = require("../lib/api/admin-ai");
 
 const {
   normalizeSupabaseRestUrl,

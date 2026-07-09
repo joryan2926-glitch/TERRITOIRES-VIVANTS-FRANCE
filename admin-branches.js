@@ -262,7 +262,7 @@ function bindEvents() {
   modalForm?.addEventListener("submit", createItem);
   packButton?.addEventListener("click", () => generatePack().catch((e) => notifyError(e)));
   exportButton?.addEventListener("click", exportCsv);
-  logoutButton?.addEventListener("click", () => { setToken(""); window.location.href = "admin"; });
+  logoutButton?.addEventListener("click", () => { setToken(""); window.location.href = "admin-login"; });
   listEl?.addEventListener("click", (event) => { const button = event.target.closest("[data-branch-id]"); if (!button) return; selectedId = button.dataset.branchId; renderAll(); });
   detailEl?.addEventListener("submit", (event) => { const form = event.target.closest("[data-branch-detail-form], [data-branches-inline-form]"); if (!form) return; event.preventDefault(); if (form.matches("[data-branch-detail-form]")) saveBranch(form).catch((e) => notifyError(e)); else saveInline(form).catch((e) => notifyError(e)); });
   detailEl?.addEventListener("click", (event) => { const button = event.target.closest("[data-branch-action]"); if (!button) return; applyBranchAction(button.dataset.branchAction).catch((e) => notifyError(e)); });

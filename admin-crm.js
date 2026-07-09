@@ -758,7 +758,7 @@ function bindEvents() {
   filtersForm?.addEventListener("input", () => { clearTimeout(debounceTimer); debounceTimer = setTimeout(() => loadCurrent().catch((error) => notifyError(error)), 280); });
   filtersForm?.addEventListener("change", () => loadCurrent().catch((error) => notifyError(error)));
   refreshButton?.addEventListener("click", () => loadCurrent().catch((error) => notifyError(error)));
-  logoutButton?.addEventListener("click", () => { setToken(""); window.location.href = "admin"; });
+  logoutButton?.addEventListener("click", () => { setToken(""); window.location.href = "admin-login"; });
   exportButton?.addEventListener("click", exportCsv);
   createContactButton?.addEventListener("click", () => openModal("contact"));
   createOrganizationButton?.addEventListener("click", () => openModal("organization"));

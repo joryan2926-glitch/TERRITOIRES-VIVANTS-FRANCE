@@ -1,5 +1,5 @@
 ﻿const assert = require("assert");
-const observatoireHandler = require("../api/admin-observatoire");
+const observatoireHandler = require("../lib/api/admin-observatoire");
 const { normalizeSupabaseRestUrl, inferIndicatorType, priorityScore, dataQualityScore, assistantForDiagnostic, sourcePayload, indicatorPayload, diagnosticPayload, watchPayload } = observatoireHandler._private;
 
 function createResponse() { return { statusCode: 0, headers: {}, body: "", setHeader(name, value) { this.headers[name] = value; }, end(value = "") { this.body = value; } }; }

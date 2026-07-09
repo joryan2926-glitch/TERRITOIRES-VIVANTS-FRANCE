@@ -17,7 +17,6 @@
     <nav class="admin-actions" aria-label="Navigation admin"><a class="btn secondary" href="admin">Accueil admin</a><a class="btn secondary" href="dashboard">Dashboard</a></nav>
   </header>
   <main id="settings-main" class="admin-shell">
-    <section class="admin-login" data-settings-login><div><p class="section-kicker">Acces securise</p><h2>Connexion Parametres</h2><p>Entrez le token admin. La session unique TVF OS ouvre ensuite tous les modules.</p></div><form data-settings-token-form><label for="settings-token">Token admin</label><input id="settings-token" name="token" type="password" autocomplete="current-password" placeholder="TVF_ADMIN_TOKEN"><button class="btn primary" type="submit">Ouvrir les parametres</button><p class="form-note" data-settings-login-status role="status" hidden></p></form></section>
     <section class="admin-app" data-settings-app hidden>
       <div class="admin-toolbar"><div><p class="section-kicker">Centre de controle</p><h2>Verifier et ajuster TVF OS sans exposer les secrets</h2><p data-settings-count>Chargement de la configuration...</p></div><div class="admin-toolbar-actions"><button class="btn primary" type="button" data-settings-create>Nouvel element</button><button class="btn secondary" type="button" data-settings-refresh>Actualiser</button><button class="btn secondary" type="button" data-settings-export>Exporter CSV</button><button class="btn ghost" type="button" data-settings-logout>Deconnexion</button></div></div>
       <section class="admin-kpi-grid settings-kpis" data-settings-kpis></section>

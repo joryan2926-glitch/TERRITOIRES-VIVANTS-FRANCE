@@ -1,5 +1,5 @@
 const assert = require("assert");
-const impactHandler = require("../api/admin-impact");
+const impactHandler = require("../lib/api/admin-impact");
 const { normalizeSupabaseRestUrl, reliabilityScore, assistantForMetric, assistantForReport, metricPayload, valuePayload, proofPayload, reportPayload, exportPayload } = impactHandler._private;
 
 function createResponse() { return { statusCode: 0, headers: {}, body: "", setHeader(name, value) { this.headers[name] = value; }, end(value = "") { this.body = value; } }; }

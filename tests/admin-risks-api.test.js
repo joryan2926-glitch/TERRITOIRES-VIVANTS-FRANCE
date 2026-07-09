@@ -1,5 +1,5 @@
 ﻿const assert = require("assert");
-const handler = require("../api/admin-risks");
+const handler = require("../lib/api/admin-risks");
 const { normalizeSupabaseRestUrl, riskPayload, checkPayload, riskScore, riskAssistant, complianceAssistant } = handler._private;
 
 function createResponse() { return { statusCode: 0, headers: {}, body: "", setHeader(name, value) { this.headers[name] = value; }, end(value = "") { this.body = value; } }; }
