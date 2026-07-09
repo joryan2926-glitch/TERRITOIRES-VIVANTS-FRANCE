@@ -3,11 +3,6 @@
     "trailingSlash":  false,
     "redirects":  [
                       {
-                          "source":  "/admin",
-                          "destination":  "/admin-demandes",
-                          "permanent":  false
-                      },
-                      {
                           "source":  "/documents",
                           "destination":  "/contact",
                           "permanent":  false
@@ -158,6 +153,10 @@
                      {
                          "source":  "/api/admin-work",
                          "destination":  "/api/admin/work"
+                     },
+                     {
+                         "destination":  "/admin.html",
+                         "source":  "/admin"
                      },
                      {
                          "destination":  "/admin-ai.html",
