@@ -149,7 +149,9 @@ function clearFieldErrors(form) {
 }
 
 function focusFirstRequiredField(form) {
-  const field = fieldsForForm(form).find((item) => item.tagName !== "SELECT" && !valueForField(item));
+  const field =
+    fieldsForForm(form).find((item) => item.required && !valueForField(item)) ||
+    fieldsForForm(form).find((item) => item.tagName !== "SELECT" && !valueForField(item));
   if (!field) return;
 
   field.setAttribute("aria-invalid", "true");
@@ -336,6 +338,12 @@ document.querySelectorAll("[data-prepare-form]").forEach((form, index) => {
     if (!submitButton) return;
 
     clearFieldErrors(form);
+    if (form.querySelector("[required]") && typeof form.reportValidity === "function" && !form.reportValidity()) {
+      focusFirstRequiredField(form);
+      setSubmitStatus("Complétez les champs obligatoires avant l'envoi.", "error");
+      return;
+    }
+
     const consentField = form.querySelector("[name=\"consent\"]");
     if (consentField && !consentField.checked) {
       consentField.setAttribute("aria-invalid", "true");
