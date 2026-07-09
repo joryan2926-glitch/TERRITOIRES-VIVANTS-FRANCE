@@ -181,6 +181,53 @@ async function listDashboardContacts(rangeDays, filters = {}) {
   return text ? JSON.parse(text) : [];
 }
 
+
+async function listDashboardActivity(rangeDays) {
+  try {
+    const { restUrl, key } = supabaseConfig();
+    const since = new Date(Date.now() - rangeDays * 24 * 60 * 60 * 1000).toISOString();
+    const params = new URLSearchParams({
+      select: "id,module_key,object_type,object_id,action,summary,performed_by,created_at,audit_source,metadata",
+      created_at: `gte.${since}`,
+      order: "created_at.desc",
+      limit: "80",
+    });
+    const response = await fetchWithTimeout(`${restUrl}/audit_logs?${params.toString()}`, { headers: supabaseHeaders(key) });
+    const text = await response.text();
+    if (!response.ok) return [];
+    return text ? JSON.parse(text) : [];
+  } catch {
+    return [];
+  }
+}
+
+function buildActivitySummary(rows = []) {
+  const byModule = rows.reduce((acc, row) => {
+    const key = clean(row.module_key || "tvf_os", 120) || "tvf_os";
+    acc[key] = (acc[key] || 0) + 1;
+    return acc;
+  }, {});
+  const today = new Date().toISOString().slice(0, 10);
+  const topModule = Object.entries(byModule).sort((a, b) => b[1] - a[1])[0] || ["-", 0];
+  return {
+    total: rows.length,
+    today: rows.filter((row) => String(row.created_at || "").slice(0, 10) === today).length,
+    modules_active: Object.keys(byModule).length,
+    byModule,
+    top_module: topModule[0],
+    top_module_count: topModule[1],
+    recent: rows.slice(0, 8).map((row) => ({
+      id: row.id,
+      module_key: row.module_key || "tvf_os",
+      action: row.action || "action",
+      summary: row.summary || "Action TVF OS tracee.",
+      performed_by: row.performed_by || "TVF OS",
+      object_type: row.object_type || "objet",
+      created_at: row.created_at || null,
+    })),
+  };
+}
+
 function countBy(rows, key, fallback = "non_classe") {
   return rows.reduce((acc, row) => {
     const value = clean(row[key] || fallback, 120) || fallback;
@@ -355,7 +402,7 @@ function buildInsights(rows, metrics) {
   return insights.slice(0, 5);
 }
 
-function aggregateDashboard(rows, rangeDays) {
+function aggregateDashboard(rows, rangeDays, activityRows = []) {
   const now = new Date();
   const openRows = rows.filter(isOpen);
   const closedRows = rows.filter((row) => CLOSED_STATUSES.has(row.status || "") || row.closed_at);
@@ -373,6 +420,8 @@ function aggregateDashboard(rows, rangeDays) {
     age_days: daysBetween(row.created_at, now),
     overdue: isOverdue(row, now),
   }));
+
+  const activity = buildActivitySummary(activityRows);
 
   const metrics = {
     total: rows.length,
@@ -395,6 +444,7 @@ function aggregateDashboard(rows, rangeDays) {
     rangeDays,
     metrics,
     recent,
+    activity,
     alerts: overdueRows.slice(0, 8).map((row) => ({
       id: row.id,
       title: row.subject || "Demande sans objet",
@@ -434,8 +484,8 @@ module.exports = async function handler(req, res) {
     }
     const rangeDays = parseRange(req);
     const filters = parseFilters(req);
-    const rows = await listDashboardContacts(rangeDays, filters);
-    sendJson(res, 200, { ok: true, dashboard: { ...aggregateDashboard(rows, rangeDays), filters } });
+    const [rows, activityRows] = await Promise.all([listDashboardContacts(rangeDays, filters), listDashboardActivity(rangeDays)]);
+    sendJson(res, 200, { ok: true, dashboard: { ...aggregateDashboard(rows, rangeDays, activityRows), filters } });
   } catch (error) {
     const statusCode = error.statusCode || 500;
     sendJson(res, statusCode, {
@@ -449,6 +499,7 @@ module.exports = async function handler(req, res) {
 
 module.exports._private = {
   aggregateDashboard,
+  buildActivitySummary,
   isOverdue,
   normalizeSupabaseRestUrl,
 };

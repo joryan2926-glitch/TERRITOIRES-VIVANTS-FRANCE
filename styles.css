@@ -6695,3 +6695,14 @@ tr:nth-child(even) td {
   font-weight: 700;
   box-shadow: var(--shadow-soft);
 }
+
+
+.dashboard-activity-panel { display: grid; gap: 14px; }
+.dashboard-activity-summary { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.dashboard-activity-list { display: grid; gap: 10px; }
+.dashboard-activity-item { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; gap: 12px; align-items: center; padding: 12px 14px; border: 1px solid rgba(14,45,69,.12); border-radius: 10px; background: #fff; box-shadow: var(--shadow-soft); }
+.dashboard-activity-item strong { color: var(--blue-900); font-size: .95rem; }
+.dashboard-activity-item p { margin: 4px 0 0; color: var(--muted); font-size: .88rem; line-height: 1.45; }
+.dashboard-activity-item span { padding: 5px 9px; border-radius: 999px; background: rgba(46,125,50,.1); color: var(--green-700); font-size: .76rem; font-weight: 800; }
+.dashboard-activity-item small { color: var(--muted); font-size: .78rem; font-weight: 700; }
+@media (max-width: 900px) { .dashboard-activity-summary, .dashboard-activity-item { grid-template-columns: 1fr; } }

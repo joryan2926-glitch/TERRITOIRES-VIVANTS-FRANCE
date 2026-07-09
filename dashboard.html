@@ -35,6 +35,7 @@
       <a class="btn secondary" href="admin-risks">Risques</a>
       <a class="btn secondary" href="admin-users">Utilisateurs</a>
       <a class="btn secondary" href="admin-settings">Parametres</a>
+      <a class="btn secondary" href="admin-activity">Activite</a>
       <a class="btn secondary" href="contact">Retour au site</a>
     </nav>
   </header>
@@ -237,7 +238,20 @@
         </section>
       </div>
 
-            <section class="dashboard-panel dashboard-compliance" aria-labelledby="compliance-title">
+            <section class="dashboard-panel dashboard-activity-panel" aria-labelledby="os-activity-title">
+        <div class="dashboard-panel-head">
+          <div>
+            <p class="section-kicker">Activite TVF OS</p>
+            <h3 id="os-activity-title">Journal operationnel recent</h3>
+            <p>Les dernieres actions sensibles tracees dans les modules internes.</p>
+          </div>
+          <a class="text-link" href="admin-activity">Ouvrir le journal</a>
+        </div>
+        <div class="dashboard-activity-summary" data-dashboard-activity-summary></div>
+        <div class="dashboard-activity-list" data-dashboard-activity></div>
+      </section>
+
+      <section class="dashboard-panel dashboard-compliance" aria-labelledby="compliance-title">
         <div class="dashboard-panel-head">
           <div>
             <p class="section-kicker">Conformite</p>

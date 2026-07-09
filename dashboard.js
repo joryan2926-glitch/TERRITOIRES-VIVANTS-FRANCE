@@ -49,6 +49,8 @@ const coverageEl = document.querySelector("[data-dashboard-coverage]");
 const coverageScoreEl = document.querySelector("[data-dashboard-coverage-score]");
 const alertsEl = document.querySelector("[data-dashboard-alerts]");
 const recentEl = document.querySelector("[data-dashboard-recent]");
+const activityEl = document.querySelector("[data-dashboard-activity]");
+const activitySummaryEl = document.querySelector("[data-dashboard-activity-summary]");
 const generatedEl = document.querySelector("[data-dashboard-generated]");
 const aiSummaryEl = document.querySelector("[data-dashboard-ai-summary]");
 const insightsEl = document.querySelector("[data-dashboard-insights]");
@@ -334,6 +336,22 @@ function renderRecent(recent) {
     : `<tr><td colspan="5">Aucune demande sur la periode.</td></tr>`;
 }
 
+
+function renderActivity(activity = {}) {
+  if (activitySummaryEl) {
+    activitySummaryEl.innerHTML = [
+      kpiCard("Actions tracees", activity.total || 0, "periode selectionnee", activity.total ? "info" : "neutral"),
+      kpiCard("Aujourd'hui", activity.today || 0, "evenements du jour", activity.today ? "success" : "neutral"),
+      kpiCard("Modules actifs", activity.modules_active || 0, "sources d'activite", activity.modules_active ? "info" : "neutral"),
+    ].join("");
+  }
+  if (!activityEl) return;
+  const recent = activity.recent || [];
+  activityEl.innerHTML = recent.length
+    ? recent.map((item) => `<article class="dashboard-activity-item"><div><strong>${escapeHtml(item.action || "Action")}</strong><p>${escapeHtml(item.summary || "Action TVF OS tracee.")}</p></div><span>${escapeHtml(item.module_key || "tvf_os")}</span><small>${escapeHtml(formatDate(item.created_at))}</small></article>`).join("")
+    : `<p class="form-note">Aucune action tracee sur la periode selectionnee.</p>`;
+}
+
 function renderViews(views) {
   if (!viewsEl) return;
   viewsEl.innerHTML = Object.values(views || {})
@@ -378,6 +396,8 @@ function exportDashboard() {
     ["Qualification", `${metrics.qualificationRate}%`],
     ["Cloture", `${metrics.closureRate}%`],
     ["Conformite", `${currentDashboard.coverage?.percent || 0}%`],
+    ["Actions TVF OS", currentDashboard.activity?.total || 0],
+    ["Modules actifs", currentDashboard.activity?.modules_active || 0],
   ];
   const csv = rows.map((row) => row.map(csvCell).join(";")).join("\n");
   const blob = new Blob(["\ufeff" + csv], { type: "text/csv;charset=utf-8" });
@@ -422,6 +442,7 @@ function renderDashboard(data) {
   renderCoverage(dashboard.coverage);
   renderAlerts(dashboard.alerts || []);
   renderRecent(dashboard.recent || []);
+  renderActivity(dashboard.activity || {});
   renderInsights(dashboard.assistant || {});
 }
 
