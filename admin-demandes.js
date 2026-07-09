@@ -67,6 +67,7 @@ const statusShortcuts = document.querySelectorAll("[data-status-shortcut]");
 const priorityShortcuts = document.querySelectorAll("[data-priority-shortcut]");
 const viewShortcuts = document.querySelectorAll("[data-view-shortcut]");
 const kpiEl = document.querySelector("[data-admin-kpis]");
+const triageEl = document.querySelector("[data-admin-triage]");
 
 let contacts = [];
 let selectedId = null;
@@ -303,7 +304,9 @@ async function loadContacts() {
   contacts = result.contacts || [];
   const visible = visibleContacts();
   if (!visible.some((item) => item.id === selectedId)) selectedId = visible[0]?.id || contacts[0]?.id || null;
+  updateKpis();
   renderStatusShortcuts();
+  renderTriagePanel();
   renderList();
   renderDetail();
 }
@@ -344,6 +347,87 @@ function updateKpis() {
     `${averageScore()}%`,
   ];
   kpiEl.querySelectorAll("strong").forEach((node, index) => { node.textContent = values[index] ?? 0; });
+}
+
+function isOpenRequest(contact) {
+  return !["archive", "refuse"].includes(contact?.status);
+}
+
+function hasOwner(contact) {
+  return Boolean(String(contact?.assigned_to || "").trim());
+}
+
+function hasMissingPieces(contact) {
+  return Boolean(piecesText(contact).trim());
+}
+
+function requestReadiness(contact) {
+  const score = Number(contact?.qualification_score || contact?.assistant?.qualification_score || 0);
+  if (String(contact?.next_action || "").toLowerCase().includes("dossier cree")) return "Dossier cree";
+  if (["accepte", "rendez_vous"].includes(contact?.status) || score >= 70) return "Pret a instruire";
+  if (hasMissingPieces(contact) || !hasOwner(contact)) return "A completer";
+  return "A qualifier";
+}
+
+function triageScore(contact) {
+  let score = 0;
+  if (isOverdue(contact)) score += 55;
+  if (contact?.priority === "urgente") score += 42;
+  if (contact?.priority === "haute") score += 24;
+  if (["nouveau", "a_qualifier"].includes(contact?.status)) score += 18;
+  if (!hasOwner(contact) && isOpenRequest(contact)) score += 12;
+  if (hasMissingPieces(contact)) score += 10;
+  return score + Number(contact?.qualification_score || contact?.assistant?.qualification_score || 0) / 10;
+}
+
+function renderTriagePanel() {
+  if (!triageEl) return;
+  const open = contacts.filter(isOpenRequest);
+  const dueToday = open.filter(isDueToday);
+  const overdue = open.filter(isOverdue);
+  const unassigned = open.filter((contact) => !hasOwner(contact));
+  const highPriority = open.filter((contact) => ["haute", "urgente"].includes(contact.priority));
+  const ready = open.filter((contact) => ["Pret a instruire", "Dossier cree"].includes(requestReadiness(contact)));
+  const missing = open.filter(hasMissingPieces);
+  const priorityRows = [...open]
+    .sort((a, b) => triageScore(b) - triageScore(a))
+    .slice(0, 5);
+
+  const cards = [
+    ["A traiter", dueToday.length, "Aujourd'hui", "today"],
+    ["En retard", overdue.length, "Echeance depassee", "today", "urgent"],
+    ["Sans responsable", unassigned.length, "A affecter", "all"],
+    ["Priorite haute", highPriority.length, "P1 / P2", "all", "warning"],
+    ["Prets dossier", ready.length, "Conversion possible", "all"],
+    ["Pieces attendues", missing.length, "Demandes incompletes", "all"],
+  ];
+
+  triageEl.innerHTML = `<div class="admin-panel-head">
+    <div>
+      <p class="section-kicker">Pilotage demandes</p>
+      <h3>Prioriser, qualifier et transformer</h3>
+      <p>Une lecture operationnelle pour passer d'une demande recue a une action suivie : CRM, dossier, pieces ou tache.</p>
+    </div>
+    <a class="text-link" href="dashboard">Voir le dashboard</a>
+  </div>
+  <div class="admin-triage-grid">
+    ${cards.map(([title, value, detail, view, tone]) => `<button type="button" class="admin-triage-card" data-admin-triage-view="${escapeHtml(view)}" data-tone="${escapeHtml(tone || "neutral")}">
+      <span>${escapeHtml(title)}</span>
+      <strong>${escapeHtml(String(value))}</strong>
+      <small>${escapeHtml(detail)}</small>
+    </button>`).join("")}
+  </div>
+  <div class="admin-triage-list" aria-label="Demandes prioritaires">
+    <div>
+      <strong>Demandes a suivre en premier</strong>
+      <small>${priorityRows.length ? "Cliquez pour ouvrir la fiche." : "Aucune demande ouverte avec les filtres actuels."}</small>
+    </div>
+    ${priorityRows.length ? priorityRows.map((contact) => `<button type="button" class="admin-triage-row${contact.id === selectedId ? " is-active" : ""}" data-admin-triage-id="${escapeHtml(contact.id)}">
+      <span><strong>${escapeHtml(contact.request_number || contact.full_name || "Demande TVF")}</strong><small>${escapeHtml(contact.subject || "Sans objet")}</small></span>
+      <em>${escapeHtml(label(priorityLabels, contact.priority))}</em>
+      <em>${escapeHtml(requestReadiness(contact))}</em>
+    </button>`).join("") : ""}
+  </div>`;
 }
 
 function renderStatusShortcuts() {
@@ -737,7 +821,9 @@ async function updateSelected(data, statusEl) {
       body: JSON.stringify(data),
     });
     contacts = contacts.map((item) => (item.id === contact.id ? result.contact : item));
+    updateKpis();
     renderStatusShortcuts();
+    renderTriagePanel();
     renderList();
     renderDetail();
     if (statusEl) {
@@ -822,7 +908,9 @@ async function createContactFromForm(event) {
     contacts = [result.contact, ...contacts.filter((item) => item.id !== result.contact.id)];
     selectedId = result.contact.id;
     closeCreateModal();
+    updateKpis();
     renderStatusShortcuts();
+    renderTriagePanel();
     renderList();
     renderDetail();
     notify("Demande creee et ajoutee au suivi.", "success");
@@ -893,6 +981,7 @@ function bindEvents() {
     button.addEventListener("click", () => {
       currentView = button.dataset.viewShortcut || "all";
       renderStatusShortcuts();
+      renderTriagePanel();
       renderList();
       renderDetail();
     });
@@ -902,8 +991,28 @@ function bindEvents() {
     const button = event.target.closest("[data-contact-id]");
     if (!button) return;
     selectedId = button.dataset.contactId;
+    renderTriagePanel();
     renderList();
     renderDetail();
+  });
+
+  triageEl?.addEventListener("click", (event) => {
+    const row = event.target.closest("[data-admin-triage-id]");
+    if (row) {
+      selectedId = row.dataset.adminTriageId;
+      renderTriagePanel();
+      renderList();
+      renderDetail();
+      return;
+    }
+    const view = event.target.closest("[data-admin-triage-view]");
+    if (view) {
+      currentView = view.dataset.adminTriageView || "all";
+      renderStatusShortcuts();
+      renderTriagePanel();
+      renderList();
+      renderDetail();
+    }
   });
 
   detailEl?.addEventListener("submit", (event) => {
