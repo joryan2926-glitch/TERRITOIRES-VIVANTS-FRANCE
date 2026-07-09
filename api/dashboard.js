@@ -440,7 +440,7 @@ module.exports = async function handler(req, res) {
     const statusCode = error.statusCode || 500;
     sendJson(res, statusCode, {
       ok: false,
-      error: statusCode >= 500 ? "Dashboard indisponible pour le moment." : error.message,
+      error: statusCode >= 500 ? "Dashboard temporairement non charge : vérifiez la configuration Supabase." : error.message,
       code: error.code || undefined,
       details: process.env.NODE_ENV === "development" ? error.details || error.message : undefined,
     });
