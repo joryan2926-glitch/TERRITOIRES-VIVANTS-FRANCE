@@ -58,6 +58,8 @@ function setToken(value) { try { if (value) sessionStorage.setItem(FIN_TOKEN_KEY
 function showApp() { if (loginSection) loginSection.hidden = true; if (appSection) appSection.hidden = false; }
 function showLogin() { if (loginSection) loginSection.hidden = false; if (appSection) appSection.hidden = true; }
 function setStatus(message, type = "info") { if (!loginStatus) return; loginStatus.hidden = !message; loginStatus.textContent = message; loginStatus.dataset.status = type; }
+function notify(message, type = "info") { if (window.tvfAdminNotice) window.tvfAdminNotice(message, type); else if (type === "error") console.error(message); else console.log(message); }
+function notifyError(error, fallback = "Action impossible pour le moment.") { notify(error?.message || fallback, "error"); }
 function escapeHtml(value) { return String(value ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;"); }
 function money(value) { return new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR", maximumFractionDigits: 0 }).format(Number(value || 0)); }
 function label(map, value) { return map[value] || value || "Non renseigne"; }
@@ -200,9 +202,11 @@ async function createElement(event) {
     modalForm.reset();
     updateModalFields();
     await loadItems();
+    notify("Element financier cree.", "success");
   } catch (error) {
     statusEl.hidden = false;
     statusEl.textContent = error.message;
+    notifyError(error);
   }
 }
 async function saveElement(form) {
@@ -213,9 +217,11 @@ async function saveElement(form) {
     statusEl.textContent = "Enregistrement...";
     await api("/api/admin-finances", { method: "PATCH", body: JSON.stringify(payload) });
     await loadItems();
+    notify("Element financier enregistre.", "success");
   } catch (error) {
     statusEl.hidden = false;
     statusEl.textContent = error.message;
+    notifyError(error);
   }
 }
 async function generateReport() {
@@ -227,9 +233,10 @@ async function generateReport() {
   currentView = "reports";
   selectedId = null;
   await loadItems();
+  notify("Reporting financeur genere.", "success");
 }
 function exportCsv() {
-  if (!items().length) return alert("Aucun element a exporter.");
+  if (!items().length) return notify("Aucun element a exporter.", "warning");
   const headers = ["Vue", "Titre", "Type", "Statut", "Montant", "Date"];
   const rows = items().map((item) => [viewLabels[currentView], itemTitle(item), itemType(item), itemStatus(item), itemAmount(item), item.updated_at || item.created_at || ""]);
   const csv = [headers, ...rows].map((row) => row.map((value) => `"${String(value ?? "").replace(/"/g, '""')}"`).join(";")).join("\n");
@@ -242,6 +249,7 @@ function exportCsv() {
   link.click();
   link.remove();
   URL.revokeObjectURL(url);
+  notify("Export finances prepare.", "success");
 }
 function openModal() { if (modal) modal.hidden = false; updateModalFields(); modalForm?.querySelector("input, select, textarea")?.focus(); }
 function closeModal() { if (modal) modal.hidden = true; }
@@ -257,9 +265,9 @@ function bindEvents() {
     setToken(value);
     try { showApp(); await loadItems(); setStatus(""); } catch (error) { setToken(""); showLogin(); setStatus(error.message, "error"); }
   });
-  tabs.forEach((button) => button.addEventListener("click", () => { currentView = button.dataset.financesView; selectedId = null; loadItems().catch((error) => alert(error.message)); }));
-  filtersForm?.addEventListener("input", () => { clearTimeout(debounceTimer); debounceTimer = setTimeout(() => loadItems().catch((error) => alert(error.message)), 280); });
-  filtersForm?.addEventListener("change", () => loadItems().catch((error) => alert(error.message)));
+  tabs.forEach((button) => button.addEventListener("click", () => { currentView = button.dataset.financesView; selectedId = null; loadItems().catch((error) => notifyError(error)); }));
+  filtersForm?.addEventListener("input", () => { clearTimeout(debounceTimer); debounceTimer = setTimeout(() => loadItems().catch((error) => notifyError(error)), 280); });
+  filtersForm?.addEventListener("change", () => loadItems().catch((error) => notifyError(error)));
   listEl?.addEventListener("click", (event) => { const button = event.target.closest("[data-item-id]"); if (!button) return; selectedId = button.dataset.itemId; renderAll(); });
   detailEl?.addEventListener("submit", (event) => { const form = event.target.closest("[data-finances-detail-form]"); if (!form) return; event.preventDefault(); saveElement(form); });
   detailEl?.addEventListener("click", (event) => {
@@ -271,8 +279,8 @@ function bindEvents() {
     saveElement(form);
   });
   createButton?.addEventListener("click", openModal);
-  reportButton?.addEventListener("click", () => generateReport().catch((error) => alert(error.message)));
-  refreshButton?.addEventListener("click", () => loadItems().catch((error) => alert(error.message)));
+  reportButton?.addEventListener("click", () => generateReport().catch((error) => notifyError(error)));
+  refreshButton?.addEventListener("click", () => loadItems().catch((error) => notifyError(error)));
   exportButton?.addEventListener("click", exportCsv);
   logoutButton?.addEventListener("click", () => { setToken(""); window.location.href = "admin"; });
   closeModalButtons.forEach((button) => button.addEventListener("click", closeModal));
