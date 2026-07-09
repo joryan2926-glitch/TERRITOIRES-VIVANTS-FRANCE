@@ -53,6 +53,8 @@ function setToken(value) { try { if (value) sessionStorage.setItem(BRANCHES_TOKE
 function showApp() { if (loginSection) loginSection.hidden = true; if (appSection) appSection.hidden = false; }
 function showLogin() { if (loginSection) loginSection.hidden = false; if (appSection) appSection.hidden = true; }
 function setStatus(message, type = "info") { if (!loginStatus) return; loginStatus.hidden = !message; loginStatus.textContent = message; loginStatus.dataset.status = type; }
+function notify(message, type = "info") { if (window.tvfAdminNotice) window.tvfAdminNotice(message, type); else if (type === "error") console.error(message); else console.log(message); }
+function notifyError(error, fallback = "Action impossible pour le moment.") { notify(error?.message || fallback, "error"); }
 function escapeHtml(value) { return String(value ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;"); }
 function label(map, value) { return map[value] || value || "Non renseigne"; }
 function formatDate(value) { if (!value) return "Non renseigne"; const date = new Date(value); if (Number.isNaN(date.getTime())) return value; return new Intl.DateTimeFormat("fr-FR", { dateStyle: "short" }).format(date); }
@@ -207,25 +209,63 @@ async function applyBranchAction(action) {
   }
   await loadAll();
 }
-async function generatePack() { const branch = selectedBranch(); if (!branch) return alert("Selectionnez une antenne."); const result = await api("/api/admin-branches", { method: "POST", body: JSON.stringify({ type: "generate_pack", branch_id: branch.id }) }); const pack = result.launch_pack; alert(`${pack.pack.title}\n\nPreparation : ${pack.assistant.readiness_score}%\nActions : ${pack.pack.next_actions.join("; ")}`); }
+function showBranchPack(pack) {
+  const payload = pack?.pack || {};
+  const assistant = pack?.assistant || {};
+  const actions = Array.isArray(payload.next_actions) ? payload.next_actions : [];
+  const wrapper = document.createElement("section");
+  wrapper.className = "admin-modal";
+  wrapper.setAttribute("aria-label", "Pack de lancement antenne");
+  wrapper.innerHTML = `
+    <div class="admin-modal-panel branches-pack-panel">
+      <div class="admin-modal-head">
+        <div>
+          <p class="section-kicker">Pack antenne</p>
+          <h2>${escapeHtml(payload.title || "Pack de lancement")}</h2>
+          <p>Document de pilotage rapide pour cadrer les prochaines actions de l'antenne selectionnee.</p>
+        </div>
+        <button class="admin-button secondary" type="button" data-branches-pack-close>Fermer</button>
+      </div>
+      <div class="branches-pack-metric">
+        <span>Preparation estimee</span>
+        <strong>${escapeHtml(assistant.readiness_score ?? 0)}%</strong>
+      </div>
+      <h3>Actions prioritaires</h3>
+      <ul class="branches-pack-list">
+        ${actions.length ? actions.map((action) => `<li>${escapeHtml(action)}</li>`).join("") : "<li>Aucune action prioritaire fournie pour le moment.</li>"}
+      </ul>
+    </div>`;
+  document.body.appendChild(wrapper);
+  const close = () => wrapper.remove();
+  wrapper.querySelector("[data-branches-pack-close]")?.addEventListener("click", close);
+  wrapper.addEventListener("click", (event) => { if (event.target === wrapper) close(); });
+}
+
+async function generatePack() {
+  const branch = selectedBranch();
+  if (!branch) return notify("Selectionnez une antenne.", "warning");
+  const result = await api("/api/admin-branches", { method: "POST", body: JSON.stringify({ type: "generate_pack", branch_id: branch.id }) });
+  showBranchPack(result.launch_pack);
+  notify("Pack de lancement antenne genere.", "success");
+}
 function exportCsv() { const rows = [["Code", "Nom", "Territoire", "Statut", "Maturite", "Preparation"], ...branches.map((branch) => [branch.code, branch.name, branch.territory_name, label(statusLabels, branch.status), label(maturityLabels, branch.maturity_level), `${branch.assistant?.readiness_score || 0}%`])]; const csv = rows.map((row) => row.map((cell) => `"${String(cell ?? "").replace(/"/g, '""')}"`).join(";")).join("\n"); const blob = new Blob(["\ufeff" + csv], { type: "text/csv;charset=utf-8" }); const url = URL.createObjectURL(blob); const link = document.createElement("a"); link.href = url; link.download = `antennes-tvf-os-${new Date().toISOString().slice(0, 10)}.csv`; document.body.appendChild(link); link.click(); link.remove(); URL.revokeObjectURL(url); }
 
 function bindEvents() {
   tokenForm?.addEventListener("submit", async (event) => { event.preventDefault(); const value = String(new FormData(tokenForm).get("token") || "").trim(); if (!value) return setStatus("Entrez le token admin.", "error"); setToken(value); try { showApp(); await loadAll(); setStatus(""); } catch (error) { setToken(""); showLogin(); setStatus(error.status === 401 ? "Token admin invalide." : error.message, "error"); } });
-  filtersForm?.addEventListener("input", () => { clearTimeout(debounceTimer); debounceTimer = setTimeout(() => loadAll().catch((e) => alert(e.message)), 260); });
-  filtersForm?.addEventListener("change", () => loadAll().catch((e) => alert(e.message)));
+  filtersForm?.addEventListener("input", () => { clearTimeout(debounceTimer); debounceTimer = setTimeout(() => loadAll().catch((e) => notifyError(e)), 260); });
+  filtersForm?.addEventListener("change", () => loadAll().catch((e) => notifyError(e)));
   tabs.forEach((button) => button.addEventListener("click", () => { view = button.dataset.branchesView || "overview"; renderAll(); }));
-  refreshButton?.addEventListener("click", () => loadAll().catch((e) => alert(e.message)));
+  refreshButton?.addEventListener("click", () => loadAll().catch((e) => notifyError(e)));
   createButton?.addEventListener("click", openModal);
   closeModalButtons.forEach((button) => button.addEventListener("click", closeModal));
   modal?.addEventListener("click", (event) => { if (event.target === modal) closeModal(); });
   modalForm?.addEventListener("submit", createItem);
-  packButton?.addEventListener("click", () => generatePack().catch((e) => alert(e.message)));
+  packButton?.addEventListener("click", () => generatePack().catch((e) => notifyError(e)));
   exportButton?.addEventListener("click", exportCsv);
   logoutButton?.addEventListener("click", () => { setToken(""); window.location.href = "admin"; });
   listEl?.addEventListener("click", (event) => { const button = event.target.closest("[data-branch-id]"); if (!button) return; selectedId = button.dataset.branchId; renderAll(); });
-  detailEl?.addEventListener("submit", (event) => { const form = event.target.closest("[data-branch-detail-form], [data-branches-inline-form]"); if (!form) return; event.preventDefault(); if (form.matches("[data-branch-detail-form]")) saveBranch(form).catch((e) => alert(e.message)); else saveInline(form).catch((e) => alert(e.message)); });
-  detailEl?.addEventListener("click", (event) => { const button = event.target.closest("[data-branch-action]"); if (!button) return; applyBranchAction(button.dataset.branchAction).catch((e) => alert(e.message)); });
+  detailEl?.addEventListener("submit", (event) => { const form = event.target.closest("[data-branch-detail-form], [data-branches-inline-form]"); if (!form) return; event.preventDefault(); if (form.matches("[data-branch-detail-form]")) saveBranch(form).catch((e) => notifyError(e)); else saveInline(form).catch((e) => notifyError(e)); });
+  detailEl?.addEventListener("click", (event) => { const button = event.target.closest("[data-branch-action]"); if (!button) return; applyBranchAction(button.dataset.branchAction).catch((e) => notifyError(e)); });
 }
 
 bindEvents();
