@@ -1,4 +1,4 @@
-﻿-- TVF OS - Module Utilisateurs, roles et permissions
+-- TVF OS - Module Utilisateurs, roles et permissions
 -- Migration production : profils, roles, permissions, rattachements antennes et revues d'acces.
 
 create extension if not exists pgcrypto;
@@ -122,6 +122,96 @@ create table if not exists public.access_reviews (
   constraint access_reviews_risk_check check (risk_level in ('low','medium','high','critical'))
 );
 
+-- Compatibilite : complete les tables utilisateurs deja creees par une ancienne tentative.
+alter table if exists public.profiles
+  add column if not exists auth_user_id uuid,
+  add column if not exists first_name text,
+  add column if not exists last_name text,
+  add column if not exists email text,
+  add column if not exists phone text,
+  add column if not exists status text not null default 'invited',
+  add column if not exists default_branch_id uuid,
+  add column if not exists avatar_file_id uuid,
+  add column if not exists last_seen_at timestamptz,
+  add column if not exists onboarding_completed_at timestamptz,
+  add column if not exists notes text,
+  add column if not exists created_at timestamptz not null default now(),
+  add column if not exists updated_at timestamptz not null default now();
+
+alter table if exists public.roles
+  add column if not exists role_key text,
+  add column if not exists role_name text,
+  add column if not exists role_family text not null default 'operations',
+  add column if not exists description text,
+  add column if not exists is_sensitive boolean not null default false,
+  add column if not exists status text not null default 'active',
+  add column if not exists created_at timestamptz not null default now(),
+  add column if not exists updated_at timestamptz not null default now();
+
+alter table if exists public.permissions
+  add column if not exists permission_key text,
+  add column if not exists permission_name text,
+  add column if not exists module_key text,
+  add column if not exists description text,
+  add column if not exists risk_level text not null default 'medium',
+  add column if not exists status text not null default 'active',
+  add column if not exists created_at timestamptz not null default now(),
+  add column if not exists updated_at timestamptz not null default now();
+
+alter table if exists public.role_permissions
+  add column if not exists role_id uuid,
+  add column if not exists permission_id uuid,
+  add column if not exists granted boolean not null default true,
+  add column if not exists conditions jsonb not null default '{}'::jsonb,
+  add column if not exists created_at timestamptz not null default now();
+
+alter table if exists public.user_roles
+  add column if not exists profile_id uuid,
+  add column if not exists role_id uuid,
+  add column if not exists branch_id uuid,
+  add column if not exists scope text not null default 'global',
+  add column if not exists status text not null default 'active',
+  add column if not exists valid_from date not null default current_date,
+  add column if not exists valid_until date,
+  add column if not exists assigned_by text,
+  add column if not exists assigned_at timestamptz not null default now(),
+  add column if not exists created_at timestamptz not null default now(),
+  add column if not exists updated_at timestamptz not null default now();
+
+alter table if exists public.user_branch_memberships
+  add column if not exists profile_id uuid,
+  add column if not exists branch_id uuid,
+  add column if not exists membership_status text not null default 'active',
+  add column if not exists joined_at timestamptz not null default now(),
+  add column if not exists left_at timestamptz,
+  add column if not exists primary_role_label text,
+  add column if not exists notes text,
+  add column if not exists created_at timestamptz not null default now(),
+  add column if not exists updated_at timestamptz not null default now();
+
+alter table if exists public.user_invitations
+  add column if not exists email text,
+  add column if not exists invited_by text,
+  add column if not exists invited_role_key text,
+  add column if not exists branch_id uuid,
+  add column if not exists status text not null default 'pending',
+  add column if not exists expires_at timestamptz,
+  add column if not exists accepted_at timestamptz,
+  add column if not exists message text,
+  add column if not exists created_at timestamptz not null default now(),
+  add column if not exists updated_at timestamptz not null default now();
+
+alter table if exists public.access_reviews
+  add column if not exists profile_id uuid,
+  add column if not exists reviewer_name text,
+  add column if not exists review_status text not null default 'pending',
+  add column if not exists risk_level text not null default 'medium',
+  add column if not exists due_at timestamptz,
+  add column if not exists reviewed_at timestamptz,
+  add column if not exists findings text,
+  add column if not exists required_actions text[] not null default '{}',
+  add column if not exists created_at timestamptz not null default now(),
+  add column if not exists updated_at timestamptz not null default now();
 create or replace function public.tvf_set_updated_at()
 returns trigger as $$
 begin

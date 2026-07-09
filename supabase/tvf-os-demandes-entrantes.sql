@@ -1,4 +1,4 @@
-﻿-- TVF OS - Module Demandes entrantes
+-- TVF OS - Module Demandes entrantes
 -- Migration production : structure metier, RLS, historique, IA et pieces.
 -- A executer apres la migration contacts operationnelle et avant de publier le module.
 
@@ -10,6 +10,17 @@ alter table if exists public.contacts
   add column if not exists request_number text,
   add column if not exists channel text not null default 'site_web',
   add column if not exists form_code text,
+  add column if not exists full_name text,
+  add column if not exists email text,
+  add column if not exists subject text,
+  add column if not exists message text,
+  add column if not exists status text not null default 'nouveau',
+  add column if not exists priority text not null default 'normale',
+  add column if not exists category text not null default 'demande-generale',
+  add column if not exists assigned_to text,
+  add column if not exists source_page text,
+  add column if not exists user_agent text,
+  add column if not exists created_at timestamptz not null default now(),
   add column if not exists pole text,
   add column if not exists next_action text,
   add column if not exists next_action_due_at timestamptz,

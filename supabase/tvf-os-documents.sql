@@ -1,4 +1,4 @@
-﻿-- TVF OS - Module Gestion documentaire
+-- TVF OS - Module Gestion documentaire
 -- Migration production : fichiers, documents, versions, liens, modeles, generations et journal.
 
 create extension if not exists pgcrypto;
@@ -149,6 +149,95 @@ create table if not exists public.document_audit_logs (
   created_at timestamptz not null default now()
 );
 
+-- Compatibilite : complete les tables deja creees par une ancienne tentative.
+alter table if exists public.files
+  add column if not exists storage_bucket text not null default 'tvf-documents',
+  add column if not exists storage_path text,
+  add column if not exists original_filename text,
+  add column if not exists mime_type text,
+  add column if not exists size_bytes bigint not null default 0,
+  add column if not exists checksum text,
+  add column if not exists uploaded_by text,
+  add column if not exists branch_id uuid,
+  add column if not exists confidentiality_level text not null default 'interne',
+  add column if not exists virus_scan_status text not null default 'pending',
+  add column if not exists ai_summary text,
+  add column if not exists sensitive_detected boolean not null default false,
+  add column if not exists created_at timestamptz not null default now();
+
+alter table if exists public.templates
+  add column if not exists template_key text,
+  add column if not exists title text,
+  add column if not exists template_type text not null default 'autre',
+  add column if not exists status text not null default 'brouillon',
+  add column if not exists version integer not null default 1,
+  add column if not exists national_validated boolean not null default false,
+  add column if not exists file_id uuid,
+  add column if not exists required_fields text[] not null default '{}',
+  add column if not exists description text,
+  add column if not exists branch_id uuid,
+  add column if not exists ai_summary text,
+  add column if not exists search_vector tsvector generated always as (to_tsvector('french', coalesce(title,'') || ' ' || coalesce(description,'') || ' ' || coalesce(ai_summary,''))) stored,
+  add column if not exists created_at timestamptz not null default now(),
+  add column if not exists updated_at timestamptz not null default now();
+
+alter table if exists public.documents
+  add column if not exists document_number text,
+  add column if not exists title text,
+  add column if not exists document_type text not null default 'piece',
+  add column if not exists status text not null default 'a_classer',
+  add column if not exists version integer not null default 1,
+  add column if not exists file_id uuid,
+  add column if not exists branch_id uuid,
+  add column if not exists related_object_type text not null default 'none',
+  add column if not exists related_object_id uuid,
+  add column if not exists template_id uuid,
+  add column if not exists validated_by text,
+  add column if not exists validated_at timestamptz,
+  add column if not exists expires_at timestamptz,
+  add column if not exists confidentiality_level text not null default 'interne',
+  add column if not exists ai_summary text,
+  add column if not exists classification_notes text,
+  add column if not exists sensitive_detected boolean not null default false,
+  add column if not exists indexed_in_knowledge boolean not null default false,
+  add column if not exists search_vector tsvector generated always as (to_tsvector('french', coalesce(title,'') || ' ' || coalesce(ai_summary,'') || ' ' || coalesce(classification_notes,''))) stored,
+  add column if not exists created_at timestamptz not null default now(),
+  add column if not exists updated_at timestamptz not null default now();
+
+alter table if exists public.document_versions
+  add column if not exists document_id uuid,
+  add column if not exists version integer not null default 1,
+  add column if not exists file_id uuid,
+  add column if not exists change_summary text,
+  add column if not exists created_by text,
+  add column if not exists created_at timestamptz not null default now();
+
+alter table if exists public.document_links
+  add column if not exists document_id uuid,
+  add column if not exists related_object_type text,
+  add column if not exists related_object_id uuid,
+  add column if not exists relation_label text,
+  add column if not exists created_at timestamptz not null default now();
+
+alter table if exists public.generated_documents
+  add column if not exists template_id uuid,
+  add column if not exists document_id uuid,
+  add column if not exists generated_by text,
+  add column if not exists generated_from_object_type text not null default 'none',
+  add column if not exists generated_from_object_id uuid,
+  add column if not exists generation_status text not null default 'draft_created',
+  add column if not exists validation_status text not null default 'non_soumis',
+  add column if not exists missing_fields text[] not null default '{}',
+  add column if not exists field_values jsonb not null default '{}'::jsonb,
+  add column if not exists created_at timestamptz not null default now();
+
+alter table if exists public.document_audit_logs
+  add column if not exists document_id uuid,
+  add column if not exists template_id uuid,
+  add column if not exists action text,
+  add column if not exists details text,
+  add column if not exists created_by text,
+  add column if not exists created_at timestamptz not null default now();
 create or replace function public.tvf_detect_sensitive_document(text_value text)
 returns boolean language sql immutable as $$
   select coalesce(text_value, '') ~* '(rib|iban|piece d identite|identite|cni|passeport|avis d impot|impot|salaire|medical|sante|signature|donnees personnelles|rgpd|contrat|mandat)';
