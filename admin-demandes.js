@@ -90,6 +90,16 @@ function setToken(value) {
   }
 }
 
+function notify(message, type = "info") {
+  if (window.tvfAdminNotice) window.tvfAdminNotice(message, type);
+  else if (type === "error") console.error(message);
+  else console.log(message);
+}
+
+function notifyError(error, fallback = "Action impossible pour le moment.") {
+  notify(error?.message || fallback, "error");
+}
+
 function setStatus(message, type = "info") {
   if (!loginStatus) return;
   loginStatus.hidden = !message;
@@ -384,8 +394,8 @@ function csvCell(value) {
 function exportContactsCsv() {
   const exportRows = visibleContacts();
   if (!exportRows.length) {
-    alert("Aucune demande a exporter avec les filtres actuels.");
-    return;
+    notify("Aucune demande a exporter avec les filtres actuels.", "warning");
+    return false;
   }
   const headers = [
     "Numero",
@@ -434,6 +444,7 @@ function exportContactsCsv() {
   link.click();
   link.remove();
   URL.revokeObjectURL(url);
+  return true;
 }
 function selectedContact() {
   return contacts.find((item) => item.id === selectedId) || null;
@@ -727,12 +738,18 @@ async function updateSelected(data, statusEl) {
     renderStatusShortcuts();
     renderList();
     renderDetail();
+    if (statusEl) {
+      statusEl.hidden = false;
+      statusEl.textContent = "Enregistrement effectue.";
+    } else {
+      notify("Demande mise a jour.", "success");
+    }
   } catch (error) {
     if (statusEl) {
       statusEl.hidden = false;
       statusEl.textContent = error.message;
     } else {
-      alert(error.message);
+      notifyError(error);
     }
   }
 }
@@ -753,7 +770,24 @@ async function copyText(text, button, doneLabel) {
       window.setTimeout(() => { button.textContent = initial; }, 1600);
     }
   } catch {
-    window.prompt("Copiez le texte", text);
+    const fallback = document.createElement("textarea");
+    fallback.value = text;
+    fallback.setAttribute("readonly", "");
+    fallback.style.position = "fixed";
+    fallback.style.left = "-9999px";
+    document.body.appendChild(fallback);
+    fallback.select();
+    let copied = false;
+    try { copied = document.execCommand("copy"); } catch { copied = false; }
+    fallback.remove();
+    if (copied && button) {
+      const initial = button.textContent;
+      button.textContent = doneLabel;
+      window.setTimeout(() => { button.textContent = initial; }, 1600);
+      notify("Texte copie.", "success");
+    } else {
+      notify("Copie automatique impossible. Selectionnez le texte manuellement dans la fiche.", "warning");
+    }
   }
 }
 
@@ -789,6 +823,7 @@ async function createContactFromForm(event) {
     renderStatusShortcuts();
     renderList();
     renderDetail();
+    notify("Demande creee et ajoutee au suivi.", "success");
   } catch (error) {
     if (createStatus) createStatus.textContent = error.message;
   }
@@ -816,11 +851,11 @@ function bindEvents() {
 
   filtersForm?.addEventListener("input", () => {
     window.clearTimeout(debounceTimer);
-    debounceTimer = window.setTimeout(() => loadContacts().catch((error) => alert(error.message)), 280);
+    debounceTimer = window.setTimeout(() => loadContacts().catch((error) => notifyError(error)), 280);
   });
-  filtersForm?.addEventListener("change", () => loadContacts().catch((error) => alert(error.message)));
-  refreshButton?.addEventListener("click", () => loadContacts().catch((error) => alert(error.message)));
-  exportButton?.addEventListener("click", exportContactsCsv);
+  filtersForm?.addEventListener("change", () => loadContacts().catch((error) => notifyError(error)));
+  refreshButton?.addEventListener("click", () => loadContacts().catch((error) => notifyError(error)));
+  exportButton?.addEventListener("click", () => { if (exportContactsCsv()) notify("Export CSV prepare avec les filtres actifs.", "success"); });
   logoutButton?.addEventListener("click", () => { setToken(""); window.location.href = "admin"; });
   createButton?.addEventListener("click", openCreateModal);
   createForm?.addEventListener("submit", createContactFromForm);
@@ -836,7 +871,7 @@ function bindEvents() {
       if (!statusSelect) return;
       statusSelect.value = button.dataset.statusShortcut || "all";
       if (prioritySelect) prioritySelect.value = "all";
-      loadContacts().catch((error) => alert(error.message));
+      loadContacts().catch((error) => notifyError(error));
     });
   });
 
@@ -848,7 +883,7 @@ function bindEvents() {
       currentView = "all";
       prioritySelect.value = button.dataset.priorityShortcut || "all";
       if (statusSelect) statusSelect.value = "all";
-      loadContacts().catch((error) => alert(error.message));
+      loadContacts().catch((error) => notifyError(error));
     });
   });
 
@@ -921,7 +956,7 @@ function bindEvents() {
         });
         await updateSelected({ status: "en_cours", next_action: "Tache de relance creee dans TVF OS", next_action_due_at: new Date(Date.now() + 48 * 60 * 60 * 1000).toISOString() });
       } catch (error) {
-        alert(error.message || "Creation de la tache impossible.");
+        notifyError(error, "Creation de la tache impossible.");
       }
       return;
     }
@@ -934,9 +969,9 @@ function bindEvents() {
           body: JSON.stringify(casePayloadFromContact(contact)),
         });
         await updateSelected({ status: "accepte", next_action: `Dossier cree : ${result.case?.case_number || result.case?.title || "module Dossiers"}` });
-        if (window.confirm("Dossier cree. Ouvrir le module Dossiers maintenant ?")) window.location.href = "admin-dossiers";
+        notify("Dossier cree. Le module Dossiers est accessible depuis le menu TVF OS.", "success");
       } catch (error) {
-        alert(error.message || "Creation du dossier impossible.");
+        notifyError(error, "Creation du dossier impossible.");
       }
       return;
     }
@@ -976,4 +1011,3 @@ if (token()) {
 } else {
   showLogin();
 }
-

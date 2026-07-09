@@ -212,6 +212,49 @@ function createAdminModuleNav() {
   });
 }
 
+function showAdminNotice(message, type = "info") {
+  const text = String(message || "").trim();
+  if (!text) return;
+  let stack = document.querySelector("[data-admin-notice-stack]");
+  if (!stack) {
+    stack = document.createElement("div");
+    stack.className = "admin-notice-stack";
+    stack.dataset.adminNoticeStack = "";
+    stack.setAttribute("aria-live", "polite");
+    document.body.appendChild(stack);
+  }
+  const notice = document.createElement("div");
+  const tone = ["success", "error", "warning", "info"].includes(type) ? type : "info";
+  notice.className = `admin-notice admin-notice-${tone}`;
+  notice.setAttribute("role", tone === "error" ? "alert" : "status");
+  const label = document.createElement("span");
+  label.textContent = text;
+  const closeButton = document.createElement("button");
+  closeButton.type = "button";
+  closeButton.setAttribute("aria-label", "Fermer la notification");
+  closeButton.innerHTML = "&times;";
+  notice.append(label, closeButton);
+  stack.appendChild(notice);
+  const close = () => {
+    notice.classList.add("is-leaving");
+    window.setTimeout(() => notice.remove(), 180);
+  };
+  closeButton.addEventListener("click", close);
+  window.setTimeout(close, tone === "error" ? 6200 : 4200);
+}
+
+function installAdminDialogPolish() {
+  if (!document.body?.classList.contains("admin-body")) return;
+  if (window.__tvfAdminDialogPolish) return;
+  window.__tvfAdminDialogPolish = true;
+  const nativeAlert = window.alert?.bind(window);
+  window.alert = (message) => {
+    if (window.tvfAdminNotice) window.tvfAdminNotice(message, "info");
+    else if (nativeAlert) nativeAlert(message);
+  };
+}
+window.tvfAdminNotice = showAdminNotice;
+installAdminDialogPolish();
 syncAdminSessionPanels();
 bindAdminSessionBridge();
 hydrateSessionFromCookie();
