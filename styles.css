@@ -6444,3 +6444,18 @@ tr:nth-child(even) td {
     width: auto;
   }
 }
+
+.cases-entry-panel {
+  max-width: 720px;
+}
+
+.cases-entry-panel .admin-modal-head p:not(.section-kicker) {
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+.cases-entry-panel .admin-create-form {
+  grid-template-columns: 1fr;
+}
