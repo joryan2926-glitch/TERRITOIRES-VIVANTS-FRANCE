@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Connexion admin | TVF OS</title>
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="theme-color" content="#183f22">
+  <link rel="icon" href="assets/favicon-32.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="admin-body admin-home-body admin-login-page" data-admin-page="login">
+  <a class="skip-link" href="#admin-login-main">Aller au contenu</a>
+  <header class="admin-topbar admin-home-topbar">
+    <a class="admin-brand" href="index" aria-label="Retour au site Territoires Vivants France">
+      <img src="assets/logo-territoires-vivants-france-web.png" alt="Territoires Vivants France" width="320" height="132">
+    </a>
+    <div>
+      <p class="admin-kicker">Acces securise</p>
+      <h1>Connexion TVF OS</h1>
+      <p>Une seule connexion ouvre ensuite l'ensemble des modules internes Territoires Vivants France pendant la session.</p>
+    </div>
+    <nav class="admin-home-actions" aria-label="Actions admin">
+      <a class="btn secondary" href="index">Retour au site</a>
+      <a class="btn secondary" href="contact">Contact</a>
+    </nav>
+  </header>
+
+  <main id="admin-login-main" class="admin-shell admin-home-shell">
+    <section class="admin-login admin-home-login" data-admin-home-login>
+      <div>
+        <p class="section-kicker">TVF OS</p>
+        <h2>Entrer dans l'espace interne</h2>
+        <p>Renseignez le code d'acces admin. Apres validation serveur, vous serez redirige vers le centre operationnel TVF OS.</p>
+      </div>
+      <form data-admin-home-token-form>
+        <label for="admin-home-token">Code d'acces admin</label>
+        <input id="admin-home-token" name="token" type="password" autocomplete="current-password" placeholder="Code TVF OS">
+        <button class="btn primary" type="submit">Se connecter</button>
+        <p class="form-note" data-admin-home-login-status role="status" hidden></p>
+      </form>
+    </section>
+  </main>
+
+  <script src="admin.js" defer></script>
+</body>
+</html>
