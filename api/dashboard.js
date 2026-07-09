@@ -201,6 +201,82 @@ async function listDashboardActivity(rangeDays) {
   }
 }
 
+async function listDashboardCases() {
+  try {
+    const { restUrl, key } = supabaseConfig();
+    const params = new URLSearchParams({
+      select: "id,case_number,title,case_type,status,priority,risk_level,decision_status,maturity_score,next_action,next_action_due_at,assigned_to,territory,updated_at,archived_at",
+      order: "updated_at.desc",
+      limit: "500",
+    });
+    const response = await fetchWithTimeout(`${restUrl}/cases?${params.toString()}`, { headers: supabaseHeaders(key) });
+    const text = await response.text();
+    if (!response.ok) return [];
+    return text ? JSON.parse(text) : [];
+  } catch {
+    return [];
+  }
+}
+
+function caseIsActive(row) {
+  return !row.archived_at && !["cloture", "archive"].includes(row.status || "");
+}
+function caseIsOverdue(row, now = new Date()) {
+  if (!caseIsActive(row) || !row.next_action_due_at) return false;
+  const due = new Date(row.next_action_due_at);
+  return !Number.isNaN(due.getTime()) && due.getTime() < now.getTime();
+}
+function casePriorityScore(row, now = new Date()) {
+  let score = 0;
+  if (caseIsOverdue(row, now)) score += 80;
+  if (row.priority === "urgente") score += 55;
+  if (row.priority === "haute") score += 32;
+  if (row.status === "a_decision") score += 42;
+  if (["a_preparer", "proposee"].includes(row.decision_status || "")) score += 24;
+  if (row.status === "attente_pieces") score += 20;
+  if (row.risk_level === "critique") score += 35;
+  if (row.risk_level === "eleve") score += 18;
+  score += Math.max(0, 100 - Number(row.maturity_score || 0)) / 10;
+  return score;
+}
+function casePriorityReason(row, now = new Date()) {
+  if (caseIsOverdue(row, now)) return "Echeance depassee";
+  if (row.status === "a_decision") return "Decision a preparer";
+  if (row.status === "attente_pieces") return "Pieces attendues";
+  if (row.priority === "urgente") return "Priorite urgente";
+  if (["critique", "eleve"].includes(row.risk_level || "")) return "Risque a cadrer";
+  return row.next_action || "Suite a definir";
+}
+function buildCasesSummary(rows = []) {
+  const now = new Date();
+  const active = rows.filter(caseIsActive);
+  const prioritized = [...active].sort((a, b) => casePriorityScore(b, now) - casePriorityScore(a, now)).slice(0, 6);
+  return {
+    total: rows.length,
+    active: active.length,
+    overdue: active.filter((row) => caseIsOverdue(row, now)).length,
+    urgent: active.filter((row) => row.priority === "urgente").length,
+    awaiting_pieces: active.filter((row) => row.status === "attente_pieces").length,
+    decision: active.filter((row) => row.status === "a_decision" || ["a_preparer", "proposee"].includes(row.decision_status || "")).length,
+    average_maturity: active.length ? Math.round(active.reduce((sum, row) => sum + Number(row.maturity_score || 0), 0) / active.length) : 0,
+    priority: prioritized.map((row) => ({
+      id: row.id,
+      case_number: row.case_number || "Dossier",
+      title: row.title || "Dossier sans titre",
+      case_type: row.case_type || "autre",
+      status: row.status || "ouvert",
+      priority: row.priority || "normale",
+      risk_level: row.risk_level || "modere",
+      maturity_score: row.maturity_score || 0,
+      next_action: row.next_action || "Suite a definir",
+      next_action_due_at: row.next_action_due_at || null,
+      assigned_to: row.assigned_to || "",
+      territory: row.territory || "",
+      reason: casePriorityReason(row, now),
+    })),
+  };
+}
+
 function buildActivitySummary(rows = []) {
   const byModule = rows.reduce((acc, row) => {
     const key = clean(row.module_key || "tvf_os", 120) || "tvf_os";
@@ -402,7 +478,7 @@ function buildInsights(rows, metrics) {
   return insights.slice(0, 5);
 }
 
-function aggregateDashboard(rows, rangeDays, activityRows = []) {
+function aggregateDashboard(rows, rangeDays, activityRows = [], caseRows = []) {
   const now = new Date();
   const openRows = rows.filter(isOpen);
   const closedRows = rows.filter((row) => CLOSED_STATUSES.has(row.status || "") || row.closed_at);
@@ -422,6 +498,7 @@ function aggregateDashboard(rows, rangeDays, activityRows = []) {
   }));
 
   const activity = buildActivitySummary(activityRows);
+  const cases = buildCasesSummary(caseRows);
 
   const metrics = {
     total: rows.length,
@@ -445,6 +522,7 @@ function aggregateDashboard(rows, rangeDays, activityRows = []) {
     metrics,
     recent,
     activity,
+    cases,
     alerts: overdueRows.slice(0, 8).map((row) => ({
       id: row.id,
       title: row.subject || "Demande sans objet",
@@ -484,8 +562,8 @@ module.exports = async function handler(req, res) {
     }
     const rangeDays = parseRange(req);
     const filters = parseFilters(req);
-    const [rows, activityRows] = await Promise.all([listDashboardContacts(rangeDays, filters), listDashboardActivity(rangeDays)]);
-    sendJson(res, 200, { ok: true, dashboard: { ...aggregateDashboard(rows, rangeDays, activityRows), filters } });
+    const [rows, activityRows, caseRows] = await Promise.all([listDashboardContacts(rangeDays, filters), listDashboardActivity(rangeDays), listDashboardCases()]);
+    sendJson(res, 200, { ok: true, dashboard: { ...aggregateDashboard(rows, rangeDays, activityRows, caseRows), filters } });
   } catch (error) {
     const statusCode = error.statusCode || 500;
     sendJson(res, statusCode, {
@@ -500,6 +578,7 @@ module.exports = async function handler(req, res) {
 module.exports._private = {
   aggregateDashboard,
   buildActivitySummary,
+  buildCasesSummary,
   isOverdue,
   normalizeSupabaseRestUrl,
 };

@@ -285,6 +285,7 @@ async function loadDashboard() {
   const result = await api("/api/admin-crm?entity=dashboard");
   dashboard = result.dashboard || {};
   renderKpis();
+  renderControlPanel();
 }
 
 async function loadCurrent() {
@@ -330,9 +331,13 @@ function renderControlPanel() {
   const missingConsent = Number(dashboard.consent_missing || 0);
   const overdue = Number(dashboard.overdue_actions || 0);
   const duplicates = Number(dashboard.duplicates_pending || 0);
+  const collectivites = Number(dashboard.collectivites || 0);
+  const entreprises = Number(dashboard.entreprises || 0);
+  const financeurs = Number(dashboard.financeurs || 0);
+  const proprietaires = Number(dashboard.proprietaires || 0);
   const nextDecision = overdue ? "Relancer les contacts" : missingConsent ? "Verifier les consentements" : duplicates ? "Fusionner les doublons" : contacts ? "Qualifier en dossier" : "Creer les premiers contacts";
   const status = overdue || missingConsent ? "Suivi requis" : duplicates ? "Nettoyage requis" : "CRM exploitable";
-  controlEl.innerHTML = `<div class="admin-panel-head"><div><p class="section-kicker">Conversion relationnelle</p><h3>Transformer les contacts en dossiers utiles</h3><p>Cette synthese sert a passer du contact au parcours operationnel : consentement, relance, dossier, pieces, decision.</p></div><strong>${escapeHtml(status)}</strong></div><div class="crm-control-grid"><article><span>Decision suivante</span><strong>${escapeHtml(nextDecision)}</strong><small>priorite</small></article><article><span>Contacts</span><strong>${escapeHtml(contacts)}</strong><small>personnes</small></article><article><span>Organisations</span><strong>${escapeHtml(orgs)}</strong><small>structures</small></article><article><span>Consentements</span><strong>${escapeHtml(missingConsent)}</strong><small>a verifier</small></article><article><span>Relances</span><strong>${escapeHtml(overdue)}</strong><small>en retard</small></article></div><div class="crm-control-links"><a class="btn secondary" href="admin-demandes">Demandes</a><a class="btn secondary" href="admin-dossiers">Dossiers</a><a class="btn secondary" href="admin-documents">Pieces</a><a class="btn secondary" href="admin-work">Taches</a><a class="btn secondary" href="admin-branches">Antennes</a></div>`;
+  controlEl.innerHTML = `<div class="admin-panel-head"><div><p class="section-kicker">Conversion relationnelle</p><h3>Transformer les contacts en parcours utiles</h3><p>Cette synthese aide a passer du contact au parcours operationnel : consentement, relance, dossier, pieces, tache et decision.</p></div><strong>${escapeHtml(status)}</strong></div><div class="crm-control-grid"><article><span>Decision suivante</span><strong>${escapeHtml(nextDecision)}</strong><small>priorite</small></article><article><span>Collectivites</span><strong>${escapeHtml(collectivites)}</strong><small>territoires</small></article><article><span>Entreprises</span><strong>${escapeHtml(entreprises)}</strong><small>RSE / materiaux</small></article><article><span>Proprietaires</span><strong>${escapeHtml(proprietaires)}</strong><small>biens ou foncier</small></article><article><span>Financeurs</span><strong>${escapeHtml(financeurs)}</strong><small>mecenat</small></article><article data-tone="warning"><span>Relances</span><strong>${escapeHtml(overdue)}</strong><small>en retard</small></article></div><div class="crm-control-links"><button class="btn secondary" type="button" data-crm-switch="organizations">Voir organisations</button><button class="btn secondary" type="button" data-crm-switch="contacts">Voir contacts</button><a class="btn secondary" href="admin-demandes">Demandes</a><a class="btn secondary" href="admin-dossiers">Dossiers</a><a class="btn secondary" href="admin-documents">Pieces</a><a class="btn secondary" href="admin-work">Taches</a></div>`;
 }function currentItems() {
   if (currentView === "organizations") return organizations;
   if (currentView === "duplicates") return duplicates;
@@ -763,7 +768,7 @@ function bindEvents() {
   createContactButton?.addEventListener("click", () => openModal("contact"));
   createOrganizationButton?.addEventListener("click", () => openModal("organization"));
   closeModalButton?.addEventListener("click", closeModal);
-  modal?.addEventListener("click", (event) => { if (event.target === modal || event.target.closest("[data-crm-close-modal]")) closeModal(); });
+  controlEl?.addEventListener("click", (event) => { const switcher = event.target.closest("[data-crm-switch]"); if (!switcher) return; currentView = switcher.dataset.crmSwitch || "contacts"; selectedId = null; loadCurrent().catch((error) => notifyError(error)); }); modal?.addEventListener("click", (event) => { if (event.target === modal || event.target.closest("[data-crm-close-modal]")) closeModal(); });
   modalForm?.addEventListener("submit", submitModal);
   listEl?.addEventListener("click", (event) => { const button = event.target.closest("[data-crm-id]"); if (!button) return; selectedId = button.dataset.crmId; renderList(); renderDetail(); });
   detailEl?.addEventListener("submit", (event) => { const form = event.target.closest("[data-crm-detail-form]"); if (!form) return; event.preventDefault(); saveDetail(form); });

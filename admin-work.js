@@ -52,12 +52,14 @@ function endOfToday() { const d = new Date(); d.setHours(23, 59, 59, 999); retur
 function taskIsOpen(task) { return !["done", "cancelled", "archive"].includes(task.status); }
 function taskIsOverdue(task) { return taskIsOpen(task) && task.due_at && new Date(task.due_at).getTime() < Date.now(); }
 function taskIsToday(task) { return taskIsOpen(task) && task.due_at && new Date(task.due_at).getTime() <= endOfToday(); }
+function taskIsLinkedToCase(task) { return task.related_object_type === "case" && Boolean(task.related_object_id); }
 function scopedTasks() {
   const tasks = data.tasks || [];
   if (workScope === "today") return tasks.filter(taskIsToday);
   if (workScope === "overdue") return tasks.filter(taskIsOverdue);
   if (workScope === "p1") return tasks.filter((task) => task.priority === "P1" && taskIsOpen(task));
   if (workScope === "unassigned") return tasks.filter((task) => taskIsOpen(task) && !task.assigned_to);
+  if (workScope === "cases") return tasks.filter((task) => taskIsOpen(task) && taskIsLinkedToCase(task));
   return tasks;
 }
 function renderWorkQueue() {
@@ -68,10 +70,12 @@ function renderWorkQueue() {
   const overdue = tasks.filter(taskIsOverdue).length;
   const p1 = tasks.filter((task) => task.priority === "P1" && taskIsOpen(task)).length;
   const unassigned = tasks.filter((task) => taskIsOpen(task) && !task.assigned_to).length;
+  const caseTasks = tasks.filter((task) => taskIsOpen(task) && taskIsLinkedToCase(task)).length;
   const cards = [
     { key: "today", label: "Aujourd'hui", value: today, detail: "A traiter avant ce soir" },
     { key: "overdue", label: "Retards", value: overdue, detail: "Relance ou replanification" },
     { key: "p1", label: "P1", value: p1, detail: "Priorites fortes" },
+    { key: "cases", label: "Dossiers", value: caseTasks, detail: "Actions rattachees" },
     { key: "unassigned", label: "Sans responsable", value: unassigned, detail: "A affecter" },
     { key: "all", label: "Toutes", value: tasks.filter(taskIsOpen).length, detail: "File active" },
   ];
@@ -85,8 +89,9 @@ function titleFor(item) { return item.title || item.rule_key || "Element"; }
 function subFor(item) { return item.assigned_to || item.owner_name || item.organizer_name || item.pole || item.trigger_type || "TVF OS"; }
 function itemStatus(item) { return item.status || item.priority || ""; }
 function itemDate(item) { return item.due_at || item.starts_at || item.updated_at || item.created_at; }
-function itemCard(item) { const risk = item.assistant?.overdue || item.priority === "P1" ? " is-risk" : ""; return `<button class="admin-request work-card${item.id === selectedId ? " is-active" : ""}${risk}" type="button" data-work-id="${escapeHtml(item.id)}"><span class="admin-request-head"><strong>${escapeHtml(titleFor(item))}</strong><small>${escapeHtml(label(itemStatus(item)))}</small></span><span>${escapeHtml(subFor(item))}</span><span class="admin-request-sub">${escapeHtml(item.description || item.summary || item.notes || item.ai_summary || "")}</span><span class="admin-badges"><em>${escapeHtml(viewLabels[view])}</em><em>${escapeHtml(formatDate(itemDate(item)))}</em></span></button>`; }
-function renderList() { const items = displayItems(); if (listTitleEl) listTitleEl.textContent = view === "tasks" && workScope !== "all" ? `${viewLabels[view]} - ${workScope}` : viewLabels[view]; if (listCountEl) listCountEl.textContent = String(items.length); if (emptyEl) emptyEl.hidden = items.length > 0; if (listEl) listEl.innerHTML = items.map(itemCard).join(""); }
+function itemCard(item) { const risk = item.assistant?.overdue || item.priority === "P1" ? " is-risk" : ""; const relationBadge = view === "tasks" && taskIsLinkedToCase(item) ? `<em data-kind="case">Dossier lie</em>` : ""; return `<button class="admin-request work-card${item.id === selectedId ? " is-active" : ""}${risk}" type="button" data-work-id="${escapeHtml(item.id)}"><span class="admin-request-head"><strong>${escapeHtml(titleFor(item))}</strong><small>${escapeHtml(label(itemStatus(item)))}</small></span><span>${escapeHtml(subFor(item))}</span><span class="admin-request-sub">${escapeHtml(item.description || item.summary || item.notes || item.ai_summary || "")}</span><span class="admin-badges"><em>${escapeHtml(viewLabels[view])}</em>${relationBadge}<em>${escapeHtml(formatDate(itemDate(item)))}</em></span></button>`; }
+function workScopeLabel() { return { today: "aujourd hui", overdue: "en retard", p1: "P1", unassigned: "sans responsable", cases: "liees aux dossiers", all: "" }[workScope] || workScope; }
+function renderList() { const items = displayItems(); if (listTitleEl) listTitleEl.textContent = view === "tasks" && workScope !== "all" ? `${viewLabels[view]} - ${workScopeLabel()}` : viewLabels[view]; if (listCountEl) listCountEl.textContent = String(items.length); if (emptyEl) emptyEl.hidden = items.length > 0; if (listEl) listEl.innerHTML = items.map(itemCard).join(""); }
 function projectProgressStage(project = {}) {
   const progress = Number(project.progress || 0);
   if (["completed", "done"].includes(project.status) || progress >= 100) return 4;
@@ -121,13 +126,16 @@ function statusOptions(current) { const values = view === "tasks" ? ["todo", "do
 function taskControlPanel(item = {}) {
   const overdue = view === "tasks" && taskIsOverdue(item);
   const today = view === "tasks" && taskIsToday(item);
+  const linkedCase = view === "tasks" && taskIsLinkedToCase(item);
   const cards = [
     ["Statut", label(item.status), overdue ? "Retard detecte" : "Suivi operationnel", overdue ? "danger" : "neutral"],
     ["Priorite", label(item.priority), item.priority === "P1" ? "A traiter rapidement" : "Priorite courante", item.priority === "P1" ? "warning" : "neutral"],
     ["Responsable", item.assigned_to || "A affecter", item.pole || "Pole non renseigne", item.assigned_to ? "success" : "warning"],
     ["Echeance", formatDate(item.due_at), today ? "Dans la file du jour" : "A surveiller", overdue ? "danger" : "neutral"],
+    ["Rattachement", linkedCase ? "Dossier" : "Libre", linkedCase ? "Issue du module Dossiers" : "Sans dossier lie", linkedCase ? "success" : "neutral"],
   ];
-  return `<section class="work-task-control" aria-label="Pilotage de la tache"><div class="admin-panel-head"><div><p class="section-kicker">Execution</p><h3>Suivi de la tache</h3></div><a class="text-link" href="admin-dossiers">Dossiers</a></div><div class="work-task-control-grid">${cards.map((card) => `<article data-tone="${escapeHtml(card[3])}"><span>${escapeHtml(card[0])}</span><strong>${escapeHtml(card[1])}</strong><small>${escapeHtml(card[2])}</small></article>`).join("")}</div><div class="admin-detail-actions work-task-actions"><button class="btn secondary" type="button" data-task-quick="doing">Demarrer</button><button class="btn secondary" type="button" data-task-quick="waiting">Mettre en attente</button><button class="btn secondary" type="button" data-task-replan="48h">Replanifier 48h</button><button class="btn primary" type="button" data-task-quick="done">Terminer</button></div></section>`;
+  const relation = linkedCase ? `<div class="work-related-case"><span>Dossier rattache</span><strong>${escapeHtml(item.related_object_id)}</strong><a class="text-link" href="admin-dossiers">Ouvrir les dossiers</a></div>` : "";
+  return `<section class="work-task-control" aria-label="Pilotage de la tache"><div class="admin-panel-head"><div><p class="section-kicker">Execution</p><h3>Suivi de la tache</h3></div><a class="text-link" href="admin-dossiers">Dossiers</a></div><div class="work-task-control-grid">${cards.map((card) => `<article data-tone="${escapeHtml(card[3])}"><span>${escapeHtml(card[0])}</span><strong>${escapeHtml(card[1])}</strong><small>${escapeHtml(card[2])}</small></article>`).join("")}</div>${relation}<div class="admin-detail-actions work-task-actions"><button class="btn secondary" type="button" data-task-quick="doing">Demarrer</button><button class="btn secondary" type="button" data-task-quick="waiting">Mettre en attente</button><button class="btn secondary" type="button" data-task-replan="48h">Replanifier 48h</button><button class="btn primary" type="button" data-task-quick="done">Terminer</button></div></section>`;
 }
 function renderDetail() {
   const item = selectedItem();

@@ -27,6 +27,31 @@ const labels = {
     "demande-generale": "Generale",
     non_classe: "Non classe",
   },
+  caseStatus: {
+    ouvert: "Ouvert",
+    qualification: "Qualification",
+    instruction: "Instruction",
+    attente_pieces: "Attente pieces",
+    visite: "Visite",
+    a_decision: "A decision",
+    decision_validee: "Decision validee",
+    cloture: "Cloture",
+    archive: "Archive",
+  },
+  caseType: {
+    bien_vacant: "Bien vacant",
+    commerce_inoccupe: "Commerce inoccupe",
+    materiaux: "Materiaux",
+    collectivite: "Collectivite",
+    entreprise: "Entreprise",
+    benevole: "Benevole",
+    financeur: "Financeur",
+    signalement: "Signalement",
+    friche_terrain: "Friche / terrain",
+    presse: "Presse",
+    gouvernance: "Gouvernance",
+    autre: "Autre",
+  },
 };
 
 const loginSection = document.querySelector("[data-dashboard-login]");
@@ -51,6 +76,7 @@ const alertsEl = document.querySelector("[data-dashboard-alerts]");
 const recentEl = document.querySelector("[data-dashboard-recent]");
 const activityEl = document.querySelector("[data-dashboard-activity]");
 const activitySummaryEl = document.querySelector("[data-dashboard-activity-summary]");
+const casesEl = document.querySelector("[data-dashboard-cases]");
 const generatedEl = document.querySelector("[data-dashboard-generated]");
 const aiSummaryEl = document.querySelector("[data-dashboard-ai-summary]");
 const insightsEl = document.querySelector("[data-dashboard-insights]");
@@ -352,6 +378,22 @@ function renderActivity(activity = {}) {
     : `<p class="form-note">Aucune action tracee sur la periode selectionnee.</p>`;
 }
 
+function renderCasesSummary(cases = {}) {
+  if (!casesEl) return;
+  const stats = [
+    kpiCard("Actifs", cases.active || 0, "dossiers ouverts", cases.active ? "info" : "neutral"),
+    kpiCard("Retards", cases.overdue || 0, "echeances depassees", cases.overdue ? "danger" : "success"),
+    kpiCard("Pieces", cases.awaiting_pieces || 0, "dossiers en attente", cases.awaiting_pieces ? "warning" : "success"),
+    kpiCard("Decision", cases.decision || 0, "arbitrage humain", cases.decision ? "warning" : "neutral"),
+    kpiCard("Maturite", `${cases.average_maturity || 0}%`, "moyenne active", "info"),
+  ].join("");
+  const priority = cases.priority || [];
+  const list = priority.length
+    ? priority.map((item) => `<a class="dashboard-case-item" href="admin-dossiers" title="Ouvrir le module Dossiers"><div><strong>${escapeHtml(item.case_number || "Dossier")}</strong><p>${escapeHtml(item.title || "Dossier sans titre")}</p></div><span>${escapeHtml(item.reason || "Suite a definir")}</span><small>${escapeHtml(label("caseType", item.case_type))} - ${escapeHtml(label("priority", item.priority))} - ${escapeHtml(item.maturity_score || 0)}%</small></a>`).join("")
+    : `<p class="form-note">Aucun dossier sensible a traiter immediatement.</p>`;
+  casesEl.innerHTML = `<div class="dashboard-cases-summary">${stats}</div><div class="dashboard-cases-list">${list}</div>`;
+}
+
 function renderViews(views) {
   if (!viewsEl) return;
   viewsEl.innerHTML = Object.values(views || {})
@@ -398,6 +440,9 @@ function exportDashboard() {
     ["Conformite", `${currentDashboard.coverage?.percent || 0}%`],
     ["Actions TVF OS", currentDashboard.activity?.total || 0],
     ["Modules actifs", currentDashboard.activity?.modules_active || 0],
+    ["Dossiers actifs", currentDashboard.cases?.active || 0],
+    ["Dossiers en retard", currentDashboard.cases?.overdue || 0],
+    ["Dossiers a decision", currentDashboard.cases?.decision || 0],
   ];
   const csv = rows.map((row) => row.map(csvCell).join(";")).join("\n");
   const blob = new Blob(["\ufeff" + csv], { type: "text/csv;charset=utf-8" });
@@ -443,6 +488,7 @@ function renderDashboard(data) {
   renderAlerts(dashboard.alerts || []);
   renderRecent(dashboard.recent || []);
   renderActivity(dashboard.activity || {});
+  renderCasesSummary(dashboard.cases || {});
   renderInsights(dashboard.assistant || {});
 }
 
