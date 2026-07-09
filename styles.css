@@ -6484,3 +6484,36 @@ tr:nth-child(even) td {
     grid-template-columns: 1fr;
   }
 }
+
+.procedures-entry-panel {
+  max-width: 720px;
+}
+
+.procedures-entry-panel .admin-modal-head p:not(.section-kicker) {
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+.procedures-entry-form {
+  grid-template-columns: 1fr;
+}
+
+.admin-checkline {
+  display: flex !important;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  padding: 10px 12px;
+  border: 1px solid rgba(14, 45, 69, 0.1);
+  border-radius: 12px;
+  background: #fff;
+  color: var(--blue-900);
+  font-weight: 800;
+}
+
+.admin-checkline input {
+  width: 18px;
+  height: 18px;
+}
