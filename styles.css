@@ -6542,3 +6542,18 @@ tr:nth-child(even) td {
     grid-template-columns: 1fr;
   }
 }
+
+.observatoire-entry-panel {
+  max-width: 680px;
+}
+
+.observatoire-entry-panel .admin-modal-head p:not(.section-kicker) {
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+.observatoire-entry-form {
+  grid-template-columns: 1fr;
+}

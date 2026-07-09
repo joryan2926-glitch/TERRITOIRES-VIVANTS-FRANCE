@@ -1,4 +1,4 @@
-﻿const OBS_TOKEN_KEY = "tvfAdminToken";
+const OBS_TOKEN_KEY = "tvfAdminToken";
 const viewLabels = { sources: "Sources", indicators: "Indicateurs", diagnostics: "Diagnostics", watch: "Veille" };
 const sourceTypes = { public_data: "Donnee publique", internal: "Interne", partner: "Partenaire", field: "Terrain", press: "Presse", funding: "Financement", legal: "Reglementaire", map: "Carte", other: "Autre" };
 const indicatorTypes = { logements_vacants: "Logements vacants", commerces_vacants: "Commerces vacants", friches: "Friches", materiaux: "Materiaux", insertion: "Insertion", partenaires: "Partenaires", financement: "Financement", risques: "Risques", population: "Population", autre: "Autre" };
@@ -48,6 +48,27 @@ function setToken(value) { try { if (value) sessionStorage.setItem(OBS_TOKEN_KEY
 function showApp() { if (loginSection) loginSection.hidden = true; if (appSection) appSection.hidden = false; }
 function showLogin() { if (loginSection) loginSection.hidden = false; if (appSection) appSection.hidden = true; }
 function setStatus(message, type = "info") { if (!loginStatus) return; loginStatus.hidden = !message; loginStatus.textContent = message; loginStatus.dataset.status = type; }
+function notify(message, type = "info") { if (window.tvfAdminNotice) window.tvfAdminNotice(message, type); else if (type === "error") console.error(message); else console.log(message); }
+function notifyError(error, fallback = "Action impossible pour le moment.") { notify(error?.message || fallback, "error"); }
+function openObservatoireEntryModal(config) {
+  return new Promise((resolve) => {
+    const wrapper = document.createElement("section");
+    wrapper.className = "admin-modal";
+    wrapper.setAttribute("aria-label", config.title || "Saisie observatoire");
+    const fields = (config.fields || []).map((field) => {
+      const required = field.required ? "required" : "";
+      const value = escapeHtml(field.value || "");
+      if (field.type === "textarea") return `<label>${escapeHtml(field.label)}<textarea name="${escapeHtml(field.name)}" rows="${field.rows || 4}" ${required} placeholder="${escapeHtml(field.placeholder || "")}">${value}</textarea></label>`;
+      return `<label>${escapeHtml(field.label)}<input name="${escapeHtml(field.name)}" type="${escapeHtml(field.type || "text")}" value="${value}" ${required} placeholder="${escapeHtml(field.placeholder || "")}"></label>`;
+    }).join("");
+    wrapper.innerHTML = `<div class="admin-modal-panel observatoire-entry-panel"><div class="admin-modal-head"><div><p class="section-kicker">Observatoire territorial</p><h2>${escapeHtml(config.title || "Nouvelle saisie")}</h2><p>${escapeHtml(config.description || "Completez les informations necessaires a l observatoire.")}</p></div><button class="btn ghost" type="button" data-entry-cancel>Fermer</button></div><form class="admin-create-form observatoire-entry-form" data-entry-form>${fields}<div class="admin-detail-actions admin-create-wide"><button class="btn primary" type="submit">${escapeHtml(config.submitLabel || "Enregistrer")}</button><button class="btn secondary" type="button" data-entry-cancel>Annuler</button></div></form></div>`;
+    const close = (value = null) => { wrapper.remove(); resolve(value); };
+    wrapper.addEventListener("click", (event) => { if (event.target === wrapper || event.target.closest("[data-entry-cancel]")) close(null); });
+    wrapper.querySelector("[data-entry-form]")?.addEventListener("submit", (event) => { event.preventDefault(); close(Object.fromEntries(new FormData(event.currentTarget))); });
+    document.body.appendChild(wrapper);
+    wrapper.querySelector("input, textarea")?.focus();
+  });
+}
 function escapeHtml(value) { return String(value ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;"); }
 function label(map, value) { return map[value] || value || "Non renseigne"; }
 function formatDate(value) { if (!value) return "Non renseigne"; const date = new Date(value); if (Number.isNaN(date.getTime())) return value; return new Intl.DateTimeFormat("fr-FR", { dateStyle: "short" }).format(date); }
@@ -194,16 +215,18 @@ async function saveElement(form) {
 }
 async function generateDiagnostic() {
   const territory = selectedItem()?.territory_label || String(filtersForm?.territory_label?.value || "").trim();
-  const value = territory || prompt("Territoire du diagnostic a generer");
+  const data = territory ? { territory_label: territory } : await openObservatoireEntryModal({ title: "Generer un diagnostic", description: "Indiquez le territoire a analyser a partir des indicateurs disponibles.", submitLabel: "Generer le diagnostic", fields: [{ name: "territory_label", label: "Territoire", required: true, placeholder: "Ex. Saint-Etienne, quartier, commune, EPCI" }] });
+  const value = String(data?.territory_label || "").trim();
   if (!value) return;
   await api("/api/admin-observatoire", { method: "POST", body: JSON.stringify({ type: "diagnostic_from_indicators", territory_label: value }) });
   currentView = "diagnostics";
   selectedId = null;
   await loadItems();
+  notify("Diagnostic territorial genere.", "success");
 }
 function exportCsv() {
   const rows = items();
-  if (!rows.length) return alert("Aucun element a exporter.");
+  if (!rows.length) return notify("Aucun element a exporter.", "warning");
   const headers = ["Vue", "Titre", "Territoire", "Type", "Statut", "Score", "Mis a jour"];
   const csvRows = rows.map((item) => [viewLabels[currentView], itemTitle(item), item.territory_label, itemType(item), itemStatus(item), item.priority_score || item.reliability_level || item.opportunity_level || "", item.updated_at || item.created_at || ""]);
   const csv = [headers, ...csvRows].map((row) => row.map((value) => `"${String(value ?? "").replace(/"/g, '""')}"`).join(";")).join("\n");
@@ -216,6 +239,7 @@ function exportCsv() {
   link.click();
   link.remove();
   URL.revokeObjectURL(url);
+  notify("Export observatoire prepare.", "success");
 }
 function openModal() { if (modal) modal.hidden = false; updateModalFields(); modalForm?.querySelector("input, select, textarea")?.focus(); }
 function closeModal() { if (modal) modal.hidden = true; }
@@ -234,9 +258,9 @@ function bindEvents() {
     setToken(value);
     try { showApp(); await loadItems(); setStatus(""); } catch (error) { setToken(""); showLogin(); setStatus(error.message, "error"); }
   });
-  tabs.forEach((button) => button.addEventListener("click", () => { currentView = button.dataset.observatoireView; selectedId = null; loadItems().catch((error) => alert(error.message)); }));
-  filtersForm?.addEventListener("input", () => { clearTimeout(debounceTimer); debounceTimer = setTimeout(() => loadItems().catch((error) => alert(error.message)), 280); });
-  filtersForm?.addEventListener("change", () => loadItems().catch((error) => alert(error.message)));
+  tabs.forEach((button) => button.addEventListener("click", () => { currentView = button.dataset.observatoireView; selectedId = null; loadItems().catch((error) => notifyError(error)); }));
+  filtersForm?.addEventListener("input", () => { clearTimeout(debounceTimer); debounceTimer = setTimeout(() => loadItems().catch((error) => notifyError(error)), 280); });
+  filtersForm?.addEventListener("change", () => loadItems().catch((error) => notifyError(error)));
   listEl?.addEventListener("click", (event) => { const button = event.target.closest("[data-item-id]"); if (!button) return; selectedId = button.dataset.itemId; renderAll(); });
   detailEl?.addEventListener("submit", (event) => { const form = event.target.closest("[data-observatoire-detail-form]"); if (!form) return; event.preventDefault(); saveElement(form); });
   detailEl?.addEventListener("click", (event) => {
@@ -247,8 +271,8 @@ function bindEvents() {
     saveElement(form);
   });
   createButton?.addEventListener("click", openModal);
-  diagnosticButton?.addEventListener("click", () => generateDiagnostic().catch((error) => alert(error.message)));
-  refreshButton?.addEventListener("click", () => loadItems().catch((error) => alert(error.message)));
+  diagnosticButton?.addEventListener("click", () => generateDiagnostic().catch((error) => notifyError(error)));
+  refreshButton?.addEventListener("click", () => loadItems().catch((error) => notifyError(error)));
   exportButton?.addEventListener("click", exportCsv);
   logoutButton?.addEventListener("click", () => { setToken(""); window.location.href = "admin"; });
   closeModalButtons.forEach((button) => button.addEventListener("click", closeModal));
@@ -265,4 +289,3 @@ if (token()) {
 } else {
   showLogin();
 }
-
