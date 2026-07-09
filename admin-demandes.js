@@ -538,7 +538,9 @@ function renderOperationalPath(contact) {
       ${cards.map((card) => {
         const action = card.href
           ? `<a class="text-link" href="${escapeHtml(card.href)}">${escapeHtml(card.action)}</a>`
-          : `<button class="text-link" type="button" ${card.key === "case" ? "data-create-case" : "data-create-task"}>${escapeHtml(card.action)}</button>`;
+          : card.done && card.key === "case"
+            ? `<a class="text-link" href="admin-dossiers">Voir dossiers</a>`
+            : `<button class="text-link" type="button" ${card.key === "case" ? "data-create-case" : "data-create-task"}>${escapeHtml(card.action)}</button>`;
         return `<article class="admin-operational-card" data-done="${card.done ? "true" : "false"}">
           <span>${escapeHtml(card.step)}</span>
           <strong>${escapeHtml(card.title)}</strong>
@@ -969,7 +971,7 @@ function bindEvents() {
           body: JSON.stringify(casePayloadFromContact(contact)),
         });
         await updateSelected({ status: "accepte", next_action: `Dossier cree : ${result.case?.case_number || result.case?.title || "module Dossiers"}` });
-        notify("Dossier cree. Le module Dossiers est accessible depuis le menu TVF OS.", "success");
+        notify("Dossier cree ou retrouve. Le module Dossiers est accessible depuis le menu TVF OS.", "success");
       } catch (error) {
         notifyError(error, "Creation du dossier impossible.");
       }
