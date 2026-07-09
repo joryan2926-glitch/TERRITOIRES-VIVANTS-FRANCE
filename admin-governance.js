@@ -42,6 +42,8 @@ function setToken(value) { try { if (value) sessionStorage.setItem(GOVERNANCE_TO
 function showApp() { if (loginSection) loginSection.hidden = true; if (appSection) appSection.hidden = false; }
 function showLogin() { if (loginSection) loginSection.hidden = false; if (appSection) appSection.hidden = true; }
 function setStatus(message, type = "info") { if (!loginStatus) return; loginStatus.hidden = !message; loginStatus.textContent = message; loginStatus.dataset.status = type; }
+function notify(message, type = "info") { if (window.tvfAdminNotice) window.tvfAdminNotice(message, type); else if (type === "error") console.error(message); else console.log(message); }
+function notifyError(error, fallback = "Action impossible pour le moment.") { notify(error?.message || fallback, "error"); }
 function escapeHtml(value) { return String(value ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;"); }
 function label(value) { return statusLabels[value] || value || "Non renseigne"; }
 function formatDate(value) { if (!value) return "Non renseigne"; const date = new Date(value); if (Number.isNaN(date.getTime())) return value; return new Intl.DateTimeFormat("fr-FR", { dateStyle: "short" }).format(date); }
@@ -109,9 +111,43 @@ function closeModal() { if (modal) modal.hidden = true; modalForm?.reset(); }
 function payloadFromForm(form) { const data = new FormData(form); const payload = {}; data.forEach((value, key) => { const text = String(value || "").trim(); if (text) payload[key] = text; }); if (payload.type === "action") { payload.action_title = payload.title || "Action issue"; payload.notes = payload.summary || ""; } if (payload.type === "delegation") { payload.delegated_to = payload.owner_name || payload.title || "Delegataire"; payload.scope = payload.summary || payload.title || "Delegation"; } if (payload.type === "committee") { payload.agenda_summary = payload.summary || ""; } return payload; }
 async function createItem(event) { event.preventDefault(); await api("/api/admin-governance", { method: "POST", body: JSON.stringify(payloadFromForm(modalForm)) }); closeModal(); await loadAll(); }
 async function saveDetail(form) { const payload = Object.fromEntries(new FormData(form)); if (payload.type === "action") payload.action_title = payload.title; if (payload.type === "delegation") { payload.delegated_to = payload.owner_name || payload.title; payload.scope = payload.summary; } if (payload.type === "committee") payload.agenda_summary = payload.summary; await api("/api/admin-governance", { method: "PATCH", body: JSON.stringify(payload) }); await loadAll(); }
-async function generateMinutes() { const item = selectedItem(); const committeeId = view === "committees" ? item?.id : item?.committee_id; if (!committeeId) return alert("Selectionnez un comite ou un element lie a un comite."); const result = await api("/api/admin-governance", { method: "POST", body: JSON.stringify({ type: "generate_minutes", committee_id: committeeId }) }); const minutes = result.minutes_pack.minutes; alert(`${minutes.title}\n\n${minutes.summary}\n\nDecisions : ${minutes.decisions.join("; ") || "aucune"}`); }
+function showMinutesPack(minutes) {
+  const decisions = Array.isArray(minutes?.decisions) ? minutes.decisions : [];
+  const wrapper = document.createElement("section");
+  wrapper.className = "admin-modal";
+  wrapper.setAttribute("aria-label", "Projet de proces-verbal");
+  wrapper.innerHTML = `
+    <div class="admin-modal-panel governance-minutes-panel">
+      <div class="admin-modal-head">
+        <div>
+          <p class="section-kicker">Proces-verbal</p>
+          <h2>${escapeHtml(minutes?.title || "Projet de PV")}</h2>
+          <p>${escapeHtml(minutes?.summary || "Synthese generee pour validation humaine.")}</p>
+        </div>
+        <button class="admin-button secondary" type="button" data-governance-minutes-close>Fermer</button>
+      </div>
+      <h3>Decisions reprises</h3>
+      <ul class="governance-minutes-list">
+        ${decisions.length ? decisions.map((decision) => `<li>${escapeHtml(decision)}</li>`).join("") : "<li>Aucune decision rattachee pour le moment.</li>"}
+      </ul>
+      <p class="form-note">Ce document reste un projet interne : il doit etre relu, complete et valide par la gouvernance TVF avant tout usage officiel.</p>
+    </div>`;
+  document.body.appendChild(wrapper);
+  const close = () => wrapper.remove();
+  wrapper.querySelector("[data-governance-minutes-close]")?.addEventListener("click", close);
+  wrapper.addEventListener("click", (event) => { if (event.target === wrapper) close(); });
+}
+
+async function generateMinutes() {
+  const item = selectedItem();
+  const committeeId = view === "committees" ? item?.id : item?.committee_id;
+  if (!committeeId) return notify("Selectionnez un comite ou un element lie a un comite.", "warning");
+  const result = await api("/api/admin-governance", { method: "POST", body: JSON.stringify({ type: "generate_minutes", committee_id: committeeId }) });
+  showMinutesPack(result.minutes_pack?.minutes || {});
+  notify("Projet de proces-verbal genere.", "success");
+}
 function exportCsv() { const rows = [["Vue", "Titre", "Statut", "Reference"], ...currentItems().map((item) => [typeLabels[view], titleFor(item), label(item.status), subFor(item)])]; const csv = rows.map((row) => row.map((cell) => `"${String(cell ?? "").replace(/"/g, '""')}"`).join(";")).join("\n"); const blob = new Blob(["\ufeff" + csv], { type: "text/csv;charset=utf-8" }); const url = URL.createObjectURL(blob); const link = document.createElement("a"); link.href = url; link.download = `gouvernance-tvf-os-${view}-${new Date().toISOString().slice(0, 10)}.csv`; document.body.appendChild(link); link.click(); link.remove(); URL.revokeObjectURL(url); }
-function bindEvents() { tokenForm?.addEventListener("submit", async (event) => { event.preventDefault(); const value = String(new FormData(tokenForm).get("token") || "").trim(); if (!value) return setStatus("Entrez le token admin.", "error"); setToken(value); try { showApp(); await loadAll(); setStatus(""); } catch (error) { setToken(""); showLogin(); setStatus(error.status === 401 ? "Token admin invalide." : error.message, "error"); } }); filtersForm?.addEventListener("input", () => { clearTimeout(debounceTimer); debounceTimer = setTimeout(() => loadAll().catch((e) => alert(e.message)), 260); }); filtersForm?.addEventListener("change", () => loadAll().catch((e) => alert(e.message))); tabs.forEach((button) => button.addEventListener("click", () => { view = button.dataset.governanceView || "decisions"; selectedId = currentItems()[0]?.id || null; renderAll(); })); refreshButton?.addEventListener("click", () => loadAll().catch((e) => alert(e.message))); createButton?.addEventListener("click", openModal); minutesButton?.addEventListener("click", () => generateMinutes().catch((e) => alert(e.message))); exportButton?.addEventListener("click", exportCsv); logoutButton?.addEventListener("click", () => { setToken(""); window.location.href = "admin"; }); closeModalButtons.forEach((button) => button.addEventListener("click", closeModal)); modal?.addEventListener("click", (event) => { if (event.target === modal) closeModal(); }); modalForm?.addEventListener("submit", createItem); listEl?.addEventListener("click", (event) => { const button = event.target.closest("[data-governance-id]"); if (!button) return; selectedId = button.dataset.governanceId; renderAll(); }); detailEl?.addEventListener("submit", (event) => { const form = event.target.closest("[data-governance-detail-form]"); if (!form) return; event.preventDefault(); saveDetail(form).catch((e) => alert(e.message)); }); }
+function bindEvents() { tokenForm?.addEventListener("submit", async (event) => { event.preventDefault(); const value = String(new FormData(tokenForm).get("token") || "").trim(); if (!value) return setStatus("Entrez le token admin.", "error"); setToken(value); try { showApp(); await loadAll(); setStatus(""); } catch (error) { setToken(""); showLogin(); setStatus(error.status === 401 ? "Token admin invalide." : error.message, "error"); } }); filtersForm?.addEventListener("input", () => { clearTimeout(debounceTimer); debounceTimer = setTimeout(() => loadAll().catch((e) => notifyError(e)), 260); }); filtersForm?.addEventListener("change", () => loadAll().catch((e) => notifyError(e))); tabs.forEach((button) => button.addEventListener("click", () => { view = button.dataset.governanceView || "decisions"; selectedId = currentItems()[0]?.id || null; renderAll(); })); refreshButton?.addEventListener("click", () => loadAll().catch((e) => notifyError(e))); createButton?.addEventListener("click", openModal); minutesButton?.addEventListener("click", () => generateMinutes().catch((e) => notifyError(e))); exportButton?.addEventListener("click", exportCsv); logoutButton?.addEventListener("click", () => { setToken(""); window.location.href = "admin"; }); closeModalButtons.forEach((button) => button.addEventListener("click", closeModal)); modal?.addEventListener("click", (event) => { if (event.target === modal) closeModal(); }); modalForm?.addEventListener("submit", createItem); listEl?.addEventListener("click", (event) => { const button = event.target.closest("[data-governance-id]"); if (!button) return; selectedId = button.dataset.governanceId; renderAll(); }); detailEl?.addEventListener("submit", (event) => { const form = event.target.closest("[data-governance-detail-form]"); if (!form) return; event.preventDefault(); saveDetail(form).catch((e) => notifyError(e)); }); }
 
 bindEvents();
 if (token()) { showApp(); loadAll().catch((error) => { setToken(""); showLogin(); setStatus(error.status === 401 ? "Session expiree ou token invalide." : error.message, "error"); }); } else { showLogin(); }
