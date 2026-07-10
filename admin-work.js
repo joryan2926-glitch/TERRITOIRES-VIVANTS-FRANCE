@@ -7,6 +7,7 @@ const tokenForm = document.querySelector("[data-work-token-form]");
 const loginStatus = document.querySelector("[data-work-login-status]");
 const filtersForm = document.querySelector("[data-work-filters]");
 const kpisEl = document.querySelector("[data-work-kpis]");
+const briefingEl = document.querySelector("[data-work-briefing]");
 const listEl = document.querySelector("[data-work-list]");
 const detailEl = document.querySelector("[data-work-detail]");
 const countEl = document.querySelector("[data-work-count]");
@@ -46,7 +47,7 @@ function selectedItem() { return displayItems().find((item) => item.id === selec
 async function api(path, options = {}) { const response = await fetch(path, { ...options, headers: { "Content-Type": "application/json", Authorization: `Bearer ${token()}`, ...(options.headers || {}) } }); const text = await response.text(); const result = text ? JSON.parse(text) : { ok: response.ok }; if (!response.ok || result.ok === false) { const error = new Error(result.error || "Action impossible."); error.status = response.status; throw error; } return result; }
 function filtersParams(entity) { const formData = new FormData(filtersForm); const params = new URLSearchParams({ entity, limit: "260" }); const q = String(formData.get("q") || "").trim(); const status = String(formData.get("status") || "").trim(); if (q) params.set("q", q); if (status && status !== "all") params.set("status", status); return params; }
 async function loadAll() { if (countEl) countEl.textContent = "Chargement du planning..."; const overview = await api("/api/admin-work?entity=dashboard"); const [tasks, events, projects, rules] = await Promise.all([api(`/api/admin-work?${filtersParams("tasks").toString()}`), api(`/api/admin-work?${filtersParams("events").toString()}`), api(`/api/admin-work?${filtersParams("projects").toString()}`), api("/api/admin-work?entity=rules&limit=200")]); dashboard = overview.dashboard || {}; data = { tasks: tasks.tasks || [], events: events.events || [], projects: projects.projects || [], rules: rules.rules || [] }; if (!currentItems().some((item) => item.id === selectedId)) selectedId = currentItems()[0]?.id || null; renderAll(); }
-function renderAll() { renderKpis(); renderAssistant(); renderTabs(); renderWorkQueue(); renderList(); renderDetail(); }
+function renderAll() { renderKpis(); renderAssistant(); renderTabs(); renderWorkQueue(); renderDailyBriefing(); renderList(); renderDetail(); }
 function startOfToday() { const d = new Date(); d.setHours(0, 0, 0, 0); return d.getTime(); }
 function endOfToday() { const d = new Date(); d.setHours(23, 59, 59, 999); return d.getTime(); }
 function taskIsOpen(task) { return !["done", "cancelled", "archive"].includes(task.status); }
@@ -80,6 +81,70 @@ function renderWorkQueue() {
     { key: "all", label: "Toutes", value: tasks.filter(taskIsOpen).length, detail: "File active" },
   ];
   panel.innerHTML = `<div class="admin-panel-head"><div><p class="section-kicker">File de travail</p><h3>Priorites du jour</h3><p>Cette vue sert a ouvrir TVF OS le matin : traiter les retards, affecter les responsables et preparer les prochaines actions.</p></div><a class="text-link" href="dashboard">Dashboard</a></div><div class="work-queue-grid">${cards.map((card) => `<button type="button" data-work-scope="${escapeHtml(card.key)}" class="${workScope === card.key ? "is-active" : ""}"><span>${escapeHtml(card.label)}</span><strong>${escapeHtml(card.value)}</strong><small>${escapeHtml(card.detail)}</small></button>`).join("")}</div>`;
+}
+
+function dueTime(item) {
+  const value = item?.due_at || item?.starts_at || item?.updated_at || item?.created_at;
+  const date = value ? new Date(value).getTime() : 0;
+  return Number.isNaN(date) ? 0 : date;
+}
+
+function taskPriorityScore(task) {
+  let score = 0;
+  if (taskIsOverdue(task)) score += 100;
+  if (task.priority === "P1") score += 50;
+  if (task.priority === "P2") score += 25;
+  if (!task.assigned_to && taskIsOpen(task)) score += 18;
+  if (taskIsLinkedToCase(task)) score += 12;
+  if (taskIsToday(task)) score += 10;
+  const due = dueTime(task);
+  if (due) score += Math.max(0, 10 - Math.floor((due - Date.now()) / 86400000));
+  return score;
+}
+
+function briefingRows(items, target, emptyText) {
+  if (!items.length) return `<p class="form-note">${escapeHtml(emptyText)}</p>`;
+  return items.map((item) => `<button type="button" class="work-briefing-row" data-work-briefing-target="${escapeHtml(target)}" data-work-briefing-id="${escapeHtml(item.id)}">
+    <span><strong>${escapeHtml(titleFor(item))}</strong><small>${escapeHtml(subFor(item))}</small></span>
+    <em>${escapeHtml(label(itemStatus(item)))}</em>
+    <small>${escapeHtml(formatDate(itemDate(item)))}</small>
+  </button>`).join("");
+}
+
+function renderDailyBriefing() {
+  if (!briefingEl) return;
+  const tasks = data.tasks || [];
+  const events = data.events || [];
+  const projects = data.projects || [];
+  const immediate = tasks
+    .filter(taskIsOpen)
+    .sort((a, b) => taskPriorityScore(b) - taskPriorityScore(a) || dueTime(a) - dueTime(b))
+    .slice(0, 5);
+  const upcoming = [
+    ...events.filter((event) => !["done", "cancelled", "archive"].includes(event.status)).sort((a, b) => dueTime(a) - dueTime(b)).slice(0, 3),
+    ...tasks.filter(taskIsToday).sort((a, b) => dueTime(a) - dueTime(b)).slice(0, 2),
+  ].slice(0, 5);
+  const decisions = projects
+    .filter((project) => !["completed", "cancelled", "archive"].includes(project.status))
+    .sort((a, b) => {
+      const bRisk = Number(b.progress || 0) < 35 ? 1 : 0;
+      const aRisk = Number(a.progress || 0) < 35 ? 1 : 0;
+      return bRisk - aRisk || dueTime(a) - dueTime(b);
+    })
+    .slice(0, 5);
+
+  briefingEl.innerHTML = `<div class="admin-panel-head">
+    <div>
+      <p class="section-kicker">Brief operationnel</p>
+      <h3>Ce qu'il faut ouvrir en premier</h3>
+      <p>Un resume court pour relier les taches, rendez-vous et projets avant la mise a jour des fiches.</p>
+    </div>
+  </div>
+  <div class="work-briefing-grid">
+    <article><h4>Actions immediates</h4>${briefingRows(immediate, "tasks", "Aucune action urgente identifiee.")}</article>
+    <article><h4>Agenda et echeances</h4>${briefingRows(upcoming, "events", "Aucun rendez-vous proche avec les filtres actuels.")}</article>
+    <article><h4>Decisions a preparer</h4>${briefingRows(decisions, "projects", "Aucun projet a arbitrer pour le moment.")}</article>
+  </div>`;
 }
 function displayItems() { return view === "tasks" ? scopedTasks() : currentItems(); }
 function renderKpis() { if (!kpisEl) return; kpisEl.innerHTML = `<article><span>Projets actifs</span><strong>${dashboard?.active_projects || 0}</strong><small>en cours</small></article><article><span>Taches ouvertes</span><strong>${dashboard?.open_tasks || 0}</strong><small>a suivre</small></article><article data-tone="danger"><span>Retards</span><strong>${dashboard?.overdue_tasks || 0}</strong><small>a traiter</small></article><article><span>Aujourd'hui</span><strong>${dashboard?.today_events || 0}</strong><small>agenda</small></article><article><span>Regles</span><strong>${dashboard?.active_rules || 0}</strong><small>actives</small></article>`; if (countEl) countEl.textContent = `${dashboard?.open_tasks || 0} tache(s), ${dashboard?.overdue_tasks || 0} retard(s), ${dashboard?.today_events || 0} evenement(s) aujourd'hui.`; }
@@ -194,6 +259,6 @@ async function applyProjectAction(action) {
 async function createItem(event) { event.preventDefault(); await api("/api/admin-work", { method: "POST", body: JSON.stringify(payloadFromForm(modalForm)) }); closeModal(); await loadAll(); notify("Element de travail cree.", "success"); }
 async function saveDetail(form) { const payload = payloadFromForm(form); await api("/api/admin-work", { method: "PATCH", body: JSON.stringify(payload) }); await loadAll(); notify("Element de travail enregistre.", "success"); }
 function exportCsv() { const rows = [["Vue", "Titre", "Statut", "Responsable", "Date"], ...currentItems().map((item) => [viewLabels[view], titleFor(item), label(itemStatus(item)), subFor(item), formatDate(itemDate(item))])]; const csv = rows.map((row) => row.map((cell) => `"${String(cell ?? "").replace(/"/g, '""')}"`).join(";")).join("\\n"); const blob = new Blob(["\ufeff" + csv], { type: "text/csv;charset=utf-8" }); const url = URL.createObjectURL(blob); const link = document.createElement("a"); link.href = url; link.download = `planning-tvf-os-${view}-${new Date().toISOString().slice(0, 10)}.csv`; document.body.appendChild(link); link.click(); link.remove(); URL.revokeObjectURL(url); notify("Export planning prepare.", "success"); }
-function bindEvents() { tokenForm?.addEventListener("submit", async (event) => { event.preventDefault(); const value = String(new FormData(tokenForm).get("token") || "").trim(); if (!value) return setStatus("Entrez le token admin.", "error"); setToken(value); try { showApp(); await loadAll(); setStatus(""); } catch (error) { setToken(""); showLogin(); setStatus(error.status === 401 ? "Token admin invalide." : error.message, "error"); } }); filtersForm?.addEventListener("input", () => { clearTimeout(debounceTimer); debounceTimer = setTimeout(() => loadAll().catch((e) => notifyError(e)), 260); }); filtersForm?.addEventListener("change", () => loadAll().catch((e) => notifyError(e))); tabs.forEach((button) => button.addEventListener("click", () => { view = button.dataset.workView || "tasks"; if (view !== "tasks") workScope = "all"; selectedId = displayItems()[0]?.id || null; renderAll(); })); refreshButton?.addEventListener("click", () => loadAll().catch((e) => notifyError(e))); createButton?.addEventListener("click", openModal); exportButton?.addEventListener("click", exportCsv); logoutButton?.addEventListener("click", () => { setToken(""); window.location.href = "admin-login"; }); closeModalButtons.forEach((button) => button.addEventListener("click", closeModal)); modal?.addEventListener("click", (event) => { if (event.target === modal) closeModal(); }); modalForm?.addEventListener("submit", createItem); listEl?.addEventListener("click", (event) => { const button = event.target.closest("[data-work-id]"); if (!button) return; selectedId = button.dataset.workId; renderAll(); }); detailEl?.addEventListener("submit", (event) => { const form = event.target.closest("[data-work-detail-form]"); if (!form) return; event.preventDefault(); saveDetail(form).catch((e) => notifyError(e)); }); document.addEventListener("click", (event) => { const scope = event.target.closest("[data-work-scope]"); if (scope) { workScope = scope.dataset.workScope || "all"; view = "tasks"; selectedId = displayItems()[0]?.id || null; renderAll(); } }); detailEl?.addEventListener("click", (event) => { const button = event.target.closest("[data-project-action]"); if (button) applyProjectAction(button.dataset.projectAction).catch((e) => notifyError(e)); const taskQuick = event.target.closest("[data-task-quick]"); if (taskQuick) updateTaskQuick(taskQuick.dataset.taskQuick).catch((e) => notifyError(e)); const replan = event.target.closest("[data-task-replan]"); if (replan) replanTask(replan.dataset.taskReplan).catch((e) => notifyError(e)); }); }
+function bindEvents() { tokenForm?.addEventListener("submit", async (event) => { event.preventDefault(); const value = String(new FormData(tokenForm).get("token") || "").trim(); if (!value) return setStatus("Entrez le token admin.", "error"); setToken(value); try { showApp(); await loadAll(); setStatus(""); } catch (error) { setToken(""); showLogin(); setStatus(error.status === 401 ? "Token admin invalide." : error.message, "error"); } }); filtersForm?.addEventListener("input", () => { clearTimeout(debounceTimer); debounceTimer = setTimeout(() => loadAll().catch((e) => notifyError(e)), 260); }); filtersForm?.addEventListener("change", () => loadAll().catch((e) => notifyError(e))); tabs.forEach((button) => button.addEventListener("click", () => { view = button.dataset.workView || "tasks"; if (view !== "tasks") workScope = "all"; selectedId = displayItems()[0]?.id || null; renderAll(); })); refreshButton?.addEventListener("click", () => loadAll().catch((e) => notifyError(e))); createButton?.addEventListener("click", openModal); exportButton?.addEventListener("click", exportCsv); logoutButton?.addEventListener("click", () => { setToken(""); window.location.href = "admin-login"; }); closeModalButtons.forEach((button) => button.addEventListener("click", closeModal)); modal?.addEventListener("click", (event) => { if (event.target === modal) closeModal(); }); modalForm?.addEventListener("submit", createItem); listEl?.addEventListener("click", (event) => { const button = event.target.closest("[data-work-id]"); if (!button) return; selectedId = button.dataset.workId; renderAll(); }); detailEl?.addEventListener("submit", (event) => { const form = event.target.closest("[data-work-detail-form]"); if (!form) return; event.preventDefault(); saveDetail(form).catch((e) => notifyError(e)); }); document.addEventListener("click", (event) => { const scope = event.target.closest("[data-work-scope]"); if (scope) { workScope = scope.dataset.workScope || "all"; view = "tasks"; selectedId = displayItems()[0]?.id || null; renderAll(); return; } const briefing = event.target.closest("[data-work-briefing-id]"); if (briefing) { view = briefing.dataset.workBriefingTarget || "tasks"; if (view !== "tasks") workScope = "all"; selectedId = briefing.dataset.workBriefingId; renderAll(); } }); detailEl?.addEventListener("click", (event) => { const button = event.target.closest("[data-project-action]"); if (button) applyProjectAction(button.dataset.projectAction).catch((e) => notifyError(e)); const taskQuick = event.target.closest("[data-task-quick]"); if (taskQuick) updateTaskQuick(taskQuick.dataset.taskQuick).catch((e) => notifyError(e)); const replan = event.target.closest("[data-task-replan]"); if (replan) replanTask(replan.dataset.taskReplan).catch((e) => notifyError(e)); }); }
 bindEvents();
 if (token()) { showApp(); loadAll().catch((error) => { setToken(""); showLogin(); setStatus(error.status === 401 ? "Session expiree ou token invalide." : error.message, "error"); }); } else { showLogin(); }
