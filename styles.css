@@ -7127,3 +7127,101 @@ tr:nth-child(even) td {
     justify-content: center;
   }
 }
+
+/* Dossiers TVF OS - dossier complet et actions d'instruction */
+.cases-detail-form > .cases-file-panel,
+.cases-detail-form > .cases-action-panel {
+  grid-column: 1 / -1;
+}
+.cases-file-panel,
+.cases-action-panel {
+  display: grid;
+  gap: 14px;
+  padding: 16px;
+  border: 1px solid rgba(14, 45, 69, .13);
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: var(--shadow-soft);
+}
+.cases-file-panel {
+  border-left: 4px solid var(--green-800);
+  background: linear-gradient(135deg, #ffffff, #f7fbf3);
+}
+.cases-file-panel .admin-panel-head p:not(.section-kicker),
+.cases-action-panel .admin-panel-head p:not(.section-kicker) {
+  margin: 5px 0 0;
+  color: var(--muted);
+  line-height: 1.45;
+}
+.cases-file-grid,
+.cases-register-grid,
+.cases-action-groups {
+  display: grid;
+  gap: 10px;
+}
+.cases-file-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+.cases-register-grid,
+.cases-action-groups {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+.cases-file-grid article,
+.cases-register-grid article,
+.cases-action-groups article {
+  display: grid;
+  align-content: start;
+  gap: 7px;
+  padding: 13px;
+  border: 1px solid rgba(14, 45, 69, .1);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, .92);
+}
+.cases-file-grid span {
+  color: var(--muted);
+  font-size: .72rem;
+  font-weight: 850;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+.cases-file-grid strong,
+.cases-register-grid h5,
+.cases-action-groups h5 {
+  margin: 0;
+  color: var(--blue-900);
+  line-height: 1.25;
+}
+.cases-file-grid small,
+.cases-register-grid small {
+  color: var(--muted);
+  font-size: .78rem;
+  font-weight: 750;
+}
+.cases-register-grid p,
+.cases-register-grid ul {
+  margin: 0;
+  color: var(--ink);
+  font-size: .88rem;
+  line-height: 1.45;
+}
+.cases-register-grid ul {
+  padding-left: 18px;
+}
+.cases-action-groups .btn {
+  width: 100%;
+  justify-content: center;
+}
+@media (max-width: 1180px) {
+  .cases-file-grid,
+  .cases-register-grid,
+  .cases-action-groups {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 680px) {
+  .cases-file-grid,
+  .cases-register-grid,
+  .cases-action-groups {
+    grid-template-columns: 1fr;
+  }
+}
