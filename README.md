@@ -201,6 +201,14 @@ Notifications e-mail optionnelles :
 - `TVF_EMAIL_REPLY_TO` : adresse de réponse. Par défaut : `contact@territoiresvivantsfrance.fr`.
 - `TVF_NOTIFICATION_EMAIL` : adresse qui reçoit les notifications internes. Par défaut : `contact@territoiresvivantsfrance.fr`.
 - `TVF_OUTBOUND_TIMEOUT_MS` : optionnel, délai maximal des appels Supabase/e-mail. Par défaut : `9000`.
+Variables de protection anti-abus :
+
+- `TVF_ADMIN_LOGIN_LIMIT` : nombre maximal de tentatives de connexion par fenêtre. Par défaut : `8`.
+- `TVF_ADMIN_LOGIN_WINDOW_MS` : durée de la fenêtre de connexion. Par défaut : `900000` (15 minutes).
+- `TVF_CONTACT_RATE_LIMIT` : nombre maximal de soumissions publiques par fenêtre. Par défaut : `8`.
+- `TVF_CONTACT_RATE_WINDOW_MS` : durée de la fenêtre des formulaires. Par défaut : `600000` (10 minutes).
+
+Le fichier `.env.example` recense toutes les variables attendues sans contenir de secret. Copiez uniquement les noms nécessaires dans votre environnement local ou dans Vercel, puis utilisez des valeurs générées depuis les services concernés.
 
 Fonctionnement : la demande est d'abord enregistrée dans Supabase. Ensuite, l'API tente d'envoyer une notification à TVF et un accusé de réception à l'utilisateur si son e-mail est renseigné. Une erreur d'e-mail ne bloque pas l'enregistrement de la demande.
 
@@ -224,6 +232,10 @@ Ordre recommande :
 5. Traiter les demandes selon le guide interne.
 
 Les documents operationnels restent des supports internes tant qu'ils ne sont pas explicitement publies sur le site.
+Contrôles disponibles :
+
+- `npm run check` : syntaxe JavaScript et tests API simulés, y compris formulaire, Dashboard et sécurité anti-abus.
+- `npm run test:production` : test Dashboard contre l'environnement réellement chargé. Ce contrôle nécessite `TVF_ADMIN_TOKEN`, `SUPABASE_URL` et `SUPABASE_SERVICE_ROLE_KEY` valides.
 
 ## Back-office demandes
 

@@ -7,7 +7,7 @@ process.env.TVF_DISABLE_ADMIN_AUDIT = process.env.TVF_DISABLE_ADMIN_AUDIT || "1"
 
 const testsDir = join(process.cwd(), "tests");
 const files = readdirSync(testsDir)
-  .filter((file) => /^admin-.*-api\.test\.js$/.test(file))
+  .filter((file) => /^(?:admin-.*-api|contact-api|dashboard-api|rate-limit)\.test\.js$/.test(file))
   .sort();
 
 const failed = [];

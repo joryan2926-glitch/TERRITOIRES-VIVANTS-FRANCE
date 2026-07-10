@@ -1,3 +1,4 @@
+const { consumeRateLimit } = require("../lib/api/rate-limit");
 const MAX_BODY_SIZE = 32 * 1024;
 const CONTACT_TABLE = process.env.SUPABASE_CONTACTS_TABLE || "contacts";
 const DEFAULT_CONTACT_EMAIL = "contact@territoiresvivantsfrance.fr";
@@ -588,6 +589,7 @@ module.exports = async function handler(req, res) {
   }
 
   try {
+    consumeRateLimit(req, res, { scope: "public-contact", limit: process.env.TVF_CONTACT_RATE_LIMIT || 8, windowMs: process.env.TVF_CONTACT_RATE_WINDOW_MS || 10 * 60 * 1000 });
     const data = await readJsonBody(req);
     const submission = buildSubmission(data, req);
     validateSubmission(data, submission);
