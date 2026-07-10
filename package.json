@@ -6,6 +6,7 @@
     "check": "npm run check:js && npm run test:admin",
     "check:js": "node scripts/check-js.js",
     "test:admin": "node scripts/run-admin-api-tests.js",
-    "test:production": "node tests/dashboard-real-env.test.js"
+    "test:production": "node tests/dashboard-real-env.test.js",
+    "audit:tvf-os": "node scripts/audit-tvf-os-operationnel.js"
   }
 }
