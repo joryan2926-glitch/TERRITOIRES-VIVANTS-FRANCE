@@ -108,7 +108,7 @@ const partnerProfiles = {
     contribution: "Mise en relation, expertise, appui projet, relais local, mobilisation de ressources ou contribution ponctuelle.",
     documents: ["Presentation de la structure", "Contacts utiles", "Contribution possible", "Territoire concerne", "Contraintes ou disponibilites"],
     approach: "Qualifier le role exact attendu et proposer une prochaine action simple, datee et suivie.",
-    benefit: "Cooperation claire, traçable et orientee impact territorial."
+    benefit: "Cooperation claire, tracable et orientee impact territorial."
   },
   autre: {
     title: "Acteur a qualifier",
@@ -423,6 +423,31 @@ function crmSectorKey(item = {}, type = "contact") {
 function crmPartnerProfile(item = {}, type = "contact") {
   return partnerProfiles[crmSectorKey(item, type)] || partnerProfiles.autre;
 }
+function crmClientId(item = {}, type = "contact") {
+  const prefix = type === "organization" ? "TVF-ORG" : "TVF-CLI";
+  const raw = String(item.id || item.email || item.name || item.display_name || Date.now()).replace(/[^a-zA-Z0-9]/g, "").toUpperCase();
+  return `${prefix}-${raw.slice(0, 8).padEnd(8, "0")}`;
+}
+
+function crmInstructionLabel(item = {}, type = "contact") {
+  const profile = crmPartnerProfile(item, type);
+  const territory = item.city || item.department || item.region || "Territoire a preciser";
+  return `${profile.title} - ${territory}`;
+}
+
+function instructionSummaryPanel(item, type) {
+  const profile = crmPartnerProfile(item, type);
+  const clientId = crmClientId(item, type);
+  const labelText = crmInstructionLabel(item, type);
+  const owner = type === "organization" ? item.name : item.display_name;
+  return `<section class="crm-instruction-panel"><div><p class="section-kicker">Fichier client</p><h4>${escapeHtml(clientId)}</h4><p>${escapeHtml(owner || "Fiche a completer")}</p></div><div class="crm-instruction-grid"><article><span>Parcours</span><strong>${escapeHtml(labelText)}</strong></article><article><span>Contribution</span><strong>${escapeHtml(profile.title)}</strong></article><article><span>Dossier</span><strong>Instruction a ouvrir ou suivre</strong></article><article><span>Pieces</span><strong>${escapeHtml(profile.documents.length)} pieces a verifier</strong></article></div></section>`;
+}
+
+function instructionActions(item, type) {
+  const email = item.email;
+  const phone = type === "organization" ? item.phone : (item.phone || item.mobile);
+  return `<section class="crm-instruction-actions"><div class="admin-panel-head"><div><p class="section-kicker">Parcours d'instruction</p><h4>Enregistrer, qualifier et rattacher</h4><p>Les actions principales sont regroupees pour eviter les doublons de boutons et guider le traitement du dossier.</p></div></div><div class="crm-action-row"><button class="btn primary" type="submit">Enregistrer la fiche</button><button class="btn secondary" type="button" data-crm-partner-action="case">Creer dossier d'instruction</button><button class="btn secondary" type="button" data-crm-partner-action="qualify">Ajouter note de qualification</button><button class="btn secondary" type="button" data-crm-partner-action="task">Creer tache de suivi</button><button class="btn secondary" type="button" data-crm-add-history>Note libre</button>${email ? `<a class="btn secondary" href="mailto:${escapeHtml(email)}">Ecrire</a>` : ""}${phone ? `<a class="btn secondary" href="tel:${escapeHtml(phone)}">Appeler</a>` : ""}</div></section>`;
+}
 function partnerCooperationPanel(item, type) {
   const profile = crmPartnerProfile(item, type);
   return `<section class="crm-cooperation-panel"><div><p class="section-kicker">Cooperation territoriale</p><h4>${escapeHtml(profile.title)}</h4><p>${escapeHtml(profile.contribution)}</p></div><div><span>Approche recommandee</span><p>${escapeHtml(profile.approach)}</p><span>Interet pour TVF</span><p>${escapeHtml(profile.benefit)}</p></div></section>`;
@@ -486,6 +511,7 @@ function renderContactDetail(item, historyItems) {
     <div class="admin-detail-title"><p class="section-kicker">Fiche contact</p><h3>${escapeHtml(item.display_name)}</h3><p>${escapeHtml(item.email || item.phone || "Coordonnees a completer")}</p></div>
     <div class="admin-meta-grid"><div><span>E-mail</span><a href="mailto:${escapeHtml(item.email || "")}">${escapeHtml(item.email || "Non renseigne")}</a></div><div><span>Telephone</span><strong>${escapeHtml(item.phone || item.mobile || "Non renseigne")}</strong></div><div><span>Consentement</span><strong>${escapeHtml(label(consentLabels, item.consent_status))}</strong></div><div><span>Dernier echange</span><strong>${escapeHtml(formatDate(item.last_interaction_at))}</strong></div></div>
     ${assistantPanel(item, "contact")}
+    ${instructionSummaryPanel(item, "contact")}
     ${relationPathPanel(item, "contact")}
     ${partnerCooperationPanel(item, "contact")}
     ${partnerDocumentsPanel(item, "contact")}
@@ -503,7 +529,8 @@ function renderContactDetail(item, historyItems) {
     <label class="crm-wide-field">Notes internes<textarea name="notes" rows="5">${escapeHtml(item.notes || "")}</textarea></label>
     <section class="crm-relations"><p class="section-kicker">Organisations rattachees</p>${orgs.length ? orgs.map((link) => `<article><strong>${escapeHtml(link.organizations?.name || "Organisation")}</strong><span>${escapeHtml(link.role_label || "Role non renseigne")}${link.is_primary ? " - principal" : ""}</span></article>`).join("") : "<p>Aucune organisation rattachee.</p>"}</section>
     ${historyPanel(historyItems)}
-    <div class="admin-detail-actions"><button class="btn primary" type="submit">Enregistrer</button><button class="btn secondary" type="button" data-crm-quick="relance_7j">Relance 7 jours</button><button class="btn secondary" type="button" data-crm-quick="consent_granted">Consentement OK</button><button class="btn secondary" type="button" data-crm-partner-action="qualify">Qualifier partenariat</button><button class="btn secondary" type="button" data-crm-partner-action="task">Creer tache de contact</button><button class="btn secondary" type="button" data-crm-partner-action="case">Ouvrir dossier</button><a class="btn secondary" href="mailto:${escapeHtml(item.email || "")}">Ecrire</a><a class="btn secondary" href="tel:${escapeHtml(item.phone || item.mobile || "")}">Appeler</a></div>
+    <div class="admin-detail-actions"><button class="btn secondary" type="button" data-crm-quick="relance_7j">Relance 7 jours</button><button class="btn secondary" type="button" data-crm-quick="consent_granted">Consentement OK</button></div>
+    ${instructionActions(item, "contact")}
     <p class="form-note" data-crm-save-status role="status" hidden></p>
   </form>`;
 }
@@ -515,6 +542,7 @@ function renderOrganizationDetail(item, historyItems) {
     <div class="admin-detail-title"><p class="section-kicker">Fiche organisation</p><h3>${escapeHtml(item.name)}</h3><p>${escapeHtml(label(organizationTypeLabels, item.organization_type))} - ${escapeHtml(label(relationLabels, item.relation_status))}</p></div>
     <div class="admin-meta-grid"><div><span>E-mail</span><a href="mailto:${escapeHtml(item.email || "")}">${escapeHtml(item.email || "Non renseigne")}</a></div><div><span>Telephone</span><strong>${escapeHtml(item.phone || "Non renseigne")}</strong></div><div><span>Territoire</span><strong>${escapeHtml(item.city || item.department || item.region || "Non renseigne")}</strong></div><div><span>Dernier echange</span><strong>${escapeHtml(formatDate(item.last_interaction_at))}</strong></div></div>
     ${assistantPanel(item, "organization")}
+    ${instructionSummaryPanel(item, "organization")}
     ${relationPathPanel(item, "organization")}
     ${partnerCooperationPanel(item, "organization")}
     ${partnerDocumentsPanel(item, "organization")}
@@ -536,7 +564,8 @@ function renderOrganizationDetail(item, historyItems) {
     <label class="crm-wide-field">Notes internes<textarea name="notes" rows="5">${escapeHtml(item.notes || "")}</textarea></label>
     <section class="crm-relations"><p class="section-kicker">Contacts associes</p>${links.length ? links.map((link) => `<article><strong>${escapeHtml(link.crm_contacts?.display_name || "Contact")}</strong><span>${escapeHtml(link.role_label || link.crm_contacts?.contact_type || "Role non renseigne")}${link.is_primary ? " - principal" : ""}</span></article>`).join("") : "<p>Aucun contact rattache.</p>"}</section>
     ${historyPanel(historyItems)}
-    <div class="admin-detail-actions"><button class="btn primary" type="submit">Enregistrer</button><button class="btn secondary" type="button" data-crm-quick="relance_7j">Relance 7 jours</button><button class="btn secondary" type="button" data-crm-quick="relation_active">Relation active</button><button class="btn secondary" type="button" data-crm-partner-action="qualify">Qualifier partenariat</button><button class="btn secondary" type="button" data-crm-partner-action="task">Creer tache de contact</button><button class="btn secondary" type="button" data-crm-partner-action="case">Ouvrir dossier</button><a class="btn secondary" href="mailto:${escapeHtml(item.email || "")}">Ecrire</a><button class="btn secondary" type="button" data-crm-create-linked-contact>Creer contact rattache</button></div>
+    <div class="admin-detail-actions"><button class="btn secondary" type="button" data-crm-quick="relance_7j">Relance 7 jours</button><button class="btn secondary" type="button" data-crm-quick="relation_active">Relation active</button><button class="btn secondary" type="button" data-crm-create-linked-contact>Creer contact rattache</button></div>
+    ${instructionActions(item, "organization")}
     <p class="form-note" data-crm-save-status role="status" hidden></p>
   </form>`;
 }
@@ -701,7 +730,8 @@ async function createCrmCase(item, type, profile) {
     `Pieces a demander : ${profile.documents.join("; ")}`,
     item.notes ? `Notes CRM : ${item.notes}` : ""
   ].filter(Boolean).join("\n\n");
-  await api("/api/admin-cases", { method: "POST", body: JSON.stringify({ type: "case", case_type: crmCaseType(profileKey), title: crmCaseTitle(item, type, profile), status: "qualification", priority: profileKey === "financeur" || profileKey === "collectivite" ? "haute" : "normale", main_pole: profileKey === "fournisseur" ? "Materiautheque solidaire" : profileKey === "proprietaire_personne_morale" ? "Habitat vivant" : "Partenariats", assigned_to: "TVF", summary, territory, next_action: `Qualifier la demande et demander les pieces : ${profile.documents.slice(0, 3).join(", ")}`, risk_level: profileKey === "proprietaire_personne_morale" || profileKey === "fournisseur" ? "modere" : "faible", decision_status: "non_preparee" }) });
+  const result = await api("/api/admin-cases", { method: "POST", body: JSON.stringify({ type: "case", case_type: crmCaseType(profileKey), title: crmCaseTitle(item, type, profile), status: "qualification", priority: profileKey === "financeur" || profileKey === "collectivite" ? "haute" : "normale", main_pole: profileKey === "fournisseur" ? "Materiautheque solidaire" : profileKey === "proprietaire_personne_morale" ? "Habitat vivant" : "Partenariats", assigned_to: "TVF", summary, territory, next_action: `Qualifier la demande et demander les pieces : ${profile.documents.slice(0, 3).join(", ")}`, risk_level: profileKey === "proprietaire_personne_morale" || profileKey === "fournisseur" ? "modere" : "faible", decision_status: "non_preparee" }) });
+  return result.case;
 }
 async function createCrmWorkTask(item, type, profile) {
   const title = type === "organization" ? `Contacter ${item.name}` : `Contacter ${item.display_name}`;
@@ -718,9 +748,17 @@ async function applyPartnerAction(action) {
   const profile = crmPartnerProfile(item, type);
   if (action === "qualify") await createCrmQualificationNote(item, type, profile);
   if (action === "task") await createCrmWorkTask(item, type, profile);
+  if (action === "case") {
+    const createdCase = await createCrmCase(item, type, profile);
+    await createCrmQualificationNote(item, type, {
+      ...profile,
+      contribution: `${profile.contribution}\nDossier cree : ${createdCase?.case_number || createdCase?.title || "dossier TVF OS"}`
+    });
+    await createCrmWorkTask(item, type, profile);
+  }
   await loadDashboard().catch(() => {});
   await renderDetail();
-  notify("Action partenaire appliquee.", "success");
+  notify(action === "case" ? "Dossier d'instruction cree et rattache a la fiche CRM." : "Action partenaire appliquee.", "success");
 }
 async function quickCrmAction(action) {
   const item = selectedItem();

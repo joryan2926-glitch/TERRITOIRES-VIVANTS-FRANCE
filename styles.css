@@ -7054,3 +7054,76 @@ tr:nth-child(even) td {
 .impact-proof-flow li.is-current button { outline: 2px solid rgba(213,162,56,.55); outline-offset: 1px; }
 @media (max-width:980px) { .impact-proof-flow { grid-template-columns: 1fr 1fr; } }
 @media (max-width:620px) { .impact-proof-flow { grid-template-columns: 1fr; } }
+
+/* CRM TVF OS - fichier client et parcours d'instruction */
+.crm-detail-form > .crm-instruction-panel,
+.crm-detail-form > .crm-instruction-actions {
+  grid-column: 1 / -1;
+}
+.crm-instruction-panel,
+.crm-instruction-actions {
+  display: grid;
+  gap: 14px;
+  padding: 16px;
+  border: 1px solid rgba(14,45,69,.12);
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: var(--shadow-soft);
+}
+.crm-instruction-panel {
+  grid-template-columns: minmax(220px, .75fr) minmax(0, 1.25fr);
+  border-left: 4px solid var(--green-800);
+}
+.crm-instruction-panel h4,
+.crm-instruction-actions h4 {
+  margin: 0;
+  color: var(--blue-900);
+}
+.crm-instruction-panel p {
+  margin: 4px 0 0;
+  color: var(--muted);
+  line-height: 1.5;
+}
+.crm-instruction-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+.crm-instruction-grid article {
+  display: grid;
+  gap: 5px;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(47,125,50,.14);
+  background: #f8faf5;
+}
+.crm-instruction-grid span {
+  color: var(--muted);
+  font-size: .72rem;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+.crm-instruction-grid strong {
+  color: var(--blue-900);
+  line-height: 1.25;
+}
+.crm-action-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+.crm-instruction-actions .admin-panel-head {
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(14,45,69,.1);
+}
+@media (max-width: 900px) {
+  .crm-instruction-panel,
+  .crm-instruction-grid {
+    grid-template-columns: 1fr;
+  }
+  .crm-action-row .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
