@@ -7,6 +7,7 @@
     "check:js": "node scripts/check-js.js",
     "test:admin": "node scripts/run-admin-api-tests.js",
     "test:production": "node tests/dashboard-real-env.test.js",
-    "audit:tvf-os": "node scripts/audit-tvf-os-operationnel.js"
+    "audit:tvf-os": "node scripts/audit-tvf-os-operationnel.js",
+    "check:tvf-os:production": "node scripts/check-tvf-os-production.js"
   }
 }

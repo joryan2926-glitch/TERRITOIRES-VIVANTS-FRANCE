@@ -1,7 +1,7 @@
 const crypto = require("crypto");
 
 const CONTACT_TABLE = process.env.SUPABASE_CONTACTS_TABLE || "contacts";
-const OUTBOUND_TIMEOUT_MS = Number(process.env.TVF_OUTBOUND_TIMEOUT_MS || 9000);
+const OUTBOUND_TIMEOUT_MS = Math.max(Number(process.env.TVF_OUTBOUND_TIMEOUT_MS || 15000), 15000);
 const ACTIVE_STATUSES = new Set(["nouveau", "a_qualifier", "en_cours", "rendez_vous", "en_attente", "accepte"]);
 const CLOSED_STATUSES = new Set(["refuse", "archive"]);
 
@@ -163,7 +163,7 @@ async function listDashboardContacts(rangeDays, filters = {}) {
   params.set("select", selectColumns());
   params.set("created_at", `gte.${since}`);
   params.set("order", "created_at.desc");
-  params.set("limit", "1000");
+  params.set("limit", "500");
   if (filters.status && filters.status !== "all") params.set("status", `eq.${filters.status}`);
   if (filters.priority && filters.priority !== "all") params.set("priority", `eq.${filters.priority}`);
   if (filters.category && filters.category !== "all") params.set("category", `eq.${filters.category}`);
@@ -568,7 +568,7 @@ module.exports = async function handler(req, res) {
     const statusCode = error.statusCode || 500;
     sendJson(res, statusCode, {
       ok: false,
-      error: statusCode >= 500 ? "Dashboard temporairement non charge : vérifiez la configuration Supabase." : error.message,
+      error: statusCode >= 500 ? "Dashboard temporairement non charge : verifiez la configuration Supabase." : error.message,
       code: error.code || undefined,
       details: process.env.NODE_ENV === "development" ? error.details || error.message : undefined,
     });

@@ -154,3 +154,26 @@ TVF OS sera considere operationnel V1 lorsque :
 5. un reporting simple peut etre produit ;
 6. les roles et traces sont verifies ;
 7. les limites IA, e-mail et RGPD sont clairement encadrees.
+
+---
+
+## 11. Controle production lecture seule
+
+Commande a lancer apres chaque migration Supabase ou deploiement Vercel :
+
+```bash
+npm run check:tvf-os:production
+```
+
+Cette commande charge le fichier `.env` local, appelle les modules TVF OS en lecture seule et genere `documents/rapport-controle-production-tvf-os.md`.
+
+Resultat du controle du 2026-07-10 :
+
+| Controle | Resultat |
+|---|---|
+| Site public | Accueil, admin-login, admin et contact repondent en HTTP 200 |
+| Modules TVF OS en lecture | 20 / 20 OK |
+| Creation de donnees | Aucune, controle lecture seule |
+| Secrets | Non affiches dans le rapport |
+
+Interpretation : TVF OS repond en lecture reelle avec Supabase. La prochaine validation doit porter sur un parcours terrain controle : formulaire public, demande, contact, dossier, tache, document, decision et reporting.
