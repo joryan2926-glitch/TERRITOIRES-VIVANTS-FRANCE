@@ -44,6 +44,15 @@ create table if not exists public.integration_configs (
   constraint integration_configs_health_check check (health_status in ('healthy','degraded','down','unknown'))
 );
 
+-- Compatibilite avec les installations anterieures : CREATE TABLE IF NOT EXISTS
+-- ne met pas a jour une contrainte deja presente.
+alter table public.integration_configs
+  drop constraint if exists integration_configs_type_check;
+
+alter table public.integration_configs
+  add constraint integration_configs_type_check
+  check (integration_type in ('api','database','email','payment','workspace','ai','storage','analytics','webhook','other'));
+
 create table if not exists public.module_feature_flags (
   id uuid primary key default gen_random_uuid(),
   module_key text not null,
