@@ -7029,3 +7029,28 @@ tr:nth-child(even) td {
 .dashboard-activity-item span { padding: 5px 9px; border-radius: 999px; background: rgba(46,125,50,.1); color: var(--green-700); font-size: .76rem; font-weight: 800; }
 .dashboard-activity-item small { color: var(--muted); font-size: .78rem; font-weight: 700; }
 @media (max-width: 900px) { .dashboard-activity-summary, .dashboard-activity-item { grid-template-columns: 1fr; } }
+
+/* Chaine inter-modules Dossiers TVF OS */
+.cases-module-chain { grid-column: 1 / -1; display: grid; gap: 12px; padding: 16px; border: 1px solid rgba(14,45,69,.14); border-radius: 10px; background: #f8faf6; }
+.cases-module-chain ol { display: grid; grid-template-columns: repeat(5,minmax(0,1fr)); gap: 8px; margin: 0; padding: 0; list-style: none; }
+.cases-module-chain a { display: grid; grid-template-columns: 28px minmax(0,1fr); gap: 2px 8px; min-height: 84px; padding: 12px; border: 1px solid rgba(14,45,69,.12); border-radius: 8px; background: #fff; color: var(--blue-900); text-decoration: none; }
+.cases-module-chain a:hover, .cases-module-chain a:focus-visible { border-color: var(--green-700); box-shadow: var(--shadow-soft); }
+.cases-module-chain a > span { grid-row: 1 / span 2; display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: #e8eee8; color: var(--blue-900); font-weight: 800; }
+.cases-module-chain strong { line-height: 1.2; }
+.cases-module-chain small { color: var(--muted); line-height: 1.3; }
+.cases-module-chain li.is-current a, .cases-module-chain li.is-ready a { border-color: rgba(47,125,50,.35); background: #f4fbf1; }
+.cases-module-chain li.is-current a > span, .cases-module-chain li.is-ready a > span { background: var(--green-800); color: #fff; }
+.cases-module-chain li.is-attention a { border-color: rgba(213,162,56,.42); background: #fffaf0; }
+@media (max-width:980px) { .cases-module-chain ol { grid-template-columns: 1fr 1fr; } }
+@media (max-width:620px) { .cases-module-chain ol { grid-template-columns: 1fr; } }
+/* Parcours de preuve Impact TVF OS */
+.impact-proof-flow { display: grid; grid-template-columns: repeat(5,minmax(0,1fr)); gap: 8px; margin: 0; padding: 0; list-style: none; }
+.impact-proof-flow button { width: 100%; display: grid; grid-template-columns: 28px minmax(0,1fr); gap: 2px 8px; min-height: 78px; padding: 11px; border: 1px solid rgba(14,45,69,.12); border-radius: 8px; background: #fff; color: var(--blue-900); text-align: left; cursor: pointer; }
+.impact-proof-flow button:hover, .impact-proof-flow button:focus-visible { border-color: var(--green-700); box-shadow: var(--shadow-soft); }
+.impact-proof-flow span { grid-row: 1 / span 2; display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: #e8eee8; font-weight: 800; }
+.impact-proof-flow small { color: var(--muted); line-height: 1.25; }
+.impact-proof-flow li.is-done button { border-color: rgba(47,125,50,.32); background: #f4fbf1; }
+.impact-proof-flow li.is-done span { background: var(--green-800); color: #fff; }
+.impact-proof-flow li.is-current button { outline: 2px solid rgba(213,162,56,.55); outline-offset: 1px; }
+@media (max-width:980px) { .impact-proof-flow { grid-template-columns: 1fr 1fr; } }
+@media (max-width:620px) { .impact-proof-flow { grid-template-columns: 1fr; } }
