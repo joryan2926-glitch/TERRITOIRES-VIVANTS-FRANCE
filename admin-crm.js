@@ -11,13 +11,6 @@ const contactTypeLabels = {
   partenaire: "Partenaire",
   autre: "Autre",
 };
-const consentLabels = {
-  unknown: "Inconnu",
-  pending: "A demander",
-  granted: "Accorde",
-  refused: "Refuse",
-  expired: "Expire",
-};
 const confidentialityLabels = {
   public: "Public",
   standard: "Standard",
@@ -274,7 +267,7 @@ function filtersParams() {
   const params = new URLSearchParams();
   params.set("entity", currentView === "organizations" ? "organizations" : currentView === "duplicates" ? "duplicates" : "contacts");
   params.set("limit", "120");
-  ["q", "contact_type", "consent_status", "organization_type", "relation_status"].forEach((name) => {
+  ["q", "contact_type", "organization_type", "relation_status"].forEach((name) => {
     const value = String(data.get(name) || "").trim();
     if (value) params.set(name, value);
   });
@@ -319,7 +312,7 @@ function renderKpis() {
   kpisEl.innerHTML = `
     <article><span>Contacts</span><strong>${escapeHtml(dashboard.contacts_total || 0)}</strong><small>Personnes actives</small></article>
     <article><span>Organisations</span><strong>${escapeHtml(dashboard.organizations_total || 0)}</strong><small>Structures suivies</small></article>
-    <article data-tone="warning"><span>Consentements</span><strong>${escapeHtml(dashboard.consent_missing || 0)}</strong><small>A verifier</small></article>
+
     <article data-tone="danger"><span>Relances</span><strong>${escapeHtml(dashboard.overdue_actions || 0)}</strong><small>En retard</small></article>
     <article data-tone="info"><span>Doublons</span><strong>${escapeHtml(dashboard.duplicates_pending || 0)}</strong><small>A verifier</small></article>`;
 }
@@ -327,11 +320,11 @@ function renderKpis() {
 function renderControlPanel() {
   if (!controlEl || !dashboard) return;
   const contacts = Number(dashboard.contacts_total || 0);
-  const missingConsent = Number(dashboard.consent_missing || 0);
+  const toQualify = Number(dashboard.contacts_to_qualify || 0);
   const overdue = Number(dashboard.overdue_actions || 0);
   const duplicates = Number(dashboard.duplicates_pending || 0);
-  const nextDecision = overdue ? "Relancer les contacts" : missingConsent ? "Verifier les consentements" : duplicates ? "Fusionner les doublons" : contacts ? "Qualifier en dossier" : "Creer les premiers contacts";
-  const status = overdue || missingConsent ? "Suivi requis" : duplicates ? "Nettoyage requis" : "CRM exploitable";
+  const nextDecision = overdue ? "Relancer les contacts" : toQualify ? "Qualifier les fiches contact" : duplicates ? "Fusionner les doublons" : contacts ? "Qualifier en dossier" : "Creer les premiers contacts";
+  const status = overdue || toQualify ? "Suivi requis" : duplicates ? "Nettoyage requis" : "CRM exploitable";
   controlEl.innerHTML = `
     <div class="admin-panel-head">
       <div>
@@ -344,7 +337,7 @@ function renderControlPanel() {
     <div class="crm-control-grid">
       <article><span>Prochaine action</span><strong>${escapeHtml(nextDecision)}</strong><small>priorite</small></article>
       <article data-tone="warning"><span>Relances</span><strong>${escapeHtml(overdue)}</strong><small>en retard</small></article>
-      <article data-tone="warning"><span>Consentements</span><strong>${escapeHtml(missingConsent)}</strong><small>a verifier</small></article>
+      <article data-tone="warning"><span>Fiches a qualifier</span><strong>${escapeHtml(toQualify)}</strong><small>contacts</small></article>
       <article data-tone="info"><span>Doublons</span><strong>${escapeHtml(duplicates)}</strong><small>a verifier</small></article>
     </div>
     <div class="crm-control-links">
@@ -383,7 +376,7 @@ function renderList() {
       </button>`;
     }
     return `<button class="admin-request crm-card${active}" type="button" data-crm-id="${escapeHtml(item.id)}">
-      <span class="admin-request-head"><strong>${escapeHtml(item.display_name)}</strong><small>${escapeHtml(label(consentLabels, item.consent_status))}</small></span>
+      <span class="admin-request-head"><strong>${escapeHtml(item.display_name)}</strong><small>${escapeHtml(formatDate(item.next_action_due_at))}</small></span>
       <span>${escapeHtml(item.email || item.phone || item.mobile || "Coordonnees a completer")}</span>
       <span class="admin-badges"><em data-kind="category">${escapeHtml(label(contactTypeLabels, item.contact_type))}</em><em data-kind="status">${escapeHtml(label(confidentialityLabels, item.confidentiality_level))}</em></span>
     </button>`;
@@ -473,7 +466,8 @@ function partnerDocumentsPanel(item, type) {
   return `<section class="crm-documents-panel"><div class="admin-panel-head"><div><p class="section-kicker">Pieces a demander</p><h4>Dossier de qualification</h4></div><strong>${escapeHtml(profile.documents.length)} pieces</strong></div><ul>${profile.documents.map((doc) => `<li>${escapeHtml(doc)}</li>`).join("")}</ul></section>`;
 }
 function relationPathPanel(item, type) {
-  const stage = type === "organization" ? item.relation_status : item.consent_status;
+  const contactStage = item.next_action ? "suivi" : (item.email || item.phone || item.mobile ? "qualification" : "identification");
+  const stage = type === "organization" ? item.relation_status : contactStage;
   const steps = type === "organization"
     ? [
         ["prospect", "Identifier"],
@@ -482,12 +476,13 @@ function relationPathPanel(item, type) {
         ["ancien", "Capitaliser"],
       ]
     : [
-        ["unknown", "Identifier"],
-        ["pending", "Consentement"],
-        ["granted", "Qualifier"],
-        ["granted", "Mobiliser"],
+        ["identification", "Identifier"],
+        ["qualification", "Qualifier"],
+        ["suivi", "Suivre"],
+        ["mobilisation", "Mobiliser"],
       ];
-  const doneIndex = Math.max(0, steps.findIndex(([key]) => key === stage));
+  const foundIndex = steps.findIndex(([key]) => key === stage);
+  const doneIndex = foundIndex >= 0 ? foundIndex : 0;
   return `<ol class="crm-relation-path" aria-label="Parcours relationnel">
     ${steps.map(([key, text], index) => `<li class="${index <= doneIndex ? "is-done" : ""}"><span>${index + 1}</span><strong>${escapeHtml(text)}</strong><small>${escapeHtml(key)}</small></li>`).join("")}
   </ol>`;
@@ -524,7 +519,7 @@ function renderContactDetail(item, historyItems) {
   detailEl.innerHTML = `<form class="admin-detail-form crm-detail-form" data-crm-detail-form data-type="contact">
     <input type="hidden" name="id" value="${escapeHtml(item.id)}">
     <div class="admin-detail-title"><p class="section-kicker">Fiche contact</p><h3>${escapeHtml(item.display_name)}</h3><p>${escapeHtml(item.email || item.phone || "Coordonnees a completer")}</p></div>
-    <div class="admin-meta-grid"><div><span>E-mail</span><a href="mailto:${escapeHtml(item.email || "")}">${escapeHtml(item.email || "Non renseigne")}</a></div><div><span>Telephone</span><strong>${escapeHtml(item.phone || item.mobile || "Non renseigne")}</strong></div><div><span>Consentement</span><strong>${escapeHtml(label(consentLabels, item.consent_status))}</strong></div><div><span>Dernier echange</span><strong>${escapeHtml(formatDate(item.last_interaction_at))}</strong></div></div>
+    <div class="admin-meta-grid"><div><span>E-mail</span><a href="mailto:${escapeHtml(item.email || "")}">${escapeHtml(item.email || "Non renseigne")}</a></div><div><span>Telephone</span><strong>${escapeHtml(item.phone || item.mobile || "Non renseigne")}</strong></div><div><span>Type</span><strong>${escapeHtml(label(contactTypeLabels, item.contact_type))}</strong></div><div><span>Dernier echange</span><strong>${escapeHtml(formatDate(item.last_interaction_at))}</strong></div></div>
     ${assistantPanel(item, "contact")}
     ${instructionSummaryPanel(item, "contact")}
     ${relationPathPanel(item, "contact")}
@@ -532,8 +527,7 @@ function renderContactDetail(item, historyItems) {
     ${partnerDocumentsPanel(item, "contact")}
     <label>Nom affiche<input name="display_name" value="${escapeHtml(item.display_name || "")}"></label>
     <label>Type contact<select name="contact_type">${options(contactTypeLabels, item.contact_type)}</select></label>
-    <label>Consentement RGPD<select name="consent_status">${options(consentLabels, item.consent_status)}</select></label>
-    <label>Source consentement<input name="consent_source" value="${escapeHtml(item.consent_source || "")}" placeholder="Formulaire, e-mail, appel..."></label>
+
     <label>Niveau confidentialite<select name="confidentiality_level">${options(confidentialityLabels, item.confidentiality_level)}</select></label>
     <label>E-mail<input name="email" type="email" value="${escapeHtml(item.email || "")}"></label>
     <label>Telephone<input name="phone" value="${escapeHtml(item.phone || "")}"></label>
@@ -544,7 +538,7 @@ function renderContactDetail(item, historyItems) {
     <label class="crm-wide-field">Notes internes<textarea name="notes" rows="5">${escapeHtml(item.notes || "")}</textarea></label>
     <section class="crm-relations"><p class="section-kicker">Organisations rattachees</p>${orgs.length ? orgs.map((link) => `<article><strong>${escapeHtml(link.organizations?.name || "Organisation")}</strong><span>${escapeHtml(link.role_label || "Role non renseigne")}${link.is_primary ? " - principal" : ""}</span></article>`).join("") : "<p>Aucune organisation rattachee.</p>"}</section>
     ${historyPanel(historyItems)}
-    <div class="admin-detail-actions"><button class="btn secondary" type="button" data-crm-quick="relance_7j">Relance 7 jours</button><button class="btn secondary" type="button" data-crm-quick="consent_granted">Consentement OK</button></div>
+    <div class="admin-detail-actions"><button class="btn secondary" type="button" data-crm-quick="relance_7j">Relance 7 jours</button></div>
     ${instructionActions(item, "contact")}
     <p class="form-note" data-crm-save-status role="status" hidden></p>
   </form>`;
@@ -597,10 +591,10 @@ function csvCell(value) {
 function exportCsv() {
   const items = currentItems();
   if (!items.length) return notify("Aucune donnee a exporter.", "warning");
-  const headers = currentView === "organizations" ? ["Nom", "Type", "Relation", "Email", "Telephone", "Ville", "Prochaine action"] : ["Nom", "Type", "Consentement", "Email", "Telephone", "Prochaine action"];
+  const headers = currentView === "organizations" ? ["Nom", "Type", "Relation", "Email", "Telephone", "Ville", "Prochaine action"] : ["Nom", "Type", "Email", "Telephone", "Prochaine action"];
   const rows = currentView === "organizations"
     ? organizations.map((item) => [item.name, label(organizationTypeLabels, item.organization_type), label(relationLabels, item.relation_status), item.email, item.phone, item.city, item.next_action])
-    : contacts.map((item) => [item.display_name, label(contactTypeLabels, item.contact_type), label(consentLabels, item.consent_status), item.email, item.phone || item.mobile, item.next_action]);
+    : contacts.map((item) => [item.display_name, label(contactTypeLabels, item.contact_type), item.email, item.phone || item.mobile, item.next_action]);
   const csv = [headers, ...rows].map((row) => row.map(csvCell).join(";")).join("\n");
   const blob = new Blob(["\ufeff" + csv], { type: "text/csv;charset=utf-8" });
   const url = URL.createObjectURL(blob);
@@ -635,7 +629,7 @@ function contactForm(defaults = {}) {
     <label>E-mail<input name="email" type="email" value="${escapeHtml(defaults.email || "")}"></label>
     <label>Telephone<input name="phone" value="${escapeHtml(defaults.phone || "")}"></label>
     <label>Type contact<select name="contact_type">${options(contactTypeLabels, defaults.contact_type || "autre")}</select></label>
-    <label>Consentement<select name="consent_status">${options(consentLabels, defaults.consent_status || "unknown")}</select></label>
+
     <label>Confidentialite<select name="confidentiality_level">${options(confidentialityLabels, defaults.confidentiality_level || "standard")}</select></label>
     <label class="admin-create-wide">Notes<textarea name="notes" rows="5">${escapeHtml(defaults.notes || "")}</textarea></label>
     <div class="admin-detail-actions admin-create-wide"><button class="btn primary" type="submit">Creer</button><button class="btn secondary" type="button" data-crm-close-modal>Annuler</button></div><p class="form-note admin-create-wide" data-crm-modal-status hidden></p>`;
@@ -784,12 +778,7 @@ async function quickCrmAction(action) {
     data.next_action = "Relancer et mettre a jour la fiche relationnelle";
     data.next_action_due_at = quickDue(7);
   }
-  if (action === "consent_granted" && type === "contact") {
-    data.consent_status = "granted";
-    data.consent_source = item.consent_source || "Validation manuelle TVF OS";
-    data.next_action = "Qualifier la relation et rattacher une organisation si besoin";
-    data.next_action_due_at = quickDue(14);
-  }
+
   if (action === "relation_active" && type === "organization") {
     data.relation_status = "actif";
     data.next_action = "Planifier un echange de cadrage ou une proposition de cooperation";

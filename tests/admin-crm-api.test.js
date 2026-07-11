@@ -48,7 +48,7 @@ function testRules() {
   assert.strictEqual(contact.email, "alice@example.fr");
   assert.strictEqual(contact.contact_type, "elu");
   assert.strictEqual(contact.consent_status, "unknown");
-  assert.ok(contact.next_action.includes("consentement"));
+  assert.ok(contact.next_action.includes("coordonnees") || contact.next_action.includes("Qualifier"));
 
   const org = organizationPayload({ name: "Mairie Demo", city: "Saint-Etienne" });
   assert.strictEqual(org.organization_type, "collectivite");
@@ -57,7 +57,7 @@ function testRules() {
 
   const assistant = crmAssistant({ display_name: "Bob", contact_type: "autre", consent_status: "unknown" }, "contact");
   assert.ok(assistant.missing_fields.includes("coordonnees"));
-  assert.ok(assistant.missing_fields.includes("consentement RGPD"));
+  assert.ok(assistant.missing_fields.includes("role externe"));
 
   assert.throws(() => contactPayload({ display_name: "X", contact_type: "bad" }), /Type de contact invalide/);
   assert.throws(() => organizationPayload({ name: "X", relation_status: "bad" }), /Niveau de relation invalide/);
@@ -161,7 +161,7 @@ async function testDashboard() {
     const result = await runHandler({ url: "/api/admin-crm?entity=dashboard" });
     assert.strictEqual(result.statusCode, 200);
     assert.strictEqual(result.json.dashboard.contacts_total, 1);
-    assert.strictEqual(result.json.dashboard.consent_missing, 1);
+    assert.strictEqual(result.json.dashboard.contacts_to_qualify, 1);
     assert.strictEqual(result.json.dashboard.duplicates_pending, 1);
   } finally {
     global.fetch = originalFetch;
