@@ -13,8 +13,8 @@ const TVF_ADMIN_GROUPS = [
     ],
   },
   {
-    label: "Entrees",
-    description: "Demandes et relation",
+    label: "A traiter",
+    description: "Demandes et contacts",
     modules: [
       { href: "admin-demandes", label: "Demandes", icon: "&#9993;" },
       { href: "admin-emails", label: "E-mails", icon: "@" },
@@ -33,7 +33,7 @@ const TVF_ADMIN_GROUPS = [
   },
   {
     label: "Territoires",
-    description: "Carte et antennes",
+    description: "Carte et impact local",
     modules: [
       { href: "admin-map", label: "Cartographie", icon: "&#8982;" },
       { href: "admin-observatoire", label: "Observatoire", icon: "&#9676;" },
@@ -43,7 +43,7 @@ const TVF_ADMIN_GROUPS = [
   },
   {
     label: "Pilotage",
-    description: "Moyens et controle",
+    description: "Dashboard et securite",
     modules: [
       { href: "admin-finances", label: "Finances", icon: "&euro;" },
       { href: "admin-governance", label: "Gouvernance", icon: "&#9671;" },
@@ -51,8 +51,8 @@ const TVF_ADMIN_GROUPS = [
     ],
   },
   {
-    label: "Systeme",
-    description: "Acces, savoir et IA",
+    label: "Plus",
+    description: "Administration et outils",
     modules: [
       { href: "admin-users", label: "Utilisateurs", icon: "&#9678;" },
       { href: "admin-settings", label: "Parametres", icon: "&#9881;" },
@@ -213,7 +213,7 @@ function createAdminModuleNav() {
       <div class="admin-module-groups">
         ${TVF_ADMIN_GROUPS.map((group) => {
           const activeGroup = groupIsActive(current, group);
-          return `<section class="admin-module-group${activeGroup ? " is-active" : ""}">
+          return `<section class="admin-module-group${activeGroup ? " is-active is-open" : ""}">
             <button class="admin-module-group-head" type="button" aria-expanded="${activeGroup ? "true" : "false"}">
               <span>${group.label}</span>
               <small>${group.description}</small>
