@@ -327,17 +327,32 @@ function renderKpis() {
 function renderControlPanel() {
   if (!controlEl || !dashboard) return;
   const contacts = Number(dashboard.contacts_total || 0);
-  const orgs = Number(dashboard.organizations_total || 0);
   const missingConsent = Number(dashboard.consent_missing || 0);
   const overdue = Number(dashboard.overdue_actions || 0);
   const duplicates = Number(dashboard.duplicates_pending || 0);
-  const collectivites = Number(dashboard.collectivites || 0);
-  const entreprises = Number(dashboard.entreprises || 0);
-  const financeurs = Number(dashboard.financeurs || 0);
-  const proprietaires = Number(dashboard.proprietaires || 0);
   const nextDecision = overdue ? "Relancer les contacts" : missingConsent ? "Verifier les consentements" : duplicates ? "Fusionner les doublons" : contacts ? "Qualifier en dossier" : "Creer les premiers contacts";
   const status = overdue || missingConsent ? "Suivi requis" : duplicates ? "Nettoyage requis" : "CRM exploitable";
-  controlEl.innerHTML = `<div class="admin-panel-head"><div><p class="section-kicker">Conversion relationnelle</p><h3>Transformer les contacts en parcours utiles</h3><p>Cette synthese aide a passer du contact au parcours operationnel : consentement, relance, dossier, pieces, tache et decision.</p></div><strong>${escapeHtml(status)}</strong></div><div class="crm-control-grid"><article><span>Decision suivante</span><strong>${escapeHtml(nextDecision)}</strong><small>priorite</small></article><article><span>Collectivites</span><strong>${escapeHtml(collectivites)}</strong><small>territoires</small></article><article><span>Entreprises</span><strong>${escapeHtml(entreprises)}</strong><small>RSE / materiaux</small></article><article><span>Proprietaires</span><strong>${escapeHtml(proprietaires)}</strong><small>biens ou foncier</small></article><article><span>Financeurs</span><strong>${escapeHtml(financeurs)}</strong><small>mecenat</small></article><article data-tone="warning"><span>Relances</span><strong>${escapeHtml(overdue)}</strong><small>en retard</small></article></div><div class="crm-control-links"><button class="btn secondary" type="button" data-crm-switch="organizations">Voir organisations</button><button class="btn secondary" type="button" data-crm-switch="contacts">Voir contacts</button><a class="btn secondary" href="admin-demandes">Demandes</a><a class="btn secondary" href="admin-dossiers">Dossiers</a><a class="btn secondary" href="admin-documents">Pieces</a><a class="btn secondary" href="admin-work">Taches</a></div>`;
+  controlEl.innerHTML = `
+    <div class="admin-panel-head">
+      <div>
+        <p class="section-kicker">A traiter</p>
+        <h3>Priorite CRM</h3>
+        <p>${escapeHtml(nextDecision)}. Utilisez ensuite la fiche pour creer un dossier, une tache ou une note.</p>
+      </div>
+      <strong>${escapeHtml(status)}</strong>
+    </div>
+    <div class="crm-control-grid">
+      <article><span>Prochaine action</span><strong>${escapeHtml(nextDecision)}</strong><small>priorite</small></article>
+      <article data-tone="warning"><span>Relances</span><strong>${escapeHtml(overdue)}</strong><small>en retard</small></article>
+      <article data-tone="warning"><span>Consentements</span><strong>${escapeHtml(missingConsent)}</strong><small>a verifier</small></article>
+      <article data-tone="info"><span>Doublons</span><strong>${escapeHtml(duplicates)}</strong><small>a verifier</small></article>
+    </div>
+    <div class="crm-control-links">
+      <button class="btn secondary" type="button" data-crm-switch="contacts">Contacts</button>
+      <button class="btn secondary" type="button" data-crm-switch="organizations">Organisations</button>
+      <a class="btn secondary" href="admin-demandes">Demandes liees</a>
+      <a class="btn secondary" href="admin-dossiers">Dossiers</a>
+    </div>`;
 }function currentItems() {
   if (currentView === "organizations") return organizations;
   if (currentView === "duplicates") return duplicates;
@@ -506,7 +521,6 @@ async function renderDetail() {
 }
 
 function renderContactDetail(item, historyItems) {
-  const orgs = item.organization_contacts || [];
   detailEl.innerHTML = `<form class="admin-detail-form crm-detail-form" data-crm-detail-form data-type="contact">
     <input type="hidden" name="id" value="${escapeHtml(item.id)}">
     <div class="admin-detail-title"><p class="section-kicker">Fiche contact</p><h3>${escapeHtml(item.display_name)}</h3><p>${escapeHtml(item.email || item.phone || "Coordonnees a completer")}</p></div>
