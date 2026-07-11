@@ -556,7 +556,7 @@ function workflowState(contact) {
     case: hasCase || ["accepte", "archive"].includes(contact?.status),
     documents: hasCase || piecesText(contact).trim().length > 0,
     task: Boolean(contact?.next_action_due_at),
-    branch: Boolean(contact?.pole || contact?.category),
+    scope: Boolean(contact?.territory || contact?.commune || contact?.category || contact?.pole),
   };
 }
 
@@ -600,13 +600,13 @@ function renderOperationalPath(contact) {
       action: "Creer la tache",
     },
     {
-      key: "branch",
+      key: "scope",
       step: "05",
-      title: "Rattacher au territoire",
-      detail: "Verifier l'antenne, le pole concerne et les besoins de deploiement local.",
-      href: "admin-branches",
-      done: state.branch,
-      action: "Voir antennes",
+      title: "Qualifier le perimetre",
+      detail: "Verifier la commune, le territoire d'intervention et le pole concerne.",
+      href: "admin-map",
+      done: state.scope,
+      action: "Voir la cartographie",
     },
   ];
   return `<section class="admin-operational-path" aria-label="Suite operationnelle TVF OS">
