@@ -707,7 +707,7 @@ function renderDetail() {
       <button class="btn secondary" type="button" data-quick-followup="48h">Relance 48h</button>
       <a class="btn secondary" href="admin-crm">Ouvrir CRM</a>
       <button class="btn secondary" type="button" data-create-task>Creer tache</button>
-      <button class="btn secondary" type="button" data-create-case>Creer dossier</button>
+
       <a class="btn secondary" href="admin-documents">Documents</a>
       <button class="btn ghost" type="button" data-quick-status="refuse">Refuser</button>
       <button class="btn ghost" type="button" data-quick-status="archive">Archiver</button>
@@ -782,15 +782,6 @@ function renderDetail() {
         <button class="btn secondary" type="button" data-admin-copy-response>Copier la reponse</button>
         <button class="btn secondary" type="button" data-admin-open-response>Ouvrir l'e-mail prepare</button>
       </div>
-    </section>
-
-    <section class="admin-conversion-panel" aria-label="Conversion future en dossier">
-      <div>
-        <p class="section-kicker">Conversion dossier</p>
-        <h4>Prete pour le module Dossiers</h4>
-        <p>Cette action cree un dossier de suivi TVF a partir de la demande, puis conserve le lien avec la demande source pour poursuivre l instruction dans le module Dossiers.</p>
-      </div>
-      <button class="btn secondary" type="button" data-create-case>Creer le dossier</button>
     </section>
 
     <div class="admin-message">
