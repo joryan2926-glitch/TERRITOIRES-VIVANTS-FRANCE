@@ -252,10 +252,10 @@ function renderFlow(dashboard) {
     },
     {
       step: "06",
-      title: "Antennes locales",
-      value: "Deploiement",
-      detail: "Piloter Saint-Etienne puis dupliquer la methode sur les futurs territoires.",
-      href: "admin-branches",
+      title: "Suivi & impact",
+      value: "Pilotage",
+      detail: "Consolider les resultats documentes, les preuves et les prochaines decisions TVF.",
+      href: "admin-impact",
       tone: "neutral",
     },
   ];
@@ -286,7 +286,7 @@ function renderNextActions(dashboard) {
     actions.push({ label: "Ouvrir les dossiers", detail: "Passer des contacts qualifies aux dossiers operationnels.", href: "admin-dossiers" });
   }
   actions.push({ label: "Preparer les pieces", detail: "Verifier les conventions, courriers et justificatifs avant transmission.", href: "admin-documents" });
-  actions.push({ label: "Suivre Saint-Etienne", detail: "Actualiser le plan antenne, les besoins locaux et les prochaines etapes.", href: "admin-branches" });
+  actions.push({ label: "Suivre l'impact TVF", detail: "Consolider les resultats documentes et les preuves associees aux dossiers.", href: "admin-impact" });
   nextActionsEl.innerHTML = actions.slice(0, 5)
     .map((action) => `<a href="${escapeHtml(action.href)}"><strong>${escapeHtml(action.label)}</strong><span>${escapeHtml(action.detail)}</span></a>`)
     .join("");
@@ -396,8 +396,7 @@ function renderCasesSummary(cases = {}) {
 
 function renderViews(views) {
   if (!viewsEl) return;
-  viewsEl.innerHTML = Object.values(views || {})
-    .map((view) => `<div class="dashboard-view-item">
+  viewsEl.innerHTML = Object.entries(views || {}).filter(([key]) => key !== "branch").map(([, view]) => `<div class="dashboard-view-item">
       <strong>${escapeHtml(view.label)}</strong>
       <span>${escapeHtml(view.available ? "Disponible" : "A venir")}</span>
       <small>${escapeHtml(view.source || "")}</small>
@@ -408,8 +407,7 @@ function renderViews(views) {
 function renderCoverage(coverage) {
   if (coverageScoreEl) coverageScoreEl.textContent = coverage ? `${coverage.percent}%` : "--";
   if (!coverageEl) return;
-  coverageEl.innerHTML = (coverage?.requirements || [])
-    .map((item) => `<div class="dashboard-compliance-item" data-covered="${item.covered ? "true" : "false"}">
+  coverageEl.innerHTML = (coverage?.requirements || []).filter((item) => !/antenne/i.test(item.label || "")).map((item) => `<div class="dashboard-compliance-item" data-covered="${item.covered ? "true" : "false"}">
       <span>${item.covered ? "OK" : "A corriger"}</span>
       <strong>${escapeHtml(item.label)}</strong>
     </div>`)
