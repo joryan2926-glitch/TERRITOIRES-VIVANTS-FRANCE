@@ -15,26 +15,26 @@ Date : 2026-07-11
 
 | Module | URL testee | Statut | Temps | Observation |
 |---|---|---:|---:|---|
-| Session admin | `/api/admin-session` | OK | 10 ms | Lecture valide |
-| Dashboard public admin | `/api/dashboard?range=30&status=all&priority=all&category=all` | OK | 901 ms | Lecture valide |
-| Demandes entrantes | `/api/admin-contacts?limit=5` | OK | 101 ms | Lecture valide |
-| CRM / contacts | `/api/admin-crm?entity=dashboard` | OK | 104 ms | Lecture valide |
-| E-mails intelligents | `/api/admin-emails?entity=dashboard` | OK | 109 ms | Lecture valide |
-| Dossiers | `/api/admin-cases?entity=dashboard` | OK | 63 ms | Lecture valide |
-| Taches / agenda | `/api/admin-work?entity=dashboard` | OK | 136 ms | Lecture valide |
-| Documents | `/api/admin-documents?entity=dashboard` | OK | 125 ms | Lecture valide |
-| Procedures | `/api/admin-procedures?entity=dashboard` | OK | 124 ms | Lecture valide |
-| Cartographie | `/api/admin-map?entity=dashboard` | OK | 78 ms | Lecture valide |
-| Observatoire | `/api/admin-observatoire?entity=dashboard` | OK | 79 ms | Lecture valide |
-| Antennes | `/api/admin-branches?entity=dashboard` | OK | 132 ms | Lecture valide |
-| Impact | `/api/admin-impact?entity=dashboard` | OK | 73 ms | Lecture valide |
-| Finances | `/api/admin-finances?entity=dashboard` | OK | 128 ms | Lecture valide |
-| Gouvernance | `/api/admin-governance?entity=dashboard` | OK | 147 ms | Lecture valide |
-| Risques / conformite | `/api/admin-risks?entity=dashboard` | OK | 82 ms | Lecture valide |
-| Utilisateurs / roles | `/api/admin-users?entity=dashboard` | OK | 107 ms | Lecture valide |
-| Parametres | `/api/admin-settings?entity=dashboard` | OK | 82 ms | Lecture valide |
-| Connaissances | `/api/admin-knowledge?entity=dashboard` | OK | 119 ms | Lecture valide |
-| Assistant IA | `/api/admin-ai?entity=dashboard` | OK | 188 ms | Lecture valide |
+| Session admin | `/api/admin-session` | OK | 9 ms | Lecture valide |
+| Dashboard public admin | `/api/dashboard?range=30&status=all&priority=all&category=all` | OK | 1152 ms | Lecture valide |
+| Demandes entrantes | `/api/admin-contacts?limit=5` | OK | 108 ms | Lecture valide |
+| CRM / contacts | `/api/admin-crm?entity=dashboard` | OK | 109 ms | Lecture valide |
+| E-mails intelligents | `/api/admin-emails?entity=dashboard` | OK | 83 ms | Lecture valide |
+| Dossiers | `/api/admin-cases?entity=dashboard` | OK | 69 ms | Lecture valide |
+| Taches / agenda | `/api/admin-work?entity=dashboard` | OK | 193 ms | Lecture valide |
+| Documents | `/api/admin-documents?entity=dashboard` | OK | 204 ms | Lecture valide |
+| Procedures | `/api/admin-procedures?entity=dashboard` | OK | 137 ms | Lecture valide |
+| Cartographie | `/api/admin-map?entity=dashboard` | OK | 77 ms | Lecture valide |
+| Observatoire | `/api/admin-observatoire?entity=dashboard` | OK | 77 ms | Lecture valide |
+| Antennes | `/api/admin-branches?entity=dashboard` | OK | 124 ms | Lecture valide |
+| Impact | `/api/admin-impact?entity=dashboard` | OK | 75 ms | Lecture valide |
+| Finances | `/api/admin-finances?entity=dashboard` | OK | 184 ms | Lecture valide |
+| Gouvernance | `/api/admin-governance?entity=dashboard` | OK | 161 ms | Lecture valide |
+| Risques / conformite | `/api/admin-risks?entity=dashboard` | OK | 84 ms | Lecture valide |
+| Utilisateurs / roles | `/api/admin-users?entity=dashboard` | OK | 124 ms | Lecture valide |
+| Parametres | `/api/admin-settings?entity=dashboard` | OK | 140 ms | Lecture valide |
+| Connaissances | `/api/admin-knowledge?entity=dashboard` | OK | 131 ms | Lecture valide |
+| Assistant IA | `/api/admin-ai?entity=dashboard` | OK | 144 ms | Lecture valide |
 
 ## Lecture operationnelle
 

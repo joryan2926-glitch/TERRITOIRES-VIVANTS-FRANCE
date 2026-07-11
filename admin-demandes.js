@@ -1111,6 +1111,8 @@ function bindEvents() {
   });
 }
 
+const initialQuery = new URLSearchParams(window.location.search).get("q");
+if (initialQuery && filtersForm?.elements.q) filtersForm.elements.q.value = initialQuery;
 bindEvents();
 if (token()) {
   showApp();
