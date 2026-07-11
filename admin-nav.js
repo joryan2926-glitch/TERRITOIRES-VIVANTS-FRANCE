@@ -5,11 +5,11 @@ const TVF_ADMIN_LOGIN_ROUTE = "admin-login";
 
 const TVF_ADMIN_GROUPS = [
   {
-    label: "Accueil",
-    description: "Vue d'ensemble",
+    label: "Demarrer",
+    description: "Vue simple",
     modules: [
       { href: "admin", label: "Accueil", icon: "&#8962;" },
-      { href: "dashboard", label: "Dashboard", icon: "&#9638;" },
+      { href: "dashboard", label: "Tableau de bord", icon: "&#9638;" },
     ],
   },
   {
@@ -17,8 +17,8 @@ const TVF_ADMIN_GROUPS = [
     description: "Demandes et contacts",
     modules: [
       { href: "admin-demandes", label: "Demandes", icon: "&#9993;" },
-      { href: "admin-emails", label: "E-mails", icon: "@" },
-      { href: "admin-crm", label: "CRM", icon: "&#9673;" },
+      { href: "admin-emails", label: "Boite mail", icon: "@" },
+      { href: "admin-crm", label: "Contacts", icon: "&#9673;" },
     ],
   },
   {
@@ -28,34 +28,34 @@ const TVF_ADMIN_GROUPS = [
       { href: "admin-dossiers", label: "Dossiers", icon: "&#9635;" },
       { href: "admin-work", label: "Taches", icon: "&#10003;" },
       { href: "admin-documents", label: "Documents", icon: "&#9633;" },
-      { href: "admin-procedures", label: "Procedures", icon: "&#167;" },
+      { href: "admin-procedures", label: "Methodes", icon: "&#167;" },
     ],
   },
   {
-    label: "Territoires",
-    description: "Carte et impact local",
+    label: "Suivi",
+    description: "Carte et resultats",
     modules: [
-      { href: "admin-map", label: "Cartographie", icon: "&#8982;" },
+      { href: "admin-map", label: "Carte", icon: "&#8982;" },
       { href: "admin-observatoire", label: "Observatoire", icon: "&#9676;" },
-      { href: "admin-impact", label: "Impact", icon: "%" },
+      { href: "admin-impact", label: "Resultats", icon: "%" },
     ],
   },
   {
     label: "Pilotage",
-    description: "Finances et activite",
+    description: "Budget et journal",
     modules: [
       { href: "admin-finances", label: "Finances", icon: "&euro;" },
-      { href: "admin-activity", label: "Activite", icon: "&#8635;" },
+      { href: "admin-activity", label: "Journal", icon: "&#8635;" },
     ],
   },
   {
-    label: "Plus",
-    description: "Administration et outils",
+    label: "Outils",
+    description: "Reglages utiles",
     modules: [
       { href: "admin-users", label: "Utilisateurs", icon: "&#9678;" },
-      { href: "admin-settings", label: "Parametres", icon: "&#9881;" },
-      { href: "admin-knowledge", label: "Connaissances", icon: "i" },
-      { href: "admin-ai", label: "Assistant IA", icon: "&#10022;" },
+      { href: "admin-settings", label: "Reglages", icon: "&#9881;" },
+      { href: "admin-knowledge", label: "Base utile", icon: "i" },
+      { href: "admin-ai", label: "Assistant", icon: "&#10022;" },
     ],
   },
 ];
