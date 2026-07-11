@@ -3171,13 +3171,23 @@ tr:nth-child(even) td {
 }
 
 .admin-quick-actions {
+  display: grid;
+  gap: 10px;
+  padding: 14px;
+  border: 1px solid rgba(47, 125, 50, 0.14);
+  border-radius: 12px;
+  background: rgba(234, 244, 232, 0.45);
+}
+.admin-quick-main,
+.admin-quick-secondary {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  padding: 12px;
-  border: 1px solid rgba(47, 125, 50, 0.14);
-  border-radius: 14px;
-  background: rgba(234, 244, 232, 0.45);
+  align-items: center;
+}
+.admin-quick-secondary {
+  padding-top: 2px;
+  gap: 14px;
 }
 
 .admin-response-panel {

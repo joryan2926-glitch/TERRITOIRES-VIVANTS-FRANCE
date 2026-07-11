@@ -700,17 +700,19 @@ function renderDetail() {
     ${renderOperationalPath(contact)}
 
     <div class="admin-quick-actions" aria-label="Actions rapides">
-      <button class="btn secondary" type="button" data-quick-status="a_qualifier">A qualifier</button>
-      <button class="btn secondary" type="button" data-quick-status="en_cours">En cours</button>
-      <button class="btn secondary" type="button" data-quick-status="rendez_vous">Rendez-vous</button>
-      <button class="btn secondary" type="button" data-quick-template="pieces">Demander pieces</button>
-      <button class="btn secondary" type="button" data-quick-followup="48h">Relance 48h</button>
-      <a class="btn secondary" href="admin-crm">Ouvrir CRM</a>
-      <button class="btn secondary" type="button" data-create-task>Creer tache</button>
-
-      <a class="btn secondary" href="admin-documents">Documents</a>
-      <button class="btn ghost" type="button" data-quick-status="refuse">Refuser</button>
-      <button class="btn ghost" type="button" data-quick-status="archive">Archiver</button>
+      <div class="admin-quick-main">
+        <button class="btn primary" type="button" data-quick-status="en_cours">Prendre en charge</button>
+        <button class="btn secondary" type="button" data-quick-status="rendez_vous">Planifier rendez-vous</button>
+        <button class="btn secondary" type="button" data-quick-template="pieces">Demander les pieces</button>
+        <button class="btn secondary" type="button" data-create-task>Creer une tache</button>
+      </div>
+      <div class="admin-quick-secondary">
+        <button class="text-link button-link" type="button" data-quick-followup="48h">Relance 48h</button>
+        <a class="text-link" href="admin-crm">CRM</a>
+        <a class="text-link" href="admin-documents">Documents</a>
+        <button class="text-link button-link" type="button" data-quick-status="refuse">Refuser</button>
+        <button class="text-link button-link" type="button" data-quick-status="archive">Archiver</button>
+      </div>
     </div>
 
     <label>Statut
