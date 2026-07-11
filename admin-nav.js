@@ -42,11 +42,10 @@ const TVF_ADMIN_GROUPS = [
   },
   {
     label: "Pilotage",
-    description: "Dashboard et securite",
+    description: "Finances et activite",
     modules: [
       { href: "admin-finances", label: "Finances", icon: "&euro;" },
-      { href: "admin-governance", label: "Gouvernance", icon: "&#9671;" },
-      { href: "admin-risks", label: "Risques", icon: "!" },
+      { href: "admin-activity", label: "Activite", icon: "&#8635;" },
     ],
   },
   {
@@ -55,7 +54,6 @@ const TVF_ADMIN_GROUPS = [
     modules: [
       { href: "admin-users", label: "Utilisateurs", icon: "&#9678;" },
       { href: "admin-settings", label: "Parametres", icon: "&#9881;" },
-      { href: "admin-activity", label: "Activite", icon: "&#8635;" },
       { href: "admin-knowledge", label: "Connaissances", icon: "i" },
       { href: "admin-ai", label: "Assistant IA", icon: "&#10022;" },
     ],

@@ -49,7 +49,6 @@ const labels = {
     signalement: "Signalement",
     friche_terrain: "Friche / terrain",
     presse: "Presse",
-    gouvernance: "Gouvernance",
     autre: "Autre",
   },
 };

@@ -1,5 +1,5 @@
 const CASES_TOKEN_KEY = "tvfAdminToken";
-const typeLabels = { bien_vacant: "Bien vacant", commerce_inoccupe: "Commerce inoccupe", materiaux: "Materiaux", collectivite: "Collectivite", entreprise: "Entreprise", benevole: "Benevole", financeur: "Financeur", signalement: "Signalement", friche_terrain: "Friche / terrain", presse: "Presse", gouvernance: "Gouvernance", autre: "Autre" };
+const typeLabels = { bien_vacant: "Bien vacant", commerce_inoccupe: "Commerce inoccupe", materiaux: "Materiaux", collectivite: "Collectivite", entreprise: "Entreprise", benevole: "Benevole", financeur: "Financeur", signalement: "Signalement", friche_terrain: "Friche / terrain", presse: "Presse", gouvernance: "Autre", autre: "Autre" };
 const statusLabels = { ouvert: "Ouvert", qualification: "Qualification", instruction: "Instruction", attente_pieces: "Attente pieces", visite: "Visite", a_decision: "A decision", decision_validee: "Decision validee", cloture: "Cloture", archive: "Archive" };
 const priorityLabels = { normale: "Normale", haute: "Haute", urgente: "Urgente" };
 const decisionLabels = { non_preparee: "Non preparee", a_preparer: "A preparer", proposee: "Proposee", validee: "Validee", refusee: "Refusee", ajournee: "Ajournee" };
@@ -215,13 +215,11 @@ function moduleChainPanel(item) {
   const decisionValidated = item.status === "decision_validee" || item.decision_status === "validee" || item.status === "cloture";
   const steps = [
     { label: "Instruction", detail: "Dossier, pieces et responsable", href: "admin-dossiers", state: "is-current" },
-    { label: "Gouvernance", detail: "Decision humaine tracee", href: "admin-governance", state: decisionReady ? "is-ready" : "" },
     { label: "Finances", detail: "Budget et justificatifs", href: "admin-finances", state: decisionValidated ? "is-ready" : "" },
-    { label: "Risques", detail: "Conformite et mesures", href: "admin-risks", state: item.risk_level && item.risk_level !== "faible" ? "is-attention" : "" },
     { label: "Impact", detail: "Valeurs, preuves et bilan", href: "admin-impact", state: decisionValidated ? "is-ready" : "" }
   ];
   return `<nav class="cases-module-chain" aria-label="Chaine de traitement du dossier">
-    <div class="admin-panel-head"><div><p class="section-kicker">Suite du dossier</p><h4>Instruction, decision, moyens, securisation et impact</h4><p>Chaque module conserve sa fonction propre tout en suivant le meme dossier operationnel.</p></div></div>
+    <div class="admin-panel-head"><div><p class="section-kicker">Suite du dossier</p><h4>Instruction, moyens et impact</h4><p>Chaque module conserve sa fonction propre tout en suivant le meme dossier operationnel.</p></div></div>
     <ol>${steps.map((step, index) => `<li class="${escapeHtml(step.state)}"><a href="${escapeHtml(step.href)}"><span>${index + 1}</span><strong>${escapeHtml(step.label)}</strong><small>${escapeHtml(step.detail)}</small></a></li>`).join("")}</ol>
   </nav>`;
 }function documentPackForCase(item) {

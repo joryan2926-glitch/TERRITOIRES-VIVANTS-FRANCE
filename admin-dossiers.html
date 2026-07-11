@@ -28,9 +28,7 @@
       <a class="btn secondary" href="contact">Retour au site</a>
     </div>
   </header>
-
   <main id="cases-main" class="admin-shell cases-shell">
-
     <section class="admin-app cases-app" data-cases-app hidden>
       <div class="admin-toolbar cases-toolbar">
         <div>
@@ -45,11 +43,8 @@
           <button class="btn ghost" type="button" data-cases-logout>Deconnexion</button>
         </div>
       </div>
-
       <section class="crm-kpis cases-kpis" data-cases-kpis aria-label="Indicateurs dossiers"></section>
-
       <section class="cases-priority-panel" data-cases-priority-panel aria-label="Synthese operationnelle des dossiers"></section>
-
       <nav class="admin-status-tabs cases-tabs" aria-label="Vues dossiers">
         <button type="button" data-case-status="all" class="is-active">Tous</button>
         <button type="button" data-case-status="qualification">Qualification</button>
@@ -58,7 +53,6 @@
         <button type="button" data-case-status="a_decision">A decision</button>
         <button type="button" data-case-status="cloture">Clotures</button>
       </nav>
-
       <form class="admin-filters cases-filters" data-cases-filters>
         <label>Recherche
           <input name="q" type="search" placeholder="Numero, titre, territoire, responsable">
@@ -76,7 +70,6 @@
             <option value="signalement">Signalement</option>
             <option value="friche_terrain">Friche / terrain</option>
             <option value="presse">Presse</option>
-            <option value="gouvernance">Gouvernance</option>
             <option value="autre">Autre</option>
           </select>
         </label>
@@ -90,7 +83,6 @@
         </label>
         <input type="hidden" name="status" value="all" data-cases-status-filter>
       </form>
-
       <div class="admin-layout cases-layout">
         <section class="admin-list cases-list" aria-label="Liste dossiers">
           <div data-cases-list class="admin-request-list"></div>
@@ -105,7 +97,6 @@
         </aside>
       </div>
     </section>
-
     <section class="admin-modal" data-cases-modal hidden aria-label="Creation dossier">
       <div class="admin-modal-panel cases-modal-panel">
         <div class="admin-modal-head">
@@ -126,7 +117,6 @@
       </div>
     </section>
   </main>
-
   <script src="admin-nav.js" defer></script>
   <script src="admin-dossiers.js" defer></script>
 </body>
