@@ -87,6 +87,99 @@ const imageSizes = {
   "assets/qr-whatsapp-tvf.png": [900, 1600],
 };
 
+const operationalKitDocs = {
+  zip: ["Kit complet formulaires et conventions", "documents/TVF-kit-formulaires-conventions-prets-a-utiliser.zip"],
+  index: ["Index du kit", "documents/kit-formulaires-conventions-tvf/00-index/tvf-index-kit-formulaires-conventions.docx"],
+  pieces: ["Liste des pieces par demande", "documents/kit-formulaires-conventions-tvf/14-listes-pieces/tvf-lp-01-liste-pieces-par-demande.docx"],
+  courriers: ["Kit courriers prets a remplir", "documents/kit-formulaires-conventions-tvf/15-courriers-prets-a-envoyer/tvf-cour-01-kit-courriers-demandes.docx"],
+};
+
+const operationalForms = [
+  ["Contact general", "Tout public", "Recevoir une demande et orienter vers le bon parcours.", "documents/kit-formulaires-conventions-tvf/01-contact-general/tvf-f-01-formulaire-de-contact-general.docx"],
+  ["Collectivite / territoire", "Commune, EPCI, departement, region", "Preparer un rendez-vous, un diagnostic ou une cooperation.", "documents/kit-formulaires-conventions-tvf/02-collectivite-territoire/tvf-f-02-demande-collectivite---territoire-partenaire.docx"],
+  ["Proprietaire / bien vacant", "Proprietaire, bailleur, mandataire", "Etudier un logement, commerce, local, terrain ou friche.", "documents/kit-formulaires-conventions-tvf/03-proprietaire-bien-vacant/tvf-f-03-proposition-de-bien-vacant-ou-inutilise.docx"],
+  ["Materiaux de reemploi", "Entreprise, particulier, collectivite, artisan", "Qualifier des materiaux, mobiliers ou equipements disponibles.", "documents/kit-formulaires-conventions-tvf/04-materiaux-reemploi/tvf-f-04-proposition-de-materiaux-reemployables.docx"],
+  ["Entreprise partenaire", "Entreprise, artisan, bailleur, logisticien", "Proposer materiaux, local, transport, competences, RSE ou soutien.", "documents/kit-formulaires-conventions-tvf/05-entreprise-partenariat/tvf-f-05-demande-entreprise---partenariat-territorial.docx"],
+  ["Local de stockage", "Collectivite, entreprise, proprietaire", "Etudier un local pour stocker et trier des ressources.", "documents/kit-formulaires-conventions-tvf/06-local-stockage/tvf-f-06-mise-a-disposition-potentielle-dun-local-de-stockage.docx"],
+  ["Transport / logistique", "Transporteur, loueur, collectivite, entreprise", "Recenser vehicule, chauffeur, manutention ou livraison.", "documents/kit-formulaires-conventions-tvf/07-transport-logistique/tvf-f-07-mise-a-disposition-transport-et-logistique.docx"],
+  ["Benevole / citoyen", "Habitant, etudiant, volontaire", "Identifier competences, disponibilites et missions possibles.", "documents/kit-formulaires-conventions-tvf/08-benevole-engagement/tvf-f-08-candidature-benevole-ou-citoyenne.docx"],
+  ["Association / insertion", "Association, SIAE, organisme formation", "Construire une action encadree, sociale ou participative.", "documents/kit-formulaires-conventions-tvf/09-association-insertion-chantier/tvf-f-09-cooperation-association-insertion-ou-chantier-participatif.docx"],
+  ["Financeur / mecene", "Fondation, entreprise mecene, financeur", "Structurer un soutien financier, materiel ou en competences.", "documents/kit-formulaires-conventions-tvf/10-financeur-mecene/tvf-f-10-demande-financeur-mecene-ou-investisseur-solidaire.docx"],
+  ["Signalement citoyen", "Habitant, association locale, citoyen", "Signaler un lieu, une friche ou une ressource a verifier.", "documents/kit-formulaires-conventions-tvf/11-signalement-citoyen/tvf-f-11-signalement-citoyen-dun-lieu-ou-dune-ressource.docx"],
+  ["Presse / institution", "Journaliste, institution, service communication", "Traiter interview, demande d'information ou kit media.", "documents/kit-formulaires-conventions-tvf/12-presse-institutionnel/tvf-f-12-demande-presse-institution-ou-communication.docx"],
+];
+
+const operationalConventions = [
+  ["Cooperation territoriale", "Collectivite, EPCI, service public", "Definir perimetre, objectifs, donnees, referents et suivi.", "documents/kit-formulaires-conventions-tvf/13-conventions-types/tvf-conv-01-convention-type-de-cooperation-territoriale.docx"],
+  ["Mise a disposition d'un bien", "Proprietaire, bailleur, collectivite", "Encadrer etude, visite, usage temporaire ou restitution.", "documents/kit-formulaires-conventions-tvf/13-conventions-types/tvf-conv-02-convention-type-de-mise-a-disposition-dun-bien.docx"],
+  ["Valorisation de materiaux", "Entreprise, collectivite, artisan, particulier", "Tracer collecte, tri, securite, affectation et responsabilites.", "documents/kit-formulaires-conventions-tvf/13-conventions-types/tvf-conv-03-convention-type-de-valorisation-de-materiaux.docx"],
+  ["Partenariat entreprise", "Entreprise, artisan, logisticien, commerce", "Formaliser contribution RSE, visibilite, reporting et limites.", "documents/kit-formulaires-conventions-tvf/13-conventions-types/tvf-conv-04-convention-type-de-partenariat-entreprise.docx"],
+  ["Soutien financier ou mecenat", "Mecene, fondation, financeur", "Cadrer affectation, versement, justificatifs et communication.", "documents/kit-formulaires-conventions-tvf/13-conventions-types/tvf-conv-05-convention-type-de-soutien-financier-ou-mecanat.docx"],
+  ["Benevolat et chantier participatif", "Benevole, association, structure encadrante", "Fixer securite, mission, emargement, confidentialite et image.", "documents/kit-formulaires-conventions-tvf/13-conventions-types/tvf-conv-06-charte-type-benevole-et-chantier-participatif.docx"],
+];
+
+function directDownloadHref(href) {
+  return href;
+}
+
+function downloadLink(label, href, variant = "text-link") {
+  return `<a class="${variant}" href="${directDownloadHref(href)}" download aria-label="Telecharger : ${escapeAttr(label)}">Telecharger</a>`;
+}
+
+function documentDownloadCards(title, intro, items, id) {
+  return `<section class="section soft document-library" ${sectionAttrs(title, id)}><div class="container"><div class="section-head"><p class="section-kicker">Telechargements</p><h2>${title}</h2><p class="section-lead">${intro}</p></div><div class="card-grid">${items
+    .map(([h, publicLabel, purpose, href]) => `<article class="card doc-download-card"><span class="card-icon" aria-hidden="true">${iconFor(h)}</span><h3>${h}</h3><p><strong>Public :</strong> ${publicLabel}</p><p>${purpose}</p>${downloadLink(h, href, "btn secondary")}</article>`)
+    .join("")}</div></div></section>`;
+}
+
+function documentOperationalKitSection() {
+  return `<section class="section" ${sectionAttrs("Kit operationnel complet", "kit-operationnel-complet")}><div class="container intro-grid"><div><p class="section-kicker">Kit complet</p><h2>Tout telecharger en une seule fois.</h2><p class="section-lead">Le kit rassemble les formulaires, conventions types, courriers et listes de pieces. Il sert de base commune pour ouvrir un dossier, le qualifier, demander les pieces, formaliser une convention et archiver la suite.</p><div class="hero-actions"><a class="btn primary" href="${operationalKitDocs.zip[1]}" download>Telecharger le ZIP complet</a><a class="btn secondary" href="${operationalKitDocs.index[1]}" download>Telecharger l'index</a></div></div><div class="mini-list"><article><strong>21 fichiers Word</strong><span>Modeles modifiables, prets a remplir, avec entete TVF, numero de dossier, clauses et signatures.</span></article><article><strong>Classement par besoin</strong><span>Contact, collectivite, proprietaire, materiaux, entreprise, local, transport, benevole, financeur, signalement.</span></article><article><strong>Usage interne</strong><span>Adapter chaque document au dossier, verifier les pieces puis faire valider avant signature.</span></article></div></div></section>`;
+}
+
+function documentOrientationTableSection() {
+  return tableSection("Choisir rapidement le bon document", "Ce tableau oriente vers le premier formulaire et les pieces a verifier selon le sujet. Il evite de multiplier les boutons et garde un parcours simple.", [
+    ["Sujet", "Premier document", "Pieces a preparer", "Suite logique"],
+    ["Demande generale", `<a href="${operationalForms[0][3]}" download>F-01 Contact general</a>`, "Coordonnees, message, territoire, pieces disponibles", "Orienter vers le bon formulaire"],
+    ["Collectivite / EPCI", `<a href="${operationalForms[1][3]}" download>F-02 Collectivite</a>`, "Referent, perimetre, besoin public, donnees, calendrier", "Rendez-vous de cadrage"],
+    ["Proprietaire / bien vacant", `<a href="${operationalForms[2][3]}" download>F-03 Proprietaire</a>`, "Adresse, preuve de propriete ou mandat, photos, contraintes", "Prequalification puis visite eventuelle"],
+    ["Materiaux", `<a href="${operationalForms[3][3]}" download>F-04 Materiaux</a>`, "Nature, quantite, etat, photos, disponibilite, acces", "Acceptation, refus ou affectation"],
+    ["Entreprise", `<a href="${operationalForms[4][3]}" download>F-05 Entreprise</a>`, "SIRET, contribution, conditions, attentes RSE", "Convention de partenariat si retenu"],
+    ["Local de stockage", `<a href="${operationalForms[5][3]}" download>F-06 Local</a>`, "Adresse, surface, photos, acces, assurance, duree", "Visite technique puis convention"],
+    ["Transport / vehicule", `<a href="${operationalForms[6][3]}" download>F-07 Logistique</a>`, "Vehicule, capacite, assurance, conducteur, disponibilites", "Accord ponctuel avant usage"],
+    ["Benevole", `<a href="${operationalForms[7][3]}" download>F-08 Benevole</a>`, "Contact, disponibilites, competences, contraintes", "Mission encadree"],
+    ["Association / insertion", `<a href="${operationalForms[8][3]}" download>F-09 Insertion</a>`, "Objet, publics, assurance, encadrement, action", "Convention partenariale"],
+    ["Financeur / mecene", `<a href="${operationalForms[9][3]}" download>F-10 Financeur</a>`, "Objet du soutien, montant, criteres, reporting", "Note projet puis convention"],
+    ["Signalement citoyen", `<a href="${operationalForms[10][3]}" download>F-11 Signalement</a>`, "Localisation, description, photos autorisees", "Verification prudente"],
+  ]);
+}
+
+function documentFormsBySubjectSection() {
+  return documentDownloadCards("Formulaires par sujet", "Un formulaire ouvre un dossier. Il permet de recevoir la demande avec les bonnes informations, sans demander toute la bibliotheque documentaire au premier contact.", operationalForms, "formulaires-par-sujet");
+}
+
+function documentPiecesBySubjectSection() {
+  return `<section class="section" ${sectionAttrs("Pieces a fournir par sujet", "pieces-a-fournir-par-sujet")}><div class="container"><div class="section-head"><p class="section-kicker">Recevabilite</p><h2>Pieces a fournir par sujet</h2><p class="section-lead">Une seule checklist regroupe les pieces utiles selon le type de demande. Elle sert avant rendez-vous, instruction, visite ou convention.</p></div><div class="decision-list"><article><strong>Document principal</strong><p>Liste des pieces a fournir selon le type de demande : proprietaire, collectivite, entreprise, association, benevole, financeur, signalement.</p>${downloadLink(operationalKitDocs.pieces[0], operationalKitDocs.pieces[1], "btn primary")}</article><article><strong>Regle de travail</strong><p>Un dossier incomplet peut rester en brouillon, mais il ne doit pas etre presente comme retenu tant que les pieces essentielles ne sont pas fournies.</p></article><article><strong>Classement conseille</strong><p>Ranger chaque piece dans le dossier client : identite, sujet, pieces, convention, decision, preuve, suivi.</p></article></div></div></section>`;
+}
+
+function documentConventionsTypesSection() {
+  return documentDownloadCards("Conventions et chartes types", "Ces modeles servent uniquement apres instruction. Ils cadrent les responsabilites, les limites, les assurances, la duree, les usages et la communication.", operationalConventions, "conventions-types");
+}
+
+function documentLettersAndUseSection() {
+  return `<section class="section soft" ${sectionAttrs("Courriers et supports de travail", "courriers-et-supports")}><div class="container"><div class="section-head"><p class="section-kicker">Courriers</p><h2>Courriers prets a remplir</h2><p class="section-lead">Le kit courrier sert a contacter une collectivite, une entreprise, un proprietaire, un financeur, une structure d'insertion, ou a relancer des pieces manquantes.</p></div><div class="card-grid"><article class="card"><span class="card-icon" aria-hidden="true">C</span><h3>Kit courriers</h3><p>Modeles prets a remplir avec objet, introduction, demande, pieces jointes et signature TVF.</p>${downloadLink(operationalKitDocs.courriers[0], operationalKitDocs.courriers[1], "btn secondary")}</article><article class="card"><span class="card-icon" aria-hidden="true">I</span><h3>Index du kit</h3><p>Repertoire general pour retrouver rapidement chaque formulaire, convention et liste de pieces.</p>${downloadLink(operationalKitDocs.index[0], operationalKitDocs.index[1], "btn secondary")}</article><article class="card"><span class="card-icon" aria-hidden="true">Z</span><h3>Archive complete</h3><p>Telecharger tout le kit en une seule fois pour le modifier, l'imprimer ou le ranger en interne.</p>${downloadLink(operationalKitDocs.zip[0], operationalKitDocs.zip[1], "btn primary")}</article></div></div></section>`;
+}
+
+function documentWorkflowSection() {
+  return timeline("Parcours documentaire simple", [
+    ["1", "Reception", "La demande arrive par formulaire, e-mail, telephone ou rendez-vous. TVF ouvre une reference dossier."],
+    ["2", "Formulaire adapte", "Le sujet determine le formulaire : collectivite, proprietaire, materiaux, entreprise, local, benevole, financeur ou signalement."],
+    ["3", "Pieces", "La checklist indique ce qui manque avant instruction : identite, photos, adresse, autorisation, assurance, donnees ou budget."],
+    ["4", "Instruction", "TVF decide si le dossier avance, reste en attente, doit etre complete, visite, conventionne ou classe."],
+    ["5", "Convention", "Un modele type est adapte uniquement si les responsabilites, limites et conditions sont suffisamment claires."],
+  ]);
+}
+
+
 const pages = [
   {
     file: "index.html",
@@ -963,172 +1056,27 @@ const pages = [
   },
   {
     file: "documents.html",
-    title: "Documents internes",
+    title: "Documents TVF",
     meta:
-      "Documents préparatoires internes de Territoires Vivants France : fiches collectivité, propriétaire, entreprise et modèle de convention transmis sur demande.",
+      "Bibliotheque documentaire operationnelle de Territoires Vivants France : formulaires, pieces a fournir, conventions types et courriers prets a remplir.",
     heroImage: "assets/photos/saint-etienne-rue-resistance.jpg",
-    eyebrow: "Ressources",
-    h1: "Des documents internes pour cadrer les premières démarches.",
+    eyebrow: "Bibliotheque operationnelle",
+    h1: "Les bons documents pour instruire chaque demande.",
     intro:
-      "Les modèles TVF ne sont pas diffusés en accès libre. Ils peuvent être transmis sur demande lorsqu'un échange est qualifié, afin de garder un cadre clair, traçable et adapté à chaque situation.",
-    ctas: [["Contacter TVF", "contact.html"], ["Voir la transparence", "transparence.html"]],
+      "Formulaires, pieces a fournir, conventions et courriers sont ranges par sujet pour faciliter le travail TVF : recevoir une demande, ouvrir un dossier, verifier les pieces, formaliser une convention et suivre la suite.",
+    ctas: [["Telecharger le kit complet", "documents/TVF-kit-formulaires-conventions-prets-a-utiliser.zip"], ["Trouver par sujet", "#pieces-a-fournir-par-sujet"]],
     sections: [
-      sectionIntro(
-        "Un centre documentaire interne pour cadrer, pas pour complexifier",
-        "Les documents TVF aident à produire des dossiers clairs : une demande qualifiée, des pièces disponibles, une décision traçable et une suite compréhensible. Ils sont remis dans le bon contexte et ne remplacent pas les validations juridiques, techniques ou administratives nécessaires.",
-        [
-          ["Préparer", "Rassembler les informations avant un premier échange."],
-          ["Décider", "Comparer les options, risques, pièces manquantes et suites possibles."],
-          ["Suivre", "Conserver les preuves, décisions, indicateurs et responsabilités."],
-        ]
-      ),
-      tableSection("Choisir le bon document", "Cette synthèse rapide évite de se perdre dans la bibliothèque complète.", [
-        ["Besoin", "Document prioritaire", "Objectif"],
-        ["Une collectivité veut tester TVF", "Fiche collectivité", "Décrire le territoire, le besoin et les interlocuteurs"],
-        ["Une collectivité prépare une réunion", "Dossier collectivité TVF", "Présenter la méthode, le périmètre, les livrables et les décisions attendues"],
-        ["Saint-Étienne doit être présenté en réunion", "Dossier territorial Saint-Étienne", "Appuyer le pilote sur des données, besoins, livrables et indicateurs"],
-        ["Un propriétaire propose un bien", "Fiche propriétaire", "Qualifier l'état, les contraintes et les scénarios d'usage"],
-        ["Un propriétaire veut comprendre le cadre", "Dossier propriétaire TVF", "Expliquer propriété conservée, visite, convention, usages et restitution"],
-        ["Une entreprise propose des matériaux", "Fiche entreprise", "Tracer la ressource, sa disponibilité et son affectation possible"],
-        ["Une entreprise ou un mécène veut contribuer", "Dossier entreprise et mécène TVF", "Présenter contribution, RSE, traçabilité, convention et reporting"],
-        ["Un lieu est signalé", "Fiche signalement", "Documenter l'information sans créer de projet automatique"],
-        ["Un projet doit être instruit", "Fiche projet", "Cadrer objectifs, acteurs, risques, budget et indicateurs"],
-        ["Un financement est recherché", "Plan de financement", "Distinguer coûts, contributions, demandes et montants obtenus"],
-      ]),
-      tableSection("Parcours documentaire recommandé", "Pour rester lisible, chaque dossier doit commencer par un socle court puis ajouter les pièces spécialisées uniquement si elles sont nécessaires.", [
-        ["Niveau", "À utiliser quand", "Documents principaux", "Résultat attendu"],
-        ["Premier contact", "Le besoin est encore général", "Fiche profil + résumé de situation", "Orienter vers le bon parcours"],
-        ["Qualification", "Le lieu, la ressource ou le projet doit être vérifié", "Fiche signalement, fiche propriétaire, fiche entreprise ou fiche collectivité", "Savoir si le dossier peut avancer"],
-        ["Instruction", "Le dossier présente un intérêt réel", "Fiche projet, grille d'instruction, pièces à fournir, matrice des risques", "Décider : compléter, visiter, conventionner ou classer"],
-        ["Formalisation", "Les responsabilités doivent être écrites", "Convention, accord de principe, lettre d'intention, bordereaux", "Sécuriser les rôles et les limites"],
-        ["Suivi", "Une action est engagée ou soutenue", "Registre, compte rendu, grille d'impact, reporting", "Prouver ce qui a été fait"],
-      ]),
-      essentialDocumentsSection(),
-      documentQuickPacksSection(),
-      pdfPresentationPackSection(),
-      documentVisibilitySection(),
-      documentPriorityPackSection(),
-      documentContactMatrixSection(),
+      documentOperationalKitSection(),
+      documentOrientationTableSection(),
+      documentFormsBySubjectSection(),
+      documentPiecesBySubjectSection(),
+      documentConventionsTypesSection(),
+      documentLettersAndUseSection(),
       documentWorkflowSection(),
-      publicEntryMatrixSection(),
-      documentArchiveSection("Archive documentaire avancée", "Cette archive rassemble les modèles spécialisés. Elle s'utilise après avoir choisi le bon parcours afin de ne télécharger que les pièces réellement utiles au dossier.", [
-        ["Dossier TVF", "Présenter l'association, sa méthode, ses publics et ses conditions de coopération.", "documents/dossier-presentation-tvf.md"],
-        ["Dossier de contact TVF", "Centraliser coordonnées, services, pôles, actions et informations à transmettre avant un premier échange.", "documents/dossier-contact-tvf.md"],
-        ["Dossier prospection Saint-Étienne", "Organiser les contacts publics, économiques, associatifs et techniques à solliciter pour lancer TVF sur le territoire pilote.", "documents/dossier-prospection-saint-etienne.md"],
-        ["Glossaire et annuaire Saint-Étienne", "Classer les contacts par secteur, pôle, action, insertion, matériaux et besoin de local de stockage.", "documents/glossaire-annuaire-contacts-saint-etienne.md"],
-        ["Kit courriers prêts à l'emploi", "Utiliser des modèles de courriers et e-mails prêts à adapter pour partenariats, matériaux, locaux, insertion, propriétaires et financeurs.", "documents/kit-courriers-partenariats-demandes-tvf.md"],
-        ["Pack lancement Saint-Étienne", "Commencer le pilote avec les bons documents, les bons interlocuteurs et une feuille de route courte.", "documents/pack-lancement-saint-etienne.md"],
-        ["Synthèse collectivité 1 page", "Présenter TVF à une mairie, un EPCI ou une collectivité sans surcharger le rendez-vous.", "documents/synthese-collectivite-1-page.md"],
-        ["Synthèse entreprise matériaux 1 page", "Expliquer en une page comment une entreprise peut contribuer par matériaux, local, compétences ou RSE.", "documents/synthese-entreprise-materiaux-1-page.md"],
-        ["Synthèse propriétaire 1 page", "Expliquer le premier contact, les garanties et les pièces utiles pour proposer un bien.", "documents/synthese-proprietaire-1-page.md"],
-        ["Synthèse financeur 1 page", "Présenter les garanties de méthode, d'impact et de reporting attendues par un mécène ou financeur.", "documents/synthese-financeur-1-page.md"],
-        ["Critères matériaux", "Décider quels matériaux peuvent être acceptés, refusés, orientés, stockés ou affectés.", "documents/criteres-acceptation-materiaux.md"],
-        ["Protocole local de stockage", "Encadrer la recherche, l'usage et la restitution d'un local de stockage temporaire.", "documents/protocole-local-stockage.md"],
-        ["Cadre chantiers insertion", "Définir ce qui est possible, exclu ou à confier à une structure habilitée.", "documents/cadre-chantiers-insertion.md"],
-        ["Dossier collectivité TVF", "Présenter un parcours territoire partenaire en réunion avec une commune, un EPCI, un département ou une région.", "documents/dossier-collectivite-tvf.md"],
-        ["Dossier propriétaire TVF", "Expliquer au propriétaire le cadre d'étude, de convention, d'usage et de restitution d'un bien.", "documents/dossier-proprietaire-tvf.md"],
-        ["Dossier entreprise et mécène TVF", "Présenter les contributions possibles : matériaux, locaux, compétences, mécénat, reporting et RSE.", "documents/dossier-entreprise-mecene-tvf.md"],
-        ["PDF dossier TVF", "Version PDF prête à transmettre pour une première présentation institutionnelle.", "output/pdf/dossier-presentation-tvf.pdf"],
-        ["PDF collectivité", "Version PDF du dossier collectivité, adaptée aux mairies, EPCI, départements et régions.", "output/pdf/dossier-collectivite-tvf.pdf"],
-        ["PDF entreprise et mécène", "Version PDF pour entreprises, fondations, mécènes et financeurs.", "output/pdf/dossier-entreprise-mecene-tvf.pdf"],
-        ["PDF propriétaire", "Version PDF du dossier propriétaire pour présenter un bien sans engagement automatique.", "output/pdf/dossier-proprietaire-tvf.pdf"],
-        ["Fiche collectivité", "Qualifier un besoin territorial, un périmètre, des ressources et des interlocuteurs.", "documents/fiche-collectivite.md"],
-        ["Diagnostic territorial", "Cadrer le périmètre, les données, la méthode et les livrables d'un diagnostic TVF.", "documents/cahier-charges-diagnostic-territorial.md"],
-        ["Convention territoriale", "Formaliser une coopération avec une collectivité sans engagement financier automatique.", "documents/convention-cooperation-territoriale.md"],
-        ["Comité de pilotage", "Organiser les acteurs, décisions, réunions et règles de suivi territorial.", "documents/fiche-comite-pilotage.md"],
-        ["Plan d'action territorial", "Transformer un diagnostic en actions, responsables, échéances et indicateurs.", "documents/plan-action-territorial.md"],
-        ["Fiche propriétaire", "Présenter un bien, son état, ses contraintes et les usages envisageables.", "documents/fiche-proprietaire.md"],
-        ["Bien solidaire", "Étudier un bien proposé pour un usage temporaire, solidaire ou partagé.", "documents/fiche-bien-solidaire-usage-partage.md"],
-        ["Accord propriétaire", "Autoriser l'étude d'un bien sans créer d'occupation, de travaux ou d'engagement prématuré.", "documents/accord-principe-proprietaire.md"],
-        ["Scénarios d'usage", "Comparer les usages possibles d'un bien avant de choisir une solution.", "documents/scenarios-usage-bien.md"],
-        ["Suivi et restitution", "Suivre un bien pendant la coopération et préparer sa restitution au propriétaire.", "documents/suivi-restitution-bien.md"],
-        ["Fiche entreprise", "Décrire des matériaux, compétences, locaux ou contributions possibles.", "documents/fiche-entreprise.md"],
-        ["Signalement lieu", "Décrire un logement, commerce, bâtiment, terrain, friche ou matériau à qualifier.", "documents/fiche-signalement-lieu.md"],
-        ["Qualification signalement", "Traiter un signalement sans le confondre avec un projet validé.", "documents/protocole-qualification-signalement.md"],
-        ["Sources territoriales", "Tracer les sources utilisées dans les diagnostics, cartes et indicateurs.", "documents/registre-sources-donnees-territoriales.md"],
-        ["Cartographie TVF", "Préparer les couches, statuts, règles de confidentialité et légendes d'une carte.", "documents/fiche-cartographie-territoriale.md"],
-        ["Fiche projet", "Cadrer un projet territorial, son usage, ses acteurs, ses risques et ses livrables.", "documents/fiche-projet.md"],
-        ["Pièces à fournir", "Lister les documents utiles selon le type de demande : collectivité, propriétaire, entreprise ou bénévole.", "documents/pieces-a-fournir.md"],
-        ["Registre demandes", "Tracer les demandes reçues, leurs statuts, responsables, priorités et prochaines actions.", "documents/registre-demandes-entrantes.md"],
-        ["Accusé de réception", "Répondre proprement à une demande sans créer d'engagement prématuré.", "documents/accuse-reception-demande.md"],
-        ["Grille d'instruction", "Analyser l'utilité, les risques, les pièces et la faisabilité d'un dossier.", "documents/grille-instruction-dossier.md"],
-        ["Décision d'orientation", "Formaliser la suite donnée à un dossier : compléter, visiter, instruire ou classer.", "documents/fiche-decision-orientation.md"],
-        ["Fiche d’audit terrain", "Documenter une visite, l’état apparent, les ressources, les risques et les suites à donner.", "documents/fiche-audit-terrain.md"],
-        ["Autorisation de visite", "Encadrer l'accès à un bien ou site avant toute observation de terrain.", "documents/autorisation-visite-bien.md"],
-        ["Droit à l'image", "Autoriser ou limiter l'usage de photos, vidéos, témoignages, logos ou citations.", "documents/autorisation-droit-image.md"],
-        ["Données personnelles", "Informer les personnes sur l'utilisation des informations transmises à TVF.", "documents/consentement-donnees-personnelles.md"],
-        ["Évaluation sécurité", "Identifier les risques d'un site avant visite, collecte ou action terrain.", "documents/evaluation-securite-site.md"],
-        ["Plan de prévention", "Cadrer une action terrain avec responsabilités, équipements et mesures de prudence.", "documents/plan-prevention-action-terrain.md"],
-        ["PV remise matériaux", "Tracer la réception, les réserves et l'affectation provisoire des matériaux.", "documents/proces-verbal-remise-materiaux.md"],
-        ["Fiche incident", "Documenter un incident, presque-incident ou point de vigilance pendant une action.", "documents/fiche-incident-action.md"],
-        ["Mission bénévole", "Cadrer une mission bénévole avant une action, une visite ou un chantier encadré.", "documents/fiche-mission-benevole.md"],
-        ["Consignes sécurité", "Préparer les règles de sécurité minimales avant une action terrain.", "documents/consignes-securite-action-terrain.md"],
-        ["Feuille d'émargement", "Tracer les présences, horaires, contacts et signatures lors d'une action.", "documents/feuille-emargement-action.md"],
-        ["Compte rendu terrain", "Documenter les objectifs, résultats, risques, décisions et suites d'une action.", "documents/compte-rendu-action-terrain.md"],
-        ["Budget prévisionnel", "Estimer les dépenses, ressources, contributions en nature et reste à financer.", "documents/budget-previsionnel-projet.md"],
-        ["Demande de devis", "Solliciter un prestataire sans créer de commande ou engagement prématuré.", "documents/demande-devis-prestation.md"],
-        ["Comparatif devis", "Comparer prix, périmètre, délais, garanties et critères qualitatifs.", "documents/tableau-comparatif-devis.md"],
-        ["Engagement dépense", "Autoriser une dépense avec budget, pièces, plafond et validation interne.", "documents/fiche-engagement-depense.md"],
-        ["Réception prestation", "Constater le service fait, les réserves et les justificatifs avant paiement.", "documents/proces-verbal-reception-prestation.md"],
-        ["Registre financements", "Suivre les dispositifs, appels à projets, statuts, échéances et sources officielles.", "documents/registre-financements-appels-projets.md"],
-        ["Éligibilité financement", "Vérifier si un projet correspond à un dispositif sans annoncer de montant acquis.", "documents/fiche-eligibilite-financement.md"],
-        ["Plan financement", "Présenter coûts, ressources, contributions en nature et reste à financer.", "documents/plan-financement-territorial.md"],
-        ["Cofinancement projet", "Distinguer montants pressentis, demandés, accordés, conventionnés et versés.", "documents/tableau-cofinancement-projet.md"],
-        ["Demande de soutien", "Présenter une demande financière claire, factuelle et rattachée à un projet instruit.", "documents/demande-soutien-financier.md"],
-        ["Impact prévisionnel", "Distinguer objectifs, estimations, hypothèses et résultats vérifiés après action.", "documents/note-impact-previsionnel.md"],
-        ["Suivi contribution", "Tracer une contribution promise, reçue, affectée et justifiée.", "documents/suivi-contribution-financeur.md"],
-        ["Reporting financeur", "Restituer l'utilisation du soutien, l'avancement, les indicateurs et les limites.", "documents/reporting-financeur.md"],
-        ["Réunion de cadrage", "Organiser un premier échange clair avec objectifs, décisions, pièces et suites.", "documents/ordre-du-jour-reunion-cadrage.md"],
-        ["Matrice des risques", "Identifier les risques juridiques, techniques, financiers, humains et de communication.", "documents/matrice-risques-projet.md"],
-        ["Fiche territoire", "Présenter un territoire candidat, ses besoins, acteurs, programmes et premières actions possibles.", "documents/fiche-territoire-partenaire.md"],
-        ["Dossier Saint-Étienne", "Présenter le territoire pilote avec données publiques, besoins, réponse TVF, indicateurs et pièces à réunir.", "documents/dossier-territorial-saint-etienne.md"],
-        ["Note d’opportunité", "Synthétiser l'intérêt d'une coopération TVF avant un rendez-vous institutionnel.", "documents/note-opportunite-territoriale.md"],
-        ["Lettre d’intention", "Formaliser une volonté de coopération sans créer d'engagement opérationnel prématuré.", "documents/lettre-intention-cooperation.md"],
-        ["Courrier propriétaire", "Contacter un propriétaire pour étudier un bien sans créer d'engagement prématuré.", "documents/courrier-proprietaire-proposition-bien.md"],
-        ["Courrier collectivité", "Proposer un échange institutionnel à une commune, un EPCI ou une collectivité.", "documents/courrier-collectivite-territoire-partenaire.md"],
-        ["Courrier entreprise", "Présenter une contribution possible en matériaux, compétences, locaux ou mécénat.", "documents/courrier-entreprise-contribution.md"],
-        ["Courrier financeur", "Demander un échange avec une fondation, un mécène ou un financeur potentiel.", "documents/courrier-financeur-mecene.md"],
-        ["Partenaire potentiel", "Qualifier un acteur avant toute annonce, logo ou coopération publique.", "documents/fiche-partenaire-potentiel.md"],
-        ["Officialisation partenariat", "Vérifier les étapes avant d'afficher un partenaire ou d'utiliser son logo.", "documents/protocole-officialisation-partenariat.md"],
-        ["Partenariat associatif", "Cadrer une coopération avec une association locale ou thématique.", "documents/convention-partenariat-association.md"],
-        ["Mise à disposition", "Préparer l'usage temporaire d'un bien, local ou terrain avec responsabilités claires.", "documents/convention-mise-disposition-bien.md"],
-        ["Contribution entreprise", "Cadrer les matériaux, compétences, locaux, mécénat ou appuis proposés par une entreprise.", "documents/fiche-contribution-entreprise.md"],
-        ["Bordereau matériaux", "Décrire précisément les matériaux proposés, leur état, leur retrait et leur affectation possible.", "documents/bordereau-don-materiaux.md"],
-        ["Convention mécénat", "Préparer un soutien financier, matériel ou de compétences sans promesse fiscale automatique.", "documents/convention-mecenat-preparatoire.md"],
-        ["Registre matériaux", "Tracer les matériaux proposés, acceptés, refusés, stockés, réservés ou affectés.", "documents/registre-materiaux-reemploi.md"],
-        ["Éléments officiels en attente", "Lister les informations administratives, partenaires, résultats et preuves à publier uniquement après vérification.", "documents/registre-elements-officiels-en-attente.md"],
-        ["Kit de discours", "Centraliser les pitchs, argumentaires, scripts et réponses aux objections.", "documents/kit-discours-tvf.md"],
-        ["Pitch officiel", "Présenter TVF en 30 secondes, 1 minute, 3 minutes ou en version institutionnelle.", "documents/pitch-officiel-tvf.md"],
-        ["Présentation 15 minutes", "Présenter TVF en réunion courte avec une structure claire et prudente.", "documents/script-presentation-15-minutes.md"],
-        ["Scripts rendez-vous", "Structurer les échanges avec mairie, EPCI, propriétaire, entreprise ou financeur.", "documents/scripts-rendez-vous-institutionnels.md"],
-        ["Préparation rendez-vous", "Préparer un échange, les questions, objections, pièces et suites à donner.", "documents/fiche-preparation-rendez-vous.md"],
-        ["Argumentaires publics", "Adapter les bénéfices et appels à l'action selon chaque interlocuteur.", "documents/argumentaires-par-public.md"],
-        ["Scripts de contact", "Préparer les e-mails, messages LinkedIn, relances et appels téléphoniques.", "documents/scripts-prise-contact.md"],
-        ["Plan prospection", "Organiser les premiers contacts sur 30 jours sans promesse excessive.", "documents/plan-prospection-30-jours.md"],
-        ["Suivi prospection", "Tracer contacts, relances, rendez-vous, statuts et prochaines actions.", "documents/tableau-suivi-prospection.md"],
-        ["Objections réponses", "Répondre aux questions difficiles sans promesse excessive ni chiffre inventé.", "documents/objections-reponses.md"],
-        ["Scripts réseaux sociaux", "Préparer vidéos, carrousels, posts et messages de lancement TVF.", "documents/scripts-video-reseaux-sociaux.md"],
-        ["Scénarios types", "Illustrer les cas d'usage sans les présenter comme des projets réalisés.", "documents/scenarios-types-cas-usage.md"],
-        ["Modèle de convention", "Préparer les clauses de coopération à adapter avec les parties concernées.", "documents/modele-convention.md"],
-        ["Grille d'impact", "Suivre les indicateurs sans inventer de chiffres ni de résultats.", "documents/grille-impact.md"],
-        ["Charte éthique", "Fixer les règles de transparence, de prudence, de traçabilité et de communication.", "documents/charte-ethique.md"],
-        ["Critères de sélection", "Évaluer l’utilité, la faisabilité, les risques et la priorité d’un dossier.", "documents/criteres-selection-projets.md"],
-        ["Bulletin d'adhésion", "Recueillir une demande d'adhésion avec identité, motivation, cotisation et engagement.", "documents/bulletin-adhesion.md"],
-        ["Registre adhérents", "Suivre les adhésions, statuts, cotisations, compétences et données à protéger.", "documents/registre-adherents.md"],
-        ["Procès-verbal", "Tracer les réunions, décisions, votes, responsables et suites à donner.", "documents/proces-verbal-reunion.md"],
-        ["Délégation de pouvoir", "Cadrer une représentation, signature ou mission limitée au nom de TVF.", "documents/delegation-pouvoir.md"],
-        ["Règlement intérieur préparatoire", "Cadrer les règles internes avant adoption officielle.", "documents/reglement-interieur-preparatoire.md"],
-        ["Registre de décisions", "Tracer les décisions, les motifs, les responsables et les échéances.", "documents/registre-suivi-decisions.md"],
-        ["Kit média", "Centraliser les formulations publiques, l’usage du logo et les règles presse.", "documents/kit-media.md"],
-      ]),
-      textBlock(
-        "Repères institutionnels",
-        "Commencez par le document prioritaire, puis ajoutez seulement les pièces nécessaires : fiche projet, convention, grille d'impact ou pièces de suivi. Avant signature ou engagement, chaque modèle doit être adapté au contexte et validé par les personnes compétentes."
-      ),
       faqSection([
-        ["Faut-il remplir tous les documents ?", "Non. Le tableau d'orientation aide à choisir le bon document selon votre besoin. Un dossier simple doit rester lisible et proportionné."],
-        ["Les modèles peuvent-ils être modifiés ?", "Oui. Ils sont conçus comme des bases de travail adaptables au contexte, au territoire, au type de bien et aux responsabilités de chaque acteur."],
-        ["Un document TVF suffit-il pour engager un projet ?", "Non. Un document prépare l'instruction. Un engagement réel suppose une validation, une convention ou une décision formalisée par les personnes compétentes."],
+        ["Faut-il remplir tous les documents ?", "Non. Chaque demande commence par le formulaire adapte au sujet, puis par les pieces indispensables. Les conventions ne servent qu'apres instruction du dossier."],
+        ["Les documents sont-ils modifiables ?", "Oui. Les modeles Word sont faits pour etre completes, adaptes au dossier et relus avant toute signature."],
+        ["Une convention type suffit-elle pour engager TVF ?", "Non. Elle sert de base de travail. L'engagement reel suppose une decision TVF, des pieces verifiees, les assurances utiles et une signature par les personnes habilitees."],
       ]),
     ],
   },
@@ -2439,6 +2387,7 @@ function essentialDocumentsSection() {
   ]);
 }
 
+
 function documentQuickPacksSection() {
   return tableSection("Packs rapides par public", "Ces packs courts evitent d'ouvrir toute la bibliotheque documentaire. Ils donnent le bon ordre de lecture selon le rendez-vous.", [
     ["Public", "Documents a transmettre", "Decision attendue"],
@@ -2714,10 +2663,17 @@ function breadcrumbNav(page) {
     .join("")}</ol></nav>`;
 }
 
+function isDownloadableDocumentHref(href) {
+  if (!href) return false;
+  const [target] = href.split(/(?=[#?])/);
+  return target === "documents/TVF-kit-formulaires-conventions-prets-a-utiliser.zip" || target.startsWith("documents/kit-formulaires-conventions-tvf/");
+}
+
 function isPrivateDocumentHref(href) {
   if (!href) return false;
   const [target] = href.split(/(?=[#?])/);
-  return target === "documents.html" || target === "documents" || target.startsWith("documents/") || target.startsWith("output/") || /\.pdf$/i.test(target);
+  if (target === "documents.html" || target === "documents" || isDownloadableDocumentHref(href)) return true;
+  return target.startsWith("documents/") || target.startsWith("output/") || /\.pdf$/i.test(target);
 }
 
 function hrefFor(href) {
@@ -3171,7 +3127,7 @@ ${breadcrumbNav(page)}
     <div class="container footer-grid">
       <div><span class="footer-logo-box"><img src="assets/logo-territoires-vivants-france-web.png" width="583" height="181" alt="Territoires Vivants France" class="footer-logo" loading="lazy" decoding="async"></span><p>Plateforme nationale de coopération pour redonner vie aux biens, lieux et ressources inutilisés.</p></div>
       <div><h3>Navigation</h3>${nav.slice(0, 7).map(([label, href]) => `<a href="${hrefFor(href)}">${label}</a>`).join("")}</div>
-      <div><h3>Ressources</h3><a href="${hrefFor("contact.html")}">Demander les documents</a><a href="${hrefFor("faq.html")}">FAQ</a><a href="${hrefFor("kit-media.html")}">Kit média</a><a href="${hrefFor("gouvernance.html")}">Gouvernance</a><a href="${hrefFor("mentions-legales.html")}">Mentions légales</a><a href="${hrefFor("politique-confidentialite.html")}">Politique de confidentialité</a></div>
+      <div><h3>Ressources</h3><a href="${hrefFor("faq.html")}">FAQ</a><a href="${hrefFor("kit-media.html")}">Kit média</a><a href="${hrefFor("gouvernance.html")}">Gouvernance</a><a href="${hrefFor("mentions-legales.html")}">Mentions légales</a><a href="${hrefFor("politique-confidentialite.html")}">Politique de confidentialité</a></div>
       <div><h3>Siège</h3><p>25 rue Élise Gervais<br>42000 Saint-Étienne</p><p><a href="mailto:${contact.email}">${contact.email}</a><br><a href="tel:${contact.phoneHref}">${contact.phone}</a></p><div class="footer-social" aria-label="Réseaux et messagerie TVF"><a href="${socialLinks.whatsapp}" target="_blank" rel="noopener noreferrer" aria-label="Écrire à TVF sur WhatsApp"><span aria-hidden="true">WA</span><span>WhatsApp</span></a><a href="${socialLinks.facebook}" target="_blank" rel="noopener noreferrer" aria-label="Suivre TVF sur Facebook"><span aria-hidden="true">FB</span><span>Facebook</span></a></div><a class="btn secondary" href="${hrefFor("contact.html")}">Contacter TVF</a></div>
     </div>
     <div class="container footer-bottom"><span>© 2026 Territoires Vivants France - Tous droits réservés.</span><a class="footer-admin-link" href="${hrefFor("admin-demandes.html")}" rel="nofollow">Accès administrateur</a></div>
@@ -3230,6 +3186,7 @@ fs.writeFileSync(
     {
       cleanUrls: true,
       trailingSlash: false,
+      functions: { "api/dashboard.js": { includeFiles: "documents/**" } },
       redirects: [
         { source: "/documents", destination: "/contact", permanent: false },
         { source: "/documents.html", destination: "/contact", permanent: false },

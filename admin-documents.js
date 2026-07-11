@@ -17,6 +17,7 @@ const countEl = document.querySelector("[data-documents-count]");
 const emptyEl = document.querySelector("[data-documents-empty]");
 const kpisEl = document.querySelector("[data-documents-kpis]");
 const globalControlEl = document.querySelector("[data-documents-control-global]");
+const internalKitEl = document.querySelector("[data-documents-kit]");
 const refreshButton = document.querySelector("[data-documents-refresh]");
 const logoutButton = document.querySelector("[data-documents-logout]");
 const exportButton = document.querySelector("[data-documents-export]");
@@ -34,6 +35,7 @@ const relatedPresetButtons = document.querySelectorAll("[data-documents-related-
 let documents = [];
 let templates = [];
 let dashboard = null;
+let internalKit = [];
 let selectedId = null;
 let view = "documents";
 let debounceTimer;
@@ -77,7 +79,45 @@ function selectedItem() { return currentItems().find((item) => item.id === selec
 function filtersParams() { const data = new FormData(filtersForm); const params = new URLSearchParams(); ["q", "document_type", "confidentiality_level", "related_object_type", "related_object_id"].forEach((name) => { const value = String(data.get(name) || "").trim(); if (value) params.set(name, value); }); params.set("limit", "120"); return params; }
 function documentParamsForView() { const params = filtersParams(); if (["a_classer", "a_valider", "valide", "archive"].includes(view)) params.set("status", view); return params; }
 async function loadDashboard() { const result = await api("/api/admin-documents?entity=dashboard"); dashboard = result.dashboard || {}; renderKpis(); renderGlobalControlPanel(); }
-async function loadItems() { if (countEl) countEl.textContent = view === "templates" ? "Chargement des modeles..." : "Chargement des documents..."; if (view === "templates") { const result = await api(`/api/admin-documents?entity=templates&${filtersParams().toString()}`); templates = result.templates || []; if (!templates.some((item) => item.id === selectedId)) selectedId = templates[0]?.id || null; } else { const result = await api(`/api/admin-documents?${documentParamsForView().toString()}`); documents = result.documents || []; if (!documents.some((item) => item.id === selectedId)) selectedId = documents[0]?.id || null; } await loadDashboard().catch(() => {}); renderTabs(); renderList(); renderDetail(); }
+async function loadInternalKit() {
+  if (!internalKitEl) return;
+  if (internalKit.length) return renderInternalKit();
+  const result = await api("/api/admin-documents?entity=kit");
+  internalKit = result.kit || [];
+  renderInternalKit();
+}
+function formatFileSize(size) {
+  const value = Number(size || 0);
+  if (!value) return "Taille non calculee";
+  if (value > 1024 * 1024) return `${(value / 1024 / 1024).toFixed(1)} Mo`;
+  return `${Math.max(1, Math.round(value / 1024))} Ko`;
+}
+function renderInternalKit() {
+  if (!internalKitEl) return;
+  const total = internalKit.reduce((sum, group) => sum + (group.files || []).length, 0);
+  internalKitEl.innerHTML = `<div class="admin-panel-head"><div><p class="section-kicker">Kit interne TVF</p><h3>Formulaires, conventions et pieces a fournir</h3><p>Ces documents sont reserves au travail interne TVF OS. Ils ne sont pas affiches dans la navigation publique du site.</p></div><strong>${escapeHtml(String(total))} fichiers</strong></div><div class="documents-kit-groups">${internalKit.map((group) => `<article class="documents-kit-group"><h4>${escapeHtml(group.label)}</h4><div class="documents-kit-grid">${(group.files || []).map(renderInternalKitFile).join("")}</div></article>`).join("")}</div>`;
+}
+function renderInternalKitFile(file) {
+  return `<article class="documents-kit-card"><div><strong>${escapeHtml(file.title)}</strong><p>${escapeHtml(file.description)}</p><small>${escapeHtml(file.filename)} - ${escapeHtml(formatFileSize(file.size))}</small></div><button class="btn secondary" type="button" data-kit-download="${escapeHtml(file.path)}">Telecharger</button></article>`;
+}
+async function downloadKitFile(relativePath) {
+  const response = await fetch(`/api/admin-documents?entity=kit_file&path=${encodeURIComponent(relativePath)}`, { headers: { Authorization: `Bearer ${token()}` } });
+  if (!response.ok) throw new Error("Telechargement interne impossible.");
+  const blob = await response.blob();
+  const disposition = response.headers.get("Content-Disposition") || "";
+  const match = disposition.match(/filename="([^"]+)"/);
+  const filename = match ? match[1] : "document-interne-tvf";
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = filename;
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  URL.revokeObjectURL(url);
+  notify("Document interne prepare.", "success");
+}
+async function loadItems() { if (countEl) countEl.textContent = view === "templates" ? "Chargement des modeles..." : "Chargement des documents..."; if (view === "templates") { const result = await api(`/api/admin-documents?entity=templates&${filtersParams().toString()}`); templates = result.templates || []; if (!templates.some((item) => item.id === selectedId)) selectedId = templates[0]?.id || null; } else { const result = await api(`/api/admin-documents?${documentParamsForView().toString()}`); documents = result.documents || []; if (!documents.some((item) => item.id === selectedId)) selectedId = documents[0]?.id || null; } await loadDashboard().catch(() => {}); await loadInternalKit().catch(() => {}); renderTabs(); renderList(); renderDetail(); }
 function renderKpis() { if (!kpisEl || !dashboard) return; kpisEl.innerHTML = `<article><span>Documents</span><strong>${dashboard.documents_total || 0}</strong><small>Total</small></article><article data-tone="warning"><span>A classer</span><strong>${dashboard.a_classer || 0}</strong><small>Tri requis</small></article><article data-tone="info"><span>A valider</span><strong>${dashboard.a_valider || 0}</strong><small>Decision humaine</small></article><article data-tone="danger"><span>Sensibles</span><strong>${dashboard.sensibles || 0}</strong><small>Acces prudent</small></article><article><span>Modeles</span><strong>${dashboard.templates_officiels || 0}/${dashboard.templates_total || 0}</strong><small>Officiels</small></article>`; }
 function renderGlobalControlPanel() {
   if (!globalControlEl || !dashboard) return;
@@ -294,5 +334,6 @@ function openTemplateModal() { if (templateModal) templateModal.hidden = false; 
 function closeTemplateModal() { if (templateModal) templateModal.hidden = true; }
 function bindEvents() { tokenForm?.addEventListener("submit", async (event) => { event.preventDefault(); const value = String(new FormData(tokenForm).get("token") || "").trim(); if (!value) return setStatus("Entrez le token admin.", "error"); setToken(value); try { showApp(); await loadItems(); setStatus(""); } catch (error) { setToken(""); showLogin(); setStatus(error.message, "error"); } }); filtersForm?.addEventListener("input", () => { clearTimeout(debounceTimer); debounceTimer = setTimeout(() => loadItems().catch((e) => notifyError(e)), 280); }); filtersForm?.addEventListener("change", () => loadItems().catch((e) => notifyError(e))); viewButtons.forEach((button) => button.addEventListener("click", () => { view = button.dataset.documentsView || "documents"; selectedId = null; loadItems().catch((e) => notifyError(e)); })); relatedPresetButtons.forEach((button) => button.addEventListener("click", () => setRelatedPreset(button.dataset.documentsRelatedPreset || "all"))); refreshButton?.addEventListener("click", () => loadItems().catch((e) => notifyError(e))); logoutButton?.addEventListener("click", () => { setToken(""); window.location.href = "admin-login"; }); exportButton?.addEventListener("click", exportCsv); createButton?.addEventListener("click", openModal); templateCreateButton?.addEventListener("click", openTemplateModal); closeModalButtons.forEach((button) => button.addEventListener("click", closeModal)); closeTemplateModalButtons.forEach((button) => button.addEventListener("click", closeTemplateModal)); modal?.addEventListener("click", (event) => { if (event.target === modal) closeModal(); }); templateModal?.addEventListener("click", (event) => { if (event.target === templateModal) closeTemplateModal(); }); modalForm?.addEventListener("submit", createDocument); templateForm?.addEventListener("submit", createTemplate); listEl?.addEventListener("click", (event) => { const button = event.target.closest("[data-item-id]"); if (!button) return; selectedId = button.dataset.itemId; renderList(); renderDetail(); }); detailEl?.addEventListener("submit", (event) => { const form = event.target.closest("[data-document-detail-form], [data-template-detail-form]"); if (!form) return; event.preventDefault(); if (form.matches("[data-template-detail-form]")) saveTemplate(form); else saveDocument(form); }); detailEl?.addEventListener("click", (event) => { const documentQuick = event.target.closest("[data-document-quick]"); if (documentQuick) quickDocument(documentQuick.dataset.documentQuick).catch((e) => notifyError(e)); const templateQuick = event.target.closest("[data-template-quick]"); if (templateQuick) quickTemplate(templateQuick.dataset.templateQuick).catch((e) => notifyError(e)); const generator = event.target.closest("[data-generate-template]"); if (generator) generateFromTemplate(generator.dataset.generateTemplate).catch((e) => notifyError(e)); const sameRelated = event.target.closest("[data-filter-related]"); if (sameRelated) filterSameRelated(); const copyRelated = event.target.closest("[data-copy-related-id]"); if (copyRelated) copyRelatedId(copyRelated.dataset.copyRelatedId); const download = event.target.closest("[data-download-file]"); if (download) downloadFile(download.dataset.downloadFile).catch((e) => notifyError(e)); }); }
 globalControlEl?.addEventListener("click", (event) => { const preset = event.target.closest("[data-documents-related-preset]"); if (preset) setRelatedPreset(preset.dataset.documentsRelatedPreset || "all"); });
+internalKitEl?.addEventListener("click", (event) => { const button = event.target.closest("[data-kit-download]"); if (button) downloadKitFile(button.dataset.kitDownload).catch((e) => notifyError(e)); });
 bindEvents();
 if (token()) { showApp(); loadItems().catch((error) => { setToken(""); showLogin(); setStatus(error.message, "error"); }); } else { showLogin(); }

@@ -7,5 +7,3 @@ Disallow: /tmp/
 Disallow: /admin-demandes
 Disallow: /admin-demandes.html
 Sitemap: https://www.territoiresvivantsfrance.fr/sitemap.xml
-Disallow: /dashboard
-Disallow: /dashboard.html

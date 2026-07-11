@@ -7928,3 +7928,54 @@ tr:nth-child(even) td {
   .admin-erp-core,
   .admin-erp-map { padding: 16px; }
 }
+
+.documents-kit-panel {
+  gap: 18px;
+}
+.documents-kit-groups {
+  display: grid;
+  gap: 16px;
+}
+.documents-kit-group {
+  display: grid;
+  gap: 10px;
+}
+.documents-kit-group h4 {
+  margin: 0;
+  color: var(--green-900);
+  font-size: .98rem;
+}
+.documents-kit-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 12px;
+}
+.documents-kit-card {
+  display: grid;
+  gap: 12px;
+  align-content: space-between;
+  min-height: 172px;
+  padding: 15px;
+  border: 1px solid rgba(14,45,69,.1);
+  border-radius: 16px;
+  background: rgba(255,255,255,.92);
+  box-shadow: 0 8px 20px rgba(12,31,46,.045);
+}
+.documents-kit-card strong {
+  color: var(--blue-900);
+}
+.documents-kit-card p {
+  margin: 7px 0;
+  color: var(--muted);
+}
+.documents-kit-card small {
+  color: #5c6b5f;
+  overflow-wrap: anywhere;
+}
+.documents-kit-card .btn {
+  width: fit-content;
+}
+@media (max-width: 720px) {
+  .documents-kit-grid { grid-template-columns: 1fr; }
+  .documents-kit-card .btn { width: 100%; }
+}

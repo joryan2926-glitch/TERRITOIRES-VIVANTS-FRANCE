@@ -1,238 +1,85 @@
 {
-    "cleanUrls":  true,
-    "trailingSlash":  false,
-    "redirects":  [
-                      {
-                          "source":  "/documents",
-                          "destination":  "/contact",
-                          "permanent":  false
-                      },
-                      {
-                          "source":  "/documents.html",
-                          "destination":  "/contact",
-                          "permanent":  false
-                      },
-                      {
-                          "source":  "/documents/:path*",
-                          "destination":  "/contact",
-                          "permanent":  false
-                      },
-                      {
-                          "source":  "/output/:path*",
-                          "destination":  "/contact",
-                          "permanent":  false
-                      },
-                      {
-                          "source":  "/tmp/:path*",
-                          "destination":  "/contact",
-                          "permanent":  false
-                      }
-                  ],
-    "headers":  [
-                    {
-                        "source":  "/(.*)",
-                        "headers":  [
-                                        {
-                                            "key":  "X-Content-Type-Options",
-                                            "value":  "nosniff"
-                                        },
-                                        {
-                                            "key":  "X-Frame-Options",
-                                            "value":  "SAMEORIGIN"
-                                        },
-                                        {
-                                            "key":  "Referrer-Policy",
-                                            "value":  "strict-origin-when-cross-origin"
-                                        },
-                                        {
-                                            "key":  "Permissions-Policy",
-                                            "value":  "camera=(), microphone=(), geolocation=(), payment=()"
-                                        },
-                                        {
-                                            "key":  "Strict-Transport-Security",
-                                            "value":  "max-age=63072000; includeSubDomains; preload"
-                                        },
-                                        {
-                                            "key":  "Content-Security-Policy",
-                                            "value":  "default-src \u0027self\u0027; script-src \u0027self\u0027 \u0027unsafe-inline\u0027; style-src \u0027self\u0027 \u0027unsafe-inline\u0027; img-src \u0027self\u0027 data: https:; font-src \u0027self\u0027 data:; connect-src \u0027self\u0027; frame-ancestors \u0027self\u0027; base-uri \u0027self\u0027; form-action \u0027self\u0027"
-                                        }
-                                    ]
-                    },
-                    {
-                        "source":  "/assets/(.*)",
-                        "headers":  [
-                                        {
-                                            "key":  "Cache-Control",
-                                            "value":  "public, max-age=31536000, immutable"
-                                        }
-                                    ]
-                    },
-                    {
-                        "source":  "/(.*).html",
-                        "headers":  [
-                                        {
-                                            "key":  "Cache-Control",
-                                            "value":  "public, max-age=0, must-revalidate"
-                                        }
-                                    ]
-                    }
-                ],
-    "rewrites":  [
-                     {
-                         "source":  "/api/admin-ai",
-                         "destination":  "/api/admin/ai"
-                     },
-                     {
-                         "source":  "/api/admin-branches",
-                         "destination":  "/api/admin/branches"
-                     },
-                     {
-                         "source":  "/api/admin-cases",
-                         "destination":  "/api/admin/cases"
-                     },
-                     {
-                         "source":  "/api/admin-contacts",
-                         "destination":  "/api/admin/contacts"
-                     },
-                     {
-                         "source":  "/api/admin-crm",
-                         "destination":  "/api/admin/crm"
-                     },
-                     {
-                         "source":  "/api/admin-documents",
-                         "destination":  "/api/admin/documents"
-                     },
-                     {
-                         "source":  "/api/admin-emails",
-                         "destination":  "/api/admin/emails"
-                     },
-                     {
-                         "source":  "/api/admin-finances",
-                         "destination":  "/api/admin/finances"
-                     },
-                     {
-                         "source":  "/api/admin-governance",
-                         "destination":  "/api/admin/governance"
-                     },
-                     {
-                         "source":  "/api/admin-impact",
-                         "destination":  "/api/admin/impact"
-                     },
-                     {
-                         "source":  "/api/admin-knowledge",
-                         "destination":  "/api/admin/knowledge"
-                     },
-                     {
-                         "source":  "/api/admin-map",
-                         "destination":  "/api/admin/map"
-                     },
-                     {
-                         "source":  "/api/admin-observatoire",
-                         "destination":  "/api/admin/observatoire"
-                     },
-                     {
-                         "source":  "/api/admin-procedures",
-                         "destination":  "/api/admin/procedures"
-                     },
-                     {
-                         "source":  "/api/admin-risks",
-                         "destination":  "/api/admin/risks"
-                     },
-                     {
-                         "source":  "/api/admin-session",
-                         "destination":  "/api/admin/session"
-                     },
-                     {
-                         "source":  "/api/admin-settings",
-                         "destination":  "/api/admin/settings"
-                     },
-                     {
-                         "source":  "/api/admin-users",
-                         "destination":  "/api/admin/users"
-                     },
-                     {
-                         "source":  "/api/admin-work",
-                         "destination":  "/api/admin/work"
-                     },
-                     {
-                         "destination":  "/admin.html",
-                         "source":  "/admin"
-                     },
-                     {
-                         "destination":  "/admin-ai.html",
-                         "source":  "/admin-ai"
-                     },
-                     {
-                         "destination":  "/admin-branches.html",
-                         "source":  "/admin-branches"
-                     },
-                     {
-                         "destination":  "/admin-crm.html",
-                         "source":  "/admin-crm"
-                     },
-                     {
-                         "destination":  "/admin-demandes.html",
-                         "source":  "/admin-demandes"
-                     },
-                     {
-                         "destination":  "/admin-documents.html",
-                         "source":  "/admin-documents"
-                     },
-                     {
-                         "destination":  "/admin-dossiers.html",
-                         "source":  "/admin-dossiers"
-                     },
-                     {
-                         "destination":  "/admin-emails.html",
-                         "source":  "/admin-emails"
-                     },
-                     {
-                         "destination":  "/admin-finances.html",
-                         "source":  "/admin-finances"
-                     },
-                     {
-                         "destination":  "/admin-governance.html",
-                         "source":  "/admin-governance"
-                     },
-                     {
-                         "destination":  "/admin-impact.html",
-                         "source":  "/admin-impact"
-                     },
-                     {
-                         "destination":  "/admin-knowledge.html",
-                         "source":  "/admin-knowledge"
-                     },
-                     {
-                         "destination":  "/admin-map.html",
-                         "source":  "/admin-map"
-                     },
-                     {
-                         "destination":  "/admin-observatoire.html",
-                         "source":  "/admin-observatoire"
-                     },
-                     {
-                         "destination":  "/admin-procedures.html",
-                         "source":  "/admin-procedures"
-                     },
-                     {
-                         "destination":  "/admin-risks.html",
-                         "source":  "/admin-risks"
-                     },
-                     {
-                         "destination":  "/admin-settings.html",
-                         "source":  "/admin-settings"
-                     },
-                     {
-                         "destination":  "/admin-users.html",
-                         "source":  "/admin-users"
-                     },
-                     {
-                         "destination":  "/admin-work.html",
-                         "source":  "/admin-work"
-                     },
-                     {
-                         "destination":  "/dashboard.html",
-                         "source":  "/dashboard"
-                     }
-                 ]
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "functions": {
+    "api/dashboard.js": {
+      "includeFiles": "documents/**"
+    }
+  },
+  "redirects": [
+    {
+      "source": "/documents",
+      "destination": "/contact",
+      "permanent": false
+    },
+    {
+      "source": "/documents.html",
+      "destination": "/contact",
+      "permanent": false
+    },
+    {
+      "source": "/documents/:path*",
+      "destination": "/contact",
+      "permanent": false
+    },
+    {
+      "source": "/output/:path*",
+      "destination": "/contact",
+      "permanent": false
+    },
+    {
+      "source": "/tmp/:path*",
+      "destination": "/contact",
+      "permanent": false
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=(), payment=()"
+        },
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=63072000; includeSubDomains; preload"
+        },
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self'; frame-ancestors 'self'; base-uri 'self'; form-action 'self'"
+        }
+      ]
+    },
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/(.*).html",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    }
+  ]
 }
