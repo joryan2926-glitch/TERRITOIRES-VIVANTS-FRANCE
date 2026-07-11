@@ -22,6 +22,10 @@ if (!fs.existsSync(archive)) fail("archive_zip_missing");
 if (docxFiles.length < 21) fail(`docx_count_${docxFiles.length}`);
 
 const vercel = JSON.parse(fs.readFileSync(path.join(root, "vercel.json"), "utf8"));
+const rewriteMap = new Map((vercel.rewrites || []).map((item) => [item.source, item.destination]));
+if (rewriteMap.get("/api/admin-:module") !== "/api/admin/:module") fail("admin_api_rewrite_missing");
+const adminFunction = vercel.functions && vercel.functions["api/admin/[module].js"];
+if (!adminFunction || adminFunction.includeFiles !== "documents/**") fail("admin_function_include_documents_missing");
 const redirectSources = new Set((vercel.redirects || []).map((item) => item.source));
 ["/documents", "/documents.html", "/documents/:path*"].forEach((source) => {
   if (!redirectSources.has(source)) fail(`redirect_missing_${source}`);
