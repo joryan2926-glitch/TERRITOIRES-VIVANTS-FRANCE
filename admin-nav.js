@@ -37,7 +37,6 @@ const TVF_ADMIN_GROUPS = [
     modules: [
       { href: "admin-map", label: "Cartographie", icon: "&#8982;" },
       { href: "admin-observatoire", label: "Observatoire", icon: "&#9676;" },
-      { href: "admin-branches", label: "Antennes", icon: "&#8962;" },
       { href: "admin-impact", label: "Impact", icon: "%" },
     ],
   },

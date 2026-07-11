@@ -64,7 +64,6 @@
         <button type="button" data-documents-related-preset="case">Dossiers</button>
         <button type="button" data-documents-related-preset="organization">Organisations</button>
         <button type="button" data-documents-related-preset="contact">Contacts</button>
-        <button type="button" data-documents-related-preset="branch">Antennes</button>
         <button type="button" data-documents-related-preset="none">Non rattaches</button>
         <button type="button" data-documents-related-preset="all">Tous</button>
       </section>
@@ -109,7 +108,6 @@
             <option value="contact">Contact</option>
             <option value="organization">Organisation</option>
             <option value="project">Projet</option>
-            <option value="branch">Antenne</option>
             <option value="none">Aucun</option>
           </select>
         </label>
@@ -144,7 +142,7 @@
           <label>Type<select name="document_type"><option value="piece">Piece</option><option value="photo">Photo</option><option value="convention">Convention</option><option value="courrier">Courrier</option><option value="budget">Budget</option><option value="preuve">Preuve</option><option value="autre">Autre</option></select></label>
           <label>Statut<select name="status"><option value="a_classer">A classer</option><option value="brouillon">Brouillon</option><option value="a_valider">A valider</option><option value="valide">Valide</option></select></label>
           <label>Confidentialite<select name="confidentiality_level"><option value="interne">Interne</option><option value="confidentiel">Confidentiel</option><option value="sensible">Sensible</option><option value="public">Public</option></select></label>
-          <label>Rattachement<select name="related_object_type"><option value="none">Aucun</option><option value="case">Dossier</option><option value="request">Demande</option><option value="contact">Contact</option><option value="organization">Organisation</option><option value="project">Projet</option><option value="branch">Antenne</option></select></label>
+          <label>Rattachement<select name="related_object_type"><option value="none">Aucun</option><option value="case">Dossier</option><option value="request">Demande</option><option value="contact">Contact</option><option value="organization">Organisation</option><option value="project">Projet</option></select></label>
           <label>ID rattache<input name="related_object_id" placeholder="UUID si connu"></label>
           <label class="admin-create-wide">Fichier<input name="file" type="file" accept=".pdf,.docx,.xlsx,.pptx,.txt,.md,.csv,.jpg,.jpeg,.png,.webp,application/pdf,image/*"></label>
           <label class="admin-create-wide">Resume / classement<textarea name="summary" rows="4" placeholder="Contexte, pieces sensibles, dossier concerne"></textarea></label>
@@ -162,7 +160,7 @@
         </div>
         <form class="admin-create-form documents-create-form" data-templates-form>
           <label>Titre<input name="title" required placeholder="Ex. Demande de pieces complementaires"></label>
-          <label>Type<select name="template_type"><option value="courrier">Courrier</option><option value="email">E-mail</option><option value="convention">Convention</option><option value="fiche">Fiche</option><option value="registre">Registre</option><option value="budget">Budget</option><option value="kit_antenne">Kit antenne</option><option value="formulaire">Formulaire</option><option value="grille">Grille</option><option value="financeur">Financeur</option><option value="autre">Autre</option></select></label>
+          <label>Type<select name="template_type"><option value="courrier">Courrier</option><option value="email">E-mail</option><option value="convention">Convention</option><option value="fiche">Fiche</option><option value="registre">Registre</option><option value="budget">Budget</option><option value="formulaire">Formulaire</option><option value="grille">Grille</option><option value="financeur">Financeur</option><option value="autre">Autre</option></select></label>
           <label>Statut<select name="status"><option value="brouillon">Brouillon</option><option value="a_valider">A valider</option><option value="officiel">Officiel</option></select></label>
           <label>Validation nationale<select name="national_validated"><option value="false">Non</option><option value="true">Oui</option></select></label>
           <label class="admin-create-wide">Champs requis<input name="required_fields" placeholder="nom, adresse, date, responsable"></label>

@@ -1,7 +1,7 @@
 const FIN_TOKEN_KEY = "tvfAdminToken";
 const viewLabels = { budgets: "Budgets", expenses: "Depenses", funders: "Financeurs", opportunities: "Appels a projets", applications: "Demandes", payments: "Paiements", reports: "Reporting" };
 const typeMaps = {
-  budgets: { project: "Projet", branch: "Antenne", national: "National", action: "Action", grant: "Subvention" },
+  budgets: { project: "Projet", national: "National", action: "Action", grant: "Subvention" },
   opportunities: { grant: "Subvention", sponsorship: "Mecenat", call_for_projects: "Appel a projets", donation: "Don", public_subsidy: "Aide publique", loan: "Pret", other: "Autre" },
   funders: { public: "Public", private: "Prive", foundation: "Fondation", corporate: "Entreprise", individual: "Particulier", institution: "Institution", other: "Autre" },
   reports: { funder_report: "Financeur", budget_review: "Revue budget", expense_summary: "Depenses", grant_report: "Subvention" },

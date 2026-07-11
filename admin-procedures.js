@@ -5,7 +5,7 @@ const levelLabels = { obligatoire: "Obligatoire", recommande: "Recommande", opti
 const stepTypeLabels = { information: "Information", verification: "Verification", decision: "Decision", document: "Document", validation: "Validation", action: "Action", risque: "Risque" };
 const stepStatusLabels = { a_faire: "A faire", en_cours: "En cours", termine: "Termine", bloque: "Bloque", non_applicable: "N/A" };
 const applicationStatusLabels = { active: "Active", terminee: "Terminee", bloquee: "Bloquee", annulee: "Annulee" };
-const relatedLabels = { case: "Dossier", request: "Demande", contact: "Contact", organization: "Organisation", project: "Projet", branch: "Antenne", none: "Aucun" };
+const relatedLabels = { case: "Dossier", request: "Demande", contact: "Contact", organization: "Organisation", project: "Projet", none: "Aucun" };
 
 const loginSection = document.querySelector("[data-procedures-login]");
 const appSection = document.querySelector("[data-procedures-app]");

@@ -3,7 +3,7 @@ const viewLabels = { metrics: "Indicateurs", values: "Valeurs", proofs: "Preuves
 const typeMaps = {
   metrics: { activity: "Activite", impact: "Impact", finance: "Finance", territory: "Territoire", volunteer: "Benevolat", material: "Materiaux", partner: "Partenaires", case: "Dossiers", other: "Autre" },
   proofs: { document: "Document", photo: "Photo", report: "Rapport", invoice: "Facture", attendance: "Emargement", decision: "Decision", external_source: "Source externe", other: "Autre" },
-  reports: { national: "National", branch: "Antenne", pole: "Pole", project: "Projet", funder: "Financeur", public: "Public" },
+  reports: { national: "National", pole: "Pole", project: "Projet", funder: "Financeur", public: "Public" },
   values: {},
   exports: {}
 };
@@ -14,7 +14,7 @@ const statusMaps = {
   reports: { draft: "Brouillon", to_validate: "A valider", validated: "Valide", published: "Publie", archive: "Archive" },
   exports: { queued: "En file", ready: "Pret", failed: "Echoue", expired: "Expire" }
 };
-const scopeLabels = { national: "National", branch: "Antenne", pole: "Pole", project: "Projet", case: "Dossier" };
+const scopeLabels = { national: "National", pole: "Pole", project: "Projet", case: "Dossier" };
 
 const loginSection = document.querySelector("[data-impact-login]");
 const appSection = document.querySelector("[data-impact-app]");

@@ -1,10 +1,10 @@
 const DOCUMENTS_TOKEN_KEY = "tvfAdminToken";
 const documentTypeLabels = { piece: "Piece", photo: "Photo", convention: "Convention", courrier: "Courrier", email: "E-mail", budget: "Budget", compte_rendu: "Compte rendu", fiche: "Fiche", registre: "Registre", formulaire: "Formulaire", kit: "Kit", preuve: "Preuve", modele_genere: "Modele genere", autre: "Autre" };
 const documentStatusLabels = { brouillon: "Brouillon", a_classer: "A classer", a_valider: "A valider", valide: "Valide", remplace: "Remplace", archive: "Archive" };
-const templateTypeLabels = { courrier: "Courrier", email: "E-mail", convention: "Convention", fiche: "Fiche", registre: "Registre", budget: "Budget", kit_antenne: "Kit antenne", formulaire: "Formulaire", grille: "Grille", compte_rendu: "Compte rendu", financeur: "Financeur", autre: "Autre" };
+const templateTypeLabels = { courrier: "Courrier", email: "E-mail", convention: "Convention", fiche: "Fiche", registre: "Registre", budget: "Budget", formulaire: "Formulaire", grille: "Grille", compte_rendu: "Compte rendu", financeur: "Financeur", autre: "Autre" };
 const templateStatusLabels = { brouillon: "Brouillon", a_valider: "A valider", officiel: "Officiel", remplace: "Remplace", archive: "Archive" };
 const confidentialityLabels = { public: "Public", interne: "Interne", confidentiel: "Confidentiel", sensible: "Sensible" };
-const relatedLabels = { case: "Dossier", request: "Demande", contact: "Contact", organization: "Organisation", project: "Projet", branch: "Antenne", template: "Modele", none: "Aucun" };
+const relatedLabels = { case: "Dossier", request: "Demande", contact: "Contact", organization: "Organisation", project: "Projet", template: "Modele", none: "Aucun" };
 
 const loginSection = document.querySelector("[data-documents-login]");
 const appSection = document.querySelector("[data-documents-app]");
@@ -146,7 +146,6 @@ function templateUsePanel(item) {
     budget: ["Postes", "Montants", "Hypotheses", "Financements", "Justificatifs"],
     financeur: ["Dispositif", "Eligibilite", "Budget", "Impact", "Pieces attendues"],
     compte_rendu: ["Date", "Participants", "Points abordes", "Decisions", "Actions"],
-    kit_antenne: ["Territoire", "Responsable", "Plan 30 jours", "Contacts", "Risques"]
   };
   const checklist = guides[item.template_type] || ["Usage", "Champs", "Limites", "Validation", "Archivage"];
   return `<section class="documents-panel templates-use-panel"><div class="admin-panel-head"><div><p class="section-kicker">Cadre d'utilisation</p><h4>${escapeHtml(label(templateTypeLabels, item.template_type))}</h4></div><strong>${item.national_validated ? "National" : "A valider"}</strong></div><ul>${checklist.map((entry) => `<li>${escapeHtml(entry)}</li>`).join("")}</ul><p>Un modele engageant doit rester un brouillon tant qu'il n'a pas ete relu et valide humainement.</p></section>`;

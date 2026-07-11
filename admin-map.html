@@ -22,7 +22,6 @@
     <div class="admin-top-actions">
       <a class="btn secondary" href="admin">Accueil admin</a>
       <a class="btn secondary" href="admin-demandes">Demandes</a>
-      <a class="btn secondary" href="admin-branches">Antennes</a>
       <a class="btn secondary" href="admin-dossiers">Dossiers</a>
       <a class="btn secondary" href="dashboard">Dashboard</a>
       <a class="btn secondary" href="contact">Retour au site</a>
@@ -52,7 +51,7 @@
 
       <form class="admin-filters map-filters" data-map-filters>
         <label>Recherche<input name="q" type="search" placeholder="Libelle, ville, adresse, description"></label>
-        <label>Couche<select name="point_type"><option value="all">Toutes</option><option value="bien">Biens</option><option value="commerce">Commerces</option><option value="friche">Friches</option><option value="materiau">Materiaux</option><option value="partenaire">Partenaires</option><option value="projet">Projets</option><option value="signalement">Signalements</option><option value="antenne">Antennes</option></select></label>
+        <label>Couche<select name="point_type"><option value="all">Toutes</option><option value="bien">Biens</option><option value="commerce">Commerces</option><option value="friche">Friches</option><option value="materiau">Materiaux</option><option value="partenaire">Partenaires</option><option value="projet">Projets</option><option value="signalement">Signalements</option></select></label>
         <label>Statut<select name="status"><option value="all">Tous</option><option value="actif">Actifs</option><option value="a_verifier">A verifier</option><option value="inactif">Inactifs</option><option value="archive">Archives</option></select></label>
         <label>Visibilite<select name="visibility_level"><option value="all">Toutes</option><option value="public">Public</option><option value="interne">Interne</option><option value="confidentiel">Confidentiel</option><option value="sensible">Sensible</option></select></label>
       </form>
@@ -82,7 +81,7 @@
         <div class="admin-modal-head"><div><p class="section-kicker">Cartographie</p><h2>Nouveau point</h2></div><button class="btn ghost" type="button" data-map-close-modal>Fermer</button></div>
         <form class="admin-create-form map-create-form" data-map-form>
           <label>Libelle<input name="label" required placeholder="Ex. Immeuble vacant Chateaucreux"></label>
-          <label>Type<select name="point_type"><option value="bien">Bien</option><option value="commerce">Commerce</option><option value="friche">Friche</option><option value="materiau">Materiaux</option><option value="partenaire">Partenaire</option><option value="projet">Projet</option><option value="signalement">Signalement</option><option value="antenne">Antenne</option><option value="autre">Autre</option></select></label>
+          <label>Type<select name="point_type"><option value="bien">Bien</option><option value="commerce">Commerce</option><option value="friche">Friche</option><option value="materiau">Materiaux</option><option value="partenaire">Partenaire</option><option value="projet">Projet</option><option value="signalement">Signalement</option><option value="autre">Autre</option></select></label>
           <label>Latitude<input name="latitude" inputmode="decimal" placeholder="45.4397"></label>
           <label>Longitude<input name="longitude" inputmode="decimal" placeholder="4.3872"></label>
           <label>Precision<select name="precision_level"><option value="quartier">Quartier</option><option value="exact">Exacte</option><option value="rue">Rue</option><option value="commune">Commune</option><option value="masque">Masquee</option></select></label>

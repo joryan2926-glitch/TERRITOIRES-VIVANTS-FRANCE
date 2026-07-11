@@ -18,7 +18,7 @@
     <div>
       <p class="admin-kicker">TVF OS</p>
       <h1>Utilisateurs et permissions</h1>
-      <p>Profils, roles, permissions, rattachements antennes, invitations et revues d'acces.</p>
+      <p>Profils, roles, permissions, invitations et revues d'acces.</p>
     </div>
     <div class="admin-top-actions">
       <a class="btn secondary" href="admin">Accueil admin</a>
@@ -46,7 +46,7 @@
     </section>
   </main>
 
-  <div class="admin-modal" data-users-modal hidden><div class="admin-modal-panel users-modal-panel" role="dialog" aria-modal="true" aria-labelledby="users-modal-title"><div class="admin-modal-head"><div><p class="section-kicker">Creation rapide</p><h2 id="users-modal-title">Ajouter un element utilisateurs</h2></div><button class="btn ghost" type="button" data-users-close-modal>Fermer</button></div><form class="admin-form users-create-form" data-users-form><label>Element<select name="type"><option value="profile">Profil</option><option value="invitation">Invitation</option><option value="role">Role</option><option value="user_role">Attribution role</option><option value="review">Revue acces</option></select></label><label>Email<input name="email" type="email" placeholder="prenom.nom@example.fr"></label><label>Nom<input name="last_name" placeholder="Nom"></label><label>Prenom<input name="first_name" placeholder="Prenom"></label><label>Statut<input name="status" placeholder="active, invited, pending..."></label><label>Role key<input name="role_key" placeholder="responsable_antenne"></label><label>Profil ID<input name="profile_id" placeholder="UUID profil"></label><label>Role ID<input name="role_id" placeholder="UUID role"></label><label class="users-wide-field">Notes<textarea name="summary" rows="4" placeholder="Contexte, perimetre, action attendue..."></textarea></label><button class="btn primary" type="submit">Enregistrer</button></form></div></div>
+  <div class="admin-modal" data-users-modal hidden><div class="admin-modal-panel users-modal-panel" role="dialog" aria-modal="true" aria-labelledby="users-modal-title"><div class="admin-modal-head"><div><p class="section-kicker">Creation rapide</p><h2 id="users-modal-title">Ajouter un element utilisateurs</h2></div><button class="btn ghost" type="button" data-users-close-modal>Fermer</button></div><form class="admin-form users-create-form" data-users-form><label>Element<select name="type"><option value="profile">Profil</option><option value="invitation">Invitation</option><option value="role">Role</option><option value="user_role">Attribution role</option><option value="review">Revue acces</option></select></label><label>Email<input name="email" type="email" placeholder="prenom.nom@example.fr"></label><label>Nom<input name="last_name" placeholder="Nom"></label><label>Prenom<input name="first_name" placeholder="Prenom"></label><label>Statut<input name="status" placeholder="active, invited, pending..."></label><label>Role key<input name="role_key" placeholder="responsable_tvf"></label><label>Profil ID<input name="profile_id" placeholder="UUID profil"></label><label>Role ID<input name="role_id" placeholder="UUID role"></label><label class="users-wide-field">Notes<textarea name="summary" rows="4" placeholder="Contexte, perimetre, action attendue..."></textarea></label><button class="btn primary" type="submit">Enregistrer</button></form></div></div>
 
   <script src="admin-nav.js" defer></script>
   <script src="admin-users.js" defer></script>
