@@ -284,9 +284,9 @@ function renderNextActions(dashboard) {
     actions.push({ label: "Qualifier en CRM", detail: "Relier les demandes utiles aux acteurs et organisations.", href: "admin-crm" });
     actions.push({ label: "Ouvrir les dossiers", detail: "Passer des contacts qualifies aux dossiers operationnels.", href: "admin-dossiers" });
   }
-  actions.push({ label: "Preparer les pieces", detail: "Verifier les conventions, courriers et justificatifs avant transmission.", href: "admin-documents" });
-  actions.push({ label: "Suivre l'impact TVF", detail: "Consolider les resultats documentes et les preuves associees aux dossiers.", href: "admin-impact" });
-  nextActionsEl.innerHTML = actions.slice(0, 5)
+  actions.push({ label: "Preparer les pieces", detail: "Verifier les courriers, justificatifs et documents avant transmission.", href: "admin-documents" });
+
+  nextActionsEl.innerHTML = actions.slice(0, 4)
     .map((action) => `<a href="${escapeHtml(action.href)}"><strong>${escapeHtml(action.label)}</strong><span>${escapeHtml(action.detail)}</span></a>`)
     .join("");
 }
@@ -367,7 +367,7 @@ function renderActivity(activity = {}) {
     activitySummaryEl.innerHTML = [
       kpiCard("Actions tracees", activity.total || 0, "periode selectionnee", activity.total ? "info" : "neutral"),
       kpiCard("Aujourd'hui", activity.today || 0, "evenements du jour", activity.today ? "success" : "neutral"),
-      kpiCard("Modules actifs", activity.modules_active || 0, "sources d'activite", activity.modules_active ? "info" : "neutral"),
+      kpiCard("Modules utilises", activity.modules_active || 0, "sources d'activite", activity.modules_active ? "info" : "neutral"),
     ].join("");
   }
   if (!activityEl) return;
@@ -397,7 +397,7 @@ function renderViews(views) {
   if (!viewsEl) return;
   viewsEl.innerHTML = Object.entries(views || {}).filter(([key]) => key !== "branch").map(([, view]) => `<div class="dashboard-view-item">
       <strong>${escapeHtml(view.label)}</strong>
-      <span>${escapeHtml(view.available ? "Disponible" : "A venir")}</span>
+      <span>${escapeHtml(view.available ? "Disponible" : "Non active")}</span>
       <small>${escapeHtml(view.source || "")}</small>
     </div>`)
     .join("");
@@ -436,7 +436,7 @@ function exportDashboard() {
     ["Cloture", `${metrics.closureRate}%`],
     ["Conformite", `${currentDashboard.coverage?.percent || 0}%`],
     ["Actions TVF OS", currentDashboard.activity?.total || 0],
-    ["Modules actifs", currentDashboard.activity?.modules_active || 0],
+    ["Modules utilises", currentDashboard.activity?.modules_active || 0],
     ["Dossiers actifs", currentDashboard.cases?.active || 0],
     ["Dossiers en retard", currentDashboard.cases?.overdue || 0],
     ["Dossiers a decision", currentDashboard.cases?.decision || 0],
