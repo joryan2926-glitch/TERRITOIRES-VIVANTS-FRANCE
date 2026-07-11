@@ -15,26 +15,26 @@ Date : 2026-07-11
 
 | Module | URL testee | Statut | Temps | Observation |
 |---|---|---:|---:|---|
-| Session admin | `/api/admin-session` | OK | 122 ms | Lecture valide |
-| Dashboard public admin | `/api/dashboard?range=30&status=all&priority=all&category=all` | OK | 1831 ms | Lecture valide |
-| Demandes entrantes | `/api/admin-contacts?limit=5` | OK | 161 ms | Lecture valide |
-| CRM / contacts | `/api/admin-crm?entity=dashboard` | OK | 146 ms | Lecture valide |
-| E-mails intelligents | `/api/admin-emails?entity=dashboard` | OK | 120 ms | Lecture valide |
-| Dossiers | `/api/admin-cases?entity=dashboard` | OK | 73 ms | Lecture valide |
-| Taches / agenda | `/api/admin-work?entity=dashboard` | OK | 146 ms | Lecture valide |
-| Documents | `/api/admin-documents?entity=dashboard` | OK | 142 ms | Lecture valide |
-| Procedures | `/api/admin-procedures?entity=dashboard` | OK | 136 ms | Lecture valide |
-| Cartographie | `/api/admin-map?entity=dashboard` | OK | 82 ms | Lecture valide |
-| Observatoire | `/api/admin-observatoire?entity=dashboard` | OK | 151 ms | Lecture valide |
-| Territoires locaux | `/api/admin-branches?entity=dashboard` | OK | 163 ms | Lecture valide |
-| Impact | `/api/admin-impact?entity=dashboard` | OK | 82 ms | Lecture valide |
-| Finances | `/api/admin-finances?entity=dashboard` | OK | 125 ms | Lecture valide |
+| Session admin | `/api/admin-session` | OK | 10 ms | Lecture valide |
+| Tableau de bord | `/api/dashboard?range=30&status=all&priority=all&category=all` | OK | 1566 ms | Lecture valide |
+| Demandes entrantes | `/api/admin-contacts?limit=5` | OK | 165 ms | Lecture valide |
+| Contacts | `/api/admin-crm?entity=dashboard` | OK | 111 ms | Lecture valide |
+| Boite mail | `/api/admin-emails?entity=dashboard` | OK | 90 ms | Lecture valide |
+| Dossiers | `/api/admin-cases?entity=dashboard` | OK | 76 ms | Lecture valide |
+| Taches / agenda | `/api/admin-work?entity=dashboard` | OK | 189 ms | Lecture valide |
+| Documents | `/api/admin-documents?entity=dashboard` | OK | 146 ms | Lecture valide |
+| Procedures | `/api/admin-procedures?entity=dashboard` | OK | 152 ms | Lecture valide |
+| Cartographie | `/api/admin-map?entity=dashboard` | OK | 149 ms | Lecture valide |
+| Observatoire | `/api/admin-observatoire?entity=dashboard` | OK | 82 ms | Lecture valide |
+| Territoires locaux | `/api/admin-branches?entity=dashboard` | OK | 186 ms | Lecture valide |
+| Resultats | `/api/admin-impact?entity=dashboard` | OK | 80 ms | Lecture valide |
+| Finances | `/api/admin-finances?entity=dashboard` | OK | 90 ms | Lecture valide |
 | Decisions | `/api/admin-governance?entity=dashboard` | OK | 122 ms | Lecture valide |
-| Controle interne | `/api/admin-risks?entity=dashboard` | OK | 89 ms | Lecture valide |
-| Utilisateurs / roles | `/api/admin-users?entity=dashboard` | OK | 149 ms | Lecture valide |
-| Parametres | `/api/admin-settings?entity=dashboard` | OK | 211 ms | Lecture valide |
-| Connaissances | `/api/admin-knowledge?entity=dashboard` | OK | 140 ms | Lecture valide |
-| Assistant IA | `/api/admin-ai?entity=dashboard` | OK | 198 ms | Lecture valide |
+| Controle interne | `/api/admin-risks?entity=dashboard` | OK | 90 ms | Lecture valide |
+| Utilisateurs / roles | `/api/admin-users?entity=dashboard` | OK | 145 ms | Lecture valide |
+| Reglages | `/api/admin-settings?entity=dashboard` | OK | 185 ms | Lecture valide |
+| Base utile | `/api/admin-knowledge?entity=dashboard` | OK | 140 ms | Lecture valide |
+| Assistant | `/api/admin-ai?entity=dashboard` | OK | 142 ms | Lecture valide |
 
 ## Lecture operationnelle
 
@@ -44,7 +44,7 @@ Tous les modules controles repondent en lecture avec les variables locales et Su
 
 1. Envoyer une demande publique reelle depuis le site.
 2. Verifier son arrivee dans Supabase et le module Demandes.
-3. La rattacher a un contact CRM.
+3. La rattacher a un contact.
 4. Creer un dossier depuis cette demande.
 5. Ajouter une tache, un document et une decision.
 6. Controler que l'activite est tracee et exportable.

@@ -65,10 +65,10 @@ const token = process.env.TVF_ADMIN_TOKEN || process.env.ADMIN_TOKEN || "";
 
 const checks = [
   { key: "session", label: "Session admin", handler: require("../lib/api/admin-session"), url: "/api/admin-session" },
-  { key: "dashboard", label: "Dashboard public admin", handler: require("../api/dashboard"), url: "/api/dashboard?range=30&status=all&priority=all&category=all" },
+  { key: "dashboard", label: "Tableau de bord", handler: require("../api/dashboard"), url: "/api/dashboard?range=30&status=all&priority=all&category=all" },
   { key: "demandes", label: "Demandes entrantes", handler: require("../lib/api/admin-contacts"), url: "/api/admin-contacts?limit=5" },
-  { key: "crm", label: "CRM / contacts", handler: require("../lib/api/admin-crm"), url: "/api/admin-crm?entity=dashboard" },
-  { key: "emails", label: "E-mails intelligents", handler: require("../lib/api/admin-emails"), url: "/api/admin-emails?entity=dashboard" },
+  { key: "crm", label: "Contacts", handler: require("../lib/api/admin-crm"), url: "/api/admin-crm?entity=dashboard" },
+  { key: "emails", label: "Boite mail", handler: require("../lib/api/admin-emails"), url: "/api/admin-emails?entity=dashboard" },
   { key: "dossiers", label: "Dossiers", handler: require("../lib/api/admin-cases"), url: "/api/admin-cases?entity=dashboard" },
   { key: "work", label: "Taches / agenda", handler: require("../lib/api/admin-work"), url: "/api/admin-work?entity=dashboard" },
   { key: "documents", label: "Documents", handler: require("../lib/api/admin-documents"), url: "/api/admin-documents?entity=dashboard" },
@@ -76,14 +76,14 @@ const checks = [
   { key: "map", label: "Cartographie", handler: require("../lib/api/admin-map"), url: "/api/admin-map?entity=dashboard" },
   { key: "observatoire", label: "Observatoire", handler: require("../lib/api/admin-observatoire"), url: "/api/admin-observatoire?entity=dashboard" },
   { key: "branches", label: "Territoires locaux", handler: require("../lib/api/admin-branches"), url: "/api/admin-branches?entity=dashboard" },
-  { key: "impact", label: "Impact", handler: require("../lib/api/admin-impact"), url: "/api/admin-impact?entity=dashboard" },
+  { key: "impact", label: "Resultats", handler: require("../lib/api/admin-impact"), url: "/api/admin-impact?entity=dashboard" },
   { key: "finances", label: "Finances", handler: require("../lib/api/admin-finances"), url: "/api/admin-finances?entity=dashboard" },
   { key: "governance", label: "Decisions", handler: require("../lib/api/admin-governance"), url: "/api/admin-governance?entity=dashboard" },
   { key: "risks", label: "Controle interne", handler: require("../lib/api/admin-risks"), url: "/api/admin-risks?entity=dashboard" },
   { key: "users", label: "Utilisateurs / roles", handler: require("../lib/api/admin-users"), url: "/api/admin-users?entity=dashboard" },
-  { key: "settings", label: "Parametres", handler: require("../lib/api/admin-settings"), url: "/api/admin-settings?entity=dashboard" },
-  { key: "knowledge", label: "Connaissances", handler: require("../lib/api/admin-knowledge"), url: "/api/admin-knowledge?entity=dashboard" },
-  { key: "ai", label: "Assistant IA", handler: require("../lib/api/admin-ai"), url: "/api/admin-ai?entity=dashboard" },
+  { key: "settings", label: "Reglages", handler: require("../lib/api/admin-settings"), url: "/api/admin-settings?entity=dashboard" },
+  { key: "knowledge", label: "Base utile", handler: require("../lib/api/admin-knowledge"), url: "/api/admin-knowledge?entity=dashboard" },
+  { key: "ai", label: "Assistant", handler: require("../lib/api/admin-ai"), url: "/api/admin-ai?entity=dashboard" },
 ];
 
 function errorLabel(result) {
@@ -157,7 +157,7 @@ async function main() {
   lines.push("");
   lines.push("1. Envoyer une demande publique reelle depuis le site.");
   lines.push("2. Verifier son arrivee dans Supabase et le module Demandes.");
-  lines.push("3. La rattacher a un contact CRM.");
+  lines.push("3. La rattacher a un contact.");
   lines.push("4. Creer un dossier depuis cette demande.");
   lines.push("5. Ajouter une tache, un document et une decision.");
   lines.push("6. Controler que l'activite est tracee et exportable.");
