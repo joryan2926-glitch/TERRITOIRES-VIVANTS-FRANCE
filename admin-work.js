@@ -199,7 +199,7 @@ function taskControlPanel(item = {}) {
     ["Echeance", formatDate(item.due_at), today ? "Dans la file du jour" : "A surveiller", overdue ? "danger" : "neutral"],
     ["Rattachement", linkedCase ? "Dossier" : "Libre", linkedCase ? "Issue du module Dossiers" : "Sans dossier lie", linkedCase ? "success" : "neutral"],
   ];
-  const relation = linkedCase ? `<div class="work-related-case"><span>Dossier rattache</span><strong>${escapeHtml(item.related_object_id)}</strong><a class="text-link" href="admin-dossiers">Ouvrir les dossiers</a></div>` : "";
+  const relation = linkedCase ? `<div class="work-related-case"><span>Dossier rattache</span><strong>${escapeHtml(item.related_object_id)}</strong><a class="text-link" href="admin-dossiers?q=${encodeURIComponent(item.related_object_id)}">Ouvrir le dossier</a></div>` : "";
   return `<section class="work-task-control" aria-label="Pilotage de la tache"><div class="admin-panel-head"><div><p class="section-kicker">Execution</p><h3>Suivi de la tache</h3></div><a class="text-link" href="admin-dossiers">Dossiers</a></div><div class="work-task-control-grid">${cards.map((card) => `<article data-tone="${escapeHtml(card[3])}"><span>${escapeHtml(card[0])}</span><strong>${escapeHtml(card[1])}</strong><small>${escapeHtml(card[2])}</small></article>`).join("")}</div>${relation}</section>`;
 }
 
