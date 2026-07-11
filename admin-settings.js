@@ -1,5 +1,5 @@
 const SETTINGS_TOKEN_KEY = "tvfAdminToken";
-const viewLabels = { settings: "Parametres", integrations: "Integrations", features: "Modules", automations: "Automatisations", health: "Sante", audit: "Audit" };
+const viewLabels = { settings: "Reglages", integrations: "Integrations", features: "Modules", automations: "Automatisations", health: "Sante", audit: "Audit" };
 const entityByView = { settings: "settings", integrations: "integrations", features: "features", automations: "automations", health: "health", audit: "audit" };
 const statusLabels = { active: "Actif", draft: "Brouillon", paused: "En pause", archive: "Archive", configured: "Configure", not_configured: "Non configure", needs_attention: "Attention", disabled: "Desactive", healthy: "Sain", degraded: "Degrade", down: "Indisponible", unknown: "Inconnu", warning: "A surveiller", critical: "Critique", planned: "Planifie", P1: "P1", P2: "P2", P3: "P3" };
 const loginSection = document.querySelector("[data-settings-login]");
