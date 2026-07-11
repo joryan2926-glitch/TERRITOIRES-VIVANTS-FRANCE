@@ -7748,3 +7748,129 @@ tr:nth-child(even) td {
   .finances-file-grid { grid-template-columns: 1fr; }
   .finances-file-head { flex-direction: column; }
 }
+
+/* TVF OS - Accueil ERP */
+.admin-erp-hero {
+  border-color: rgba(46,125,50,.18);
+  background: linear-gradient(135deg, #ffffff 0%, #f4faf1 58%, #eef6ec 100%);
+}
+.admin-erp-core,
+.admin-erp-map {
+  display: grid;
+  gap: 16px;
+  padding: 20px;
+  border: 1px solid rgba(14,45,69,.12);
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: var(--shadow-soft);
+}
+.admin-erp-timeline {
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.admin-erp-timeline li {
+  display: grid;
+  gap: 7px;
+  min-height: 118px;
+  padding: 12px;
+  border: 1px solid rgba(14,45,69,.12);
+  border-radius: 10px;
+  background: #fbfdf9;
+}
+.admin-erp-timeline span,
+.admin-erp-maturity-grid span {
+  display: inline-grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: rgba(46,125,50,.1);
+  color: #245f2a;
+  font-weight: 900;
+  font-size: .78rem;
+}
+.admin-erp-timeline strong,
+.admin-erp-dashboard h3,
+.admin-erp-map h3,
+.admin-erp-module-grid strong {
+  color: var(--blue-900);
+}
+.admin-erp-timeline small {
+  color: var(--muted);
+  line-height: 1.35;
+  font-weight: 700;
+}
+.admin-erp-dashboard {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+.admin-erp-dashboard article {
+  display: grid;
+  gap: 12px;
+  align-content: start;
+  padding: 18px;
+  border: 1px solid rgba(14,45,69,.12);
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: var(--shadow-soft);
+}
+.admin-erp-dashboard article p:not(.section-kicker) {
+  color: var(--muted);
+  line-height: 1.45;
+}
+.admin-erp-dashboard article div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.admin-erp-dashboard .btn {
+  min-height: 34px;
+  padding: 8px 10px;
+  font-size: .8rem;
+}
+.admin-erp-module-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+.admin-erp-module-grid a {
+  display: grid;
+  gap: 7px;
+  min-height: 96px;
+  padding: 14px;
+  border: 1px solid rgba(14,45,69,.12);
+  border-radius: 10px;
+  background: #f8faf6;
+  color: inherit;
+  text-decoration: none;
+  transition: transform .18s ease, border-color .18s ease, background .18s ease;
+}
+.admin-erp-module-grid a:hover,
+.admin-erp-module-grid a:focus-visible {
+  transform: translateY(-1px);
+  border-color: rgba(46,125,50,.35);
+  background: #fff;
+  box-shadow: var(--shadow-soft);
+}
+.admin-erp-module-grid span {
+  color: var(--muted);
+  font-size: .84rem;
+  line-height: 1.35;
+}
+@media (max-width: 1240px) {
+  .admin-erp-timeline,
+  .admin-erp-dashboard,
+  .admin-erp-module-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 720px) {
+  .admin-erp-timeline,
+  .admin-erp-dashboard,
+  .admin-erp-module-grid { grid-template-columns: 1fr; }
+  .admin-erp-core,
+  .admin-erp-map { padding: 16px; }
+}

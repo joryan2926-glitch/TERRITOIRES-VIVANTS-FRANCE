@@ -1,9 +1,9 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="fr">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Accueil admin | TVF OS</title>
+  <title>TVF OS ERP | Territoires Vivants France</title>
   <meta name="robots" content="noindex, nofollow, noarchive">
   <meta name="theme-color" content="#183f22">
   <link rel="icon" href="assets/favicon-32.png">
@@ -16,9 +16,9 @@
       <img src="assets/logo-territoires-vivants-france-web.png" alt="Territoires Vivants France" width="320" height="132">
     </a>
     <div>
-      <p class="admin-kicker">TVF OS</p>
-      <h1>Accueil admin</h1>
-      <p>Point d'entree unique du back-office Territoires Vivants France.</p>
+      <p class="admin-kicker">TVF OS ERP</p>
+      <h1>Centre de pilotage interne</h1>
+      <p>Unifier les demandes, les tiers, les dossiers, les pieces, les decisions, les finances, les risques et l'impact.</p>
     </div>
     <nav class="admin-home-actions" aria-label="Actions admin">
       <a class="btn secondary" href="dashboard">Dashboard</a>
@@ -28,89 +28,119 @@
 
   <main id="admin-home-main" class="admin-shell admin-home-shell">
     <section class="admin-home-app" data-admin-home-app hidden>
-      <div class="admin-home-command">
+      <div class="admin-home-command admin-erp-hero">
         <div class="admin-home-command-copy">
-          <p class="section-kicker">Centre d'exploitation national</p>
-          <h2>Piloter TVF OS avec une lecture claire des priorites</h2>
-          <p>Cette page sert de point d'entree institutionnel : traiter les demandes, suivre les dossiers, administrer les antennes et controler la configuration depuis un parcours unique.</p>
+          <p class="section-kicker">ERP territorial TVF</p>
+          <h2>Un dossier unique pour piloter toute l'activite de l'association</h2>
+          <p>TVF OS devient le systeme central de Territoires Vivants France : chaque entree doit pouvoir etre reliee a un tiers, un dossier, des pieces, des taches, une decision, un budget, des risques et des preuves d'impact.</p>
         </div>
         <div class="admin-home-header-actions">
-          <a class="btn primary" href="dashboard">Ouvrir le dashboard</a>
-          <a class="btn secondary" href="admin-settings">Verifier la configuration</a><a class="btn secondary" href="admin-activity">Journal activite</a>
+          <a class="btn primary" href="admin-dossiers">Ouvrir les dossiers</a>
+          <a class="btn secondary" href="admin-demandes">Traiter les entrees</a>
+          <a class="btn secondary" href="dashboard">Voir le dashboard</a>
           <button class="btn ghost" type="button" data-admin-home-logout>Deconnexion</button>
         </div>
       </div>
 
-
-      <section class="admin-home-control" aria-label="Ordre de traitement recommande TVF OS">
+      <section class="admin-erp-core" aria-label="Noyau ERP TVF OS">
         <div class="admin-panel-head">
           <div>
-            <p class="section-kicker">Ordre de traitement recommande</p>
-            <h3>Ne pas se perdre dans les modules</h3>
-            <p>TVF OS doit d'abord capter, qualifier, instruire, decider, executer puis mesurer. Cette lecture garde tous les modules dans une logique de terrain.</p>
+            <p class="section-kicker">Noyau ERP</p>
+            <h3>La chaine commune de traitement</h3>
+            <p>Le site public attire les demandes. TVF OS doit ensuite les transformer en dossiers suivis, decisionnes, finances, securises et mesurables.</p>
           </div>
-          <strong>Parcours unique</strong>
+          <strong>ERP Core</strong>
         </div>
-        <div class="admin-home-control-grid">
-          <article><span>1</span><strong>Entrées</strong><small>Demandes, e-mails, CRM</small></article>
-          <article><span>2</span><strong>Instruction</strong><small>Dossiers, pieces, procedures</small></article>
-          <article><span>3</span><strong>Decision</strong><small>Gouvernance, risques, finances</small></article>
-          <article><span>4</span><strong>Terrain</strong><small>Taches, antennes, carte</small></article>
-          <article><span>5</span><strong>Preuve</strong><small>Impact, documents, reporting</small></article>
-        </div>
-      </section>
-      <section class="admin-home-priority" aria-label="Acces prioritaires">
-        <a href="admin-demandes"><span>01</span><strong>Traiter les entrees</strong><small>Demandes, qualification, conversion</small></a>
-        <a href="admin-emails"><span>02</span><strong>Trier les e-mails</strong><small>Lecture IA, reponses, pieces, taches</small></a>
-        <a href="admin-work"><span>03</span><strong>Organiser l'action</strong><small>Taches, agenda, projets, relances</small></a>
-        <a href="admin-dossiers"><span>04</span><strong>Suivre les dossiers</strong><small>Cas, decisions, documents, cloture</small></a>
-      </section>
-      <section class="admin-home-control" aria-label="Conformite aux dossiers TVF OS">
-        <div class="admin-panel-head">
-          <div>
-            <p class="section-kicker">Conformite</p>
-            <h3>TVF OS suit-il les dossiers de cadrage ?</h3>
-            <p>Lecture interne : le socle est cohérent avec la vision, mais la priorité reste de verrouiller demandes, dossiers, documents, rôles, audit et preuves avant l'extension nationale.</p>
-          </div>
-          <strong>Pré-MVP avancé</strong>
-        </div>
-        <div class="admin-home-control-grid">
-          <article><span>01</span><strong>Conforme</strong><small>Modules, navigation et API centralisée</small></article>
-          <article><span>02</span><strong>À renforcer</strong><small>Rôles, RLS, audit et permissions</small></article>
-          <article><span>03</span><strong>Priorité</strong><small>Demande → dossier → document → décision</small></article>
-          <article><span>04</span><strong>À cadrer</strong><small>IA, workflows, antennes et reporting</small></article>
-        </div>
-      </section>
-
-      <section class="admin-home-flow" aria-label="Parcours operationnel TVF OS">
-        <div>
-          <p class="section-kicker">Parcours logique</p>
-          <h3>De la demande terrain au pilotage national</h3>
-        </div>
-        <ol>
-          <li><strong>Reception</strong><span>Demandes et e-mails entrants</span></li>
-          <li><strong>Qualification</strong><span>CRM, pole, priorite, responsable</span></li>
-          <li><strong>Execution</strong><span>Taches, agenda, dossiers, documents</span></li>
-          <li><strong>Capitalisation</strong><span>Procedures, connaissances, IA</span></li>
-          <li><strong>Pilotage</strong><span>Finances, impact, risques, gouvernance</span></li>
+        <ol class="admin-erp-timeline">
+          <li><span>1</span><strong>Tiers</strong><small>Contact, organisation, role, territoire</small></li>
+          <li><span>2</span><strong>Demande</strong><small>Formulaire, e-mail, appel, WhatsApp</small></li>
+          <li><span>3</span><strong>Dossier</strong><small>Objet central, statut, responsable</small></li>
+          <li><span>4</span><strong>Pieces</strong><small>Documents, preuves, conventions</small></li>
+          <li><span>5</span><strong>Instruction</strong><small>Workflow, taches, risques</small></li>
+          <li><span>6</span><strong>Decision</strong><small>Validation humaine tracee</small></li>
+          <li><span>7</span><strong>Moyens</strong><small>Budget, financement, logistique</small></li>
+          <li><span>8</span><strong>Impact</strong><small>Resultats, preuves, reporting</small></li>
         </ol>
       </section>
 
-      <section class="admin-home-control" aria-label="Mode d'emploi TVF OS">
+      <section class="admin-erp-dashboard" aria-label="Parcours ERP prioritaires">
+        <article>
+          <p class="section-kicker">Priorite 1</p>
+          <h3>Receptionner et qualifier</h3>
+          <p>Traiter les demandes entrantes, e-mails et contacts avant de creer ou rattacher un dossier.</p>
+          <div><a class="btn secondary" href="admin-demandes">Demandes</a><a class="btn secondary" href="admin-emails">E-mails</a><a class="btn secondary" href="admin-crm">CRM</a></div>
+        </article>
+        <article>
+          <p class="section-kicker">Priorite 2</p>
+          <h3>Instruire le dossier</h3>
+          <p>Rassembler les pieces, suivre les taches, produire les documents et appliquer les procedures.</p>
+          <div><a class="btn secondary" href="admin-dossiers">Dossiers</a><a class="btn secondary" href="admin-documents">Documents</a><a class="btn secondary" href="admin-work">Taches</a></div>
+        </article>
+        <article>
+          <p class="section-kicker">Priorite 3</p>
+          <h3>Decider et securiser</h3>
+          <p>Verifier les risques, valider les decisions, suivre les budgets et eviter les engagements non traces.</p>
+          <div><a class="btn secondary" href="admin-governance">Gouvernance</a><a class="btn secondary" href="admin-risks">Risques</a><a class="btn secondary" href="admin-finances">Finances</a></div>
+        </article>
+        <article>
+          <p class="section-kicker">Priorite 4</p>
+          <h3>Prouver et piloter</h3>
+          <p>Suivre l'impact, les territoires, les antennes, l'activite et les connaissances reutilisables.</p>
+          <div><a class="btn secondary" href="admin-impact">Impact</a><a class="btn secondary" href="admin-map">Carte</a><a class="btn secondary" href="admin-activity">Activite</a></div>
+        </article>
+      </section>
+
+      <section class="admin-home-control" aria-label="Tableau de maturite ERP TVF OS">
         <div class="admin-panel-head">
           <div>
-            <p class="section-kicker">Mode d'emploi</p>
-            <h3>Un menu pour naviguer, une page pour décider</h3>
-            <p>Le menu TVF OS sous l'en-tête donne accès à tous les modules. Cette page d'accueil sert uniquement à comprendre l'ordre de travail et à lancer les actions prioritaires.</p>
+            <p class="section-kicker">Maturite ERP</p>
+            <h3>Ou en est TVF OS ?</h3>
+            <p>Le socle technique est avance. La refonte doit maintenant concentrer l'usage autour du dossier unique et des liens transversaux entre modules.</p>
           </div>
-          <strong>Navigation simplifiée</strong>
+          <strong>Environ 50 % ERP</strong>
+        </div>
+        <div class="admin-home-control-grid admin-erp-maturity-grid">
+          <article><span>75</span><strong>Modules</strong><small>Base fonctionnelle deja en place</small></article>
+          <article><span>70</span><strong>API</strong><small>Socle Supabase et routes admin</small></article>
+          <article><span>85</span><strong>Tests</strong><small>Controle automatique solide</small></article>
+          <article><span>55</span><strong>Dossier</strong><small>Centre ERP a renforcer</small></article>
+          <article><span>45</span><strong>Workflow</strong><small>Liens transversaux a finaliser</small></article>
+        </div>
+      </section>
+
+      <section class="admin-erp-map" aria-label="Modules ERP TVF OS">
+        <div>
+          <p class="section-kicker">Modules ERP</p>
+          <h3>Chaque module a un role precis dans la chaine</h3>
+          <p>L'objectif est d'eviter les doublons : chaque information doit avoir une place, un statut, un responsable et une suite logique.</p>
+        </div>
+        <div class="admin-erp-module-grid">
+          <a href="admin-crm"><strong>Tiers / CRM</strong><span>Contacts, organisations, partenaires, proprietaires, financeurs.</span></a>
+          <a href="admin-dossiers"><strong>Dossiers</strong><span>Objet central d'instruction et de rattachement.</span></a>
+          <a href="admin-documents"><strong>Documents</strong><span>Pieces, modeles, conventions, preuves et versions.</span></a>
+          <a href="admin-work"><strong>Taches</strong><span>Echeances, relances, responsables et agenda.</span></a>
+          <a href="admin-finances"><strong>Finances</strong><span>Budgets, depenses, financements et reporting.</span></a>
+          <a href="admin-governance"><strong>Gouvernance</strong><span>Decisions humaines, PV, delegations et actions issues.</span></a>
+          <a href="admin-risks"><strong>Risques</strong><span>RGPD, assurance, autorisations, securite et conformite.</span></a>
+          <a href="admin-impact"><strong>Impact</strong><span>Objectifs, resultats, preuves et consolidation nationale.</span></a>
+        </div>
+      </section>
+
+      <section class="admin-home-control" aria-label="Regles de refonte ERP">
+        <div class="admin-panel-head">
+          <div>
+            <p class="section-kicker">Regles de refonte</p>
+            <h3>Transformer sans casser</h3>
+            <p>La refonte ERP se fait par couches progressives : conserver les modules, renforcer les liens et tester chaque evolution.</p>
+          </div>
+          <strong>Approche prudente</strong>
         </div>
         <div class="admin-home-control-grid">
-          <article><span>A</span><strong>Menu permanent</strong><small>Utiliser le menu supérieur pour ouvrir tous les modules : entrées, instruction, territoires, pilotage et système.</small></article>
-          <article><span>B</span><strong>Priorités du jour</strong><small>Commencer par les quatre accès prioritaires : demandes, e-mails, tâches puis dossiers.</small></article>
-          <article><span>C</span><strong>Pas de doublon</strong><small>La page d'accueil n'affiche plus la liste complète des modules afin d'éviter de se perdre.</small></article>
-          <article><span>D</span><strong>Suivi terrain</strong><small>Chaque action doit finir dans un dossier, une tâche ou un document traçable.</small></article>
-          <article><span>E</span><strong>Pilotage</strong><small>Utiliser le dashboard pour contrôler l'état global avant les arbitrages.</small></article>
+          <article><span>A</span><strong>Conserver</strong><small>Ne pas supprimer les modules existants.</small></article>
+          <article><span>B</span><strong>Relier</strong><small>Rattacher chaque action au dossier unique.</small></article>
+          <article><span>C</span><strong>Tracer</strong><small>Journaliser decisions, risques et actions critiques.</small></article>
+          <article><span>D</span><strong>Tester</strong><small>Executer les controles avant chaque push.</small></article>
+          <article><span>E</span><strong>Simplifier</strong><small>Reduire les doublons de menus et de boutons.</small></article>
         </div>
       </section>
     </section>
