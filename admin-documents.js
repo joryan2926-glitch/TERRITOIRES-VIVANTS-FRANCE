@@ -178,13 +178,6 @@ function documentControlPanel(item) {
     <div class="documents-control-grid">
       ${cards.map((card) => `<article data-tone="${escapeHtml(card.tone)}"><span>${escapeHtml(card.label)}</span><strong>${escapeHtml(card.value)}</strong><small>${escapeHtml(card.detail)}</small></article>`).join("")}
     </div>
-    <div class="documents-control-actions">
-      <button class="btn secondary" type="button" data-document-quick="a_classer">A classer</button>
-      <button class="btn secondary" type="button" data-document-quick="a_valider">Soumettre validation</button>
-      <button class="btn secondary" type="button" data-document-quick="valide">Valider</button>
-      <a class="btn secondary" href="admin-dossiers">Dossiers</a>
-      <a class="btn secondary" href="admin-work">Taches</a>
-    </div>
   </section>`;
 }
 
@@ -210,12 +203,6 @@ function templateControlPanel(item) {
     </div>
     <div class="documents-control-grid documents-control-grid-template">
       ${cards.map((card) => `<article data-tone="${escapeHtml(card.tone)}"><span>${escapeHtml(card.label)}</span><strong>${escapeHtml(card.value)}</strong><small>${escapeHtml(card.detail)}</small></article>`).join("")}
-    </div>
-    <div class="documents-control-actions">
-      <button class="btn secondary" type="button" data-template-quick="a_valider">Soumettre validation</button>
-      <button class="btn secondary" type="button" data-template-quick="officiel">Valider national</button>
-      <button class="btn secondary" type="button" data-generate-template="${escapeHtml(item.id)}">Generer brouillon</button>
-      <a class="btn secondary" href="admin-dossiers">Dossiers</a>
     </div>
   </section>`;
 }
