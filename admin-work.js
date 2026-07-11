@@ -279,12 +279,12 @@ async function applyProjectAction(action) {
   const project = selectedItem();
   if (!project || view !== "projects") return;
   if (action === "kickoff") {
-    await createProjectTask(project, `Cadrer le projet - ${titleFor(project)}`, "Formaliser objectif, acteurs, pieces et risques du projet.", 3, "P2");
+    await createProjectTask(project, `Cadrer le projet - ${titleFor(project)}`, "Formaliser objectif, acteurs, pieces et points de vigilance du projet.", 3, "P2");
     await createProjectTask(project, `Lister les partenaires - ${titleFor(project)}`, "Identifier collectivite, proprietaire, entreprise, financeur ou benevoles utiles.", 7, "P2");
     await createProjectTask(project, `Preparer documents - ${titleFor(project)}`, "Rattacher note, budget, convention ou courrier au projet.", 10, "P3");
   }
   if (action === "review") await createProjectTask(project, `Revue projet - ${titleFor(project)}`, "Faire le point sur avancement, blocages, echeances et prochaine decision.", 5, "P2");
-  if (action === "report") await createProjectTask(project, `Reporting projet - ${titleFor(project)}`, "Preparer elements de suivi : actions, pieces, partenaires, risques et indicateurs.", 14, "P3");
+  if (action === "report") await createProjectTask(project, `Reporting projet - ${titleFor(project)}`, "Preparer elements de suivi : actions, pieces, partenaires, points de vigilance et indicateurs.", 14, "P3");
   await loadAll();
   notify("Action projet appliquee.", "success");
 }

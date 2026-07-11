@@ -118,7 +118,7 @@ function instructionPiecesPanel(item) {
     request: ["message initial", "coordonnees", "pieces recues", "qualification", "reponse envoyee"],
     organization: ["fiche structure", "interlocuteur", "capacite d'engagement", "proposition de cooperation", "convention ou compte rendu"],
     contact: ["coordonnees", "consentement RGPD", "historique echange", "rattachement structure", "prochaine action"],
-    project: ["note projet", "budget", "calendrier", "risques", "indicateurs"],
+    project: ["note projet", "budget", "calendrier", "points de vigilance", "indicateurs"],
     branch: ["territoire", "responsable", "plan d'action", "documents de lancement", "reporting"]
   };
   const pieces = packs[related] || ["objet a rattacher", "type a preciser", "resume de classement", "confidentialite", "validation humaine"];

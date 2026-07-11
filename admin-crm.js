@@ -78,7 +78,7 @@ const partnerProfiles = {
   financeur: {
     title: "Financeur / mecene / fondation",
     contribution: "Financement de demarrage, fonds d'amorcage, soutien projet, mecenat financier ou accompagnement methodologique.",
-    documents: ["Dossier de presentation", "Budget previsionnel", "Objectifs d'impact", "Gouvernance", "Modalites de reporting"],
+    documents: ["Dossier de presentation", "Budget previsionnel", "Objectifs d'impact", "Cadre de decision", "Modalites de reporting"],
     approach: "Presenter un besoin clair, un territoire pilote, des indicateurs suivis et une trajectoire de deploiement.",
     benefit: "Financement a impact territorial lisible, suivi, documente et rattache a des usages concrets."
   },
@@ -135,7 +135,7 @@ const profileCaseTypes = {
   entreprise: "entreprise",
   association: "benevole",
   financeur: "financeur",
-  institution: "gouvernance",
+  institution: "autre",
   proprietaire_personne_morale: "bien_vacant",
   fournisseur: "materiaux",
   partenaire: "autre",
