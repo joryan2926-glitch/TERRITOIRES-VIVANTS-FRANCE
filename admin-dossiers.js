@@ -427,6 +427,15 @@ function manualCasePayload(formData) {
   delete data.manual_risks;
   return data;
 }
+function shouldOpenCreateModal() {
+  const params = new URLSearchParams(window.location.search);
+  return params.get("create") === "client" || window.location.hash === "#creer-dossier";
+}
+
+function openCreateModalFromMenu() {
+  if (!shouldOpenCreateModal()) return;
+  window.setTimeout(() => openModal(), 120);
+}
 function openModal() { if (modal) modal.hidden = false; modalForm?.querySelector("input, select, textarea")?.focus(); }
 function closeModal() { if (modal) modal.hidden = true; }
 async function createCase(event) {
@@ -465,4 +474,4 @@ function bindEvents() { tokenForm?.addEventListener("submit", async (event) => {
     if (event.target.closest("[data-add-decision]")) addDecision().catch((e) => notifyError(e));
   }); }
 bindEvents();
-if (token()) { showApp(); loadCases().catch((error) => { setToken(""); showLogin(); setStatus(error.message, "error"); }); } else { showLogin(); }
+if (token()) { showApp(); loadCases().then(openCreateModalFromMenu).catch((error) => { setToken(""); showLogin(); setStatus(error.message, "error"); }); } else { showLogin(); }

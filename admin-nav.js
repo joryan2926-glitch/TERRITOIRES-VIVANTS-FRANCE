@@ -26,6 +26,7 @@ const TVF_ADMIN_GROUPS = [
     description: "Dossiers et action",
     modules: [
       { href: "admin-dossiers", label: "Dossiers", icon: "&#9635;" },
+      { href: "admin-dossiers?create=client", label: "Creer dossier", icon: "+" },
       { href: "admin-work", label: "Taches", icon: "&#10003;" },
       { href: "admin-documents", label: "Documents", icon: "&#9633;" },
       { href: "admin-procedures", label: "Methodes", icon: "&#167;" },
@@ -183,8 +184,13 @@ function normalizePath(pathname) {
   return clean.replace(/\.html$/i, "") || "index";
 }
 
+function moduleRoute(moduleHref) {
+  return String(moduleHref || "").split(/[?#]/)[0];
+}
+
 function moduleIsActive(current, moduleHref) {
-  return current === moduleHref || (current === "dashboard" && moduleHref === "dashboard") || (current === "admin" && moduleHref === "admin");
+  const route = moduleRoute(moduleHref);
+  return current === route || (current === "dashboard" && route === "dashboard") || (current === "admin" && route === "admin");
 }
 
 function groupIsActive(current, group) {
