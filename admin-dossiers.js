@@ -282,7 +282,7 @@ function clientDossierSchemaPanel(item) {
   const category = label(typeLabels, item.case_type) || "Categorie a definir";
   const status = label(statusLabels, item.status) || "Statut a definir";
   const steps = [
-    ["Coordonnees", item.assigned_to || item.territory || "Contact et territoire a completer"],
+    ["Coordonnees", primaryParticipant(item)?.display_name || item.assigned_to || item.territory || "Contact et territoire a completer"],
     ["Categorie", category],
     ["Statut", status],
     ["Numero dossier", item.case_number || "Generation automatique"],
@@ -296,6 +296,10 @@ function clientDossierSchemaPanel(item) {
     <div class="admin-detail-actions"><a class="btn secondary" href="admin-demandes">Demande source</a><a class="btn secondary" href="admin-documents">Documents du dossier</a><a class="btn secondary" href="admin-work">Taches d'instruction</a></div>
   </section>`;
 }
+function primaryParticipant(item) {
+  const participants = item.case_participants || [];
+  return participants.find((participant) => participant.is_primary) || participants[0] || null;
+}
 function caseFilePanel(item) {
   const workflow = workflowForCase(item);
   const checklist = item.case_checklist_items || [];
@@ -305,8 +309,11 @@ function caseFilePanel(item) {
   const received = checklist.filter((piece) => ["recu", "valide"].includes(piece.status));
   const missing = checklist.filter((piece) => piece.required && ["a_verifier", "manquant"].includes(piece.status));
   const source = item.source_request_id ? item.source_request_id : "Non rattachee";
+  const participant = primaryParticipant(item);
+  const participantName = participant?.display_name || source;
+  const participantRole = participant?.role_label || (item.source_request_id ? "Demande source" : "A rattacher");
   const next = item.next_action || nextActionForWorkflow(item, "pieces");
-  return `<section class="cases-file-panel" aria-label="Fichier dossier complet"><div class="admin-panel-head"><div><p class="section-kicker">Dossier complet</p><h4>${escapeHtml(item.case_number || "Dossier TVF")}</h4><p>Synthese du dossier, des pieces et de la suite.</p></div><strong>${escapeHtml(label(statusLabels, item.status))}</strong></div><div class="cases-file-grid"><article><span>Objet</span><strong>${escapeHtml(item.title || "A qualifier")}</strong><small>${escapeHtml(label(typeLabels, item.case_type))}</small></article><article><span>Territoire</span><strong>${escapeHtml(item.territory || "A preciser")}</strong><small>${escapeHtml(item.main_pole || "Pole a definir")}</small></article><article><span>Responsable</span><strong>${escapeHtml(item.assigned_to || "Non assigne")}</strong><small>${escapeHtml(label(priorityLabels, item.priority))}</small></article><article><span>Demande source</span><strong>${escapeHtml(source)}</strong><small>Rattachement initial</small></article></div><div class="cases-register-grid"><article><h5>Instruction</h5><p>${escapeHtml(workflow.objective)}</p><ul><li>${escapeHtml(workflow.steps[0] || "Qualifier")}</li><li>${escapeHtml(workflow.steps[1] || "Verifier")}</li><li>${escapeHtml(workflow.steps[2] || "Decider")}</li></ul></article><article><h5>Pieces</h5><p>${escapeHtml(received.length)} piece(s) recue(s) sur ${escapeHtml(required.length || checklist.length)} attendue(s).</p>${missing.length ? `<ul>${missing.slice(0, 4).map((piece) => `<li>${escapeHtml(piece.label)}</li>`).join("")}</ul>` : "<p>Pas de piece obligatoire manquante identifiee.</p>"}</article><article><h5>Vigilance</h5><p>${escapeHtml(risks.length)} point(s) de vigilance trace(s), ${escapeHtml(decisions.length)} decision(s) enregistree(s).</p><p>${escapeHtml(item.decision_summary || label(decisionLabels, item.decision_status))}</p></article><article><h5>Prochaine suite</h5><p>${escapeHtml(next)}</p><small>${escapeHtml(formatDate(item.next_action_due_at))}</small></article></div></section>`;
+  return `<section class="cases-file-panel" aria-label="Fichier dossier complet"><div class="admin-panel-head"><div><p class="section-kicker">Dossier complet</p><h4>${escapeHtml(item.case_number || "Dossier TVF")}</h4><p>Synthese du dossier, des pieces et de la suite.</p></div><strong>${escapeHtml(label(statusLabels, item.status))}</strong></div><div class="cases-file-grid"><article><span>Objet</span><strong>${escapeHtml(item.title || "A qualifier")}</strong><small>${escapeHtml(label(typeLabels, item.case_type))}</small></article><article><span>Territoire</span><strong>${escapeHtml(item.territory || "A preciser")}</strong><small>${escapeHtml(item.main_pole || "Pole a definir")}</small></article><article><span>Responsable</span><strong>${escapeHtml(item.assigned_to || "Non assigne")}</strong><small>${escapeHtml(label(priorityLabels, item.priority))}</small></article><article><span>Interlocuteur</span><strong>${escapeHtml(participantName)}</strong><small>${escapeHtml(participantRole)}</small></article></div><div class="cases-register-grid"><article><h5>Instruction</h5><p>${escapeHtml(workflow.objective)}</p><ul><li>${escapeHtml(workflow.steps[0] || "Qualifier")}</li><li>${escapeHtml(workflow.steps[1] || "Verifier")}</li><li>${escapeHtml(workflow.steps[2] || "Decider")}</li></ul></article><article><h5>Pieces</h5><p>${escapeHtml(received.length)} piece(s) recue(s) sur ${escapeHtml(required.length || checklist.length)} attendue(s).</p>${missing.length ? `<ul>${missing.slice(0, 4).map((piece) => `<li>${escapeHtml(piece.label)}</li>`).join("")}</ul>` : "<p>Pas de piece obligatoire manquante identifiee.</p>"}</article><article><h5>Vigilance</h5><p>${escapeHtml(risks.length)} point(s) de vigilance trace(s), ${escapeHtml(decisions.length)} decision(s) enregistree(s).</p><p>${escapeHtml(item.decision_summary || label(decisionLabels, item.decision_status))}</p></article><article><h5>Prochaine suite</h5><p>${escapeHtml(next)}</p><small>${escapeHtml(formatDate(item.next_action_due_at))}</small></article></div></section>`;
 }
 
 function renderDetail() { const item = selectedCase(); if (!detailEl) return; if (!item) { detailEl.innerHTML = `<div class="admin-detail-empty"><p class="section-kicker">Detail</p><h3>Selectionnez un dossier</h3><p>Aucun dossier disponible.</p></div>`; return; } const checklist = item.case_checklist_items || []; const risks = item.case_risks || []; const decisions = item.case_decisions || []; const history = item.case_status_history || []; detailEl.innerHTML = `<form class="admin-detail-form cases-detail-form" data-cases-detail-form><input type="hidden" name="id" value="${escapeHtml(item.id)}"><div class="admin-detail-title"><p class="section-kicker">${escapeHtml(item.case_number || "Dossier")}</p><h3>${escapeHtml(item.title)}</h3><p>${escapeHtml(label(typeLabels, item.case_type))} - ${escapeHtml(item.territory || "Territoire non renseigne")}</p></div><div class="admin-meta-grid"><div><span>Responsable</span><strong>${escapeHtml(item.assigned_to || "Non assigne")}</strong></div><div><span>Pole</span><strong>${escapeHtml(item.main_pole || "Non renseigne")}</strong></div><div><span>Decision</span><strong>${escapeHtml(label(decisionLabels, item.decision_status))}</strong></div><div><span>Ouverture</span><strong>${escapeHtml(formatDate(item.opened_at))}</strong></div><div><span>Demande source</span><strong>${item.source_request_id ? `<a class="text-link" href="admin-demandes?q=${encodeURIComponent(item.source_request_id)}">Voir la demande source</a>` : "Non rattachee"}</strong></div></div>${assistantPanel(item)}${clientDossierSchemaPanel(item)}${caseFilePanel(item)}${instructionControlPanel(item)}${instructionPathPanel(item)}${moduleChainPanel(item)}${workflowPanel(item)}${documentsPanel(item)}<label>Titre<input name="title" value="${escapeHtml(item.title || "")}"></label><label>Statut<select name="status">${options(statusLabels, item.status)}</select></label><label>Type<select name="case_type">${options(typeLabels, item.case_type)}</select></label><label>Priorite<select name="priority">${options(priorityLabels, item.priority)}</select></label><label>Pole principal<input name="main_pole" value="${escapeHtml(item.main_pole || "")}"></label><label>Responsable<input name="assigned_to" value="${escapeHtml(item.assigned_to || "")}"></label><label>Territoire<input name="territory" value="${escapeHtml(item.territory || "")}"></label><label>Prochaine action<input name="next_action" value="${escapeHtml(item.next_action || "")}"></label><label>Echeance<input name="next_action_due_at" type="datetime-local" value="${escapeHtml(toDateTimeLocal(item.next_action_due_at))}"></label><label>Statut decision<select name="decision_status">${options(decisionLabels, item.decision_status)}</select></label><label class="cases-wide-field">Resume<textarea name="summary" rows="5">${escapeHtml(item.summary || "")}</textarea></label><label class="cases-wide-field">Synthese decision<textarea name="decision_summary" rows="4">${escapeHtml(item.decision_summary || "")}</textarea></label>${checklistPanel(checklist)}${decisionsPanel(decisions)}${historyPanel(history)}<p class="form-note" data-cases-save-status hidden></p></form>`; }
@@ -416,15 +423,7 @@ function manualCasePayload(formData) {
   ].filter(Boolean);
   data.summary = summaryBlocks.join("\n");
   data.decision_summary = raw.manual_risks ? `Points de vigilance initiaux : ${raw.manual_risks}` : "";
-  delete data.client_name;
-  delete data.client_type;
-  delete data.client_email;
-  delete data.client_phone;
-  delete data.client_address;
-  delete data.request_theme;
-  delete data.intake_origin;
-  delete data.known_documents;
-  delete data.manual_risks;
+
   return data;
 }
 function shouldOpenCreateModal() {

@@ -177,3 +177,36 @@ Resultat du controle du 2026-07-10 :
 | Secrets | Non affiches dans le rapport |
 
 Interpretation : TVF OS repond en lecture reelle avec Supabase. La prochaine validation doit porter sur un parcours terrain controle : formulaire public, demande, contact, dossier, tache, document, decision et reporting.
+
+## Verrouillage operationnel - 2026-07-12 17:36
+
+Objectif : TVF OS doit fonctionner comme un ERP/CRM simple pour l'association, centre sur une structure unique et sur le parcours demande -> fichier client -> dossier -> instruction -> documents -> taches -> decision -> suivi.
+
+Priorites verrouillees :
+
+1. Tester le parcours reel complet depuis une demande ou une creation manuelle.
+2. Rattacher les documents au dossier : fiche d'instruction, demande de pieces, courrier, convention, note de decision.
+3. Rendre la fiche dossier lisible en blocs utiles : identite, demande, instruction, pieces, taches, decision, documents, historique.
+4. Utiliser des statuts operationnels simples : qualification, attente pieces, visite, decision, convention/suivi, cloture.
+5. Relier chaque dossier aux taches utiles : relance, pieces, rendez-vous, visite, validation, convention.
+6. Rattacher la creation manuelle au CRM quand des coordonnees sont saisies.
+7. Garder Documents comme bibliotheque interne : modeles, pieces a fournir, conventions, courriers.
+8. Centrer le tableau de bord sur les indicateurs utiles : nouvelles demandes, dossiers actifs, pieces attendues, retards, decisions.
+9. Tracer les notifications et e-mails sans bloquer le travail si une integration externe echoue.
+10. Auditer le parcours avec trois cas : proprietaire, entreprise materiaux, collectivite.
+
+Regle de conception : peu de texte explicatif dans l'interface, des actions claires, une trace par dossier, aucun module inutile dans le parcours quotidien.
+
+### Test controle du parcours dossier manuel - 2026-07-12 17:39
+
+Scenario teste : creation d'un dossier manuel depuis TVF OS avec coordonnees client, type proprietaire, thematique proposer un bien, territoire Saint-Etienne.
+
+Resultat :
+
+- Dossier cree avec numero metier genere automatiquement.
+- Participant principal rattache au dossier.
+- Contact CRM cree et rattache au participant.
+- Donnees de test supprimees immediatement apres verification.
+- Parcours valide pour un usage terrain controle.
+
+Point de vigilance : les documents et taches restent des actions semi-automatiques a declencher depuis la fiche dossier afin d'eviter la creation de pieces inutiles.
