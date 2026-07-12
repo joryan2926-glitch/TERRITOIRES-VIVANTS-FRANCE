@@ -1,0 +1,544 @@
+-- TERRITOIRES VIVANTS FRANCE - TVF OS
+-- Installation et verification du module Documents
+-- A copier-coller dans Supabase SQL Editor puis executer.
+
+begin;
+
+-- TVF OS - Module Gestion documentaire
+-- Migration production : fichiers, documents, versions, liens, modeles, generations et journal.
+
+create extension if not exists pgcrypto;
+create sequence if not exists public.documents_number_seq;
+
+insert into storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
+values (
+  'tvf-documents',
+  'tvf-documents',
+  false,
+  10485760,
+  array[
+    'application/pdf',
+    'image/jpeg',
+    'image/png',
+    'image/webp',
+    'text/plain',
+    'text/markdown',
+    'text/csv',
+    'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+    'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    'application/vnd.openxmlformats-officedocument.presentationml.presentation'
+  ]
+)
+on conflict (id) do update set
+  public = excluded.public,
+  file_size_limit = excluded.file_size_limit,
+  allowed_mime_types = excluded.allowed_mime_types;
+
+create table if not exists public.files (
+  id uuid primary key default gen_random_uuid(),
+  storage_bucket text not null default 'tvf-documents',
+  storage_path text not null unique,
+  original_filename text not null,
+  mime_type text,
+  size_bytes bigint not null default 0,
+  checksum text,
+  uploaded_by text,
+  branch_id uuid,
+  confidentiality_level text not null default 'interne',
+  virus_scan_status text not null default 'pending',
+  ai_summary text,
+  sensitive_detected boolean not null default false,
+  created_at timestamptz not null default now(),
+  constraint files_confidentiality_check check (confidentiality_level in ('public','interne','confidentiel','sensible')),
+  constraint files_virus_scan_check check (virus_scan_status in ('pending','clean','suspect','blocked')),
+  constraint files_size_check check (size_bytes >= 0 and size_bytes <= 10485760)
+);
+
+create table if not exists public.templates (
+  id uuid primary key default gen_random_uuid(),
+  template_key text not null unique,
+  title text not null,
+  template_type text not null default 'autre',
+  status text not null default 'brouillon',
+  version integer not null default 1,
+  national_validated boolean not null default false,
+  file_id uuid references public.files(id) on delete set null,
+  required_fields text[] not null default '{}',
+  description text,
+  branch_id uuid,
+  ai_summary text,
+  search_vector tsvector generated always as (to_tsvector('french', coalesce(title,'') || ' ' || coalesce(description,'') || ' ' || coalesce(ai_summary,''))) stored,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now(),
+  constraint templates_type_check check (template_type in ('courrier','email','convention','fiche','registre','budget','kit_antenne','formulaire','grille','compte_rendu','financeur','autre')),
+  constraint templates_status_check check (status in ('brouillon','a_valider','officiel','remplace','archive')),
+  constraint templates_version_check check (version >= 1)
+);
+
+create table if not exists public.documents (
+  id uuid primary key default gen_random_uuid(),
+  document_number text unique,
+  title text not null,
+  document_type text not null default 'piece',
+  status text not null default 'a_classer',
+  version integer not null default 1,
+  file_id uuid references public.files(id) on delete set null,
+  branch_id uuid,
+  related_object_type text not null default 'none',
+  related_object_id uuid,
+  template_id uuid references public.templates(id) on delete set null,
+  validated_by text,
+  validated_at timestamptz,
+  expires_at timestamptz,
+  confidentiality_level text not null default 'interne',
+  ai_summary text,
+  classification_notes text,
+  sensitive_detected boolean not null default false,
+  indexed_in_knowledge boolean not null default false,
+  search_vector tsvector generated always as (to_tsvector('french', coalesce(title,'') || ' ' || coalesce(ai_summary,'') || ' ' || coalesce(classification_notes,''))) stored,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now(),
+  constraint documents_type_check check (document_type in ('piece','photo','convention','courrier','email','budget','compte_rendu','fiche','registre','formulaire','kit','preuve','modele_genere','autre')),
+  constraint documents_status_check check (status in ('brouillon','a_classer','a_valider','valide','remplace','archive')),
+  constraint documents_version_check check (version >= 1),
+  constraint documents_confidentiality_check check (confidentiality_level in ('public','interne','confidentiel','sensible')),
+  constraint documents_related_type_check check (related_object_type in ('case','request','contact','organization','project','branch','template','none'))
+);
+
+create table if not exists public.document_versions (
+  id uuid primary key default gen_random_uuid(),
+  document_id uuid not null references public.documents(id) on delete cascade,
+  version integer not null,
+  file_id uuid references public.files(id) on delete set null,
+  change_summary text,
+  created_by text,
+  created_at timestamptz not null default now(),
+  unique(document_id, version),
+  constraint document_versions_version_check check (version >= 1)
+);
+
+create table if not exists public.document_links (
+  id uuid primary key default gen_random_uuid(),
+  document_id uuid not null references public.documents(id) on delete cascade,
+  related_object_type text not null,
+  related_object_id uuid not null,
+  relation_label text,
+  created_at timestamptz not null default now(),
+  unique(document_id, related_object_type, related_object_id),
+  constraint document_links_related_type_check check (related_object_type in ('case','request','contact','organization','project','branch','template'))
+);
+
+create table if not exists public.generated_documents (
+  id uuid primary key default gen_random_uuid(),
+  template_id uuid not null references public.templates(id) on delete cascade,
+  document_id uuid references public.documents(id) on delete set null,
+  generated_by text,
+  generated_from_object_type text not null default 'none',
+  generated_from_object_id uuid,
+  generation_status text not null default 'draft_created',
+  validation_status text not null default 'non_soumis',
+  missing_fields text[] not null default '{}',
+  field_values jsonb not null default '{}'::jsonb,
+  created_at timestamptz not null default now(),
+  constraint generated_documents_object_type_check check (generated_from_object_type in ('case','request','contact','organization','project','branch','template','none')),
+  constraint generated_documents_generation_status_check check (generation_status in ('draft_created','missing_fields','submitted','validated','failed')),
+  constraint generated_documents_validation_status_check check (validation_status in ('non_soumis','a_valider','valide','refuse'))
+);
+
+create table if not exists public.document_audit_logs (
+  id uuid primary key default gen_random_uuid(),
+  document_id uuid references public.documents(id) on delete cascade,
+  template_id uuid references public.templates(id) on delete cascade,
+  action text not null,
+  details text,
+  created_by text,
+  created_at timestamptz not null default now()
+);
+
+-- Compatibilite : complete les tables deja creees par une ancienne tentative.
+alter table if exists public.files
+  add column if not exists storage_bucket text not null default 'tvf-documents',
+  add column if not exists storage_path text,
+  add column if not exists original_filename text,
+  add column if not exists mime_type text,
+  add column if not exists size_bytes bigint not null default 0,
+  add column if not exists checksum text,
+  add column if not exists uploaded_by text,
+  add column if not exists branch_id uuid,
+  add column if not exists confidentiality_level text not null default 'interne',
+  add column if not exists virus_scan_status text not null default 'pending',
+  add column if not exists ai_summary text,
+  add column if not exists sensitive_detected boolean not null default false,
+  add column if not exists created_at timestamptz not null default now();
+
+alter table if exists public.templates
+  add column if not exists template_key text,
+  add column if not exists title text,
+  add column if not exists template_type text not null default 'autre',
+  add column if not exists status text not null default 'brouillon',
+  add column if not exists version integer not null default 1,
+  add column if not exists national_validated boolean not null default false,
+  add column if not exists file_id uuid,
+  add column if not exists required_fields text[] not null default '{}',
+  add column if not exists description text,
+  add column if not exists branch_id uuid,
+  add column if not exists ai_summary text,
+  add column if not exists search_vector tsvector generated always as (to_tsvector('french', coalesce(title,'') || ' ' || coalesce(description,'') || ' ' || coalesce(ai_summary,''))) stored,
+  add column if not exists created_at timestamptz not null default now(),
+  add column if not exists updated_at timestamptz not null default now();
+
+alter table if exists public.documents
+  add column if not exists document_number text,
+  add column if not exists title text,
+  add column if not exists document_type text not null default 'piece',
+  add column if not exists status text not null default 'a_classer',
+  add column if not exists version integer not null default 1,
+  add column if not exists file_id uuid,
+  add column if not exists branch_id uuid,
+  add column if not exists related_object_type text not null default 'none',
+  add column if not exists related_object_id uuid,
+  add column if not exists template_id uuid,
+  add column if not exists validated_by text,
+  add column if not exists validated_at timestamptz,
+  add column if not exists expires_at timestamptz,
+  add column if not exists confidentiality_level text not null default 'interne',
+  add column if not exists ai_summary text,
+  add column if not exists classification_notes text,
+  add column if not exists sensitive_detected boolean not null default false,
+  add column if not exists indexed_in_knowledge boolean not null default false,
+  add column if not exists search_vector tsvector generated always as (to_tsvector('french', coalesce(title,'') || ' ' || coalesce(ai_summary,'') || ' ' || coalesce(classification_notes,''))) stored,
+  add column if not exists created_at timestamptz not null default now(),
+  add column if not exists updated_at timestamptz not null default now();
+
+alter table if exists public.document_versions
+  add column if not exists document_id uuid,
+  add column if not exists version integer not null default 1,
+  add column if not exists file_id uuid,
+  add column if not exists change_summary text,
+  add column if not exists created_by text,
+  add column if not exists created_at timestamptz not null default now();
+
+alter table if exists public.document_links
+  add column if not exists document_id uuid,
+  add column if not exists related_object_type text,
+  add column if not exists related_object_id uuid,
+  add column if not exists relation_label text,
+  add column if not exists created_at timestamptz not null default now();
+
+alter table if exists public.generated_documents
+  add column if not exists template_id uuid,
+  add column if not exists document_id uuid,
+  add column if not exists generated_by text,
+  add column if not exists generated_from_object_type text not null default 'none',
+  add column if not exists generated_from_object_id uuid,
+  add column if not exists generation_status text not null default 'draft_created',
+  add column if not exists validation_status text not null default 'non_soumis',
+  add column if not exists missing_fields text[] not null default '{}',
+  add column if not exists field_values jsonb not null default '{}'::jsonb,
+  add column if not exists created_at timestamptz not null default now();
+
+alter table if exists public.document_audit_logs
+  add column if not exists document_id uuid,
+  add column if not exists template_id uuid,
+  add column if not exists action text,
+  add column if not exists details text,
+  add column if not exists created_by text,
+  add column if not exists created_at timestamptz not null default now();
+create or replace function public.tvf_detect_sensitive_document(text_value text)
+returns boolean language sql immutable as $$
+  select coalesce(text_value, '') ~* '(rib|iban|piece d identite|identite|cni|passeport|avis d impot|impot|salaire|medical|sante|signature|donnees personnelles|rgpd|contrat|mandat)';
+$$;
+
+create or replace function public.tvf_document_type_from_title(text_value text)
+returns text language sql immutable as $$
+  select case
+    when coalesce(text_value, '') ~* '(photo|image|jpg|jpeg|png|webp)' then 'photo'
+    when coalesce(text_value, '') ~* '(convention|partenariat|mise a disposition)' then 'convention'
+    when coalesce(text_value, '') ~* '(courrier|lettre)' then 'courrier'
+    when coalesce(text_value, '') ~* '(email|mail)' then 'email'
+    when coalesce(text_value, '') ~* '(budget|finance|financement|devis|facture)' then 'budget'
+    when coalesce(text_value, '') ~* '(compte rendu|proces verbal|reunion)' then 'compte_rendu'
+    when coalesce(text_value, '') ~* '(fiche|formulaire|grille)' then 'fiche'
+    when coalesce(text_value, '') ~* '(registre|suivi|tableau)' then 'registre'
+    when coalesce(text_value, '') ~* '(kit|pack)' then 'kit'
+    when coalesce(text_value, '') ~* '(preuve|justificatif|attestation|rib|cni|identite)' then 'preuve'
+    else 'piece'
+  end;
+$$;
+
+create or replace function public.set_file_metadata()
+returns trigger language plpgsql as $$
+begin
+  new.sensitive_detected := coalesce(new.sensitive_detected, false) or public.tvf_detect_sensitive_document(coalesce(new.original_filename,'') || ' ' || coalesce(new.ai_summary,''));
+  if new.sensitive_detected and new.confidentiality_level in ('public','interne') then
+    new.confidentiality_level := 'sensible';
+  end if;
+  return new;
+end;
+$$;
+
+create or replace function public.set_template_metadata()
+returns trigger language plpgsql as $$
+begin
+  if new.template_key is null or new.template_key = '' then
+    new.template_key := lower(regexp_replace(new.template_type || '-' || new.title, '[^a-zA-Z0-9]+', '-', 'g'));
+  end if;
+  if new.status = 'officiel' then
+    new.national_validated := true;
+  end if;
+  new.updated_at := now();
+  return new;
+end;
+$$;
+
+create or replace function public.set_document_metadata()
+returns trigger language plpgsql as $$
+begin
+  if new.document_number is null or new.document_number = '' then
+    new.document_number := 'DOC-' || to_char(coalesce(new.created_at, now()), 'YYYY') || '-' || lpad(nextval('public.documents_number_seq')::text, 4, '0');
+  end if;
+  if new.document_type is null or new.document_type = '' then
+    new.document_type := public.tvf_document_type_from_title(new.title);
+  end if;
+  new.sensitive_detected := coalesce(new.sensitive_detected, false) or public.tvf_detect_sensitive_document(coalesce(new.title,'') || ' ' || coalesce(new.ai_summary,'') || ' ' || coalesce(new.classification_notes,''));
+  if new.sensitive_detected and new.confidentiality_level in ('public','interne') then
+    new.confidentiality_level := 'sensible';
+  end if;
+  if new.status = 'valide' and new.validated_at is null then
+    new.validated_at := now();
+  end if;
+  if new.status = 'valide' and new.confidentiality_level <> 'sensible' then
+    new.indexed_in_knowledge := true;
+  end if;
+  new.updated_at := now();
+  return new;
+end;
+$$;
+
+create or replace function public.create_initial_document_version()
+returns trigger language plpgsql as $$
+begin
+  if new.file_id is not null then
+    insert into public.document_versions(document_id, version, file_id, change_summary, created_by)
+    values (new.id, new.version, new.file_id, 'Version initiale', 'TVF OS')
+    on conflict do nothing;
+  end if;
+  return new;
+end;
+$$;
+
+create or replace function public.log_document_status_change()
+returns trigger language plpgsql as $$
+begin
+  if old.status is distinct from new.status then
+    insert into public.document_audit_logs(document_id, action, details, created_by)
+    values (new.id, 'changement_statut', coalesce(old.status, 'nouveau') || ' -> ' || new.status, 'TVF OS');
+  end if;
+  return new;
+end;
+$$;
+
+drop trigger if exists set_file_metadata on public.files;
+create trigger set_file_metadata before insert or update on public.files for each row execute function public.set_file_metadata();
+
+drop trigger if exists set_template_metadata on public.templates;
+create trigger set_template_metadata before insert or update on public.templates for each row execute function public.set_template_metadata();
+
+drop trigger if exists set_document_metadata on public.documents;
+create trigger set_document_metadata before insert or update on public.documents for each row execute function public.set_document_metadata();
+
+drop trigger if exists create_initial_document_version on public.documents;
+create trigger create_initial_document_version after insert on public.documents for each row execute function public.create_initial_document_version();
+
+drop trigger if exists log_document_status_change on public.documents;
+create trigger log_document_status_change after update on public.documents for each row execute function public.log_document_status_change();
+
+create index if not exists files_bucket_path_idx on public.files(storage_bucket, storage_path);
+create index if not exists files_confidentiality_idx on public.files(confidentiality_level, virus_scan_status);
+create index if not exists documents_status_idx on public.documents(status, document_type, updated_at desc);
+create index if not exists documents_related_idx on public.documents(related_object_type, related_object_id);
+create index if not exists documents_file_idx on public.documents(file_id);
+create index if not exists documents_template_idx on public.documents(template_id);
+create index if not exists documents_search_idx on public.documents using gin(search_vector);
+create index if not exists document_versions_document_idx on public.document_versions(document_id, version desc);
+create index if not exists document_links_object_idx on public.document_links(related_object_type, related_object_id);
+create index if not exists templates_status_idx on public.templates(status, template_type, updated_at desc);
+create index if not exists templates_search_idx on public.templates using gin(search_vector);
+create index if not exists generated_documents_template_idx on public.generated_documents(template_id, generation_status);
+create index if not exists generated_documents_object_idx on public.generated_documents(generated_from_object_type, generated_from_object_id);
+create index if not exists document_audit_logs_document_idx on public.document_audit_logs(document_id, created_at desc);
+
+do $$
+begin
+  if not exists (
+    select 1 from pg_constraint where conname = 'generated_documents_template_document_unique'
+  ) then
+    alter table public.generated_documents
+      add constraint generated_documents_template_document_unique unique(template_id, document_id);
+  end if;
+end $$;
+
+alter table public.files enable row level security;
+alter table public.documents enable row level security;
+alter table public.document_versions enable row level security;
+alter table public.document_links enable row level security;
+alter table public.templates enable row level security;
+alter table public.generated_documents enable row level security;
+alter table public.document_audit_logs enable row level security;
+
+-- Service role bypass RLS. Policies preparent les futurs roles Supabase Auth TVF.
+drop policy if exists "TVF files can read" on public.files;
+create policy "TVF files can read" on public.files for select using ((auth.jwt() -> 'app_metadata' ->> 'tvf_role') in ('national_admin','branch_manager','case_manager','document_manager','request_manager','crm_manager','auditor'));
+drop policy if exists "TVF files can manage" on public.files;
+create policy "TVF files can manage" on public.files for all using ((auth.jwt() -> 'app_metadata' ->> 'tvf_role') in ('national_admin','branch_manager','document_manager')) with check ((auth.jwt() -> 'app_metadata' ->> 'tvf_role') in ('national_admin','branch_manager','document_manager'));
+
+drop policy if exists "TVF documents can read" on public.documents;
+create policy "TVF documents can read" on public.documents for select using ((auth.jwt() -> 'app_metadata' ->> 'tvf_role') in ('national_admin','branch_manager','case_manager','document_manager','request_manager','crm_manager','auditor'));
+drop policy if exists "TVF documents can manage" on public.documents;
+create policy "TVF documents can manage" on public.documents for all using ((auth.jwt() -> 'app_metadata' ->> 'tvf_role') in ('national_admin','branch_manager','document_manager','case_manager')) with check ((auth.jwt() -> 'app_metadata' ->> 'tvf_role') in ('national_admin','branch_manager','document_manager','case_manager'));
+
+drop policy if exists "TVF document versions can read" on public.document_versions;
+create policy "TVF document versions can read" on public.document_versions for select using ((auth.jwt() -> 'app_metadata' ->> 'tvf_role') in ('national_admin','branch_manager','case_manager','document_manager','auditor'));
+drop policy if exists "TVF document versions can manage" on public.document_versions;
+create policy "TVF document versions can manage" on public.document_versions for all using ((auth.jwt() -> 'app_metadata' ->> 'tvf_role') in ('national_admin','branch_manager','document_manager')) with check ((auth.jwt() -> 'app_metadata' ->> 'tvf_role') in ('national_admin','branch_manager','document_manager'));
+
+drop policy if exists "TVF document links can read" on public.document_links;
+create policy "TVF document links can read" on public.document_links for select using ((auth.jwt() -> 'app_metadata' ->> 'tvf_role') in ('national_admin','branch_manager','case_manager','document_manager','request_manager','crm_manager','auditor'));
+drop policy if exists "TVF document links can manage" on public.document_links;
+create policy "TVF document links can manage" on public.document_links for all using ((auth.jwt() -> 'app_metadata' ->> 'tvf_role') in ('national_admin','branch_manager','document_manager','case_manager')) with check ((auth.jwt() -> 'app_metadata' ->> 'tvf_role') in ('national_admin','branch_manager','document_manager','case_manager'));
+
+drop policy if exists "TVF templates can read" on public.templates;
+create policy "TVF templates can read" on public.templates for select using ((auth.jwt() -> 'app_metadata' ->> 'tvf_role') in ('national_admin','branch_manager','case_manager','document_manager','request_manager','crm_manager','auditor'));
+drop policy if exists "TVF templates can manage" on public.templates;
+create policy "TVF templates can manage" on public.templates for all using ((auth.jwt() -> 'app_metadata' ->> 'tvf_role') in ('national_admin','document_manager')) with check ((auth.jwt() -> 'app_metadata' ->> 'tvf_role') in ('national_admin','document_manager'));
+
+drop policy if exists "TVF generated documents can read" on public.generated_documents;
+create policy "TVF generated documents can read" on public.generated_documents for select using ((auth.jwt() -> 'app_metadata' ->> 'tvf_role') in ('national_admin','branch_manager','case_manager','document_manager','auditor'));
+drop policy if exists "TVF generated documents can manage" on public.generated_documents;
+create policy "TVF generated documents can manage" on public.generated_documents for all using ((auth.jwt() -> 'app_metadata' ->> 'tvf_role') in ('national_admin','branch_manager','document_manager','case_manager')) with check ((auth.jwt() -> 'app_metadata' ->> 'tvf_role') in ('national_admin','branch_manager','document_manager','case_manager'));
+
+drop policy if exists "TVF document audit can read" on public.document_audit_logs;
+create policy "TVF document audit can read" on public.document_audit_logs for select using ((auth.jwt() -> 'app_metadata' ->> 'tvf_role') in ('national_admin','branch_manager','document_manager','auditor'));
+drop policy if exists "TVF document audit can manage" on public.document_audit_logs;
+create policy "TVF document audit can manage" on public.document_audit_logs for all using ((auth.jwt() -> 'app_metadata' ->> 'tvf_role') in ('national_admin','branch_manager','document_manager')) with check ((auth.jwt() -> 'app_metadata' ->> 'tvf_role') in ('national_admin','branch_manager','document_manager'));
+
+drop policy if exists "TVF storage documents can read" on storage.objects;
+create policy "TVF storage documents can read" on storage.objects for select using (bucket_id = 'tvf-documents' and (auth.jwt() -> 'app_metadata' ->> 'tvf_role') in ('national_admin','branch_manager','case_manager','document_manager','request_manager','crm_manager','auditor'));
+drop policy if exists "TVF storage documents can manage" on storage.objects;
+create policy "TVF storage documents can manage" on storage.objects for all using (bucket_id = 'tvf-documents' and (auth.jwt() -> 'app_metadata' ->> 'tvf_role') in ('national_admin','branch_manager','document_manager')) with check (bucket_id = 'tvf-documents' and (auth.jwt() -> 'app_metadata' ->> 'tvf_role') in ('national_admin','branch_manager','document_manager'));
+
+comment on table public.files is 'TVF OS - metadonnees des fichiers stockes dans Supabase Storage.';
+comment on table public.documents is 'TVF OS - objets documentaires metier classes, versionnes et validables.';
+comment on table public.templates is 'TVF OS - bibliotheque des modeles officiels et locaux.';
+comment on table public.generated_documents is 'TVF OS - documents produits depuis un modele.';
+
+commit;
+
+-- Verification post-installation
+-- TVF OS - Module Gestion documentaire
+-- Verification post-migration : bucket, tables, RLS, politiques, indexes, fonctions et triggers.
+
+select tablename, policyname, cmd
+from pg_policies
+where schemaname = 'public'
+  and tablename in ('files','documents','document_versions','document_links','templates','generated_documents','document_audit_logs')
+order by tablename, policyname;
+
+with expected(metric, expected_count) as (
+  values
+    ('bucket', 1),
+    ('tables', 7),
+    ('rls_enabled', 7),
+    ('policies_public', 14),
+    ('policies_storage', 2),
+    ('indexes', 14),
+    ('functions', 7),
+    ('triggers', 5),
+    ('required_columns', 82)
+), actual(metric, actual_count) as (
+  select 'bucket', count(*)::int
+  from storage.buckets
+  where id = 'tvf-documents' and public = false
+  union all
+  select 'tables', count(*)::int
+  from information_schema.tables
+  where table_schema = 'public'
+    and table_name in ('files','documents','document_versions','document_links','templates','generated_documents','document_audit_logs')
+  union all
+  select 'rls_enabled', count(*)::int
+  from pg_class c
+  join pg_namespace n on n.oid = c.relnamespace
+  where n.nspname = 'public'
+    and c.relname in ('files','documents','document_versions','document_links','templates','generated_documents','document_audit_logs')
+    and c.relrowsecurity = true
+  union all
+  select 'policies_public', count(*)::int
+  from pg_policies
+  where schemaname = 'public'
+    and tablename in ('files','documents','document_versions','document_links','templates','generated_documents','document_audit_logs')
+  union all
+  select 'policies_storage', count(*)::int
+  from pg_policies
+  where schemaname = 'storage'
+    and tablename = 'objects'
+    and policyname in ('TVF storage documents can read','TVF storage documents can manage')
+  union all
+  select 'indexes', count(*)::int
+  from pg_indexes
+  where schemaname = 'public'
+    and indexname in ('files_bucket_path_idx','files_confidentiality_idx','documents_status_idx','documents_related_idx','documents_file_idx','documents_template_idx','documents_search_idx','document_versions_document_idx','document_links_object_idx','templates_status_idx','templates_search_idx','generated_documents_template_idx','generated_documents_object_idx','document_audit_logs_document_idx')
+  union all
+  select 'functions', count(*)::int
+  from pg_proc p
+  join pg_namespace n on n.oid = p.pronamespace
+  where n.nspname = 'public'
+    and p.proname in ('tvf_detect_sensitive_document','tvf_document_type_from_title','set_file_metadata','set_template_metadata','set_document_metadata','create_initial_document_version','log_document_status_change')
+  union all
+  select 'triggers', count(distinct t.tgname)::int
+  from pg_trigger t
+  join pg_class c on c.oid = t.tgrelid
+  join pg_namespace n on n.oid = c.relnamespace
+  where n.nspname = 'public'
+    and not t.tgisinternal
+    and t.tgname in ('set_file_metadata','set_template_metadata','set_document_metadata','create_initial_document_version','log_document_status_change')
+  union all
+  select 'required_columns', count(*)::int
+  from information_schema.columns
+  where table_schema = 'public'
+    and (table_name, column_name) in (
+
+        ('files','id'),('files','storage_bucket'),('files','storage_path'),('files','original_filename'),('files','mime_type'),('files','size_bytes'),('files','checksum'),('files','uploaded_by'),('files','branch_id'),('files','confidentiality_level'),('files','virus_scan_status'),('files','ai_summary'),('files','sensitive_detected'),('files','created_at'),
+        ('templates','id'),('templates','template_key'),('templates','title'),('templates','template_type'),('templates','status'),('templates','version'),('templates','national_validated'),('templates','file_id'),('templates','required_fields'),('templates','description'),('templates','branch_id'),('templates','ai_summary'),('templates','search_vector'),('templates','created_at'),('templates','updated_at'),
+        ('documents','id'),('documents','document_number'),('documents','title'),('documents','document_type'),('documents','status'),('documents','version'),('documents','file_id'),('documents','branch_id'),('documents','related_object_type'),('documents','related_object_id'),('documents','template_id'),('documents','validated_by'),('documents','validated_at'),('documents','expires_at'),('documents','confidentiality_level'),('documents','ai_summary'),('documents','classification_notes'),('documents','sensitive_detected'),('documents','indexed_in_knowledge'),('documents','search_vector'),('documents','created_at'),('documents','updated_at'),
+        ('document_versions','id'),('document_versions','document_id'),('document_versions','version'),('document_versions','file_id'),('document_versions','change_summary'),('document_versions','created_by'),('document_versions','created_at'),
+        ('document_links','id'),('document_links','document_id'),('document_links','related_object_type'),('document_links','related_object_id'),('document_links','relation_label'),('document_links','created_at'),
+        ('generated_documents','id'),('generated_documents','template_id'),('generated_documents','document_id'),('generated_documents','generated_by'),('generated_documents','generated_from_object_type'),('generated_documents','generated_from_object_id'),('generated_documents','generation_status'),('generated_documents','validation_status'),('generated_documents','missing_fields'),('generated_documents','field_values'),('generated_documents','created_at'),
+        ('document_audit_logs','id'),('document_audit_logs','document_id'),('document_audit_logs','template_id'),('document_audit_logs','action'),('document_audit_logs','details'),('document_audit_logs','created_by'),('document_audit_logs','created_at')
+    )
+)
+select e.metric, e.expected_count, coalesce(a.actual_count, 0) as actual_count,
+       case when coalesce(a.actual_count, 0) >= e.expected_count then 'ok' else 'missing' end as status
+from expected e
+left join actual a using(metric)
+order by e.metric;
+
+-- Colonnes requises par l'API TVF OS Documents.
+with required_columns(table_name, column_name) as (
+  values
+    ('files','id'),('files','storage_bucket'),('files','storage_path'),('files','original_filename'),('files','mime_type'),('files','size_bytes'),('files','checksum'),('files','uploaded_by'),('files','branch_id'),('files','confidentiality_level'),('files','virus_scan_status'),('files','ai_summary'),('files','sensitive_detected'),('files','created_at'),
+    ('templates','id'),('templates','template_key'),('templates','title'),('templates','template_type'),('templates','status'),('templates','version'),('templates','national_validated'),('templates','file_id'),('templates','required_fields'),('templates','description'),('templates','branch_id'),('templates','ai_summary'),('templates','search_vector'),('templates','created_at'),('templates','updated_at'),
+    ('documents','id'),('documents','document_number'),('documents','title'),('documents','document_type'),('documents','status'),('documents','version'),('documents','file_id'),('documents','branch_id'),('documents','related_object_type'),('documents','related_object_id'),('documents','template_id'),('documents','validated_by'),('documents','validated_at'),('documents','expires_at'),('documents','confidentiality_level'),('documents','ai_summary'),('documents','classification_notes'),('documents','sensitive_detected'),('documents','indexed_in_knowledge'),('documents','search_vector'),('documents','created_at'),('documents','updated_at'),
+    ('document_versions','id'),('document_versions','document_id'),('document_versions','version'),('document_versions','file_id'),('document_versions','change_summary'),('document_versions','created_by'),('document_versions','created_at'),
+    ('document_links','id'),('document_links','document_id'),('document_links','related_object_type'),('document_links','related_object_id'),('document_links','relation_label'),('document_links','created_at'),
+    ('generated_documents','id'),('generated_documents','template_id'),('generated_documents','document_id'),('generated_documents','generated_by'),('generated_documents','generated_from_object_type'),('generated_documents','generated_from_object_id'),('generated_documents','generation_status'),('generated_documents','validation_status'),('generated_documents','missing_fields'),('generated_documents','field_values'),('generated_documents','created_at'),
+    ('document_audit_logs','id'),('document_audit_logs','document_id'),('document_audit_logs','template_id'),('document_audit_logs','action'),('document_audit_logs','details'),('document_audit_logs','created_by'),('document_audit_logs','created_at')
+), actual_columns as (
+  select table_name, column_name
+  from information_schema.columns
+  where table_schema = 'public'
+)
+select r.table_name, r.column_name, 'missing' as status
+from required_columns r
+left join actual_columns a using(table_name, column_name)
+where a.column_name is null
+order by r.table_name, r.column_name;
