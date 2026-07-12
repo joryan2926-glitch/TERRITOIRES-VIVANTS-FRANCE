@@ -1,4 +1,4 @@
-const CASES_TOKEN_KEY = "tvfAdminToken";
+﻿const CASES_TOKEN_KEY = "tvfAdminToken";
 const typeLabels = { bien_vacant: "Bien vacant", commerce_inoccupe: "Commerce inoccupe", materiaux: "Materiaux", collectivite: "Collectivite", entreprise: "Entreprise", benevole: "Benevole", financeur: "Financeur", signalement: "Signalement", friche_terrain: "Friche / terrain", presse: "Presse", gouvernance: "Autre", autre: "Autre" };
 const statusLabels = { ouvert: "Ouvert", qualification: "Qualification", instruction: "Instruction", attente_pieces: "Attente pieces", visite: "Visite", a_decision: "A decision", decision_validee: "Decision validee", cloture: "Cloture", archive: "Archive" };
 const priorityLabels = { normale: "Normale", haute: "Haute", urgente: "Urgente" };
@@ -290,10 +290,14 @@ function clientDossierSchemaPanel(item) {
     ["Documents", "Pieces rattachees"],
     ["Instruction", item.next_action || "Prochaine action a definir"]
   ];
+  const dossierQuery = encodeURIComponent(item.case_number || item.title || item.source_request_id || "");
+  const demandHref = item.source_request_id ? `admin-demandes?q=${encodeURIComponent(item.source_request_id)}` : "admin-demandes";
+  const documentsHref = dossierQuery ? `admin-documents?q=${dossierQuery}` : "admin-documents";
+  const tasksHref = dossierQuery ? `admin-work?q=${dossierQuery}` : "admin-work";
   return `<section class="cases-panel cases-client-schema-panel" aria-label="Schema de construction du dossier client">
     <div class="admin-panel-head"><div><p class="section-kicker">Fichier client</p><h4>Construction du dossier par etape</h4><p>Vue directe : demande, pieces, instruction et prochaine action.</p></div><strong>${escapeHtml(item.case_number || "Dossier")}</strong></div>
     <ol class="cases-instruction-path cases-client-file-path">${steps.map((step, index) => `<li class="${index <= caseInstructionIndex(item.status) + 2 ? "is-done" : ""}"><span>${index + 1}</span><strong>${escapeHtml(step[0])}</strong><small>${escapeHtml(step[1])}</small></li>`).join("")}</ol>
-    <div class="admin-detail-actions"><a class="btn secondary" href="admin-demandes">Demande source</a><a class="btn secondary" href="admin-documents">Documents du dossier</a><a class="btn secondary" href="admin-work">Taches d'instruction</a></div>
+    <div class="admin-detail-actions"><a class="btn secondary" href="${demandHref}">Demande source</a><a class="btn secondary" href="${documentsHref}">Documents du dossier</a><a class="btn secondary" href="${tasksHref}">Taches d'instruction</a></div>
   </section>`;
 }
 function primaryParticipant(item) {

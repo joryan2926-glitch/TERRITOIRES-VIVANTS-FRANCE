@@ -1,4 +1,4 @@
-const TVF_ADMIN_TOKEN_KEY = "tvfAdminToken";
+﻿const TVF_ADMIN_TOKEN_KEY = "tvfAdminToken";
 const TVF_ADMIN_COOKIE_SENTINEL = "__tvf_cookie_session__";
 const TVF_ADMIN_COOKIE_CHECK_KEY = "tvfAdminCookieHydrated";
 const TVF_ADMIN_LOGIN_ROUTE = "admin-login";
@@ -62,6 +62,11 @@ const TVF_ADMIN_GROUPS = [
 ];
 
 const TVF_ADMIN_MODULES = TVF_ADMIN_GROUPS.flatMap((group) => group.modules);
+const TVF_ADMIN_QUICK_ACTIONS = [
+  { href: "admin-demandes", label: "Traiter une demande", tone: "primary" },
+  { href: "admin-dossiers?create=client", label: "Nouveau dossier", tone: "strong" },
+  { href: "admin-dossiers", label: "Rechercher dossier", tone: "neutral" },
+];
 
 function readSessionToken() {
   try { return sessionStorage.getItem(TVF_ADMIN_TOKEN_KEY) || ""; } catch { return ""; }
@@ -213,6 +218,16 @@ function createAdminModuleNav() {
         <span>TVF OS</span>
         <strong>Centre operationnel</strong>
       </div>
+      <div class="admin-os-quickbar" aria-label="Actions rapides TVF OS">
+        <div class="admin-os-quicklinks">
+          ${TVF_ADMIN_QUICK_ACTIONS.map((action) => `<a class="admin-os-quicklink is-${action.tone}" href="${action.href}">${action.label}</a>`).join("")}
+        </div>
+        <form class="admin-os-search" data-admin-global-search>
+          <label class="sr-only" for="admin-global-search">Recherche TVF OS</label>
+          <input id="admin-global-search" name="q" type="search" placeholder="Rechercher un dossier, contact, commune...">
+          <button type="submit">Rechercher</button>
+        </form>
+      </div>
       <div class="admin-module-groups">
         ${TVF_ADMIN_GROUPS.map((group) => {
           const activeGroup = groupIsActive(current, group);
@@ -240,6 +255,13 @@ function createAdminModuleNav() {
     const open = !group.classList.contains("is-open");
     group.classList.toggle("is-open", open);
     button.setAttribute("aria-expanded", String(open));
+  });
+  nav.addEventListener("submit", (event) => {
+    const form = event.target?.closest?.("[data-admin-global-search]");
+    if (!form) return;
+    event.preventDefault();
+    const query = String(new FormData(form).get("q") || "").trim();
+    window.location.href = query ? `admin-dossiers?q=${encodeURIComponent(query)}` : "admin-dossiers";
   });
 }
 
