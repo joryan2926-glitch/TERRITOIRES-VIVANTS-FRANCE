@@ -222,7 +222,7 @@ function instructionPiecesPanel(item) {
     case: ["fiche dossier ou besoin", "pieces justificatives", "photos ou preuves", "note d'instruction", "decision ou convention"],
     request: ["message initial", "coordonnees", "pieces recues", "qualification", "reponse envoyee"],
     organization: ["fiche structure", "interlocuteur", "capacite d'engagement", "proposition de cooperation", "convention ou compte rendu"],
-    contact: ["coordonnees", "consentement RGPD", "historique echange", "rattachement structure", "prochaine action"],
+    contact: ["coordonnees", "accord de contact", "historique echange", "rattachement structure", "prochaine action"],
     project: ["note projet", "budget", "calendrier", "points de vigilance", "indicateurs"],
     branch: ["territoire", "responsable", "plan d'action", "documents de lancement", "reporting"]
   };

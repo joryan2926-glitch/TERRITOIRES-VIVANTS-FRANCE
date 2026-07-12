@@ -689,13 +689,13 @@ function renderDetail() {
     </div>
 
     <ol class="admin-case-flow" aria-label="Parcours de transformation en dossier client">
-      <li class="${contact.status ? "is-done" : ""}"><span>1</span><strong>Coordonnees</strong><small>Contact, structure, telephone, e-mail</small></li>
-      <li class="${contact.category ? "is-done" : ""}"><span>2</span><strong>Categorie</strong><small>Objet, profil et besoin principal</small></li>
-      <li class="${["a_qualifier", "en_cours", "rendez_vous", "en_attente", "accepte", "refuse", "archive"].includes(contact.status) ? "is-done" : ""}"><span>3</span><strong>Statut</strong><small>Qualification, pieces ou rendez-vous</small></li>
-      <li class="${String(contact.next_action || "").toLowerCase().includes("dossier cree") || contact.status === "accepte" ? "is-done" : ""}"><span>4</span><strong>N° dossier</strong><small>Creation automatique dans Dossiers</small></li>
-      <li class="${String(contact.next_action || "").toLowerCase().includes("dossier cree") ? "is-done" : ""}"><span>5</span><strong>Fichier client</strong><small>Demande, notes, pieces et historique</small></li>
-      <li class="${["en_attente", "accepte", "archive"].includes(contact.status) ? "is-done" : ""}"><span>6</span><strong>Documents</strong><small>Pieces, courriers, conventions</small></li>
-      <li class="${["accepte", "archive"].includes(contact.status) ? "is-done" : ""}"><span>7</span><strong>Instruction</strong><small>Analyse, decision et suite</small></li>
+      <li class="${contact.status ? "is-done" : ""}"><span>1</span><strong>Coordonnees</strong><small>Contact et structure</small></li>
+      <li class="${contact.category ? "is-done" : ""}"><span>2</span><strong>Categorie</strong><small>Profil et besoin</small></li>
+      <li class="${["a_qualifier", "en_cours", "rendez_vous", "en_attente", "accepte", "refuse", "archive"].includes(contact.status) ? "is-done" : ""}"><span>3</span><strong>Statut</strong><small>Suite a donner</small></li>
+      <li class="${String(contact.next_action || "").toLowerCase().includes("dossier cree") || contact.status === "accepte" ? "is-done" : ""}"><span>4</span><strong>Numero dossier</strong><small>Numero de suivi</small></li>
+      <li class="${String(contact.next_action || "").toLowerCase().includes("dossier cree") ? "is-done" : ""}"><span>5</span><strong>Fichier client</strong><small>Notes et historique</small></li>
+      <li class="${["en_attente", "accepte", "archive"].includes(contact.status) ? "is-done" : ""}"><span>6</span><strong>Documents</strong><small>Pieces rattachees</small></li>
+      <li class="${["accepte", "archive"].includes(contact.status) ? "is-done" : ""}"><span>7</span><strong>Instruction</strong><small>Decision et suivi</small></li>
     </ol>
 
     ${renderAssistant(contact)}
