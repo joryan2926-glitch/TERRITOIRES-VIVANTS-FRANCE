@@ -8318,3 +8318,78 @@ tr:nth-child(even) td {
     grid-template-columns: 1fr;
   }
 }
+/* TVF OS - optimisation UX operationnelle */
+.admin-module-shell {
+  max-width: 1380px;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 10px;
+  padding-block: 8px;
+}
+.admin-module-title { display: none; }
+.admin-module-groups { gap: 8px; }
+.admin-module-group-head {
+  min-height: 46px;
+  padding: 8px 11px;
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(14,45,69,.045);
+}
+.admin-module-group-head span { font-size: .84rem; font-weight: 760; }
+.admin-module-group-head small { font-size: .62rem; letter-spacing: .06em; }
+.admin-module-links {
+  min-width: 240px;
+  padding: 8px;
+  gap: 5px;
+}
+.admin-module-links a {
+  min-height: 36px;
+  grid-template-columns: 28px minmax(0, 1fr);
+  font-size: .8rem;
+  font-weight: 720;
+}
+.admin-os-quickbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+.admin-os-quicklinks { display: flex; flex-wrap: wrap; gap: 8px; }
+.admin-os-search { min-width: min(360px, 100%); }
+.admin-erp-new-body .admin-home-shell { display: grid; gap: 18px; }
+.admin-erp-new-body .admin-home-command,
+.admin-erp-new-body .admin-home-control,
+.admin-erp-new-body .admin-erp-map {
+  padding: 18px;
+  border-radius: 12px;
+}
+.admin-erp-new-body .admin-home-command h2 {
+  max-width: 760px;
+  font-size: clamp(1.45rem, 2vw, 2rem);
+}
+.admin-erp-new-body .admin-home-header-actions { gap: 9px; }
+.admin-erp-new-body .admin-home-header-actions .btn { min-width: 0; }
+.admin-erp-module-grid-compact { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.cases-body .admin-top-actions { gap: 8px; }
+.cases-detail-form > .admin-ai-panel,
+.cases-detail-form > .cases-client-schema-panel,
+.cases-detail-form > .cases-module-chain,
+.cases-detail-form > .cases-instruction-path:not(.cases-client-file-path) {
+  display: none;
+}
+.cases-control-actions { justify-content: flex-start; }
+.cases-control-actions .btn { min-width: 0; }
+.cases-file-panel,
+.cases-control-panel,
+.cases-workflow-panel,
+.cases-documents-panel {
+  border-radius: 12px;
+}
+@media (max-width: 1100px) {
+  .admin-erp-module-grid-compact { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .admin-os-quickbar { align-items: stretch; flex-direction: column; }
+}
+@media (max-width: 760px) {
+  .admin-erp-module-grid-compact { grid-template-columns: 1fr; }
+  .admin-module-groups { grid-template-columns: 1fr; }
+  .admin-os-search { min-width: 0; }
+}

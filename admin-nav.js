@@ -1,4 +1,4 @@
-﻿const TVF_ADMIN_TOKEN_KEY = "tvfAdminToken";
+const TVF_ADMIN_TOKEN_KEY = "tvfAdminToken";
 const TVF_ADMIN_COOKIE_SENTINEL = "__tvf_cookie_session__";
 const TVF_ADMIN_COOKIE_CHECK_KEY = "tvfAdminCookieHydrated";
 const TVF_ADMIN_LOGIN_ROUTE = "admin-login";
@@ -6,53 +6,48 @@ const TVF_ADMIN_LOGIN_ROUTE = "admin-login";
 const TVF_ADMIN_GROUPS = [
   {
     label: "Accueil",
-    description: "Vue generale",
+    description: "Vue du jour",
     modules: [
       { href: "admin", label: "Accueil", icon: "&#8962;" },
       { href: "dashboard", label: "Tableau de bord", icon: "&#9638;" },
     ],
   },
   {
-    label: "Reception",
-    description: "Entrees et tiers",
+    label: "Demandes",
+    description: "Reception",
     modules: [
-      { href: "admin-demandes", label: "Demandes", icon: "&#9993;" },
+      { href: "admin-demandes", label: "Demandes entrantes", icon: "&#9993;" },
       { href: "admin-emails", label: "Boite mail", icon: "@" },
       { href: "admin-crm", label: "Contacts", icon: "&#9673;" },
     ],
   },
   {
-    label: "Instruction",
-    description: "Dossiers et pieces",
+    label: "Dossiers",
+    description: "Instruction",
     modules: [
-      { href: "admin-dossiers", label: "Dossiers", icon: "&#9635;" },
       { href: "admin-dossiers?create=client", label: "Nouveau dossier", icon: "+" },
+      { href: "admin-dossiers", label: "Dossiers actifs", icon: "&#9635;" },
       { href: "admin-work", label: "Taches", icon: "&#10003;" },
-      { href: "admin-documents", label: "Documents", icon: "&#9633;" },
-      { href: "admin-procedures", label: "Methodes", icon: "&#167;" },
     ],
   },
   {
-    label: "Suivi",
-    description: "Impact et carte",
+    label: "Documents",
+    description: "Pieces et modeles",
     modules: [
-      { href: "admin-map", label: "Carte", icon: "&#8982;" },
-      { href: "admin-observatoire", label: "Observatoire", icon: "&#9676;" },
-      { href: "admin-impact", label: "Resultats", icon: "%" },
+      { href: "admin-documents#bibliotheque-interne-tvf", label: "Bibliotheque", icon: "&#9633;" },
+      { href: "admin-documents", label: "Documents rattaches", icon: "&#128196;" },
+      { href: "admin-procedures", label: "Procedures", icon: "&#167;" },
     ],
   },
   {
     label: "Pilotage",
-    description: "Finances et trace",
+    description: "Suivi et preuves",
     modules: [
+      { href: "admin-impact", label: "Resultats", icon: "%" },
       { href: "admin-finances", label: "Finances", icon: "&euro;" },
+      { href: "admin-map", label: "Carte", icon: "&#8982;" },
+      { href: "admin-observatoire", label: "Observatoire", icon: "&#9676;" },
       { href: "admin-activity", label: "Journal", icon: "&#8635;" },
-    ],
-  },
-  {
-    label: "Outils",
-    description: "Support interne",
-    modules: [
       { href: "admin-users", label: "Utilisateurs", icon: "&#9678;" },
       { href: "admin-settings", label: "Reglages", icon: "&#9881;" },
       { href: "admin-knowledge", label: "Base interne", icon: "i" },
@@ -60,12 +55,11 @@ const TVF_ADMIN_GROUPS = [
     ],
   },
 ];
-
 const TVF_ADMIN_MODULES = TVF_ADMIN_GROUPS.flatMap((group) => group.modules);
 const TVF_ADMIN_QUICK_ACTIONS = [
   { href: "admin-demandes", label: "Traiter une demande", tone: "primary" },
   { href: "admin-dossiers?create=client", label: "Nouveau dossier", tone: "strong" },
-  { href: "admin-dossiers", label: "Rechercher dossier", tone: "neutral" },
+  { href: "admin-documents#bibliotheque-interne-tvf", label: "Documents", tone: "neutral" },
 ];
 
 function readSessionToken() {

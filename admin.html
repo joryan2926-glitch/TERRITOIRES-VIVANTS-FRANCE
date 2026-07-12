@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="fr">
 <head>
   <meta charset="utf-8">
@@ -18,10 +18,10 @@
     <div>
       <p class="admin-kicker">TVF OS ERP</p>
       <h1>Centre de pilotage interne</h1>
-      <p>Demandes, dossiers, pieces, decisions et suivi dans un meme espace.</p>
+      <p>Une entree unique pour traiter les demandes, ouvrir les dossiers, suivre les pieces et garder la trace des decisions.</p>
     </div>
     <nav class="admin-home-actions" aria-label="Actions admin">
-      <a class="btn secondary" href="dashboard">Tableau de bord</a>
+      <a class="btn secondary" href="admin-dossiers">Dossiers</a>
       <a class="btn secondary" href="contact">Retour au site</a>
     </nav>
   </header>
@@ -30,15 +30,14 @@
     <section class="admin-home-app" data-admin-home-app hidden>
       <div class="admin-home-command admin-erp-hero">
         <div class="admin-home-command-copy">
-          <p class="section-kicker">ERP territorial TVF</p>
-          <h2>Transformer une demande en dossier suivi</h2>
-          <p>Recevoir, qualifier, instruire, suivre.</p>
+          <p class="section-kicker">Poste de travail TVF</p>
+          <h2>Traiter vite, classer proprement, instruire sans perdre d'information.</h2>
+          <p>Le fonctionnement doit rester simple : une demande devient une fiche contact, puis un dossier d'instruction avec ses pieces, ses taches, sa decision et son suivi.</p>
         </div>
         <div class="admin-home-header-actions">
-          <a class="btn primary" href="admin-demandes">Traiter demandes</a>
-          <a class="btn secondary" href="admin-dossiers?create=client">Nouveau dossier</a>
-          <a class="btn secondary" href="admin-dossiers">Dossiers actifs</a>
-          <a class="btn secondary" href="admin-documents#kit-interne-tvf">Documents internes</a>
+          <a class="btn primary" href="admin-demandes">Traiter une demande</a>
+          <a class="btn secondary" href="admin-dossiers?create=client">Creer un dossier</a>
+          <a class="btn secondary" href="admin-documents#bibliotheque-interne-tvf">Documents</a>
           <button class="btn ghost" type="button" data-admin-home-logout>Deconnexion</button>
         </div>
       </div>
@@ -62,147 +61,60 @@
           <article>
             <h4>Demandes a qualifier</h4>
             <div data-admin-today-requests><p class="form-note">Chargement...</p></div>
-            <a class="text-link" href="admin-demandes">Voir toutes les demandes</a>
+            <a class="text-link" href="admin-demandes">Ouvrir les demandes</a>
           </article>
           <article>
             <h4>Dossiers a suivre</h4>
             <div data-admin-today-cases><p class="form-note">Chargement...</p></div>
-            <a class="text-link" href="admin-dossiers">Voir les dossiers</a>
+            <a class="text-link" href="admin-dossiers">Ouvrir les dossiers</a>
           </article>
           <article>
             <h4>Taches ouvertes</h4>
             <div data-admin-today-tasks><p class="form-note">Chargement...</p></div>
-            <a class="text-link" href="admin-work">Voir les taches</a>
+            <a class="text-link" href="admin-work">Ouvrir les taches</a>
           </article>
         </div>
-      </section>
-
-      <section class="admin-erp-core" aria-label="Noyau ERP TVF OS">
-        <div class="admin-panel-head">
-          <div>
-            <p class="section-kicker">Noyau ERP</p>
-            <h3>Chaine de traitement</h3>
-            <p>Une demande devient un dossier, puis une action tracee.</p>
-          </div>
-          <strong>ERP Core</strong>
-        </div>
-        <ol class="admin-erp-timeline">
-          <li><span>1</span><strong>Tiers</strong><small>Contact, organisation, role, territoire</small></li>
-          <li><span>2</span><strong>Demande</strong><small>Formulaire, e-mail, appel, WhatsApp</small></li>
-          <li><span>3</span><strong>Dossier</strong><small>Objet central, statut, responsable</small></li>
-          <li><span>4</span><strong>Pieces</strong><small>Documents, preuves, conventions</small></li>
-          <li><span>5</span><strong>Instruction</strong><small>Workflow, taches, validations</small></li>
-          <li><span>6</span><strong>Decision</strong><small>Validation humaine tracee</small></li>
-          <li><span>7</span><strong>Moyens</strong><small>Budget, financement, logistique</small></li>
-          <li><span>8</span><strong>Impact</strong><small>Resultats, preuves, reporting</small></li>
-        </ol>
       </section>
 
       <section class="admin-home-control admin-client-file-schema" aria-label="Schema de constitution d'un dossier client TVF OS">
         <div class="admin-panel-head">
           <div>
-            <p class="section-kicker">Schema dossier client</p>
-            <h3>De la demande au dossier instruit</h3>
-            <p>Un parcours unique pour eviter les pertes d'information.</p>
+            <p class="section-kicker">Parcours unique</p>
+            <h3>De la demande entrante au dossier suivi</h3>
+            <p>Chaque dossier doit contenir les coordonnees, le besoin, les pieces, l'instruction, la decision et la prochaine action.</p>
           </div>
-          <strong>Dossier unique</strong>
+          <strong>Dossier central</strong>
         </div>
         <ol class="admin-erp-timeline admin-client-file-steps">
-          <li><span>1</span><strong>Coordonnees</strong><small>Contact et structure.</small></li>
-          <li><span>2</span><strong>Categorie</strong><small>Profil et besoin.</small></li>
-          <li><span>3</span><strong>Statut</strong><small>Suite a donner.</small></li>
-          <li><span>4</span><strong>Numero dossier</strong><small>Identifiant de suivi.</small></li>
-          <li><span>5</span><strong>Fichier client</strong><small>Notes et historique.</small></li>
-          <li><span>6</span><strong>Documents</strong><small>Pieces rattachees.</small></li>
-          <li><span>7</span><strong>Instruction</strong><small>Decision et suivi.</small></li>
+          <li><span>1</span><strong>Demande</strong><small>Formulaire, e-mail, appel ou WhatsApp.</small></li>
+          <li><span>2</span><strong>Contact</strong><small>Interlocuteur et structure.</small></li>
+          <li><span>3</span><strong>Dossier</strong><small>Numero, categorie et statut.</small></li>
+          <li><span>4</span><strong>Pieces</strong><small>Documents utiles et manquants.</small></li>
+          <li><span>5</span><strong>Instruction</strong><small>Analyse, taches et vigilance.</small></li>
+          <li><span>6</span><strong>Decision</strong><small>Suite validee et tracee.</small></li>
         </ol>
         <div class="admin-detail-actions">
-          <a class="btn primary" href="admin-demandes">1. Qualifier demande</a>
-          <a class="btn secondary" href="admin-dossiers">2. Ouvrir dossier</a>
-          <a class="btn secondary" href="admin-documents#kit-interne-tvf">3. Rattacher pieces</a>
-        </div>
-      </section>
-      <section class="admin-erp-dashboard" aria-label="Parcours ERP prioritaires">
-        <article>
-          <p class="section-kicker">Priorite 1</p>
-          <h3>Receptionner et qualifier</h3>
-          <p>Classer la demande et identifier la suite.</p>
-          <div><a class="btn secondary" href="admin-demandes">Voir demandes</a></div>
-        </article>
-        <article>
-          <p class="section-kicker">Priorite 2</p>
-          <h3>Instruire le dossier</h3>
-          <p>Centraliser les pieces et les prochaines actions.</p>
-          <div><a class="btn secondary" href="admin-dossiers">Dossiers actifs</a>
-          <a class="btn secondary" href="admin-documents#kit-interne-tvf">Documents internes</a></div>
-        </article>
-        <article>
-          <p class="section-kicker">Priorite 3</p>
-          <h3>Decider et securiser</h3>
-          <p>Tracer decisions, budget et conditions.</p>
-          <div><a class="btn secondary" href="admin-finances">Finances</a></div>
-        </article>
-        <article>
-          <p class="section-kicker">Priorite 4</p>
-          <h3>Prouver et piloter</h3>
-          <p>Conserver preuves, indicateurs et resultats.</p>
-          <div><a class="btn secondary" href="admin-impact">Voir resultats</a></div>
-        </article>
-      </section>
-
-      <section class="admin-home-control" aria-label="Tableau de pilotage TVF OS">
-        <div class="admin-panel-head">
-          <div>
-            <p class="section-kicker">Pilotage quotidien</p>
-            <h3>Priorites du jour</h3>
-            <p>Voir quoi traiter, relancer et documenter.</p>
-          </div>
-          <strong>Mode operationnel</strong>
-        </div>
-        <div class="admin-home-control-grid admin-erp-maturity-grid">
-          <article><span>1</span><strong>Demandes</strong><small>Qualifier les messages entrants</small></article>
-          <article><span>2</span><strong>Dossiers</strong><small>Centraliser le suivi et les pieces</small></article>
-          <article><span>3</span><strong>Taches</strong><small>Prioriser les relances utiles</small></article>
-          <article><span>4</span><strong>Documents</strong><small>Rattacher les preuves et modeles</small></article>
-          <article><span>5</span><strong>Impact</strong><small>Conserver les elements de reporting</small></article>
+          <a class="btn primary" href="admin-demandes">Qualifier une demande</a>
+          <a class="btn secondary" href="admin-dossiers?create=client">Creer un dossier manuel</a>
+          <a class="btn secondary" href="admin-documents#bibliotheque-interne-tvf">Trouver un document</a>
         </div>
       </section>
 
-      <section class="admin-erp-map" aria-label="Modules ERP TVF OS">
+      <section class="admin-erp-map" aria-label="Espaces principaux TVF OS">
         <div>
-          <p class="section-kicker">Reperes rapides</p>
-          <h3>Chaque espace a une fonction precise</h3>
-          <p>Chaque information a une place, un statut et une suite.</p>
+          <p class="section-kicker">Espaces principaux</p>
+          <h3>Une place pour chaque information</h3>
+          <p>Les autres modules restent accessibles dans le menu, mais le travail quotidien se fait d'abord ici.</p>
         </div>
-        <div class="admin-erp-module-grid">
-          <a href="admin-crm"><strong>Contacts et tiers</strong><span>Interlocuteurs et organisations.</span></a>
-          <a href="admin-dossiers"><strong>Dossiers</strong><span>Instruction et rattachement.</span></a>
-          <a href="admin-documents#kit-interne-tvf"><strong>Documents</strong><span>Modeles, pieces et conventions.</span></a>
-          <a href="admin-work"><strong>Taches</strong><span>Relances et echeances.</span></a>
-          <a href="admin-finances"><strong>Finances</strong><span>Budgets et suivi.</span></a>
-          <a href="admin-impact"><strong>Resultats</strong><span>Preuves et indicateurs.</span></a>
-        </div>
-      </section>
-
-
-      <section class="admin-home-control" aria-label="Validation terrain TVF OS">
-        <div class="admin-panel-head">
-          <div>
-            <p class="section-kicker">Validation terrain</p>
-            <h3>Cycle a tester</h3>
-            <p>Reception, qualification, dossier, action, preuve.</p>
-          </div>
-          <strong>Cycle reel</strong>
-        </div>
-        <div class="admin-home-control-grid admin-erp-maturity-grid">
-          <article><span>1</span><strong>Demande</strong><small>Formulaire ou message.</small></article>
-          <article><span>2</span><strong>Contact</strong><small>Fiche interlocuteur.</small></article>
-          <article><span>3</span><strong>Dossier</strong><small>Instruction ouverte.</small></article>
-          <article><span>4</span><strong>Tache</strong><small>Relance planifiee.</small></article>
-          <article><span>5</span><strong>Preuve</strong><small>Piece rattachee.</small></article>
+        <div class="admin-erp-module-grid admin-erp-module-grid-compact">
+          <a href="admin-demandes"><strong>Demandes</strong><span>Recevoir, qualifier, transformer.</span></a>
+          <a href="admin-dossiers"><strong>Dossiers</strong><span>Instruire, suivre, decider.</span></a>
+          <a href="admin-documents#bibliotheque-interne-tvf"><strong>Documents</strong><span>Modeles, pieces, conventions.</span></a>
+          <a href="admin-work"><strong>Taches</strong><span>Relances, echeances, actions.</span></a>
+          <a href="admin-impact"><strong>Suivi</strong><span>Preuves, resultats, reporting.</span></a>
         </div>
       </section>
-</section>
+    </section>
   </main>
 
   <script src="admin-nav.js" defer></script>
