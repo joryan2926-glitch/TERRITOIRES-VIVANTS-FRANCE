@@ -5,9 +5,48 @@ const templateTypeLabels = { courrier: "Courrier", email: "E-mail", convention: 
 const templateStatusLabels = { brouillon: "Brouillon", a_valider: "A valider", officiel: "Officiel", remplace: "Remplace", archive: "Archive" };
 const confidentialityLabels = { public: "Public", interne: "Interne", confidentiel: "Confidentiel", sensible: "Sensible" };
 const relatedLabels = { case: "Dossier", request: "Demande", contact: "Contact", organization: "Organisation", project: "Projet", template: "Modele", none: "Aucun" };
-const internalKitFallback = [];
-
-
+const internalKitFallback = [
+  {
+    label: "00 - Index",
+    files: [
+      { title: "Archive complete du kit documentaire TVF", description: "Tous les formulaires, conventions, listes de pieces, courriers et fiches internes ranges dans une archive unique.", path: "documents/TVF-kit-formulaires-conventions-prets-a-utiliser.zip", filename: "TVF-kit-formulaires-conventions-prets-a-utiliser.zip", size: 7501514 },
+      { title: "Index de la bibliotheque interne", description: "Sommaire de classement pour retrouver rapidement le bon document selon le type de demande.", path: "documents/kit-formulaires-conventions-tvf/00-index/tvf-index-bibliotheque-formulaires-conventions.docx", filename: "tvf-index-bibliotheque-formulaires-conventions.docx", size: 0 }
+    ]
+  },
+  {
+    label: "01 - Formulaires",
+    files: [
+      { title: "Contact general", description: "Qualifier une demande entrante et l'orienter vers le bon parcours TVF OS.", path: "documents/kit-formulaires-conventions-tvf/01-contact-general/tvf-f-01-formulaire-de-contact-general.docx", filename: "tvf-f-01-formulaire-de-contact-general.docx", size: 0 },
+      { title: "Collectivite / territoire", description: "Preparer une demande de rendez-vous, diagnostic territorial ou cooperation.", path: "documents/kit-formulaires-conventions-tvf/02-collectivite-territoire/tvf-f-02-demande-collectivite---territoire-de-cooperation.docx", filename: "tvf-f-02-demande-collectivite---territoire-de-cooperation.docx", size: 0 },
+      { title: "Proprietaire / bien vacant", description: "Etudier un logement, commerce, local, terrain ou friche propose a TVF.", path: "documents/kit-formulaires-conventions-tvf/03-proprietaire-bien-vacant/tvf-f-03-proposition-de-bien-vacant-ou-inutilise.docx", filename: "tvf-f-03-proposition-de-bien-vacant-ou-inutilise.docx", size: 0 },
+      { title: "Materiaux de reemploi", description: "Qualifier des materiaux, mobiliers ou equipements reutilisables.", path: "documents/kit-formulaires-conventions-tvf/04-materiaux-reemploi/tvf-f-04-proposition-de-materiaux-reemployables.docx", filename: "tvf-f-04-proposition-de-materiaux-reemployables.docx", size: 0 },
+      { title: "Entreprise / contribution", description: "Recueillir une proposition de materiaux, local, transport, competence ou soutien.", path: "documents/kit-formulaires-conventions-tvf/05-entreprise-partenariat/tvf-f-05-demande-entreprise---cooperation-territoriale.docx", filename: "tvf-f-05-demande-entreprise---cooperation-territoriale.docx", size: 0 },
+      { title: "Local de stockage", description: "Etudier un local potentiel pour stockage, tri, logistique et reception de materiaux.", path: "documents/kit-formulaires-conventions-tvf/06-local-stockage/tvf-f-06-mise-a-disposition-potentielle-dun-local-de-stockage.docx", filename: "tvf-f-06-mise-a-disposition-potentielle-dun-local-de-stockage.docx", size: 0 },
+      { title: "Transport / logistique", description: "Recenser vehicule, chauffeur, manutention ou livraison mobilisable.", path: "documents/kit-formulaires-conventions-tvf/07-transport-logistique/tvf-f-07-mise-a-disposition-transport-et-logistique.docx", filename: "tvf-f-07-mise-a-disposition-transport-et-logistique.docx", size: 0 }
+    ]
+  },
+  {
+    label: "02 - Conventions",
+    files: [
+      { title: "Convention cooperation territoriale", description: "Cadrer une cooperation avec une collectivite, une commune ou un EPCI.", path: "documents/kit-formulaires-conventions-tvf/13-conventions-types/tvf-conv-01-convention-type-de-cooperation-territoriale.docx", filename: "tvf-conv-01-convention-type-de-cooperation-territoriale.docx", size: 0 },
+      { title: "Convention mise a disposition d'un bien", description: "Encadrer etude, visite, usage temporaire, obligations et restitution.", path: "documents/kit-formulaires-conventions-tvf/13-conventions-types/tvf-conv-02-convention-type-de-mise-a-disposition-dun-bien.docx", filename: "tvf-conv-02-convention-type-de-mise-a-disposition-dun-bien.docx", size: 0 },
+      { title: "Convention valorisation de materiaux", description: "Tracer collecte, tri, securite, affectation, responsabilites et suivi.", path: "documents/kit-formulaires-conventions-tvf/13-conventions-types/tvf-conv-03-convention-type-de-valorisation-de-materiaux.docx", filename: "tvf-conv-03-convention-type-de-valorisation-de-materiaux.docx", size: 0 },
+      { title: "Convention cooperation entreprise", description: "Formaliser contribution RSE, visibilite, limites, reporting et engagement.", path: "documents/kit-formulaires-conventions-tvf/13-conventions-types/tvf-conv-04-convention-type-de-cooperation-entreprise.docx", filename: "tvf-conv-04-convention-type-de-cooperation-entreprise.docx", size: 0 }
+    ]
+  },
+  {
+    label: "03 - Pieces a fournir",
+    files: [
+      { title: "Liste des pieces par demande", description: "Checklist interne des justificatifs a demander selon le type de dossier.", path: "documents/kit-formulaires-conventions-tvf/14-listes-pieces/tvf-lp-01-liste-pieces-par-demande.docx", filename: "tvf-lp-01-liste-pieces-par-demande.docx", size: 0 }
+    ]
+  },
+  {
+    label: "04 - Courriers",
+    files: [
+      { title: "Courriers types prets a envoyer", description: "Modeles de courriers ranges par interlocuteur, besoin, relance et partenariat.", path: "documents/kit-formulaires-conventions-tvf/15-courriers-prets-a-envoyer/tvf-cour-01-courriers-types-demandes.docx", filename: "tvf-cour-01-courriers-types-demandes.docx", size: 0 }
+    ]
+  }
+];
 const loginSection = document.querySelector("[data-documents-login]");
 const appSection = document.querySelector("[data-documents-app]");
 const tokenForm = document.querySelector("[data-documents-token-form]");
@@ -370,4 +409,6 @@ globalControlEl?.addEventListener("click", (event) => { const preset = event.tar
 internalKitEl?.addEventListener("click", (event) => { const button = event.target.closest("[data-kit-download]"); if (button) downloadKitFile(button.dataset.kitDownload).catch((e) => notifyError(e)); });
 bindEvents();
 initDocumentsModule().catch((error) => { setToken(""); showLogin(); setStatus(error.message, "error"); });
+
+
 
