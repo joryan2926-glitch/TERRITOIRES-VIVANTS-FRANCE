@@ -688,11 +688,14 @@ function renderDetail() {
       <div><span>Prochaine action</span><strong>${escapeHtml(contact.next_action || contact.assistant?.next_action || "A definir")}</strong></div>
     </div>
 
-    <ol class="admin-case-flow" aria-label="Parcours de traitement">
-      <li class="${contact.status ? "is-done" : ""}"><span>1</span><strong>Reception</strong><small>Demande enregistree</small></li>
-      <li class="${["a_qualifier", "en_cours", "rendez_vous", "en_attente", "accepte", "refuse", "archive"].includes(contact.status) ? "is-done" : ""}"><span>2</span><strong>Qualification</strong><small>Categorie, pieces, priorite</small></li>
-      <li class="${["en_cours", "rendez_vous", "en_attente", "accepte", "archive"].includes(contact.status) ? "is-done" : ""}"><span>3</span><strong>Suivi</strong><small>Relance ou rendez-vous</small></li>
-      <li class="${["accepte", "refuse", "archive"].includes(contact.status) ? "is-done" : ""}"><span>4</span><strong>Decision</strong><small>Dossier, refus ou archive</small></li>
+    <ol class="admin-case-flow" aria-label="Parcours de transformation en dossier client">
+      <li class="${contact.status ? "is-done" : ""}"><span>1</span><strong>Coordonnees</strong><small>Contact, structure, telephone, e-mail</small></li>
+      <li class="${contact.category ? "is-done" : ""}"><span>2</span><strong>Categorie</strong><small>Objet, profil et besoin principal</small></li>
+      <li class="${["a_qualifier", "en_cours", "rendez_vous", "en_attente", "accepte", "refuse", "archive"].includes(contact.status) ? "is-done" : ""}"><span>3</span><strong>Statut</strong><small>Qualification, pieces ou rendez-vous</small></li>
+      <li class="${String(contact.next_action || "").toLowerCase().includes("dossier cree") || contact.status === "accepte" ? "is-done" : ""}"><span>4</span><strong>N° dossier</strong><small>Creation automatique dans Dossiers</small></li>
+      <li class="${String(contact.next_action || "").toLowerCase().includes("dossier cree") ? "is-done" : ""}"><span>5</span><strong>Fichier client</strong><small>Demande, notes, pieces et historique</small></li>
+      <li class="${["en_attente", "accepte", "archive"].includes(contact.status) ? "is-done" : ""}"><span>6</span><strong>Documents</strong><small>Pieces, courriers, conventions</small></li>
+      <li class="${["accepte", "archive"].includes(contact.status) ? "is-done" : ""}"><span>7</span><strong>Instruction</strong><small>Analyse, decision et suite</small></li>
     </ol>
 
     ${renderAssistant(contact)}

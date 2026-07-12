@@ -7979,3 +7979,29 @@ tr:nth-child(even) td {
   .documents-kit-grid { grid-template-columns: 1fr; }
   .documents-kit-card .btn { width: 100%; }
 }
+/* TVF OS - parcours dossier client */
+.admin-client-file-schema,
+.cases-client-schema-panel {
+  border-color: rgba(46, 125, 50, .22);
+  background: linear-gradient(180deg, #ffffff 0%, #f6faf3 100%);
+}
+.admin-client-file-steps,
+.cases-client-file-path {
+  margin-top: 14px;
+}
+.admin-client-file-steps li span,
+.cases-client-file-path li span {
+  background: #2e7d32;
+  color: #fff;
+}
+.cases-client-schema-panel .admin-detail-actions,
+.admin-client-file-schema .admin-detail-actions {
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+@media (max-width: 760px) {
+  .admin-client-file-schema .admin-detail-actions .btn,
+  .cases-client-schema-panel .admin-detail-actions .btn {
+    width: 100%;
+  }
+}
