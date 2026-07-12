@@ -2,7 +2,7 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "functions": {
-    "api/admin/*.js": {
+    "api/admin/[module].js": {
       "includeFiles": "documents/**"
     },
     "api/dashboard.js": {

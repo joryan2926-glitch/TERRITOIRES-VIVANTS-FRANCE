@@ -1,25 +1,23 @@
-const path = require("path");
-
-const MODULE_ALIASES = {
-  cases: "cases",
-  contacts: "contacts",
-  session: "session",
-  ai: "ai",
-  branches: "branches",
-  crm: "crm",
-  documents: "documents",
-  emails: "emails",
-  finances: "finances",
-  governance: "governance",
-  impact: "impact",
-  knowledge: "knowledge",
-  map: "map",
-  observatoire: "observatoire",
-  procedures: "procedures",
-  risks: "risks",
-  settings: "settings",
-  users: "users",
-  work: "work",
+const MODULE_LOADERS = {
+  cases: () => require("../../lib/api/admin-cases.js"),
+  contacts: () => require("../../lib/api/admin-contacts.js"),
+  session: () => require("../../lib/api/admin-session.js"),
+  ai: () => require("../../lib/api/admin-ai.js"),
+  branches: () => require("../../lib/api/admin-branches.js"),
+  crm: () => require("../../lib/api/admin-crm.js"),
+  documents: () => require("../../lib/api/admin-documents.js"),
+  emails: () => require("../../lib/api/admin-emails.js"),
+  finances: () => require("../../lib/api/admin-finances.js"),
+  governance: () => require("../../lib/api/admin-governance.js"),
+  impact: () => require("../../lib/api/admin-impact.js"),
+  knowledge: () => require("../../lib/api/admin-knowledge.js"),
+  map: () => require("../../lib/api/admin-map.js"),
+  observatoire: () => require("../../lib/api/admin-observatoire.js"),
+  procedures: () => require("../../lib/api/admin-procedures.js"),
+  risks: () => require("../../lib/api/admin-risks.js"),
+  settings: () => require("../../lib/api/admin-settings.js"),
+  users: () => require("../../lib/api/admin-users.js"),
+  work: () => require("../../lib/api/admin-work.js"),
 };
 
 function sendJson(res, statusCode, payload) {
@@ -35,12 +33,11 @@ function normalizeModule(value) {
 }
 
 module.exports = async function handler(req, res) {
-  const moduleName = MODULE_ALIASES[normalizeModule(req.query.module)];
-  if (!moduleName) {
+  const moduleLoader = MODULE_LOADERS[normalizeModule(req.query.module)];
+  if (!moduleLoader) {
     return sendJson(res, 404, { ok: false, error: "Module admin introuvable." });
   }
 
-  const handlerPath = path.join(__dirname, "..", "..", "lib", "api", `admin-${moduleName}.js`);
-  const moduleHandler = require(handlerPath);
+  const moduleHandler = moduleLoader();
   return moduleHandler(req, res);
 };
