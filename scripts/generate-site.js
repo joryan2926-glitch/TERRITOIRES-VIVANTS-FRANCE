@@ -3186,7 +3186,7 @@ fs.writeFileSync(
     {
       cleanUrls: true,
       trailingSlash: false,
-      functions: { "api/admin/[module].js": { includeFiles: "documents/**" }, "api/dashboard.js": { includeFiles: "documents/**" } },
+      functions: { "api/admin/*.js": { includeFiles: "documents/**" }, "api/dashboard.js": { includeFiles: "documents/**" } },
       rewrites: [{ source: "/api/admin-:module", destination: "/api/admin/:module" }],
       redirects: [
         { source: "/documents", destination: "/contact", permanent: false },
