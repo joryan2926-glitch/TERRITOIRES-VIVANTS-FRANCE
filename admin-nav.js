@@ -242,13 +242,81 @@ function createAdminModuleNav() {
     </div>`;
   topbar.insertAdjacentElement("afterend", nav);
 
+  const groups = Array.from(nav.querySelectorAll(".admin-module-group"));
+  const desktopHover = () => window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  let hoverOpenTimer = null;
+  let hoverCloseTimer = null;
+
+  function setGroupOpen(group, open) {
+    if (!group) return;
+    const button = group.querySelector(".admin-module-group-head");
+    group.classList.toggle("is-open", open);
+    group.classList.toggle("is-hover", false);
+    button?.setAttribute("aria-expanded", String(open));
+  }
+
+  function closeGroups(except = null) {
+    groups.forEach((group) => {
+      if (group !== except) setGroupOpen(group, false);
+    });
+  }
+
+  function openGroup(group, hover = false) {
+    window.clearTimeout(hoverCloseTimer);
+    closeGroups(group);
+    if (!group) return;
+    const button = group.querySelector(".admin-module-group-head");
+    group.classList.add("is-open");
+    group.classList.toggle("is-hover", hover);
+    button?.setAttribute("aria-expanded", "true");
+  }
+
+  function scheduleHoverOpen(group) {
+    if (!desktopHover()) return;
+    window.clearTimeout(hoverOpenTimer);
+    window.clearTimeout(hoverCloseTimer);
+    hoverOpenTimer = window.setTimeout(() => openGroup(group, true), 90);
+  }
+
+  function scheduleHoverClose() {
+    if (!desktopHover()) return;
+    window.clearTimeout(hoverOpenTimer);
+    window.clearTimeout(hoverCloseTimer);
+    hoverCloseTimer = window.setTimeout(() => closeGroups(), 170);
+  }
+
+  groups.forEach((group) => {
+    group.addEventListener("pointerenter", () => scheduleHoverOpen(group));
+    group.addEventListener("pointerleave", scheduleHoverClose);
+    group.addEventListener("focusin", () => openGroup(group));
+  });
+
   nav.addEventListener("click", (event) => {
+    const link = event.target.closest(".admin-module-links a, .admin-os-quicklink");
+    if (link) {
+      closeGroups();
+      return;
+    }
     const button = event.target.closest(".admin-module-group-head");
     if (!button) return;
     const group = button.closest(".admin-module-group");
     const open = !group.classList.contains("is-open");
-    group.classList.toggle("is-open", open);
-    button.setAttribute("aria-expanded", String(open));
+    closeGroups(group);
+    setGroupOpen(group, open);
+  });
+
+  nav.addEventListener("focusout", () => {
+    window.setTimeout(() => {
+      if (!nav.contains(document.activeElement)) closeGroups();
+    }, 0);
+  });
+
+  document.addEventListener("click", (event) => {
+    if (!nav.contains(event.target)) closeGroups();
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") closeGroups();
   });
   nav.addEventListener("submit", (event) => {
     const form = event.target?.closest?.("[data-admin-global-search]");

@@ -8393,3 +8393,41 @@ tr:nth-child(even) td {
   .admin-module-groups { grid-template-columns: 1fr; }
   .admin-os-search { min-width: 0; }
 }
+
+/* TVF OS - ouverture stable des sous-menus */
+@media (hover: hover) and (pointer: fine) {
+  .admin-module-group:hover .admin-module-links {
+    opacity: 0;
+    transform: translateY(-6px);
+    pointer-events: none;
+  }
+  .admin-module-group.is-open .admin-module-links,
+  .admin-module-group.is-hover .admin-module-links,
+  .admin-module-group:focus-within .admin-module-links {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+  .admin-module-group.is-hover .admin-module-group-head,
+  .admin-module-group.is-open .admin-module-group-head {
+    border-color: rgba(47,125,50,.36);
+    box-shadow: 0 12px 28px rgba(24,63,34,.09);
+  }
+  .admin-module-group.is-hover .admin-module-group-head::after,
+  .admin-module-group.is-open .admin-module-group-head::after {
+    content: "-";
+  }
+}
+@media (hover: none), (pointer: coarse) {
+  .admin-module-group:hover .admin-module-links {
+    opacity: 0;
+    transform: translateY(-6px);
+    pointer-events: none;
+  }
+  .admin-module-group.is-open .admin-module-links,
+  .admin-module-group.is-active .admin-module-links {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+}
