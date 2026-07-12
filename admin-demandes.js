@@ -26,7 +26,7 @@ const categoryLabels = {
   "collectivite-territoire": "Collectivite",
   "bien-vacant-proprietaire": "Bien vacant",
   "materiaux-reemploi": "Materiaux",
-  "entreprise-partenariat": "Entreprise",
+  "entreprise-partenariat": "Entreprise / contribution",
   "benevolat-insertion": "Benevolat / insertion",
   "financement-mecenat": "Financement",
   "presse-institutionnel": "Presse",
@@ -37,7 +37,7 @@ const responseTemplates = {
   "collectivite-territoire": "Reponse collectivite",
   "bien-vacant-proprietaire": "Reponse proprietaire",
   "materiaux-reemploi": "Reponse materiaux",
-  "entreprise-partenariat": "Reponse entreprise",
+  "entreprise-partenariat": "Reponse entreprise / contribution",
   "benevolat-insertion": "Reponse benevole / association",
   "financement-mecenat": "Reponse financeur / mecene",
   "presse-institutionnel": "Reponse presse / institution",
@@ -254,7 +254,7 @@ function responseTemplate(contact, key = "auto") {
     "collectivite-territoire": `${commonIntro}\n\nPour preparer un premier echange territorial, pouvez-vous nous transmettre les elements suivants :\n\n- commune ou EPCI concerne ;\n- besoin public identifie ;\n- perimetre geographique ;\n- donnees deja disponibles ;\n- interlocuteur referent ;\n- calendrier souhaite.\n\nNous pourrons ensuite proposer un rendez-vous de cadrage afin d'evaluer les modalites possibles de cooperation.`,
     "bien-vacant-proprietaire": `${commonIntro}\n\nPour qualifier le bien propose, pouvez-vous nous transmettre :\n\n- adresse precise du bien ;\n- type de bien : logement, immeuble, commerce, local, terrain ou friche ;\n- etat apparent ;\n- photos recentes ;\n- contraintes connues ;\n- situation de propriete ou mandat ;\n- objectif recherche : remise en usage, convention, location solidaire ou autre scenario.\n\nApres reception, nous pourrons indiquer si une visite ou une etude preliminaire est pertinente.`,
     "materiaux-reemploi": `${commonIntro}\n\nPour etudier la valorisation des materiaux, merci de preciser :\n\n- nature des materiaux ;\n- quantite approximative ;\n- etat ;\n- localisation ;\n- delai de disponibilite ;\n- conditions d'enlevement ;\n- photos si disponibles.\n\nTVF n'est pas une plateforme de distribution libre : les materiaux sont qualifies puis orientes vers des projets compatibles avec l'interet territorial.`,
-    "entreprise-partenariat": `${commonIntro}\n\nPour evaluer une cooperation avec votre entreprise, pouvez-vous preciser :\n\n- type de contribution envisagee : materiaux, locaux, competences, transport, mecanat, financement ;\n- localisation ;\n- calendrier ;\n- contact referent ;\n- contraintes RSE ou reporting attendues.\n\nNous pourrons ensuite proposer un cadre de partenariat adapte et tracable.`,
+    "entreprise-partenariat": `${commonIntro}\n\nPour evaluer une cooperation avec votre entreprise, pouvez-vous preciser :\n\n- type de contribution envisagee : materiaux, locaux, competences, transport, mecanat, financement ;\n- localisation ;\n- calendrier ;\n- contact referent ;\n- contraintes RSE ou reporting attendues.\n\nNous pourrons ensuite proposer un cadre de cooperation adapte et tracable.`,
     "benevolat-insertion": `${commonIntro}\n\nPour vous orienter vers une mission adaptee, merci de nous indiquer :\n\n- commune ou secteur d'intervention ;\n- disponibilites ;\n- competences ou envies ;\n- mobilite ;\n- limites d'intervention ;\n- experience eventuelle sur chantier, animation, diagnostic ou mobilisation citoyenne.\n\nLes missions TVF doivent rester encadrees et compatibles avec la securite des personnes.`,
     "financement-mecenat": `${commonIntro}\n\nPour preparer un echange financeur ou mecene, pouvez-vous nous indiquer :\n\n- type de soutien envisage ;\n- territoire ou thematique prioritaire ;\n- calendrier de decision ;\n- criteres de selection ;\n- attentes de reporting ;\n- personne referente.\n\nTVF pourra ensuite transmettre une note d'opportunite ou un dossier adapte.`,
     "presse-institutionnel": `${commonIntro}\n\nPour orienter votre demande, pouvez-vous nous preciser :\n\n- media ou institution ;\n- sujet souhaite ;\n- format attendu ;\n- delai ;\n- contact referent.\n\nNous pouvons transmettre les elements de presentation, le kit media et les informations institutionnelles disponibles.`,
@@ -561,77 +561,54 @@ function workflowState(contact) {
 }
 
 function renderOperationalPath(contact) {
-  const state = workflowState(contact);
+  const readiness = requestReadiness(contact);
+  const hasCase = String(contact?.next_action || "").toLowerCase().includes("dossier cree") || contact?.status === "accepte";
+  const hasResponse = ["en_attente", "rendez_vous", "accepte", "refuse", "archive"].includes(contact?.status);
   const cards = [
     {
-      key: "crm",
       step: "01",
-      title: "Qualifier en CRM",
-      detail: "Identifier l'acteur, son organisation, son besoin et le niveau de relation.",
-      href: "admin-crm",
-      done: state.crm,
-      action: "Ouvrir le CRM",
+      title: "Qualifier",
+      detail: "Verifier le contact, la categorie, la priorite, les pieces et la prochaine action.",
+      done: ["en_cours", "rendez_vous", "en_attente", "accepte", "refuse", "archive"].includes(contact?.status),
+      action: `<button class="text-link" type="button" data-quick-status="en_cours">Prendre en charge</button>`,
     },
     {
-      key: "case",
       step: "02",
-      title: "Ouvrir un dossier",
-      detail: "Transformer la demande qualifiee en dossier TVF avec responsable et suivi.",
-      button: "Creer dossier",
-      done: state.case,
-      action: "Creer le dossier",
+      title: "Dossier",
+      detail: "Transformer la demande qualifiee en dossier d'instruction avec numero de suivi.",
+      done: hasCase,
+      action: hasCase ? `<a class="text-link" href="admin-dossiers">Voir dossiers</a>` : `<button class="text-link" type="button" data-create-case>Transformer en dossier</button>`,
     },
     {
-      key: "documents",
       step: "03",
-      title: "Preparer les pieces",
-      detail: "Rassembler courriers, justificatifs, photos, conventions et traces utiles.",
-      href: "admin-documents",
-      done: state.documents,
-      action: "Voir documents",
+      title: "Pieces",
+      detail: "Identifier les documents manquants et ouvrir la bibliotheque interne si besoin.",
+      done: !hasMissingPieces(contact) || hasCase,
+      action: `<a class="text-link" href="admin-documents#bibliotheque-interne-tvf">Bibliotheque</a>`,
     },
     {
-      key: "task",
       step: "04",
-      title: "Planifier l'action",
-      detail: "Creer une tache de relance, visite, rendez-vous ou instruction interne.",
-      button: "Creer tache",
-      done: state.task,
-      action: "Creer la tache",
-    },
-    {
-      key: "scope",
-      step: "05",
-      title: "Qualifier le perimetre",
-      detail: "Verifier la commune, le territoire d'intervention et le pole concerne.",
-      href: "admin-map",
-      done: state.scope,
-      action: "Voir la cartographie",
+      title: "Reponse / suivi",
+      detail: "Envoyer une reponse, creer une tache et fixer une prochaine echeance.",
+      done: hasResponse || Boolean(contact?.next_action_due_at),
+      action: `<button class="text-link" type="button" data-create-task>Creer une tache</button>`,
     },
   ];
-  return `<section class="admin-operational-path" aria-label="Suite operationnelle TVF OS">
+  return `<section class="admin-operational-path admin-request-treatment" aria-label="Traitement operationnel de la demande">
     <div class="admin-panel-head">
       <div>
-        <p class="section-kicker">Suite operationnelle</p>
-        <h4>Transformer cette demande en action suivie</h4>
-        <p>Le parcours garde une trace claire : relation, dossier, pieces, taches et territoire.</p>
+        <p class="section-kicker">Traitement</p>
+        <h4>Suite conseillee : ${escapeHtml(readiness)}</h4>
+        <p>Un seul chemin : qualifier la demande, ouvrir le dossier, reunir les pieces et tracer la suite.</p>
       </div>
-      <a class="text-link" href="dashboard">Retour dashboard</a>
+      <strong>${escapeHtml(label(priorityLabels, contact?.priority))}</strong>
     </div>
-    <div class="admin-operational-grid">
-      ${cards.map((card) => {
-        const action = card.href
-          ? `<a class="text-link" href="${escapeHtml(card.href)}">${escapeHtml(card.action)}</a>`
-          : card.done && card.key === "case"
-            ? `<a class="text-link" href="admin-dossiers">Voir dossiers</a>`
-            : `<button class="text-link" type="button" ${card.key === "case" ? "data-create-case" : "data-create-task"}>${escapeHtml(card.action)}</button>`;
-        return `<article class="admin-operational-card" data-done="${card.done ? "true" : "false"}">
-          <span>${escapeHtml(card.step)}</span>
-          <strong>${escapeHtml(card.title)}</strong>
-          <p>${escapeHtml(card.detail)}</p>
-          ${action}
-        </article>`;
-      }).join("")}
+    <div class="admin-operational-grid admin-operational-grid-compact">
+      ${cards.map((card) => `<article class="admin-operational-card" data-done="${card.done ? "true" : "false"}">
+        <span>${escapeHtml(card.step)}</span>
+        <strong>${escapeHtml(card.title)}</strong>
+        <p>${escapeHtml(card.detail)}</p>
+      </article>`).join("")}
     </div>
   </section>`;
 }
@@ -702,21 +679,27 @@ function renderDetail() {
 
     ${renderOperationalPath(contact)}
 
-    <div class="admin-quick-actions" aria-label="Actions rapides">
-      <div class="admin-quick-main">
-        <button class="btn primary" type="button" data-quick-status="en_cours">Prendre en charge</button>
-        <button class="btn secondary" type="button" data-quick-status="rendez_vous">Planifier rendez-vous</button>
-        <button class="btn secondary" type="button" data-quick-template="pieces">Demander les pieces</button>
-        <button class="btn secondary" type="button" data-create-task>Creer une tache</button>
+    <section class="admin-request-command-panel" aria-label="Actions principales sur la demande">
+      <div class="admin-panel-head">
+        <div>
+          <p class="section-kicker">Actions principales</p>
+          <h4>Que faire maintenant ?</h4>
+        </div>
       </div>
-      <div class="admin-quick-secondary">
+      <div class="admin-request-command-main">
+        <button class="btn primary" type="button" data-create-case>Transformer en dossier</button>
+        <button class="btn secondary" type="button" data-quick-status="en_cours">Qualifier / prendre en charge</button>
+        <button class="btn secondary" type="button" data-quick-template="pieces">Demander les pieces</button>
+        <button class="btn secondary" type="button" data-create-task>Planifier une action</button>
+      </div>
+      <div class="admin-request-command-secondary">
         <button class="text-link button-link" type="button" data-quick-followup="48h">Relance 48h</button>
         <a class="text-link" href="admin-crm">CRM</a>
-        <a class="text-link" href="admin-documents">Documents</a>
+        <a class="text-link" href="admin-documents#bibliotheque-interne-tvf">Documents</a>
         <button class="text-link button-link" type="button" data-quick-status="refuse">Refuser</button>
         <button class="text-link button-link" type="button" data-quick-status="archive">Archiver</button>
       </div>
-    </div>
+    </section>
 
     <label>Statut
       <select name="status">
@@ -770,11 +753,12 @@ function renderDetail() {
       <textarea name="internal_notes" rows="6" placeholder="Historique, relance, prochaine action...">${escapeHtml(contact.internal_notes || "")}</textarea>
     </label>
 
-    <section class="admin-response-panel" aria-label="Modele de reponse">
+    <details class="admin-response-panel admin-response-panel-compact" aria-label="Modele de reponse">
+      <summary><span>Reponse externe</span><strong>Preparer le message</strong></summary>
       <div class="admin-response-head">
         <div>
-          <p class="section-kicker">Reponse externe</p>
-          <h4>Brouillon pret a adapter</h4>
+          <p class="section-kicker">Brouillon</p>
+          <h4>Modele pret a adapter</h4>
         </div>
         <label>Modele
           <select data-response-template>
@@ -782,12 +766,12 @@ function renderDetail() {
           </select>
         </label>
       </div>
-      <textarea data-response-body rows="11">${escapeHtml(initialTemplate)}</textarea>
+      <textarea data-response-body rows="9">${escapeHtml(initialTemplate)}</textarea>
       <div class="admin-detail-actions">
         <button class="btn secondary" type="button" data-admin-copy-response>Copier la reponse</button>
         <button class="btn secondary" type="button" data-admin-open-response>Ouvrir l'e-mail prepare</button>
       </div>
-    </section>
+    </details>
 
     <div class="admin-message">
       <h4>Message recu</h4>
