@@ -1,6 +1,7 @@
 ﻿from __future__ import annotations
 
 from pathlib import Path
+import shutil
 import zipfile
 
 from build_tvf_operational_documents import (
@@ -60,7 +61,7 @@ PIECE_GUIDES = [
         ("Besoin public identifie", "Obligatoire", "Vacance, friche, commerce, materiaux, insertion."),
         ("Documents disponibles", "Si disponible", "PLH, OPAH, PCAET, Action Coeur de Ville, donnees."),
         ("Calendrier administratif", "Recommande", "Budget, deliberation, comite, echeance.")], ["TVF complete les politiques publiques sans les remplacer.", "Identifier un service pilote.", "Formaliser le partage de donnees."], "Rendez-vous, fiche territoire, convention ou orientation."),
-    ("TVF-LP-07", "Pieces a fournir - entreprise ou partenaire economique", "Entreprise, artisan, promoteur, bailleur, logisticien", "Qualifier une contribution RSE, materielle, technique, logistique ou financiere.", [
+    ("TVF-LP-07", "Pieces a fournir - entreprise ou acteur economique", "Entreprise, artisan, promoteur, bailleur, logisticien", "Qualifier une contribution RSE, materielle, technique, logistique ou financiere.", [
         ("Identification de l'entreprise", "Obligatoire", "Raison sociale, SIRET, adresse, representant."),
         ("Contact habilite", "Obligatoire", "Nom, fonction, e-mail, telephone."),
         ("Nature de la contribution", "Obligatoire", "Materiaux, local, vehicule, competence, financement."),
@@ -95,7 +96,7 @@ PIECE_GUIDES = [
         ("Objet de la demande", "Obligatoire", "Interview, logo, citation, photo, communique."),
         ("Date limite", "Obligatoire", "Echeance de reponse ou publication."),
         ("Angle ou contexte", "A verifier", "Sujet, support, diffusion, cible."),
-        ("Validation necessaire", "A verifier", "Citation, logo, chiffre, photo, partenaire.")], ["Ne pas citer de partenaire non officialise.", "Valider les chiffres avant diffusion.", "Conserver la trace de la demande."], "Reponse presse, kit media, validation interne ou refus prudent."),
+        ("Validation necessaire", "A verifier", "Citation, logo, chiffre, photo, structure citee.")], ["Ne pas citer de structure non officialisee.", "Valider les chiffres avant diffusion.", "Conserver la trace de la demande."], "Reponse presse, support media, validation interne ou refus prudent."),
 ]
 
 INSTRUCTION_DOCS = [
@@ -117,7 +118,7 @@ INSTRUCTION_DOCS = [
         ("Message au demandeur prepare", "A verifier", "Courrier, e-mail ou appel."),
         ("Dossier mis a jour", "Obligatoire", "Statut et prochaine action."),
         ("Documents sensibles proteges", "A verifier", "Acces limite si necessaire.")]),
-    ("TVF-INST-04", "Compte rendu rendez-vous", "Conserver une trace claire apres rendez-vous.", ["Date", "Lieu / visio", "Participants", "Dossier", "Objet", "Points abordes", "Decisions", "Pieces attendues", "Actions TVF", "Actions partenaire", "Echeances"], [
+    ("TVF-INST-04", "Compte rendu rendez-vous", "Conserver une trace claire apres rendez-vous.", ["Date", "Lieu / visio", "Participants", "Dossier", "Objet", "Points abordes", "Decisions", "Pieces attendues", "Actions TVF", "Actions autre partie", "Echeances"], [
         ("Participants notes", "Obligatoire", "Nom, structure, fonction."),
         ("Decisions separees des idees", "Obligatoire", "Eviter les malentendus."),
         ("Pieces et delais notes", "A verifier", "Qui transmet quoi et quand."),
@@ -153,21 +154,31 @@ EXTRA_CONVENTIONS = [
     ("TVF-CONV-08", "Convention type de transport et logistique", "Transporteur, loueur, entreprise, collectivite", "Encadrer vehicule, chauffeur, manutention ou livraison.", "Definir les moyens logistiques mobilises et les responsabilites.", ["Mission decrite par trajet, dates, ressources et responsables.", "Assurances du vehicule, conducteur et biens verifiees.", "Roles de chargement, transport et dechargement definis.", "Ressources dangereuses exclues sans cadre specifique.", "Bon d'enlevement ou inventaire annexe."], ["Fiche operation", "Assurance", "Permis si besoin", "Bon d'enlevement", "Inventaire transporte"]),
     ("TVF-CONV-09", "Convention type association insertion ou chantier encadre", "Association, SIAE, organisme de formation", "Cadrer une cooperation sociale, pedagogique ou participative.", "Organiser une action encadree avec roles, publics, missions, securite et livrables.", ["Structure encadrante et responsable operationnel identifies.", "Missions adaptees aux competences et conditions de securite.", "Emargement possible pour suivi, assurance et impact.", "Consignes, EPI, zones interdites et procedure d'arret formalises.", "Bilan d'action realise apres intervention."], ["Fiche mission", "Consignes securite", "Feuille emargement", "Autorisation image", "Bilan action"]),
     ("TVF-CONV-10", "Autorisation type de visite d'un bien ou d'un site", "Proprietaire, gestionnaire, mandataire", "Autoriser une visite de diagnostic sans engagement de travaux.", "Permettre a TVF de visiter un bien ou site pour observation, photos autorisees et prequalification.", ["La visite ne vaut pas acceptation du dossier.", "Personnes, date, zones accessibles et photos autorisees sont precisees.", "Aucune intervention technique sans autorisation specifique.", "Risques apparents notes sans se substituer a un diagnostic reglementaire.", "Informations recueillies conservees en interne sauf accord contraire."], ["Adresse", "Personnes autorisees", "Photos autorisees", "Piece identite si besoin", "Compte rendu visite"]),
-    ("TVF-CONV-11", "Autorisation type droit a l'image et communication", "Benevole, partenaire, participant, proprietaire", "Encadrer photos, videos, citations ou logos.", "Definir supports, durees, territoires et limites d'utilisation d'images ou mentions publiques.", ["Supports autorises clairement listes.", "Aucune personne identifiable diffusee sans autorisation adaptee.", "Logos et noms de partenaires utilises uniquement avec accord ecrit.", "Retrait ou limitation d'usage prevu selon conditions.", "Images et citations ne doivent pas suggerer un partenariat non signe."], ["Visuels concernes", "Supports autorises", "Duree", "Logo", "Validation communication"]),
-    ("TVF-CONV-12", "Proces-verbal type de restitution ou cloture", "TVF, proprietaire, collectivite, partenaire", "Cloturer une mise a disposition, une action ou une cooperation.", "Tracer la fin d'une action, la restitution d'un bien ou le bilan d'une cooperation.", ["Date, objet, parties, livrables et points ouverts precises.", "Etat de sortie ou bilan d'utilisation annexe si necessaire.", "Cles, documents, materiaux ou equipements restitues listes.", "Reserves eventuelles formulees factuellement.", "Communication finale validee avant publication."], ["Etat de sortie", "Inventaire", "Photos", "Bilan impact", "Reserves eventuelles"]),
+    ("TVF-CONV-11", "Autorisation type droit a l'image et communication", "Benevole, participant, proprietaire, structure", "Encadrer photos, videos, citations ou logos.", "Definir supports, durees, territoires et limites d'utilisation d'images ou mentions publiques.", ["Supports autorises clairement listes.", "Aucune personne identifiable diffusee sans autorisation adaptee.", "Logos et noms de partenaires utilises uniquement avec accord ecrit.", "Retrait ou limitation d'usage prevu selon conditions.", "Images et citations ne doivent pas suggerer un partenariat non signe."], ["Visuels concernes", "Supports autorises", "Duree", "Logo", "Validation communication"]),
+    ("TVF-CONV-12", "Proces-verbal type de restitution ou cloture", "TVF, proprietaire, collectivite, structure", "Cloturer une mise a disposition, une action ou une cooperation.", "Tracer la fin d'une action, la restitution d'un bien ou le bilan d'une cooperation.", ["Date, objet, parties, livrables et points ouverts precises.", "Etat de sortie ou bilan d'utilisation annexe si necessaire.", "Cles, documents, materiaux ou equipements restitues listes.", "Reserves eventuelles formulees factuellement.", "Communication finale validee avant publication."], ["Etat de sortie", "Inventaire", "Photos", "Bilan impact", "Reserves eventuelles"]),
 ]
 
 def build_piece_guide(item):
     ref, title, public, subtitle, required, vigilance, decision = item
-    doc = setup_doc(title, ref, subtitle, public, status="Checklist operationnelle prete a remplir")
-    paragraph(doc, "Identification du dossier", style="Heading 1")
-    add_kv_table(doc, rows(["Numero dossier TVF", "Date de demande", "Demandeur / structure", "Referent TVF", "Statut"]), widths=(1.85, 4.4))
-    add_check_table(doc, "Pieces obligatoires ou a verifier", checklist(required))
-    paragraph(doc, "Points de vigilance", style="Heading 2")
+    doc = setup_doc(title, ref, subtitle, public, status="Liste de pieces et fiche sujet prete a remplir")
+    paragraph(doc, "1. Identification du dossier", style="Heading 1")
+    add_kv_table(doc, rows(["Numero dossier TVF", "Date de demande", "Demandeur / structure", "Contact", "Adresse ou territoire", "Referent TVF", "Statut"]), widths=(1.9, 4.35))
+    paragraph(doc, "2. Description detaillee du sujet", style="Heading 1")
+    paragraph(doc, "Cette section sert a comprendre le besoin avant de demander ou d'exiger des pieces. Elle doit etre completee avec des informations concretes, pas seulement avec un intitul? general.")
+    blank_area(doc, "Contexte et origine de la demande", 4)
+    blank_area(doc, "Description du bien, local, ressource, action ou besoin concerne", 5)
+    blank_area(doc, "Objectif recherche et resultats attendus", 4)
+    blank_area(doc, "Contraintes connues : delai, securite, acces, assurance, budget, autorisations", 4)
+    paragraph(doc, "3. Pieces obligatoires ou a verifier", style="Heading 1")
+    add_check_table(doc, "Controle de recevabilite", checklist(required))
+    paragraph(doc, "4. Analyse TVF avant instruction", style="Heading 1")
+    add_kv_table(doc, [("Recevabilite", "[ ] Recevable   [ ] Incomplet   [ ] Hors perimetre   [ ] A verifier"), ("Niveau d'urgence", "[ ] Standard   [ ] Delai court   [ ] Risque terrain   [ ] Institutionnel"), ("Risque principal", "[ ] Juridique   [ ] Securite   [ ] Assurance   [ ] Budget   [ ] Donnees   [ ] Image   [ ] Aucun"), ("Pieces prioritaires a obtenir", "____________________________________________________________"), ("Interlocuteur a relancer", "____________________________________________________________")], widths=(1.9, 4.35))
+    paragraph(doc, "5. Points de vigilance", style="Heading 1")
     add_bullets(doc, vigilance)
-    blank_area(doc, "Observations, pieces manquantes et relances", 6)
-    add_kv_table(doc, [("Decision TVF", "[ ] Complet   [ ] Pieces a demander   [ ] Rendez-vous   [ ] Visite   [ ] Orientation   [ ] Classe"), ("Suite logique", decision), ("Date de relance", "____ / ____ / ______"), ("Prochaine action", "____________________________________________________________")], widths=(1.85, 4.4))
-    add_signature_block(doc, left_label="Controle TVF", right_label="Demandeur / partenaire si necessaire")
+    paragraph(doc, "6. Observations, relances et decision", style="Heading 1")
+    blank_area(doc, "Observations internes", 5)
+    add_kv_table(doc, [("Decision TVF", "[ ] Complet   [ ] Pieces a demander   [ ] Rendez-vous   [ ] Visite   [ ] Orientation   [ ] Classe"), ("Suite logique", decision), ("Date de relance", "____ / ____ / ______"), ("Prochaine action", "____________________________________________________________")], widths=(1.9, 4.35))
+    add_signature_block(doc, left_label="Controle TVF", right_label="Demandeur / structure si necessaire")
     out = OUT / "14-listes-pieces" / f"{ref.lower()}-{safe_name(title)}.docx"
     save_doc(doc, out)
     return out
@@ -175,11 +186,21 @@ def build_piece_guide(item):
 def build_instruction_doc(item):
     ref, title, subtitle, fields, checks = item
     doc = setup_doc(title, ref, subtitle, "Equipe TVF", status="Document interne TVF OS pret a completer")
-    paragraph(doc, "Zone dossier", style="Heading 1")
+    paragraph(doc, "1. Fiche d'ouverture", style="Heading 1")
     add_kv_table(doc, rows(fields), widths=(2.05, 4.2))
-    add_check_table(doc, "Controle d'instruction", checklist(checks))
-    blank_area(doc, "Analyse, notes et elements a completer", 7)
-    add_kv_table(doc, [("Decision", "[ ] Continuer   [ ] Demander pieces   [ ] Rendez-vous   [ ] Convention   [ ] Orienter   [ ] Classer"), ("Motif", "____________________________________________________________"), ("Responsable suite", "____________________________________________________________"), ("Date limite", "____ / ____ / ______")], widths=(1.85, 4.4))
+    paragraph(doc, "2. Recit de la demande", style="Heading 1")
+    paragraph(doc, "Cette partie doit permettre a une personne qui decouvre le dossier de comprendre rapidement le sujet, le besoin, les contraintes et la suite attendue.")
+    blank_area(doc, "Resume clair de la demande", 4)
+    blank_area(doc, "Contexte operationnel et territorial", 4)
+    blank_area(doc, "Ce que TVF doit verifier, obtenir ou organiser", 4)
+    blank_area(doc, "Historique des echanges et documents recus", 4)
+    paragraph(doc, "3. Controle d'instruction", style="Heading 1")
+    add_check_table(doc, "Points a verifier", checklist(checks))
+    paragraph(doc, "4. Analyse TVF", style="Heading 1")
+    add_kv_table(doc, [("Parcours", "[ ] Propriete / bien   [ ] Commerce   [ ] Materiaux   [ ] Stockage   [ ] Transport   [ ] Insertion   [ ] Financement   [ ] Autre"), ("Maturite", "[ ] Premier contact   [ ] Pieces partielles   [ ] Dossier complet   [ ] Visite requise   [ ] Convention possible"), ("Blocage principal", "[ ] Pieces   [ ] Autorisation   [ ] Budget   [ ] Assurance   [ ] Securite   [ ] Interlocuteur   [ ] Aucun"), ("Priorite TVF", "[ ] Faible   [ ] Normale   [ ] Haute   [ ] Institutionnelle"), ("Decision proposee", "____________________________________________________________")], widths=(2.05, 4.2))
+    blank_area(doc, "Analyse, reserves et conditions de poursuite", 6)
+    paragraph(doc, "5. Decision et suivi", style="Heading 1")
+    add_kv_table(doc, [("Decision", "[ ] Continuer   [ ] Demander pieces   [ ] Rendez-vous   [ ] Visite   [ ] Convention   [ ] Orienter   [ ] Classer"), ("Motif", "____________________________________________________________"), ("Responsable suite", "____________________________________________________________"), ("Date limite", "____ / ____ / ______"), ("Document a envoyer", "[ ] Courrier   [ ] Liste de pieces   [ ] Convention   [ ] Compte rendu   [ ] Aucun")], widths=(1.9, 4.35))
     add_signature_block(doc, left_label="Referent TVF", right_label="Validation interne si necessaire")
     out = OUT / "16-instruction-dossier" / f"{ref.lower()}-{safe_name(title)}.docx"
     save_doc(doc, out)
@@ -204,7 +225,7 @@ def build_complete_index(paths):
     return out
 
 def refresh_readme(paths):
-    lines = ["# Bibliotheque interne TVF OS", "", "Documents internes prets a remplir pour recevoir, qualifier, instruire, conventionner et suivre les demandes TVF.", "", "## Categories", "", "- `00-index` : index du kit et index complet.", "- `01` a `12` : formulaires par type de demande.", "- `13-conventions-types` : conventions, autorisations, chartes et PV types.", "- `14-listes-pieces` : pieces a fournir par sujet.", "- `15-courriers-prets-a-envoyer` : courriers types.", "- `16-instruction-dossier` : fiches internes d'instruction.", "", "## Regle", "", "Completer le numero de dossier TVF, les coordonnees, les pieces recues, la decision et les signatures si necessaire. Adapter tout document engageant avant transmission ou signature.", "", "## Fichiers", ""]
+    lines = ["# Bibliotheque interne TVF OS", "", "Documents internes prets a remplir pour recevoir, qualifier, instruire, conventionner et suivre les demandes TVF.", "", "## Categories", "", "- `00-index` : index de la bibliotheque et index complet.", "- `01` a `12` : formulaires par type de demande.", "- `13-conventions-types` : conventions, autorisations, chartes et PV types.", "- `14-listes-pieces` : pieces a fournir par sujet.", "- `15-courriers-prets-a-envoyer` : courriers types.", "- `16-instruction-dossier` : fiches internes d'instruction.", "", "## Regle", "", "Completer le numero de dossier TVF, les coordonnees, les pieces recues, la decision et les signatures si necessaire. Adapter tout document engageant avant transmission ou signature.", "", "## Fichiers", ""]
     for path in sorted(paths):
         lines.append(f"- `{str(path.relative_to(OUT)).replace(chr(92), '/')}`")
     (OUT / "README.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
@@ -218,6 +239,9 @@ def rebuild_archive():
                 zf.write(path, path.relative_to(ROOT / "documents"))
 
 def main():
+    if OUT.exists():
+        shutil.rmtree(OUT)
+    OUT.mkdir(parents=True, exist_ok=True)
     build_base_kit()
     generated = sorted(OUT.rglob("*.docx"))
     for item in PIECE_GUIDES:

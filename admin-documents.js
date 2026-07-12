@@ -1,44 +1,12 @@
-const DOCUMENTS_TOKEN_KEY = "tvfAdminToken";
-const documentTypeLabels = { piece: "Piece", photo: "Photo", convention: "Convention", courrier: "Courrier", email: "E-mail", budget: "Budget", compte_rendu: "Compte rendu", fiche: "Fiche", registre: "Registre", formulaire: "Formulaire", kit: "Kit", preuve: "Preuve", modele_genere: "Modele genere", autre: "Autre" };
+﻿const DOCUMENTS_TOKEN_KEY = "tvfAdminToken";
+const documentTypeLabels = { piece: "Piece", photo: "Photo", convention: "Convention", courrier: "Courrier", email: "E-mail", budget: "Budget", compte_rendu: "Compte rendu", fiche: "Fiche", registre: "Registre", formulaire: "Formulaire", kit: "Bibliotheque", preuve: "Preuve", modele_genere: "Modele genere", autre: "Autre" };
 const documentStatusLabels = { brouillon: "Brouillon", a_classer: "A classer", a_valider: "A valider", valide: "Valide", remplace: "Remplace", archive: "Archive" };
 const templateTypeLabels = { courrier: "Courrier", email: "E-mail", convention: "Convention", fiche: "Fiche", registre: "Registre", budget: "Budget", formulaire: "Formulaire", grille: "Grille", compte_rendu: "Compte rendu", financeur: "Financeur", autre: "Autre" };
 const templateStatusLabels = { brouillon: "Brouillon", a_valider: "A valider", officiel: "Officiel", remplace: "Remplace", archive: "Archive" };
 const confidentialityLabels = { public: "Public", interne: "Interne", confidentiel: "Confidentiel", sensible: "Sensible" };
 const relatedLabels = { case: "Dossier", request: "Demande", contact: "Contact", organization: "Organisation", project: "Projet", template: "Modele", none: "Aucun" };
-const internalKitFallback = [
-  { label: "Archive ZIP", files: [
-    { title: "Kit complet", description: "Tous les formulaires, conventions, courriers et listes de pieces.", path: "documents/TVF-kit-formulaires-conventions-prets-a-utiliser.zip", filename: "TVF-kit-formulaires-conventions-prets-a-utiliser.zip", size: 0 },
-  ]},
-  { label: "00 - Index", files: [
-    { title: "Index", description: "Sommaire du kit et logique de classement interne.", path: "documents/kit-formulaires-conventions-tvf/00-index/tvf-index-kit-formulaires-conventions.docx", filename: "tvf-index-kit-formulaires-conventions.docx", size: 0 },
-  ]},
-  { label: "01 - Formulaires", files: [
-    { title: "Contact general", description: "Qualifier une demande entrante et l'orienter vers le bon parcours.", path: "documents/kit-formulaires-conventions-tvf/01-contact-general/tvf-f-01-formulaire-de-contact-general.docx", filename: "tvf-f-01-formulaire-de-contact-general.docx", size: 0 },
-    { title: "Collectivite / territoire", description: "Preparer une demande de rendez-vous, diagnostic ou cooperation.", path: "documents/kit-formulaires-conventions-tvf/02-collectivite-territoire/tvf-f-02-demande-collectivite---territoire-partenaire.docx", filename: "tvf-f-02-demande-collectivite---territoire-partenaire.docx", size: 0 },
-    { title: "Proprietaire / bien vacant", description: "Etudier un logement, commerce, local, terrain ou friche.", path: "documents/kit-formulaires-conventions-tvf/03-proprietaire-bien-vacant/tvf-f-03-proposition-de-bien-vacant-ou-inutilise.docx", filename: "tvf-f-03-proposition-de-bien-vacant-ou-inutilise.docx", size: 0 },
-    { title: "Materiaux de reemploi", description: "Qualifier des materiaux, mobiliers ou equipements disponibles.", path: "documents/kit-formulaires-conventions-tvf/04-materiaux-reemploi/tvf-f-04-proposition-de-materiaux-reemployables.docx", filename: "tvf-f-04-proposition-de-materiaux-reemployables.docx", size: 0 },
-    { title: "Entreprise partenaire", description: "Recueillir une proposition de materiaux, local, transport, competences ou soutien.", path: "documents/kit-formulaires-conventions-tvf/05-entreprise-partenariat/tvf-f-05-demande-entreprise---partenariat-territorial.docx", filename: "tvf-f-05-demande-entreprise---partenariat-territorial.docx", size: 0 },
-    { title: "Local de stockage", description: "Etudier un local potentiel pour stockage, tri et logistique.", path: "documents/kit-formulaires-conventions-tvf/06-local-stockage/tvf-f-06-mise-a-disposition-potentielle-dun-local-de-stockage.docx", filename: "tvf-f-06-mise-a-disposition-potentielle-dun-local-de-stockage.docx", size: 0 },
-    { title: "Transport / logistique", description: "Recenser vehicule, chauffeur, manutention ou livraison possible.", path: "documents/kit-formulaires-conventions-tvf/07-transport-logistique/tvf-f-07-mise-a-disposition-transport-et-logistique.docx", filename: "tvf-f-07-mise-a-disposition-transport-et-logistique.docx", size: 0 },
-    { title: "Benevole / citoyen", description: "Identifier competences, disponibilites et missions possibles.", path: "documents/kit-formulaires-conventions-tvf/08-benevole-engagement/tvf-f-08-candidature-benevole-ou-citoyenne.docx", filename: "tvf-f-08-candidature-benevole-ou-citoyenne.docx", size: 0 },
-    { title: "Association / insertion", description: "Construire une action encadree, sociale ou participative.", path: "documents/kit-formulaires-conventions-tvf/09-association-insertion-chantier/tvf-f-09-cooperation-association-insertion-ou-chantier-participatif.docx", filename: "tvf-f-09-cooperation-association-insertion-ou-chantier-participatif.docx", size: 0 },
-    { title: "Financeur / mecene", description: "Structurer un soutien financier, materiel ou en competences.", path: "documents/kit-formulaires-conventions-tvf/10-financeur-mecene/tvf-f-10-demande-financeur-mecene-ou-investisseur-solidaire.docx", filename: "tvf-f-10-demande-financeur-mecene-ou-investisseur-solidaire.docx", size: 0 },
-    { title: "Signalement citoyen", description: "Signaler un lieu, une friche ou une ressource a verifier.", path: "documents/kit-formulaires-conventions-tvf/11-signalement-citoyen/tvf-f-11-signalement-citoyen-dun-lieu-ou-dune-ressource.docx", filename: "tvf-f-11-signalement-citoyen-dun-lieu-ou-dune-ressource.docx", size: 0 },
-    { title: "Presse / institution", description: "Traiter une demande d'information, d'interview ou de communication.", path: "documents/kit-formulaires-conventions-tvf/12-presse-institutionnel/tvf-f-12-demande-presse-institution-ou-communication.docx", filename: "tvf-f-12-demande-presse-institution-ou-communication.docx", size: 0 },
-  ]},
-  { label: "02 - Conventions", files: [
-    { title: "Convention cooperation territoriale", description: "Cadrer une cooperation avec une collectivite ou un EPCI.", path: "documents/kit-formulaires-conventions-tvf/13-conventions-types/tvf-conv-01-convention-type-de-cooperation-territoriale.docx", filename: "tvf-conv-01-convention-type-de-cooperation-territoriale.docx", size: 0 },
-    { title: "Convention mise a disposition d'un bien", description: "Encadrer etude, visite, usage temporaire ou restitution.", path: "documents/kit-formulaires-conventions-tvf/13-conventions-types/tvf-conv-02-convention-type-de-mise-a-disposition-dun-bien.docx", filename: "tvf-conv-02-convention-type-de-mise-a-disposition-dun-bien.docx", size: 0 },
-    { title: "Convention valorisation de materiaux", description: "Tracer collecte, tri, securite, affectation et responsabilites.", path: "documents/kit-formulaires-conventions-tvf/13-conventions-types/tvf-conv-03-convention-type-de-valorisation-de-materiaux.docx", filename: "tvf-conv-03-convention-type-de-valorisation-de-materiaux.docx", size: 0 },
-    { title: "Convention partenariat entreprise", description: "Formaliser contribution RSE, visibilite, reporting et limites.", path: "documents/kit-formulaires-conventions-tvf/13-conventions-types/tvf-conv-04-convention-type-de-partenariat-entreprise.docx", filename: "tvf-conv-04-convention-type-de-partenariat-entreprise.docx", size: 0 },
-    { title: "Convention soutien financier ou mecenat", description: "Cadrer affectation, versement, justificatifs et communication.", path: "documents/kit-formulaires-conventions-tvf/13-conventions-types/tvf-conv-05-convention-type-de-soutien-financier-ou-mecanat.docx", filename: "tvf-conv-05-convention-type-de-soutien-financier-ou-mecanat.docx", size: 0 },
-    { title: "Charte benevole et chantier participatif", description: "Fixer securite, mission, emargement, confidentialite et image.", path: "documents/kit-formulaires-conventions-tvf/13-conventions-types/tvf-conv-06-charte-type-benevole-et-chantier-participatif.docx", filename: "tvf-conv-06-charte-type-benevole-et-chantier-participatif.docx", size: 0 },
-  ]},
-  { label: "03 - Pieces et courriers", files: [
-    { title: "Liste des pieces par demande", description: "Verifier les pieces minimales selon le type de dossier.", path: "documents/kit-formulaires-conventions-tvf/14-listes-pieces/tvf-lp-01-liste-pieces-par-demande.docx", filename: "tvf-lp-01-liste-pieces-par-demande.docx", size: 0 },
-    { title: "Kit courriers prets a envoyer", description: "Modeles de courriers ranges par interlocuteur et besoin.", path: "documents/kit-formulaires-conventions-tvf/15-courriers-prets-a-envoyer/tvf-cour-01-kit-courriers-demandes.docx", filename: "tvf-cour-01-kit-courriers-demandes.docx", size: 0 },
-  ]},
-];
+const internalKitFallback = [];
+
 
 const loginSection = document.querySelector("[data-documents-login]");
 const appSection = document.querySelector("[data-documents-app]");
@@ -126,7 +94,7 @@ async function loadInternalKit() {
       renderInternalKit();
     }
   } catch (error) {
-    notify("Kit interne affiche. Connexion API documents en cours ou indisponible.", "warning");
+    notify("Bibliotheque interne affiche. Connexion API documents en cours ou indisponible.", "warning");
   }
 }
 function formatFileSize(size) {
@@ -138,7 +106,7 @@ function formatFileSize(size) {
 function renderInternalKit() {
   if (!internalKitEl) return;
   const total = internalKit.reduce((sum, group) => sum + (group.files || []).length, 0);
-  internalKitEl.innerHTML = `<div class="admin-panel-head"><div><p class="section-kicker">Kit interne TVF</p><h3>Formulaires, conventions et pieces a fournir</h3><p>Ces documents sont reserves au travail interne TVF OS. Ils ne sont pas affiches dans la navigation publique du site.</p></div><strong>${escapeHtml(String(total))} fichiers</strong></div><div class="documents-kit-groups">${internalKit.map((group) => `<article class="documents-kit-group"><h4>${escapeHtml(group.label)}</h4><div class="documents-kit-grid">${(group.files || []).map(renderInternalKitFile).join("")}</div></article>`).join("")}</div>`;
+  internalKitEl.innerHTML = `<div class="admin-panel-head"><div><p class="section-kicker">Bibliotheque interne TVF</p><h3>Bibliotheque documentaire rangee par categorie</h3><p>Documents internes reserves a TVF OS : formulaires, conventions, listes de pieces, courriers et fiches d'instruction telechargeables individuellement.</p></div><strong>${escapeHtml(String(total))} fichiers</strong></div><div class="documents-kit-groups">${internalKit.map((group) => `<article class="documents-kit-group"><h4>${escapeHtml(group.label)}</h4><div class="documents-kit-grid">${(group.files || []).map(renderInternalKitFile).join("")}</div></article>`).join("")}</div>`;
 }
 function renderInternalKitFile(file) {
   return `<article class="documents-kit-card"><div><strong>${escapeHtml(file.title)}</strong><p>${escapeHtml(file.description)}</p><small>${escapeHtml(file.filename)} - ${escapeHtml(formatFileSize(file.size))}</small></div><button class="btn secondary" type="button" data-kit-download="${escapeHtml(file.path)}">Telecharger</button></article>`;
@@ -161,7 +129,7 @@ async function downloadKitFile(relativePath) {
   notify("Document interne prepare.", "success");
 }
 async function loadItems() { if (countEl) countEl.textContent = view === "templates" ? "Chargement des modeles..." : "Chargement des documents..."; if (view === "templates") { const result = await api(`/api/admin/documents?entity=templates&${filtersParams().toString()}`); templates = result.templates || []; if (!templates.some((item) => item.id === selectedId)) selectedId = templates[0]?.id || null; } else { const result = await api(`/api/admin/documents?${documentParamsForView().toString()}`); documents = result.documents || []; if (!documents.some((item) => item.id === selectedId)) selectedId = documents[0]?.id || null; } await loadDashboard().catch(() => {}); renderTabs(); renderList(); renderDetail(); }
-async function loadInitialDocumentsApp() { showApp(); renderTabs(); renderList(); renderDetail(); await loadInternalKit(); try { await loadItems(); } catch (error) { renderTabs(); renderList(); renderDetail(); if (countEl) countEl.textContent = "Bibliotheque Supabase indisponible - kit interne charge."; notifyError(error, "La liste Supabase est indisponible, mais le kit interne reste disponible."); } }
+async function loadInitialDocumentsApp() { showApp(); renderTabs(); renderList(); renderDetail(); await loadInternalKit(); try { await loadItems(); } catch (error) { renderTabs(); renderList(); renderDetail(); if (countEl) countEl.textContent = "Bibliotheque Supabase indisponible - bibliotheque interne charge."; notifyError(error, "La liste Supabase est indisponible, mais la bibliotheque interne reste disponible."); } }
 async function hasServerSession() {
   try {
     const response = await fetch("/api/admin-session", { headers: token() ? { Authorization: `Bearer ${token()}` } : {} });
@@ -402,3 +370,4 @@ globalControlEl?.addEventListener("click", (event) => { const preset = event.tar
 internalKitEl?.addEventListener("click", (event) => { const button = event.target.closest("[data-kit-download]"); if (button) downloadKitFile(button.dataset.kitDownload).catch((e) => notifyError(e)); });
 bindEvents();
 initDocumentsModule().catch((error) => { setToken(""); showLogin(); setStatus(error.message, "error"); });
+

@@ -4,7 +4,7 @@ Documents internes prets a remplir pour recevoir, qualifier, instruire, conventi
 
 ## Categories
 
-- `00-index` : index du kit et index complet.
+- `00-index` : index de la bibliotheque et index complet.
 - `01` a `12` : formulaires par type de demande.
 - `13-conventions-types` : conventions, autorisations, chartes et PV types.
 - `14-listes-pieces` : pieces a fournir par sujet.
@@ -17,13 +17,13 @@ Completer le numero de dossier TVF, les coordonnees, les pieces recues, la decis
 
 ## Fichiers
 
+- `00-index/tvf-index-bibliotheque-formulaires-conventions.docx`
 - `00-index/tvf-index-bibliotheque-interne-complete.docx`
-- `00-index/tvf-index-kit-formulaires-conventions.docx`
 - `01-contact-general/tvf-f-01-formulaire-de-contact-general.docx`
-- `02-collectivite-territoire/tvf-f-02-demande-collectivite---territoire-partenaire.docx`
+- `02-collectivite-territoire/tvf-f-02-demande-collectivite---territoire-de-cooperation.docx`
 - `03-proprietaire-bien-vacant/tvf-f-03-proposition-de-bien-vacant-ou-inutilise.docx`
 - `04-materiaux-reemploi/tvf-f-04-proposition-de-materiaux-reemployables.docx`
-- `05-entreprise-partenariat/tvf-f-05-demande-entreprise---partenariat-territorial.docx`
+- `05-entreprise-partenariat/tvf-f-05-demande-entreprise---cooperation-territoriale.docx`
 - `06-local-stockage/tvf-f-06-mise-a-disposition-potentielle-dun-local-de-stockage.docx`
 - `07-transport-logistique/tvf-f-07-mise-a-disposition-transport-et-logistique.docx`
 - `08-benevole-engagement/tvf-f-08-candidature-benevole-ou-citoyenne.docx`
@@ -34,7 +34,7 @@ Completer le numero de dossier TVF, les coordonnees, les pieces recues, la decis
 - `13-conventions-types/tvf-conv-01-convention-type-de-cooperation-territoriale.docx`
 - `13-conventions-types/tvf-conv-02-convention-type-de-mise-a-disposition-dun-bien.docx`
 - `13-conventions-types/tvf-conv-03-convention-type-de-valorisation-de-materiaux.docx`
-- `13-conventions-types/tvf-conv-04-convention-type-de-partenariat-entreprise.docx`
+- `13-conventions-types/tvf-conv-04-convention-type-de-cooperation-entreprise.docx`
 - `13-conventions-types/tvf-conv-05-convention-type-de-soutien-financier-ou-mecanat.docx`
 - `13-conventions-types/tvf-conv-06-charte-type-benevole-et-chantier-participatif.docx`
 - `13-conventions-types/tvf-conv-07-convention-type-de-local-de-stockage.docx`
@@ -49,13 +49,13 @@ Completer le numero de dossier TVF, les coordonnees, les pieces recues, la decis
 - `14-listes-pieces/tvf-lp-04-pieces-a-fournir---friche-terrain-ou-espace-abandonne.docx`
 - `14-listes-pieces/tvf-lp-05-pieces-a-fournir---materiaux-de-reemploi.docx`
 - `14-listes-pieces/tvf-lp-06-pieces-a-fournir---collectivite-et-territoire.docx`
-- `14-listes-pieces/tvf-lp-07-pieces-a-fournir---entreprise-ou-partenaire-economique.docx`
+- `14-listes-pieces/tvf-lp-07-pieces-a-fournir---entreprise-ou-acteur-economique.docx`
 - `14-listes-pieces/tvf-lp-08-pieces-a-fournir---local-de-stockage.docx`
 - `14-listes-pieces/tvf-lp-09-pieces-a-fournir---transport-et-logistique.docx`
 - `14-listes-pieces/tvf-lp-10-pieces-a-fournir---benevole-association-ou-insertion.docx`
 - `14-listes-pieces/tvf-lp-11-pieces-a-fournir---financeur-mecene-ou-investisseur.docx`
 - `14-listes-pieces/tvf-lp-12-pieces-a-fournir---presse-institution-communication.docx`
-- `15-courriers-prets-a-envoyer/tvf-cour-01-kit-courriers-demandes.docx`
+- `15-courriers-prets-a-envoyer/tvf-cour-01-courriers-types-demandes.docx`
 - `16-instruction-dossier/tvf-inst-01-fiche-dossier-client-et-demande.docx`
 - `16-instruction-dossier/tvf-inst-02-grille-instruction-dossier.docx`
 - `16-instruction-dossier/tvf-inst-03-fiche-decision-et-orientation.docx`
