@@ -1,21 +1,22 @@
-# Kit matériaux TVF - prêt à utiliser
+﻿# Kit matÃ©riaux TVF - prÃªt Ã  utiliser
 
-Version Word générée : `output/documents/kit-materiaux-tvf-pret-a-utiliser.docx`
+Version Word gÃ©nÃ©rÃ©e : `output/documents/kit-materiaux-tvf-pret-a-utiliser.docx`
 
 Contenu :
-- cadre général du dispositif ;
-- catégories de matériaux acceptables ;
-- matériaux refusés ;
-- parcours opérationnel ;
-- numérotation et traçabilité ;
-- fiche de dépôt matériaux ;
-- grille d'évaluation sur 100 ;
-- liste des pièces à fournir ;
-- procédure collecte et stockage ;
+- cadre gÃ©nÃ©ral du dispositif ;
+- catÃ©gories de matÃ©riaux acceptables ;
+- matÃ©riaux refusÃ©s ;
+- parcours opÃ©rationnel ;
+- numÃ©rotation et traÃ§abilitÃ© ;
+- fiche de dÃ©pÃ´t matÃ©riaux ;
+- grille d'Ã©valuation sur 100 ;
+- liste des piÃ¨ces Ã  fournir ;
+- procÃ©dure collecte et stockage ;
 - fiche inventaire ;
-- convention simplifiée de valorisation ;
-- procès-verbal de remise ;
+- convention simplifiÃ©e de valorisation ;
+- procÃ¨s-verbal de remise ;
 - clauses de prudence ;
-- modèle de décision interne.
+- modÃ¨le de dÃ©cision interne.
 
-Contact TVF : contact@territoiresvivantsfrance.fr - 06 22 03 93 24.
+Contact TVF : contact@territoiresvivantsfrance.fr - 04 65 81 54 69.
+

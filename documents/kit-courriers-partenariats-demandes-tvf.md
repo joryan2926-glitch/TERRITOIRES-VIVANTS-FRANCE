@@ -1,8 +1,8 @@
-# Kit courriers prets a l'emploi - Partenariats, materiaux et demandes TVF
+﻿# Kit courriers prets a l'emploi - Partenariats, materiaux et demandes TVF
 
 Document operationnel modifiable - version de travail
 
-Contact TVF : contact@territoiresvivantsfrance.fr - 06 22 03 93 24  
+Contact TVF : contact@territoiresvivantsfrance.fr - 04 65 81 54 69  
 Siege national : 25 rue Elise Gervais, 42000 Saint-Etienne  
 President fondateur : Edryan Rangoly  
 Secretaire et tresorier : M. Lambeau Jordan
@@ -61,7 +61,7 @@ Pour Territoires Vivants France
 Nom :  
 Fonction :  
 E-mail : contact@territoiresvivantsfrance.fr  
-Telephone : 06 22 03 93 24  
+Telephone : 04 65 81 54 69  
 Adresse : 25 rue Elise Gervais, 42000 Saint-Etienne
 
 ---
@@ -125,7 +125,7 @@ Pour Territoires Vivants France
 
 Nom :  
 Fonction :  
-Contact : contact@territoiresvivantsfrance.fr - 06 22 03 93 24
+Contact : contact@territoiresvivantsfrance.fr - 04 65 81 54 69
 
 ### Relance courte
 
@@ -203,7 +203,7 @@ Pour Territoires Vivants France
 
 Nom :  
 Fonction :  
-Contact : contact@territoiresvivantsfrance.fr - 06 22 03 93 24
+Contact : contact@territoiresvivantsfrance.fr - 04 65 81 54 69
 
 ### Tableau de cadrage a joindre ou remplir
 
@@ -277,7 +277,7 @@ Pour Territoires Vivants France
 
 Nom :  
 Fonction :  
-Contact : contact@territoiresvivantsfrance.fr - 06 22 03 93 24
+Contact : contact@territoiresvivantsfrance.fr - 04 65 81 54 69
 
 ### Mini-formulaire a envoyer a l'entreprise
 
@@ -329,7 +329,7 @@ Pour Territoires Vivants France
 
 Nom :  
 Fonction :  
-Contact : contact@territoiresvivantsfrance.fr - 06 22 03 93 24
+Contact : contact@territoiresvivantsfrance.fr - 04 65 81 54 69
 
 ---
 
@@ -378,7 +378,7 @@ Pour Territoires Vivants France
 
 Nom :  
 Fonction :  
-Contact : contact@territoiresvivantsfrance.fr - 06 22 03 93 24
+Contact : contact@territoiresvivantsfrance.fr - 04 65 81 54 69
 
 ---
 
@@ -427,7 +427,7 @@ Pour Territoires Vivants France
 
 Nom :  
 Fonction :  
-Contact : contact@territoiresvivantsfrance.fr - 06 22 03 93 24
+Contact : contact@territoiresvivantsfrance.fr - 04 65 81 54 69
 
 ---
 
@@ -465,7 +465,7 @@ Pour Territoires Vivants France
 
 Nom :  
 Fonction :  
-Contact : contact@territoiresvivantsfrance.fr - 06 22 03 93 24
+Contact : contact@territoiresvivantsfrance.fr - 04 65 81 54 69
 
 ---
 
@@ -513,7 +513,7 @@ Pour Territoires Vivants France
 
 Nom :  
 Fonction :  
-Contact : contact@territoiresvivantsfrance.fr - 06 22 03 93 24
+Contact : contact@territoiresvivantsfrance.fr - 04 65 81 54 69
 
 ---
 
@@ -551,7 +551,7 @@ Pour Territoires Vivants France
 
 Nom :  
 Fonction :  
-Contact : contact@territoiresvivantsfrance.fr - 06 22 03 93 24
+Contact : contact@territoiresvivantsfrance.fr - 04 65 81 54 69
 
 ---
 
@@ -588,7 +588,7 @@ Pour Territoires Vivants France
 
 Nom :  
 Fonction :  
-Contact : contact@territoiresvivantsfrance.fr - 06 22 03 93 24
+Contact : contact@territoiresvivantsfrance.fr - 04 65 81 54 69
 
 ---
 
@@ -627,7 +627,7 @@ Pour Territoires Vivants France
 
 Nom :  
 Fonction :  
-Contact : contact@territoiresvivantsfrance.fr - 06 22 03 93 24
+Contact : contact@territoiresvivantsfrance.fr - 04 65 81 54 69
 
 ---
 
@@ -664,7 +664,7 @@ Pour Territoires Vivants France
 
 Nom :  
 Fonction :  
-Contact : contact@territoiresvivantsfrance.fr - 06 22 03 93 24
+Contact : contact@territoiresvivantsfrance.fr - 04 65 81 54 69
 
 ---
 
@@ -699,7 +699,7 @@ Pour Territoires Vivants France
 
 Nom :  
 Fonction :  
-Contact : contact@territoiresvivantsfrance.fr - 06 22 03 93 24
+Contact : contact@territoiresvivantsfrance.fr - 04 65 81 54 69
 
 ---
 
@@ -725,7 +725,7 @@ Cordialement,
 
 Nom :  
 Fonction :  
-Contact : contact@territoiresvivantsfrance.fr - 06 22 03 93 24
+Contact : contact@territoiresvivantsfrance.fr - 04 65 81 54 69
 
 ---
 
@@ -751,7 +751,7 @@ Cordialement,
 
 Nom :  
 Fonction :  
-Contact : contact@territoiresvivantsfrance.fr - 06 22 03 93 24
+Contact : contact@territoiresvivantsfrance.fr - 04 65 81 54 69
 
 ---
 
@@ -790,7 +790,7 @@ Cordialement,
 
 Nom :  
 Fonction :  
-Contact : contact@territoiresvivantsfrance.fr - 06 22 03 93 24
+Contact : contact@territoiresvivantsfrance.fr - 04 65 81 54 69
 
 ---
 
@@ -915,3 +915,4 @@ Avant toute action terrain, TVF doit verifier :
 ## 28. Phrase de fin recommandee
 
 "TVF souhaite avancer avec prudence, transparence et utilite territoriale. Aucune annonce publique, aucun usage de logo, aucune communication de partenariat et aucune action operationnelle ne seront engages sans validation ecrite des parties concernees."
+

@@ -1,10 +1,10 @@
-# TERRITOIRES VIVANTS FRANCE
+﻿# TERRITOIRES VIVANTS FRANCE
 
 ## Dossier territorial pilote - Saint-Etienne
 
 Version de travail : 2026  
 Statut : document preparatoire, a adapter avant transmission officielle  
-Contact TVF : contact@territoiresvivantsfrance.fr - 06 22 03 93 24  
+Contact TVF : contact@territoiresvivantsfrance.fr - 04 65 81 54 69  
 Siege national : 25 rue Elise Gervais, 42000 Saint-Etienne
 
 ---
@@ -199,3 +199,4 @@ Organiser une reunion de cadrage avec :
 - indicateurs de suivi.
 
 Document associe : `ordre-du-jour-reunion-cadrage.md`
+

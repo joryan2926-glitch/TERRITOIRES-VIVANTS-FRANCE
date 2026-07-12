@@ -1,4 +1,4 @@
-# Synthese 1 page - Entreprise, materiaux et contribution territoriale
+﻿# Synthese 1 page - Entreprise, materiaux et contribution territoriale
 
 Document court a transmettre a une entreprise, un artisan, un commerce, une administration ou un acteur economique.
 
@@ -54,5 +54,6 @@ TVF n'est pas une dechetterie et ne distribue pas librement les ressources. Chaq
 
 Territoires Vivants France  
 contact@territoiresvivantsfrance.fr  
-06 22 03 93 24
+04 65 81 54 69
+
 

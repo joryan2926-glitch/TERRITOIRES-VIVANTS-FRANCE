@@ -20,7 +20,7 @@ Cordialement,
 TERRITOIRES VIVANTS FRANCE
 25 rue Elise Gervais, 42000 Saint-Etienne
 contact@territoiresvivantsfrance.fr
-06 22 03 93 24
+04 65 81 54 69
 www.territoiresvivantsfrance.fr
 
 ## 2. Collectivite
@@ -101,3 +101,4 @@ Nous pouvons vous transmettre une presentation institutionnelle et organiser un 
 
 Cordialement,
 TERRITOIRES VIVANTS FRANCE
+

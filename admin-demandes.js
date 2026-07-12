@@ -1,4 +1,4 @@
-const ADMIN_TOKEN_KEY = "tvfAdminToken";
+﻿const ADMIN_TOKEN_KEY = "tvfAdminToken";
 const statusLabels = {
   nouveau: "Nouveau",
   a_qualifier: "A qualifier",
@@ -248,7 +248,7 @@ function responseTemplate(contact, key = "auto") {
     .map((item) => `- ${item}`)
     .join("\n");
   const commonIntro = `Bonjour ${name},\n\nMerci pour votre message et pour l'interet porte a Territoires Vivants France. Votre demande ${contact?.request_number || "TVF"} a bien ete recue et va etre qualifiee afin d'identifier la suite la plus adaptee.`;
-  const signature = `\n\nCordialement,\n\nTerritoires Vivants France\ncontact@territoiresvivantsfrance.fr\n06 22 03 93 24`;
+  const signature = `\n\nCordialement,\n\nTerritoires Vivants France\ncontact@territoiresvivantsfrance.fr\n04 65 81 54 69`;
 
   const templates = {
     "collectivite-territoire": `${commonIntro}\n\nPour preparer un premier echange territorial, pouvez-vous nous transmettre les elements suivants :\n\n- commune ou EPCI concerne ;\n- besoin public identifie ;\n- perimetre geographique ;\n- donnees deja disponibles ;\n- interlocuteur referent ;\n- calendrier souhaite.\n\nNous pourrons ensuite proposer un rendez-vous de cadrage afin d'evaluer les modalites possibles de cooperation.`,
@@ -1104,3 +1104,4 @@ if (token()) {
 } else {
   showLogin();
 }
+

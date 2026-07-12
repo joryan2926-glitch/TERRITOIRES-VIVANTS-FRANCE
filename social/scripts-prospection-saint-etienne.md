@@ -1,11 +1,11 @@
-# Scripts de prospection - Lancement TVF Saint-Etienne
+﻿# Scripts de prospection - Lancement TVF Saint-Etienne
 
 Objectif : obtenir des rendez-vous courts, qualifier les besoins et identifier les premiers partenaires utiles au demarrage de TVF a Saint-Etienne.
 
 Contacts publics TVF :
 
 - E-mail : contact@territoiresvivantsfrance.fr
-- Telephone : 06 22 03 93 24
+- Telephone : 04 65 81 54 69
 - WhatsApp : https://wa.me/message/SKYLJHX46E43C1
 - Site : https://www.territoiresvivantsfrance.fr
 
@@ -24,7 +24,7 @@ Seriez-vous disponible pour un echange court de 20 a 30 minutes ?
 Cordialement,
 Territoires Vivants France
 contact@territoiresvivantsfrance.fr
-06 22 03 93 24
+04 65 81 54 69
 
 ## 2. Collectivite / institution
 
@@ -59,7 +59,7 @@ Nous pouvons transmettre une note de presentation en amont.
 Cordialement,
 Territoires Vivants France
 contact@territoiresvivantsfrance.fr
-06 22 03 93 24
+04 65 81 54 69
 
 ### Script telephone
 
@@ -105,7 +105,7 @@ Seriez-vous disponible pour un premier echange afin d'identifier les ressources 
 Cordialement,
 Territoires Vivants France
 contact@territoiresvivantsfrance.fr
-06 22 03 93 24
+04 65 81 54 69
 
 ### Message LinkedIn
 
@@ -147,7 +147,7 @@ Seriez-vous disponible pour un premier echange afin de comprendre la situation d
 Cordialement,
 Territoires Vivants France
 contact@territoiresvivantsfrance.fr
-06 22 03 93 24
+04 65 81 54 69
 
 ### Informations a demander
 
@@ -189,7 +189,7 @@ Seriez-vous disponible pour un premier echange ?
 Cordialement,
 Territoires Vivants France
 contact@territoiresvivantsfrance.fr
-06 22 03 93 24
+04 65 81 54 69
 
 ## 6. Financeurs / mecenes / fondations
 
@@ -222,7 +222,7 @@ Seriez-vous disponible pour recevoir notre dossier de presentation ou organiser 
 Cordialement,
 Territoires Vivants France
 contact@territoiresvivantsfrance.fr
-06 22 03 93 24
+04 65 81 54 69
 
 ## 7. Message WhatsApp court
 
@@ -264,3 +264,4 @@ Pour chaque contact, noter :
 - date de relance.
 
 Ne jamais promettre de partenariat, financement, intervention ou usage sans validation interne et convention.
+

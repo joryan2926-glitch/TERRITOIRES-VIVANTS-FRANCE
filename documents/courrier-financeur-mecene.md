@@ -1,10 +1,10 @@
-# Modèle de courrier - Financeur, mécène ou fondation
+﻿# ModÃ¨le de courrier - Financeur, mÃ©cÃ¨ne ou fondation
 
-Document préparatoire modifiable - version de travail
+Document prÃ©paratoire modifiable - version de travail
 
 ## 1. Objet possible
 
-Objet : Présentation de Territoires Vivants France et demande d'échange sur un soutien à impact territorial
+Objet : PrÃ©sentation de Territoires Vivants France et demande d'Ã©change sur un soutien Ã  impact territorial
 
 ## 2. Destinataire
 
@@ -13,53 +13,53 @@ Objet : Présentation de Territoires Vivants France et demande d'échange sur un
 - Fonction :
 - Adresse :
 - E-mail :
-- Téléphone :
+- TÃ©lÃ©phone :
 - Domaine de financement :
 
 ## 3. Courrier type
 
 Madame, Monsieur,
 
-Territoires Vivants France est une association nationale en création qui développe une plateforme de coopération pour remettre en usage des logements, commerces, bâtiments, friches, terrains et matériaux inutilisés au service des territoires.
+Territoires Vivants France est une association nationale en crÃ©ation qui dÃ©veloppe une plateforme de coopÃ©ration pour remettre en usage des logements, commerces, bÃ¢timents, friches, terrains et matÃ©riaux inutilisÃ©s au service des territoires.
 
-Notre démarche repose sur une exigence simple : ne pas annoncer de résultats, de partenaires ou de chiffres d'impact sans preuve. Chaque projet doit être instruit, documenté, conventionné lorsque nécessaire, puis suivi à partir d'indicateurs vérifiables.
+Notre dÃ©marche repose sur une exigence simple : ne pas annoncer de rÃ©sultats, de partenaires ou de chiffres d'impact sans preuve. Chaque projet doit Ãªtre instruit, documentÃ©, conventionnÃ© lorsque nÃ©cessaire, puis suivi Ã  partir d'indicateurs vÃ©rifiables.
 
-Nous souhaitons vous présenter cette méthode afin d'étudier, le cas échéant, les conditions d'un soutien à des projets territoriaux cadrés :
+Nous souhaitons vous prÃ©senter cette mÃ©thode afin d'Ã©tudier, le cas Ã©chÃ©ant, les conditions d'un soutien Ã  des projets territoriaux cadrÃ©s :
 
 - diagnostic territorial ;
-- repérage et qualification de biens inutilisés ;
-- réemploi de matériaux ;
-- chantiers participatifs encadrés ;
+- repÃ©rage et qualification de biens inutilisÃ©s ;
+- rÃ©emploi de matÃ©riaux ;
+- chantiers participatifs encadrÃ©s ;
 - insertion et mobilisation citoyenne ;
 - remise en usage de lieux utiles aux habitants ;
 - suivi d'impact et reporting.
 
-À ce stade, cette prise de contact ne crée aucun engagement. Elle vise à vérifier si les objectifs de TVF peuvent rejoindre vos priorités de financement, de mécénat ou d'investissement à impact.
+Ã€ ce stade, cette prise de contact ne crÃ©e aucun engagement. Elle vise Ã  vÃ©rifier si les objectifs de TVF peuvent rejoindre vos prioritÃ©s de financement, de mÃ©cÃ©nat ou d'investissement Ã  impact.
 
-## 4. Pièces proposées en annexe
+## 4. PiÃ¨ces proposÃ©es en annexe
 
-- Dossier de présentation TVF.
+- Dossier de prÃ©sentation TVF.
 - Demande de soutien financier.
-- Note d'impact prévisionnel.
-- Budget prévisionnel.
+- Note d'impact prÃ©visionnel.
+- Budget prÃ©visionnel.
 - Reporting financeur.
-- Charte éthique.
+- Charte Ã©thique.
 
 ## 5. Proposition de rendez-vous
 
-Nous vous proposons un échange de présentation afin de :
+Nous vous proposons un Ã©change de prÃ©sentation afin de :
 
-- préciser la mission TVF ;
+- prÃ©ciser la mission TVF ;
 - expliquer les garanties de transparence ;
-- présenter les documents de cadrage ;
-- identifier les critères d'éligibilité éventuels ;
-- comprendre vos attentes en matière d'impact et de reporting.
+- prÃ©senter les documents de cadrage ;
+- identifier les critÃ¨res d'Ã©ligibilitÃ© Ã©ventuels ;
+- comprendre vos attentes en matiÃ¨re d'impact et de reporting.
 
-## 6. Formule de clôture
+## 6. Formule de clÃ´ture
 
-Nous serions honorés de pouvoir vous présenter cette démarche, pensée comme un outil de coopération au service de la revitalisation territoriale.
+Nous serions honorÃ©s de pouvoir vous prÃ©senter cette dÃ©marche, pensÃ©e comme un outil de coopÃ©ration au service de la revitalisation territoriale.
 
-Veuillez agréer, Madame, Monsieur, l'expression de nos salutations distinguées.
+Veuillez agrÃ©er, Madame, Monsieur, l'expression de nos salutations distinguÃ©es.
 
 Pour Territoires Vivants France
 
@@ -67,22 +67,23 @@ Nom :
 
 Fonction :
 
-Contact : contact@territoiresvivantsfrance.fr - 06 22 03 93 24
+Contact : contact@territoiresvivantsfrance.fr - 04 65 81 54 69
 
 ## 7. Relance courte
 
 Madame, Monsieur,
 
-Nous nous permettons de revenir vers vous concernant notre proposition d'échange autour de Territoires Vivants France et de ses projets de revitalisation territoriale. Notre approche privilégie des dossiers instruits, des budgets lisibles et un reporting d'impact vérifiable.
+Nous nous permettons de revenir vers vous concernant notre proposition d'Ã©change autour de Territoires Vivants France et de ses projets de revitalisation territoriale. Notre approche privilÃ©gie des dossiers instruits, des budgets lisibles et un reporting d'impact vÃ©rifiable.
 
-Nous restons disponibles pour convenir d'un créneau.
+Nous restons disponibles pour convenir d'un crÃ©neau.
 
 Cordialement,
 
-## 8. Points à ne pas écrire
+## 8. Points Ã  ne pas Ã©crire
 
-- Ne pas promettre un impact déjà réalisé.
+- Ne pas promettre un impact dÃ©jÃ  rÃ©alisÃ©.
 - Ne pas afficher un financeur avant accord.
 - Ne pas garantir un avantage fiscal sans validation.
-- Ne pas annoncer un projet comme financé.
-- Ne pas confondre objectif prévisionnel et résultat mesuré.
+- Ne pas annoncer un projet comme financÃ©.
+- Ne pas confondre objectif prÃ©visionnel et rÃ©sultat mesurÃ©.
+

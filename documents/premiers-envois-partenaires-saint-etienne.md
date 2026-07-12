@@ -29,7 +29,7 @@ Seriez-vous disponible pour un premier echange de cadrage ?
 Cordialement,
 TERRITOIRES VIVANTS FRANCE
 contact@territoiresvivantsfrance.fr
-06 22 03 93 24
+04 65 81 54 69
 
 ## 3. Regle de prudence
 
@@ -53,3 +53,4 @@ Chaque envoi doit etre note dans le tableau de suivi avec :
 - relance prevue ;
 - reponse obtenue ;
 - prochaine action.
+

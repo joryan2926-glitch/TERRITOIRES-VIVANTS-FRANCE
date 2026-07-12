@@ -1,45 +1,45 @@
-# Dossier propriétaire - Proposer un bien à TVF
+﻿# Dossier propriÃ©taire - Proposer un bien Ã  TVF
 
-Document préparatoire pour propriétaire privé, SCI, entreprise, association ou collectivité souhaitant présenter un logement, commerce, bâtiment, immeuble ou terrain inutilisé.
+Document prÃ©paratoire pour propriÃ©taire privÃ©, SCI, entreprise, association ou collectivitÃ© souhaitant prÃ©senter un logement, commerce, bÃ¢timent, immeuble ou terrain inutilisÃ©.
 
-Contact : contact@territoiresvivantsfrance.fr - 06 22 03 93 24
+Contact : contact@territoiresvivantsfrance.fr - 04 65 81 54 69
 
 ---
 
 ## 1. Objet du dossier
 
-Ce dossier permet de présenter un bien sans créer d'engagement automatique. TVF commence toujours par une phase de qualification : état, propriété, accès, contraintes, usages possibles, risques, responsabilités et conditions de convention.
+Ce dossier permet de prÃ©senter un bien sans crÃ©er d'engagement automatique. TVF commence toujours par une phase de qualification : Ã©tat, propriÃ©tÃ©, accÃ¨s, contraintes, usages possibles, risques, responsabilitÃ©s et conditions de convention.
 
-Le propriétaire conserve la propriété du bien. Aucune visite, communication, intervention, occupation ou mobilisation de partenaires ne doit avoir lieu sans accord écrit.
+Le propriÃ©taire conserve la propriÃ©tÃ© du bien. Aucune visite, communication, intervention, occupation ou mobilisation de partenaires ne doit avoir lieu sans accord Ã©crit.
 
 ---
 
-## 2. Identification du propriétaire
+## 2. Identification du propriÃ©taire
 
-| Élément | Information |
+| Ã‰lÃ©ment | Information |
 |---|---|
 | Nom / structure |  |
-| Statut | Particulier / SCI / entreprise / association / collectivité |
+| Statut | Particulier / SCI / entreprise / association / collectivitÃ© |
 | Adresse |  |
-| Contact référent |  |
+| Contact rÃ©fÃ©rent |  |
 | E-mail |  |
-| Téléphone |  |
-| Mandataire éventuel |  |
+| TÃ©lÃ©phone |  |
+| Mandataire Ã©ventuel |  |
 | Date de la demande |  |
 
 ---
 
-## 3. Bien concerné
+## 3. Bien concernÃ©
 
-| Élément | Information |
+| Ã‰lÃ©ment | Information |
 |---|---|
-| Type de bien | Logement / immeuble / commerce / bâtiment / terrain / autre |
+| Type de bien | Logement / immeuble / commerce / bÃ¢timent / terrain / autre |
 | Adresse |  |
-| Surface estimée |  |
+| Surface estimÃ©e |  |
 | Nombre de niveaux ou lots |  |
-| Durée de vacance estimée |  |
-| État apparent |  |
-| Accès possible | Oui / Non / À vérifier |
+| DurÃ©e de vacance estimÃ©e |  |
+| Ã‰tat apparent |  |
+| AccÃ¨s possible | Oui / Non / Ã€ vÃ©rifier |
 | Occupation actuelle |  |
 | Contraintes connues |  |
 
@@ -47,16 +47,16 @@ Le propriétaire conserve la propriété du bien. Aucune visite, communication, 
 
 ## 4. Situation juridique et technique
 
-À compléter :
+Ã€ complÃ©ter :
 
-- propriété pleine et entière : Oui / Non / À vérifier ;
-- copropriété : Oui / Non ;
+- propriÃ©tÃ© pleine et entiÃ¨re : Oui / Non / Ã€ vÃ©rifier ;
+- copropriÃ©tÃ© : Oui / Non ;
 - indivision : Oui / Non ;
 - servitudes connues :
 - diagnostics disponibles :
 - assurance actuelle :
-- risques identifiés :
-- contentieux ou procédure :
+- risques identifiÃ©s :
+- contentieux ou procÃ©dure :
 - autorisation de visite possible : Oui / Non ;
 - photos disponibles : Oui / Non.
 
@@ -64,20 +64,20 @@ Le propriétaire conserve la propriété du bien. Aucune visite, communication, 
 
 ## 5. Usages possibles
 
-Cocher les usages acceptables ou à étudier :
+Cocher les usages acceptables ou Ã  Ã©tudier :
 
 - [ ] logement temporaire ;
 - [ ] logement solidaire ;
-- [ ] logement intergénérationnel ;
+- [ ] logement intergÃ©nÃ©rationnel ;
 - [ ] local associatif ;
-- [ ] commerce de proximité ;
-- [ ] atelier partagé ;
+- [ ] commerce de proximitÃ© ;
+- [ ] atelier partagÃ© ;
 - [ ] espace culturel ;
 - [ ] espace de formation ;
-- [ ] jardin, terrain ou espace partagé ;
-- [ ] usage à définir avec TVF.
+- [ ] jardin, terrain ou espace partagÃ© ;
+- [ ] usage Ã  dÃ©finir avec TVF.
 
-Limites du propriétaire :
+Limites du propriÃ©taire :
 
 ................................................................................
 
@@ -87,72 +87,73 @@ Limites du propriétaire :
 
 ## 6. Convention possible
 
-Une convention peut préciser :
+Une convention peut prÃ©ciser :
 
-- le maintien de la propriété ;
-- l'autorisation d'étude ;
+- le maintien de la propriÃ©tÃ© ;
+- l'autorisation d'Ã©tude ;
 - l'autorisation de visite ;
-- l'usage envisagé ;
-- la durée ;
-- les responsabilités ;
+- l'usage envisagÃ© ;
+- la durÃ©e ;
+- les responsabilitÃ©s ;
 - les assurances ;
-- les travaux autorisés ou exclus ;
-- les matériaux utilisés ;
+- les travaux autorisÃ©s ou exclus ;
+- les matÃ©riaux utilisÃ©s ;
 - la communication ;
 - les conditions de restitution ;
-- les modalités d'arrêt.
+- les modalitÃ©s d'arrÃªt.
 
-Points à verrouiller :
+Points Ã  verrouiller :
 
-- [ ] propriétaire ou mandataire habilité ;
-- [ ] accès sécurisé ;
+- [ ] propriÃ©taire ou mandataire habilitÃ© ;
+- [ ] accÃ¨s sÃ©curisÃ© ;
 - [ ] usage compatible avec le bien ;
-- [ ] durée acceptable ;
-- [ ] travaux autorisés par écrit ;
-- [ ] responsabilités définies ;
-- [ ] assurance vérifiée ;
-- [ ] restitution prévue.
+- [ ] durÃ©e acceptable ;
+- [ ] travaux autorisÃ©s par Ã©crit ;
+- [ ] responsabilitÃ©s dÃ©finies ;
+- [ ] assurance vÃ©rifiÃ©e ;
+- [ ] restitution prÃ©vue.
 
 ---
 
-## 7. Pièces à fournir
+## 7. PiÃ¨ces Ã  fournir
 
-| Pièce | Utilité |
+| PiÃ¨ce | UtilitÃ© |
 |---|---|
-| Photos extérieures | Comprendre le contexte |
-| Photos intérieures | Évaluer l'état apparent |
+| Photos extÃ©rieures | Comprendre le contexte |
+| Photos intÃ©rieures | Ã‰valuer l'Ã©tat apparent |
 | Plan ou croquis | Comprendre les surfaces |
-| Justificatif de propriété ou mandat | Vérifier l'autorisation |
+| Justificatif de propriÃ©tÃ© ou mandat | VÃ©rifier l'autorisation |
 | Diagnostics existants | Identifier les risques |
-| Factures ou travaux récents | Comprendre l'historique |
-| Contraintes écrites | Sécuriser le cadrage |
+| Factures ou travaux rÃ©cents | Comprendre l'historique |
+| Contraintes Ã©crites | SÃ©curiser le cadrage |
 
 ---
 
-## 8. Décision attendue
+## 8. DÃ©cision attendue
 
-Après analyse, TVF peut proposer :
+AprÃ¨s analyse, TVF peut proposer :
 
-- [ ] demande de pièces complémentaires ;
-- [ ] visite autorisée ;
-- [ ] note d'opportunité ;
-- [ ] scénario d'usage ;
-- [ ] convention d'étude ;
+- [ ] demande de piÃ¨ces complÃ©mentaires ;
+- [ ] visite autorisÃ©e ;
+- [ ] note d'opportunitÃ© ;
+- [ ] scÃ©nario d'usage ;
+- [ ] convention d'Ã©tude ;
 - [ ] convention d'usage ;
-- [ ] réorientation vers un autre acteur ;
-- [ ] classement sans suite motivé.
+- [ ] rÃ©orientation vers un autre acteur ;
+- [ ] classement sans suite motivÃ©.
 
 ---
 
-## 9. Prochaine étape
+## 9. Prochaine Ã©tape
 
 Transmettre :
 
-- fiche propriétaire ;
+- fiche propriÃ©taire ;
 - description du bien ;
 - photos ;
 - contraintes ;
-- intention du propriétaire ;
-- accord éventuel pour une visite.
+- intention du propriÃ©taire ;
+- accord Ã©ventuel pour une visite.
 
 Contact : contact@territoiresvivantsfrance.fr
+

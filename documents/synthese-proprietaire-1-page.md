@@ -1,4 +1,4 @@
-# Synthese 1 page - Proprietaire d'un bien vacant ou inutilise
+﻿# Synthese 1 page - Proprietaire d'un bien vacant ou inutilise
 
 Document court pour expliquer le premier contact avec TVF.
 
@@ -54,5 +54,6 @@ Le proprietaire conserve la propriete du bien. Rien ne se fait sans accord ecrit
 
 Territoires Vivants France  
 contact@territoiresvivantsfrance.fr  
-06 22 03 93 24
+04 65 81 54 69
+
 

@@ -1,4 +1,4 @@
-# Prospects reels Saint-Etienne - TVF
+﻿# Prospects reels Saint-Etienne - TVF
 
 Liste de premiers contacts institutionnels et professionnels a travailler pour lancer Territoires Vivants France sur Saint-Etienne.
 
@@ -58,7 +58,7 @@ Serait-il possible de nous orienter vers le service ou la personne competente ?
 Cordialement,
 Territoires Vivants France
 contact@territoiresvivantsfrance.fr
-06 22 03 93 24
+04 65 81 54 69
 
 ## Sources consultees
 
@@ -68,3 +68,4 @@ contact@territoiresvivantsfrance.fr
 - Departement de la Loire : contact general, habitat/logement, emploi/insertion, environnement.
 - CCI Lyon Metropole Saint-Etienne Roanne : accompagnement entreprises, commerce, developpement durable, collectivites.
 - CMA Auvergne-Rhone-Alpes : relais artisans et entreprises artisanales.
+

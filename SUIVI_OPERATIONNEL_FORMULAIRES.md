@@ -81,7 +81,7 @@ Cordialement,
 
 Territoires Vivants France
 contact@territoiresvivantsfrance.fr
-06 22 03 93 24
+04 65 81 54 69
 
 ## 7. Regles de prudence
 
@@ -171,3 +171,4 @@ Les documents suivants completent le processus de traitement :
 5. Nettoyer les tests dans Supabase avant les premiers usages publics.
 6. Configurer ou verifier DKIM et DMARC pour ameliorer la delivrabilite.
 7. Utiliser les modeles de reponse pour traiter les premieres demandes reelles.
+

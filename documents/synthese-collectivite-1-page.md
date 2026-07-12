@@ -1,4 +1,4 @@
-# Synthese 1 page - Collectivite ou territoire partenaire
+﻿# Synthese 1 page - Collectivite ou territoire partenaire
 
 Document court a transmettre avant ou apres un premier rendez-vous.
 
@@ -50,5 +50,6 @@ TVF ne remplace pas les dispositifs publics. TVF aide a relier les acteurs, cadr
 
 Territoires Vivants France  
 contact@territoiresvivantsfrance.fr  
-06 22 03 93 24
+04 65 81 54 69
+
 

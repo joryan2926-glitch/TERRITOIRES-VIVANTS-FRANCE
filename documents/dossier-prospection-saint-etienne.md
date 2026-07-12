@@ -1,9 +1,9 @@
-# Dossier de prospection - Lancement Saint-Etienne
+﻿# Dossier de prospection - Lancement Saint-Etienne
 
 Contacts publics, acteurs a solliciter et plan d'approche pour lancer Territoires Vivants France sur le territoire pilote.
 
 Version de travail : 2026  
-Contact TVF : contact@territoiresvivantsfrance.fr - 06 22 03 93 24  
+Contact TVF : contact@territoiresvivantsfrance.fr - 04 65 81 54 69  
 Siege national : 25 rue Elise Gervais, 42000 Saint-Etienne  
 President fondateur : Edryan Rangoly  
 Secretaire et tresorier : M. Lambeau Jordan
@@ -68,7 +68,7 @@ Ces contacts proviennent de sources publiques. Ils doivent etre reverifies avant
 | 1 | EPORA | Siege social et direction territoriale Loire a Saint-Etienne. Tel : 04 77 47 47 50 | Foncier, friches, portage, reconversion, observation fonciere et cooperation avec collectivites |
 | 1 | Renovactions 42 | 20 A rue Balay, 42000 Saint-Etienne. Tel : 04 77 41 41 25 | Guichet renovation habitat cite par Saint-Etienne Metropole pour orienter les proprietaires et les aides existantes |
 | 2 | CCI Lyon Metropole Saint-Etienne Roanne | Tel : 04 72 40 58 58. Contact via lyon-metropole.cci.fr | Entreprises, commerces, attractivite, developpement economique, transition ecologique, fichiers et reseaux professionnels |
-| 2 | CAPEB Loire | 13 rue Camille de Rochetaillée, 42000 Saint-Etienne. Tel : 04 77 92 11 30. Email : forez@capeb-loire.fr | Artisans du batiment, renovation, reemploi, chantiers encadres, mobilisation des entreprises artisanales |
+| 2 | CAPEB Loire | 13 rue Camille de RochetaillÃ©e, 42000 Saint-Etienne. Tel : 04 77 92 11 30. Email : forez@capeb-loire.fr | Artisans du batiment, renovation, reemploi, chantiers encadres, mobilisation des entreprises artisanales |
 | 2 | Maison de l'emploi - PLIE Saint-Etienne | 18 avenue Augustin Dupre, Saint-Etienne. Tel : 04 77 01 35 35 | Insertion, chantiers, parcours vers l'emploi, publics eloignes de l'emploi |
 
 ---
@@ -87,7 +87,7 @@ Ces acteurs sont strategiques mais doivent etre qualifies avant toute prise de c
 | Distributeurs et magasins | Bricolage, materiaux, mobilier, fournitures professionnelles | Surplus, invendus, fins de serie, dons encadres |
 | Associations locales | Centres sociaux, associations d'insertion, associations de quartier, acteurs culturels | Besoins d'espaces, benevolat, animation locale, usages futurs |
 | Enseignement et formation | Lycees professionnels, CFA, ecoles d'architecture, design, urbanisme, ingenierie | Projets pedagogiques, chantiers ecoles, diagnostics, stages |
-| Financeurs | Fondations, banques, mutuelles, entreprises mecènes, clubs d'entreprises | Financement, mecénat, reporting, impact territorial |
+| Financeurs | Fondations, banques, mutuelles, entreprises mecÃ¨nes, clubs d'entreprises | Financement, mecÃ©nat, reporting, impact territorial |
 | Medias locaux | Presse locale, radios, medias economiques, newsletters territoriales | Faire connaitre l'appel a signalements et les besoins prioritaires |
 
 ---
@@ -100,15 +100,15 @@ Ces acteurs sont strategiques mais doivent etre qualifies avant toute prise de c
 |---|---|---|
 | Ville de Saint-Etienne | Appui au reperage des logements vacants, orientation des situations, cadre de dialogue avec les proprietaires | Un rendez-vous habitat/urbanisme et l'identification des dispositifs deja actifs |
 | Saint-Etienne Metropole | Complement operationnel au PLH, orientation vers le guichet renovation, appui aux quartiers anciens | Un cadrage avec les services habitat et politique de la ville |
-| Renovactions 42 | Orientation des proprietaires vers les aides, distinction entre conseil public et action TVF | Un entretien technique sur les parcours propriétaires |
-| EPORA | Identification fonciere, situations complexes, friches bâties ou biens necessitant portage | Connaitre les criteres d'intervention et les limites |
+| Renovactions 42 | Orientation des proprietaires vers les aides, distinction entre conseil public et action TVF | Un entretien technique sur les parcours propriÃ©taires |
+| EPORA | Identification fonciere, situations complexes, friches bÃ¢ties ou biens necessitant portage | Connaitre les criteres d'intervention et les limites |
 | Bailleurs sociaux | Locaux, logements, garages, rez-de-chaussee, besoins d'insertion | Identifier des situations non sensibles et non confidentielles |
 | Notaires et administrateurs de biens | Biens vacants, successions, proprietaires difficiles a joindre | Proposer une orientation volontaire vers TVF |
 
 Documents a envoyer :
 
 - dossier TVF ;
-- fiche propriétaire ;
+- fiche propriÃ©taire ;
 - fiche bien solidaire ;
 - modele de convention ;
 - dossier territorial Saint-Etienne.
@@ -151,15 +151,15 @@ Premier objet de mail :
 | Contact cible | Ce que TVF peut proposer | Ce qu'il faut demander |
 |---|---|---|
 | Ville de Saint-Etienne - commerce et artisanat | Appui a la reconquete des rez-de-chaussee vacants et usages utiles | Un rendez-vous avec le service commerce / centre-ville |
-| CCI | Mise en relation avec porteurs de projets, commerçants, entrepreneurs | Relai economique et diagnostic commercial |
+| CCI | Mise en relation avec porteurs de projets, commerÃ§ants, entrepreneurs | Relai economique et diagnostic commercial |
 | Proprietaires de cellules commerciales | Programme de remise en usage, usage temporaire, travaux encadres | Autorisation de visite et fiche bien |
-| Associations de commerçants | Besoins de rue, vacance ressentie, locaux utiles | Identifier les rues prioritaires |
+| Associations de commerÃ§ants | Besoins de rue, vacance ressentie, locaux utiles | Identifier les rues prioritaires |
 | Artisans et jeunes entrepreneurs | Ateliers, boutiques tests, activites de proximite | Recenser les besoins de locaux |
-| Financeurs locaux | Soutien a la rehabilitation de petites cellules | Identifier dispositifs et mecénat possible |
+| Financeurs locaux | Soutien a la rehabilitation de petites cellules | Identifier dispositifs et mecÃ©nat possible |
 
 Documents a envoyer :
 
-- fiche propriétaire ;
+- fiche propriÃ©taire ;
 - fiche projet ;
 - modele de convention ;
 - courrier proprietaire ;
@@ -225,7 +225,7 @@ Premier objet de mail :
 | Action | Contacts prioritaires | But du premier rendez-vous |
 |---|---|---|
 | Logements vacants | Ville, Metropole, Renovactions 42, bailleurs, notaires, syndics | Comprendre les dispositifs habitat et identifier des situations volontaires |
-| Commerces inoccupes | Ville commerce, CCI, proprietaires, associations commerçantes | Reperer les rez-de-chaussee vacants et tester un parcours d'usage |
+| Commerces inoccupes | Ville commerce, CCI, proprietaires, associations commerÃ§antes | Reperer les rez-de-chaussee vacants et tester un parcours d'usage |
 | Materiaux de reemploi | Metropole dechets, CAPEB, CCI, CMA, entreprises BTP, magasins | Creer un premier flux encadre de materiaux utiles |
 | Espaces abandonnes | Metropole, EPORA, services de l'Etat, associations environnementales | Qualifier les terrains et usages temporaires possibles |
 | Solidarite et insertion | Maison de l'emploi, PLIE, Departement, associations, DDETS | Relier les futurs chantiers a des parcours humains |
@@ -324,14 +324,14 @@ Ce qu'il faut demander :
 - encadrement ;
 - contraintes d'accueil.
 
-### Financeurs et mecènes
+### Financeurs et mecÃ¨nes
 
 Ce que TVF peut apporter :
 
-- dossiers cadrés ;
+- dossiers cadrÃ©s ;
 - indicateurs ;
 - logique d'impact territorial ;
-- traçabilite des contributions ;
+- traÃ§abilite des contributions ;
 - projets compatibles avec economie circulaire, insertion, habitat et revitalisation.
 
 Ce qu'il faut demander :
@@ -370,7 +370,7 @@ Cordialement,
 
 Territoires Vivants France  
 contact@territoiresvivantsfrance.fr  
-06 22 03 93 24
+04 65 81 54 69
 
 ### Mail entreprise
 
@@ -378,7 +378,7 @@ Objet : Cooperation territoriale - Materiaux, locaux ou competences utiles a Sai
 
 Madame, Monsieur,
 
-Territoires Vivants France souhaite structurer a Saint-Etienne un dispositif de valorisation territoriale des ressources inutilisees : materiaux, mobilier, locaux, competences techniques ou mecénat.
+Territoires Vivants France souhaite structurer a Saint-Etienne un dispositif de valorisation territoriale des ressources inutilisees : materiaux, mobilier, locaux, competences techniques ou mecÃ©nat.
 
 Notre approche n'est pas une plateforme de dons libres. Les ressources sont qualifiees, tracees et affectees a des projets utiles au territoire, apres validation.
 
@@ -449,7 +449,7 @@ Ordre conseille :
 4. entreprises BTP ;
 5. magasins materiaux ;
 6. artisans independants ;
-7. entreprises mecènes potentielles.
+7. entreprises mecÃ¨nes potentielles.
 
 Objectif : tester le reemploi, les competences, les chantiers encadres et les contributions RSE.
 
@@ -477,7 +477,7 @@ Ordre conseille :
 5. proprietaires de commerces vacants ;
 6. proprietaires de logements ou immeubles vacants.
 
-Objectif : identifier les premiers biens volontaires, sans demarchage agressif ni promesse non cadrée.
+Objectif : identifier les premiers biens volontaires, sans demarchage agressif ni promesse non cadrÃ©e.
 
 ---
 
@@ -568,3 +568,4 @@ Ces rendez-vous doivent permettre d'identifier un premier portefeuille de situat
 - une structure associative ou d'insertion capable de participer.
 
 Une fois ces cinq axes qualifies, TVF pourra produire une premiere note de lancement Saint-Etienne avec acteurs rencontres, besoins exprimes, opportunites, risques, documents a reunir et calendrier de travail.
+

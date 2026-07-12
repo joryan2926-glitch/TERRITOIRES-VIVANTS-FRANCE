@@ -9,7 +9,7 @@ const internalKitFallback = [
   {
     label: "00 - Index",
     files: [
-      { title: "Archive complete du kit documentaire TVF", description: "Tous les formulaires, conventions, listes de pieces, courriers et fiches internes ranges dans une archive unique.", path: "documents/TVF-kit-formulaires-conventions-prets-a-utiliser.zip", filename: "TVF-kit-formulaires-conventions-prets-a-utiliser.zip", size: 7501514 },
+      { title: "Archive complete du kit documentaire TVF", description: "Tous les formulaires, conventions, listes de pieces, courriers et fiches internes ranges dans une archive unique.", path: "documents/TVF-kit-formulaires-conventions-prets-a-utiliser.zip", filename: "TVF-kit-formulaires-conventions-prets-a-utiliser.zip", size: 7497469 },
       { title: "Index de la bibliotheque interne", description: "Sommaire de classement pour retrouver rapidement le bon document selon le type de demande.", path: "documents/kit-formulaires-conventions-tvf/00-index/tvf-index-bibliotheque-formulaires-conventions.docx", filename: "tvf-index-bibliotheque-formulaires-conventions.docx", size: 0 }
     ]
   },
@@ -409,6 +409,7 @@ globalControlEl?.addEventListener("click", (event) => { const preset = event.tar
 internalKitEl?.addEventListener("click", (event) => { const button = event.target.closest("[data-kit-download]"); if (button) downloadKitFile(button.dataset.kitDownload).catch((e) => notifyError(e)); });
 bindEvents();
 initDocumentsModule().catch((error) => { setToken(""); showLogin(); setStatus(error.message, "error"); });
+
 
 
 

@@ -1,4 +1,4 @@
-# Synthese 1 page - Financeur, fondation ou mecene
+﻿# Synthese 1 page - Financeur, fondation ou mecene
 
 Document court pour presenter une demande de soutien avec prudence et clarte.
 
@@ -54,5 +54,6 @@ Un financeur ou mecene peut soutenir une methode, un territoire pilote, un proje
 
 Territoires Vivants France  
 contact@territoiresvivantsfrance.fr  
-06 22 03 93 24
+04 65 81 54 69
+
 

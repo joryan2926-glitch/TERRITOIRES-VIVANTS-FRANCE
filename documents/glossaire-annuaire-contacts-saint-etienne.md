@@ -1,9 +1,9 @@
-# Glossaire et annuaire de contacts - Saint-Etienne
+﻿# Glossaire et annuaire de contacts - Saint-Etienne
 
 Annuaire operationnel par secteur, pole TVF et besoin terrain pour lancer Territoires Vivants France a Saint-Etienne.
 
 Version de travail : 2026  
-Contact TVF : contact@territoiresvivantsfrance.fr - 06 22 03 93 24  
+Contact TVF : contact@territoiresvivantsfrance.fr - 04 65 81 54 69  
 Siege national : 25 rue Elise Gervais, 42000 Saint-Etienne  
 President fondateur : Edryan Rangoly  
 Secretaire et tresorier : M. Lambeau Jordan
@@ -254,7 +254,7 @@ Cordialement,
 
 Territoires Vivants France  
 contact@territoiresvivantsfrance.fr  
-06 22 03 93 24
+04 65 81 54 69
 
 ---
 
@@ -396,3 +396,4 @@ La priorite immediate est d'obtenir :
 3. un rendez-vous Maison de l'emploi / PLIE pour l'insertion ;
 4. un rendez-vous EPORA pour friches et locaux possibles ;
 5. une piste de local tampon pour la materiautheque.
+
