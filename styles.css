@@ -8005,3 +8005,42 @@ tr:nth-child(even) td {
     width: 100%;
   }
 }
+/* TVF OS - creation manuelle de dossier client */
+.cases-manual-form {
+  gap: 16px;
+}
+.case-modal-section {
+  display: grid;
+  gap: 12px;
+  padding: 14px;
+  border: 1px solid rgba(14, 45, 69, 0.12);
+  border-radius: 14px;
+  background: #fbfcf8;
+}
+.case-modal-section legend {
+  padding: 0 6px;
+  color: var(--blue-900);
+  font-size: 0.84rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.cases-manual-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+.cases-manual-form textarea {
+  min-height: 86px;
+}
+.cases-manual-form .admin-detail-actions {
+  margin-top: 0;
+}
+@media (max-width: 760px) {
+  .cases-manual-grid {
+    grid-template-columns: 1fr;
+  }
+  .case-modal-section {
+    padding: 12px;
+  }
+}

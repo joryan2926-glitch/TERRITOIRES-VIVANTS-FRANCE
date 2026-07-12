@@ -37,7 +37,7 @@
           <p data-cases-count>Chargement des dossiers...</p>
         </div>
         <div class="admin-toolbar-actions">
-          <button class="btn primary" type="button" data-cases-create>Nouveau dossier</button>
+          <button class="btn primary" type="button" data-cases-create>Creer fichier client</button>
           <button class="btn secondary" type="button" data-cases-refresh>Actualiser</button>
           <button class="btn secondary" type="button" data-cases-export>Exporter CSV</button>
           <button class="btn ghost" type="button" data-cases-logout>Deconnexion</button>
@@ -100,18 +100,45 @@
     <section class="admin-modal" data-cases-modal hidden aria-label="Creation dossier">
       <div class="admin-modal-panel cases-modal-panel">
         <div class="admin-modal-head">
-          <div><p class="section-kicker">Dossier</p><h2>Nouveau dossier</h2></div>
+          <div><p class="section-kicker">Dossier manuel</p><h2>Nouveau fichier client</h2></div>
           <button class="btn ghost" type="button" data-cases-close-modal>Fermer</button>
         </div>
-        <form class="admin-create-form cases-create-form" data-cases-form>
-          <label>Titre<input name="title" required placeholder="Ex. Bien vacant rue..." /></label>
-          <label>Type<select name="case_type"><option value="bien_vacant">Bien vacant</option><option value="materiaux">Materiaux</option><option value="collectivite">Collectivite</option><option value="entreprise">Entreprise</option><option value="financeur">Financeur</option><option value="autre">Autre</option></select></label>
-          <label>Priorite<select name="priority"><option value="normale">Normale</option><option value="haute">Haute</option><option value="urgente">Urgente</option></select></label>
-          <label>Responsable<input name="assigned_to" placeholder="Referent TVF" /></label>
-          <label>Territoire<input name="territory" placeholder="Commune, quartier, departement" /></label>
-          <label>Pole principal<input name="main_pole" placeholder="IA propose si vide" /></label>
-          <label class="admin-create-wide">Resume<textarea name="summary" rows="5" placeholder="Objet de l'instruction, contexte, parties prenantes connues"></textarea></label>
-          <div class="admin-detail-actions admin-create-wide"><button class="btn primary" type="submit">Creer le dossier</button><button class="btn secondary" type="button" data-cases-close-modal>Annuler</button></div>
+        <form class="admin-create-form cases-create-form cases-manual-form" data-cases-form>
+          <fieldset class="case-modal-section admin-create-wide">
+            <legend>Fichier client</legend>
+            <div class="cases-manual-grid">
+              <label>Type d'interlocuteur<select name="client_type"><option value="proprietaire">Proprietaire</option><option value="collectivite">Collectivite</option><option value="entreprise">Entreprise</option><option value="association">Association</option><option value="particulier">Particulier</option><option value="financeur">Financeur / mecene</option><option value="benevole">Benevole</option><option value="autre">Autre</option></select></label>
+              <label>Origine du dossier<select name="intake_origin"><option value="saisie interne">Saisie interne</option><option value="appel telephone">Appel telephone</option><option value="rendez-vous">Rendez-vous</option><option value="visite terrain">Visite terrain</option><option value="courrier papier">Courrier papier</option><option value="whatsapp">WhatsApp</option><option value="autre">Autre</option></select></label>
+              <label>Nom / structure<input name="client_name" required placeholder="Nom, structure ou organisme" /></label>
+              <label>E-mail<input name="client_email" type="email" placeholder="contact@exemple.fr" /></label>
+              <label>Telephone<input name="client_phone" type="tel" placeholder="06..." /></label>
+              <label class="admin-create-wide">Adresse / commune<input name="client_address" placeholder="Adresse, commune, quartier" /></label>
+            </div>
+          </fieldset>
+
+          <fieldset class="case-modal-section admin-create-wide">
+            <legend>Qualification de la demande</legend>
+            <div class="cases-manual-grid">
+              <label>Type de dossier<select name="case_type"><option value="bien_vacant">Bien vacant</option><option value="commerce_inoccupe">Commerce inoccupe</option><option value="materiaux">Materiaux</option><option value="friche_terrain">Friche / terrain</option><option value="collectivite">Collectivite</option><option value="entreprise">Entreprise</option><option value="benevole">Benevole / insertion</option><option value="financeur">Financement</option><option value="signalement">Signalement</option><option value="autre">Autre</option></select></label>
+              <label>Thematique<select name="request_theme"><option value="proposer un bien">Proposer un bien</option><option value="proposer des materiaux">Proposer des materiaux</option><option value="demande de partenariat">Demande de partenariat</option><option value="demande de local ou stockage">Local / stockage</option><option value="transport et logistique">Transport / logistique</option><option value="chantier insertion">Chantier / insertion</option><option value="financement">Financement</option><option value="diagnostic territorial">Diagnostic territorial</option><option value="autre">Autre</option></select></label>
+              <label>Priorite<select name="priority"><option value="normale">Normale</option><option value="haute">Haute</option><option value="urgente">Urgente</option></select></label>
+              <label>Statut initial<select name="status"><option value="qualification">Qualification</option><option value="instruction">Instruction</option><option value="attente_pieces">Attente pieces</option><option value="visite">Visite a prevoir</option><option value="ouvert">Ouvert</option></select></label>
+              <label>Territoire<input name="territory" placeholder="Saint-Etienne, quartier, departement" /></label>
+              <label>Responsable TVF<input name="assigned_to" placeholder="Referent TVF" /></label>
+              <label>Pole principal<input name="main_pole" placeholder="Propose automatiquement si vide" /></label>
+              <label>Prochaine action<input name="next_action" placeholder="Qualifier, demander pieces, planifier rendez-vous..." /></label>
+            </div>
+          </fieldset>
+
+          <fieldset class="case-modal-section admin-create-wide">
+            <legend>Instruction</legend>
+            <label>Titre du dossier<input name="title" placeholder="Genere automatiquement si vide" /></label>
+            <label>Description de la demande<textarea name="summary" rows="5" placeholder="Contexte, besoin, bien ou materiaux concernes, attente de l'interlocuteur, elements deja connus"></textarea></label>
+            <label>Pieces deja connues<textarea name="known_documents" rows="3" placeholder="Photos, adresse, titre, mandat, devis, liste de materiaux, courrier, plans..."></textarea></label>
+            <label>Points de vigilance<textarea name="manual_risks" rows="3" placeholder="Propriete, securite, delai, autorisation, financement, acces, urgence..."></textarea></label>
+          </fieldset>
+
+          <div class="admin-detail-actions admin-create-wide"><button class="btn primary" type="submit">Creer le fichier client</button><button class="btn secondary" type="button" data-cases-close-modal>Annuler</button></div>
           <p class="form-note admin-create-wide" data-cases-modal-status hidden></p>
         </form>
       </div>

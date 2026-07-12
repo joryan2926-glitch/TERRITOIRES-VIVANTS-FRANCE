@@ -386,9 +386,72 @@ async function createFollowupTask() {
 }
 async function addRisk() { const item = selectedCase(); if (!item) return; const data = await openCaseEntryModal({ title: "Ajouter un risque", description: "Tracez le risque, son niveau et la mesure de maitrise prevue avant decision.", submitLabel: "Ajouter le risque", fields: [{ name: "risk_label", label: "Risque identifie", required: true, placeholder: "Ex. acces dangereux, propriete non verifiee" }, { name: "risk_level", label: "Niveau de risque", type: "select", value: "modere", options: riskLabels }, { name: "mitigation", label: "Mesure de maitrise", type: "textarea", rows: 4, placeholder: "Action prevue pour limiter le risque" }] }); if (!data?.risk_label) return; await api("/api/admin-cases", { method: "POST", body: JSON.stringify({ type: "risk", case_id: item.id, risk_label: data.risk_label, risk_level: data.risk_level || "modere", mitigation: data.mitigation || "A definir" }) }); notify("Risque ajoute au dossier.", "success"); await loadCases(); }
 async function addDecision() { const item = selectedCase(); if (!item) return; const data = await openCaseEntryModal({ title: "Ajouter une decision", description: "Formalisez une proposition ou une orientation avant validation humaine.", submitLabel: "Ajouter la decision", fields: [{ name: "proposed_decision", label: "Decision proposee", required: true, placeholder: "Ex. ouvrir une phase de diagnostic terrain" }, { name: "decision_status", label: "Statut", type: "select", value: "proposee", options: decisionLabels }, { name: "final_decision", label: "Commentaire / reserve", type: "textarea", rows: 4, placeholder: "Precisions, conditions, points a verifier" }] }); if (!data?.proposed_decision) return; await api("/api/admin-cases", { method: "POST", body: JSON.stringify({ type: "decision", case_id: item.id, proposed_decision: data.proposed_decision, decision_status: data.decision_status || "proposee", final_decision: data.final_decision || "" }) }); notify("Decision ajoutee au dossier.", "success"); await loadCases(); }
+function manualCasePayload(formData) {
+  const raw = Object.fromEntries(formData);
+  const data = { ...raw, type: "case" };
+  const clientName = String(raw.client_name || "").trim();
+  const clientType = String(raw.client_type || "").trim();
+  const theme = String(raw.request_theme || "").trim();
+  const origin = String(raw.intake_origin || "").trim();
+  const caseTypeLabel = label(typeLabels, raw.case_type) || "Dossier";
+  const titleParts = [caseTypeLabel, clientName || raw.territory || theme || "dossier manuel"].filter(Boolean);
+  data.title = String(raw.title || "").trim() || titleParts.join(" - ");
+  data.status = raw.status || "qualification";
+  data.priority = raw.priority || "normale";
+  data.next_action = String(raw.next_action || "").trim() || "Qualifier le dossier et demander les pieces utiles";
+
+  const summaryBlocks = [
+    "Creation manuelle TVF OS",
+    `Interlocuteur : ${clientName || "Non renseigne"}`,
+    `Type d'interlocuteur : ${clientType || "Non renseigne"}`,
+    origin ? `Origine : ${origin}` : "",
+    raw.client_email ? `E-mail : ${raw.client_email}` : "",
+    raw.client_phone ? `Telephone : ${raw.client_phone}` : "",
+    raw.client_address ? `Adresse / commune : ${raw.client_address}` : "",
+    theme ? `Thematique : ${theme}` : "",
+    raw.territory ? `Territoire : ${raw.territory}` : "",
+    raw.summary ? `Demande : ${raw.summary}` : "Demande : a completer",
+    raw.known_documents ? `Pieces deja connues : ${raw.known_documents}` : "",
+    raw.manual_risks ? `Points de vigilance : ${raw.manual_risks}` : ""
+  ].filter(Boolean);
+  data.summary = summaryBlocks.join("\n");
+  data.decision_summary = raw.manual_risks ? `Points de vigilance initiaux : ${raw.manual_risks}` : "";
+  delete data.client_name;
+  delete data.client_type;
+  delete data.client_email;
+  delete data.client_phone;
+  delete data.client_address;
+  delete data.request_theme;
+  delete data.intake_origin;
+  delete data.known_documents;
+  delete data.manual_risks;
+  return data;
+}
 function openModal() { if (modal) modal.hidden = false; modalForm?.querySelector("input, select, textarea")?.focus(); }
 function closeModal() { if (modal) modal.hidden = true; }
-async function createCase(event) { event.preventDefault(); const statusEl = modalForm.querySelector("[data-cases-modal-status]"); const data = Object.fromEntries(new FormData(modalForm)); data.type = "case"; try { statusEl.hidden = false; statusEl.textContent = "Creation..."; const result = await api("/api/admin-cases", { method: "POST", body: JSON.stringify(data) }); cases = [result.case, ...cases]; selectedId = result.case.id; modalForm.reset(); closeModal(); renderPriorityPanel(); renderList(); renderDetail(); await loadDashboard().catch(() => {}); notify("Dossier enregistre.", "success"); } catch (error) { statusEl.hidden = false; statusEl.textContent = error.message; notifyError(error); } }
+async function createCase(event) {
+  event.preventDefault();
+  const statusEl = modalForm.querySelector("[data-cases-modal-status]");
+  const data = manualCasePayload(new FormData(modalForm));
+  try {
+    statusEl.hidden = false;
+    statusEl.textContent = "Creation...";
+    const result = await api("/api/admin-cases", { method: "POST", body: JSON.stringify(data) });
+    cases = [result.case, ...cases];
+    selectedId = result.case.id;
+    modalForm.reset();
+    closeModal();
+    renderPriorityPanel();
+    renderList();
+    renderDetail();
+    await loadDashboard().catch(() => {});
+    notify("Fichier client cree et dossier ouvert.", "success");
+  } catch (error) {
+    statusEl.hidden = false;
+    statusEl.textContent = error.message;
+    notifyError(error);
+  }
+}
 function exportCsv() { if (!cases.length) return notify("Aucun dossier a exporter.", "warning"); const headers = ["Numero", "Titre", "Type", "Statut", "Priorite", "Pole", "Responsable", "Maturite", "Prochaine action"]; const rows = cases.map((item) => [item.case_number, item.title, label(typeLabels, item.case_type), label(statusLabels, item.status), label(priorityLabels, item.priority), item.main_pole, item.assigned_to, item.maturity_score, item.next_action]); const csv = [headers, ...rows].map((row) => row.map((v) => `"${String(v || "").replace(/"/g, '""')}"`).join(";")).join("\n"); const blob = new Blob(["\ufeff" + csv], { type: "text/csv;charset=utf-8" }); const url = URL.createObjectURL(blob); const link = document.createElement("a"); link.href = url; link.download = `dossiers-tvf-${new Date().toISOString().slice(0, 10)}.csv`; document.body.appendChild(link); link.click(); link.remove(); URL.revokeObjectURL(url); notify("Export prepare.", "success"); }
 function bindEvents() { tokenForm?.addEventListener("submit", async (event) => { event.preventDefault(); const value = String(new FormData(tokenForm).get("token") || "").trim(); if (!value) return setStatus("Entrez le token admin.", "error"); setToken(value); try { showApp(); await loadCases(); setStatus(""); } catch (error) { setToken(""); showLogin(); setStatus(error.message, "error"); } }); filtersForm?.addEventListener("input", () => { clearTimeout(debounceTimer); debounceTimer = setTimeout(() => loadCases().catch((e) => notifyError(e)), 280); }); filtersForm?.addEventListener("change", () => loadCases().catch((e) => notifyError(e))); statusButtons.forEach((button) => button.addEventListener("click", () => { if (statusFilter) statusFilter.value = button.dataset.caseStatus || "all"; loadCases().catch((e) => notifyError(e)); })); refreshButton?.addEventListener("click", () => loadCases().catch((e) => notifyError(e))); logoutButton?.addEventListener("click", () => { setToken(""); window.location.href = "admin-login"; }); exportButton?.addEventListener("click", exportCsv); createButton?.addEventListener("click", openModal); closeModalButtons.forEach((button) => button.addEventListener("click", closeModal)); modal?.addEventListener("click", (event) => { if (event.target === modal) closeModal(); }); modalForm?.addEventListener("submit", createCase); listEl?.addEventListener("click", (event) => { const button = event.target.closest("[data-case-id]"); if (!button) return; selectedId = button.dataset.caseId; renderPriorityPanel(); renderList(); renderDetail(); }); priorityPanelEl?.addEventListener("click", (event) => { const button = event.target.closest("[data-priority-case-id]"); if (!button) return; selectedId = button.dataset.priorityCaseId; renderPriorityPanel(); renderList(); renderDetail(); detailEl?.scrollIntoView({ behavior: "smooth", block: "start" }); }); priorityPanelEl?.addEventListener("click", (event) => { if (event.target.closest("[data-cases-refresh]")) loadCases().catch((e) => notifyError(e)); }); detailEl?.addEventListener("submit", (event) => { const form = event.target.closest("[data-cases-detail-form]"); if (!form) return; event.preventDefault(); saveDetail(form); }); detailEl?.addEventListener("change", (event) => { const select = event.target.closest("[data-checklist-id]"); if (select) updateChecklist(select.dataset.checklistId, select.value).catch((e) => notifyError(e)); }); detailEl?.addEventListener("click", (event) => {
     const quick = event.target.closest("[data-case-quick]");
