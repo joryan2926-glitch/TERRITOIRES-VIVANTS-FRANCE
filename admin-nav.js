@@ -5,16 +5,16 @@ const TVF_ADMIN_LOGIN_ROUTE = "admin-login";
 
 const TVF_ADMIN_GROUPS = [
   {
-    label: "Demarrer",
-    description: "Vue simple",
+    label: "Accueil",
+    description: "Vue generale",
     modules: [
       { href: "admin", label: "Accueil", icon: "&#8962;" },
       { href: "dashboard", label: "Tableau de bord", icon: "&#9638;" },
     ],
   },
   {
-    label: "A traiter",
-    description: "Demandes et contacts",
+    label: "Reception",
+    description: "Entrees et tiers",
     modules: [
       { href: "admin-demandes", label: "Demandes", icon: "&#9993;" },
       { href: "admin-emails", label: "Boite mail", icon: "@" },
@@ -23,10 +23,10 @@ const TVF_ADMIN_GROUPS = [
   },
   {
     label: "Instruction",
-    description: "Dossiers et action",
+    description: "Dossiers et pieces",
     modules: [
       { href: "admin-dossiers", label: "Dossiers", icon: "&#9635;" },
-      { href: "admin-dossiers?create=client", label: "Creer dossier", icon: "+" },
+      { href: "admin-dossiers?create=client", label: "Nouveau dossier", icon: "+" },
       { href: "admin-work", label: "Taches", icon: "&#10003;" },
       { href: "admin-documents", label: "Documents", icon: "&#9633;" },
       { href: "admin-procedures", label: "Methodes", icon: "&#167;" },
@@ -34,7 +34,7 @@ const TVF_ADMIN_GROUPS = [
   },
   {
     label: "Suivi",
-    description: "Carte et resultats",
+    description: "Impact et carte",
     modules: [
       { href: "admin-map", label: "Carte", icon: "&#8982;" },
       { href: "admin-observatoire", label: "Observatoire", icon: "&#9676;" },
@@ -43,7 +43,7 @@ const TVF_ADMIN_GROUPS = [
   },
   {
     label: "Pilotage",
-    description: "Budget et journal",
+    description: "Finances et trace",
     modules: [
       { href: "admin-finances", label: "Finances", icon: "&euro;" },
       { href: "admin-activity", label: "Journal", icon: "&#8635;" },
@@ -51,11 +51,11 @@ const TVF_ADMIN_GROUPS = [
   },
   {
     label: "Outils",
-    description: "Reglages utiles",
+    description: "Support interne",
     modules: [
       { href: "admin-users", label: "Utilisateurs", icon: "&#9678;" },
       { href: "admin-settings", label: "Reglages", icon: "&#9881;" },
-      { href: "admin-knowledge", label: "Base utile", icon: "i" },
+      { href: "admin-knowledge", label: "Base interne", icon: "i" },
       { href: "admin-ai", label: "Assistant", icon: "&#10022;" },
     ],
   },

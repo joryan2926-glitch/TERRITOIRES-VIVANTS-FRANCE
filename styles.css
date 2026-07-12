@@ -8044,3 +8044,90 @@ tr:nth-child(even) td {
     padding: 12px;
   }
 }
+/* TVF OS - harmonisation operationnelle finale */
+.admin-body .btn {
+  border-radius: 999px;
+  font-weight: 760;
+  letter-spacing: 0;
+}
+.admin-body .btn.primary {
+  box-shadow: 0 10px 22px rgba(47, 125, 50, 0.16);
+}
+.admin-body .btn.secondary,
+.admin-body .btn.ghost {
+  box-shadow: none;
+}
+.admin-home-header-actions,
+.admin-toolbar-actions,
+.admin-detail-actions,
+.cases-control-actions,
+.documents-control-actions,
+.work-action-row,
+.work-action-links,
+.crm-control-links {
+  gap: 8px;
+}
+.admin-home-header-actions .btn,
+.admin-toolbar-actions .btn,
+.admin-detail-actions .btn,
+.cases-control-actions .btn,
+.documents-control-actions .btn,
+.work-action-row .btn {
+  min-height: 38px;
+  padding: 9px 13px;
+  font-size: 0.82rem;
+}
+.admin-body .admin-panel-head h3,
+.admin-body .admin-panel-head h4 {
+  letter-spacing: 0;
+}
+.admin-body .admin-panel-head p:not(.section-kicker) {
+  max-width: 760px;
+}
+.admin-module-title,
+.admin-module-group-head,
+.admin-module-links,
+.case-modal-section,
+.cases-panel,
+.documents-panel,
+.crm-control-panel,
+.cases-control-panel,
+.documents-control-panel,
+.work-action-panel {
+  border-color: rgba(14, 45, 69, 0.12);
+}
+.admin-module-group-head span,
+.admin-module-links a span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.admin-module-links a[href*="create=client"] {
+  border-color: rgba(47, 125, 50, 0.22);
+  background: #f4fbf0;
+  color: var(--green-800);
+}
+.admin-module-links a[href*="create=client"] i {
+  background: var(--green-800);
+  color: #fff;
+}
+.cases-file-grid article,
+.cases-register-grid article,
+.documents-file-grid article,
+.documents-register-grid article,
+.crm-control-grid article,
+.cases-control-grid article {
+  border-radius: 12px;
+}
+.case-modal-section {
+  background: linear-gradient(180deg, #ffffff 0%, #f8faf5 100%);
+}
+@media (max-width: 760px) {
+  .admin-home-header-actions .btn,
+  .admin-toolbar-actions .btn,
+  .admin-detail-actions .btn,
+  .cases-control-actions .btn,
+  .documents-control-actions .btn,
+  .work-action-row .btn {
+    width: 100%;
+  }
+}

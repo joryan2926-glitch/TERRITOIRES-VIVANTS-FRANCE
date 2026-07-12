@@ -37,7 +37,7 @@
           <p data-cases-count>Chargement des dossiers...</p>
         </div>
         <div class="admin-toolbar-actions">
-          <button class="btn primary" type="button" data-cases-create>Creer fichier client</button>
+          <button class="btn primary" type="button" data-cases-create>Nouveau dossier</button>
           <button class="btn secondary" type="button" data-cases-refresh>Actualiser</button>
           <button class="btn secondary" type="button" data-cases-export>Exporter CSV</button>
           <button class="btn ghost" type="button" data-cases-logout>Deconnexion</button>
@@ -100,7 +100,7 @@
     <section class="admin-modal" data-cases-modal hidden aria-label="Creation dossier">
       <div class="admin-modal-panel cases-modal-panel">
         <div class="admin-modal-head">
-          <div><p class="section-kicker">Dossier manuel</p><h2>Nouveau fichier client</h2></div>
+          <div><p class="section-kicker">Dossier client</p><h2>Nouveau dossier client</h2></div>
           <button class="btn ghost" type="button" data-cases-close-modal>Fermer</button>
         </div>
         <form class="admin-create-form cases-create-form cases-manual-form" data-cases-form>
@@ -138,7 +138,7 @@
             <label>Points de vigilance<textarea name="manual_risks" rows="3" placeholder="Propriete, securite, delai, autorisation, financement, acces, urgence..."></textarea></label>
           </fieldset>
 
-          <div class="admin-detail-actions admin-create-wide"><button class="btn primary" type="submit">Creer le fichier client</button><button class="btn secondary" type="button" data-cases-close-modal>Annuler</button></div>
+          <div class="admin-detail-actions admin-create-wide"><button class="btn primary" type="submit">Creer le dossier client</button><button class="btn secondary" type="button" data-cases-close-modal>Annuler</button></div>
           <p class="form-note admin-create-wide" data-cases-modal-status hidden></p>
         </form>
       </div>
