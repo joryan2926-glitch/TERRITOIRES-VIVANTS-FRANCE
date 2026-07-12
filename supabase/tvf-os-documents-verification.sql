@@ -1,4 +1,4 @@
-﻿-- TVF OS - Module Gestion documentaire
+-- TVF OS - Module Gestion documentaire
 -- Verification post-migration : bucket, tables, RLS, politiques, indexes, fonctions et triggers.
 
 select tablename, policyname, cmd
