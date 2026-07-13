@@ -8512,3 +8512,78 @@ tr:nth-child(even) td {
   .admin-request-command-main .btn,
   .admin-request-command-secondary .text-link { width: 100%; }
 }
+
+/* Respiration douce des paragraphes - lecture institutionnelle */
+:root {
+  --paragraph-line: 1.68;
+  --paragraph-card-line: 1.58;
+}
+
+main p,
+.site-footer p {
+  text-wrap: pretty;
+}
+
+.section-lead,
+.section-head p:not(.section-kicker),
+.intro-grid > div:first-child > p:not(.section-kicker),
+.feature-grid > div > p:not(.section-kicker),
+.split > div > p:not(.section-kicker),
+.form-panel > div:first-child > p:not(.section-kicker),
+.narrow > p:not(.section-kicker),
+.legal p,
+.institutional-narrative p,
+.decision-copy p,
+.cta-band p {
+  line-height: var(--paragraph-line);
+}
+
+.narrow p:not(:last-child),
+.legal p:not(:last-child),
+.institutional-narrative p:not(:last-child),
+.decision-copy p:not(:last-child),
+.split p:not(:last-child),
+.feature-grid p:not(:last-child),
+.intro-grid p:not(:last-child) {
+  margin-bottom: 0.82em;
+}
+
+.card p,
+.trust-grid p,
+.timeline p,
+.faq-list details p,
+.decision-list p,
+.quick-brief-grid p,
+.compact-grid p,
+.audience-grid p,
+.mini-list span,
+td {
+  line-height: var(--paragraph-card-line);
+}
+
+.card p:not(:last-child),
+.trust-grid p:not(:last-child),
+.timeline p:not(:last-child),
+.decision-list p:not(:last-child),
+.quick-brief-grid p:not(:last-child),
+.compact-grid p:not(:last-child),
+.audience-grid p:not(:last-child) {
+  margin-bottom: 0.58em;
+}
+
+@media (max-width: 760px) {
+  :root {
+    --paragraph-line: 1.7;
+    --paragraph-card-line: 1.62;
+  }
+
+  .narrow p:not(:last-child),
+  .legal p:not(:last-child),
+  .institutional-narrative p:not(:last-child),
+  .decision-copy p:not(:last-child),
+  .split p:not(:last-child),
+  .feature-grid p:not(:last-child),
+  .intro-grid p:not(:last-child) {
+    margin-bottom: 0.72em;
+  }
+}
