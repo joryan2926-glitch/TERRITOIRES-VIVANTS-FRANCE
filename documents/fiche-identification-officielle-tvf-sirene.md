@@ -1,35 +1,35 @@
 ﻿# Fiche d'identification officielle - TERRITOIRES VIVANTS FRANCE
 
-Source : Avis de situation au rÃ©pertoire SIRENE Ã  la date du 07/07/2026.
+Source : Avis de situation au répertoire SIRENE à la date du 07/07/2026.
 
 ## Identification
 
-- DÃ©nomination : TERRITOIRES VIVANTS FRANCE
-- Statut : Association dÃ©clarÃ©e - loi 1901
-- CatÃ©gorie juridique : 9220 - Association dÃ©clarÃ©e
+- Dénomination : TERRITOIRES VIVANTS FRANCE
+- Statut : Association déclarée - loi 1901
+- Catégorie juridique : 9220 - Association déclarée
 - RNA : W423016361
 - SIREN : 107 226 128
-- SIRET du siÃ¨ge : 107 226 128 00018
+- SIRET du siège : 107 226 128 00018
 - Entreprise active depuis : 01/07/2026
 
-## SiÃ¨ge
+## Siège
 
-25 RUE Ã‰LISE GERVAIS  
-42000 SAINT-Ã‰TIENNE
+25 RUE ÉLISE GERVAIS  
+42000 SAINT-ÉTIENNE
 
-## ActivitÃ©
+## Activité
 
-- APE : 94.99Z - Autres organisations fonctionnant par adhÃ©sion volontaire
+- APE : 94.99Z - Autres organisations fonctionnant par adhésion volontaire
 - Appartenance au champ de l'ESS : Oui
-- Appartenance au champ des sociÃ©tÃ©s Ã  mission : Non
+- Appartenance au champ des sociétés à mission : Non
 
-## CoordonnÃ©es publiques TVF
+## Coordonnées publiques TVF
 
 - E-mail : contact@territoiresvivantsfrance.fr
-- TÃ©lÃ©phone : 04 65 81 54 69
+- Téléphone : 04 65 81 54 69
 - Site : https://www.territoiresvivantsfrance.fr
 
 ## Prudence
 
-L'avis de situation SIRENE indique que, sauf les informations d'identification, les renseignements comme le code APE ont une valeur statistique. Aucune valeur juridique n'est attachÃ©e Ã  l'avis de situation.
+L'avis de situation SIRENE indique que, sauf les informations d'identification, les renseignements comme le code APE ont une valeur statistique. Aucune valeur juridique n'est attachée à l'avis de situation.
 

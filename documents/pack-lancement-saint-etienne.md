@@ -26,7 +26,7 @@ Il doit permettre de repondre rapidement a quatre questions :
 |---|---|---|---|
 | 1 | Dossier TVF | Presenter la mission, la methode et les limites de communication | Premier rendez-vous institutionnel |
 | 2 | Dossier territorial Saint-Etienne | Appuyer le pilote sur les enjeux locaux et les donnees publiques disponibles | Collectivite, financeur, acteur territorial |
-| 3 | Fiche collectivitÃ© ou fiche entreprise | Qualifier le besoin de l'interlocuteur | Pendant ou juste apres le rendez-vous |
+| 3 | Fiche collectivité ou fiche entreprise | Qualifier le besoin de l'interlocuteur | Pendant ou juste apres le rendez-vous |
 | 4 | Glossaire et annuaire Saint-Etienne | Identifier les bons contacts par secteur, pole et action | Preparation de prospection |
 | 5 | Kit courriers prets a l'emploi | Envoyer des demandes prudentes et structurees | Avant relance ou sollicitation |
 

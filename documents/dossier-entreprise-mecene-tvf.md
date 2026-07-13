@@ -1,6 +1,6 @@
-﻿# Dossier entreprise, mÃ©cÃ¨ne et financeur - TVF
+﻿# Dossier entreprise, mécène et financeur - TVF
 
-Document prÃ©paratoire pour entreprise, fondation, mÃ©cÃ¨ne, financeur ou acteur Ã©conomique souhaitant soutenir Territoires Vivants France.
+Document préparatoire pour entreprise, fondation, mécène, financeur ou acteur économique souhaitant soutenir Territoires Vivants France.
 
 Contact : contact@territoiresvivantsfrance.fr - 04 65 81 54 69
 
@@ -8,61 +8,61 @@ Contact : contact@territoiresvivantsfrance.fr - 04 65 81 54 69
 
 ## 1. Objet du dossier
 
-Ce dossier permet de cadrer une contribution Ã©conomique, matÃ©rielle, technique ou financiÃ¨re. TVF ne prÃ©sente pas une entreprise comme partenaire officiel sans accord Ã©crit, et ne valorise pas une contribution sans traÃ§abilitÃ©.
+Ce dossier permet de cadrer une contribution économique, matérielle, technique ou financière. TVF ne présente pas une entreprise comme partenaire officiel sans accord écrit, et ne valorise pas une contribution sans traçabilité.
 
 Les contributions possibles :
 
-- matÃ©riaux ;
+- matériaux ;
 - mobilier ;
-- Ã©quipements ;
+- équipements ;
 - locaux ;
-- mÃ©cÃ©nat financier ;
-- mÃ©cÃ©nat de compÃ©tences ;
+- mécénat financier ;
+- mécénat de compétences ;
 - logistique ;
 - expertise technique ;
-- soutien Ã  un projet territorial.
+- soutien à un projet territorial.
 
 ---
 
 ## 2. Identification
 
-| Ã‰lÃ©ment | Information |
+| Élément | Information |
 |---|---|
 | Nom de la structure |  |
-| Secteur d'activitÃ© |  |
+| Secteur d'activité |  |
 | Adresse |  |
-| Contact rÃ©fÃ©rent |  |
+| Contact référent |  |
 | Fonction |  |
 | E-mail |  |
-| TÃ©lÃ©phone |  |
-| Type de contribution envisagÃ©e |  |
+| Téléphone |  |
+| Type de contribution envisagée |  |
 
 ---
 
-## 3. Contribution proposÃ©e
+## 3. Contribution proposée
 
-| Sujet | Ã€ complÃ©ter |
+| Sujet | À compléter |
 |---|---|
 | Nature de la contribution |  |
-| QuantitÃ© ou montant |  |
+| Quantité ou montant |  |
 | Localisation |  |
-| DisponibilitÃ© |  |
-| Ã‰tat ou qualitÃ© |  |
+| Disponibilité |  |
+| État ou qualité |  |
 | Contraintes de retrait ou d'utilisation |  |
 | Documents disponibles |  |
 | Contact logistique |  |
 
 ---
 
-## 4. BÃ©nÃ©fices pour l'entreprise
+## 4. Bénéfices pour l'entreprise
 
 | Objectif | Ce que TVF peut permettre | Preuve attendue |
 |---|---|---|
-| RSE concrÃ¨te | Relier la contribution Ã  un besoin territorial | Fiche contribution |
-| Ã‰conomie circulaire | Orienter des matÃ©riaux rÃ©utilisables vers un projet | Bordereau matÃ©riaux |
+| RSE concrète | Relier la contribution à un besoin territorial | Fiche contribution |
+| Économie circulaire | Orienter des matériaux réutilisables vers un projet | Bordereau matériaux |
 | Ancrage local | Soutenir une action utile aux habitants | Compte rendu |
-| MÃ©cÃ©nat lisible | Financer un objet identifiÃ© | Convention ou lettre d'intention |
-| Communication maÃ®trisÃ©e | Valoriser uniquement aprÃ¨s validation | Accord Ã©crit |
+| Mécénat lisible | Financer un objet identifié | Convention ou lettre d'intention |
+| Communication maîtrisée | Valoriser uniquement après validation | Accord écrit |
 | Reporting | Suivre l'utilisation de la contribution | Bilan ou reporting |
 
 ---
@@ -71,81 +71,81 @@ Les contributions possibles :
 
 TVF n'est pas :
 
-- une dÃ©chetterie ;
+- une déchetterie ;
 - une plateforme de dons libres ;
 - un site de revente classique ;
 - un outil de communication automatique ;
-- un organisme garantissant un rÃ©sultat avant rÃ©alisation ;
+- un organisme garantissant un résultat avant réalisation ;
 - un canal d'affichage de logos sans accord.
 
-TVF peut refuser une contribution si elle est dangereuse, inutilisable, impossible Ã  stocker, non traÃ§able ou sans destination rÃ©aliste.
+TVF peut refuser une contribution si elle est dangereuse, inutilisable, impossible à stocker, non traçable ou sans destination réaliste.
 
 ---
 
-## 6. ModalitÃ©s de convention
+## 6. Modalités de convention
 
-Selon la contribution, une convention peut prÃ©ciser :
+Selon la contribution, une convention peut préciser :
 
 - l'objet ;
-- le pÃ©rimÃ¨tre ;
-- la durÃ©e ;
-- les responsabilitÃ©s ;
+- le périmètre ;
+- la durée ;
+- les responsabilités ;
 - les conditions de retrait ;
 - les assurances ;
-- la traÃ§abilitÃ© ;
-- les rÃ¨gles de communication ;
+- la traçabilité ;
+- les règles de communication ;
 - les justificatifs ;
 - les indicateurs de suivi ;
 - les conditions de fin ou de restitution.
 
-Points Ã  verrouiller :
+Points à verrouiller :
 
-- [ ] contribution rÃ©ellement disponible ;
-- [ ] droit de donner ou mettre Ã  disposition vÃ©rifiÃ© ;
-- [ ] Ã©tat et sÃ©curitÃ© Ã©valuÃ©s ;
+- [ ] contribution réellement disponible ;
+- [ ] droit de donner ou mettre à disposition vérifié ;
+- [ ] état et sécurité évalués ;
 - [ ] stockage ou retrait possible ;
-- [ ] usage conforme Ã  l'objet TVF ;
-- [ ] communication validÃ©e par Ã©crit ;
-- [ ] reporting dÃ©fini.
+- [ ] usage conforme à l'objet TVF ;
+- [ ] communication validée par écrit ;
+- [ ] reporting défini.
 
 ---
 
-## 7. PiÃ¨ces Ã  fournir
+## 7. Pièces à fournir
 
-| PiÃ¨ce | UtilitÃ© |
+| Pièce | Utilité |
 |---|---|
-| Photos | VÃ©rifier Ã©tat et nature de la ressource |
+| Photos | Vérifier état et nature de la ressource |
 | Inventaire | Quantifier la contribution |
-| Fiches techniques | VÃ©rifier usage et sÃ©curitÃ© |
-| Contraintes logistiques | PrÃ©parer retrait, transport ou stockage |
-| Contact opÃ©rationnel | Organiser la suite |
-| Document de mÃ©cÃ©nat ou intention | Cadrer le soutien financier ou en nature |
+| Fiches techniques | Vérifier usage et sécurité |
+| Contraintes logistiques | Préparer retrait, transport ou stockage |
+| Contact opérationnel | Organiser la suite |
+| Document de mécénat ou intention | Cadrer le soutien financier ou en nature |
 
 ---
 
-## 8. DÃ©cision attendue
+## 8. Décision attendue
 
-Ã€ la fin du premier Ã©change, la contribution peut Ãªtre :
+À la fin du premier échange, la contribution peut être :
 
-- [ ] acceptÃ©e ;
-- [ ] refusÃ©e ;
-- [ ] Ã  complÃ©ter ;
+- [ ] acceptée ;
+- [ ] refusée ;
+- [ ] à compléter ;
 - [ ] mise en attente ;
-- [ ] orientÃ©e vers un projet ;
-- [ ] Ã  conventionner ;
-- [ ] Ã  rÃ©Ã©valuer aprÃ¨s piÃ¨ces complÃ©mentaires.
+- [ ] orientée vers un projet ;
+- [ ] à conventionner ;
+- [ ] à réévaluer après pièces complémentaires.
 
 ---
 
-## 9. Prochaine Ã©tape
+## 9. Prochaine étape
 
-PrÃ©parer :
+Préparer :
 
 - une fiche entreprise ;
 - un descriptif de contribution ;
-- les photos ou piÃ¨ces disponibles ;
+- les photos ou pièces disponibles ;
 - les contraintes ;
-- le niveau de communication souhaitÃ©.
+- le niveau de communication souhaité.
 
 Contact : contact@territoiresvivantsfrance.fr
 

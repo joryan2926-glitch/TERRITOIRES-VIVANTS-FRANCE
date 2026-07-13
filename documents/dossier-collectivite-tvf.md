@@ -1,6 +1,6 @@
-﻿# Dossier collectivitÃ© - Territoire partenaire TVF
+﻿# Dossier collectivité - Territoire partenaire TVF
 
-Document prÃ©paratoire pour commune, EPCI, dÃ©partement, rÃ©gion ou structure publique souhaitant Ã©tudier une coopÃ©ration avec Territoires Vivants France.
+Document préparatoire pour commune, EPCI, département, région ou structure publique souhaitant étudier une coopération avec Territoires Vivants France.
 
 Contact : contact@territoiresvivantsfrance.fr - 04 65 81 54 69
 
@@ -8,50 +8,50 @@ Contact : contact@territoiresvivantsfrance.fr - 04 65 81 54 69
 
 ## 1. Objet du dossier
 
-Ce dossier permet de cadrer une premiÃ¨re coopÃ©ration territoriale avec TVF. Il ne remplace pas une dÃ©libÃ©ration, une convention validÃ©e, une procÃ©dure de marchÃ© public ou une instruction juridique interne.
+Ce dossier permet de cadrer une première coopération territoriale avec TVF. Il ne remplace pas une délibération, une convention validée, une procédure de marché public ou une instruction juridique interne.
 
-Il sert Ã  prÃ©parer :
+Il sert à préparer :
 
 - le besoin public ;
-- le pÃ©rimÃ¨tre pilote ;
-- les acteurs Ã  mobiliser ;
-- les donnÃ©es disponibles ;
+- le périmètre pilote ;
+- les acteurs à mobiliser ;
+- les données disponibles ;
 - les livrables attendus ;
-- les modalitÃ©s de convention ;
+- les modalités de convention ;
 - les indicateurs de suivi.
 
 ---
 
 ## 2. Situation du territoire
 
-Ã€ complÃ©ter par la collectivitÃ© :
+À compléter par la collectivité :
 
-| Ã‰lÃ©ment | Information |
+| Élément | Information |
 |---|---|
-| Nom de la collectivitÃ© |  |
-| Type | Commune / EPCI / DÃ©partement / RÃ©gion / Autre |
-| Service rÃ©fÃ©rent |  |
-| Ã‰lu ou direction concernÃ©e |  |
-| Contact opÃ©rationnel |  |
-| Territoire concernÃ© |  |
+| Nom de la collectivité |  |
+| Type | Commune / EPCI / Département / Région / Autre |
+| Service référent |  |
+| Élu ou direction concernée |  |
+| Contact opérationnel |  |
+| Territoire concerné |  |
 | Quartier, rue ou secteur pilote |  |
 | Date de la demande |  |
 
 ---
 
-## 3. Besoins publics Ã  traiter
+## 3. Besoins publics à traiter
 
 Cocher les sujets prioritaires :
 
 - [ ] logements vacants ;
-- [ ] habitat ancien ou dÃ©gradÃ© ;
-- [ ] commerces inoccupÃ©s ;
-- [ ] friches ou terrains dÃ©laissÃ©s ;
-- [ ] matÃ©riaux de rÃ©emploi ;
+- [ ] habitat ancien ou dégradé ;
+- [ ] commerces inoccupés ;
+- [ ] friches ou terrains délaissés ;
+- [ ] matériaux de réemploi ;
 - [ ] locaux associatifs ;
 - [ ] participation citoyenne ;
-- [ ] insertion ou bÃ©nÃ©volat ;
-- [ ] mÃ©cÃ©nat territorial ;
+- [ ] insertion ou bénévolat ;
+- [ ] mécénat territorial ;
 - [ ] autre :
 
 Description courte du besoin :
@@ -64,96 +64,96 @@ Description courte du besoin :
 
 ## 4. Ce que TVF peut apporter
 
-| Besoin de la collectivitÃ© | Contribution TVF possible | Livrable |
+| Besoin de la collectivité | Contribution TVF possible | Livrable |
 |---|---|---|
-| Comprendre la vacance | Regrouper donnÃ©es, signalements et premiers constats | Note de cadrage |
-| Prioriser un pÃ©rimÃ¨tre | Comparer secteurs, typologies et faisabilitÃ© | Grille de priorisation |
-| Mobiliser des propriÃ©taires | PrÃ©parer une dÃ©marche respectueuse et documentÃ©e | Courrier et fiche propriÃ©taire |
-| Valoriser des matÃ©riaux | Identifier ressources et affectations possibles | Registre matÃ©riaux |
-| RÃ©activer un local | Ã‰tudier usages, acteurs et contraintes | Fiche local / scÃ©nario |
-| Suivre une expÃ©rimentation | DÃ©finir indicateurs et preuves | Tableau de bord |
+| Comprendre la vacance | Regrouper données, signalements et premiers constats | Note de cadrage |
+| Prioriser un périmètre | Comparer secteurs, typologies et faisabilité | Grille de priorisation |
+| Mobiliser des propriétaires | Préparer une démarche respectueuse et documentée | Courrier et fiche propriétaire |
+| Valoriser des matériaux | Identifier ressources et affectations possibles | Registre matériaux |
+| Réactiver un local | Étudier usages, acteurs et contraintes | Fiche local / scénario |
+| Suivre une expérimentation | Définir indicateurs et preuves | Tableau de bord |
 
 ---
 
-## 5. ModalitÃ©s de convention
+## 5. Modalités de convention
 
-Une convention de coopÃ©ration territoriale doit prÃ©ciser :
+Une convention de coopération territoriale doit préciser :
 
-- l'objet exact de la coopÃ©ration ;
-- le pÃ©rimÃ¨tre gÃ©ographique ;
+- l'objet exact de la coopération ;
+- le périmètre géographique ;
 - les sujets couverts ;
-- la durÃ©e ;
-- les rÃ©fÃ©rents ;
-- les donnÃ©es utilisables ;
-- les rÃ¨gles de confidentialitÃ© ;
+- la durée ;
+- les référents ;
+- les données utilisables ;
+- les règles de confidentialité ;
 - les livrables attendus ;
-- les limites de responsabilitÃ© ;
-- les rÃ¨gles de communication ;
-- les modalitÃ©s de suivi ;
-- les conditions d'arrÃªt ou d'Ã©volution.
+- les limites de responsabilité ;
+- les règles de communication ;
+- les modalités de suivi ;
+- les conditions d'arrêt ou d'évolution.
 
-Points Ã  verrouiller avant signature :
+Points à verrouiller avant signature :
 
-- [ ] aucun logo public utilisÃ© sans accord ;
-- [ ] aucun site privÃ© exposÃ© publiquement sans autorisation ;
-- [ ] aucune donnÃ©e sensible diffusÃ©e sans base lÃ©gitime ;
-- [ ] aucune promesse de rÃ©sultat non vÃ©rifiÃ© ;
+- [ ] aucun logo public utilisé sans accord ;
+- [ ] aucun site privé exposé publiquement sans autorisation ;
+- [ ] aucune donnée sensible diffusée sans base légitime ;
+- [ ] aucune promesse de résultat non vérifié ;
 - [ ] aucun engagement financier implicite ;
-- [ ] aucun chantier sans cadre sÃ©curitÃ©.
+- [ ] aucun chantier sans cadre sécurité.
 
 ---
 
-## 6. PiÃ¨ces Ã  fournir
+## 6. Pièces à fournir
 
-| PiÃ¨ce | Obligatoire | Commentaire |
+| Pièce | Obligatoire | Commentaire |
 |---|---|---|
-| Carte du pÃ©rimÃ¨tre | RecommandÃ©e | Quartier, rue, commune, zone pilote |
-| DonnÃ©es disponibles | RecommandÃ©e | Logements, commerces, friches, Ã©tudes |
-| Contact rÃ©fÃ©rent | Oui | Service ou personne ressource |
-| PrioritÃ©s politiques ou techniques | RecommandÃ©e | Note interne, orientation, besoin public |
-| Documents existants | Si disponible | PLH, diagnostic, stratÃ©gie, Ã©tudes |
-| Contraintes connues | Oui si identifiÃ©es | PropriÃ©tÃ©, sÃ©curitÃ©, accÃ¨s, dÃ©lais |
+| Carte du périmètre | Recommandée | Quartier, rue, commune, zone pilote |
+| Données disponibles | Recommandée | Logements, commerces, friches, études |
+| Contact référent | Oui | Service ou personne ressource |
+| Priorités politiques ou techniques | Recommandée | Note interne, orientation, besoin public |
+| Documents existants | Si disponible | PLH, diagnostic, stratégie, études |
+| Contraintes connues | Oui si identifiées | Propriété, sécurité, accès, délais |
 
 ---
 
-## 7. DÃ©cision attendue du premier rendez-vous
+## 7. Décision attendue du premier rendez-vous
 
-Ã€ la fin du premier Ã©change, la collectivitÃ© doit pouvoir dÃ©cider :
+À la fin du premier échange, la collectivité doit pouvoir décider :
 
 - [ ] lancer une phase de cadrage ;
-- [ ] transmettre des donnÃ©es complÃ©mentaires ;
-- [ ] identifier un pÃ©rimÃ¨tre pilote ;
-- [ ] organiser une visite ou rÃ©union technique ;
-- [ ] prÃ©parer une convention ;
-- [ ] diffÃ©rer la dÃ©marche ;
+- [ ] transmettre des données complémentaires ;
+- [ ] identifier un périmètre pilote ;
+- [ ] organiser une visite ou réunion technique ;
+- [ ] préparer une convention ;
+- [ ] différer la démarche ;
 - [ ] classer le sujet sans suite.
 
 ---
 
 ## 8. Indicateurs possibles
 
-Les indicateurs ne doivent Ãªtre publiÃ©s qu'aprÃ¨s vÃ©rification.
+Les indicateurs ne doivent être publiés qu'après vérification.
 
-| Indicateur | DÃ©finition | Preuve |
+| Indicateur | Définition | Preuve |
 |---|---|---|
-| Biens signalÃ©s | Situations reÃ§ues dans un registre | Fiche signalement |
-| Biens qualifiÃ©s | Dossiers avec informations suffisantes | Grille d'instruction |
-| Ressources proposÃ©es | MatÃ©riaux, locaux ou compÃ©tences recensÃ©s | Bordereau ou fiche |
-| Dossiers orientÃ©s | Suites dÃ©cidÃ©es et tracÃ©es | Fiche dÃ©cision |
-| Projets conventionnÃ©s | Cadre Ã©crit validÃ© | Convention signÃ©e |
-| RÃ©sultats vÃ©rifiÃ©s | Effets documentÃ©s | Grille d'impact |
+| Biens signalés | Situations reçues dans un registre | Fiche signalement |
+| Biens qualifiés | Dossiers avec informations suffisantes | Grille d'instruction |
+| Ressources proposées | Matériaux, locaux ou compétences recensés | Bordereau ou fiche |
+| Dossiers orientés | Suites décidées et tracées | Fiche décision |
+| Projets conventionnés | Cadre écrit validé | Convention signée |
+| Résultats vérifiés | Effets documentés | Grille d'impact |
 
 ---
 
-## 9. Prochaine Ã©tape
+## 9. Prochaine étape
 
-Envoyer Ã  TVF :
+Envoyer à TVF :
 
-- la fiche collectivitÃ© ;
-- le pÃ©rimÃ¨tre pressenti ;
+- la fiche collectivité ;
+- le périmètre pressenti ;
 - le besoin prioritaire ;
-- les donnÃ©es disponibles ;
-- la dÃ©cision attendue.
+- les données disponibles ;
+- la décision attendue.
 
 Contact : contact@territoiresvivantsfrance.fr
 

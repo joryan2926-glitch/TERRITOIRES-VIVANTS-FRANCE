@@ -1,77 +1,77 @@
-﻿# Consentement et information sur les donnÃ©es personnelles
+﻿# Consentement et information sur les données personnelles
 
-Document prÃ©paratoire modifiable - version de travail
+Document préparatoire modifiable - version de travail
 
 ## 1. Objet
 
-Ce document informe les personnes qui transmettent des informations Ã  Territoires Vivants France dans le cadre d'un contact, signalement, dossier, partenariat, bÃ©nÃ©volat ou projet.
+Ce document informe les personnes qui transmettent des informations à Territoires Vivants France dans le cadre d'un contact, signalement, dossier, partenariat, bénévolat ou projet.
 
-## 2. DonnÃ©es pouvant Ãªtre collectÃ©es
+## 2. Données pouvant être collectées
 
-| CatÃ©gorie | Exemples |
+| Catégorie | Exemples |
 | --- | --- |
-| IdentitÃ© | Nom, prÃ©nom, fonction, structure |
-| Contact | E-mail, tÃ©lÃ©phone, adresse |
-| Dossier | Adresse d'un bien, description, photos, piÃ¨ces transmises |
-| Contribution | MatÃ©riaux, compÃ©tences, disponibilitÃ©, proposition |
-| Suivi | Ã©changes, dÃ©cisions, documents, Ã©tapes |
+| Identité | Nom, prénom, fonction, structure |
+| Contact | E-mail, téléphone, adresse |
+| Dossier | Adresse d'un bien, description, photos, pièces transmises |
+| Contribution | Matériaux, compétences, disponibilité, proposition |
+| Suivi | échanges, décisions, documents, étapes |
 
-## 3. FinalitÃ©s
+## 3. Finalités
 
-Les donnÃ©es sont utilisÃ©es pour :
+Les données sont utilisées pour :
 
-- rÃ©pondre Ã  une demande ;
+- répondre à une demande ;
 - instruire un dossier ;
-- organiser un Ã©change ou une visite ;
-- prÃ©parer une convention ;
+- organiser un échange ou une visite ;
+- préparer une convention ;
 - suivre un projet ;
-- documenter les dÃ©cisions ;
+- documenter les décisions ;
 - produire des indicateurs internes non nominatifs.
 
 ## 4. Base et prudence
 
-La transmission d'informations Ã  TVF doit rester proportionnÃ©e au besoin. Les donnÃ©es sensibles ou inutiles ne doivent pas Ãªtre demandÃ©es ni diffusÃ©es.
+La transmission d'informations à TVF doit rester proportionnée au besoin. Les données sensibles ou inutiles ne doivent pas être demandées ni diffusées.
 
-## 5. AccÃ¨s aux donnÃ©es
+## 5. Accès aux données
 
-Les donnÃ©es peuvent Ãªtre consultÃ©es par :
+Les données peuvent être consultées par :
 
-- les rÃ©fÃ©rents TVF concernÃ©s ;
-- les personnes nÃ©cessaires Ã  l'instruction du dossier ;
-- les partenaires uniquement lorsque cela est utile et validÃ© ;
-- les autoritÃ©s ou conseils compÃ©tents si une obligation l'exige.
+- les référents TVF concernés ;
+- les personnes nécessaires à l'instruction du dossier ;
+- les partenaires uniquement lorsque cela est utile et validé ;
+- les autorités ou conseils compétents si une obligation l'exige.
 
-## 6. DurÃ©e de conservation indicative
+## 6. Durée de conservation indicative
 
-| Type de donnÃ©e | DurÃ©e indicative |
+| Type de donnée | Durée indicative |
 | --- | --- |
-| Message simple | Temps nÃ©cessaire Ã  la rÃ©ponse |
-| Dossier non retenu | DurÃ©e limitÃ©e Ã  l'instruction et Ã  l'archivage raisonnable |
-| Dossier conventionnÃ© | DurÃ©e de la convention et du suivi |
-| Document comptable ou conventionnel | DurÃ©e lÃ©gale applicable |
+| Message simple | Temps nécessaire à la réponse |
+| Dossier non retenu | Durée limitée à l'instruction et à l'archivage raisonnable |
+| Dossier conventionné | Durée de la convention et du suivi |
+| Document comptable ou conventionnel | Durée légale applicable |
 
-Ces durÃ©es devront Ãªtre prÃ©cisÃ©es dans la politique de confidentialitÃ© dÃ©finitive.
+Ces durées devront être précisées dans la politique de confidentialité définitive.
 
 ## 7. Droits des personnes
 
 Chaque personne peut demander :
 
-- l'accÃ¨s Ã  ses donnÃ©es ;
+- l'accès à ses données ;
 - la rectification d'une information ;
 - la suppression lorsque cela est possible ;
 - la limitation d'un traitement ;
-- le retrait d'un consentement donnÃ© pour une communication.
+- le retrait d'un consentement donné pour une communication.
 
-Les demandes relatives aux donnÃ©es personnelles peuvent Ãªtre adressÃ©es Ã  :
+Les demandes relatives aux données personnelles peuvent être adressées à :
 
 - contact@territoiresvivantsfrance.fr
 - 04 65 81 54 69
 
 ## 8. Consentement
 
-Je reconnais avoir Ã©tÃ© informÃ©(e) de l'utilisation des informations transmises Ã  TVF dans le cadre du dossier suivant :
+Je reconnais avoir été informé(e) de l'utilisation des informations transmises à TVF dans le cadre du dossier suivant :
 
-- NumÃ©ro de dossier :
+- Numéro de dossier :
 - Objet :
 - Nom :
 - E-mail :
@@ -81,18 +81,18 @@ J'accepte que TVF utilise ces informations pour instruire la demande :
 - Oui
 - Non
 
-J'accepte d'Ãªtre recontactÃ©(e) :
+J'accepte d'être recontacté(e) :
 
 - Oui
 - Non
 
-Fait Ã  :
+Fait à :
 
 Le :
 
 Signature :
 
-## 9. Mise Ã  jour
+## 9. Mise à jour
 
-Ce document doit Ãªtre adaptÃ© aprÃ¨s validation juridique, publication de la politique de confidentialitÃ© dÃ©finitive et mise en place des outils numÃ©riques utilisÃ©s par TVF.
+Ce document doit être adapté après validation juridique, publication de la politique de confidentialité définitive et mise en place des outils numériques utilisés par TVF.
 

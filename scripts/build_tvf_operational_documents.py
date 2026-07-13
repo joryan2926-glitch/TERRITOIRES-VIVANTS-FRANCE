@@ -745,7 +745,7 @@ CONVENTIONS = [
         "clauses": [
             "Selection : TVF peut accepter ou refuser les ressources selon leur etat, leur securite, leur utilite et la faisabilite logistique.",
             "Affectation : les ressources acceptees sont integrees a une strategie de valorisation territoriale et non distribuees automatiquement.",
-            "TraÃ§abilite : un bordereau liste les quantites, categories, etats, lieux et dates de remise.",
+            "Traçabilité : un bordereau liste les quantités, catégories, états, lieux et dates de remise.",
             "Securite : les materiaux dangereux, pollues ou non conformes ne sont pas acceptes sans controle specifique.",
             "Transport : les responsabilites de chargement, transport et dechargement sont precisees.",
             "Communication : la valorisation RSE est possible uniquement selon les termes valides par les parties.",
@@ -792,7 +792,7 @@ CONVENTIONS = [
         "title": "Charte type benevole et chantier participatif",
         "public": "Benevole, citoyen, structure encadrante, association",
         "subtitle": "Encadrer la participation citoyenne, les missions benevoles et les actions collectives.",
-        "object": "Fixer les principes d'engagement, de securite, de respect des personnes et de traÃ§abilite des participations.",
+        "object": "Fixer les principes d'engagement, de sécurité, de respect des personnes et de traçabilité des participations.",
         "clauses": [
             "Engagement : le benevole agit dans le cadre defini par TVF ou par la structure encadrante.",
             "Securite : les consignes, equipements et limites d'intervention doivent etre respectes.",

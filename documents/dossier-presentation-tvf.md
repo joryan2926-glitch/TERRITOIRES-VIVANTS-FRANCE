@@ -1,183 +1,183 @@
-﻿# Dossier de prÃ©sentation - Territoires Vivants France
+﻿# Dossier de présentation - Territoires Vivants France
 
-Document de prÃ©sentation institutionnelle Ã  adapter selon l'interlocuteur.
+Document de présentation institutionnelle à adapter selon l'interlocuteur.
 
 Version de travail : 2026
 Contact : contact@territoiresvivantsfrance.fr - 04 65 81 54 69
-SiÃ¨ge national : 25 rue Ã‰lise Gervais, 42000 Saint-Ã‰tienne
+Siège national : 25 rue Élise Gervais, 42000 Saint-Étienne
 
 ---
 
-## 1. RÃ©sumÃ© exÃ©cutif
+## 1. Résumé exécutif
 
-Territoires Vivants France (TVF) est une association nationale en structuration, basÃ©e Ã  Saint-Ã‰tienne, qui vise Ã  remettre en usage des ressources aujourd'hui sous-utilisÃ©es : logements vacants, commerces inoccupÃ©s, bÃ¢timents inutilisÃ©s, friches, terrains dÃ©laissÃ©s, matÃ©riaux rÃ©employables, compÃ©tences locales et engagement citoyen.
+Territoires Vivants France (TVF) est une association nationale en structuration, basée à Saint-Étienne, qui vise à remettre en usage des ressources aujourd'hui sous-utilisées : logements vacants, commerces inoccupés, bâtiments inutilisés, friches, terrains délaissés, matériaux réemployables, compétences locales et engagement citoyen.
 
-TVF ne se positionne pas comme un opÃ©rateur isolÃ©. Sa vocation est de crÃ©er un cadre de coopÃ©ration entre propriÃ©taires, collectivitÃ©s, entreprises, associations, citoyens, bÃ©nÃ©voles, mÃ©cÃ¨nes et financeurs afin de transformer des situations bloquÃ©es en dossiers lisibles, conventionnÃ©s et suivis.
+TVF ne se positionne pas comme un opérateur isolé. Sa vocation est de créer un cadre de coopération entre propriétaires, collectivités, entreprises, associations, citoyens, bénévoles, mécènes et financeurs afin de transformer des situations bloquées en dossiers lisibles, conventionnés et suivis.
 
-La mÃ©thode repose sur une exigence simple : ne pas annoncer de rÃ©sultats, de partenaires ou de financements sans preuve. Chaque projet doit Ãªtre repÃ©rÃ©, qualifiÃ©, priorisÃ©, formalisÃ©, suivi et documentÃ©.
+La méthode repose sur une exigence simple : ne pas annoncer de résultats, de partenaires ou de financements sans preuve. Chaque projet doit être repéré, qualifié, priorisé, formalisé, suivi et documenté.
 
 ---
 
-## 2. Pourquoi TVF est nÃ©cessaire
+## 2. Pourquoi TVF est nécessaire
 
-De nombreux territoires font face Ã  des difficultÃ©s simultanÃ©es :
+De nombreux territoires font face à des difficultés simultanées :
 
-- des logements vacants ou dÃ©gradÃ©s restent sans solution ;
-- des commerces fermÃ©s fragilisent les rues et centres-villes ;
-- des bÃ¢timents et terrains inutilisÃ©s se dÃ©gradent ;
-- des matÃ©riaux encore exploitables sortent des circuits utiles ;
+- des logements vacants ou dégradés restent sans solution ;
+- des commerces fermés fragilisent les rues et centres-villes ;
+- des bâtiments et terrains inutilisés se dégradent ;
+- des matériaux encore exploitables sortent des circuits utiles ;
 - des associations cherchent des locaux ou des ressources ;
-- des entreprises veulent contribuer sans toujours disposer d'un cadre traÃ§able ;
-- des collectivitÃ©s doivent coordonner plusieurs acteurs avec des moyens limitÃ©s ;
-- des financeurs demandent des dossiers structurÃ©s, suivis et vÃ©rifiables.
+- des entreprises veulent contribuer sans toujours disposer d'un cadre traçable ;
+- des collectivités doivent coordonner plusieurs acteurs avec des moyens limités ;
+- des financeurs demandent des dossiers structurés, suivis et vérifiables.
 
-Ces sujets sont souvent traitÃ©s sÃ©parÃ©ment. TVF propose de les relier autour d'un mÃªme parcours : observer, qualifier, mobiliser, conventionner, agir, mesurer.
+Ces sujets sont souvent traités séparément. TVF propose de les relier autour d'un même parcours : observer, qualifier, mobiliser, conventionner, agir, mesurer.
 
 ---
 
 ## 3. Mission
 
-La mission de TVF est de faciliter la remise en usage des biens, lieux et ressources inutilisÃ©s au service des habitants et des territoires.
+La mission de TVF est de faciliter la remise en usage des biens, lieux et ressources inutilisés au service des habitants et des territoires.
 
-TVF cherche notamment Ã  :
+TVF cherche notamment à :
 
 - identifier les situations de vacance ou de sous-utilisation ;
-- qualifier les contraintes techniques, juridiques, financiÃ¨res et humaines ;
-- mettre autour de la table les acteurs concernÃ©s ;
-- prÃ©parer des conventions adaptÃ©es ;
-- orienter les matÃ©riaux et contributions vers des projets validÃ©s ;
-- crÃ©er des missions utiles pour les bÃ©nÃ©voles et acteurs locaux ;
-- suivre les rÃ©sultats uniquement lorsqu'ils sont prouvÃ©s.
+- qualifier les contraintes techniques, juridiques, financières et humaines ;
+- mettre autour de la table les acteurs concernés ;
+- préparer des conventions adaptées ;
+- orienter les matériaux et contributions vers des projets validés ;
+- créer des missions utiles pour les bénévoles et acteurs locaux ;
+- suivre les résultats uniquement lorsqu'ils sont prouvés.
 
 ---
 
-## 4. Publics concernÃ©s
+## 4. Publics concernés
 
-### CollectivitÃ©s
+### Collectivités
 
-TVF peut aider une commune, un EPCI, un dÃ©partement ou une rÃ©gion Ã  cadrer un diagnostic, un pÃ©rimÃ¨tre pilote ou une coopÃ©ration territoriale.
+TVF peut aider une commune, un EPCI, un département ou une région à cadrer un diagnostic, un périmètre pilote ou une coopération territoriale.
 
 Ce que TVF apporte :
 
-- une mÃ©thode de qualification ;
+- une méthode de qualification ;
 - une grille de priorisation ;
-- des modÃ¨les de convention ;
+- des modèles de convention ;
 - un registre de suivi ;
 - des indicateurs d'impact ;
-- une interface avec propriÃ©taires, entreprises, associations et citoyens.
+- une interface avec propriétaires, entreprises, associations et citoyens.
 
-### PropriÃ©taires
+### Propriétaires
 
-Un propriÃ©taire peut proposer un logement, un commerce, un bÃ¢timent, un immeuble ou un terrain inutilisÃ©.
+Un propriétaire peut proposer un logement, un commerce, un bâtiment, un immeuble ou un terrain inutilisé.
 
 Ce que TVF clarifie :
 
 - le statut du bien ;
-- l'Ã©tat apparent ;
-- les contraintes d'accÃ¨s et de sÃ©curitÃ© ;
+- l'état apparent ;
+- les contraintes d'accès et de sécurité ;
 - les usages possibles ;
-- la durÃ©e envisageable ;
-- les modalitÃ©s de convention ;
+- la durée envisageable ;
+- les modalités de convention ;
 - les conditions de restitution.
 
 ### Entreprises
 
-Une entreprise peut contribuer par des matÃ©riaux, du mobilier, des locaux, des compÃ©tences, de la logistique ou du mÃ©cÃ©nat.
+Une entreprise peut contribuer par des matériaux, du mobilier, des locaux, des compétences, de la logistique ou du mécénat.
 
-Ce que TVF sÃ©curise :
+Ce que TVF sécurise :
 
 - la description de la contribution ;
-- la traÃ§abilitÃ© ;
-- l'affectation Ã  un projet utile ;
-- le refus des ressources non adaptÃ©es ;
-- les rÃ¨gles de communication ;
-- le reporting Ã©ventuel.
+- la traçabilité ;
+- l'affectation à un projet utile ;
+- le refus des ressources non adaptées ;
+- les règles de communication ;
+- le reporting éventuel.
 
-### Associations, bÃ©nÃ©voles et citoyens
+### Associations, bénévoles et citoyens
 
-TVF peut recevoir des besoins d'usage, des signalements, des compÃ©tences ou des disponibilitÃ©s bÃ©nÃ©voles.
+TVF peut recevoir des besoins d'usage, des signalements, des compétences ou des disponibilités bénévoles.
 
 Ce que TVF organise :
 
 - des missions simples ;
-- des consignes de sÃ©curitÃ© ;
+- des consignes de sécurité ;
 - des fiches de signalement ;
-- des feuilles d'Ã©margement ;
+- des feuilles d'émargement ;
 - des comptes rendus ;
-- des limites claires de reprÃ©sentation.
+- des limites claires de représentation.
 
-### Financeurs et mÃ©cÃ¨nes
+### Financeurs et mécènes
 
-TVF prÃ©pare des dossiers de soutien plus lisibles : besoin, budget, risques, convention, indicateurs et preuve.
+TVF prépare des dossiers de soutien plus lisibles : besoin, budget, risques, convention, indicateurs et preuve.
 
 Ce que TVF doit fournir :
 
-- un objet de financement prÃ©cis ;
+- un objet de financement précis ;
 - un plan de financement ;
 - une matrice des risques ;
 - une grille d'impact ;
-- un reporting honnÃªte ;
-- une distinction entre objectif et rÃ©sultat.
+- un reporting honnête ;
+- une distinction entre objectif et résultat.
 
 ---
 
-## 5. MÃ©thode TVF
+## 5. Méthode TVF
 
-| Ã‰tape | Objectif | Livrable |
+| Étape | Objectif | Livrable |
 |---|---|---|
-| 1. RepÃ©rer | Identifier un bien, un besoin ou une ressource | Fiche signalement |
-| 2. Qualifier | VÃ©rifier informations, contraintes, acteurs et risques | Grille d'instruction |
-| 3. Prioriser | DÃ©cider si le dossier mÃ©rite une suite | Fiche dÃ©cision |
-| 4. Mobiliser | Identifier propriÃ©taires, collectivitÃ©s, entreprises, associations, financeurs | Compte rendu de cadrage |
-| 5. Formaliser | Ã‰crire les responsabilitÃ©s et conditions | Convention ou lettre d'intention |
-| 6. Agir | Mettre en oeuvre une action encadrÃ©e | PV, Ã©margement, compte rendu |
-| 7. Mesurer | Publier uniquement ce qui est prouvÃ© | Grille d'impact |
+| 1. Repérer | Identifier un bien, un besoin ou une ressource | Fiche signalement |
+| 2. Qualifier | Vérifier informations, contraintes, acteurs et risques | Grille d'instruction |
+| 3. Prioriser | Décider si le dossier mérite une suite | Fiche décision |
+| 4. Mobiliser | Identifier propriétaires, collectivités, entreprises, associations, financeurs | Compte rendu de cadrage |
+| 5. Formaliser | Écrire les responsabilités et conditions | Convention ou lettre d'intention |
+| 6. Agir | Mettre en oeuvre une action encadrée | PV, émargement, compte rendu |
+| 7. Mesurer | Publier uniquement ce qui est prouvé | Grille d'impact |
 
 ---
 
-## 6. Les cinq pÃ´les
+## 6. Les cinq pôles
 
-| PÃ´le | RÃ´le |
+| Pôle | Rôle |
 |---|---|
-| Habitat Vivant | Ã‰tudier les logements vacants, dÃ©gradÃ©s ou sous-utilisÃ©s |
-| MatÃ©riauthÃ¨que Solidaire | Qualifier et affecter des matÃ©riaux rÃ©employables Ã  des projets utiles |
-| Commerce Vivant | PrÃ©parer la rÃ©activation de locaux commerciaux inoccupÃ©s |
-| Friches & Terrains Vivants | Transformer des espaces dÃ©laissÃ©s en usages utiles, verts ou collectifs |
-| SolidaritÃ© & Insertion | Organiser bÃ©nÃ©volat, missions encadrÃ©es, participation et insertion |
+| Habitat Vivant | Étudier les logements vacants, dégradés ou sous-utilisés |
+| Matériauthèque Solidaire | Qualifier et affecter des matériaux réemployables à des projets utiles |
+| Commerce Vivant | Préparer la réactivation de locaux commerciaux inoccupés |
+| Friches & Terrains Vivants | Transformer des espaces délaissés en usages utiles, verts ou collectifs |
+| Solidarité & Insertion | Organiser bénévolat, missions encadrées, participation et insertion |
 
 ---
 
-## 7. Territoire pilote : Saint-Ã‰tienne
+## 7. Territoire pilote : Saint-Étienne
 
-Saint-Ã‰tienne constitue le point de dÃ©part de la mÃ©thode TVF. Le pilote doit permettre de tester les outils avant tout dÃ©ploiement plus large.
+Saint-Étienne constitue le point de départ de la méthode TVF. Le pilote doit permettre de tester les outils avant tout déploiement plus large.
 
 Objectifs du pilote :
 
 - structurer les premiers registres ;
-- qualifier des situations rÃ©elles ;
+- qualifier des situations réelles ;
 - tester les fiches par public ;
-- produire des conventions adaptÃ©es ;
-- prÃ©parer des indicateurs ;
+- produire des conventions adaptées ;
+- préparer des indicateurs ;
 - identifier les blocages ;
-- rendre la mÃ©thode duplicable.
+- rendre la méthode duplicable.
 
-Le pilote ne doit pas Ãªtre prÃ©sentÃ© comme un rÃ©sultat dÃ©jÃ  rÃ©alisÃ©. Il s'agit d'un terrain de mÃ©thode, de cadrage et de mise en confiance.
+Le pilote ne doit pas être présenté comme un résultat déjà réalisé. Il s'agit d'un terrain de méthode, de cadrage et de mise en confiance.
 
 ---
 
-## 8. Garanties de sÃ©rieux
+## 8. Garanties de sérieux
 
-TVF applique des rÃ¨gles de prudence indispensables :
+TVF applique des règles de prudence indispensables :
 
 - aucun faux partenaire ;
 - aucun faux financeur ;
-- aucun chiffre d'impact inventÃ© ;
-- aucun projet prÃ©sentÃ© comme rÃ©alisÃ© sans preuve ;
+- aucun chiffre d'impact inventé ;
+- aucun projet présenté comme réalisé sans preuve ;
 - aucune utilisation de logo sans accord ;
-- aucune entrÃ©e dans un bien sans autorisation ;
-- aucune action terrain sans cadre de sÃ©curitÃ© ;
-- aucune distribution libre de matÃ©riaux sans affectation validÃ©e ;
-- distinction entre idÃ©e, signalement, instruction, convention, rÃ©alisation et rÃ©sultat.
+- aucune entrée dans un bien sans autorisation ;
+- aucune action terrain sans cadre de sécurité ;
+- aucune distribution libre de matériaux sans affectation validée ;
+- distinction entre idée, signalement, instruction, convention, réalisation et résultat.
 
 ---
 
@@ -185,30 +185,30 @@ TVF applique des rÃ¨gles de prudence indispensables :
 
 Pour un premier rendez-vous, les documents prioritaires sont :
 
-- fiche collectivitÃ© ;
-- fiche propriÃ©taire ;
+- fiche collectivité ;
+- fiche propriétaire ;
 - fiche entreprise ;
 - fiche projet ;
 - fiche signalement ;
 - grille d'instruction ;
-- modÃ¨le de convention ;
+- modèle de convention ;
 - grille d'impact ;
 - plan de financement ;
-- registre des dÃ©cisions.
+- registre des décisions.
 
 ---
 
-## 10. Prochaine Ã©tape
+## 10. Prochaine étape
 
-Pour engager un Ã©change, prÃ©parer :
+Pour engager un échange, préparer :
 
 - le profil de l'interlocuteur ;
-- le territoire ou le bien concernÃ© ;
-- la situation Ã  traiter ;
+- le territoire ou le bien concerné ;
+- la situation à traiter ;
 - les acteurs connus ;
-- les piÃ¨ces dÃ©jÃ  disponibles ;
+- les pièces déjà disponibles ;
 - les contraintes principales ;
-- la dÃ©cision attendue du rendez-vous.
+- la décision attendue du rendez-vous.
 
 Contact : contact@territoiresvivantsfrance.fr - 04 65 81 54 69
 

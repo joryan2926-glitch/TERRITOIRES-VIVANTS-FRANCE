@@ -2,24 +2,24 @@
 
 Document interne - version de lancement
 
-## Signature recommandÃ©e - PrÃ©sident fondateur
+## Signature recommandée - Président fondateur
 
 Edryan Rangoly  
-PrÃ©sident fondateur  
+Président fondateur  
 **TERRITOIRES VIVANTS FRANCE**  
-25 rue Ã‰lise Gervais, 42000 Saint-Ã‰tienne  
+25 rue Élise Gervais, 42000 Saint-Étienne  
 contact@territoiresvivantsfrance.fr  
 04 65 81 54 69  
 https://www.territoiresvivantsfrance.fr  
 RNA W423016361 - SIREN 107 226 128  
-SIRET du siÃ¨ge 107 226 128 00018
+SIRET du siège 107 226 128 00018
 
 ---
 
 ## Signature courte
 
 TERRITOIRES VIVANTS FRANCE  
-Redonner vie aux lieux, aux bÃ¢timents et aux territoires.  
+Redonner vie aux lieux, aux bâtiments et aux territoires.  
 contact@territoiresvivantsfrance.fr - 04 65 81 54 69  
 www.territoiresvivantsfrance.fr
 
@@ -28,20 +28,20 @@ www.territoiresvivantsfrance.fr
 ## Signature pour courriers institutionnels
 
 TERRITOIRES VIVANTS FRANCE  
-Association loi 1901 dÃ©clarÃ©e  
+Association loi 1901 déclarée  
 RNA W423016361 - SIREN 107 226 128  
-SIRET du siÃ¨ge 107 226 128 00018  
-SiÃ¨ge : 25 rue Ã‰lise Gervais, 42000 Saint-Ã‰tienne  
+SIRET du siège 107 226 128 00018  
+Siège : 25 rue Élise Gervais, 42000 Saint-Étienne  
 E-mail : contact@territoiresvivantsfrance.fr  
-TÃ©lÃ©phone : 04 65 81 54 69  
+Téléphone : 04 65 81 54 69  
 Site : www.territoiresvivantsfrance.fr
 
 ---
 
-## RÃ¨gles dâ€™utilisation
+## Règles d’utilisation
 
-- Utiliser la signature complÃ¨te pour les collectivitÃ©s, financeurs, propriÃ©taires et entreprises.
-- Utiliser la signature courte pour les Ã©changes rapides.
-- Ne pas ajouter de logo partenaire, financeur ou institution sans autorisation Ã©crite.
-- Ne pas promettre de financement, de local, de vÃ©hicule ou de partenariat avant validation.
+- Utiliser la signature complète pour les collectivités, financeurs, propriétaires et entreprises.
+- Utiliser la signature courte pour les échanges rapides.
+- Ne pas ajouter de logo partenaire, financeur ou institution sans autorisation écrite.
+- Ne pas promettre de financement, de local, de véhicule ou de partenariat avant validation.
 

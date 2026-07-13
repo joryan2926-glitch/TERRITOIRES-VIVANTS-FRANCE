@@ -1,48 +1,48 @@
-﻿# Kit mÃ©dia TVF
+﻿# Kit média TVF
 
-Document prÃ©paratoire modifiable - version de travail
+Document préparatoire modifiable - version de travail
 
-## 1. PrÃ©sentation courte
+## 1. Présentation courte
 
-Territoires Vivants France est une association nationale en crÃ©ation qui structure une plateforme de coopÃ©ration pour remettre en usage les logements, commerces, bÃ¢timents, terrains et matÃ©riaux inutilisÃ©s.
+Territoires Vivants France est une association nationale en création qui structure une plateforme de coopération pour remettre en usage les logements, commerces, bâtiments, terrains et matériaux inutilisés.
 
-## 2. PrÃ©sentation longue
+## 2. Présentation longue
 
-Territoires Vivants France coordonne propriÃ©taires, collectivitÃ©s, entreprises, associations, citoyens, bÃ©nÃ©voles, mÃ©cÃ¨nes et financeurs autour d'un objectif commun : transformer les ressources inutilisÃ©es en projets utiles pour les habitants et les territoires. TVF agit avec une mÃ©thode progressive : repÃ©rer, qualifier, prioriser, conventionner, mobiliser, suivre et documenter.
+Territoires Vivants France coordonne propriétaires, collectivités, entreprises, associations, citoyens, bénévoles, mécènes et financeurs autour d'un objectif commun : transformer les ressources inutilisées en projets utiles pour les habitants et les territoires. TVF agit avec une méthode progressive : repérer, qualifier, prioriser, conventionner, mobiliser, suivre et documenter.
 
-## 3. Formulation recommandÃ©e
+## 3. Formulation recommandée
 
-TVF est une plateforme nationale de coopÃ©ration territoriale. Elle ne remplace pas les dispositifs publics, les collectivitÃ©s ou les professionnels existants. Elle facilite leur coordination autour de projets concrets de revitalisation.
+TVF est une plateforme nationale de coopération territoriale. Elle ne remplace pas les dispositifs publics, les collectivités ou les professionnels existants. Elle facilite leur coordination autour de projets concrets de revitalisation.
 
-## 4. Formulations Ã  Ã©viter
+## 4. Formulations à éviter
 
 - "TVF finance tous les projets"
-- "TVF distribue gratuitement des matÃ©riaux"
-- "TVF dispose dÃ©jÃ  d'un rÃ©seau national opÃ©rationnel"
-- "TVF est partenaire de..." sans accord formalisÃ©
-- "TVF a dÃ©jÃ  gÃ©nÃ©rÃ©..." sans indicateur vÃ©rifiÃ©
+- "TVF distribue gratuitement des matériaux"
+- "TVF dispose déjà d'un réseau national opérationnel"
+- "TVF est partenaire de..." sans accord formalisé
+- "TVF a déjà généré..." sans indicateur vérifié
 
 ## 5. Logo officiel
 
-Fichiers de rÃ©fÃ©rence :
+Fichiers de référence :
 
 - `assets/logo-territoires-vivants-france.png`
 
-RÃ¨gles :
+Règles :
 
 - conserver les proportions ;
 - ne pas modifier les couleurs ;
 - ne pas ajouter d'effet visuel ;
-- prÃ©server une marge suffisante autour du logo ;
-- utiliser la version fond blanc sur supports clairs lorsque la lisibilitÃ© est meilleure.
+- préserver une marge suffisante autour du logo ;
+- utiliser la version fond blanc sur supports clairs lorsque la lisibilité est meilleure.
 
 ## 6. Message institutionnel
 
-TVF veut devenir un outil de coopÃ©ration au service des territoires : plus lisible pour les collectivitÃ©s, plus accessible pour les propriÃ©taires, plus utile pour les entreprises engagÃ©es et plus mobilisateur pour les citoyens.
+TVF veut devenir un outil de coopération au service des territoires : plus lisible pour les collectivités, plus accessible pour les propriétaires, plus utile pour les entreprises engagées et plus mobilisateur pour les citoyens.
 
-## 7. Supports de discours associÃ©s
+## 7. Supports de discours associés
 
-Pour prÃ©parer une prise de parole, un rendez-vous ou une campagne de communication, utiliser Ã©galement :
+Pour préparer une prise de parole, un rendez-vous ou une campagne de communication, utiliser également :
 
 - `kit-discours-tvf.md`
 - `pitch-officiel-tvf.md`
@@ -57,25 +57,25 @@ Pour prÃ©parer une prise de parole, un rendez-vous ou une campagne de communic
 - `scripts-video-reseaux-sociaux.md`
 - `scenarios-types-cas-usage.md`
 
-RÃ¨gle : adapter chaque support au contexte rÃ©el, sans annoncer de partenaire, chiffre ou rÃ©sultat non vÃ©rifiÃ©.
+Règle : adapter chaque support au contexte réel, sans annoncer de partenaire, chiffre ou résultat non vérifié.
 
 ## 8. Contact presse et institutionnel
 
-Canal officiel TVF pour les premiÃ¨res demandes :
+Canal officiel TVF pour les premières demandes :
 
 - E-mail : contact@territoiresvivantsfrance.fr
-- TÃ©lÃ©phone : 04 65 81 54 69
-- SiÃ¨ge : 25 rue Ã‰lise Gervais, 42000 Saint-Ã‰tienne
+- Téléphone : 04 65 81 54 69
+- Siège : 25 rue Élise Gervais, 42000 Saint-Étienne
 
-Interlocuteur presse nominatif Ã  prÃ©ciser selon la demande, le sujet traitÃ© et l'autorisation de communication.
+Interlocuteur presse nominatif à préciser selon la demande, le sujet traité et l'autorisation de communication.
 
-## 9. ContrÃ´le avant diffusion
+## 9. Contrôle avant diffusion
 
-Avant toute publication externe, vÃ©rifier :
+Avant toute publication externe, vérifier :
 
-- cohÃ©rence avec la charte Ã©thique ;
+- cohérence avec la charte éthique ;
 - exactitude des informations ;
-- accord des personnes citÃ©es ;
+- accord des personnes citées ;
 - autorisation d'utilisation des images ;
-- absence de faux partenaire, faux chiffre ou rÃ©sultat non vÃ©rifiÃ©.
+- absence de faux partenaire, faux chiffre ou résultat non vérifié.
 
