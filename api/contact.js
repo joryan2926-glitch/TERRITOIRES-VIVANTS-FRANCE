@@ -99,8 +99,8 @@ function inferCategory(input) {
   if (/presse|journaliste|media|communication/.test(text)) return "presse-institutionnel";
   if (/financeur|mecene|mecenat|fondation|investisseur|subvention|don\b|financement/.test(text)) return "financement-mecenat";
   if (/materiau|materiaux|reemploi|stock|palettes|bois|fenetre|porte|mobilier|don de materiaux/.test(text)) return "materiaux-reemploi";
-  if (/proprietaire|logement|immeuble|bien|local|commerce|terrain|friche|batiment/.test(text)) return "bien-vacant-proprietaire";
   if (/collectivite|mairie|commune|epci|metropole|departement|region|territoire partenaire|diagnostic/.test(text)) return "collectivite-territoire";
+  if (/proprietaire|logement|immeuble|bien|local|commerce|terrain|friche|batiment/.test(text)) return "bien-vacant-proprietaire";
   if (/entreprise|artisan|rse|competence|partenariat|partenaire|local de stockage/.test(text)) return "entreprise-partenariat";
   if (/benevole|citoyen|insertion|chantier|association|volontaire/.test(text)) return "benevolat-insertion";
   return "demande-generale";

@@ -1,0 +1,14 @@
+PACK EMAILS D'ACCOMPAGNEMENT TVF - SAINT-ÉTIENNE
+
+01-ville-saint-etienne -> 01-ville-saint-etienne-email-accompagnement.txt
+02-saint-etienne-metropole -> 02-saint-etienne-metropole-email-accompagnement.txt
+03-departement-loire -> 03-departement-loire-email-accompagnement.txt
+04-prefecture-loire -> 04-prefecture-loire-email-accompagnement.txt
+05-epora -> 05-epora-email-accompagnement.txt
+06-renovactions42 -> 06-renovactions42-email-accompagnement.txt
+07-cci-lyon-metropole-saint-etienne-roanne -> 07-cci-lyon-metropole-saint-etienne-roanne-email-accompagnement.txt
+08-capeb-loire -> 08-capeb-loire-email-accompagnement.txt
+09-epase -> 09-epase-email-accompagnement.txt
+10-maison-emploi-plie -> 10-maison-emploi-plie-email-accompagnement.txt
+11-mission-locale-saint-etienne -> 11-mission-locale-saint-etienne-email-accompagnement.txt
+12-hosmoz-reseau-gesat -> 12-hosmoz-reseau-gesat-email-accompagnement.txt

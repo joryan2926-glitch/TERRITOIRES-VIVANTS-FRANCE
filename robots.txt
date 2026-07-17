@@ -4,6 +4,9 @@ Disallow: /documents
 Disallow: /documents/
 Disallow: /output/
 Disallow: /tmp/
-Disallow: /admin-demandes
-Disallow: /admin-demandes.html
+Disallow: /admin
+Disallow: /admin-
+Disallow: /dashboard
+Disallow: /api/admin
+Disallow: /api/dashboard
 Sitemap: https://www.territoiresvivantsfrance.fr/sitemap.xml

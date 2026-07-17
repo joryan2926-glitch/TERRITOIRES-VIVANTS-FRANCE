@@ -3,13 +3,14 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "check": "npm run check:encoding && npm run check:js && npm run check:documents && npm run test:admin",
+    "check": "npm run check:encoding && npm run check:js && npm run check:documents && npm run test:admin && npm run test:user-flow",
     "check:js": "node scripts/check-js.js",
     "check:documents": "node scripts/check-document-downloads.js",
     "test:admin": "node scripts/run-admin-api-tests.js",
     "test:production": "node tests/dashboard-real-env.test.js",
     "audit:tvf-os": "node scripts/audit-tvf-os-operationnel.js",
     "check:tvf-os:production": "node scripts/check-tvf-os-production.js",
-    "check:encoding": "node scripts/check-encoding.js"
+    "check:encoding": "node scripts/check-encoding.js",
+    "test:user-flow": "node tests/user-flow-tvf-os.test.js"
   }
 }
