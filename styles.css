@@ -8587,3 +8587,38 @@ td {
     margin-bottom: 0.72em;
   }
 }
+
+/* Ajustements TVF - lisibilite bloc pilote */
+.feature {
+  color: var(--blue-900);
+  background: linear-gradient(180deg, #f7faf4, #eef6eb);
+  border-block: 1px solid rgba(24, 63, 34, 0.12);
+}
+
+.feature h2,
+.feature p {
+  color: var(--blue-900);
+}
+
+.feature .section-kicker {
+  color: var(--green-800);
+}
+
+.feature .section-lead {
+  color: rgba(14, 45, 69, 0.84);
+}
+
+.feature .btn.primary {
+  color: var(--white);
+  background: linear-gradient(135deg, var(--green-800), var(--blue-900));
+  box-shadow: 0 14px 30px rgba(14, 45, 69, 0.18);
+}
+
+.journey-section .section-head {
+  max-width: 820px;
+}
+
+.journey-card {
+  background: rgba(255, 255, 255, 0.13);
+  border-color: rgba(255, 255, 255, 0.28);
+}

@@ -6,7 +6,7 @@ const site = {
   url: "https://www.territoiresvivantsfrance.fr",
   lastModified: "2026-07-04",
   description:
-    "Plateforme nationale de coopération pour remettre en usage les logements, commerces, bâtiments, terrains et matériaux inutilisés.",
+    "Association en développement pour remettre en usage les logements, commerces, bâtiments, terrains et matériaux inutilisés.",
 };
 
 const contact = {
@@ -188,7 +188,7 @@ const pages = [
     meta:
       "Territoires Vivants France coordonne propriétaires, collectivités, entreprises, associations et citoyens pour redonner vie aux biens et ressources inutilisés.",
     heroImage: "assets/photos/france-saint-etienne-chateaucreux.jpg",
-    eyebrow: "Plateforme nationale de coopération",
+    eyebrow: "Association en développement territorial",
     h1: "Redonner vie aux lieux utiles aux habitants.",
     intro:
       "Territoires Vivants France structure une méthode de coopération pour repérer les ressources inutilisées, mobiliser les bons acteurs, préparer les conventions et accompagner des projets utiles aux territoires.",
@@ -250,7 +250,7 @@ const pages = [
     file: "qui-sommes-nous.html",
     title: "Qui sommes-nous ?",
     meta:
-      "Découvrez Territoires Vivants France, association nationale de coopération territoriale basée à Saint-Étienne.",
+      "Découvrez Territoires Vivants France, association en développement territorial basée à Saint-Étienne.",
     heroImage: "assets/photos/france-saint-etienne-chateaucreux.jpg",
     eyebrow: "L'association",
     h1: "Une plateforme de coopération territoriale.",
@@ -1377,7 +1377,7 @@ const pages = [
         "Le kit média sert à harmoniser la présentation publique : mêmes mots, mêmes limites, mêmes visuels, même exigence de preuve. Il évite qu'un article, un post ou une présentation donne une impression plus avancée que la réalité du projet.",
         [
           ["Identifier", "Utiliser le logo officiel, le nom complet et les formulations validées."],
-          ["Expliquer", "Présenter TVF comme une association nationale de coopération territoriale."],
+          ["Expliquer", "Présenter TVF comme une association en développement territorial, basée à Saint-Étienne."],
           ["Protéger", "Ne pas annoncer de partenaires, chiffres ou résultats non formalisés."],
         ]
       ),
@@ -1916,7 +1916,7 @@ function journeySection(page) {
 
 function journeyCopyFor(page) {
   const map = {
-    "index.html": ["Orientation", "Comprendre TVF en trois portes", "Choisissez l'entrée la plus utile selon votre besoin : comprendre, agir ou étudier le territoire pilote."],
+    "index.html": ["Orientation", "Comprendre TVF en trois entrées", "Choisissez l'entrée la plus utile selon votre besoin : comprendre, agir ou étudier le territoire pilote."],
     "contact.html": ["Après contact", "Préparer une demande exploitable", "Ces liens évitent d'envoyer un message trop général et aident à joindre les bonnes pièces."],
     "documents.html": ["Documents", "Passer du modèle à l'action", "Après avoir identifié un document, vérifiez le cadre, le public concerné et la prochaine décision."],
     "saint-etienne.html": ["Pilote", "Transformer le diagnostic en dossier", "Le territoire pilote doit conduire vers des données, des acteurs et des documents directement exploitables."],
@@ -2829,7 +2829,7 @@ function ctaBandFor(page) {
 function institutionalNarrativeFor(page) {
   const narratives = {
     "index.html": [
-      "Un portail de coopération territoriale",
+      "Une méthode territoriale en construction",
       "Territoires Vivants France se positionne comme un outil d'intérêt général destiné à relier des situations aujourd'hui dispersées : biens vacants, ressources inutilisées, besoins locaux, compétences techniques et capacités de financement. Le site doit être lu comme une porte d'entrée vers une méthode de travail, pas comme une simple vitrine associative.",
       "La démarche proposée repose sur une exigence constante : qualifier avant d'annoncer, conventionner avant d'agir et documenter avant de publier un impact. Cette posture permet de dialoguer avec les collectivités, les propriétaires, les entreprises et les financeurs dans un cadre sérieux, compréhensible et vérifiable."
     ],
@@ -2908,7 +2908,7 @@ function institutionalNarrativeFor(page) {
 
 function quickBriefFor(page) {
   const briefs = {
-    "index.html": ["Positionnement", "TVF coordonne la remise en usage de biens, lieux et ressources inutilisés à partir d'un cadre de coopération territorial.", "Qualifier le profil, le territoire et le sujet à instruire.", "Dossier TVF", "agir-avec-nous.html"],
+    "index.html": ["Positionnement", "TVF prépare la remise en usage de biens, lieux et ressources inutilisés à partir d'un cadre de travail territorial.", "Qualifier le profil, le territoire et le sujet à instruire.", "Dossier TVF", "agir-avec-nous.html"],
     "nos-actions.html": ["Cadre d'intervention", "Les actions structurent les principaux leviers : habitat, commerce, matériaux, friches, insertion et financement.", "Orienter le dossier vers le levier prioritaire.", "Fiche projet", "contact.html"],
     "nos-poles.html": ["Organisation opérationnelle", "Les cinq pôles donnent une lecture professionnelle des compétences mobilisables sur un dossier.", "Identifier le pôle pilote et les pôles associés.", "Grille d'instruction", "nos-actions.html"],
     "observatoire.html": ["Observation territoriale", "L'observatoire rassemble données publiques, signalements qualifiés et décisions internes sans exposer d'informations sensibles.", "Documenter une situation factuelle.", "Fiche signalement", "agir-avec-nous.html#signalement"],
@@ -2924,7 +2924,7 @@ function quickBriefFor(page) {
     "financeurs-mecenes.html": ["Financement responsable", "Un soutien doit s'appuyer sur un projet instruit, un budget, des risques identifiés et un reporting vérifiable.", "Demander une lecture financeur du dossier.", "Plan de financement", "documents/plan-financement-territorial.md"],
     "partenaires.html": ["Coopération", "Un partenariat TVF repose sur un périmètre écrit, des responsabilités, une durée et une communication validée.", "Qualifier la forme de coopération possible.", "Fiche partenaire", "documents/fiche-partenaire-potentiel.md"],
     "notre-methode.html": ["Méthodologie", "La méthode transforme un signalement ou une proposition en décision documentée, conventionnée ou classée.", "Suivre les étapes de qualification et de décision.", "Grille d'instruction", "documents/grille-instruction-dossier.md"],
-    "qui-sommes-nous.html": ["Identité", "TVF porte une mission de coopération nationale au service des territoires, des propriétaires et des ressources inutilisées.", "Lire la méthode ou engager un échange institutionnel.", "Dossier TVF", "documents/dossier-presentation-tvf.md"],
+    "qui-sommes-nous.html": ["Identité", "TVF porte une mission de revitalisation progressive au service des territoires, des propriétaires et des ressources inutilisées.", "Lire la méthode ou engager un échange institutionnel.", "Dossier TVF", "documents/dossier-presentation-tvf.md"],
     "gouvernance.html": ["Gouvernance", "Les décisions doivent être tracées, argumentées et compatibles avec l'objet statutaire de l'association.", "Vérifier le cadre avant tout engagement.", "Charte éthique", "documents/charte-ethique.md"],
     "transparence.html": ["Transparence", "La communication distingue informations établies, dossiers en instruction, objectifs et résultats vérifiés.", "Appuyer toute annonce sur une preuve ou un statut clair.", "Registre décisions", "documents/registre-suivi-decisions.md"],
     "faq.html": ["Questions clés", "Les réponses orientent vers les pages, documents et interlocuteurs utiles sans multiplier les détours.", "Rechercher par profil ou passer au contact.", "Documents essentiels", "documents.html#les-documents-essentiels"],
@@ -2944,8 +2944,8 @@ function decisionPanelFor(page) {
   const panels = {
     "index.html": {
       kicker: "Orientation",
-      title: "Une porte d'entrée vers la coopération territoriale.",
-      text: "La page d'accueil présente TVF comme une plateforme nationale capable de qualifier un besoin, d'orienter les acteurs et de préparer les premiers cadres de coopération.",
+      title: "Une entrée claire vers la méthode TVF.",
+      text: "La page d'accueil présente TVF comme une association en développement capable de qualifier un besoin, d'orienter les acteurs et de préparer les premiers cadres de travail.",
       action: ["Engager une démarche", "agir-avec-nous.html"],
       items: [
         ["Mission", "Coordonner biens vacants, ressources inutilisées et acteurs territoriaux autour d'usages utiles."],
@@ -3125,7 +3125,7 @@ ${breadcrumbNav(page)}
   </main>
   <footer class="site-footer">
     <div class="container footer-grid">
-      <div><span class="footer-logo-box"><img src="assets/logo-territoires-vivants-france-web.png" width="583" height="181" alt="Territoires Vivants France" class="footer-logo" loading="lazy" decoding="async"></span><p>Plateforme nationale de coopération pour redonner vie aux biens, lieux et ressources inutilisés.</p></div>
+      <div><span class="footer-logo-box"><img src="assets/logo-territoires-vivants-france-web.png" width="583" height="181" alt="Territoires Vivants France" class="footer-logo" loading="lazy" decoding="async"></span><p>Association en développement, basée à Saint-Étienne, pour redonner vie aux biens, lieux et ressources inutilisés.</p></div>
       <div><h3>Navigation</h3>${nav.slice(0, 7).map(([label, href]) => `<a href="${hrefFor(href)}">${label}</a>`).join("")}</div>
       <div><h3>Ressources</h3><a href="${hrefFor("faq.html")}">FAQ</a><a href="${hrefFor("kit-media.html")}">Kit média</a><a href="${hrefFor("gouvernance.html")}">Gouvernance</a><a href="${hrefFor("mentions-legales.html")}">Mentions légales</a><a href="${hrefFor("politique-confidentialite.html")}">Politique de confidentialité</a></div>
       <div><h3>Siège</h3><p>25 rue Élise Gervais<br>42000 Saint-Étienne</p><p><a href="mailto:${contact.email}">${contact.email}</a><br><a href="tel:${contact.phoneHref}">${contact.phone}</a></p><div class="footer-social" aria-label="Réseaux et messagerie TVF"><a href="${socialLinks.whatsapp}" target="_blank" rel="noopener noreferrer" aria-label="Écrire à TVF sur WhatsApp"><span aria-hidden="true">WA</span><span>WhatsApp</span></a><a href="${socialLinks.facebook}" target="_blank" rel="noopener noreferrer" aria-label="Suivre TVF sur Facebook"><span aria-hidden="true">FB</span><span>Facebook</span></a><a href="${socialLinks.instagram}" target="_blank" rel="noopener noreferrer" aria-label="Suivre TVF sur Instagram"><span aria-hidden="true">IG</span><span>Instagram</span></a></div><a class="btn secondary" href="${hrefFor("contact.html")}">Contacter TVF</a></div>
