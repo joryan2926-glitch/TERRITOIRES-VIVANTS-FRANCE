@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import {
   ActivityIndicator,
   Alert,
@@ -16,6 +16,7 @@ import {
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
 import { Ionicons } from "@expo/vector-icons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as ImagePicker from "expo-image-picker";
 import * as Location from "expo-location";
 
@@ -41,6 +42,26 @@ import { submitMobileRequest } from "./src/services/requestRepository";
 import { getSupabaseConfigStatus } from "./src/services/supabaseClient";
 
 const logo = require("./assets/tvf-mobile-logo.png");
+
+const SUBMISSION_HISTORY_KEY = "tvf-mobile-submission-history";
+
+async function loadSubmissionHistory() {
+  try {
+    const raw = await AsyncStorage.getItem(SUBMISSION_HISTORY_KEY);
+    const parsed = raw ? JSON.parse(raw) : [];
+    return Array.isArray(parsed) ? parsed.slice(0, 8) : [];
+  } catch {
+    return [];
+  }
+}
+
+async function saveSubmissionHistory(items) {
+  try {
+    await AsyncStorage.setItem(SUBMISSION_HISTORY_KEY, JSON.stringify(items.slice(0, 8)));
+  } catch {
+    // Le suivi local reste optionnel : l'envoi Supabase ne doit jamais etre bloque par le stockage du telephone.
+  }
+}
 
 const initialDraft = {
   category: "",
@@ -706,6 +727,18 @@ function AppShell() {
   const [missing, setMissing] = useState([]);
   const [submitting, setSubmitting] = useState(false);
 
+  useEffect(() => {
+    let active = true;
+    loadSubmissionHistory().then((items) => {
+      if (!active) return;
+      setSubmissionHistory(items);
+      if (items.length) setLastSubmission(items[0]);
+    });
+    return () => {
+      active = false;
+    };
+  }, []);
+
   const go = (next, options = {}) => {
     setMissing([]);
     if (options.resetDraft) setDraft(initialDraft);
@@ -758,7 +791,11 @@ function AppShell() {
         payload
       };
       setLastSubmission(submission);
-      setSubmissionHistory((items) => [submission, ...items.filter((item) => item.reference !== reference)].slice(0, 8));
+      setSubmissionHistory((items) => {
+        const next = [submission, ...items.filter((item) => item.reference !== reference)].slice(0, 8);
+        saveSubmissionHistory(next);
+        return next;
+      });
       setDraft(initialDraft);
       setMissing([]);
       go("confirmation");

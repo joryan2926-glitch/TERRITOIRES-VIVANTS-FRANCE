@@ -51,7 +51,8 @@ for (const dependency of [
   "@supabase/supabase-js",
   "react-native-url-polyfill",
   "@opentelemetry/api",
-  "@expo/ngrok"
+  "@expo/ngrok",
+  "@react-native-async-storage/async-storage"
 ]) {
   if (!dependencies[dependency]) {
     console.error(`MISSING dependency ${dependency}`);
@@ -71,7 +72,9 @@ for (const token of [
   "Alert.alert",
   "photoUri",
   "latitude",
-  "longitude"
+  "longitude",
+  "AsyncStorage",
+  "SUBMISSION_HISTORY_KEY"
 ]) {
   if (!appSource.includes(token)) {
     console.error(`MISSING App.js token ${token}`);
