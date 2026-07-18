@@ -1,4 +1,4 @@
-﻿const assert = require("assert");
+const assert = require("assert");
 const adminContactsHandler = require("../lib/api/admin-contacts");
 
 const {
@@ -9,6 +9,8 @@ const {
   buildAssistant,
   createPayload,
   updatePayload,
+  enrichMobileRequest,
+  contactPayloadFromMobile,
 } = adminContactsHandler._private;
 
 function createResponse() {
@@ -82,6 +84,40 @@ function testPayloadValidation() {
   assert.deepStrictEqual(updatePayload({ missing_pieces: "photos\nadresse" }).missing_pieces, ["photos", "adresse"]);
 }
 
+function testMobileMapping() {
+  const mobile = enrichMobileRequest({
+    id: "00000000-0000-0000-0000-000000000201",
+    reference: "MOB-2026-0001",
+    flow: "materials",
+    category: "bois",
+    raw_address: "Saint-Etienne",
+    photo_bucket: "materiaux",
+    photo_path: "MOB-2026-0001/photo.jpg",
+    payload: {
+      categoryLabel: "Bois et menuiseries",
+      details: {
+        title: "Stock de bois disponible",
+        description: "Lots de bois propres et reutilisables.",
+        quantity: "12 palettes",
+      },
+      contact: {
+        name: "Entreprise demo",
+        email: "contact@example.fr",
+        phone: "0465000000",
+      },
+    },
+  });
+  assert.strictEqual(mobile.target_category, "materiaux-reemploi");
+  assert.strictEqual(mobile.target_priority, "normale");
+  assert.strictEqual(mobile.has_photo, true);
+
+  const payload = contactPayloadFromMobile(mobile);
+  assert.strictEqual(payload.source_page, "tvf-mobile");
+  assert.strictEqual(payload.form_code, "MOB-01");
+  assert.strictEqual(payload.category, "materiaux-reemploi");
+  assert.ok(payload.message.includes("Reference mobile : MOB-2026-0001"));
+  assert.ok(payload.internal_notes.includes("Piece photo"));
+}
 async function testUnauthorizedEndpoint() {
   process.env.TVF_ADMIN_TOKEN = "secret";
   const result = await runHandler({ method: "GET", token: "wrong" });
@@ -171,6 +207,117 @@ async function testPostEndpointWithSupabaseMock() {
   }
 }
 
+async function testMobileEndpointWithSupabaseMock() {
+  process.env.NODE_ENV = "test";
+  process.env.TVF_ADMIN_TOKEN = "secret";
+  process.env.SUPABASE_URL = "https://demo.supabase.co";
+  process.env.SUPABASE_SERVICE_ROLE_KEY = "sb_secret_demo";
+
+  const originalFetch = global.fetch;
+  global.fetch = async (url, options = {}) => {
+    assert.ok(String(url).startsWith("https://demo.supabase.co/rest/v1/mobile_requests?"));
+    assert.ok(String(url).includes("status=eq.received_mobile"));
+    assert.strictEqual(options.headers.apikey, "sb_secret_demo");
+    return {
+      ok: true,
+      status: 200,
+      async text() {
+        return JSON.stringify([
+          {
+            id: "00000000-0000-0000-0000-000000000202",
+            reference: "MOB-2026-0002",
+            flow: "signal",
+            category: "commerce ferme",
+            status: "received_mobile",
+            raw_address: "Rue de la Republique, Saint-Etienne",
+            payload: { details: { description: "Vitrine fermee depuis plusieurs mois." } },
+            created_at: "2026-07-07T10:00:00.000Z",
+          },
+        ]);
+      },
+    };
+  };
+
+  try {
+    const result = await runHandler({ method: "GET", url: "/api/admin-contacts?action=mobile-pending" });
+    assert.strictEqual(result.statusCode, 200);
+    assert.strictEqual(result.json.mobileRequests.length, 1);
+    assert.strictEqual(result.json.mobileRequests[0].target_category, "bien-vacant-proprietaire");
+  } finally {
+    global.fetch = originalFetch;
+  }
+}
+
+async function testMobileImportWithSupabaseMock() {
+  process.env.NODE_ENV = "test";
+  process.env.TVF_ADMIN_TOKEN = "secret";
+  process.env.SUPABASE_URL = "https://demo.supabase.co";
+  process.env.SUPABASE_SERVICE_ROLE_KEY = "sb_secret_demo";
+
+  const calls = [];
+  const originalFetch = global.fetch;
+  global.fetch = async (url, options = {}) => {
+    const method = options.method || "GET";
+    const table = String(url).replace(/^https:\/\/demo\.supabase\.co\/rest\/v1\//, "").split("?")[0];
+    calls.push({ table, method, url: String(url), body: options.body ? JSON.parse(options.body) : null });
+
+    if (table === "mobile_requests" && method === "GET") {
+      return {
+        ok: true,
+        status: 200,
+        async text() {
+          return JSON.stringify([
+            {
+              id: "00000000-0000-0000-0000-000000000203",
+              reference: "MOB-2026-0003",
+              flow: "property",
+              category: "logement vacant",
+              status: "received_mobile",
+              raw_address: "Saint-Etienne",
+              contact_name: "Proprietaire demo",
+              contact_email: "proprio@example.fr",
+              payload: { details: { title: "Appartement vacant", description: "Logement a etudier pour remise en usage." } },
+              created_at: "2026-07-07T10:00:00.000Z",
+            },
+          ]);
+        },
+      };
+    }
+
+    if (table === "contacts" && method === "POST") {
+      assert.strictEqual(calls[calls.length - 1].body.source_page, "tvf-mobile");
+      assert.strictEqual(calls[calls.length - 1].body.category, "bien-vacant-proprietaire");
+      return {
+        ok: true,
+        status: 201,
+        async text() {
+          return JSON.stringify([{ id: "00000000-0000-0000-0000-000000000204", request_number: "TVF-2026-0204", ...calls[calls.length - 1].body, created_at: "2026-07-07T10:00:00.000Z" }]);
+        },
+      };
+    }
+
+    if (table === "mobile_requests" && method === "PATCH") {
+      assert.strictEqual(calls[calls.length - 1].body.status, "imported_tvf_os");
+      assert.strictEqual(calls[calls.length - 1].body.payload.tvf_os_import.request_number, "TVF-2026-0204");
+      return { ok: true, status: 204, async text() { return ""; } };
+    }
+
+    throw new Error(`Unexpected call ${method} ${url}`);
+  };
+
+  try {
+    const result = await runHandler({
+      method: "POST",
+      body: { type: "mobile-import", mobile_request_id: "00000000-0000-0000-0000-000000000203" },
+    });
+    assert.strictEqual(result.statusCode, 201);
+    assert.strictEqual(result.json.contact.source_page, "tvf-mobile");
+    assert.strictEqual(result.json.mobileRequest.status, "imported_tvf_os");
+    assert.deepStrictEqual(calls.map((call) => `${call.method}:${call.table}`), ["GET:mobile_requests", "POST:contacts", "PATCH:mobile_requests"]);
+  } finally {
+    global.fetch = originalFetch;
+  }
+}
 async function testPatchEndpointWithSupabaseMock() {
   process.env.TVF_ADMIN_TOKEN = "secret";
   process.env.SUPABASE_URL = "https://demo.supabase.co";
@@ -223,9 +370,12 @@ async function testPatchEndpointWithSupabaseMock() {
 async function main() {
   testAssistantRules();
   testPayloadValidation();
+  testMobileMapping();
   await testUnauthorizedEndpoint();
   await testGetEndpointWithSupabaseMock();
   await testPostEndpointWithSupabaseMock();
+  await testMobileEndpointWithSupabaseMock();
+  await testMobileImportWithSupabaseMock();
   await testPatchEndpointWithSupabaseMock();
   console.log("Demandes entrantes API tests passed");
 }

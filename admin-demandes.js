@@ -1,4 +1,4 @@
-﻿const ADMIN_TOKEN_KEY = "tvfAdminToken";
+const ADMIN_TOKEN_KEY = "tvfAdminToken";
 const statusLabels = {
   nouveau: "Nouveau",
   a_qualifier: "A qualifier",
@@ -21,6 +21,12 @@ const channelLabels = {
   whatsapp: "WhatsApp",
   rendez_vous: "Rendez-vous",
   import: "Import manuel",
+};
+const mobileFlowLabels = {
+  signal: "Signalement terrain",
+  materials: "Materiaux",
+  property: "Bien propose",
+  volunteer: "Benevolat",
 };
 const categoryLabels = {
   "collectivite-territoire": "Collectivite",
@@ -68,8 +74,10 @@ const priorityShortcuts = document.querySelectorAll("[data-priority-shortcut]");
 const viewShortcuts = document.querySelectorAll("[data-view-shortcut]");
 const kpiEl = document.querySelector("[data-admin-kpis]");
 const triageEl = document.querySelector("[data-admin-triage]");
+const mobilePanelEl = document.querySelector("[data-admin-mobile]");
 
 let contacts = [];
+let mobileRequests = [];
 let selectedId = null;
 let currentView = "all";
 let debounceTimer;
@@ -155,6 +163,11 @@ function fromDateTimeLocal(value) {
 
 function label(map, value) {
   return map[value] || value || "Non classe";
+}
+
+function contactChannelLabel(contact) {
+  if (contact?.source_page === "tvf-mobile") return "TVF Mobile";
+  return label(channelLabels, contact?.channel);
 }
 
 function contactName(contact) {
@@ -309,6 +322,7 @@ async function loadContacts() {
   renderTriagePanel();
   renderList();
   renderDetail();
+  await loadMobileRequests();
 }
 
 function isOverdue(contact) {
@@ -430,6 +444,87 @@ function renderTriagePanel() {
   </div>`;
 }
 
+function mobileFlowLabel(flow) {
+  return mobileFlowLabels[flow] || "Demande mobile";
+}
+
+function renderMobilePanel() {
+  if (!mobilePanelEl) return;
+  if (!mobileRequests.length) {
+    mobilePanelEl.hidden = true;
+    mobilePanelEl.innerHTML = "";
+    return;
+  }
+  mobilePanelEl.hidden = false;
+  mobilePanelEl.innerHTML = `<div class="admin-panel-head">
+    <div>
+      <p class="section-kicker">TVF Mobile</p>
+      <h3>Demandes terrain a importer</h3>
+      <p>Les signalements mobiles sont qualifies ici avant d'entrer dans le parcours demande, contact et dossier.</p>
+    </div>
+    <strong>${escapeHtml(String(mobileRequests.length))}</strong>
+  </div>
+  <div class="admin-mobile-list">
+    ${mobileRequests.map((item) => `<article class="admin-mobile-card">
+      <div>
+        <span>${escapeHtml(item.reference || "Mobile")}</span>
+        <strong>${escapeHtml(item.title || mobileFlowLabel(item.flow))}</strong>
+        <small>${escapeHtml([mobileFlowLabel(item.flow), item.category_label || item.category, item.raw_address].filter(Boolean).join(" - "))}</small>
+      </div>
+      <div class="admin-mobile-meta">
+        <em>${escapeHtml(label(categoryLabels, item.target_category))}</em>
+        <em>${escapeHtml(label(priorityLabels, item.target_priority))}</em>
+        ${item.has_photo ? "<em>Photo</em>" : ""}
+      </div>
+      <button class="btn secondary" type="button" data-mobile-import="${escapeHtml(item.id)}">Importer</button>
+    </article>`).join("")}
+  </div>`;
+}
+
+async function loadMobileRequests() {
+  if (!mobilePanelEl) return;
+  try {
+    const result = await api("/api/admin-contacts?action=mobile-pending&limit=12");
+    mobileRequests = result.mobileRequests || [];
+    renderMobilePanel();
+  } catch {
+    mobileRequests = [];
+    mobilePanelEl.hidden = true;
+  }
+}
+
+async function importMobileRequest(id, button) {
+  if (!id) return;
+  const initial = button?.textContent || "Importer";
+  if (button) {
+    button.disabled = true;
+    button.textContent = "Import...";
+  }
+  try {
+    const result = await api("/api/admin-contacts", {
+      method: "POST",
+      body: JSON.stringify({ type: "mobile-import", mobile_request_id: id }),
+    });
+    if (result.contact) {
+      contacts = [result.contact, ...contacts.filter((item) => item.id !== result.contact.id)];
+      selectedId = result.contact.id;
+    }
+    mobileRequests = mobileRequests.filter((item) => item.id !== id);
+    updateKpis();
+    renderStatusShortcuts();
+    renderTriagePanel();
+    renderList();
+    renderDetail();
+    renderMobilePanel();
+    notify("Demande mobile importee dans TVF OS.", "success");
+  } catch (error) {
+    notifyError(error, "Import mobile impossible.");
+    if (button) {
+      button.disabled = false;
+      button.textContent = initial;
+    }
+  }
+}
 function renderStatusShortcuts() {
   const currentStatus = filtersForm?.elements.status?.value || "all";
   const currentPriority = filtersForm?.elements.priority?.value || "all";
@@ -453,7 +548,7 @@ function renderList() {
       return `<button class="admin-request${active}${overdue}" type="button" data-contact-id="${escapeHtml(contact.id)}">
         <span class="admin-request-head"><strong>${escapeHtml(contact.request_number || contact.full_name || "Demande TVF")}</strong><small>${escapeHtml(formatDate(contact.created_at))}</small></span>
         <span>${escapeHtml(contact.subject || "Sans objet")}</span>
-        <span class="admin-request-sub">${escapeHtml(contact.full_name || "Contact sans nom")} - ${escapeHtml(label(channelLabels, contact.channel))}</span>
+        <span class="admin-request-sub">${escapeHtml(contact.full_name || "Contact sans nom")} - ${escapeHtml(contactChannelLabel(contact))}</span>
         <span class="admin-badges">
           <em data-kind="status">${escapeHtml(label(statusLabels, contact.status))}</em>
           <em data-kind="priority">${escapeHtml(label(priorityLabels, contact.priority))}</em>
@@ -506,7 +601,7 @@ function exportContactsCsv() {
     label(priorityLabels, contact.priority),
     label(categoryLabels, contact.category),
     contact.pole,
-    label(channelLabels, contact.channel),
+    contactChannelLabel(contact),
     contact.full_name,
     contact.email,
     contact.subject,
@@ -658,7 +753,7 @@ function renderDetail() {
 
     <div class="admin-meta-grid">
       <div><span>E-mail</span><a href="mailto:${escapeHtml(contact.email || "")}">${escapeHtml(contact.email || "Non renseigne")}</a></div>
-      <div><span>Canal</span><strong>${escapeHtml(label(channelLabels, contact.channel))}</strong></div>
+      <div><span>Canal</span><strong>${escapeHtml(contactChannelLabel(contact))}</strong></div>
       <div><span>Source</span><strong>${escapeHtml(contact.source_page || "Site TVF")}</strong></div>
       <div><span>Mise a jour</span><strong>${escapeHtml(formatDate(contact.updated_at))}</strong></div>
       <div><span>Suivi</span><strong>${escapeHtml(contact.assigned_to || "A affecter")}</strong></div>
@@ -974,6 +1069,12 @@ function bindEvents() {
     renderTriagePanel();
     renderList();
     renderDetail();
+  });
+
+  mobilePanelEl?.addEventListener("click", (event) => {
+    const button = event.target.closest("[data-mobile-import]");
+    if (!button) return;
+    importMobileRequest(button.dataset.mobileImport, button);
   });
 
   triageEl?.addEventListener("click", (event) => {
