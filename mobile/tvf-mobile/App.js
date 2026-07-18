@@ -463,7 +463,7 @@ function ConfigBanner() {
     </View>
   );
 }
-function HomeScreen({ go }) {
+function HomeScreen({ go, draftRestored }) {
   return (
     <ScrollView contentContainerStyle={styles.content}>
       <ScreenTitle eyebrow="Préversion terrain" title="Une application terrain simple pour TVF">
@@ -477,6 +477,18 @@ function HomeScreen({ go }) {
         </View>
       </View>
       <ConfigBanner />
+      {draftRestored ? (
+        <TouchableOpacity style={styles.draftBanner} onPress={() => go("signal")} activeOpacity={0.86}>
+          <View style={styles.draftBannerIcon}>
+            <Ionicons name="create-outline" size={20} color={colors.white} />
+          </View>
+          <View style={styles.draftBannerText}>
+            <Text style={styles.draftBannerTitle}>Brouillon restauré</Text>
+            <Text style={styles.draftBannerCopy}>Une demande commencée a été retrouvée sur ce téléphone.</Text>
+          </View>
+          <Ionicons name="chevron-forward" size={18} color={colors.green} />
+        </TouchableOpacity>
+      ) : null}
       <View style={styles.quickStats}>
         <View style={styles.statMini}><Text style={styles.statMiniValue}>4</Text><Text style={styles.statMiniLabel}>parcours clés</Text></View>
         <View style={styles.statMini}><Text style={styles.statMiniValue}>1</Text><Text style={styles.statMiniLabel}>suivi TVF OS</Text></View>
@@ -875,6 +887,7 @@ function AppShell() {
   const [missing, setMissing] = useState([]);
   const [submitting, setSubmitting] = useState(false);
   const [draftReady, setDraftReady] = useState(false);
+  const [draftRestored, setDraftRestored] = useState(false);
 
   useEffect(() => {
     let active = true;
@@ -885,7 +898,10 @@ function AppShell() {
     });
     loadDraft().then((storedDraft) => {
       if (!active) return;
-      if (hasDraftContent(storedDraft)) setDraft(storedDraft);
+      if (hasDraftContent(storedDraft)) {
+        setDraft(storedDraft);
+        setDraftRestored(true);
+      }
       setDraftReady(true);
     });
     return () => {
@@ -906,6 +922,7 @@ function AppShell() {
     if (options.resetDraft) {
       setDraft(initialDraft);
       clearDraftStorage();
+      setDraftRestored(false);
     }
     setScreen(next);
     setHistory((value) => [...value, next]);
@@ -991,9 +1008,9 @@ function AppShell() {
         return <ConfirmationScreen lastSubmission={lastSubmission} goHome={() => go("home")} goTracking={() => go("tracking")} />;
       case "home":
       default:
-        return <HomeScreen go={go} />;
+        return <HomeScreen go={go} draftRestored={draftRestored} />;
     }
-  }, [screen, draft, lastSubmission, submissionHistory, selectedRequest, missing, submitting, draftReady]);
+  }, [screen, draft, lastSubmission, submissionHistory, selectedRequest, missing, submitting, draftReady, draftRestored]);
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -1109,6 +1126,29 @@ const styles = StyleSheet.create({
     fontWeight: "800",
     fontSize: 14
   },
+  draftBanner: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 11,
+    backgroundColor: colors.white,
+    borderWidth: 1,
+    borderColor: "#B7D2BA",
+    borderRadius: radius.md,
+    padding: 12,
+    marginBottom: 14,
+    ...shadow
+  },
+  draftBannerIcon: {
+    width: 42,
+    height: 42,
+    borderRadius: 15,
+    backgroundColor: colors.green,
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  draftBannerText: { flex: 1 },
+  draftBannerTitle: { color: colors.green, fontWeight: "800", fontSize: 14.5 },
+  draftBannerCopy: { color: colors.muted, fontWeight: "600", fontSize: 12.5, lineHeight: 18, marginTop: 2 },
   configText: {
     color: colors.muted,
     fontWeight: "600",
