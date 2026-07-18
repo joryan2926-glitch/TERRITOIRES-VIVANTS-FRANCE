@@ -318,6 +318,154 @@ async function testMobileImportWithSupabaseMock() {
     global.fetch = originalFetch;
   }
 }
+
+async function testMobileImportCaseWithSupabaseMock() {
+  process.env.NODE_ENV = "test";
+  process.env.TVF_ADMIN_TOKEN = "secret";
+  process.env.SUPABASE_URL = "https://demo.supabase.co";
+  process.env.SUPABASE_SERVICE_ROLE_KEY = "sb_secret_demo";
+
+  const calls = [];
+  const originalFetch = global.fetch;
+  global.fetch = async (url, options = {}) => {
+    const method = options.method || "GET";
+    const table = String(url).replace(/^https:\/\/demo\.supabase\.co\/rest\/v1\//, "").split("?")[0];
+    const body = options.body ? JSON.parse(options.body) : null;
+    calls.push({ table, method, url: String(url), body });
+
+    if (table === "mobile_requests" && method === "GET") {
+      return {
+        ok: true,
+        status: 200,
+        async text() {
+          return JSON.stringify([
+            {
+              id: "00000000-0000-0000-0000-000000000205",
+              reference: "MOB-2026-0005",
+              flow: "signal",
+              category: "commerce ferme",
+              status: "received_mobile",
+              raw_address: "Rue de la Republique, Saint-Etienne",
+              contact_name: "Citoyen terrain",
+              contact_email: "citoyen@example.fr",
+              contact_phone: "0465815469",
+              photo_bucket: "signalements",
+              photo_path: "MOB-2026-0005/photo-terrain.jpg",
+              payload: { details: { title: "Commerce ferme", description: "Rideau baisse et local vacant a qualifier." } },
+              created_at: "2026-07-07T10:00:00.000Z",
+            },
+          ]);
+        },
+      };
+    }
+
+    if (table === "contacts" && method === "POST") {
+      assert.strictEqual(body.source_page, "tvf-mobile");
+      assert.strictEqual(body.category, "bien-vacant-proprietaire");
+      return {
+        ok: true,
+        status: 201,
+        async text() {
+          return JSON.stringify([{ id: "00000000-0000-0000-0000-000000000206", request_number: "TVF-2026-0206", ...body, created_at: "2026-07-07T10:00:00.000Z" }]);
+        },
+      };
+    }
+
+    if (table === "cases" && method === "POST") {
+      assert.strictEqual(body.source_request_id, "00000000-0000-0000-0000-000000000206");
+      assert.strictEqual(body.case_type, "commerce_inoccupe");
+      assert.ok(body.summary.includes("MOB-2026-0005"));
+      return {
+        ok: true,
+        status: 201,
+        async text() {
+          return JSON.stringify([{ id: "00000000-0000-0000-0000-000000000207", case_number: "DOS-2026-0007", ...body, created_at: "2026-07-07T10:00:00.000Z" }]);
+        },
+      };
+    }
+
+    if (table === "case_status_history" && method === "POST") {
+      assert.strictEqual(body.case_id, "00000000-0000-0000-0000-000000000207");
+      return { ok: true, status: 204, async text() { return ""; } };
+    }
+
+    if (table === "files" && method === "GET") {
+      assert.ok(String(url).includes("storage_path=eq.MOB-2026-0005%2Fphoto-terrain.jpg"));
+      return { ok: true, status: 200, async text() { return "[]"; } };
+    }
+
+    if (table === "files" && method === "POST") {
+      assert.strictEqual(body.storage_bucket, "signalements");
+      assert.strictEqual(body.storage_path, "MOB-2026-0005/photo-terrain.jpg");
+      return {
+        ok: true,
+        status: 201,
+        async text() {
+          return JSON.stringify([{ id: "00000000-0000-0000-0000-000000000208", ...body }]);
+        },
+      };
+    }
+
+    if (table === "documents" && method === "POST") {
+      assert.strictEqual(body.related_object_type, "case");
+      assert.strictEqual(body.related_object_id, "00000000-0000-0000-0000-000000000207");
+      assert.strictEqual(body.file_id, "00000000-0000-0000-0000-000000000208");
+      return {
+        ok: true,
+        status: 201,
+        async text() {
+          return JSON.stringify([{ id: "00000000-0000-0000-0000-000000000209", document_number: "DOC-2026-0009", ...body }]);
+        },
+      };
+    }
+
+    if (table === "contacts" && method === "PATCH") {
+      assert.strictEqual(body.status, "accepte");
+      assert.ok(body.next_action.includes("DOS-2026-0007"));
+      return {
+        ok: true,
+        status: 200,
+        async text() {
+          return JSON.stringify([{ id: "00000000-0000-0000-0000-000000000206", request_number: "TVF-2026-0206", source_page: "tvf-mobile", category: "bien-vacant-proprietaire", status: "accepte", ...body, created_at: "2026-07-07T10:00:00.000Z" }]);
+        },
+      };
+    }
+
+    if (table === "mobile_requests" && method === "PATCH") {
+      assert.strictEqual(body.status, "imported_tvf_os");
+      assert.strictEqual(body.payload.tvf_os_import.request_number, "TVF-2026-0206");
+      assert.strictEqual(body.payload.tvf_os_import.case_number, "DOS-2026-0007");
+      assert.strictEqual(body.payload.tvf_os_import.document_id, "00000000-0000-0000-0000-000000000209");
+      return { ok: true, status: 204, async text() { return ""; } };
+    }
+
+    throw new Error(`Unexpected call ${method} ${url}`);
+  };
+
+  try {
+    const result = await runHandler({
+      method: "POST",
+      body: { type: "mobile-import-case", mobile_request_id: "00000000-0000-0000-0000-000000000205" },
+    });
+    assert.strictEqual(result.statusCode, 201);
+    assert.strictEqual(result.json.contact.status, "accepte");
+    assert.strictEqual(result.json.case.case_number, "DOS-2026-0007");
+    assert.strictEqual(result.json.document.document_number, "DOC-2026-0009");
+    assert.deepStrictEqual(calls.map((call) => `${call.method}:${call.table}`), [
+      "GET:mobile_requests",
+      "POST:contacts",
+      "POST:cases",
+      "POST:case_status_history",
+      "GET:files",
+      "POST:files",
+      "POST:documents",
+      "PATCH:contacts",
+      "PATCH:mobile_requests",
+    ]);
+  } finally {
+    global.fetch = originalFetch;
+  }
+}
 async function testPatchEndpointWithSupabaseMock() {
   process.env.TVF_ADMIN_TOKEN = "secret";
   process.env.SUPABASE_URL = "https://demo.supabase.co";
@@ -376,6 +524,7 @@ async function main() {
   await testPostEndpointWithSupabaseMock();
   await testMobileEndpointWithSupabaseMock();
   await testMobileImportWithSupabaseMock();
+  await testMobileImportCaseWithSupabaseMock();
   await testPatchEndpointWithSupabaseMock();
   console.log("Demandes entrantes API tests passed");
 }

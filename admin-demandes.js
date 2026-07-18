@@ -170,6 +170,32 @@ function contactChannelLabel(contact) {
   return label(channelLabels, contact?.channel);
 }
 
+function mobileSourceInfo(contact) {
+  if (contact?.source_page !== "tvf-mobile") return null;
+  const notes = String(contact.internal_notes || "");
+  const message = String(contact.message || "");
+  const source = `${notes}\n${message}`;
+  const ref = source.match(/Reference mobile\s*:\s*([^\n]+)/i)?.[1]?.trim() || contact.request_number || "TVF Mobile";
+  const phone = source.match(/Telephone\s*:\s*([^\n]+)/i)?.[1]?.trim() || "";
+  const photo = source.match(/(?:Piece photo a consulter dans Supabase Storage|Photo)\s*:\s*([^\n]+)/i)?.[1]?.trim() || "";
+  const dossier = source.match(/Dossier cree automatiquement\s*:\s*([^\n]+)/i)?.[1]?.trim() || "";
+  return { ref, phone, photo, dossier };
+}
+
+function renderMobileSource(contact) {
+  const info = mobileSourceInfo(contact);
+  if (!info) return "";
+  const rows = [
+    ["Reference", info.ref],
+    ["Telephone", info.phone],
+    ["Photo", info.photo],
+    ["Dossier", info.dossier],
+  ].filter(([, value]) => value);
+  return `<section class="admin-mobile-source" aria-label="Origine TVF Mobile">
+    <div><p class="section-kicker">TVF Mobile</p><h4>Signalement terrain importe</h4></div>
+    <dl>${rows.map(([term, value]) => `<div><dt>${escapeHtml(term)}</dt><dd>${escapeHtml(value)}</dd></div>`).join("")}</dl>
+  </section>`;
+}
 function contactName(contact) {
   return contact?.full_name || "Madame, Monsieur";
 }
@@ -476,7 +502,7 @@ function renderMobilePanel() {
         <em>${escapeHtml(label(priorityLabels, item.target_priority))}</em>
         ${item.has_photo ? "<em>Photo</em>" : ""}
       </div>
-      <button class="btn secondary" type="button" data-mobile-import="${escapeHtml(item.id)}">Importer</button>
+      <button class="btn secondary" type="button" data-mobile-import="${escapeHtml(item.id)}">Importer + dossier</button>
     </article>`).join("")}
   </div>`;
 }
@@ -498,12 +524,12 @@ async function importMobileRequest(id, button) {
   const initial = button?.textContent || "Importer";
   if (button) {
     button.disabled = true;
-    button.textContent = "Import...";
+    button.textContent = "Dossier...";
   }
   try {
     const result = await api("/api/admin-contacts", {
       method: "POST",
-      body: JSON.stringify({ type: "mobile-import", mobile_request_id: id }),
+      body: JSON.stringify({ type: "mobile-import-case", mobile_request_id: id }),
     });
     if (result.contact) {
       contacts = [result.contact, ...contacts.filter((item) => item.id !== result.contact.id)];
@@ -516,7 +542,7 @@ async function importMobileRequest(id, button) {
     renderList();
     renderDetail();
     renderMobilePanel();
-    notify("Demande mobile importee dans TVF OS.", "success");
+    notify(result.case ? "Demande mobile importee et dossier cree." : "Demande mobile importee dans TVF OS.", result.warning ? "warning" : "success");
   } catch (error) {
     notifyError(error, "Import mobile impossible.");
     if (button) {
@@ -744,6 +770,11 @@ function renderDetail() {
   }
 
   const initialTemplate = responseTemplate(contact);
+  const mobileInfo = mobileSourceInfo(contact);
+  const caseText = `${contact.next_action || ""}` + "\n" + `${contact.internal_notes || ""}`;
+  const hasCase = caseText.toLowerCase().includes("dossier cree");
+  const caseQuery = mobileInfo?.dossier || contact.request_number || contact.id || contact.subject || "";
+  const mainCaseAction = hasCase ? `<a class="btn primary" href="admin-dossiers?q=${encodeURIComponent(caseQuery)}">Voir le dossier</a>` : `<button class="btn primary" type="button" data-create-case>Transformer en dossier</button>`;
   detailEl.innerHTML = `<form class="admin-detail-form" data-admin-detail-form>
     <div class="admin-detail-title">
       <p class="section-kicker">${escapeHtml(contact.request_number || "Demande TVF")} - recue le ${escapeHtml(formatDate(contact.created_at))}</p>
@@ -759,6 +790,8 @@ function renderDetail() {
       <div><span>Suivi</span><strong>${escapeHtml(contact.assigned_to || "A affecter")}</strong></div>
       <div><span>Prochaine action</span><strong>${escapeHtml(contact.next_action || contact.assistant?.next_action || "A definir")}</strong></div>
     </div>
+
+    ${renderMobileSource(contact)}
 
     <ol class="admin-case-flow" aria-label="Parcours de transformation en dossier client">
       <li class="${contact.status ? "is-done" : ""}"><span>1</span><strong>Coordonnees</strong><small>Contact et structure</small></li>
@@ -782,7 +815,7 @@ function renderDetail() {
         </div>
       </div>
       <div class="admin-request-command-main">
-        <button class="btn primary" type="button" data-create-case>Transformer en dossier</button>
+        ${mainCaseAction}
         <button class="btn secondary" type="button" data-quick-status="en_cours">Qualifier / prendre en charge</button>
         <button class="btn secondary" type="button" data-quick-template="pieces">Demander les pieces</button>
         <button class="btn secondary" type="button" data-create-task>Planifier une action</button>

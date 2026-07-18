@@ -8701,6 +8701,56 @@ td {
   white-space: nowrap;
 }
 
+
+.admin-mobile-source {
+  display: grid;
+  gap: 12px;
+  padding: 14px 16px;
+  border: 1px solid rgba(24, 63, 34, 0.13);
+  border-radius: 14px;
+  background: linear-gradient(135deg, #f8faf5 0%, #ffffff 100%);
+}
+
+.admin-mobile-source h4 {
+  margin: 2px 0 0;
+  color: var(--blue-900);
+  font-size: 0.98rem;
+}
+
+.admin-mobile-source dl {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 0;
+}
+
+.admin-mobile-source dl > div {
+  min-width: 0;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.86);
+}
+
+.admin-mobile-source dt {
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.admin-mobile-source dd {
+  margin: 3px 0 0;
+  color: var(--blue-900);
+  font-weight: 750;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 760px) {
+  .admin-mobile-source dl {
+    grid-template-columns: 1fr;
+  }
+}
 @media (max-width: 760px) {
   .admin-mobile-card {
     grid-template-columns: 1fr;
