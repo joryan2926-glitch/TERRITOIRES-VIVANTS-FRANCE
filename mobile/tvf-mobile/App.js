@@ -920,9 +920,18 @@ function AppShell() {
   }, [draft, draftReady]);
 
   const dismissDraft = () => {
-    setDraft(initialDraft);
-    clearDraftStorage();
-    setDraftRestored(false);
+    Alert.alert("Supprimer le brouillon ?", "La demande commencée sera effacée de ce téléphone.", [
+      { text: "Annuler", style: "cancel" },
+      {
+        text: "Supprimer",
+        style: "destructive",
+        onPress: () => {
+          setDraft(initialDraft);
+          clearDraftStorage();
+          setDraftRestored(false);
+        }
+      }
+    ]);
   };
   const openRequest = (request) => {
     setSelectedRequest(request);
@@ -1149,7 +1158,7 @@ const styles = StyleSheet.create({
     marginBottom: 14,
     ...shadow
   },
-'  draftResumeArea: { flexDirection: "row", alignItems: "center", gap: 11 },
+  draftResumeArea: { flexDirection: "row", alignItems: "center", gap: 11 },
   draftClearButton: {
     alignSelf: "flex-start",
     flexDirection: "row",
