@@ -27,7 +27,7 @@ export const homeActions = [
   {
     key: "tracking",
     title: "Suivre ma demande",
-    subtitle: "Retrouver un statut à partir d'un e-mail ou numéro TVF.",
+    subtitle: "Retrouver le numéro créé sur ce téléphone.",
     icon: "search-outline"
   }
 ];
@@ -42,27 +42,27 @@ export const signalCategories = [
 ];
 
 export const materialCategories = [
-  "Bois",
-  "Portes",
-  "Fenêtres",
-  "Sanitaires",
-  "Carrelage",
-  "Mobilier",
-  "Luminaires",
-  "Équipements",
-  "Outils",
-  "Divers"
+  { key: "bois", label: "Bois", icon: "layers-outline" },
+  { key: "portes", label: "Portes", icon: "exit-outline" },
+  { key: "fenetres", label: "Fenêtres", icon: "grid-outline" },
+  { key: "sanitaires", label: "Sanitaires", icon: "water-outline" },
+  { key: "carrelage", label: "Carrelage", icon: "apps-outline" },
+  { key: "mobilier", label: "Mobilier", icon: "cube-outline" },
+  { key: "luminaires", label: "Luminaires", icon: "bulb-outline" },
+  { key: "equipements", label: "Équipements", icon: "construct-outline" },
+  { key: "outils", label: "Outils", icon: "hammer-outline" },
+  { key: "divers", label: "Divers", icon: "ellipsis-horizontal-circle-outline" }
 ];
 
 export const propertyTypes = [
-  "Logement vacant",
-  "Maison",
-  "Immeuble",
-  "Commerce",
-  "Local d'activité",
-  "Bâtiment inutilisé",
-  "Terrain",
-  "Friche"
+  { key: "logement-vacant", label: "Logement vacant", icon: "home-outline" },
+  { key: "maison", label: "Maison", icon: "home-outline" },
+  { key: "immeuble", label: "Immeuble", icon: "business-outline" },
+  { key: "commerce", label: "Commerce", icon: "storefront-outline" },
+  { key: "local-activite", label: "Local d'activité", icon: "briefcase-outline" },
+  { key: "batiment-inutilise", label: "Bâtiment inutilisé", icon: "business-outline" },
+  { key: "terrain", label: "Terrain", icon: "map-outline" },
+  { key: "friche", label: "Friche", icon: "leaf-outline" }
 ];
 
 export const documents = [
@@ -93,10 +93,45 @@ export const statusSteps = [
   "Clôturé"
 ];
 
+export const flowGuides = {
+  signal: ["Identifier", "Localiser", "Transmettre"],
+  materials: ["Décrire", "Qualifier", "Orienter"],
+  property: ["Présenter", "Pré-étudier", "Constituer"],
+  volunteer: ["Se présenter", "Préciser", "Être recontacté"],
+  tracking: ["Retrouver", "Comprendre", "Suivre"]
+};
+
+export const checklistByFlow = {
+  signal: [
+    "Choisir la catégorie du lieu",
+    "Indiquer une adresse ou un repère fiable",
+    "Ajouter une description factuelle",
+    "Joindre une photo si elle peut être prise légalement"
+  ],
+  materials: [
+    "Indiquer le type de matériau",
+    "Préciser la quantité ou les dimensions",
+    "Décrire l'état général",
+    "Ajouter un contact pour organiser la suite"
+  ],
+  property: [
+    "Identifier le type de bien",
+    "Décrire l'état général",
+    "Préciser l'objectif du propriétaire",
+    "Préparer les pièces utiles avant instruction"
+  ],
+  volunteer: [
+    "Laisser ses coordonnées",
+    "Présenter ses compétences",
+    "Indiquer ses disponibilités",
+    "Attendre un contact selon les besoins TVF"
+  ]
+};
+
 export const requiredFieldsByFlow = {
   signal: ["category", "address", "description"],
-  materials: ["category", "quantity", "condition", "address"],
-  property: ["category", "address", "condition", "objective"],
+  materials: ["category", "quantity", "condition", "address", "contactName"],
+  property: ["category", "address", "condition", "objective", "contactName"],
   volunteer: ["contactName", "email", "skills"]
 };
 
@@ -106,6 +141,7 @@ export const fieldLabels = {
   address: "adresse ou localisation",
   description: "description",
   contactName: "nom et prénom",
+  contactMethod: "e-mail ou téléphone",
   email: "e-mail",
   phone: "téléphone",
   quantity: "quantité",

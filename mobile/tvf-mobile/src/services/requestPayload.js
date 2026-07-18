@@ -1,10 +1,11 @@
-export function buildRequestPayload({ flow, draft, reference }) {
+export function buildRequestPayload({ flow, draft, reference, categoryLabel }) {
   return {
     reference,
     source: "tvf-mobile-preversion-terrain",
     flow,
     status: "draft_mobile",
     category: draft.category || null,
+    categoryLabel: categoryLabel || draft.category || null,
     location: {
       rawAddress: draft.address || null,
       latitude: draft.latitude ? Number(draft.latitude) : null,
@@ -14,7 +15,7 @@ export function buildRequestPayload({ flow, draft, reference }) {
     media: {
       photoUri: draft.photoUri || null,
       photoFileName: draft.photoFileName || null,
-      storageTarget: draft.photoUri ? "supabase-storage-signalements" : null
+      storageTarget: draft.photoUri ? (flow === "materials" ? "supabase-storage-materiaux" : "supabase-storage-signalements") : null
     },
     contact: {
       name: draft.contactName || null,
@@ -29,6 +30,11 @@ export function buildRequestPayload({ flow, draft, reference }) {
       availability: draft.availability || null,
       objective: draft.objective || null,
       skills: draft.skills || null
+    },
+    submissionContext: {
+      app: "TVF Mobile",
+      sdk: "Expo SDK 57",
+      createdFrom: "mobile-field-intake"
     },
     nextSystemTarget: "tvf-os-demandes"
   };
