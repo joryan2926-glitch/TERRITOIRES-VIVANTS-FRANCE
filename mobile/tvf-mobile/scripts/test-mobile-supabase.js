@@ -14,13 +14,15 @@ function loadEnv(filePath) {
     const match = trimmed.match(/^([A-Za-z_][A-Za-z0-9_]*)\s*=\s*(.*)$/);
     if (!match || process.env[match[1]]) continue;
     let value = match[2].trim();
-    if ((value.startsWith('"') && value.endsWith('"')) || (value.startsWith("'") && value.endsWith("'"))) value = value.slice(1, -1);
+    if ((value.startsWith('"') && value.endsWith('"')) || (value.startsWith("'") && value.endsWith("'"))) {
+      value = value.slice(1, -1);
+    }
     process.env[match[1]] = value;
   }
 }
 
 function normalizeSupabaseUrl(value) {
-  return String(value || "").trim().replace(/\/+$/, "").replace(/\/rest\/v1$/i, "");
+  return String(value || "").trim().replace(/\/rest\/v1\/?$/i, "").replace(/\/+$/, "");
 }
 
 loadEnv(path.join(repoRoot, ".env"));
@@ -53,6 +55,12 @@ function explainSupabaseError(error) {
     return [
       message,
       "Action requise : executer supabase/tvf-mobile-requests.sql dans Supabase SQL Editor, puis supabase/verify-tvf-mobile-requests.sql."
+    ].join(" | ");
+  }
+  if (message.toLowerCase().includes("row-level security")) {
+    return [
+      message,
+      "Action requise : verifier la policy mobile_requests_public_insert et les grants INSERT dans supabase/tvf-mobile-requests.sql."
     ].join(" | ");
   }
   return message;
@@ -88,21 +96,26 @@ async function main() {
     payload
   };
 
-  let inserted = null;
+  let insertedId = null;
   try {
-    const insertResult = await publicClient
+    const insertResult = await publicClient.from("mobile_requests").insert(row);
+    if (insertResult.error) throw insertResult.error;
+
+    const readResult = await serviceClient
       .from("mobile_requests")
-      .insert(row)
       .select("id,reference,status,flow")
+      .eq("reference", reference)
       .single();
 
-    if (insertResult.error) throw insertResult.error;
-    inserted = insertResult.data;
+    if (readResult.error) throw readResult.error;
+    const inserted = readResult.data;
     if (!inserted?.id || inserted.reference !== reference) throw new Error("Insertion mobile non confirmee.");
+
+    insertedId = inserted.id;
     console.log(`TVF_MOBILE_SUPABASE_INSERT_OK reference=${inserted.reference}`);
   } finally {
-    if (inserted?.id) {
-      const deleteResult = await serviceClient.from("mobile_requests").delete().eq("id", inserted.id);
+    if (insertedId) {
+      const deleteResult = await serviceClient.from("mobile_requests").delete().eq("id", insertedId);
       if (deleteResult.error) throw deleteResult.error;
       console.log(`TVF_MOBILE_SUPABASE_CLEANUP_OK reference=${reference}`);
     }
