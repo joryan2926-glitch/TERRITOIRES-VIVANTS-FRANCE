@@ -621,15 +621,25 @@ function ContactScreen() {
 function ConfirmationScreen({ lastSubmission, goHome, goTracking }) {
   const data = lastSubmission || {};
   const subject = encodeURIComponent(`Demande TVF ${data.reference || ""}`.trim());
+  const isSent = data.syncMode === "supabase";
+  const isError = data.syncMode === "supabase-error";
+  const statusTitle = isSent ? "Demande transmise" : isError ? "Transmission à vérifier" : "Demande préparée";
+  const statusLabel = isSent ? "Supabase confirmé" : isError ? "Non transmis" : "Mode local";
+  const statusIcon = isSent ? "cloud-done-outline" : isError ? "warning-outline" : "phone-portrait-outline";
   return (
     <ScrollView contentContainerStyle={styles.content}>
       <View style={styles.confirmation}>
-        <View style={styles.confirmIcon}>
-          <Ionicons name="checkmark" size={42} color={colors.white} />
+        <View style={[styles.confirmIcon, isError && styles.confirmIconWarning]}>
+          <Ionicons name={isSent ? "checkmark" : statusIcon} size={42} color={colors.white} />
         </View>
-        <Text style={styles.confirmTitle}>Demande préparée</Text>
+        <Text style={styles.confirmTitle}>{statusTitle}</Text>
+        <View style={[styles.syncBadge, isSent && styles.syncBadgeReady, isError && styles.syncBadgeError]}>
+          <Ionicons name={statusIcon} size={16} color={isSent || isError ? colors.white : colors.green} />
+          <Text style={[styles.syncBadgeText, (isSent || isError) && styles.syncBadgeTextReady]}>{statusLabel}</Text>
+        </View>
         <Text style={styles.reference}>{data.reference}</Text>
         <Text style={styles.confirmText}>{data.syncMessage || "La demande est prête à être reprise dans TVF OS."}</Text>
+        {!isSent ? <Notice>Pour apparaître dans TVF OS, la confirmation doit indiquer « Supabase confirmé ». Si ce n'est pas le cas, relancez Expo avec les variables Supabase puis renvoyez la demande.</Notice> : null}
         <View style={styles.summaryCard}>
           <Text style={styles.summaryTitle}>Récapitulatif</Text>
           <Text style={styles.summaryLine}>Type : {data.label || "Non renseigné"}</Text>
@@ -637,7 +647,7 @@ function ConfirmationScreen({ lastSubmission, goHome, goTracking }) {
           <Text style={styles.summaryLine}>Localisation : {data.address || "À compléter"}</Text>
           <Text style={styles.summaryLine}>Photo : {data.hasPhoto ? "jointe" : "non jointe"}</Text>
           <Text style={styles.summaryLine}>GPS : {data.hasCoordinates ? "enregistré" : "non renseigné"}</Text>
-          <Text style={styles.summaryLine}>Mode : {data.syncMode === "supabase" ? "Supabase" : "préversion locale"}</Text>
+          <Text style={styles.summaryLine}>Transmission : {isSent ? "enregistrée dans Supabase" : isError ? "à renvoyer" : "locale uniquement"}</Text>
         </View>
         <View style={styles.summaryCard}>
           <Text style={styles.summaryTitle}>Suite prévue</Text>
@@ -1123,7 +1133,24 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     marginBottom: 6
   },
+  confirmIconWarning: { backgroundColor: colors.gold },
   confirmTitle: { color: colors.blue, fontSize: 26, lineHeight: 30, fontWeight: "800", textAlign: "center" },
+  syncBadge: {
+    alignSelf: "center",
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 7,
+    backgroundColor: colors.soft,
+    borderWidth: 1,
+    borderColor: colors.line,
+    borderRadius: 999,
+    paddingHorizontal: 13,
+    paddingVertical: 7
+  },
+  syncBadgeReady: { backgroundColor: colors.green, borderColor: colors.green },
+  syncBadgeError: { backgroundColor: colors.danger, borderColor: colors.danger },
+  syncBadgeText: { color: colors.green, fontWeight: "800", fontSize: 12.5 },
+  syncBadgeTextReady: { color: colors.white },
   reference: { color: colors.gold, fontSize: 16, fontWeight: "800", textAlign: "center" },
   confirmText: { color: colors.muted, fontSize: 15, lineHeight: 22, fontWeight: "600", textAlign: "center" },
   summaryCard: {

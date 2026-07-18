@@ -474,42 +474,46 @@ function mobileFlowLabel(flow) {
   return mobileFlowLabels[flow] || "Demande mobile";
 }
 
-function renderMobilePanel() {
+function renderMobilePanel(state = "ready") {
   if (!mobilePanelEl) return;
-  if (!mobileRequests.length) {
-    mobilePanelEl.hidden = true;
-    mobilePanelEl.innerHTML = "";
-    return;
-  }
   mobilePanelEl.hidden = false;
+  const isError = state === "error";
+  const count = mobileRequests.length;
+  const content = count
+    ? `<div class="admin-mobile-list">
+      ${mobileRequests.map((item) => `<article class="admin-mobile-card">
+        <div>
+          <span>${escapeHtml(item.reference || "Mobile")}</span>
+          <strong>${escapeHtml(item.title || mobileFlowLabel(item.flow))}</strong>
+          <small>${escapeHtml([mobileFlowLabel(item.flow), item.category_label || item.category, item.raw_address].filter(Boolean).join(" - "))}</small>
+        </div>
+        <div class="admin-mobile-meta">
+          <em>${escapeHtml(label(categoryLabels, item.target_category))}</em>
+          <em>${escapeHtml(label(priorityLabels, item.target_priority))}</em>
+          ${item.has_photo ? "<em>Photo</em>" : ""}
+        </div>
+        <button class="btn secondary" type="button" data-mobile-import="${escapeHtml(item.id)}">Importer + dossier</button>
+      </article>`).join("")}
+    </div>`
+    : `<div class="admin-mobile-empty">
+      <strong>${isError ? "Lecture mobile indisponible" : "Aucune demande mobile en attente"}</strong>
+      <p>${isError ? "Verifiez la configuration Supabase et rechargez le module." : "Lorsqu'une demande est envoyee depuis TVF Mobile, elle apparaitra ici avant import dans les demandes et les dossiers."}</p>
+      <button class="btn secondary" type="button" data-admin-refresh>Actualiser</button>
+    </div>`;
+
   mobilePanelEl.innerHTML = `<div class="admin-panel-head">
     <div>
       <p class="section-kicker">TVF Mobile</p>
       <h3>Demandes terrain a importer</h3>
       <p>Les signalements mobiles sont qualifies ici avant d'entrer dans le parcours demande, contact et dossier.</p>
     </div>
-    <strong>${escapeHtml(String(mobileRequests.length))}</strong>
+    <strong>${escapeHtml(String(count))}</strong>
   </div>
-  <div class="admin-mobile-list">
-    ${mobileRequests.map((item) => `<article class="admin-mobile-card">
-      <div>
-        <span>${escapeHtml(item.reference || "Mobile")}</span>
-        <strong>${escapeHtml(item.title || mobileFlowLabel(item.flow))}</strong>
-        <small>${escapeHtml([mobileFlowLabel(item.flow), item.category_label || item.category, item.raw_address].filter(Boolean).join(" - "))}</small>
-      </div>
-      <div class="admin-mobile-meta">
-        <em>${escapeHtml(label(categoryLabels, item.target_category))}</em>
-        <em>${escapeHtml(label(priorityLabels, item.target_priority))}</em>
-        ${item.has_photo ? "<em>Photo</em>" : ""}
-      </div>
-      <button class="btn secondary" type="button" data-mobile-import="${escapeHtml(item.id)}">Importer + dossier</button>
-    </article>`).join("")}
-  </div>`;
+  ${content}`;
   if (window.location.hash === "#demandes-mobile") {
     window.setTimeout(() => mobilePanelEl.scrollIntoView({ behavior: "smooth", block: "start" }), 60);
   }
 }
-
 async function loadMobileRequests() {
   if (!mobilePanelEl) return;
   try {
@@ -518,7 +522,7 @@ async function loadMobileRequests() {
     renderMobilePanel();
   } catch {
     mobileRequests = [];
-    mobilePanelEl.hidden = true;
+    renderMobilePanel("error");
   }
 }
 
@@ -1108,6 +1112,11 @@ function bindEvents() {
   });
 
   mobilePanelEl?.addEventListener("click", (event) => {
+    const refresh = event.target.closest("[data-admin-refresh]");
+    if (refresh) {
+      loadMobileRequests().catch((error) => notifyError(error));
+      return;
+    }
     const button = event.target.closest("[data-mobile-import]");
     if (!button) return;
     importMobileRequest(button.dataset.mobileImport, button);

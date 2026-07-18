@@ -15,35 +15,56 @@ function sanitizeFileName(value) {
 }
 
 async function uploadPhotoIfNeeded(payload) {
-  if (!payload.media?.photoUri) return { payload, bucket: null, path: null };
+  if (!payload.media?.photoUri) return { payload, bucket: null, path: null, warning: null };
 
   const bucket = bucketForFlow(payload.flow);
   const fileName = sanitizeFileName(payload.media.photoFileName);
   const storagePath = `${payload.reference}/${Date.now()}-${fileName}`;
-  const response = await fetch(payload.media.photoUri);
-  const blob = await response.blob();
-  const contentType = blob.type || "image/jpeg";
 
-  const { error } = await supabase.storage.from(bucket).upload(storagePath, blob, {
-    contentType,
-    upsert: false
-  });
+  try {
+    const response = await fetch(payload.media.photoUri);
+    const blob = await response.blob();
+    const contentType = blob.type || "image/jpeg";
 
-  if (error) throw error;
+    const { error } = await supabase.storage.from(bucket).upload(storagePath, blob, {
+      contentType,
+      upsert: false
+    });
 
-  return {
-    bucket,
-    path: storagePath,
-    payload: {
-      ...payload,
-      media: {
-        ...payload.media,
-        photoUri: null,
-        storageBucket: bucket,
-        storagePath
+    if (error) throw error;
+
+    return {
+      bucket,
+      path: storagePath,
+      warning: null,
+      payload: {
+        ...payload,
+        media: {
+          ...payload.media,
+          photoUri: null,
+          storageBucket: bucket,
+          storagePath
+        }
       }
-    }
-  };
+    };
+  } catch (error) {
+    const warning = error?.message || "Photo non transmise.";
+    return {
+      bucket: null,
+      path: null,
+      warning,
+      payload: {
+        ...payload,
+        media: {
+          ...payload.media,
+          photoUri: null,
+          storageBucket: null,
+          storagePath: null,
+          uploadWarning: warning
+        }
+      }
+    };
+  }
 }
 
 export async function submitMobileRequest(payload) {
@@ -51,7 +72,7 @@ export async function submitMobileRequest(payload) {
     return {
       ok: true,
       mode: "local-preview",
-      message: "Demande préparée localement. Configurez Supabase pour l'enregistrement réel."
+      message: "Demande preparee localement. Relancez Expo avec la configuration Supabase pour l'enregistrement reel."
     };
   }
 
@@ -79,7 +100,11 @@ export async function submitMobileRequest(payload) {
     return {
       ok: true,
       mode: "supabase",
-      message: upload.path ? "Demande et photo enregistrées dans Supabase." : "Demande enregistrée dans Supabase."
+      message: upload.warning
+        ? "Demande enregistree dans Supabase. Photo non transmise : elle pourra etre ajoutee depuis TVF OS."
+        : upload.path
+          ? "Demande et photo enregistrees dans Supabase."
+          : "Demande enregistree dans Supabase."
     };
   } catch (error) {
     return {
