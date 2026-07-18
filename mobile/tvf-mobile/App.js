@@ -7,6 +7,7 @@ import {
   Linking,
   Platform,
   ScrollView,
+  Share,
   StyleSheet,
   Text,
   TextInput,
@@ -551,6 +552,17 @@ function VolunteerScreen({ draft, setDraft, submit, missing, submitting }) {
 function RequestsScreen({ submissionHistory = [], goTracking }) {
   const sentCount = submissionHistory.filter((item) => item.syncMode === "supabase").length;
   const pendingCount = submissionHistory.length - sentCount;
+
+  const shareReference = async (item) => {
+    const message = `Demande TVF ${item.reference}
+Type : ${item.label || "Demande TVF"}
+Transmission : ${item.syncMode === "supabase" ? "transmise" : "à vérifier"}`;
+    try {
+      await Share.share({ message });
+    } catch {
+      Alert.alert("Partage indisponible", `Notez la référence : ${item.reference}`);
+    }
+  };
   return (
     <ScrollView contentContainerStyle={styles.content}>
       <ScreenTitle eyebrow="Mes demandes" title="Demandes enregistrées sur ce téléphone">
@@ -575,6 +587,10 @@ function RequestsScreen({ submissionHistory = [], goTracking }) {
                   <Text style={styles.requestLabel}>{item.label || "Demande TVF"}</Text>
                   <Text style={styles.requestMeta}>{item.categoryLabel || item.category || "Catégorie non renseignée"} · {item.address || "Localisation non renseignée"}</Text>
                   <Text style={[styles.requestSync, isSent && styles.requestSyncReady]}>{isSent ? "Transmise dans TVF OS" : "Transmission à vérifier"}</Text>
+                  <TouchableOpacity style={styles.requestShareButton} onPress={() => shareReference(item)} activeOpacity={0.82}>
+                    <Ionicons name="share-social-outline" size={16} color={colors.green} />
+                    <Text style={styles.requestShareText}>Partager la référence</Text>
+                  </TouchableOpacity>
                 </View>
               </View>
             );
@@ -1225,6 +1241,18 @@ const styles = StyleSheet.create({
   requestMeta: { color: colors.muted, fontSize: 12.5, lineHeight: 18, fontWeight: "600" },
   requestSync: { color: colors.gold, fontSize: 12.5, fontWeight: "800", marginTop: 7 },
   requestSyncReady: { color: colors.green },
+  requestShareButton: {
+    alignSelf: "flex-start",
+    flexDirection: "row",
+    gap: 6,
+    alignItems: "center",
+    marginTop: 10,
+    paddingHorizontal: 10,
+    paddingVertical: 7,
+    borderRadius: 999,
+    backgroundColor: colors.soft
+  },
+  requestShareText: { color: colors.green, fontWeight: "800", fontSize: 12.5 },
   stepRow: { flexDirection: "row", alignItems: "center", gap: 10, paddingVertical: 7 },
   stepDot: { width: 13, height: 13, borderRadius: 99, backgroundColor: colors.line },
   stepDotActive: { backgroundColor: colors.green },
