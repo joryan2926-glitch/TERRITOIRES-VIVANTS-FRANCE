@@ -549,7 +549,7 @@ function VolunteerScreen({ draft, setDraft, submit, missing, submitting }) {
   );
 }
 
-function RequestsScreen({ submissionHistory = [], goTracking }) {
+function RequestsScreen({ submissionHistory = [], goTracking, openRequest }) {
   const sentCount = submissionHistory.filter((item) => item.syncMode === "supabase").length;
   const pendingCount = submissionHistory.length - sentCount;
 
@@ -563,6 +563,7 @@ Transmission : ${item.syncMode === "supabase" ? "transmise" : "à vérifier"}`;
       Alert.alert("Partage indisponible", `Notez la référence : ${item.reference}`);
     }
   };
+
   return (
     <ScrollView contentContainerStyle={styles.content}>
       <ScreenTitle eyebrow="Mes demandes" title="Demandes enregistrées sur ce téléphone">
@@ -587,10 +588,16 @@ Transmission : ${item.syncMode === "supabase" ? "transmise" : "à vérifier"}`;
                   <Text style={styles.requestLabel}>{item.label || "Demande TVF"}</Text>
                   <Text style={styles.requestMeta}>{item.categoryLabel || item.category || "Catégorie non renseignée"} · {item.address || "Localisation non renseignée"}</Text>
                   <Text style={[styles.requestSync, isSent && styles.requestSyncReady]}>{isSent ? "Transmise dans TVF OS" : "Transmission à vérifier"}</Text>
-                  <TouchableOpacity style={styles.requestShareButton} onPress={() => shareReference(item)} activeOpacity={0.82}>
-                    <Ionicons name="share-social-outline" size={16} color={colors.green} />
-                    <Text style={styles.requestShareText}>Partager la référence</Text>
-                  </TouchableOpacity>
+                  <View style={styles.requestActionsRow}>
+                    <TouchableOpacity style={styles.requestShareButton} onPress={() => openRequest(item)} activeOpacity={0.82}>
+                      <Ionicons name="eye-outline" size={16} color={colors.green} />
+                      <Text style={styles.requestShareText}>Voir la fiche</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.requestShareButton} onPress={() => shareReference(item)} activeOpacity={0.82}>
+                      <Ionicons name="share-social-outline" size={16} color={colors.green} />
+                      <Text style={styles.requestShareText}>Partager la référence</Text>
+                    </TouchableOpacity>
+                  </View>
                 </View>
               </View>
             );
@@ -603,6 +610,52 @@ Transmission : ${item.syncMode === "supabase" ? "transmise" : "à vérifier"}`;
         </View>
       )}
       <PrimaryButton secondary icon="search-outline" onPress={goTracking}>Rechercher une demande</PrimaryButton>
+    </ScrollView>
+  );
+}
+function RequestDetailScreen({ request, goBack, goTracking }) {
+  if (!request) {
+    return (
+      <ScrollView contentContainerStyle={styles.content}>
+        <ScreenTitle eyebrow="Fiche demande" title="Demande introuvable">
+          Revenez à la liste des demandes enregistrées sur ce téléphone.
+        </ScreenTitle>
+        <PrimaryButton onPress={goBack}>Retour aux demandes</PrimaryButton>
+      </ScrollView>
+    );
+  }
+  const isSent = request.syncMode === "supabase";
+  const subject = encodeURIComponent(`Demande TVF ${request.reference || ""}`.trim());
+  return (
+    <ScrollView contentContainerStyle={styles.content}>
+      <ScreenTitle eyebrow="Fiche demande" title={request.reference || "Demande TVF"}>
+        Résumé opérationnel de la demande enregistrée depuis TVF Mobile.
+      </ScreenTitle>
+      <View style={[styles.syncBadge, isSent && styles.syncBadgeReady, !isSent && styles.syncBadgeError]}>
+        <Ionicons name={isSent ? "cloud-done-outline" : "warning-outline"} size={16} color={colors.white} />
+        <Text style={styles.syncBadgeTextReady}>{isSent ? "Transmise dans TVF OS" : "Transmission à vérifier"}</Text>
+      </View>
+      <View style={styles.summaryCard}>
+        <Text style={styles.summaryTitle}>Informations principales</Text>
+        <Text style={styles.summaryLine}>Type : {request.label || "Non renseigné"}</Text>
+        <Text style={styles.summaryLine}>Catégorie : {request.categoryLabel || request.category || "Non renseignée"}</Text>
+        <Text style={styles.summaryLine}>Localisation : {request.address || "À compléter"}</Text>
+        <Text style={styles.summaryLine}>Photo : {request.hasPhoto ? "jointe" : "non jointe"}</Text>
+        <Text style={styles.summaryLine}>GPS : {request.hasCoordinates ? "enregistré" : "non renseigné"}</Text>
+      </View>
+      <View style={styles.summaryCard}>
+        <Text style={styles.summaryTitle}>Contact associé</Text>
+        <Text style={styles.summaryLine}>E-mail : {request.email || "Non renseigné"}</Text>
+        <Text style={styles.summaryLine}>Téléphone : {request.phone || "Non renseigné"}</Text>
+      </View>
+      <View style={styles.summaryCard}>
+        <Text style={styles.summaryTitle}>Message de transmission</Text>
+        <Text style={styles.summaryLine}>{request.syncMessage || "Aucun message technique enregistré."}</Text>
+      </View>
+      <PrimaryButton secondary icon="share-social-outline" onPress={() => Share.share({ message: `Demande TVF ${request.reference}` })}>Partager la référence</PrimaryButton>
+      <PrimaryButton secondary icon="mail-outline" onPress={() => Linking.openURL(`mailto:contact@territoiresvivantsfrance.fr?subject=${subject}`)}>Contacter TVF</PrimaryButton>
+      <PrimaryButton secondary icon="search-outline" onPress={goTracking}>Ouvrir le suivi</PrimaryButton>
+      <PrimaryButton onPress={goBack}>Retour aux demandes</PrimaryButton>
     </ScrollView>
   );
 }
@@ -783,6 +836,7 @@ function AppShell() {
   const [draft, setDraft] = useState(initialDraft);
   const [lastSubmission, setLastSubmission] = useState(null);
   const [submissionHistory, setSubmissionHistory] = useState([]);
+  const [selectedRequest, setSelectedRequest] = useState(null);
   const [missing, setMissing] = useState([]);
   const [submitting, setSubmitting] = useState(false);
 
@@ -798,6 +852,10 @@ function AppShell() {
     };
   }, []);
 
+  const openRequest = (request) => {
+    setSelectedRequest(request);
+    go("request-detail");
+  };
   const go = (next, options = {}) => {
     setMissing([]);
     if (options.resetDraft) setDraft(initialDraft);
@@ -873,7 +931,7 @@ function AppShell() {
       case "volunteer":
         return <VolunteerScreen draft={draft} setDraft={setDraft} submit={submit} missing={missing} submitting={submitting} />;
       case "requests":
-        return <RequestsScreen submissionHistory={submissionHistory} goTracking={() => go("tracking")} />;
+        return <RequestsScreen submissionHistory={submissionHistory} goTracking={() => go("tracking")} openRequest={openRequest} />;
       case "tracking":
         return <TrackingScreen lastSubmission={lastSubmission} submissionHistory={submissionHistory} />;
       case "documents":
@@ -886,7 +944,7 @@ function AppShell() {
       default:
         return <HomeScreen go={go} />;
     }
-  }, [screen, draft, lastSubmission, submissionHistory, missing, submitting]);
+  }, [screen, draft, lastSubmission, submissionHistory, selectedRequest, missing, submitting]);
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -1241,12 +1299,12 @@ const styles = StyleSheet.create({
   requestMeta: { color: colors.muted, fontSize: 12.5, lineHeight: 18, fontWeight: "600" },
   requestSync: { color: colors.gold, fontSize: 12.5, fontWeight: "800", marginTop: 7 },
   requestSyncReady: { color: colors.green },
+  requestActionsRow: { flexDirection: "row", flexWrap: "wrap", gap: 8, marginTop: 10 },
   requestShareButton: {
     alignSelf: "flex-start",
     flexDirection: "row",
     gap: 6,
     alignItems: "center",
-    marginTop: 10,
     paddingHorizontal: 10,
     paddingVertical: 7,
     borderRadius: 999,
