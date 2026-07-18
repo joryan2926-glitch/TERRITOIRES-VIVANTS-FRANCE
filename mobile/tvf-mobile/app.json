@@ -1,0 +1,44 @@
+{
+  "expo": {
+    "name": "TVF Mobile",
+    "slug": "tvf-mobile",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "icon": "./assets/tvf-mobile-logo.png",
+    "userInterfaceStyle": "light",
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "fr.territoiresvivants.tvfmobile",
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "TVF Mobile utilise la localisation uniquement pour situer un signalement transmis a Territoires Vivants France.",
+        "NSPhotoLibraryUsageDescription": "TVF Mobile utilise la phototheque uniquement pour joindre une photo a un signalement ou a une proposition.",
+        "NSCameraUsageDescription": "TVF Mobile utilise l'appareil photo uniquement pour documenter un signalement ou une ressource."
+      }
+    },
+    "android": {
+      "package": "fr.territoiresvivants.tvfmobile",
+      "permissions": [
+        "CAMERA",
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_COARSE_LOCATION",
+        "READ_MEDIA_IMAGES"
+      ]
+    },
+    "extra": {
+      "projectPhase": "preversion-terrain-sdk-57"
+    },
+    "plugins": [
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/tvf-mobile-logo.png",
+          "resizeMode": "contain",
+          "backgroundColor": "#F7FAF4"
+        }
+      ]
+    ]
+  }
+}

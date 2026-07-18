@@ -1,0 +1,122 @@
+# TVF Mobile - Prototype terrain SDK 57
+
+Prototype Expo / React Native de l'application mobile Territoires Vivants France.
+
+## Objectif
+
+TVF Mobile prepare l'usage terrain de Territoires Vivants France : signaler rapidement une situation, joindre une photo, localiser une ressource et transmettre une demande exploitable dans TVF OS.
+
+L'application permet de preparer les parcours suivants :
+
+- signaler un lieu vacant ou abandonne ;
+- proposer des materiaux reutilisables ;
+- proposer un bien dormant ;
+- transmettre une candidature benevole ;
+- consulter les documents utiles ;
+- contacter TVF par les canaux officiels ;
+- preparer le suivi d'une demande rattachee a TVF OS.
+
+## Parcours disponibles
+
+1. **Accueil** : choix rapide du besoin.
+2. **Signaler un lieu** : categorie, localisation, description, photo et coordonnees.
+3. **Proposer des materiaux** : categorie, quantite, etat, stockage et disponibilite.
+4. **Proposer un bien** : type de bien, adresse, etat et objectif recherche.
+5. **Devenir benevole** : coordonnees, competences et disponibilites.
+6. **Suivre ma demande** : ecran prepare pour la synchronisation TVF OS.
+7. **Documents** : bibliotheque mobile structuree par usage.
+8. **Contact** : WhatsApp, e-mail, telephone, Facebook et Instagram officiels.
+
+## Fonctionnement actuel
+
+Cette version est une preversion terrain compatible Expo SDK 57 et Expo Go SDK 57.
+
+- navigation locale ;
+- formulaires controles cote interface ;
+- champs obligatoires par parcours ;
+- numero de demande genere cote application ;
+- recapitulatif de demande ;
+- prise de photo via Expo Image Picker ;
+- geolocalisation via Expo Location ;
+- connexion Supabase preparee avec fallback local si les variables publiques ne sont pas renseignees ;
+- upload photo prepare vers Supabase Storage ;
+- aucune cle `service_role` dans l'application mobile.
+
+## Prerequis
+
+- Node.js 20 LTS recommande.
+- Node.js 24 fonctionne pour les controles locaux si les dependances sont installees avec Expo SDK 57.
+- Application Expo Go compatible SDK 57 installee sur le telephone.
+
+## Lancement local
+
+Depuis ce dossier :
+
+```bash
+npm install
+npm run start
+```
+
+Puis scanner le QR code avec Expo Go sur telephone.
+
+## Controles locaux
+
+Depuis ce dossier :
+
+```bash
+npm run check
+npx expo export --platform web --output-dir export-check
+```
+
+Depuis la racine du depot :
+
+```bash
+node scripts/check-encoding.js
+```
+
+## Connexion Supabase preparee
+
+La preversion peut fonctionner sans Supabase : les demandes restent alors en mode local.
+
+Pour activer l'enregistrement reel :
+
+1. Copier `.env.example` vers `.env`.
+2. Renseigner uniquement les variables publiques Expo :
+
+```bash
+EXPO_PUBLIC_SUPABASE_URL=https://votre-projet.supabase.co
+EXPO_PUBLIC_SUPABASE_ANON_KEY=votre-cle-anon-publique
+```
+
+3. Ne jamais mettre la cle `service_role` dans l'application mobile.
+4. Executer le fichier SQL suivant dans Supabase SQL Editor :
+
+```text
+supabase/tvf-mobile-requests.sql
+```
+
+5. Verifier avec :
+
+```text
+supabase/verify-tvf-mobile-requests.sql
+```
+
+## Suite fonctionnelle prevue
+
+- creation d'une demande dans Supabase ;
+- generation d'un numero de dossier TVF OS ;
+- upload photo dans Supabase Storage ;
+- stockage latitude/longitude dans le dossier de demande ;
+- notification e-mail vers TVF ;
+- accuse de reception vers l'utilisateur ;
+- suivi du statut depuis TVF OS.
+
+## Points a valider avant publication native
+
+- libelles definitifs des formulaires ;
+- categories de signalement ;
+- categories de materiaux ;
+- documents affiches ;
+- niveau de detail demande a l'utilisateur ;
+- regles de confidentialite ;
+- integration complete avec les processus internes TVF OS.

@@ -1,0 +1,939 @@
+import React, { useMemo, useState } from "react";
+import {
+  ActivityIndicator,
+  Alert,
+  Image,
+  KeyboardAvoidingView,
+  Linking,
+  Platform,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View
+} from "react-native";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import { StatusBar } from "expo-status-bar";
+import { Ionicons } from "@expo/vector-icons";
+import * as ImagePicker from "expo-image-picker";
+import * as Location from "expo-location";
+
+import { colors, radius, shadow } from "./src/theme";
+import {
+  contactChannels,
+  documentGroups,
+  documents,
+  fieldLabels,
+  flowLabels,
+  homeActions,
+  materialCategories,
+  nextSteps,
+  propertyTypes,
+  requiredFieldsByFlow,
+  signalCategories,
+  statusSteps
+} from "./src/data";
+import { buildRequestPayload } from "./src/services/requestPayload";
+import { submitMobileRequest } from "./src/services/requestRepository";
+import { getSupabaseConfigStatus } from "./src/services/supabaseClient";
+
+const logo = require("./assets/tvf-mobile-logo.png");
+
+const initialDraft = {
+  category: "",
+  title: "",
+  address: "",
+  description: "",
+  contactName: "",
+  email: "",
+  phone: "",
+  quantity: "",
+  condition: "",
+  availability: "",
+  objective: "",
+  skills: "",
+  photoUri: "",
+  photoFileName: "",
+  latitude: "",
+  longitude: "",
+  locationAccuracy: ""
+};
+
+function buildReference(flow) {
+  const prefix = {
+    signal: "SIG",
+    materials: "MAT",
+    property: "BIEN",
+    volunteer: "BEN"
+  }[flow] || "TVF";
+  const stamp = Date.now().toString().slice(-6);
+  return `TVF-${prefix}-${stamp}`;
+}
+
+function validateDraft(flow, draft) {
+  const required = requiredFieldsByFlow[flow] || [];
+  return required.filter((field) => !String(draft[field] || "").trim());
+}
+
+function AppHeader({ screen, onBack }) {
+  const canGoBack = screen !== "home";
+  return (
+    <View style={styles.header}>
+      <TouchableOpacity
+        style={[styles.headerButton, !canGoBack && styles.headerButtonMuted]}
+        onPress={canGoBack ? onBack : undefined}
+        accessibilityLabel="Retour"
+      >
+        <Ionicons name={canGoBack ? "chevron-back" : "leaf-outline"} size={22} color={colors.green} />
+      </TouchableOpacity>
+      <View style={styles.headerBrand}>
+        <Image source={logo} style={styles.headerLogo} />
+        <View>
+          <Text style={styles.headerTitle}>TVF Mobile</Text>
+          <Text style={styles.headerSubtitle}>Signaler. Localiser. Agir.</Text>
+        </View>
+      </View>
+      <TouchableOpacity style={styles.headerButton} accessibilityLabel="Notifications">
+        <Ionicons name="notifications-outline" size={21} color={colors.green} />
+      </TouchableOpacity>
+    </View>
+  );
+}
+
+function ScreenTitle({ eyebrow, title, children }) {
+  return (
+    <View style={styles.screenTitle}>
+      <Text style={styles.eyebrow}>{eyebrow}</Text>
+      <Text style={styles.title}>{title}</Text>
+      {children ? <Text style={styles.lead}>{children}</Text> : null}
+    </View>
+  );
+}
+
+function PrimaryButton({ children, icon = "arrow-forward-outline", onPress, secondary }) {
+  return (
+    <TouchableOpacity style={[styles.primaryButton, secondary && styles.secondaryButton]} onPress={onPress}>
+      <Text style={[styles.primaryButtonText, secondary && styles.secondaryButtonText]}>{children}</Text>
+      <Ionicons name={icon} size={18} color={secondary ? colors.green : colors.white} />
+    </TouchableOpacity>
+  );
+}
+
+function Card({ icon, title, subtitle, onPress, primary }) {
+  return (
+    <TouchableOpacity style={[styles.card, primary && styles.cardPrimary]} onPress={onPress} activeOpacity={0.86}>
+      <View style={[styles.cardIcon, primary && styles.cardIconPrimary]}>
+        <Ionicons name={icon} size={23} color={primary ? colors.green : colors.green} />
+      </View>
+      <View style={styles.cardText}>
+        <Text style={[styles.cardTitle, primary && styles.cardTitlePrimary]}>{title}</Text>
+        <Text style={[styles.cardSubtitle, primary && styles.cardSubtitlePrimary]}>{subtitle}</Text>
+      </View>
+      <Ionicons name="chevron-forward" size={19} color={primary ? colors.white : colors.muted} />
+    </TouchableOpacity>
+  );
+}
+
+function Field({ label, value = "", onChangeText = () => {}, placeholder, multiline, keyboardType }) {
+  return (
+    <View style={styles.fieldGroup}>
+      <Text style={styles.label}>{label}</Text>
+      <TextInput
+        style={[styles.input, multiline && styles.textArea]}
+        value={value}
+        onChangeText={onChangeText}
+        placeholder={placeholder}
+        placeholderTextColor="#8A968F"
+        multiline={multiline}
+        keyboardType={keyboardType}
+      />
+    </View>
+  );
+}
+
+function PillPicker({ items, selected, onSelect }) {
+  return (
+    <View style={styles.pillGrid}>
+      {items.map((item) => {
+        const value = typeof item === "string" ? item : item.key;
+        const label = typeof item === "string" ? item : item.label;
+        const icon = typeof item === "string" ? "ellipse-outline" : item.icon;
+        const active = selected === value || selected === label;
+        return (
+          <TouchableOpacity key={value} style={[styles.pill, active && styles.pillActive]} onPress={() => onSelect(value)}>
+            <Ionicons name={icon} size={18} color={active ? colors.white : colors.green} />
+            <Text style={[styles.pillText, active && styles.pillTextActive]}>{label}</Text>
+          </TouchableOpacity>
+        );
+      })}
+    </View>
+  );
+}
+
+function MediaCapture({ draft, setDraft, label = "Ajouter une photo" }) {
+  const [busy, setBusy] = useState(false);
+
+  const saveAsset = (asset) => {
+    setDraft({
+      ...draft,
+      photoUri: asset.uri,
+      photoFileName: asset.fileName || "photo-tvf-mobile.jpg"
+    });
+  };
+
+  const openLibrary = async () => {
+    setBusy(true);
+    try {
+      const permission = await ImagePicker.requestMediaLibraryPermissionsAsync();
+      if (!permission.granted) {
+        Alert.alert("Autorisation nécessaire", "TVF Mobile a besoin de l'accès aux photos pour joindre une image au dossier.");
+        return;
+      }
+      const result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        allowsEditing: false,
+        quality: 0.75
+      });
+      if (!result.canceled && result.assets?.length) saveAsset(result.assets[0]);
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const openCamera = async () => {
+    setBusy(true);
+    try {
+      const permission = await ImagePicker.requestCameraPermissionsAsync();
+      if (!permission.granted) {
+        Alert.alert("Autorisation nécessaire", "TVF Mobile a besoin de l'appareil photo pour documenter une demande.");
+        return;
+      }
+      const result = await ImagePicker.launchCameraAsync({
+        allowsEditing: false,
+        quality: 0.72
+      });
+      if (!result.canceled && result.assets?.length) saveAsset(result.assets[0]);
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const choosePhotoSource = () => {
+    Alert.alert("Ajouter une photo", "Choisissez la source de l'image.", [
+      { text: "Appareil photo", onPress: openCamera },
+      { text: "Photothèque", onPress: openLibrary },
+      { text: "Annuler", style: "cancel" }
+    ]);
+  };
+
+  const clearPhoto = () => {
+    setDraft({ ...draft, photoUri: "", photoFileName: "" });
+  };
+
+  return (
+    <View style={styles.mediaWrap}>
+      <TouchableOpacity style={styles.photoBox} activeOpacity={0.82} onPress={choosePhotoSource}>
+        {busy ? <ActivityIndicator color={colors.green} /> : <Ionicons name="camera-outline" size={30} color={colors.green} />}
+        <Text style={styles.photoTitle}>{draft.photoUri ? "Photo ajoutée" : label}</Text>
+        {draft.photoUri ? <Image source={{ uri: draft.photoUri }} style={styles.photoPreview} /> : null}
+        <Text style={styles.photoText}>{draft.photoUri ? "La photo sera jointe à la demande lors de la connexion TVF OS." : "Prendre une photo ou choisir une image existante."}</Text>
+      </TouchableOpacity>
+      {draft.photoUri ? <PrimaryButton secondary icon="trash-outline" onPress={clearPhoto}>Retirer la photo</PrimaryButton> : null}
+    </View>
+  );
+}
+function LocationCapture({ draft, setDraft }) {
+  const [busy, setBusy] = useState(false);
+
+  const captureLocation = async () => {
+    setBusy(true);
+    try {
+      const permission = await Location.requestForegroundPermissionsAsync();
+      if (permission.status !== "granted") {
+        Alert.alert("Autorisation nécessaire", "TVF Mobile a besoin de la localisation pour rattacher la demande à un lieu.");
+        return;
+      }
+      const position = await Location.getCurrentPositionAsync({ accuracy: Location.Accuracy.Balanced });
+      setDraft({
+        ...draft,
+        latitude: String(position.coords.latitude),
+        longitude: String(position.coords.longitude),
+        locationAccuracy: String(Math.round(position.coords.accuracy || 0))
+      });
+    } catch (error) {
+      Alert.alert("Localisation indisponible", "La position n'a pas pu être récupérée. Vous pouvez indiquer l'adresse manuellement.");
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const hasLocation = draft.latitude && draft.longitude;
+  return (
+    <TouchableOpacity style={[styles.locationBox, hasLocation && styles.locationBoxActive]} onPress={captureLocation} activeOpacity={0.84}>
+      {busy ? <ActivityIndicator color={colors.green} /> : <Ionicons name="navigate-outline" size={22} color={hasLocation ? colors.white : colors.green} />}
+      <View style={styles.locationTextWrap}>
+        <Text style={[styles.locationTitle, hasLocation && styles.locationTitleActive]}>{hasLocation ? "Position enregistrée" : "Utiliser ma position"}</Text>
+        <Text style={[styles.locationText, hasLocation && styles.locationTextActive]}>
+          {hasLocation ? `${Number(draft.latitude).toFixed(5)}, ${Number(draft.longitude).toFixed(5)}` : "Complète l'adresse avec un repère GPS."}
+        </Text>
+      </View>
+    </TouchableOpacity>
+  );
+}
+function ErrorBox({ missing }) {
+  if (!missing.length) return null;
+  return (
+    <View style={styles.errorBox}>
+      <Ionicons name="alert-circle-outline" size={20} color={colors.danger} />
+      <Text style={styles.errorText}>
+        Complétez : {missing.map((field) => fieldLabels[field] || field).join(", ")}.
+      </Text>
+    </View>
+  );
+}
+
+function Notice({ children }) {
+  return (
+    <View style={styles.notice}>
+      <Ionicons name="information-circle-outline" size={20} color={colors.green} />
+      <Text style={styles.noticeText}>{children}</Text>
+    </View>
+  );
+}
+
+function ConfigBanner() {
+  const status = getSupabaseConfigStatus();
+  return (
+    <View style={[styles.configBanner, status.configured && styles.configBannerReady]}>
+      <View style={[styles.configIcon, status.configured && styles.configIconReady]}>
+        <Ionicons name={status.configured ? "cloud-done-outline" : "phone-portrait-outline"} size={20} color={status.configured ? colors.white : colors.green} />
+      </View>
+      <View style={styles.configTextWrap}>
+        <Text style={styles.configTitle}>{status.title}</Text>
+        <Text style={styles.configText}>{status.message}</Text>
+      </View>
+    </View>
+  );
+}
+function HomeScreen({ go }) {
+  return (
+    <ScrollView contentContainerStyle={styles.content}>
+      <ScreenTitle eyebrow="Préversion terrain" title="Une application terrain simple pour TVF">
+        Signaler un lieu, proposer des matériaux ou déposer une première demande en quelques étapes.
+      </ScreenTitle>
+      <View style={styles.logoPanel}>
+        <Image source={logo} style={styles.logoLarge} />
+        <View style={styles.logoCopy}>
+          <Text style={styles.logoPanelTitle}>Pensée pour le terrain</Text>
+          <Text style={styles.logoPanelText}>Chaque saisie doit pouvoir devenir une demande exploitable dans TVF OS.</Text>
+        </View>
+      </View>
+      <ConfigBanner />
+      <View style={styles.quickStats}>
+        <View style={styles.statMini}><Text style={styles.statMiniValue}>4</Text><Text style={styles.statMiniLabel}>parcours clés</Text></View>
+        <View style={styles.statMini}><Text style={styles.statMiniValue}>1</Text><Text style={styles.statMiniLabel}>suivi TVF OS</Text></View>
+        <View style={styles.statMini}><Text style={styles.statMiniValue}>0</Text><Text style={styles.statMiniLabel}>donnée fictive</Text></View>
+      </View>
+      <View style={styles.stack}>
+        {homeActions.map((action) => (
+          <Card
+            key={action.key}
+            icon={action.icon}
+            title={action.title}
+            subtitle={action.subtitle}
+            primary={action.primary}
+            onPress={() => go(action.key)}
+          />
+        ))}
+      </View>
+    </ScrollView>
+  );
+}
+
+function SignalScreen({ draft, setDraft, submit, missing }) {
+  return (
+    <ScrollView contentContainerStyle={styles.content}>
+      <ScreenTitle eyebrow="Signalement" title="Décrire un lieu à vérifier">
+        Le signalement sert à repérer une situation, puis à la qualifier avant toute action.
+      </ScreenTitle>
+      <PillPicker items={signalCategories} selected={draft.category} onSelect={(category) => setDraft({ ...draft, category })} />
+      <MediaCapture draft={draft} setDraft={setDraft} />
+      <LocationCapture draft={draft} setDraft={setDraft} />
+      <Field label="Adresse ou repère" value={draft.address} onChangeText={(address) => setDraft({ ...draft, address })} placeholder="Rue, commune, quartier..." />
+      <Field label="Description courte" value={draft.description} onChangeText={(description) => setDraft({ ...draft, description })} placeholder="Que faut-il savoir ?" multiline />
+      <Field label="E-mail de suivi (facultatif)" value={draft.email} onChangeText={(email) => setDraft({ ...draft, email })} placeholder="exemple@mail.fr" keyboardType="email-address" />
+      <Notice>Ne prenez pas de photo en entrant dans une propriété privée sans autorisation.</Notice>
+      <ErrorBox missing={missing} />
+      <PrimaryButton onPress={() => submit("signal")}>Envoyer à TVF</PrimaryButton>
+    </ScrollView>
+  );
+}
+
+function MaterialsScreen({ draft, setDraft, submit, missing }) {
+  return (
+    <ScrollView contentContainerStyle={styles.content}>
+      <ScreenTitle eyebrow="Matériaux" title="Proposer une ressource réutilisable">
+        Les matériaux sont étudiés par TVF avant toute acceptation, collecte ou affectation à un projet.
+      </ScreenTitle>
+      <PillPicker items={materialCategories} selected={draft.category} onSelect={(category) => setDraft({ ...draft, category })} />
+      <Field label="Quantité / dimensions" value={draft.quantity} onChangeText={(quantity) => setDraft({ ...draft, quantity })} placeholder="Ex. 12 portes, 30 m² de carrelage..." />
+      <Field label="État général" value={draft.condition} onChangeText={(condition) => setDraft({ ...draft, condition })} placeholder="Neuf, bon état, à vérifier..." />
+      <Field label="Lieu de stockage" value={draft.address} onChangeText={(address) => setDraft({ ...draft, address })} placeholder="Adresse ou commune" />
+      <LocationCapture draft={draft} setDraft={setDraft} />
+      <Field label="Date limite de disponibilité" value={draft.availability} onChangeText={(availability) => setDraft({ ...draft, availability })} placeholder="Ex. disponible jusqu'au..." />
+      <MediaCapture draft={draft} setDraft={setDraft} label="Ajouter des photos des matériaux" />
+      <ErrorBox missing={missing} />
+      <PrimaryButton onPress={() => submit("materials")}>Proposer à TVF</PrimaryButton>
+    </ScrollView>
+  );
+}
+
+function PropertyScreen({ draft, setDraft, submit, missing }) {
+  return (
+    <ScrollView contentContainerStyle={styles.content}>
+      <ScreenTitle eyebrow="Propriétaire" title="Présenter un bien dormant">
+        Une proposition de bien ouvre une pré-étude, pas une acceptation automatique.
+      </ScreenTitle>
+      <PillPicker items={propertyTypes} selected={draft.category} onSelect={(category) => setDraft({ ...draft, category })} />
+      <Field label="Adresse du bien" value={draft.address} onChangeText={(address) => setDraft({ ...draft, address })} placeholder="Adresse, commune..." />
+      <LocationCapture draft={draft} setDraft={setDraft} />
+      <Field label="État général" value={draft.condition} onChangeText={(condition) => setDraft({ ...draft, condition })} placeholder="Vacant, à rénover, inutilisé..." />
+      <Field label="Objectif recherché" value={draft.objective} onChangeText={(objective) => setDraft({ ...draft, objective })} placeholder="Rendez-vous, étude, orientation..." multiline />
+      <MediaCapture draft={draft} setDraft={setDraft} label="Ajouter des photos du bien" />
+      <Notice>TVF peut demander la liste des pièces à fournir avant toute suite opérationnelle.</Notice>
+      <ErrorBox missing={missing} />
+      <PrimaryButton onPress={() => submit("property")}>Demander une étude</PrimaryButton>
+    </ScrollView>
+  );
+}
+
+function VolunteerScreen({ draft, setDraft, submit, missing }) {
+  return (
+    <ScrollView contentContainerStyle={styles.content}>
+      <ScreenTitle eyebrow="Bénévolat" title="Proposer du temps ou une compétence">
+        TVF pourra recontacter les personnes selon les besoins terrain et administratifs.
+      </ScreenTitle>
+      <Field label="Nom et prénom" value={draft.contactName} onChangeText={(contactName) => setDraft({ ...draft, contactName })} placeholder="Votre identité" />
+      <Field label="E-mail" value={draft.email} onChangeText={(email) => setDraft({ ...draft, email })} placeholder="exemple@mail.fr" keyboardType="email-address" />
+      <Field label="Téléphone" value={draft.phone} onChangeText={(phone) => setDraft({ ...draft, phone })} placeholder="Votre numéro" keyboardType="phone-pad" />
+      <Field label="Compétences / disponibilités" value={draft.skills} onChangeText={(skills) => setDraft({ ...draft, skills })} placeholder="Repérage, logistique, administration, communication..." multiline />
+      <ErrorBox missing={missing} />
+      <PrimaryButton onPress={() => submit("volunteer")}>Transmettre à TVF</PrimaryButton>
+    </ScrollView>
+  );
+}
+
+function TrackingScreen() {
+  return (
+    <ScrollView contentContainerStyle={styles.content}>
+      <ScreenTitle eyebrow="Suivi" title="Retrouver une demande">
+        En V1, le suivi affichera les statuts synchronisés avec TVF OS.
+      </ScreenTitle>
+      <Field label="E-mail ou numéro TVF" placeholder="TVF-SIG-000001" />
+      <View style={styles.trackingCard}>
+        <Text style={styles.trackingTitle}>Chaîne de traitement prévue</Text>
+        {statusSteps.map((step, index) => (
+          <View key={step} style={styles.stepRow}>
+            <View style={[styles.stepDot, index <= 1 && styles.stepDotActive]} />
+            <Text style={[styles.stepText, index <= 1 && styles.stepTextActive]}>{step}</Text>
+          </View>
+        ))}
+      </View>
+      <PrimaryButton secondary icon="refresh-outline">Rechercher</PrimaryButton>
+    </ScrollView>
+  );
+}
+
+function DocumentsScreen() {
+  return (
+    <ScrollView contentContainerStyle={styles.content}>
+      <ScreenTitle eyebrow="Documents" title="Préparer son dossier">
+        Les documents publics utiles seront consultables depuis l'application et reliés aux dossiers TVF OS.
+      </ScreenTitle>
+      <View style={styles.stack}>
+        {documentGroups.map((group) => (
+          <View key={group.title} style={styles.groupCard}>
+            <Text style={styles.groupTitle}>{group.title}</Text>
+            {group.items.map((item) => <Text key={item} style={styles.groupItem}>• {item}</Text>)}
+          </View>
+        ))}
+        {documents.map((doc) => (
+          <View key={doc.title} style={styles.documentCard}>
+            <Ionicons name="document-text-outline" size={25} color={colors.green} />
+            <View style={styles.documentText}>
+              <Text style={styles.documentTitle}>{doc.title}</Text>
+              <Text style={styles.documentSubtitle}>{doc.subtitle}</Text>
+            </View>
+          </View>
+        ))}
+      </View>
+    </ScrollView>
+  );
+}
+
+function ContactScreen() {
+  return (
+    <ScrollView contentContainerStyle={styles.content}>
+      <ScreenTitle eyebrow="Contact" title="Joindre Territoires Vivants France">
+        Le contact rapide reste utile lorsqu'un utilisateur ne sait pas quel parcours choisir.
+      </ScreenTitle>
+      <View style={styles.stack}>
+        {contactChannels.map((channel) => (
+          <Card
+            key={channel.title}
+            icon={channel.icon}
+            title={channel.title}
+            subtitle={channel.subtitle}
+            onPress={() => Linking.openURL(channel.url)}
+          />
+        ))}
+        <Card icon="location-outline" title="Siège" subtitle="25 rue Élise Gervais, 42000 Saint-Étienne" />
+      </View>
+    </ScrollView>
+  );
+}
+
+function ConfirmationScreen({ lastSubmission, goHome }) {
+  const data = lastSubmission || {};
+  return (
+    <ScrollView contentContainerStyle={styles.content}>
+      <View style={styles.confirmation}>
+        <View style={styles.confirmIcon}>
+          <Ionicons name="checkmark" size={42} color={colors.white} />
+        </View>
+        <Text style={styles.confirmTitle}>Demande préparée</Text>
+        <Text style={styles.reference}>{data.reference}</Text>
+        <Text style={styles.confirmText}>
+          {data.label || "Votre demande"} est prête à être envoyée vers TVF OS dans la version connectée.
+        </Text>
+        <View style={styles.summaryCard}>
+          <Text style={styles.summaryTitle}>Récapitulatif</Text>
+          <Text style={styles.summaryLine}>Type : {data.label || "Non renseigné"}</Text>
+          <Text style={styles.summaryLine}>Catégorie : {data.category || "Non renseignée"}</Text>
+          <Text style={styles.summaryLine}>Localisation : {data.address || "À compléter"}</Text>
+          <Text style={styles.summaryLine}>Photo : {data.hasPhoto ? "jointe" : "non jointe"}</Text>
+          <Text style={styles.summaryLine}>GPS : {data.hasCoordinates ? "enregistré" : "non renseigné"}</Text>
+          <Text style={styles.summaryLine}>Mode : {data.syncMode === "supabase" ? "Supabase" : "préversion locale"}</Text>
+        </View>
+        <View style={styles.summaryCard}>
+          <Text style={styles.summaryTitle}>Suite prévue</Text>
+          {nextSteps.map((step) => <Text key={step} style={styles.summaryLine}>• {step}</Text>)}
+        </View>
+        <PrimaryButton onPress={goHome}>Retour à l'accueil</PrimaryButton>
+      </View>
+    </ScrollView>
+  );
+}
+
+function BottomNav({ screen, go }) {
+  const items = [
+    ["home", "Accueil", "home-outline"],
+    ["signal", "Signaler", "alert-circle-outline"],
+    ["documents", "Docs", "document-text-outline"],
+    ["contact", "Contact", "call-outline"]
+  ];
+  return (
+    <View style={styles.bottomNav}>
+      {items.map(([key, label, icon]) => {
+        const active = screen === key;
+        return (
+          <TouchableOpacity key={key} style={styles.navItem} onPress={() => go(key)}>
+            <Ionicons name={icon} size={21} color={active ? colors.green : colors.muted} />
+            <Text style={[styles.navLabel, active && styles.navLabelActive]}>{label}</Text>
+          </TouchableOpacity>
+        );
+      })}
+    </View>
+  );
+}
+
+function AppShell() {
+  const [screen, setScreen] = useState("home");
+  const [history, setHistory] = useState(["home"]);
+  const [draft, setDraft] = useState(initialDraft);
+  const [lastSubmission, setLastSubmission] = useState(null);
+  const [missing, setMissing] = useState([]);
+
+  const go = (next) => {
+    setMissing([]);
+    setScreen(next);
+    setHistory((value) => [...value, next]);
+  };
+
+  const back = () => {
+    setMissing([]);
+    setHistory((value) => {
+      if (value.length <= 1) {
+        setScreen("home");
+        return ["home"];
+      }
+      const nextHistory = value.slice(0, -1);
+      setScreen(nextHistory[nextHistory.length - 1]);
+      return nextHistory;
+    });
+  };
+
+  const submit = async (flow) => {
+    const missingFields = validateDraft(flow, draft);
+    if (missingFields.length) {
+      setMissing(missingFields);
+      return;
+    }
+    const reference = buildReference(flow);
+    const payload = buildRequestPayload({ flow, draft, reference });
+    const result = await submitMobileRequest(payload);
+    if (!result.ok) {
+      Alert.alert("Enregistrement non finalisé", result.message || "La demande reste préparée localement.");
+    }
+    setLastSubmission({
+      reference,
+      label: flowLabels[flow],
+      category: draft.category,
+      address: draft.address,
+      email: draft.email,
+      hasPhoto: Boolean(draft.photoUri),
+      hasCoordinates: Boolean(draft.latitude && draft.longitude),
+      syncMode: result.mode,
+      syncMessage: result.message,
+      payload
+    });
+    setDraft(initialDraft);
+    setMissing([]);
+    go("confirmation");
+  };
+
+  const content = useMemo(() => {
+    switch (screen) {
+      case "signal":
+        return <SignalScreen draft={draft} setDraft={setDraft} submit={submit} missing={missing} />;
+      case "materials":
+        return <MaterialsScreen draft={draft} setDraft={setDraft} submit={submit} missing={missing} />;
+      case "property":
+        return <PropertyScreen draft={draft} setDraft={setDraft} submit={submit} missing={missing} />;
+      case "volunteer":
+        return <VolunteerScreen draft={draft} setDraft={setDraft} submit={submit} missing={missing} />;
+      case "tracking":
+        return <TrackingScreen />;
+      case "documents":
+        return <DocumentsScreen />;
+      case "contact":
+        return <ContactScreen />;
+      case "confirmation":
+        return <ConfirmationScreen lastSubmission={lastSubmission} goHome={() => go("home")} />;
+      case "home":
+      default:
+        return <HomeScreen go={go} />;
+    }
+  }, [screen, draft, lastSubmission, missing]);
+
+  return (
+    <SafeAreaView style={styles.safeArea}>
+      <StatusBar style="dark" />
+      <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : undefined} style={styles.app}>
+        <AppHeader screen={screen} onBack={back} />
+        <View style={styles.main}>{content}</View>
+        <BottomNav screen={screen} go={go} />
+      </KeyboardAvoidingView>
+    </SafeAreaView>
+  );
+}
+
+export default function App() {
+  return (
+    <SafeAreaProvider>
+      <AppShell />
+    </SafeAreaProvider>
+  );
+}
+
+const styles = StyleSheet.create({
+  safeArea: { flex: 1, backgroundColor: colors.cream },
+  app: { flex: 1, backgroundColor: colors.cream },
+  header: {
+    paddingHorizontal: 18,
+    paddingTop: 8,
+    paddingBottom: 10,
+    backgroundColor: "rgba(255,255,255,0.96)",
+    borderBottomWidth: 1,
+    borderBottomColor: colors.line,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between"
+  },
+  headerBrand: { flexDirection: "row", alignItems: "center", gap: 10 },
+  headerLogo: { width: 42, height: 42, borderRadius: 14 },
+  headerTitle: { color: colors.blue, fontWeight: "800", fontSize: 15 },
+  headerSubtitle: { color: colors.muted, fontWeight: "700", fontSize: 11 },
+  headerButton: {
+    width: 42,
+    height: 42,
+    borderRadius: 16,
+    backgroundColor: colors.soft,
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  headerButtonMuted: { opacity: 0.75 },
+  main: { flex: 1 },
+  content: { padding: 18, paddingBottom: 30 },
+  screenTitle: { marginBottom: 16 },
+  eyebrow: {
+    color: colors.gold,
+    fontSize: 12,
+    letterSpacing: 1.1,
+    textTransform: "uppercase",
+    fontWeight: "800",
+    marginBottom: 8
+  },
+  title: {
+    color: colors.blue,
+    fontSize: 29,
+    lineHeight: 34,
+    fontWeight: "800"
+  },
+  lead: { marginTop: 10, color: colors.muted, fontSize: 15, lineHeight: 22, fontWeight: "600" },
+  logoPanel: {
+    flexDirection: "row",
+    gap: 14,
+    backgroundColor: colors.white,
+    borderWidth: 1,
+    borderColor: colors.line,
+    borderRadius: radius.lg,
+    padding: 14,
+    alignItems: "center",
+    marginBottom: 14,
+    ...shadow
+  },
+  logoLarge: { width: 92, height: 92, borderRadius: 28 },
+  logoCopy: { flex: 1 },
+  logoPanelTitle: { fontSize: 18, fontWeight: "800", color: colors.green, marginBottom: 4 },
+  logoPanelText: { color: colors.muted, fontWeight: "600", lineHeight: 19 },
+  configBanner: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10,
+    backgroundColor: colors.white,
+    borderWidth: 1,
+    borderColor: colors.line,
+    borderRadius: radius.md,
+    padding: 12,
+    marginBottom: 14
+  },
+  configBannerReady: {
+    borderColor: "#A8C7AA"
+  },
+  configIcon: {
+    width: 42,
+    height: 42,
+    borderRadius: 15,
+    backgroundColor: colors.soft,
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  configIconReady: {
+    backgroundColor: colors.green
+  },
+  configTextWrap: {
+    flex: 1
+  },
+  configTitle: {
+    color: colors.blue,
+    fontWeight: "800",
+    fontSize: 14
+  },
+  configText: {
+    color: colors.muted,
+    fontWeight: "600",
+    fontSize: 12.5,
+    lineHeight: 18,
+    marginTop: 2
+  },  quickStats: { flexDirection: "row", gap: 10, marginBottom: 14 },
+  statMini: {
+    flex: 1,
+    backgroundColor: colors.white,
+    borderRadius: radius.md,
+    borderWidth: 1,
+    borderColor: colors.line,
+    padding: 12
+  },
+  statMiniValue: { color: colors.green, fontSize: 20, fontWeight: "800" },
+  statMiniLabel: { color: colors.muted, fontSize: 11.5, fontWeight: "700", marginTop: 2 },
+  stack: { gap: 12 },
+  card: {
+    backgroundColor: colors.white,
+    borderRadius: radius.md,
+    borderWidth: 1,
+    borderColor: colors.line,
+    padding: 14,
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 12,
+    ...shadow
+  },
+  cardPrimary: { backgroundColor: colors.green, borderColor: colors.green },
+  cardIcon: {
+    width: 44,
+    height: 44,
+    borderRadius: 16,
+    backgroundColor: colors.soft,
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  cardIconPrimary: { backgroundColor: colors.white },
+  cardText: { flex: 1 },
+  cardTitle: { color: colors.blue, fontSize: 15.5, fontWeight: "800", marginBottom: 3 },
+  cardTitlePrimary: { color: colors.white },
+  cardSubtitle: { color: colors.muted, fontSize: 12.5, lineHeight: 17, fontWeight: "600" },
+  cardSubtitlePrimary: { color: "rgba(255,255,255,0.84)" },
+  fieldGroup: { marginBottom: 12 },
+  label: { color: colors.green, fontWeight: "800", marginBottom: 6, fontSize: 13 },
+  input: {
+    backgroundColor: colors.white,
+    borderWidth: 1,
+    borderColor: colors.line,
+    borderRadius: radius.md,
+    paddingHorizontal: 14,
+    paddingVertical: 13,
+    minHeight: 50,
+    color: colors.blue,
+    fontWeight: "600",
+    fontSize: 14.5
+  },
+  textArea: { minHeight: 96, textAlignVertical: "top" },
+  pillGrid: { flexDirection: "row", flexWrap: "wrap", gap: 10, marginBottom: 14 },
+  pill: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 7,
+    backgroundColor: colors.white,
+    borderWidth: 1,
+    borderColor: colors.line,
+    borderRadius: 999,
+    paddingVertical: 10,
+    paddingHorizontal: 12
+  },
+  pillActive: { backgroundColor: colors.green, borderColor: colors.green },
+  pillText: { color: colors.blue, fontWeight: "700", fontSize: 12.8 },
+  pillTextActive: { color: colors.white },
+  photoBox: {
+    minHeight: 132,
+    backgroundColor: colors.white,
+    borderWidth: 1.2,
+    borderColor: "#9EB7A2",
+    borderStyle: "dashed",
+    borderRadius: radius.lg,
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 20,
+    marginBottom: 14
+  },
+  photoTitle: { color: colors.green, fontWeight: "800", marginTop: 8, fontSize: 15 },
+  photoText: { color: colors.muted, fontWeight: "600", textAlign: "center", marginTop: 5, lineHeight: 18 },
+  notice: {
+    flexDirection: "row",
+    gap: 10,
+    backgroundColor: colors.soft,
+    borderRadius: radius.md,
+    borderWidth: 1,
+    borderColor: colors.line,
+    padding: 12,
+    marginBottom: 14
+  },
+  noticeText: { flex: 1, color: colors.blue, lineHeight: 19, fontWeight: "600", fontSize: 12.8 },
+  errorBox: {
+    flexDirection: "row",
+    gap: 10,
+    backgroundColor: "#FFF3EF",
+    borderRadius: radius.md,
+    borderWidth: 1,
+    borderColor: "#F2C4B8",
+    padding: 12,
+    marginBottom: 14
+  },
+  errorText: { flex: 1, color: colors.danger, fontWeight: "700", lineHeight: 19, fontSize: 12.8 },
+  primaryButton: {
+    minHeight: 52,
+    borderRadius: 999,
+    backgroundColor: colors.green,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 8,
+    paddingHorizontal: 18,
+    marginTop: 2
+  },
+  secondaryButton: { backgroundColor: colors.white, borderWidth: 1, borderColor: colors.green },
+  primaryButtonText: { color: colors.white, fontSize: 15, fontWeight: "800" },
+  secondaryButtonText: { color: colors.green },
+  trackingCard: {
+    backgroundColor: colors.white,
+    borderWidth: 1,
+    borderColor: colors.line,
+    borderRadius: radius.lg,
+    padding: 16,
+    marginBottom: 14,
+    ...shadow
+  },
+  trackingTitle: { color: colors.blue, fontWeight: "800", fontSize: 16, marginBottom: 12 },
+  stepRow: { flexDirection: "row", alignItems: "center", gap: 10, paddingVertical: 7 },
+  stepDot: { width: 13, height: 13, borderRadius: 99, backgroundColor: colors.line },
+  stepDotActive: { backgroundColor: colors.green },
+  stepText: { color: colors.muted, fontWeight: "700" },
+  stepTextActive: { color: colors.blue },
+  groupCard: {
+    backgroundColor: colors.soft,
+    borderWidth: 1,
+    borderColor: colors.line,
+    borderRadius: radius.md,
+    padding: 14
+  },
+  groupTitle: { color: colors.green, fontWeight: "800", fontSize: 15, marginBottom: 8 },
+  groupItem: { color: colors.blue, fontWeight: "600", lineHeight: 21 },
+  documentCard: {
+    backgroundColor: colors.white,
+    borderRadius: radius.md,
+    borderWidth: 1,
+    borderColor: colors.line,
+    padding: 14,
+    flexDirection: "row",
+    gap: 12,
+    alignItems: "center"
+  },
+  documentText: { flex: 1 },
+  documentTitle: { color: colors.blue, fontWeight: "800", fontSize: 15 },
+  documentSubtitle: { color: colors.muted, fontWeight: "600", lineHeight: 18, marginTop: 3 },
+  confirmation: { minHeight: 520, justifyContent: "center", gap: 14 },
+  confirmIcon: {
+    width: 86,
+    height: 86,
+    borderRadius: 32,
+    backgroundColor: colors.green,
+    alignItems: "center",
+    justifyContent: "center",
+    alignSelf: "center",
+    marginBottom: 6
+  },
+  confirmTitle: { color: colors.blue, fontSize: 26, lineHeight: 30, fontWeight: "800", textAlign: "center" },
+  reference: { color: colors.gold, fontSize: 16, fontWeight: "800", textAlign: "center" },
+  confirmText: { color: colors.muted, fontSize: 15, lineHeight: 22, fontWeight: "600", textAlign: "center" },
+  summaryCard: {
+    backgroundColor: colors.white,
+    borderRadius: radius.md,
+    borderWidth: 1,
+    borderColor: colors.line,
+    padding: 14
+  },
+  summaryTitle: { color: colors.green, fontWeight: "800", fontSize: 15, marginBottom: 7 },
+  summaryLine: { color: colors.blue, fontWeight: "600", lineHeight: 21 },
+  bottomNav: {
+    flexDirection: "row",
+    backgroundColor: colors.white,
+    borderTopWidth: 1,
+    borderTopColor: colors.line,
+    paddingTop: 8,
+    paddingBottom: 8
+  },
+  navItem: { flex: 1, alignItems: "center", gap: 3 },
+  navLabel: { color: colors.muted, fontSize: 11, fontWeight: "800" },
+  navLabelActive: { color: colors.green }
+});

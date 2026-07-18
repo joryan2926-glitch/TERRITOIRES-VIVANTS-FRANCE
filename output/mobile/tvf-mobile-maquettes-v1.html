@@ -1,0 +1,766 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TVF Mobile V1 - Maquettes fonctionnelles</title>
+  <style>
+    :root {
+      --green: #183f22;
+      --green-2: #2e7d32;
+      --blue: #071e30;
+      --gold: #b28418;
+      --cream: #f7faf4;
+      --soft: #eaf3ea;
+      --line: #dce6dd;
+      --muted: #5f6862;
+      --white: #ffffff;
+      --shadow: 0 24px 60px rgba(7, 30, 48, .15);
+      font-family: Inter, Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      color: var(--blue);
+      background:
+        radial-gradient(circle at top left, rgba(46, 125, 50, .14), transparent 34rem),
+        linear-gradient(180deg, #ffffff 0%, #f6f8f4 100%);
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(255, 255, 255, .9);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(14px);
+    }
+
+    .topbar {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 18px 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-width: 0;
+    }
+
+    .brand img {
+      width: 58px;
+      height: 58px;
+      object-fit: contain;
+      border-radius: 18px;
+      box-shadow: 0 8px 22px rgba(7, 30, 48, .12);
+    }
+
+    .brand strong {
+      display: block;
+      font-size: 1rem;
+      letter-spacing: .02em;
+    }
+
+    .brand span {
+      display: block;
+      color: var(--muted);
+      font-size: .84rem;
+      margin-top: 2px;
+    }
+
+    nav {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    nav a {
+      color: var(--blue);
+      text-decoration: none;
+      border: 1px solid var(--line);
+      background: var(--white);
+      padding: 9px 12px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: .82rem;
+      transition: .2s ease;
+    }
+
+    nav a:hover {
+      color: var(--white);
+      background: var(--green);
+      border-color: var(--green);
+      transform: translateY(-1px);
+    }
+
+    .hero {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 56px 22px 36px;
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 42px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      color: var(--gold);
+      text-transform: uppercase;
+      font-weight: 800;
+      letter-spacing: .12em;
+      font-size: .78rem;
+      margin: 0 0 14px;
+    }
+
+    h1 {
+      font-size: clamp(2.2rem, 5vw, 4.5rem);
+      line-height: .98;
+      margin: 0;
+      color: var(--blue);
+      letter-spacing: -.03em;
+    }
+
+    .hero p.lead {
+      color: #273a3e;
+      font-size: 1.1rem;
+      line-height: 1.65;
+      max-width: 680px;
+      margin: 22px 0 0;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 26px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 0 18px;
+      border-radius: 999px;
+      border: 1px solid var(--green);
+      color: var(--white);
+      background: linear-gradient(135deg, var(--green), var(--green-2));
+      box-shadow: 0 12px 28px rgba(24, 63, 34, .18);
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .btn.secondary {
+      color: var(--green);
+      background: var(--white);
+      box-shadow: none;
+    }
+
+    .hero-card {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 32px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card img {
+      display: block;
+      width: min(260px, 100%);
+      margin: 0 auto 18px;
+      border-radius: 32px;
+    }
+
+    .hero-card ul {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      display: grid;
+      gap: 10px;
+    }
+
+    .hero-card li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--blue);
+      font-weight: 750;
+      background: var(--cream);
+      border-radius: 16px;
+      padding: 11px 12px;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 99px;
+      background: var(--green-2);
+      flex: 0 0 auto;
+    }
+
+    .section {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 34px 22px;
+    }
+
+    .section-head {
+      max-width: 760px;
+      margin-bottom: 24px;
+    }
+
+    .section-head h2 {
+      font-size: clamp(1.55rem, 3vw, 2.4rem);
+      line-height: 1.1;
+      margin: 0 0 12px;
+      color: var(--green);
+    }
+
+    .section-head p {
+      color: var(--muted);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    .screens {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 24px;
+      align-items: start;
+    }
+
+    .phone-wrap {
+      display: grid;
+      gap: 12px;
+    }
+
+    .phone-title {
+      min-height: 42px;
+      font-weight: 850;
+      color: var(--blue);
+    }
+
+    .phone {
+      width: 100%;
+      max-width: 268px;
+      min-height: 540px;
+      margin: 0 auto;
+      padding: 10px;
+      border-radius: 38px;
+      background: #0d1d23;
+      box-shadow: 0 22px 45px rgba(7, 30, 48, .2);
+    }
+
+    .screen {
+      min-height: 520px;
+      overflow: hidden;
+      border-radius: 30px;
+      background: var(--cream);
+      border: 1px solid rgba(255,255,255,.16);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .screen-top {
+      padding: 18px 16px 12px;
+      background:
+        radial-gradient(circle at top right, rgba(178,132,24,.24), transparent 9rem),
+        linear-gradient(160deg, var(--green), #0f2c19);
+      color: var(--white);
+    }
+
+    .status {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: .7rem;
+      opacity: .9;
+      margin-bottom: 18px;
+      letter-spacing: .02em;
+    }
+
+    .screen-top img {
+      width: 62px;
+      height: 62px;
+      object-fit: cover;
+      border-radius: 20px;
+      background: white;
+      display: block;
+      margin-bottom: 14px;
+    }
+
+    .screen h3 {
+      margin: 0;
+      font-size: 1.25rem;
+      line-height: 1.1;
+    }
+
+    .screen-top p {
+      margin: 8px 0 0;
+      font-size: .82rem;
+      line-height: 1.35;
+      color: rgba(255,255,255,.86);
+    }
+
+    .screen-body {
+      padding: 14px;
+      display: grid;
+      gap: 12px;
+      flex: 1;
+      align-content: start;
+    }
+
+    .mobile-btn,
+    .tile,
+    .field,
+    .status-card {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 13px;
+      color: var(--blue);
+      box-shadow: 0 8px 20px rgba(7,30,48,.05);
+    }
+
+    .mobile-btn {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 850;
+    }
+
+    .mobile-btn.primary {
+      color: var(--white);
+      background: linear-gradient(135deg, var(--green), var(--green-2));
+      border-color: transparent;
+    }
+
+    .icon {
+      width: 34px;
+      height: 34px;
+      flex: 0 0 auto;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      color: var(--green);
+      background: var(--soft);
+      font-weight: 900;
+    }
+
+    .mobile-btn.primary .icon {
+      color: var(--green);
+      background: var(--white);
+    }
+
+    .tile strong,
+    .field strong,
+    .status-card strong {
+      display: block;
+      font-size: .82rem;
+      margin-bottom: 5px;
+    }
+
+    .tile span,
+    .field span,
+    .status-card span {
+      display: block;
+      color: var(--muted);
+      font-size: .74rem;
+      line-height: 1.35;
+    }
+
+    .category-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .category-grid .tile {
+      min-height: 88px;
+      padding: 11px;
+    }
+
+    .photo-box {
+      min-height: 140px;
+      border: 1px dashed #99bba0;
+      background:
+        linear-gradient(135deg, rgba(24,63,34,.08), rgba(178,132,24,.08)),
+        var(--white);
+      border-radius: 20px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      color: var(--green);
+      font-weight: 850;
+    }
+
+    .field {
+      min-height: 54px;
+      background: var(--white);
+    }
+
+    .progress {
+      display: grid;
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    .progress span {
+      height: 8px;
+      border-radius: 99px;
+      background: #dce6dd;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .progress span::before {
+      content: "";
+      display: block;
+      height: 100%;
+      width: var(--w, 40%);
+      background: linear-gradient(90deg, var(--green), var(--green-2));
+      border-radius: inherit;
+    }
+
+    .bottom-nav {
+      margin-top: auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-top: 1px solid var(--line);
+      background: rgba(255,255,255,.92);
+    }
+
+    .bottom-nav span {
+      padding: 10px 3px 12px;
+      text-align: center;
+      font-size: .65rem;
+      color: var(--muted);
+      font-weight: 800;
+    }
+
+    .flow-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .step {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 18px;
+      box-shadow: 0 12px 30px rgba(7,30,48,.05);
+    }
+
+    .step b {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      color: var(--white);
+      background: var(--green);
+      border-radius: 12px;
+      margin-bottom: 12px;
+    }
+
+    .step strong { display: block; margin-bottom: 6px; }
+    .step p { margin: 0; color: var(--muted); line-height: 1.45; font-size: .9rem; }
+
+    footer {
+      max-width: 1180px;
+      margin: 30px auto 0;
+      padding: 24px 22px 44px;
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    @media (max-width: 1050px) {
+      .hero { grid-template-columns: 1fr; }
+      .screens { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .flow-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 640px) {
+      .topbar { align-items: flex-start; flex-direction: column; }
+      nav { justify-content: flex-start; }
+      .hero { padding-top: 34px; }
+      .screens { grid-template-columns: 1fr; }
+      .flow-grid { grid-template-columns: 1fr; }
+      .phone { max-width: 320px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="topbar">
+      <div class="brand">
+        <img src="assets/tvf-mobile-logo.png" alt="Logo TVF Mobile">
+        <div>
+          <strong>TVF Mobile V1</strong>
+          <span>Maquettes fonctionnelles - Territoires Vivants France</span>
+        </div>
+      </div>
+      <nav aria-label="Navigation maquette">
+        <a href="#ecrans">Écrans</a>
+        <a href="#parcours">Parcours</a>
+        <a href="#priorites">Priorités</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div>
+        <p class="eyebrow">Prototype avant développement</p>
+        <h1>Une application terrain simple pour signaler, localiser et agir.</h1>
+        <p class="lead">
+          TVF Mobile doit permettre à un citoyen, un propriétaire, une entreprise ou un bénévole
+          de transmettre rapidement une situation exploitable à Territoires Vivants France.
+          La V1 reste volontairement claire : photo, localisation, description, suivi.
+        </p>
+        <div class="hero-actions">
+          <a class="btn" href="#ecrans">Voir les écrans</a>
+          <a class="btn secondary" href="../documents/cahier-des-charges-tvf-mobile-v1.pdf">Ouvrir le cahier des charges</a>
+        </div>
+      </div>
+      <aside class="hero-card">
+        <img src="assets/tvf-mobile-logo.png" alt="TVF Mobile">
+        <ul>
+          <li><span class="dot"></span> Signaler un lieu en moins de 2 minutes</li>
+          <li><span class="dot"></span> Ajouter photo et géolocalisation</li>
+          <li><span class="dot"></span> Recevoir un accusé de réception</li>
+          <li><span class="dot"></span> Transformer la demande dans TVF OS</li>
+        </ul>
+      </aside>
+    </section>
+
+    <section class="section" id="ecrans">
+      <div class="section-head">
+        <h2>Écrans principaux de la V1</h2>
+        <p>
+          Ces maquettes définissent l’expérience cible avant développement : une interface directe,
+          peu chargée, pensée pour le terrain et connectée ensuite à TVF OS.
+        </p>
+      </div>
+
+      <div class="screens">
+        <article class="phone-wrap">
+          <div class="phone-title">1. Accueil</div>
+          <div class="phone">
+            <div class="screen">
+              <div class="screen-top">
+                <div class="status"><span>9:41</span><span>TVF Mobile</span></div>
+                <img src="assets/tvf-mobile-logo.png" alt="">
+                <h3>Que souhaitez-vous transmettre ?</h3>
+                <p>Choisissez une action. TVF qualifiera ensuite votre demande.</p>
+              </div>
+              <div class="screen-body">
+                <div class="mobile-btn primary"><span class="icon">!</span> Signaler un lieu</div>
+                <div class="mobile-btn"><span class="icon">M</span> Proposer des matériaux</div>
+                <div class="mobile-btn"><span class="icon">B</span> Proposer un bien</div>
+                <div class="mobile-btn"><span class="icon">V</span> Devenir bénévole</div>
+                <div class="mobile-btn"><span class="icon">S</span> Suivre ma demande</div>
+              </div>
+              <div class="bottom-nav"><span>Accueil</span><span>Carte</span><span>Docs</span><span>Contact</span></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="phone-wrap">
+          <div class="phone-title">2. Choix du signalement</div>
+          <div class="phone">
+            <div class="screen">
+              <div class="screen-top">
+                <div class="status"><span>9:41</span><span>Étape 1/4</span></div>
+                <h3>Quel type de lieu ?</h3>
+                <p>Sélectionnez la situation observée. Le signalement ne sera pas public sans validation.</p>
+              </div>
+              <div class="screen-body">
+                <div class="category-grid">
+                  <div class="tile"><strong>Logement</strong><span>Vacant ou dégradé</span></div>
+                  <div class="tile"><strong>Commerce</strong><span>Fermé ou inutilisé</span></div>
+                  <div class="tile"><strong>Bâtiment</strong><span>Abandonné</span></div>
+                  <div class="tile"><strong>Friche</strong><span>Terrain délaissé</span></div>
+                  <div class="tile"><strong>Dépôt</strong><span>Dépôt sauvage</span></div>
+                  <div class="tile"><strong>Autre</strong><span>À qualifier</span></div>
+                </div>
+                <div class="mobile-btn primary">Continuer</div>
+              </div>
+              <div class="bottom-nav"><span>Accueil</span><span>Carte</span><span>Docs</span><span>Contact</span></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="phone-wrap">
+          <div class="phone-title">3. Photo et localisation</div>
+          <div class="phone">
+            <div class="screen">
+              <div class="screen-top">
+                <div class="status"><span>9:41</span><span>Étape 2/4</span></div>
+                <h3>Documenter le lieu</h3>
+                <p>Ajoutez une photo et confirmez l’adresse ou la position.</p>
+              </div>
+              <div class="screen-body">
+                <div class="photo-box">+ Ajouter une photo</div>
+                <div class="field"><strong>Localisation</strong><span>Utiliser ma position ou saisir une adresse</span></div>
+                <div class="field"><strong>Description courte</strong><span>Exemple : local fermé depuis plusieurs mois</span></div>
+                <div class="mobile-btn primary">Envoyer le signalement</div>
+              </div>
+              <div class="bottom-nav"><span>Accueil</span><span>Carte</span><span>Docs</span><span>Contact</span></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="phone-wrap">
+          <div class="phone-title">4. Proposer des matériaux</div>
+          <div class="phone">
+            <div class="screen">
+              <div class="screen-top">
+                <div class="status"><span>9:41</span><span>Matériaux</span></div>
+                <h3>Une ressource à valoriser ?</h3>
+                <p>TVF étudie les matériaux avant toute acceptation ou enlèvement.</p>
+              </div>
+              <div class="screen-body">
+                <div class="field"><strong>Catégorie</strong><span>Bois, portes, fenêtres, sanitaires...</span></div>
+                <div class="field"><strong>Quantité</strong><span>Nombre, dimensions, volume estimé</span></div>
+                <div class="field"><strong>État</strong><span>Neuf, bon état, à vérifier</span></div>
+                <div class="photo-box">Photos des matériaux</div>
+                <div class="mobile-btn primary">Proposer à TVF</div>
+              </div>
+              <div class="bottom-nav"><span>Accueil</span><span>Carte</span><span>Docs</span><span>Contact</span></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="phone-wrap">
+          <div class="phone-title">5. Proposer un bien</div>
+          <div class="phone">
+            <div class="screen">
+              <div class="screen-top">
+                <div class="status"><span>9:41</span><span>Propriétaire</span></div>
+                <h3>Présenter un bien dormant</h3>
+                <p>Un premier échange permet de vérifier la faisabilité.</p>
+              </div>
+              <div class="screen-body">
+                <div class="field"><strong>Type de bien</strong><span>Logement, local, commerce, terrain...</span></div>
+                <div class="field"><strong>Adresse</strong><span>Commune et localisation précise</span></div>
+                <div class="field"><strong>État général</strong><span>Vacant, à rénover, inutilisé...</span></div>
+                <div class="field"><strong>Objectif recherché</strong><span>Rendez-vous, étude, orientation</span></div>
+                <div class="mobile-btn primary">Demander une étude</div>
+              </div>
+              <div class="bottom-nav"><span>Accueil</span><span>Carte</span><span>Docs</span><span>Contact</span></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="phone-wrap">
+          <div class="phone-title">6. Suivi de demande</div>
+          <div class="phone">
+            <div class="screen">
+              <div class="screen-top">
+                <div class="status"><span>9:41</span><span>Suivi</span></div>
+                <h3>Où en est ma demande ?</h3>
+                <p>Retrouvez votre dossier avec votre e-mail ou numéro TVF.</p>
+              </div>
+              <div class="screen-body">
+                <div class="field"><strong>E-mail ou numéro</strong><span>ex. TVF-2026-0001</span></div>
+                <div class="status-card"><strong>Signalement reçu</strong><span>Votre demande est enregistrée.</span><div class="progress"><span style="--w:25%"></span></div></div>
+                <div class="status-card"><strong>Étape actuelle</strong><span>À vérifier par TVF</span></div>
+                <div class="mobile-btn primary">Compléter ma demande</div>
+              </div>
+              <div class="bottom-nav"><span>Accueil</span><span>Carte</span><span>Docs</span><span>Contact</span></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="phone-wrap">
+          <div class="phone-title">7. Documents utiles</div>
+          <div class="phone">
+            <div class="screen">
+              <div class="screen-top">
+                <div class="status"><span>9:41</span><span>Documents</span></div>
+                <h3>Préparer son dossier</h3>
+                <p>Les documents sont consultables avant transmission à TVF.</p>
+              </div>
+              <div class="screen-body">
+                <div class="tile"><strong>Pièces à fournir - particuliers</strong><span>Checklist de dépôt de dossier</span></div>
+                <div class="tile"><strong>Brochure propriétaires</strong><span>Biens dormants et conventions possibles</span></div>
+                <div class="tile"><strong>Brochure matériaux</strong><span>Ressources, critères et procédure</span></div>
+                <div class="tile"><strong>Fiche contact TVF</strong><span>Coordonnées officielles</span></div>
+              </div>
+              <div class="bottom-nav"><span>Accueil</span><span>Carte</span><span>Docs</span><span>Contact</span></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="phone-wrap">
+          <div class="phone-title">8. Contact rapide</div>
+          <div class="phone">
+            <div class="screen">
+              <div class="screen-top">
+                <div class="status"><span>9:41</span><span>Contact</span></div>
+                <h3>Contacter TVF</h3>
+                <p>Un doute avant de transmettre ? Utilisez le canal le plus adapté.</p>
+              </div>
+              <div class="screen-body">
+                <div class="mobile-btn primary"><span class="icon">W</span> WhatsApp TVF</div>
+                <div class="mobile-btn"><span class="icon">@</span> contact@territoiresvivantsfrance.fr</div>
+                <div class="mobile-btn"><span class="icon">T</span> 04 65 81 54 69</div>
+                <div class="tile"><strong>Siège</strong><span>25 rue Élise Gervais, 42000 Saint-Étienne</span></div>
+              </div>
+              <div class="bottom-nav"><span>Accueil</span><span>Carte</span><span>Docs</span><span>Contact</span></div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="parcours">
+      <div class="section-head">
+        <h2>Parcours fonctionnel cible</h2>
+        <p>
+          Le mobile sert à collecter une information propre. TVF OS reste l’outil de qualification,
+          d’instruction, de réponse et de transformation en dossier.
+        </p>
+      </div>
+      <div class="flow-grid">
+        <div class="step"><b>1</b><strong>Saisie mobile</strong><p>L’utilisateur choisit une action et remplit les champs essentiels.</p></div>
+        <div class="step"><b>2</b><strong>Photo + lieu</strong><p>La demande est documentée par image, adresse ou géolocalisation.</p></div>
+        <div class="step"><b>3</b><strong>Supabase</strong><p>Les données sont enregistrées avec un statut reçu.</p></div>
+        <div class="step"><b>4</b><strong>TVF OS</strong><p>La demande devient visible pour qualification et suivi.</p></div>
+        <div class="step"><b>5</b><strong>Réponse</strong><p>TVF demande des pièces, oriente ou crée un dossier.</p></div>
+      </div>
+    </section>
+
+    <section class="section" id="priorites">
+      <div class="section-head">
+        <h2>Priorités avant développement</h2>
+        <p>
+          Avant de coder l’application, ces maquettes doivent valider la simplicité du parcours,
+          les champs réellement nécessaires et la cohérence avec TVF OS.
+        </p>
+      </div>
+      <div class="flow-grid">
+        <div class="step"><b>A</b><strong>Valider les écrans</strong><p>Confirmer qu’il n’y a pas trop de champs ni de boutons.</p></div>
+        <div class="step"><b>B</b><strong>Valider les statuts</strong><p>Utiliser les mêmes statuts côté mobile et côté TVF OS.</p></div>
+        <div class="step"><b>C</b><strong>Valider les données</strong><p>Ne collecter que ce qui est utile pour instruire.</p></div>
+        <div class="step"><b>D</b><strong>Valider RGPD</strong><p>Prévoir les consentements clairs avant photo et localisation.</p></div>
+        <div class="step"><b>E</b><strong>Prototype Expo</strong><p>Créer ensuite la base technique de l’app Android/iPhone.</p></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    Maquette fonctionnelle TVF Mobile V1 - Territoires Vivants France - Document de travail avant développement.
+  </footer>
+</body>
+</html>
