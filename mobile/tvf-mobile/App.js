@@ -527,15 +527,15 @@ function VolunteerScreen({ draft, setDraft, submit, missing, submitting }) {
   );
 }
 
-function TrackingScreen({ lastSubmission }) {
+function TrackingScreen({ lastSubmission, submissionHistory = [] }) {
   const [query, setQuery] = useState("");
   const [searched, setSearched] = useState(false);
   const normalizedQuery = query.trim().toLowerCase();
-  const matchesLast = Boolean(
-    lastSubmission &&
+  const foundSubmission = submissionHistory.find((item) =>
     normalizedQuery &&
-    [lastSubmission.reference, lastSubmission.email].filter(Boolean).some((value) => String(value).toLowerCase().includes(normalizedQuery))
+    [item.reference, item.email, item.phone].filter(Boolean).some((value) => String(value).toLowerCase().includes(normalizedQuery))
   );
+  const visibleHistory = submissionHistory.slice(0, 5);
 
   return (
     <ScrollView contentContainerStyle={styles.content}>
@@ -543,18 +543,32 @@ function TrackingScreen({ lastSubmission }) {
         Le numéro TVF permet de reprendre un échange et de rattacher la demande au dossier dans TVF OS.
       </ScreenTitle>
       <FlowGuide flow="tracking" />
-      <Field label="E-mail ou numéro TVF" value={query} onChangeText={setQuery} placeholder="TVF-SIG-000001" />
+      <Field label="E-mail, téléphone ou numéro TVF" value={query} onChangeText={setQuery} placeholder="TVF-SIG-000001" />
       <PrimaryButton secondary icon="refresh-outline" onPress={() => setSearched(true)}>Rechercher</PrimaryButton>
       {lastSubmission ? (
         <View style={styles.trackingCard}>
           <Text style={styles.trackingTitle}>Dernière demande sur ce téléphone</Text>
           <Text style={styles.summaryLine}>Numéro : {lastSubmission.reference}</Text>
           <Text style={styles.summaryLine}>Type : {lastSubmission.label}</Text>
-          <Text style={styles.summaryLine}>Transmission : {lastSubmission.syncMode === "supabase" ? "enregistrée" : "locale"}</Text>
+          <Text style={styles.summaryLine}>Transmission : {lastSubmission.syncMode === "supabase" ? "enregistrée dans Supabase" : "locale ou à vérifier"}</Text>
+        </View>
+      ) : null}
+      {visibleHistory.length ? (
+        <View style={styles.trackingCard}>
+          <Text style={styles.trackingTitle}>Historique de session</Text>
+          {visibleHistory.map((item) => (
+            <View key={item.reference} style={styles.historyRow}>
+              <View style={styles.historyDot} />
+              <View style={styles.historyText}>
+                <Text style={styles.historyReference}>{item.reference}</Text>
+                <Text style={styles.historyMeta}>{item.label || "Demande TVF"} · {item.syncMode === "supabase" ? "transmise" : "à vérifier"}</Text>
+              </View>
+            </View>
+          ))}
         </View>
       ) : null}
       {searched && normalizedQuery ? (
-        <Notice>{matchesLast ? "Demande retrouvée sur ce téléphone. Conservez ce numéro pour vos échanges avec TVF." : "Aucune demande locale ne correspond. Si elle a été transmise, contactez TVF avec votre e-mail ou votre numéro de dossier."}</Notice>
+        <Notice>{foundSubmission ? "Demande retrouvée sur ce téléphone. Conservez ce numéro pour vos échanges avec TVF." : "Aucune demande locale ne correspond. Si elle a été transmise, contactez TVF avec votre e-mail ou votre numéro de dossier."}</Notice>
       ) : null}
       <View style={styles.trackingCard}>
         <Text style={styles.trackingTitle}>Chaîne de traitement TVF OS</Text>
@@ -688,6 +702,7 @@ function AppShell() {
   const [history, setHistory] = useState(["home"]);
   const [draft, setDraft] = useState(initialDraft);
   const [lastSubmission, setLastSubmission] = useState(null);
+  const [submissionHistory, setSubmissionHistory] = useState([]);
   const [missing, setMissing] = useState([]);
   const [submitting, setSubmitting] = useState(false);
 
@@ -728,7 +743,7 @@ function AppShell() {
       if (!result.ok) {
         Alert.alert("Enregistrement non finalisé", result.message || "La demande reste préparée localement.");
       }
-      setLastSubmission({
+      const submission = {
         reference,
         label: flowLabels[flow],
         category: draft.category,
@@ -741,7 +756,9 @@ function AppShell() {
         syncMode: result.mode,
         syncMessage: result.message,
         payload
-      });
+      };
+      setLastSubmission(submission);
+      setSubmissionHistory((items) => [submission, ...items.filter((item) => item.reference !== reference)].slice(0, 8));
       setDraft(initialDraft);
       setMissing([]);
       go("confirmation");
@@ -760,7 +777,7 @@ function AppShell() {
       case "volunteer":
         return <VolunteerScreen draft={draft} setDraft={setDraft} submit={submit} missing={missing} submitting={submitting} />;
       case "tracking":
-        return <TrackingScreen lastSubmission={lastSubmission} />;
+        return <TrackingScreen lastSubmission={lastSubmission} submissionHistory={submissionHistory} />;
       case "documents":
         return <DocumentsScreen />;
       case "contact":
@@ -771,7 +788,7 @@ function AppShell() {
       default:
         return <HomeScreen go={go} />;
     }
-  }, [screen, draft, lastSubmission, missing, submitting]);
+  }, [screen, draft, lastSubmission, submissionHistory, missing, submitting]);
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -1095,6 +1112,11 @@ const styles = StyleSheet.create({
     ...shadow
   },
   trackingTitle: { color: colors.blue, fontWeight: "800", fontSize: 16, marginBottom: 12 },
+  historyRow: { flexDirection: "row", gap: 10, alignItems: "flex-start", paddingVertical: 8, borderTopWidth: 1, borderTopColor: colors.line },
+  historyDot: { width: 10, height: 10, borderRadius: 99, backgroundColor: colors.green, marginTop: 5 },
+  historyText: { flex: 1 },
+  historyReference: { color: colors.blue, fontWeight: "800", fontSize: 13.5 },
+  historyMeta: { color: colors.muted, fontWeight: "600", fontSize: 12.5, marginTop: 2 },
   stepRow: { flexDirection: "row", alignItems: "center", gap: 10, paddingVertical: 7 },
   stepDot: { width: 13, height: 13, borderRadius: 99, backgroundColor: colors.line },
   stepDotActive: { backgroundColor: colors.green },
