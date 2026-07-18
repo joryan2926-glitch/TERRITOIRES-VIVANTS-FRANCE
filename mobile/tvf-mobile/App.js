@@ -548,6 +548,48 @@ function VolunteerScreen({ draft, setDraft, submit, missing, submitting }) {
   );
 }
 
+function RequestsScreen({ submissionHistory = [], goTracking }) {
+  const sentCount = submissionHistory.filter((item) => item.syncMode === "supabase").length;
+  const pendingCount = submissionHistory.length - sentCount;
+  return (
+    <ScrollView contentContainerStyle={styles.content}>
+      <ScreenTitle eyebrow="Mes demandes" title="Demandes enregistrées sur ce téléphone">
+        Retrouvez les références utiles pour échanger avec TVF et vérifier ce qui a bien été transmis.
+      </ScreenTitle>
+      <View style={styles.quickStats}>
+        <View style={styles.statMini}><Text style={styles.statMiniValue}>{submissionHistory.length}</Text><Text style={styles.statMiniLabel}>demandes</Text></View>
+        <View style={styles.statMini}><Text style={styles.statMiniValue}>{sentCount}</Text><Text style={styles.statMiniLabel}>transmises</Text></View>
+        <View style={styles.statMini}><Text style={styles.statMiniValue}>{pendingCount}</Text><Text style={styles.statMiniLabel}>à vérifier</Text></View>
+      </View>
+      {submissionHistory.length ? (
+        <View style={styles.stack}>
+          {submissionHistory.map((item) => {
+            const isSent = item.syncMode === "supabase";
+            return (
+              <View key={item.reference} style={styles.requestCard}>
+                <View style={[styles.requestStatusIcon, isSent && styles.requestStatusIconReady]}>
+                  <Ionicons name={isSent ? "cloud-done-outline" : "warning-outline"} size={19} color={isSent ? colors.white : colors.gold} />
+                </View>
+                <View style={styles.requestCardText}>
+                  <Text style={styles.requestReference}>{item.reference}</Text>
+                  <Text style={styles.requestLabel}>{item.label || "Demande TVF"}</Text>
+                  <Text style={styles.requestMeta}>{item.categoryLabel || item.category || "Catégorie non renseignée"} · {item.address || "Localisation non renseignée"}</Text>
+                  <Text style={[styles.requestSync, isSent && styles.requestSyncReady]}>{isSent ? "Transmise dans TVF OS" : "Transmission à vérifier"}</Text>
+                </View>
+              </View>
+            );
+          })}
+        </View>
+      ) : (
+        <View style={styles.trackingCard}>
+          <Text style={styles.trackingTitle}>Aucune demande enregistrée</Text>
+          <Text style={styles.summaryLine}>Les demandes envoyées depuis ce téléphone apparaîtront ici avec leur numéro TVF.</Text>
+        </View>
+      )}
+      <PrimaryButton secondary icon="search-outline" onPress={goTracking}>Rechercher une demande</PrimaryButton>
+    </ScrollView>
+  );
+}
 function TrackingScreen({ lastSubmission, submissionHistory = [] }) {
   const [query, setQuery] = useState("");
   const [searched, setSearched] = useState(false);
@@ -700,6 +742,7 @@ function BottomNav({ screen, go }) {
   const items = [
     ["home", "Accueil", "home-outline"],
     ["signal", "Signaler", "alert-circle-outline"],
+    ["requests", "Demandes", "file-tray-full-outline"],
     ["documents", "Docs", "document-text-outline"],
     ["contact", "Contact", "call-outline"]
   ];
@@ -813,6 +856,8 @@ function AppShell() {
         return <PropertyScreen draft={draft} setDraft={setDraft} submit={submit} missing={missing} submitting={submitting} />;
       case "volunteer":
         return <VolunteerScreen draft={draft} setDraft={setDraft} submit={submit} missing={missing} submitting={submitting} />;
+      case "requests":
+        return <RequestsScreen submissionHistory={submissionHistory} goTracking={() => go("tracking")} />;
       case "tracking":
         return <TrackingScreen lastSubmission={lastSubmission} submissionHistory={submissionHistory} />;
       case "documents":
@@ -1154,6 +1199,32 @@ const styles = StyleSheet.create({
   historyText: { flex: 1 },
   historyReference: { color: colors.blue, fontWeight: "800", fontSize: 13.5 },
   historyMeta: { color: colors.muted, fontWeight: "600", fontSize: 12.5, marginTop: 2 },
+  requestCard: {
+    backgroundColor: colors.white,
+    borderRadius: radius.md,
+    borderWidth: 1,
+    borderColor: colors.line,
+    padding: 14,
+    flexDirection: "row",
+    gap: 12,
+    alignItems: "flex-start",
+    ...shadow
+  },
+  requestStatusIcon: {
+    width: 42,
+    height: 42,
+    borderRadius: 15,
+    backgroundColor: "#FFF7E4",
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  requestStatusIconReady: { backgroundColor: colors.green },
+  requestCardText: { flex: 1 },
+  requestReference: { color: colors.gold, fontSize: 13, fontWeight: "800", marginBottom: 3 },
+  requestLabel: { color: colors.blue, fontSize: 15.5, fontWeight: "800", marginBottom: 3 },
+  requestMeta: { color: colors.muted, fontSize: 12.5, lineHeight: 18, fontWeight: "600" },
+  requestSync: { color: colors.gold, fontSize: 12.5, fontWeight: "800", marginTop: 7 },
+  requestSyncReady: { color: colors.green },
   stepRow: { flexDirection: "row", alignItems: "center", gap: 10, paddingVertical: 7 },
   stepDot: { width: 13, height: 13, borderRadius: 99, backgroundColor: colors.line },
   stepDotActive: { backgroundColor: colors.green },

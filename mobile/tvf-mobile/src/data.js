@@ -25,6 +25,12 @@ export const homeActions = [
     icon: "people-outline"
   },
   {
+    key: "requests",
+    title: "Mes demandes",
+    subtitle: "Consulter les références enregistrées sur ce téléphone.",
+    icon: "file-tray-full-outline"
+  },
+  {
     key: "tracking",
     title: "Suivre ma demande",
     subtitle: "Retrouver le numéro créé sur ce téléphone.",
