@@ -1,6 +1,6 @@
-﻿# Processus de traitement des demandes entrantes TVF
+# Processus de traitement des demandes entrantes TVF
 
-Ce document sert de mode d'emploi interne pour traiter les formulaires recus depuis le site Territoires Vivants France.
+Ce document sert de mode d'emploi interne pour recevoir, qualifier, instruire et suivre les demandes recues par Territoires Vivants France.
 
 ## 1. Ou arrivent les demandes ?
 
@@ -12,7 +12,17 @@ Chaque formulaire envoye depuis le site suit trois chemins :
 
 Adresse officielle de reception pour la phase de lancement : `contact@territoiresvivantsfrance.fr`.
 
-## 2. Lecture d'une demande
+## 2. Sources de reception
+
+| Source | Module TVF OS | Suite attendue |
+|---|---|---|
+| Formulaire public | `Demandes` | Qualifier, prioriser, repondre ou transformer en dossier |
+| TVF Mobile | `Demandes` puis `Dossiers` | Importer la demande, creer le dossier et rattacher la photo terrain |
+| E-mail entrant | `Boite mail` / `Demandes` | Classer le motif, rattacher au contact ou au dossier |
+| Appel / WhatsApp | `Demandes` | Creer une demande manuelle avec les coordonnees et le motif |
+| Rendez-vous | `Dossiers` / `Taches` | Creer une action de suivi et ajouter les documents utiles |
+
+## 3. Lecture d'une demande
 
 A reception, verifier :
 
@@ -25,9 +35,10 @@ A reception, verifier :
 - categorie interne ;
 - priorite ;
 - message ;
-- consentement RGPD.
+- pieces ou photos deja transmises ;
+- base legale ou accord de contact lorsque des donnees personnelles sont traitees.
 
-## 3. Statuts internes recommandes
+## 4. Statuts internes recommandes
 
 | Statut | Quand l'utiliser | Action attendue |
 |---|---|---|
@@ -36,11 +47,11 @@ A reception, verifier :
 | en_cours | Dossier en instruction | Suivre les echanges et prochaines etapes |
 | rendez_vous | Rendez-vous propose ou confirme | Preparer ordre du jour et pieces utiles |
 | en_attente | Attente d'une reponse externe | Relancer a date fixe |
-| accepte | Demande retenue pour suite | Creer fiche projet ou fiche partenaire |
+| accepte | Demande retenue pour suite | Creer ou ouvrir un dossier d'instruction |
 | refuse | Demande non compatible | Repondre clairement et archiver |
 | archive | Dossier clos | Garder trace sans action active |
 
-## 4. Priorites
+## 5. Priorites
 
 | Priorite | Critere | Delai indicatif |
 |---|---|---|
@@ -48,7 +59,7 @@ A reception, verifier :
 | haute | Collectivite, financeur, partenaire structurant, rendez-vous | Reponse sous 48 h ouvrables |
 | normale | Demande generale, information, orientation | Reponse sous 5 jours ouvrables |
 
-## 5. Categories operationnelles
+## 6. Categories operationnelles
 
 | Categorie | Exemples | Suite logique |
 |---|---|---|
@@ -61,7 +72,47 @@ A reception, verifier :
 | presse-institutionnel | journaliste, media, communication | transmettre kit media et contact officiel |
 | demande-generale | autre demande | orienter vers la bonne categorie |
 
-## 6. Reponse type courte
+## 7. Parcours TVF Mobile vers TVF OS
+
+Quand une demande arrive depuis TVF Mobile :
+
+1. Ouvrir `Demandes`.
+2. Repérer le bloc `TVF Mobile`.
+3. Cliquer sur `Importer + dossier`.
+4. Verifier que la demande apparait dans la liste.
+5. Ouvrir la fiche demande et controler le bloc `Origine TVF Mobile`.
+6. Cliquer sur `Voir le dossier` lorsque le dossier a ete cree automatiquement.
+7. Verifier dans `Documents` que la photo terrain est referencee si une photo a ete transmise.
+8. Completer l'instruction : categorie, pieces manquantes, tache, prochaine action, statut.
+
+Ce parcours evite la ressaisie : les coordonnees, l'adresse, le motif, la photo et la reference mobile doivent etre conserves dans le dossier.
+
+## 8. Transformation en dossier d'instruction
+
+Une demande devient un dossier lorsque TVF doit suivre une action dans le temps : visite, diagnostic, convention, collecte de materiaux, rendez-vous partenaire, demande de financement ou suivi territorial.
+
+Avant de transformer :
+
+- verifier que l'identite du demandeur est suffisante ;
+- verifier le motif exact ;
+- attribuer une categorie ;
+- choisir une priorite ;
+- noter les pieces manquantes ;
+- definir la prochaine action ;
+- rattacher les documents disponibles.
+
+## 9. Documents et pieces utiles
+
+| Sujet | Pieces utiles au demarrage |
+|---|---|
+| Bien vacant | adresse, photos, description, situation de propriete, contraintes connues |
+| Materiaux | photos, quantite, etat, lieu de stockage, delai, conditions d'enlevement |
+| Collectivite | besoin public, perimetre, service referent, calendrier, documents territoriaux |
+| Entreprise | type de contribution, stock ou ressource, interlocuteur, contraintes logistiques |
+| Benevolat | disponibilites, competences, mobilite, type de mission souhaite |
+| Financement | type de soutien, criteres, calendrier, montant ou enveloppe si connu |
+
+## 10. Reponse type courte
 
 Bonjour,
 
@@ -79,46 +130,11 @@ Pour avancer, pouvez-vous nous transmettre les elements suivants :
 
 Cordialement,
 
-Territoires Vivants France
-contact@territoiresvivantsfrance.fr
+Territoires Vivants France  
+contact@territoiresvivantsfrance.fr  
 04 65 81 54 69
 
-## 7. Regles de prudence
-
-- Ne jamais promettre une aide financiere avant instruction.
-- Ne jamais annoncer de partenaire non officialise.
-- Ne jamais publier une donnee personnelle sans consentement.
-- Ne jamais visiter un bien sans autorisation ecrite.
-- Ne jamais accepter des materiaux sans qualification de securite, etat, quantite et retrait.
-- Tracer les decisions importantes dans Supabase ou dans le registre interne.
-
-## 8. Routine hebdomadaire
-
-Chaque semaine :
-
-1. Exporter ou consulter les nouvelles demandes.
-2. Classer par statut, categorie et priorite.
-3. Relancer les demandes en attente.
-4. Creer les fiches projet pour les dossiers retenus.
-5. Mettre a jour les indicateurs : demandes recues, demandes qualifiees, rendez-vous, dossiers acceptes, dossiers archives.
-
-## 9. Utilisation du back-office
-
-Acces : `admin-demandes.html`.
-
-Routine conseillee :
-
-1. Ouvrir le back-office avec le token admin.
-2. Filtrer les demandes `nouveau`.
-3. Lire chaque demande.
-4. Verifier la categorie et la priorite.
-5. Ajouter une note interne courte.
-6. Passer le statut a `a_qualifier`, `en_cours`, `rendez_vous`, `refuse` ou `archive`.
-7. Utiliser le modele de reponse adapte.
-8. Repondre depuis la messagerie Gmail ou la messagerie officielle.
-9. Exporter les demandes filtrees en CSV avant une reunion de suivi ou un bilan hebdomadaire.
-
-## 10. Modeles de reponse disponibles dans le back-office
+## 11. Modeles de reponse disponibles dans le back-office
 
 Le back-office contient des modeles prets a adapter :
 
@@ -135,13 +151,32 @@ Le back-office contient des modeles prets a adapter :
 
 Ces modeles sont des bases de travail : ils doivent etre relus avant envoi et adaptes au contexte. Aucun engagement financier, technique ou partenarial ne doit etre formule sans validation interne.
 
-## 11. Nettoyage des tests
+## 12. Regles de prudence
 
-Les demandes techniques dont l'objet commence par `[TEST` doivent etre passees en `archive` apres verification. Elles ne doivent pas etre supprimees si elles servent a documenter un controle de fonctionnement recent.
+- Ne jamais promettre une aide financiere avant instruction.
+- Ne jamais annoncer de partenaire non officialise.
+- Ne jamais publier une donnee personnelle sans cadre legal ou accord valable.
+- Ne jamais visiter un bien sans autorisation ecrite.
+- Ne jamais accepter des materiaux sans qualification de securite, etat, quantite et retrait.
+- Tracer les decisions importantes dans Supabase ou dans le registre interne.
 
-## 12. Export de suivi
+## 13. Routine hebdomadaire
 
-Le bouton `Exporter CSV` du back-office exporte uniquement les demandes affichees avec les filtres actifs. Utilisations recommandees :
+Chaque semaine :
+
+1. Consulter les nouvelles demandes.
+2. Classer par statut, categorie et priorite.
+3. Relancer les demandes en attente.
+4. Creer ou completer les dossiers retenus.
+5. Mettre a jour les documents et les taches.
+6. Exporter les demandes filtrees si un point de suivi est prevu.
+7. Mettre a jour les indicateurs : demandes recues, demandes qualifiees, rendez-vous, dossiers acceptes, dossiers archives.
+
+## 14. Export de suivi
+
+Le bouton `Exporter CSV` du back-office exporte uniquement les demandes affichees avec les filtres actifs.
+
+Utilisations recommandees :
 
 - preparation d'un point hebdomadaire ;
 - transmission interne des demandes a qualifier ;
@@ -150,25 +185,29 @@ Le bouton `Exporter CSV` du back-office exporte uniquement les demandes affichee
 
 Le fichier CSV contient des donnees personnelles. Il doit rester interne, etre stocke dans un espace securise et etre supprime lorsqu'il n'est plus utile.
 
-## 10. Outils operationnels ajoutes
+## 15. Nettoyage des tests
 
-Les documents suivants completent le processus de traitement :
+Les demandes techniques dont l'objet commence par `[TEST` doivent etre passees en `archive` apres verification. Elles ne doivent pas etre supprimees si elles servent a documenter un controle de fonctionnement recent.
+
+## 16. Outils operationnels disponibles
 
 | Document | Usage |
 |---|---|
 | `documents/procedure-traitement-formulaires-tvf.md` | Procedure complete pour recevoir, qualifier, prioriser et archiver les demandes |
-| `documents/modeles-reponses-email-formulaires-tvf.md` | Modeles d'emails prets a adapter selon le profil du demandeur |
+| `documents/modeles-reponses-email-formulaires-tvf.md` | Modeles d'e-mails prets a adapter selon le profil du demandeur |
 | `documents/tableau-suivi-demandes-operationnelles.md` | Tableau de pilotage manuel pour suivre les dossiers et les relances |
-| `documents/checklist-brevo-dns-rgpd-formulaires.md` | Points de controle email, DNS, Brevo, delivrabilite et RGPD |
+| `documents/checklist-brevo-dns-rgpd-formulaires.md` | Points de controle e-mail, DNS, Brevo, delivrabilite et donnees personnelles |
 | `documents/plan-nettoyage-tests-supabase.md` | Methode prudente pour identifier et nettoyer les donnees de test |
 
-## 11. Suite logique apres activation
+## 17. Recette avant usage reel
 
-1. Tester chaque formulaire avec une vraie adresse email externe.
-2. Verifier que l'email interne arrive sur `contact@territoiresvivantsfrance.fr`.
+1. Tester chaque formulaire avec une vraie adresse e-mail externe.
+2. Verifier que l'e-mail interne arrive sur `contact@territoiresvivantsfrance.fr`.
 3. Verifier que l'accuse de reception arrive chez le demandeur.
-4. Reporter chaque test dans le tableau de suivi.
-5. Nettoyer les tests dans Supabase avant les premiers usages publics.
-6. Configurer ou verifier DKIM et DMARC pour ameliorer la delivrabilite.
-7. Utiliser les modeles de reponse pour traiter les premieres demandes reelles.
-
+4. Tester une demande TVF Mobile avec photo.
+5. Importer la demande mobile dans TVF OS.
+6. Verifier la creation du dossier et le rattachement document/photo.
+7. Reporter chaque test dans le tableau de suivi.
+8. Archiver les tests dans Supabase avant les premiers usages publics.
+9. Verifier DKIM et DMARC pour ameliorer la delivrabilite.
+10. Utiliser les modeles de reponse pour traiter les premieres demandes reelles.
