@@ -10,12 +10,14 @@ const required = [
   "babel.config.js",
   ".env.example",
   ".nvmrc",
+  "SUPABASE_ACTIVATION.md",
   "App.js",
   "src/theme.js",
   "src/data.js",
   "src/services/requestPayload.js",
   "src/services/requestRepository.js",
   "src/services/supabaseClient.js",
+  "scripts/test-mobile-supabase.js",
   "assets/tvf-mobile-logo.png"
 ];
 
@@ -32,6 +34,14 @@ for (const file of required) {
 const pkg = JSON.parse(fs.readFileSync(path.join(root, "package.json"), "utf8"));
 JSON.parse(fs.readFileSync(path.join(root, "app.json"), "utf8"));
 const dependencies = { ...pkg.dependencies, ...pkg.devDependencies };
+
+for (const scriptName of ["start:clear", "start:lan", "start:tunnel", "test:supabase"]) {
+  if (!pkg.scripts?.[scriptName]) {
+    console.error(`MISSING script ${scriptName}`);
+    ok = false;
+  }
+}
+
 for (const dependency of [
   "expo-image-picker",
   "expo-location",
@@ -40,7 +50,8 @@ for (const dependency of [
   "@expo/metro-runtime",
   "@supabase/supabase-js",
   "react-native-url-polyfill",
-  "@opentelemetry/api"
+  "@opentelemetry/api",
+  "@expo/ngrok"
 ]) {
   if (!dependencies[dependency]) {
     console.error(`MISSING dependency ${dependency}`);
@@ -53,6 +64,7 @@ for (const token of [
   "buildRequestPayload",
   "submitMobileRequest",
   "getSupabaseConfigStatus",
+  "flowCategoryOptions",
   "expo-image-picker",
   "expo-location",
   "ActivityIndicator",

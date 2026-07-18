@@ -11,7 +11,8 @@
     "check": "node scripts/check-mobile-project.js",
     "start:clear": "expo start --clear",
     "start:lan": "expo start --clear --lan",
-    "start:tunnel": "expo start --clear --tunnel"
+    "start:tunnel": "expo start --clear --tunnel",
+    "test:supabase": "node scripts/test-mobile-supabase.js"
   },
   "dependencies": {
     "@expo/metro-runtime": "~57.0.6",

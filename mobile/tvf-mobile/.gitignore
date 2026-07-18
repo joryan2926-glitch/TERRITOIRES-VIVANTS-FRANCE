@@ -5,3 +5,5 @@ export-check/
 dist/
 build/
 *.log
+.env
+.env.local

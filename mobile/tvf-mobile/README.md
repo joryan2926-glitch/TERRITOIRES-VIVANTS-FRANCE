@@ -86,6 +86,12 @@ Depuis la racine du depot :
 node scripts/check-encoding.js
 ```
 
+Test d'enregistrement reel dans Supabase, avec creation puis suppression automatique d'une ligne technique :
+
+```bash
+npm run test:supabase
+```
+
 ## Connexion Supabase preparee
 
 La preversion peut fonctionner sans Supabase : les demandes restent alors en mode local.
