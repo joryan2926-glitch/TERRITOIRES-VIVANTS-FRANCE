@@ -57,7 +57,19 @@ npm install
 npm run start
 ```
 
-Puis scanner le QR code avec Expo Go sur telephone.
+Si Expo Go ne detecte pas le projet sur le reseau local, utiliser le mode tunnel :
+
+```bash
+npm run start:tunnel
+```
+
+Si l'application reste bloquee sur un ancien ecran, vider le cache Metro :
+
+```bash
+npm run start:clear
+```
+
+Puis scanner le QR code avec Expo Go sur telephone. Le mode tunnel peut demander le paquet `@expo/ngrok`, deja ajoute au projet.
 
 ## Controles locaux
 

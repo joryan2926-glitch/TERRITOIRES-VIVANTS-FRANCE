@@ -62,6 +62,14 @@ const initialDraft = {
   locationAccuracy: ""
 };
 
+const flowCategoryOptions = {
+  signal: signalCategories,
+  materials: materialCategories,
+  property: propertyTypes,
+  volunteer: [],
+  tracking: []
+};
+
 function buildReference(flow) {
   const prefix = {
     signal: "SIG",
