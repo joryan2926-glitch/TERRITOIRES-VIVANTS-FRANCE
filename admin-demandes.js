@@ -505,6 +505,9 @@ function renderMobilePanel() {
       <button class="btn secondary" type="button" data-mobile-import="${escapeHtml(item.id)}">Importer + dossier</button>
     </article>`).join("")}
   </div>`;
+  if (window.location.hash === "#demandes-mobile") {
+    window.setTimeout(() => mobilePanelEl.scrollIntoView({ behavior: "smooth", block: "start" }), 60);
+  }
 }
 
 async function loadMobileRequests() {

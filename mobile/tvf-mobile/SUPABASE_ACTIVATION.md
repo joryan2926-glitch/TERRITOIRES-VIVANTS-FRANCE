@@ -73,7 +73,23 @@ TVF_MOBILE_SUPABASE_CLEANUP_OK reference=...
 
 Si le test indique que `public.mobile_requests` est introuvable, le script SQL mobile n'a pas encore ete applique au bon projet Supabase ou le cache schema Supabase doit etre rafraichi.
 
-## Etape 4 - Relancer Expo Go
+## Etape 4 - Tester le passage vers TVF OS
+
+Depuis la racine du depot :
+
+```bash
+npm run test:mobile-os
+```
+
+Succes attendu :
+
+```text
+TVF_MOBILE_TO_OS_OK reference=... contact=... dossier=...
+```
+
+Cette recette cree une demande mobile technique, l'importe dans TVF OS, genere un dossier d'instruction, verifie les rattachements, puis supprime automatiquement les donnees de test.
+
+## Etape 5 - Relancer Expo Go
 
 Depuis `mobile/tvf-mobile` :
 

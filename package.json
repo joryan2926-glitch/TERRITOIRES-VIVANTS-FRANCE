@@ -11,6 +11,7 @@
     "audit:tvf-os": "node scripts/audit-tvf-os-operationnel.js",
     "check:tvf-os:production": "node scripts/check-tvf-os-production.js",
     "check:encoding": "node scripts/check-encoding.js",
-    "test:user-flow": "node tests/user-flow-tvf-os.test.js"
+    "test:user-flow": "node tests/user-flow-tvf-os.test.js",
+    "test:mobile-os": "node scripts/test-mobile-tvf-os-real.js"
   }
 }

@@ -92,6 +92,12 @@ Test d'enregistrement reel dans Supabase, avec creation puis suppression automat
 npm run test:supabase
 ```
 
+Depuis la racine du depot, tester le passage complet vers TVF OS :
+
+```bash
+npm run test:mobile-os
+```
+
 ## Connexion Supabase preparee
 
 La preversion peut fonctionner sans Supabase : les demandes restent alors en mode local.

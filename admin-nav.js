@@ -17,6 +17,7 @@ const TVF_ADMIN_GROUPS = [
     description: "Reception",
     modules: [
       { href: "admin-demandes", label: "Demandes entrantes", icon: "&#9993;" },
+      { href: "admin-demandes#demandes-mobile", label: "Mobile terrain", icon: "&#8982;" },
       { href: "admin-emails", label: "Boite mail", icon: "@" },
       { href: "admin-crm", label: "Contacts", icon: "&#9673;" },
     ],
