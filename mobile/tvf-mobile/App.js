@@ -463,7 +463,7 @@ function ConfigBanner() {
     </View>
   );
 }
-function HomeScreen({ go, draftRestored }) {
+function HomeScreen({ go, draftRestored, dismissDraft }) {
   return (
     <ScrollView contentContainerStyle={styles.content}>
       <ScreenTitle eyebrow="Préversion terrain" title="Une application terrain simple pour TVF">
@@ -478,16 +478,22 @@ function HomeScreen({ go, draftRestored }) {
       </View>
       <ConfigBanner />
       {draftRestored ? (
-        <TouchableOpacity style={styles.draftBanner} onPress={() => go("signal")} activeOpacity={0.86}>
-          <View style={styles.draftBannerIcon}>
-            <Ionicons name="create-outline" size={20} color={colors.white} />
-          </View>
-          <View style={styles.draftBannerText}>
-            <Text style={styles.draftBannerTitle}>Brouillon restauré</Text>
-            <Text style={styles.draftBannerCopy}>Une demande commencée a été retrouvée sur ce téléphone.</Text>
-          </View>
-          <Ionicons name="chevron-forward" size={18} color={colors.green} />
-        </TouchableOpacity>
+        <View style={styles.draftBanner}>
+          <TouchableOpacity style={styles.draftResumeArea} onPress={() => go("signal")} activeOpacity={0.86}>
+            <View style={styles.draftBannerIcon}>
+              <Ionicons name="create-outline" size={20} color={colors.white} />
+            </View>
+            <View style={styles.draftBannerText}>
+              <Text style={styles.draftBannerTitle}>Brouillon restauré</Text>
+              <Text style={styles.draftBannerCopy}>Une demande commencée a été retrouvée sur ce téléphone.</Text>
+            </View>
+            <Ionicons name="chevron-forward" size={18} color={colors.green} />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.draftClearButton} onPress={dismissDraft} activeOpacity={0.82}>
+            <Ionicons name="trash-outline" size={16} color={colors.muted} />
+            <Text style={styles.draftClearText}>Supprimer</Text>
+          </TouchableOpacity>
+        </View>
       ) : null}
       <View style={styles.quickStats}>
         <View style={styles.statMini}><Text style={styles.statMiniValue}>4</Text><Text style={styles.statMiniLabel}>parcours clés</Text></View>
@@ -913,6 +919,11 @@ function AppShell() {
     if (draftReady) saveDraft(draft);
   }, [draft, draftReady]);
 
+  const dismissDraft = () => {
+    setDraft(initialDraft);
+    clearDraftStorage();
+    setDraftRestored(false);
+  };
   const openRequest = (request) => {
     setSelectedRequest(request);
     go("request-detail");
@@ -1008,7 +1019,7 @@ function AppShell() {
         return <ConfirmationScreen lastSubmission={lastSubmission} goHome={() => go("home")} goTracking={() => go("tracking")} />;
       case "home":
       default:
-        return <HomeScreen go={go} draftRestored={draftRestored} />;
+        return <HomeScreen go={go} draftRestored={draftRestored} dismissDraft={dismissDraft} />;
     }
   }, [screen, draft, lastSubmission, submissionHistory, selectedRequest, missing, submitting, draftReady, draftRestored]);
 
@@ -1138,6 +1149,19 @@ const styles = StyleSheet.create({
     marginBottom: 14,
     ...shadow
   },
+'  draftResumeArea: { flexDirection: "row", alignItems: "center", gap: 11 },
+  draftClearButton: {
+    alignSelf: "flex-start",
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 6,
+    paddingHorizontal: 10,
+    paddingVertical: 7,
+    borderRadius: 999,
+    backgroundColor: colors.soft,
+    marginLeft: 53
+  },
+  draftClearText: { color: colors.muted, fontWeight: "800", fontSize: 12.5 },'
   draftBannerIcon: {
     width: 42,
     height: 42,
@@ -1155,7 +1179,8 @@ const styles = StyleSheet.create({
     fontSize: 12.5,
     lineHeight: 18,
     marginTop: 2
-  },  quickStats: { flexDirection: "row", gap: 10, marginBottom: 14 },
+  },
+  quickStats: { flexDirection: "row", gap: 10, marginBottom: 14 },
   statMini: {
     flex: 1,
     backgroundColor: colors.white,
