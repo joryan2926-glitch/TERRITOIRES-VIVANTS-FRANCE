@@ -45,6 +45,7 @@ import { getSupabaseConfigStatus } from "./src/services/supabaseClient";
 const logo = require("./assets/tvf-mobile-logo.png");
 
 const SUBMISSION_HISTORY_KEY = "tvf-mobile-submission-history";
+const DRAFT_STORAGE_KEY = "tvf-mobile-current-draft";
 
 async function loadSubmissionHistory() {
   try {
@@ -84,6 +85,40 @@ const initialDraft = {
   locationAccuracy: ""
 };
 
+
+function hasDraftContent(draft) {
+  return Object.values(draft || {}).some((value) => String(value || "").trim());
+}
+
+async function loadDraft() {
+  try {
+    const raw = await AsyncStorage.getItem(DRAFT_STORAGE_KEY);
+    const parsed = raw ? JSON.parse(raw) : null;
+    return parsed && typeof parsed === "object" ? { ...initialDraft, ...parsed } : initialDraft;
+  } catch {
+    return initialDraft;
+  }
+}
+
+async function saveDraft(draft) {
+  try {
+    if (!hasDraftContent(draft)) {
+      await AsyncStorage.removeItem(DRAFT_STORAGE_KEY);
+      return;
+    }
+    await AsyncStorage.setItem(DRAFT_STORAGE_KEY, JSON.stringify(draft));
+  } catch {
+    // Le brouillon local reste un confort utilisateur et ne bloque jamais l'envoi.
+  }
+}
+
+async function clearDraftStorage() {
+  try {
+    await AsyncStorage.removeItem(DRAFT_STORAGE_KEY);
+  } catch {
+    // Rien a faire : le formulaire sera quand meme remis a zero dans l'application.
+  }
+}
 const flowCategoryOptions = {
   signal: signalCategories,
   materials: materialCategories,
@@ -839,6 +874,7 @@ function AppShell() {
   const [selectedRequest, setSelectedRequest] = useState(null);
   const [missing, setMissing] = useState([]);
   const [submitting, setSubmitting] = useState(false);
+  const [draftReady, setDraftReady] = useState(false);
 
   useEffect(() => {
     let active = true;
@@ -847,10 +883,19 @@ function AppShell() {
       setSubmissionHistory(items);
       if (items.length) setLastSubmission(items[0]);
     });
+    loadDraft().then((storedDraft) => {
+      if (!active) return;
+      if (hasDraftContent(storedDraft)) setDraft(storedDraft);
+      setDraftReady(true);
+    });
     return () => {
       active = false;
     };
   }, []);
+
+  useEffect(() => {
+    if (draftReady) saveDraft(draft);
+  }, [draft, draftReady]);
 
   const openRequest = (request) => {
     setSelectedRequest(request);
@@ -858,7 +903,10 @@ function AppShell() {
   };
   const go = (next, options = {}) => {
     setMissing([]);
-    if (options.resetDraft) setDraft(initialDraft);
+    if (options.resetDraft) {
+      setDraft(initialDraft);
+      clearDraftStorage();
+    }
     setScreen(next);
     setHistory((value) => [...value, next]);
   };
@@ -914,6 +962,7 @@ function AppShell() {
         return next;
       });
       setDraft(initialDraft);
+      clearDraftStorage();
       setMissing([]);
       go("confirmation");
     } finally {
@@ -944,7 +993,7 @@ function AppShell() {
       default:
         return <HomeScreen go={go} />;
     }
-  }, [screen, draft, lastSubmission, submissionHistory, selectedRequest, missing, submitting]);
+  }, [screen, draft, lastSubmission, submissionHistory, selectedRequest, missing, submitting, draftReady]);
 
   return (
     <SafeAreaView style={styles.safeArea}>
