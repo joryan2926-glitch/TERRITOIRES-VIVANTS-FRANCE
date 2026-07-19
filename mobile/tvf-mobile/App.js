@@ -154,6 +154,21 @@ function validateDraft(flow, draft) {
   return [...new Set(missing)];
 }
 
+function completionForFlow(flow, draft) {
+  const required = [...(requiredFieldsByFlow[flow] || [])];
+  if (["materials", "property"].includes(flow)) required.push("contactMethod");
+  const uniqueRequired = [...new Set(required)];
+  const completed = uniqueRequired.filter((field) => {
+    if (field === "contactMethod") return Boolean(draft.email.trim() || draft.phone.trim());
+    return Boolean(String(draft[field] || "").trim());
+  }).length;
+  return {
+    completed,
+    total: uniqueRequired.length,
+    percent: uniqueRequired.length ? Math.round((completed / uniqueRequired.length) * 100) : 100
+  };
+}
+
 function AppHeader({ screen, onBack, onContact }) {
   const canGoBack = screen !== "home";
   return (
@@ -404,6 +419,25 @@ function FlowGuide({ flow }) {
   );
 }
 
+function CompletionMeter({ flow, draft }) {
+  const completion = completionForFlow(flow, draft);
+  if (!completion.total) return null;
+  return (
+    <View style={styles.completionCard}>
+      <View style={styles.completionHeader}>
+        <View>
+          <Text style={styles.completionTitle}>Qualité de la saisie</Text>
+          <Text style={styles.completionText}>{completion.completed}/{completion.total} informations essentielles complétées</Text>
+        </View>
+        <Text style={styles.completionPercent}>{completion.percent}%</Text>
+      </View>
+      <View style={styles.completionTrack}>
+        <View style={[styles.completionFill, { width: `${completion.percent}%` }]} />
+      </View>
+    </View>
+  );
+}
+
 function Checklist({ flow }) {
   const items = checklistByFlow[flow] || [];
   if (!items.length) return null;
@@ -414,6 +448,23 @@ function Checklist({ flow }) {
         <View key={item} style={styles.checkRow}>
           <Ionicons name="checkmark-circle-outline" size={18} color={colors.green2} />
           <Text style={styles.checkText}>{item}</Text>
+        </View>
+      ))}
+    </View>
+  );
+}
+
+function NextStepsTimeline() {
+  return (
+    <View style={styles.timelineCard}>
+      <Text style={styles.timelineTitle}>Suite prévue</Text>
+      {nextSteps.map((step, index) => (
+        <View key={step} style={styles.timelineRow}>
+          <View style={styles.timelineMarker}><Text style={styles.timelineMarkerText}>{index + 1}</Text></View>
+          <View style={styles.timelineTextWrap}>
+            <Text style={styles.timelineStep}>{step}</Text>
+            <Text style={styles.timelineHint}>{index === 0 ? "La demande arrive dans le module Demandes reçues." : index === 1 ? "TVF vérifie la nature, la localisation et les informations utiles." : index === 2 ? "Un complément pourra être demandé si le dossier doit être instruit." : "La demande est classée, orientée ou transformée en dossier."}</Text>
+          </View>
         </View>
       ))}
     </View>
@@ -531,6 +582,7 @@ function SignalScreen({ draft, setDraft, submit, missing, submitting }) {
       <ContactFields draft={draft} setDraft={setDraft} />
       <Notice>Ne prenez pas de photo en entrant dans une propriété privée sans autorisation.</Notice>
       <Checklist flow="signal" />
+      <CompletionMeter flow="signal" draft={draft} />
       <RequestPreview flow="signal" draft={draft} />
       <ErrorBox missing={missing} />
       <PrimaryButton loading={submitting} onPress={() => submit("signal")}>{submitting ? "Transmission..." : "Envoyer à TVF"}</PrimaryButton>
@@ -554,6 +606,7 @@ function MaterialsScreen({ draft, setDraft, submit, missing, submitting }) {
       <MediaCapture draft={draft} setDraft={setDraft} label="Ajouter des photos des matériaux" />
       <ContactFields draft={draft} setDraft={setDraft} required />
       <Checklist flow="materials" />
+      <CompletionMeter flow="materials" draft={draft} />
       <RequestPreview flow="materials" draft={draft} />
       <ErrorBox missing={missing} />
       <PrimaryButton loading={submitting} onPress={() => submit("materials")}>{submitting ? "Transmission..." : "Proposer à TVF"}</PrimaryButton>
@@ -577,6 +630,7 @@ function PropertyScreen({ draft, setDraft, submit, missing, submitting }) {
       <ContactFields draft={draft} setDraft={setDraft} required />
       <Notice>TVF peut demander la liste des pièces à fournir avant toute suite opérationnelle.</Notice>
       <Checklist flow="property" />
+      <CompletionMeter flow="property" draft={draft} />
       <RequestPreview flow="property" draft={draft} />
       <ErrorBox missing={missing} />
       <PrimaryButton loading={submitting} onPress={() => submit("property")}>{submitting ? "Transmission..." : "Demander une étude"}</PrimaryButton>
@@ -596,6 +650,7 @@ function VolunteerScreen({ draft, setDraft, submit, missing, submitting }) {
       <Field label="Téléphone" value={draft.phone} onChangeText={(phone) => setDraft({ ...draft, phone })} placeholder="Votre numéro" keyboardType="phone-pad" />
       <Field label="Compétences / disponibilités" value={draft.skills} onChangeText={(skills) => setDraft({ ...draft, skills })} placeholder="Repérage, logistique, administration, communication..." multiline />
       <Checklist flow="volunteer" />
+      <CompletionMeter flow="volunteer" draft={draft} />
       <ErrorBox missing={missing} />
       <PrimaryButton loading={submitting} onPress={() => submit("volunteer")}>{submitting ? "Transmission..." : "Transmettre à TVF"}</PrimaryButton>
     </ScrollView>
@@ -848,10 +903,8 @@ function ConfirmationScreen({ lastSubmission, goHome, goTracking }) {
           <Text style={styles.summaryLine}>GPS : {data.hasCoordinates ? "enregistré" : "non renseigné"}</Text>
           <Text style={styles.summaryLine}>Transmission : {isSent ? "enregistrée dans Supabase" : isError ? "à renvoyer" : "locale uniquement"}</Text>
         </View>
-        <View style={styles.summaryCard}>
-          <Text style={styles.summaryTitle}>Suite prévue</Text>
-          {nextSteps.map((step) => <Text key={step} style={styles.summaryLine}>• {step}</Text>)}
-        </View>
+        <NextStepsTimeline />
+
         <PrimaryButton secondary icon="mail-outline" onPress={() => Linking.openURL(`mailto:contact@territoiresvivantsfrance.fr?subject=${subject}`)}>Contacter TVF avec ce numéro</PrimaryButton>
         <PrimaryButton secondary icon="search-outline" onPress={goTracking}>Voir le suivi</PrimaryButton>
         <PrimaryButton onPress={goHome}>Retour à l'accueil</PrimaryButton>
@@ -1324,6 +1377,35 @@ const styles = StyleSheet.create({
   contactHeaderText: { flex: 1 },
   contactTitle: { color: colors.blue, fontWeight: "800", fontSize: 15 },
   contactHint: { color: colors.muted, fontWeight: "600", fontSize: 12.5, marginTop: 2 },
+  completionCard: {
+    backgroundColor: colors.white,
+    borderRadius: radius.md,
+    borderWidth: 1,
+    borderColor: "#CFE0D1",
+    padding: 13,
+    marginBottom: 14
+  },
+  completionHeader: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    gap: 12,
+    marginBottom: 10
+  },
+  completionTitle: { color: colors.blue, fontWeight: "800", fontSize: 14.5 },
+  completionText: { color: colors.muted, fontWeight: "600", fontSize: 12.4, marginTop: 2 },
+  completionPercent: { color: colors.green, fontWeight: "900", fontSize: 18 },
+  completionTrack: {
+    height: 8,
+    borderRadius: 99,
+    backgroundColor: colors.soft,
+    overflow: "hidden"
+  },
+  completionFill: {
+    height: "100%",
+    borderRadius: 99,
+    backgroundColor: colors.green2
+  },
   checklistCard: {
     backgroundColor: colors.soft,
     borderRadius: radius.md,
@@ -1492,6 +1574,28 @@ const styles = StyleSheet.create({
   syncBadgeTextReady: { color: colors.white },
   reference: { color: colors.gold, fontSize: 16, fontWeight: "800", textAlign: "center" },
   confirmText: { color: colors.muted, fontSize: 15, lineHeight: 22, fontWeight: "600", textAlign: "center" },
+  timelineCard: {
+    backgroundColor: colors.white,
+    borderRadius: radius.lg,
+    borderWidth: 1,
+    borderColor: colors.line,
+    padding: 15,
+    marginBottom: 14
+  },
+  timelineTitle: { color: colors.green, fontWeight: "900", fontSize: 15.5, marginBottom: 10 },
+  timelineRow: { flexDirection: "row", gap: 11, alignItems: "flex-start", paddingVertical: 7 },
+  timelineMarker: {
+    width: 28,
+    height: 28,
+    borderRadius: 99,
+    backgroundColor: colors.green,
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  timelineMarkerText: { color: colors.white, fontWeight: "900", fontSize: 12 },
+  timelineTextWrap: { flex: 1 },
+  timelineStep: { color: colors.blue, fontWeight: "800", fontSize: 13.5, lineHeight: 18 },
+  timelineHint: { color: colors.muted, fontWeight: "600", fontSize: 12.2, lineHeight: 17, marginTop: 2 },
   summaryCard: {
     backgroundColor: colors.white,
     borderRadius: radius.md,
