@@ -15,56 +15,63 @@ function sanitizeFileName(value) {
 }
 
 async function uploadPhotoIfNeeded(payload) {
-  if (!payload.media?.photoUri) return { payload, bucket: null, path: null, warning: null };
+  const photos = Array.isArray(payload.media?.photos) && payload.media.photos.length
+    ? payload.media.photos
+    : payload.media?.photoUri
+      ? [{ uri: payload.media.photoUri, fileName: payload.media.photoFileName, rank: 1 }]
+      : [];
+
+  if (!photos.length) return { payload, bucket: null, path: null, paths: [], warning: null };
 
   const bucket = bucketForFlow(payload.flow);
-  const fileName = sanitizeFileName(payload.media.photoFileName);
-  const storagePath = `${payload.reference}/${Date.now()}-${fileName}`;
+  const uploaded = [];
+  const warnings = [];
 
-  try {
-    const response = await fetch(payload.media.photoUri);
-    const blob = await response.blob();
-    const contentType = blob.type || "image/jpeg";
+  for (const [index, photo] of photos.entries()) {
+    if (!photo?.uri) continue;
+    const fileName = sanitizeFileName(photo.fileName || `photo-tvf-mobile-${index + 1}.jpg`);
+    const storagePath = `${payload.reference}/${Date.now()}-${index + 1}-${fileName}`;
 
-    const { error } = await supabase.storage.from(bucket).upload(storagePath, blob, {
-      contentType,
-      upsert: false
-    });
+    try {
+      const response = await fetch(photo.uri);
+      const blob = await response.blob();
+      const contentType = blob.type || "image/jpeg";
 
-    if (error) throw error;
+      const { error } = await supabase.storage.from(bucket).upload(storagePath, blob, {
+        contentType,
+        upsert: false
+      });
 
-    return {
-      bucket,
-      path: storagePath,
-      warning: null,
-      payload: {
-        ...payload,
-        media: {
-          ...payload.media,
-          photoUri: null,
-          storageBucket: bucket,
-          storagePath
-        }
-      }
-    };
-  } catch (error) {
-    const warning = error?.message || "Photo non transmise.";
-    return {
-      bucket: null,
-      path: null,
-      warning,
-      payload: {
-        ...payload,
-        media: {
-          ...payload.media,
-          photoUri: null,
-          storageBucket: null,
-          storagePath: null,
-          uploadWarning: warning
-        }
-      }
-    };
+      if (error) throw error;
+      uploaded.push({ ...photo, uri: null, storageBucket: bucket, storagePath, rank: index + 1 });
+    } catch (error) {
+      warnings.push(error?.message || "Photo non transmise.");
+      uploaded.push({ ...photo, uri: null, storageBucket: null, storagePath: null, uploadWarning: error?.message || "Photo non transmise.", rank: index + 1 });
+    }
   }
+
+  const firstUploaded = uploaded.find((photo) => photo.storagePath) || null;
+  const warning = warnings.length ? `${warnings.length} photo(s) non transmise(s).` : null;
+
+  return {
+    bucket: firstUploaded?.storageBucket || null,
+    path: firstUploaded?.storagePath || null,
+    paths: uploaded.filter((photo) => photo.storagePath).map((photo) => photo.storagePath),
+    warning,
+    payload: {
+      ...payload,
+      media: {
+        ...payload.media,
+        photoUri: null,
+        photos: uploaded,
+        photoCount: uploaded.length,
+        storageBucket: firstUploaded?.storageBucket || null,
+        storagePath: firstUploaded?.storagePath || null,
+        storagePaths: uploaded.filter((photo) => photo.storagePath).map((photo) => photo.storagePath),
+        uploadWarning: warning
+      }
+    }
+  };
 }
 
 export async function submitMobileRequest(payload) {
@@ -101,9 +108,9 @@ export async function submitMobileRequest(payload) {
       ok: true,
       mode: "supabase",
       message: upload.warning
-        ? "Demande transmise vers TVF OS. Photo non transmise : elle pourra etre ajoutee ensuite."
-        : upload.path
-          ? "Demande et photo transmises vers TVF OS."
+        ? "Demande transmise vers TVF OS. Certaines photos pourront etre ajoutees ensuite."
+        : upload.paths?.length
+          ? `Demande et ${upload.paths.length} photo(s) transmises vers TVF OS.`
           : "Demande transmise vers TVF OS."
     };
   } catch (error) {

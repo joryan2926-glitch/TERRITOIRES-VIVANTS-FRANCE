@@ -56,6 +56,23 @@ function getConfig(flow) {
   return FLOW_CONFIG[flow] || FLOW_CONFIG.signal;
 }
 
+function normalizePhotos(draft) {
+  if (Array.isArray(draft.photos) && draft.photos.length) {
+    return draft.photos
+      .filter((photo) => clean(photo?.uri))
+      .slice(0, 4)
+      .map((photo, index) => ({
+        uri: clean(photo.uri),
+        fileName: clean(photo.fileName) || `photo-tvf-mobile-${index + 1}.jpg`,
+        rank: index + 1
+      }));
+  }
+  if (clean(draft.photoUri)) {
+    return [{ uri: clean(draft.photoUri), fileName: clean(draft.photoFileName) || "photo-tvf-mobile.jpg", rank: 1 }];
+  }
+  return [];
+}
+
 function buildTitle(config, draft, categoryLabel) {
   const title = clean(draft.title);
   if (title) return title;
@@ -101,6 +118,8 @@ export function buildRequestPayload({ flow, draft, reference, categoryLabel }) {
   const title = buildTitle(config, draft, categoryLabel);
   const completeness = calculateCompleteness(flow, draft);
   const routing = buildRouting(flow, draft);
+  const photos = normalizePhotos(draft);
+  const primaryPhoto = photos[0] || null;
 
   return {
     reference,
@@ -121,7 +140,8 @@ export function buildRequestPayload({ flow, draft, reference, categoryLabel }) {
       caseType: config.caseType,
       documentHints: config.documentHints,
       requiresContact: flow !== "signal",
-      hasPhoto: Boolean(clean(draft.photoUri)),
+      hasPhoto: photos.length > 0,
+      photoCount: photos.length,
       hasLocation: Boolean(clean(draft.address) || (clean(draft.latitude) && clean(draft.longitude))),
       routing
     },
@@ -132,9 +152,11 @@ export function buildRequestPayload({ flow, draft, reference, categoryLabel }) {
       accuracyMeters: numberOrNull(draft.locationAccuracy)
     },
     media: {
-      photoUri: clean(draft.photoUri),
-      photoFileName: clean(draft.photoFileName),
-      storageTarget: draft.photoUri ? (flow === "materials" ? "supabase-storage-materiaux" : "supabase-storage-signalements") : null
+      photoUri: primaryPhoto?.uri || null,
+      photoFileName: primaryPhoto?.fileName || null,
+      photos,
+      photoCount: photos.length,
+      storageTarget: photos.length ? (flow === "materials" ? "supabase-storage-materiaux" : "supabase-storage-signalements") : null
     },
     contact: {
       name: clean(draft.contactName),

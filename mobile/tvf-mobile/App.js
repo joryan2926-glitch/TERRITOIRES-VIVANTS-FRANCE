@@ -305,13 +305,29 @@ function PillPicker({ items, selected, onSelect }) {
 
 function MediaCapture({ draft, setDraft, label = "Ajouter une photo" }) {
   const [busy, setBusy] = useState(false);
+  const photos = Array.isArray(draft.photos) ? draft.photos : [];
+  const photoCount = photos.length || (draft.photoUri ? 1 : 0);
 
-  const saveAsset = (asset) => {
+  const applyPhotos = (nextPhotos) => {
+    const limited = nextPhotos.slice(0, 4);
+    const primary = limited[0] || null;
     setDraft({
       ...draft,
-      photoUri: asset.uri,
-      photoFileName: asset.fileName || "photo-tvf-mobile.jpg"
+      photos: limited,
+      photoUri: primary?.uri || "",
+      photoFileName: primary?.fileName || ""
     });
+  };
+
+  const saveAssets = (assets) => {
+    const incoming = (assets || [])
+      .filter((asset) => asset?.uri)
+      .map((asset, index) => ({
+        uri: asset.uri,
+        fileName: asset.fileName || `photo-tvf-mobile-${Date.now()}-${index + 1}.jpg`
+      }));
+    if (!incoming.length) return;
+    applyPhotos([...photos, ...incoming]);
   };
 
   const openLibrary = async () => {
@@ -325,9 +341,11 @@ function MediaCapture({ draft, setDraft, label = "Ajouter une photo" }) {
       const result = await ImagePicker.launchImageLibraryAsync({
         mediaTypes: ImagePicker.MediaTypeOptions.Images,
         allowsEditing: false,
+        allowsMultipleSelection: true,
+        selectionLimit: Math.max(1, 4 - photoCount),
         quality: 0.75
       });
-      if (!result.canceled && result.assets?.length) saveAsset(result.assets[0]);
+      if (!result.canceled && result.assets?.length) saveAssets(result.assets);
     } finally {
       setBusy(false);
     }
@@ -345,13 +363,17 @@ function MediaCapture({ draft, setDraft, label = "Ajouter une photo" }) {
         allowsEditing: false,
         quality: 0.72
       });
-      if (!result.canceled && result.assets?.length) saveAsset(result.assets[0]);
+      if (!result.canceled && result.assets?.length) saveAssets(result.assets);
     } finally {
       setBusy(false);
     }
   };
 
   const choosePhotoSource = () => {
+    if (photoCount >= 4) {
+      Alert.alert("Limite atteinte", "Vous pouvez joindre jusqu'à 4 photos par demande.");
+      return;
+    }
     Alert.alert("Ajouter une photo", "Choisissez la source de l'image.", [
       { text: "Appareil photo", onPress: openCamera },
       { text: "Photothèque", onPress: openLibrary },
@@ -359,19 +381,33 @@ function MediaCapture({ draft, setDraft, label = "Ajouter une photo" }) {
     ]);
   };
 
-  const clearPhoto = () => {
-    setDraft({ ...draft, photoUri: "", photoFileName: "" });
+  const removePhoto = (index) => {
+    applyPhotos(photos.filter((_, photoIndex) => photoIndex !== index));
+  };
+
+  const clearPhotos = () => {
+    setDraft({ ...draft, photoUri: "", photoFileName: "", photos: [] });
   };
 
   return (
     <View style={styles.mediaWrap}>
       <TouchableOpacity style={styles.photoBox} activeOpacity={0.82} onPress={choosePhotoSource}>
         {busy ? <ActivityIndicator color={colors.green} /> : <Ionicons name="camera-outline" size={30} color={colors.green} />}
-        <Text style={styles.photoTitle}>{draft.photoUri ? "Photo ajoutée" : label}</Text>
+        <Text style={styles.photoTitle}>{photoCount ? `${photoCount} photo${photoCount > 1 ? "s" : ""} ajoutée${photoCount > 1 ? "s" : ""}` : label}</Text>
         {draft.photoUri ? <Image source={{ uri: draft.photoUri }} style={styles.photoPreview} /> : null}
-        <Text style={styles.photoText}>{draft.photoUri ? "La photo sera jointe à la demande lors de la connexion TVF OS." : "Prendre une photo ou choisir une image existante."}</Text>
+        <Text style={styles.photoText}>{photoCount ? "La première photo sert d'aperçu. Les photos seront jointes à la demande TVF OS." : "Prendre une photo ou choisir une image existante."}</Text>
       </TouchableOpacity>
-      {draft.photoUri ? <PrimaryButton secondary icon="trash-outline" onPress={clearPhoto}>Retirer la photo</PrimaryButton> : null}
+      {photos.length ? (
+        <View style={styles.photoStrip}>
+          {photos.map((photo, index) => (
+            <TouchableOpacity key={`${photo.uri}-${index}`} style={styles.photoThumbWrap} onPress={() => removePhoto(index)} activeOpacity={0.84}>
+              <Image source={{ uri: photo.uri }} style={styles.photoThumb} />
+              <View style={styles.photoRemoveBadge}><Ionicons name="close" size={13} color={colors.white} /></View>
+            </TouchableOpacity>
+          ))}
+        </View>
+      ) : null}
+      {photoCount ? <PrimaryButton secondary icon="trash-outline" onPress={clearPhotos}>Retirer les photos</PrimaryButton> : null}
     </View>
   );
 }
@@ -533,7 +569,7 @@ function RequestPreview({ flow, draft }) {
       <Text style={styles.previewLine}>Catégorie : {getCategoryLabel(flow, draft.category)}</Text>
       <Text style={styles.previewLine}>Localisation : {draft.address || "À renseigner"}</Text>
       <Text style={styles.previewLine}>Contact : {draft.email || draft.phone || "Non renseigné"}</Text>
-      <Text style={styles.previewLine}>Photo : {draft.photoUri ? "jointe" : "non jointe"}</Text>
+      <Text style={styles.previewLine}>Photos : {draft.photoUri ? `${Array.isArray(draft.photos) && draft.photos.length ? draft.photos.length : 1} jointe(s)` : "non jointes"}</Text>
     </View>
   );
 }
@@ -788,7 +824,7 @@ Transmission : ${item.syncMode === "supabase" ? "transmise" : "à finaliser"}`;
 function RequestActionPlan({ request }) {
   const items = [
     "Conserver le numéro TVF et le communiquer dans chaque échange.",
-    request?.hasPhoto ? "Vérifier que la photo illustre clairement la situation." : "Ajouter une photo si elle peut être prise légalement.",
+    request?.hasPhoto ? "Vérifier que les photos illustrent clairement la situation." : "Ajouter une photo si elle peut être prise légalement.",
     request?.hasCoordinates ? "La position GPS est disponible pour faciliter la localisation." : "Compléter l'adresse avec un repère précis si besoin.",
     "Préparer les pièces ou informations complémentaires demandées par TVF."
   ];
@@ -836,7 +872,7 @@ function RequestDetailScreen({ request, goBack, goTracking, retryRequest, retryi
         <Text style={styles.summaryLine}>Type : {request.label || "Non renseigné"}</Text>
         <Text style={styles.summaryLine}>Catégorie : {request.categoryLabel || request.category || "Non renseignée"}</Text>
         <Text style={styles.summaryLine}>Localisation : {request.address || "À compléter"}</Text>
-        <Text style={styles.summaryLine}>Photo : {request.hasPhoto ? "jointe" : "non jointe"}</Text>
+        <Text style={styles.summaryLine}>Photos : {request.photoCount ? `${request.photoCount} jointe(s)` : request.hasPhoto ? "1 jointe" : "non jointes"}</Text>
         <Text style={styles.summaryLine}>GPS : {request.hasCoordinates ? "enregistré" : "non renseigné"}</Text>
       </View>
       <View style={styles.summaryCard}>
@@ -1110,7 +1146,7 @@ function ConfirmationScreen({ lastSubmission, goHome, goTracking, retryRequest, 
           <Text style={styles.summaryLine}>Type : {data.label || "Non renseigné"}</Text>
           <Text style={styles.summaryLine}>Catégorie : {data.categoryLabel || data.category || "Non renseignée"}</Text>
           <Text style={styles.summaryLine}>Localisation : {data.address || "À compléter"}</Text>
-          <Text style={styles.summaryLine}>Photo : {data.hasPhoto ? "jointe" : "non jointe"}</Text>
+          <Text style={styles.summaryLine}>Photos : {data.photoCount ? `${data.photoCount} jointe(s)` : data.hasPhoto ? "1 jointe" : "non jointes"}</Text>
           <Text style={styles.summaryLine}>GPS : {data.hasCoordinates ? "enregistré" : "non renseigné"}</Text>
           <Text style={styles.summaryLine}>Transmission : {isSent ? "transmise vers TVF OS" : isError ? "à renvoyer" : "locale uniquement"}</Text>
         </View>
@@ -1280,6 +1316,7 @@ function AppShell() {
         email: draft.email,
         phone: draft.phone,
         hasPhoto: Boolean(draft.photoUri),
+        photoCount: Array.isArray(draft.photos) && draft.photos.length ? draft.photos.length : (draft.photoUri ? 1 : 0),
         hasCoordinates: Boolean(draft.latitude && draft.longitude),
         syncMode: result.mode,
         syncMessage: result.message,
@@ -1616,6 +1653,10 @@ const styles = StyleSheet.create({
     marginBottom: 14
   },
   photoPreview: { width: "100%", height: 170, borderRadius: radius.md, marginTop: 12, resizeMode: "cover" },
+  photoStrip: { flexDirection: "row", flexWrap: "wrap", gap: 9, marginTop: 10, marginBottom: 8 },
+  photoThumbWrap: { width: 64, height: 64, borderRadius: 18, overflow: "hidden", borderWidth: 1, borderColor: colors.line },
+  photoThumb: { width: "100%", height: "100%", resizeMode: "cover" },
+  photoRemoveBadge: { position: "absolute", top: 4, right: 4, width: 20, height: 20, borderRadius: 999, backgroundColor: "rgba(8, 33, 49, 0.82)", alignItems: "center", justifyContent: "center" },
   photoTitle: { color: colors.green, fontWeight: "800", marginTop: 8, fontSize: 15 },
   photoText: { color: colors.muted, fontWeight: "600", textAlign: "center", marginTop: 5, lineHeight: 18 },
   locationBox: {
