@@ -742,6 +742,29 @@ Transmission : ${item.syncMode === "supabase" ? "transmise" : "à vérifier"}`;
     </ScrollView>
   );
 }
+function RequestActionPlan({ request }) {
+  const items = [
+    "Conserver le numéro TVF et le communiquer dans chaque échange.",
+    request?.hasPhoto ? "Vérifier que la photo illustre clairement la situation." : "Ajouter une photo si elle peut être prise légalement.",
+    request?.hasCoordinates ? "La position GPS est disponible pour faciliter la localisation." : "Compléter l'adresse avec un repère précis si besoin.",
+    "Préparer les pièces ou informations complémentaires demandées par TVF."
+  ];
+  return (
+    <View style={styles.actionPlanCard}>
+      <View style={styles.actionPlanHeader}>
+        <Ionicons name="clipboard-outline" size={20} color={colors.green} />
+        <Text style={styles.actionPlanTitle}>À préparer pour TVF</Text>
+      </View>
+      {items.map((item) => (
+        <View key={item} style={styles.actionPlanRow}>
+          <Ionicons name="checkmark-circle-outline" size={17} color={colors.green2} />
+          <Text style={styles.actionPlanText}>{item}</Text>
+        </View>
+      ))}
+    </View>
+  );
+}
+
 function RequestDetailScreen({ request, goBack, goTracking }) {
   if (!request) {
     return (
@@ -781,6 +804,7 @@ function RequestDetailScreen({ request, goBack, goTracking }) {
         <Text style={styles.summaryTitle}>Message de transmission</Text>
         <Text style={styles.summaryLine}>{request.syncMessage || "Aucun message technique enregistré."}</Text>
       </View>
+      <RequestActionPlan request={request} />
       <PrimaryButton secondary icon="share-social-outline" onPress={() => Share.share({ message: `Demande TVF ${request.reference}` })}>Partager la référence</PrimaryButton>
       <PrimaryButton secondary icon="mail-outline" onPress={() => Linking.openURL(`mailto:contact@territoiresvivantsfrance.fr?subject=${subject}`)}>Contacter TVF</PrimaryButton>
       <PrimaryButton secondary icon="search-outline" onPress={goTracking}>Ouvrir le suivi</PrimaryButton>
@@ -788,7 +812,7 @@ function RequestDetailScreen({ request, goBack, goTracking }) {
     </ScrollView>
   );
 }
-function TrackingScreen({ lastSubmission, submissionHistory = [] }) {
+function TrackingScreen({ lastSubmission, submissionHistory = [], openRequest }) {
   const [query, setQuery] = useState("");
   const [searched, setSearched] = useState(false);
   const normalizedQuery = query.trim().toLowerCase();
@@ -829,7 +853,20 @@ function TrackingScreen({ lastSubmission, submissionHistory = [] }) {
         </View>
       ) : null}
       {searched && normalizedQuery ? (
-        <Notice>{foundSubmission ? "Demande retrouvée sur ce téléphone. Conservez ce numéro pour vos échanges avec TVF." : "Aucune demande locale ne correspond. Si elle a été transmise, contactez TVF avec votre e-mail ou votre numéro de dossier."}</Notice>
+        foundSubmission ? (
+          <View style={styles.foundRequestCard}>
+            <View style={styles.foundRequestHead}>
+              <Ionicons name="search-circle-outline" size={24} color={colors.green} />
+              <View style={styles.foundRequestText}>
+                <Text style={styles.foundRequestTitle}>Demande retrouvée</Text>
+                <Text style={styles.foundRequestMeta}>{foundSubmission.reference} · {foundSubmission.label || "Demande TVF"}</Text>
+              </View>
+            </View>
+            <PrimaryButton secondary icon="eye-outline" onPress={() => openRequest?.(foundSubmission)}>Ouvrir la fiche</PrimaryButton>
+          </View>
+        ) : (
+          <Notice>Aucune demande locale ne correspond. Si elle a été transmise, contactez TVF avec votre e-mail ou votre numéro de dossier.</Notice>
+        )
       ) : null}
       <View style={styles.trackingCard}>
         <Text style={styles.trackingTitle}>Chaîne de traitement TVF OS</Text>
@@ -1093,7 +1130,7 @@ function AppShell() {
       case "requests":
         return <RequestsScreen submissionHistory={submissionHistory} goTracking={() => go("tracking")} openRequest={openRequest} />;
       case "tracking":
-        return <TrackingScreen lastSubmission={lastSubmission} submissionHistory={submissionHistory} />;
+        return <TrackingScreen lastSubmission={lastSubmission} submissionHistory={submissionHistory} openRequest={openRequest} />;
       case "documents":
         return <DocumentsScreen />;
       case "contact":
@@ -1523,6 +1560,31 @@ const styles = StyleSheet.create({
   historyText: { flex: 1 },
   historyReference: { color: colors.blue, fontWeight: "800", fontSize: 13.5 },
   historyMeta: { color: colors.muted, fontWeight: "600", fontSize: 12.5, marginTop: 2 },
+  actionPlanCard: {
+    backgroundColor: "#F8FBF7",
+    borderRadius: radius.lg,
+    borderWidth: 1,
+    borderColor: "#CFE0D1",
+    padding: 15,
+    marginBottom: 14
+  },
+  actionPlanHeader: { flexDirection: "row", alignItems: "center", gap: 8, marginBottom: 10 },
+  actionPlanTitle: { color: colors.green, fontWeight: "900", fontSize: 15.5 },
+  actionPlanRow: { flexDirection: "row", alignItems: "flex-start", gap: 9, paddingVertical: 4 },
+  actionPlanText: { flex: 1, color: colors.blue, fontWeight: "600", fontSize: 12.8, lineHeight: 18 },
+  foundRequestCard: {
+    backgroundColor: colors.white,
+    borderRadius: radius.lg,
+    borderWidth: 1,
+    borderColor: "#CFE0D1",
+    padding: 15,
+    marginBottom: 14,
+    ...shadow
+  },
+  foundRequestHead: { flexDirection: "row", alignItems: "center", gap: 10, marginBottom: 12 },
+  foundRequestText: { flex: 1 },
+  foundRequestTitle: { color: colors.green, fontWeight: "900", fontSize: 15 },
+  foundRequestMeta: { color: colors.muted, fontWeight: "600", fontSize: 12.5, marginTop: 2 },
   requestCard: {
     backgroundColor: colors.white,
     borderRadius: radius.md,
