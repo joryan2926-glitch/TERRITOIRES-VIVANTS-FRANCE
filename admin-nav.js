@@ -5,54 +5,62 @@ const TVF_ADMIN_LOGIN_ROUTE = "admin-login";
 
 const TVF_ADMIN_GROUPS = [
   {
-    label: "Accueil",
-    description: "Vue du jour",
+    label: "General",
+    description: "Vue globale",
     modules: [
-      { href: "admin", label: "Accueil", icon: "&#8962;" },
-      { href: "dashboard", label: "Tableau de bord", icon: "&#9638;" },
+      { href: "admin", label: "Tableau de bord", icon: "&#8962;", badge: "" },
+      { href: "dashboard", label: "Statistiques", icon: "&#9638;", badge: "" },
     ],
   },
   {
     label: "Demandes",
     description: "Reception",
     modules: [
-      { href: "admin-demandes", label: "Demandes entrantes", icon: "&#9993;" },
-      { href: "admin-demandes#demandes-mobile", label: "Mobile terrain", icon: "&#8982;" },
-      { href: "admin-emails", label: "Boite mail", icon: "@" },
-      { href: "admin-crm", label: "Contacts", icon: "&#9673;" },
+      { href: "admin-demandes", label: "Demandes recues", icon: "&#9993;", badge: "" },
+      { href: "admin-emails", label: "Messages", icon: "@", badge: "" },
+      { href: "admin-crm", label: "CRM contacts", icon: "&#9678;", badge: "" },
     ],
   },
   {
     label: "Dossiers",
     description: "Instruction",
     modules: [
-      { href: "admin-dossiers?create=client", label: "Nouveau dossier", icon: "+" },
-      { href: "admin-dossiers", label: "Dossiers actifs", icon: "&#9635;" },
-      { href: "admin-work", label: "Taches", icon: "&#10003;" },
+      { href: "admin-dossiers", label: "Dossiers en instruction", icon: "&#9635;", badge: "" },
+      { href: "admin-dossiers?create=client", label: "Creer un dossier", icon: "+", badge: "" },
+      { href: "admin-work", label: "Calendrier & taches", icon: "&#10003;", badge: "" },
     ],
   },
   {
-    label: "Documents",
-    description: "Pieces et modeles",
+    label: "Poles",
+    description: "Metiers TVF",
     modules: [
-      { href: "admin-documents#bibliotheque-interne-tvf", label: "Bibliotheque", icon: "&#9633;" },
-      { href: "admin-documents", label: "Documents rattaches", icon: "&#128196;" },
-      { href: "admin-procedures", label: "Procedures", icon: "&#167;" },
+      { href: "admin-dossiers?case_type=bien_vacant", label: "Patrimoine", icon: "&#8962;", badge: "" },
+      { href: "admin-documents#bibliotheque-interne-tvf", label: "Materiotheque", icon: "&#9636;", badge: "" },
+      { href: "admin-dossiers?case_type=commerce_inoccupe", label: "Commerce Vivant", icon: "&#9637;", badge: "" },
+      { href: "admin-map", label: "Friches", icon: "&#8982;", badge: "" },
+      { href: "admin-dossiers?case_type=benevole", label: "Solidarite", icon: "&#9673;", badge: "" },
+    ],
+  },
+  {
+    label: "Ressources",
+    description: "Documents",
+    modules: [
+      { href: "admin-documents", label: "Documents", icon: "&#9633;", badge: "" },
+      { href: "admin-procedures", label: "Procedures", icon: "&#167;", badge: "" },
+      { href: "admin-knowledge", label: "Base interne", icon: "i", badge: "" },
+      { href: "admin-ai", label: "Assistant", icon: "&#10022;", badge: "" },
     ],
   },
   {
     label: "Pilotage",
-    description: "Suivi et preuves",
+    description: "Reporting",
     modules: [
-      { href: "admin-impact", label: "Resultats", icon: "%" },
-      { href: "admin-finances", label: "Finances", icon: "&euro;" },
-      { href: "admin-map", label: "Carte", icon: "&#8982;" },
-      { href: "admin-observatoire", label: "Observatoire", icon: "&#9676;" },
-      { href: "admin-activity", label: "Journal", icon: "&#8635;" },
-      { href: "admin-users", label: "Utilisateurs", icon: "&#9678;" },
-      { href: "admin-settings", label: "Reglages", icon: "&#9881;" },
-      { href: "admin-knowledge", label: "Base interne", icon: "i" },
-      { href: "admin-ai", label: "Assistant", icon: "&#10022;" },
+      { href: "admin-impact", label: "Rapports", icon: "&#9679;", badge: "" },
+      { href: "admin-finances", label: "Finances", icon: "&#8364;", badge: "" },
+      { href: "admin-observatoire", label: "Observatoire", icon: "&#9676;", badge: "" },
+      { href: "admin-activity", label: "Journal", icon: "&#8635;", badge: "" },
+      { href: "admin-users", label: "Utilisateurs", icon: "&#9677;", badge: "" },
+      { href: "admin-settings", label: "Parametres", icon: "&#9881;", badge: "" },
     ],
   },
 ];
@@ -209,10 +217,7 @@ function createAdminModuleNav() {
   nav.setAttribute("aria-label", "Navigation TVF OS");
   nav.innerHTML = `
     <div class="admin-module-shell">
-      <div class="admin-module-title">
-        <span>TVF OS</span>
-        <strong>Centre operationnel</strong>
-      </div>
+      <div class="admin-module-title"><img src="assets/logo-territoires-vivants-france-web.png" alt="TVF" width="220" height="68"><span>TVF OS</span><strong>Centre operationnel</strong></div>
       <div class="admin-os-quickbar" aria-label="Actions rapides TVF OS">
         <div class="admin-os-quicklinks">
           ${TVF_ADMIN_QUICK_ACTIONS.map((action) => `<a class="admin-os-quicklink is-${action.tone}" href="${action.href}">${action.label}</a>`).join("")}
@@ -234,7 +239,7 @@ function createAdminModuleNav() {
             <div class="admin-module-links">
               ${group.modules.map((module) => {
                 const active = moduleIsActive(current, module.href);
-                return `<a href="${module.href}"${active ? ' aria-current="page" class="is-active"' : ""}><i>${module.icon}</i><span>${module.label}</span></a>`;
+                return `<a href="${module.href}"${active ? ' aria-current="page" class="is-active"' : ""}><i>${module.icon}</i><span>${module.label}</span>${module.badge ? `<b>${module.badge}</b>` : ""}</a>`;
               }).join("")}
             </div>
           </section>`;

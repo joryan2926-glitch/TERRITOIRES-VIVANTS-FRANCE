@@ -588,23 +588,30 @@ function renderStatusShortcuts() {
 function renderList() {
   if (!listEl) return;
   const rows = visibleContacts();
-  listEl.innerHTML = rows
+  const header = `<div class="admin-requests-table-head" role="row">
+    <span>Numero</span><span>Date</span><span>Contact / objet</span><span>Categorie</span><span>Statut</span><span>Priorite</span><span>Source</span><span>Responsable</span><span>Actions</span>
+  </div>`;
+  const body = rows
     .map((contact) => {
       const active = contact.id === selectedId ? " is-active" : "";
       const overdue = isOverdue(contact) ? " is-overdue" : "";
-      return `<button class="admin-request${active}${overdue}" type="button" data-contact-id="${escapeHtml(contact.id)}">
-        <span class="admin-request-head"><strong>${escapeHtml(contact.request_number || contact.full_name || "Demande TVF")}</strong><small>${escapeHtml(formatDate(contact.created_at))}</small></span>
-        <span>${escapeHtml(contact.subject || "Sans objet")}</span>
-        <span class="admin-request-sub">${escapeHtml(contact.full_name || "Contact sans nom")} - ${escapeHtml(contactChannelLabel(contact))}</span>
-        <span class="admin-badges">
-          <em data-kind="status">${escapeHtml(label(statusLabels, contact.status))}</em>
-          <em data-kind="priority">${escapeHtml(label(priorityLabels, contact.priority))}</em>
-          <em data-kind="category">${escapeHtml(label(categoryLabels, contact.category))}</em>
-          <em data-kind="score">${escapeHtml(String(contact.qualification_score || contact.assistant?.qualification_score || 0))}%</em>
-        </span>
+      const tone = String(contact.status || "nouveau").replace(/[^a-z0-9_-]/gi, "");
+      const agent = contact.assigned_to || "A attribuer";
+      const source = contactChannelLabel(contact);
+      return `<button class="admin-request admin-request-row${active}${overdue}" data-status="${escapeHtml(tone)}" type="button" data-contact-id="${escapeHtml(contact.id)}">
+        <span class="admin-cell-number"><i aria-hidden="true"></i><strong>${escapeHtml(contact.request_number || "TVF")}</strong></span>
+        <span>${escapeHtml(formatDate(contact.created_at))}</span>
+        <span class="admin-cell-main"><strong>${escapeHtml(contact.subject || "Sans objet")}</strong><small>${escapeHtml(contact.full_name || "Contact sans nom")}</small></span>
+        <span><em class="admin-pill admin-pill-soft">${escapeHtml(label(categoryLabels, contact.category))}</em></span>
+        <span><em class="admin-pill admin-pill-status">${escapeHtml(label(statusLabels, contact.status))}</em></span>
+        <span><em class="admin-pill admin-pill-priority">${escapeHtml(label(priorityLabels, contact.priority))}</em></span>
+        <span>${escapeHtml(source)}</span>
+        <span>${escapeHtml(agent)}</span>
+        <span class="admin-row-actions"><b>...</b></span>
       </button>`;
     })
     .join("");
+  listEl.innerHTML = rows.length ? `${header}${body}` : "";
 
   if (emptyEl) emptyEl.hidden = rows.length !== 0;
   if (countEl) {
