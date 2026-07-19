@@ -882,16 +882,60 @@ function TrackingScreen({ lastSubmission, submissionHistory = [], openRequest })
 }
 
 function DocumentsScreen() {
+  const preparationTracks = [
+    {
+      title: "Propriétaire ou bien vacant",
+      icon: "home-outline",
+      items: ["Adresse précise du bien", "Photos extérieures et intérieures si autorisées", "Situation d'occupation", "Objectif recherché"]
+    },
+    {
+      title: "Matériaux ou équipements",
+      icon: "cube-outline",
+      items: ["Nature des matériaux", "Quantité ou dimensions", "État général", "Lieu et délai de disponibilité"]
+    },
+    {
+      title: "Signalement de terrain",
+      icon: "location-outline",
+      items: ["Adresse ou repère fiable", "Type de situation", "Description factuelle", "Photo prise légalement"]
+    }
+  ];
+
   return (
     <ScrollView contentContainerStyle={styles.content}>
-      <ScreenTitle eyebrow="Documents" title="Préparer son dossier">
-        Les documents publics utiles seront consultables depuis l'application et reliés aux dossiers TVF OS.
+      <ScreenTitle eyebrow="Documents" title="Préparer une demande solide">
+        Cette bibliothèque aide à réunir les premières informations avant instruction. Chaque situation reste étudiée par TVF avant toute suite opérationnelle.
       </ScreenTitle>
+      <View style={styles.documentIntroCard}>
+        <Ionicons name="folder-open-outline" size={26} color={colors.green} />
+        <View style={styles.documentIntroText}>
+          <Text style={styles.documentIntroTitle}>Objectif terrain</Text>
+          <Text style={styles.documentIntroCopy}>Arriver au premier échange avec les bonnes pièces, une localisation claire et une demande compréhensible.</Text>
+        </View>
+      </View>
       <View style={styles.stack}>
+        {preparationTracks.map((track) => (
+          <View key={track.title} style={styles.preparationCard}>
+            <View style={styles.preparationHead}>
+              <View style={styles.preparationIcon}><Ionicons name={track.icon} size={20} color={colors.white} /></View>
+              <Text style={styles.preparationTitle}>{track.title}</Text>
+            </View>
+            {track.items.map((item) => (
+              <View key={item} style={styles.preparationRow}>
+                <Ionicons name="checkmark-circle-outline" size={17} color={colors.green2} />
+                <Text style={styles.preparationText}>{item}</Text>
+              </View>
+            ))}
+          </View>
+        ))}
         {documentGroups.map((group) => (
           <View key={group.title} style={styles.groupCard}>
             <Text style={styles.groupTitle}>{group.title}</Text>
-            {group.items.map((item) => <Text key={item} style={styles.groupItem}>• {item}</Text>)}
+            {group.items.map((item) => (
+              <View key={item} style={styles.groupItemRow}>
+                <Ionicons name="document-attach-outline" size={16} color={colors.green} />
+                <Text style={styles.groupItem}>{item}</Text>
+              </View>
+            ))}
           </View>
         ))}
         {documents.map((doc) => (
@@ -904,6 +948,7 @@ function DocumentsScreen() {
           </View>
         ))}
       </View>
+      <Notice>Les documents préparent l'échange. Ils ne valent pas acceptation d'un projet, d'un bien ou d'une collecte.</Notice>
     </ScrollView>
   );
 }
@@ -1628,6 +1673,40 @@ const styles = StyleSheet.create({
   stepDotActive: { backgroundColor: colors.green },
   stepText: { color: colors.muted, fontWeight: "700" },
   stepTextActive: { color: colors.blue },
+  documentIntroCard: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 12,
+    backgroundColor: colors.white,
+    borderWidth: 1,
+    borderColor: colors.line,
+    borderRadius: radius.lg,
+    padding: 15,
+    marginBottom: 14,
+    ...shadow
+  },
+  documentIntroText: { flex: 1 },
+  documentIntroTitle: { color: colors.green, fontWeight: "900", fontSize: 16, marginBottom: 3 },
+  documentIntroCopy: { color: colors.muted, fontWeight: "600", fontSize: 12.7, lineHeight: 18 },
+  preparationCard: {
+    backgroundColor: "#F8FBF7",
+    borderWidth: 1,
+    borderColor: "#CFE0D1",
+    borderRadius: radius.lg,
+    padding: 15
+  },
+  preparationHead: { flexDirection: "row", alignItems: "center", gap: 10, marginBottom: 10 },
+  preparationIcon: {
+    width: 34,
+    height: 34,
+    borderRadius: 13,
+    backgroundColor: colors.green,
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  preparationTitle: { flex: 1, color: colors.blue, fontWeight: "900", fontSize: 15.2 },
+  preparationRow: { flexDirection: "row", alignItems: "flex-start", gap: 8, paddingVertical: 4 },
+  preparationText: { flex: 1, color: colors.blue, fontWeight: "600", fontSize: 12.8, lineHeight: 18 },
   groupCard: {
     backgroundColor: colors.soft,
     borderWidth: 1,
@@ -1636,7 +1715,8 @@ const styles = StyleSheet.create({
     padding: 14
   },
   groupTitle: { color: colors.green, fontWeight: "800", fontSize: 15, marginBottom: 8 },
-  groupItem: { color: colors.blue, fontWeight: "600", lineHeight: 21 },
+  groupItemRow: { flexDirection: "row", alignItems: "flex-start", gap: 8, paddingVertical: 4 },
+  groupItem: { flex: 1, color: colors.blue, fontWeight: "600", lineHeight: 19, fontSize: 12.8 },
   documentCard: {
     backgroundColor: colors.white,
     borderRadius: radius.md,
