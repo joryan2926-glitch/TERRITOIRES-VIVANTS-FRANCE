@@ -1,4 +1,4 @@
-﻿const assert = require("assert");
+const assert = require("assert");
 const casesHandler = require("../lib/api/admin-cases");
 
 const {
@@ -97,6 +97,7 @@ async function testListCases() {
 }
 
 async function testCreateCase() {
+  process.env.NODE_ENV = "test";
   process.env.TVF_ADMIN_TOKEN = "secret";
   process.env.SUPABASE_URL = "https://demo.supabase.co";
   process.env.SUPABASE_SERVICE_ROLE_KEY = "sb_secret_demo";
