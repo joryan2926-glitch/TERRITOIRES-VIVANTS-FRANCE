@@ -983,6 +983,41 @@ function ContactScreen() {
   );
 }
 
+function TransmissionStatusCard({ data, isSent, isError }) {
+  const rows = isSent
+    ? [
+        "La demande est enregistrée dans Supabase.",
+        "Elle peut être reprise dans TVF OS.",
+        "Conservez la référence pour tout échange."
+      ]
+    : isError
+      ? [
+          "La demande reste visible sur ce téléphone.",
+          "La transmission devra être relancée.",
+          "Contactez TVF avec la référence si besoin."
+        ]
+      : [
+          "La demande est préparée localement.",
+          "Elle n'est pas encore visible dans TVF OS.",
+          "Relancez l'envoi quand la configuration est active."
+        ];
+  return (
+    <View style={[styles.transmissionCard, isSent && styles.transmissionCardReady, isError && styles.transmissionCardError]}>
+      <View style={styles.transmissionHead}>
+        <Ionicons name={isSent ? "shield-checkmark-outline" : isError ? "warning-outline" : "phone-portrait-outline"} size={21} color={isSent ? colors.green : isError ? colors.danger : colors.gold} />
+        <Text style={styles.transmissionTitle}>{isSent ? "Envoi confirmé" : isError ? "Action nécessaire" : "Préparation locale"}</Text>
+      </View>
+      {rows.map((row) => (
+        <View key={row} style={styles.transmissionRow}>
+          <View style={[styles.transmissionDot, isSent && styles.transmissionDotReady, isError && styles.transmissionDotError]} />
+          <Text style={styles.transmissionText}>{row}</Text>
+        </View>
+      ))}
+      {data?.syncMessage ? <Text style={styles.transmissionNote}>{data.syncMessage}</Text> : null}
+    </View>
+  );
+}
+
 function ConfirmationScreen({ lastSubmission, goHome, goTracking }) {
   const data = lastSubmission || {};
   const subject = encodeURIComponent(`Demande TVF ${data.reference || ""}`.trim());
@@ -1003,8 +1038,8 @@ function ConfirmationScreen({ lastSubmission, goHome, goTracking }) {
           <Text style={[styles.syncBadgeText, (isSent || isError) && styles.syncBadgeTextReady]}>{statusLabel}</Text>
         </View>
         <Text style={styles.reference}>{data.reference}</Text>
-        <Text style={styles.confirmText}>{data.syncMessage || "La demande est prête à être reprise dans TVF OS."}</Text>
-        {!isSent ? <Notice>Pour apparaître dans TVF OS, la confirmation doit indiquer « Supabase confirmé ». Si ce n'est pas le cas, relancez Expo avec les variables Supabase puis renvoyez la demande.</Notice> : null}
+        <Text style={styles.confirmText}>{isSent ? "Votre demande est prête à être traitée par TVF." : "Votre demande est conservée sur ce téléphone avec sa référence."}</Text>
+        <TransmissionStatusCard data={data} isSent={isSent} isError={isError} />
         <View style={styles.summaryCard}>
           <Text style={styles.summaryTitle}>Récapitulatif</Text>
           <Text style={styles.summaryLine}>Type : {data.label || "Non renseigné"}</Text>
@@ -1016,6 +1051,7 @@ function ConfirmationScreen({ lastSubmission, goHome, goTracking }) {
         </View>
         <NextStepsTimeline />
 
+        <PrimaryButton secondary icon="share-social-outline" onPress={() => Share.share({ message: `Demande TVF ${data.reference || ""}` })}>Partager la référence</PrimaryButton>
         <PrimaryButton secondary icon="mail-outline" onPress={() => Linking.openURL(`mailto:contact@territoiresvivantsfrance.fr?subject=${subject}`)}>Contacter TVF avec ce numéro</PrimaryButton>
         <PrimaryButton secondary icon="search-outline" onPress={goTracking}>Voir le suivi</PrimaryButton>
         <PrimaryButton onPress={goHome}>Retour à l'accueil</PrimaryButton>
@@ -1778,6 +1814,24 @@ const styles = StyleSheet.create({
   syncBadgeTextReady: { color: colors.white },
   reference: { color: colors.gold, fontSize: 16, fontWeight: "800", textAlign: "center" },
   confirmText: { color: colors.muted, fontSize: 15, lineHeight: 22, fontWeight: "600", textAlign: "center" },
+  transmissionCard: {
+    backgroundColor: colors.white,
+    borderRadius: radius.lg,
+    borderWidth: 1,
+    borderColor: colors.line,
+    padding: 15,
+    marginBottom: 14
+  },
+  transmissionCardReady: { borderColor: "#B7D2BA", backgroundColor: "#F8FBF7" },
+  transmissionCardError: { borderColor: "#E7B7B2", backgroundColor: "#FFF7F5" },
+  transmissionHead: { flexDirection: "row", alignItems: "center", gap: 8, marginBottom: 9 },
+  transmissionTitle: { color: colors.blue, fontWeight: "900", fontSize: 15.2 },
+  transmissionRow: { flexDirection: "row", alignItems: "center", gap: 8, paddingVertical: 3 },
+  transmissionDot: { width: 7, height: 7, borderRadius: 99, backgroundColor: colors.gold },
+  transmissionDotReady: { backgroundColor: colors.green2 },
+  transmissionDotError: { backgroundColor: colors.danger },
+  transmissionText: { flex: 1, color: colors.blue, fontWeight: "600", fontSize: 12.8, lineHeight: 18 },
+  transmissionNote: { color: colors.muted, fontWeight: "600", fontSize: 12, lineHeight: 17, marginTop: 8 },
   timelineCard: {
     backgroundColor: colors.white,
     borderRadius: radius.lg,

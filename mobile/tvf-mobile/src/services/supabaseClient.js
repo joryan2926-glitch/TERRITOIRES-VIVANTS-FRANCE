@@ -14,22 +14,22 @@ export function getSupabaseConfigStatus() {
     return {
       configured: false,
       title: "Mode local",
-      message: "Supabase n'est pas encore configuré pour cette préversion."
+      message: "Les demandes restent preparees sur ce telephone tant que l'envoi TVF OS n'est pas actif."
     };
   }
 
   if (!supabaseUrl.startsWith("https://")) {
     return {
       configured: false,
-      title: "Configuration à vérifier",
-      message: "L'URL Supabase doit commencer par https://."
+      title: "Connexion a verifier",
+      message: "La connexion aux services TVF doit etre verifiee avant l'envoi reel."
     };
   }
 
   return {
     configured: true,
-    title: "Supabase prêt",
-    message: "Les demandes peuvent être envoyées vers la base configurée."
+    title: "Envoi TVF OS actif",
+    message: "Les demandes peuvent etre transmises vers TVF OS."
   };
 }
 export const supabase = hasSupabaseConfig()
