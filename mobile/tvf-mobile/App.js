@@ -961,12 +961,33 @@ function DocumentsScreen() {
   );
 }
 
-function ContactScreen() {
+function ContactScreen({ go }) {
+  const orientationCards = [
+    { title: "J'ai vu un lieu vacant", subtitle: "Créer un signalement terrain.", icon: "alert-circle-outline", target: "signal" },
+    { title: "J'ai des matériaux", subtitle: "Proposer une ressource réutilisable.", icon: "cube-outline", target: "materials" },
+    { title: "Je possède un bien", subtitle: "Présenter un logement, local ou terrain.", icon: "home-outline", target: "property" },
+    { title: "Je veux aider", subtitle: "Proposer du temps ou une compétence.", icon: "people-outline", target: "volunteer" }
+  ];
   return (
     <ScrollView contentContainerStyle={styles.content}>
       <ScreenTitle eyebrow="Contact" title="Joindre Territoires Vivants France">
-        Le contact rapide reste utile lorsqu'un utilisateur ne sait pas quel parcours choisir.
+        Choisissez un canal direct ou le parcours le plus adapté pour que votre demande soit exploitable dans TVF OS.
       </ScreenTitle>
+      <View style={styles.contactChoiceCard}>
+        <Text style={styles.contactChoiceTitle}>Quel est votre besoin ?</Text>
+        <Text style={styles.contactChoiceText}>Le bon parcours permet de créer une demande plus claire dès le premier échange.</Text>
+        <View style={styles.contactChoiceGrid}>
+          {orientationCards.map((item) => (
+            <TouchableOpacity key={item.target} style={styles.contactChoiceItem} onPress={() => go(item.target, { resetDraft: true })} activeOpacity={0.84}>
+              <Ionicons name={item.icon} size={19} color={colors.green} />
+              <View style={styles.contactChoiceCopy}>
+                <Text style={styles.contactChoiceItemTitle}>{item.title}</Text>
+                <Text style={styles.contactChoiceItemText}>{item.subtitle}</Text>
+              </View>
+            </TouchableOpacity>
+          ))}
+        </View>
+      </View>
       <View style={styles.stack}>
         {contactChannels.map((channel) => (
           <Card
@@ -1223,7 +1244,7 @@ function AppShell() {
       case "documents":
         return <DocumentsScreen />;
       case "contact":
-        return <ContactScreen />;
+        return <ContactScreen go={go} />;
       case "confirmation":
         return <ConfirmationScreen lastSubmission={lastSubmission} goHome={() => go("home")} goTracking={() => go("tracking")} />;
       case "home":
@@ -1814,6 +1835,31 @@ const styles = StyleSheet.create({
   syncBadgeTextReady: { color: colors.white },
   reference: { color: colors.gold, fontSize: 16, fontWeight: "800", textAlign: "center" },
   confirmText: { color: colors.muted, fontSize: 15, lineHeight: 22, fontWeight: "600", textAlign: "center" },
+  contactChoiceCard: {
+    backgroundColor: colors.white,
+    borderRadius: radius.lg,
+    borderWidth: 1,
+    borderColor: colors.line,
+    padding: 15,
+    marginBottom: 14,
+    ...shadow
+  },
+  contactChoiceTitle: { color: colors.green, fontWeight: "900", fontSize: 16, marginBottom: 3 },
+  contactChoiceText: { color: colors.muted, fontWeight: "600", fontSize: 12.8, lineHeight: 18, marginBottom: 12 },
+  contactChoiceGrid: { gap: 9 },
+  contactChoiceItem: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10,
+    borderWidth: 1,
+    borderColor: "#CFE0D1",
+    backgroundColor: "#F8FBF7",
+    borderRadius: radius.md,
+    padding: 12
+  },
+  contactChoiceCopy: { flex: 1 },
+  contactChoiceItemTitle: { color: colors.blue, fontWeight: "800", fontSize: 13.5 },
+  contactChoiceItemText: { color: colors.muted, fontWeight: "600", fontSize: 12, lineHeight: 16, marginTop: 2 },
   transmissionCard: {
     backgroundColor: colors.white,
     borderRadius: radius.lg,

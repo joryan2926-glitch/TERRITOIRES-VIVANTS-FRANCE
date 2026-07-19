@@ -195,6 +195,12 @@ export const contactChannels = [
     title: "Instagram",
     subtitle: "@territoiresvivantsfrance",
     url: "https://www.instagram.com/territoiresvivantsfrance?igsh=MW5uajF2MmQ3MW91OQ=="
+  },
+  {
+    icon: "logo-facebook",
+    title: "Facebook",
+    subtitle: "Territoires Vivants France",
+    url: "https://www.facebook.com/share/1Ef3zqWypK/"
   }
 ];
 
