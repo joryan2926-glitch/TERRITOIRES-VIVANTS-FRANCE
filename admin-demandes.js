@@ -474,6 +474,15 @@ function mobileFlowLabel(flow) {
   return mobileFlowLabels[flow] || "Demande mobile";
 }
 
+function mobileCardDetails(item) {
+  return [
+    item.raw_address ? ["Lieu", item.raw_address] : null,
+    item.contact_name ? ["Contact", item.contact_name] : null,
+    item.contact_phone ? ["Tel.", item.contact_phone] : null,
+    item.contact_email ? ["E-mail", item.contact_email] : null,
+  ].filter(Boolean);
+}
+
 function renderMobilePanel(state = "ready") {
   if (!mobilePanelEl) return;
   mobilePanelEl.hidden = false;
@@ -481,11 +490,15 @@ function renderMobilePanel(state = "ready") {
   const count = mobileRequests.length;
   const content = count
     ? `<div class="admin-mobile-list">
-      ${mobileRequests.map((item) => `<article class="admin-mobile-card">
-        <div>
-          <span>${escapeHtml(item.reference || "Mobile")}</span>
+      ${mobileRequests.map((item) => {
+        const details = mobileCardDetails(item);
+        return `<article class="admin-mobile-card">
+        <div class="admin-mobile-main">
+          <span>${escapeHtml(item.reference || "Mobile")} - ${escapeHtml(formatDate(item.created_at))}</span>
           <strong>${escapeHtml(item.title || mobileFlowLabel(item.flow))}</strong>
-          <small>${escapeHtml([mobileFlowLabel(item.flow), item.category_label || item.category, item.raw_address].filter(Boolean).join(" - "))}</small>
+          <small>${escapeHtml([mobileFlowLabel(item.flow), item.category_label || item.category].filter(Boolean).join(" - "))}</small>
+          ${item.description ? `<p>${escapeHtml(item.description)}</p>` : ""}
+          ${details.length ? `<dl>${details.map(([term, value]) => `<div><dt>${escapeHtml(term)}</dt><dd>${escapeHtml(value)}</dd></div>`).join("")}</dl>` : ""}
         </div>
         <div class="admin-mobile-meta">
           <em>${escapeHtml(label(categoryLabels, item.target_category))}</em>
@@ -493,7 +506,8 @@ function renderMobilePanel(state = "ready") {
           ${item.has_photo ? "<em>Photo</em>" : ""}
         </div>
         <button class="btn secondary" type="button" data-mobile-import="${escapeHtml(item.id)}">Importer + dossier</button>
-      </article>`).join("")}
+      </article>`;
+      }).join("")}
     </div>`
     : `<div class="admin-mobile-empty">
       <strong>${isError ? "Lecture mobile indisponible" : "Aucune demande mobile en attente"}</strong>
@@ -1119,6 +1133,9 @@ function bindEvents() {
     }
     const button = event.target.closest("[data-mobile-import]");
     if (!button) return;
+    const item = mobileRequests.find((request) => request.id === button.dataset.mobileImport);
+    const label = item?.reference || item?.title || "cette demande mobile";
+    if (!window.confirm(`Importer ${label} dans TVF OS et creer le dossier d'instruction ?`)) return;
     importMobileRequest(button.dataset.mobileImport, button);
   });
 
