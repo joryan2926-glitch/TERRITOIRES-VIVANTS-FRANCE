@@ -28,6 +28,7 @@ import {
   documentGroups,
   documents,
   fieldLabels,
+  fieldTestPlan,
   flowGuides,
   flowLabels,
   homeActions,
@@ -1013,6 +1014,23 @@ function DocumentsScreen() {
             ))}
           </View>
         ))}
+        <View style={styles.groupCard}>
+          <Text style={styles.groupTitle}>Recette terrain Expo Go</Text>
+          {fieldTestPlan.map((track) => (
+            <View key={track.title} style={styles.testTrackCard}>
+              <View style={styles.testTrackHead}>
+                <Ionicons name={track.icon} size={17} color={colors.green} />
+                <Text style={styles.testTrackTitle}>{track.title}</Text>
+              </View>
+              {track.items.map((item) => (
+                <View key={item} style={styles.groupItemRow}>
+                  <Ionicons name="checkmark-circle-outline" size={16} color={colors.green2} />
+                  <Text style={styles.groupItem}>{item}</Text>
+                </View>
+              ))}
+            </View>
+          ))}
+        </View>
         {documentGroups.map((group) => (
           <View key={group.title} style={styles.groupCard}>
             <Text style={styles.groupTitle}>{group.title}</Text>
@@ -1907,6 +1925,9 @@ const styles = StyleSheet.create({
   groupTitle: { color: colors.green, fontWeight: "800", fontSize: 15, marginBottom: 8 },
   groupItemRow: { flexDirection: "row", alignItems: "flex-start", gap: 8, paddingVertical: 4 },
   groupItem: { flex: 1, color: colors.blue, fontWeight: "600", lineHeight: 19, fontSize: 12.8 },
+  testTrackCard: { borderTopWidth: 1, borderTopColor: colors.line, paddingTop: 10, marginTop: 10 },
+  testTrackHead: { flexDirection: "row", alignItems: "center", gap: 7, marginBottom: 6 },
+  testTrackTitle: { color: colors.green, fontWeight: "900", fontSize: 13.2 },
   documentCard: {
     backgroundColor: colors.white,
     borderRadius: radius.md,

@@ -224,3 +224,25 @@ export const documentGroups = [
     items: ["Fiche contact TVF", "Courrier de premier contact", "Présentation synthétique"]
   }
 ];
+export const fieldTestPlan = [
+  {
+    title: "Signalement",
+    icon: "alert-circle-outline",
+    items: ["Choisir une catégorie", "Ajouter adresse ou GPS", "Joindre 1 à 4 photos", "Envoyer puis ouvrir la fiche"]
+  },
+  {
+    title: "Matériaux",
+    icon: "cube-outline",
+    items: ["Décrire quantité et état", "Indiquer le lieu de stockage", "Ajouter un contact", "Vérifier la remontée TVF OS"]
+  },
+  {
+    title: "Bien proposé",
+    icon: "home-outline",
+    items: ["Renseigner le type de bien", "Préciser l'objectif", "Joindre les photos utiles", "Tester le renvoi si besoin"]
+  },
+  {
+    title: "Bénévolat",
+    icon: "people-outline",
+    items: ["Saisir identité et e-mail", "Indiquer compétences", "Transmettre", "Retrouver la référence"]
+  }
+];
