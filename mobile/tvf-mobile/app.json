@@ -25,10 +25,14 @@
         "ACCESS_FINE_LOCATION",
         "ACCESS_COARSE_LOCATION",
         "READ_MEDIA_IMAGES"
-      ]
+      ],
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/tvf-mobile-logo.png",
+        "backgroundColor": "#F7FAF4"
+      }
     },
     "extra": {
-      "projectPhase": "preversion-terrain-sdk-57"
+      "projectPhase": "version-terrain-tvf-os-sdk-57"
     },
     "plugins": [
       [
@@ -39,6 +43,7 @@
           "backgroundColor": "#F7FAF4"
         }
       ]
-    ]
+    ],
+    "backgroundColor": "#F7FAF4"
   }
 }

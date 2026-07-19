@@ -44,6 +44,13 @@ Cette version est une preversion terrain compatible Expo SDK 57 et Expo Go SDK 5
 - upload photo prepare vers Supabase Storage ;
 - aucune cle `service_role` dans l'application mobile.
 
+## Identite applicative
+
+- Nom affiche : **TVF Mobile**.
+- Slug Expo : `tvf-mobile`.
+- Bundle iOS / package Android : `fr.territoiresvivants.tvfmobile`.
+- Icone et ecran de lancement : `assets/tvf-mobile-logo.png`.
+- Style : portrait, interface claire, fond TVF blanc casse.
 ## Prerequis
 
 - Node.js 20 LTS recommande.
