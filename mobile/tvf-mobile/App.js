@@ -144,6 +144,18 @@ function getCategoryLabel(flow, value) {
   if (!found) return value || "Non renseignée";
   return typeof found === "string" ? found : found.label;
 }
+function isValidEmail(value) {
+  const text = String(value || "").trim();
+  if (!text) return true;
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(text);
+}
+
+function isValidPhone(value) {
+  const text = String(value || "").trim();
+  if (!text) return true;
+  const digits = text.replace(/\D/g, "");
+  return digits.length >= 10;
+}
 
 function validateDraft(flow, draft) {
   const required = requiredFieldsByFlow[flow] || [];
@@ -151,6 +163,8 @@ function validateDraft(flow, draft) {
   if (["materials", "property"].includes(flow) && !draft.email.trim() && !draft.phone.trim()) {
     missing.push("contactMethod");
   }
+  if (!isValidEmail(draft.email)) missing.push("emailFormat");
+  if (!isValidPhone(draft.phone)) missing.push("phoneFormat");
   return [...new Set(missing)];
 }
 
