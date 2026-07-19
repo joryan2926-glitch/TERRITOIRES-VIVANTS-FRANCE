@@ -490,7 +490,8 @@ function ContactFields({ draft, setDraft, required }) {
         </View>
       </View>
       <Field required={required} label="Nom et prénom" value={draft.contactName} onChangeText={(contactName) => setDraft({ ...draft, contactName })} placeholder="Votre identité" />
-      <Field required={required} label="E-mail" value={draft.email} onChangeText={(email) => setDraft({ ...draft, email })} placeholder="exemple@mail.fr" keyboardType="email-address" autoCapitalize="none" />
+      {required ? <Text style={styles.contactRequiredNote}>Indiquez au moins un moyen de contact : e-mail ou téléphone.</Text> : null}
+      <Field label="E-mail" value={draft.email} onChangeText={(email) => setDraft({ ...draft, email })} placeholder="exemple@mail.fr" keyboardType="email-address" autoCapitalize="none" />
       <Field label="Téléphone" value={draft.phone} onChangeText={(phone) => setDraft({ ...draft, phone })} placeholder="Votre numéro" keyboardType="phone-pad" />
     </View>
   );
@@ -1575,6 +1576,7 @@ const styles = StyleSheet.create({
   contactHeaderText: { flex: 1 },
   contactTitle: { color: colors.blue, fontWeight: "800", fontSize: 15 },
   contactHint: { color: colors.muted, fontWeight: "600", fontSize: 12.5, marginTop: 2 },
+  contactRequiredNote: { color: colors.green, fontWeight: "800", fontSize: 12.4, lineHeight: 18, marginBottom: 10 },
   completionCard: {
     backgroundColor: colors.white,
     borderRadius: radius.md,
