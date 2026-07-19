@@ -235,10 +235,13 @@ function Card({ icon, title, subtitle, onPress, primary }) {
   );
 }
 
-function Field({ label, value = "", onChangeText = () => {}, placeholder, multiline, keyboardType, autoCapitalize = "sentences" }) {
+function Field({ label, value = "", onChangeText = () => {}, placeholder, multiline, keyboardType, autoCapitalize = "sentences", required, hint }) {
   return (
     <View style={styles.fieldGroup}>
-      <Text style={styles.label}>{label}</Text>
+      <View style={styles.labelRow}>
+        <Text style={styles.label}>{label}</Text>
+        {required ? <Text style={styles.requiredTag}>requis</Text> : null}
+      </View>
       <TextInput
         style={[styles.input, multiline && styles.textArea]}
         value={value}
@@ -249,10 +252,10 @@ function Field({ label, value = "", onChangeText = () => {}, placeholder, multil
         keyboardType={keyboardType}
         autoCapitalize={autoCapitalize}
       />
+      {hint ? <Text style={styles.fieldHint}>{hint}</Text> : null}
     </View>
   );
 }
-
 function PillPicker({ items, selected, onSelect }) {
   return (
     <View style={styles.pillGrid}>
@@ -386,14 +389,19 @@ function ErrorBox({ missing }) {
   if (!missing.length) return null;
   return (
     <View style={styles.errorBox}>
-      <Ionicons name="alert-circle-outline" size={20} color={colors.danger} />
-      <Text style={styles.errorText}>
-        Complétez : {missing.map((field) => fieldLabels[field] || field).join(", ")}.
-      </Text>
+      <View style={styles.errorHeader}>
+        <Ionicons name="alert-circle-outline" size={20} color={colors.danger} />
+        <Text style={styles.errorTitle}>Informations à compléter</Text>
+      </View>
+      {missing.map((field) => (
+        <View key={field} style={styles.errorRow}>
+          <View style={styles.errorDot} />
+          <Text style={styles.errorText}>{fieldLabels[field] || field}</Text>
+        </View>
+      ))}
     </View>
   );
 }
-
 function Notice({ children }) {
   return (
     <View style={styles.notice}>
@@ -481,8 +489,8 @@ function ContactFields({ draft, setDraft, required }) {
           <Text style={styles.contactHint}>{required ? "Nécessaires pour traiter la demande." : "Facultatif, mais utile si TVF doit recontacter."}</Text>
         </View>
       </View>
-      <Field label="Nom et prénom" value={draft.contactName} onChangeText={(contactName) => setDraft({ ...draft, contactName })} placeholder="Votre identité" />
-      <Field label="E-mail" value={draft.email} onChangeText={(email) => setDraft({ ...draft, email })} placeholder="exemple@mail.fr" keyboardType="email-address" autoCapitalize="none" />
+      <Field required={required} label="Nom et prénom" value={draft.contactName} onChangeText={(contactName) => setDraft({ ...draft, contactName })} placeholder="Votre identité" />
+      <Field required={required} label="E-mail" value={draft.email} onChangeText={(email) => setDraft({ ...draft, email })} placeholder="exemple@mail.fr" keyboardType="email-address" autoCapitalize="none" />
       <Field label="Téléphone" value={draft.phone} onChangeText={(phone) => setDraft({ ...draft, phone })} placeholder="Votre numéro" keyboardType="phone-pad" />
     </View>
   );
@@ -598,8 +606,8 @@ function SignalScreen({ draft, setDraft, submit, missing, submitting }) {
       <PillPicker items={signalCategories} selected={draft.category} onSelect={(category) => setDraft({ ...draft, category })} />
       <MediaCapture draft={draft} setDraft={setDraft} />
       <LocationCapture draft={draft} setDraft={setDraft} />
-      <Field label="Adresse ou repère" value={draft.address} onChangeText={(address) => setDraft({ ...draft, address })} placeholder="Rue, commune, quartier..." />
-      <Field label="Description courte" value={draft.description} onChangeText={(description) => setDraft({ ...draft, description })} placeholder="Que faut-il savoir ?" multiline />
+      <Field required hint="Indiquez une adresse complete ou un repere assez precis pour localiser le lieu." label="Adresse ou repère" value={draft.address} onChangeText={(address) => setDraft({ ...draft, address })} placeholder="Rue, commune, quartier..." />
+      <Field required hint="Decrivez uniquement des faits observables : etat, acces visible, risque eventuel." label="Description courte" value={draft.description} onChangeText={(description) => setDraft({ ...draft, description })} placeholder="Que faut-il savoir ?" multiline />
       <ContactFields draft={draft} setDraft={setDraft} />
       <Notice>Ne prenez pas de photo en entrant dans une propriété privée sans autorisation.</Notice>
       <Checklist flow="signal" />
@@ -619,9 +627,9 @@ function MaterialsScreen({ draft, setDraft, submit, missing, submitting }) {
       </ScreenTitle>
       <FlowGuide flow="materials" />
       <PillPicker items={materialCategories} selected={draft.category} onSelect={(category) => setDraft({ ...draft, category })} />
-      <Field label="Quantité / dimensions" value={draft.quantity} onChangeText={(quantity) => setDraft({ ...draft, quantity })} placeholder="Ex. 12 portes, 30 m² de carrelage..." />
-      <Field label="État général" value={draft.condition} onChangeText={(condition) => setDraft({ ...draft, condition })} placeholder="Neuf, bon état, à vérifier..." />
-      <Field label="Lieu de stockage" value={draft.address} onChangeText={(address) => setDraft({ ...draft, address })} placeholder="Adresse ou commune" />
+      <Field required hint="Donnez une estimation simple : nombre, surface, volume ou dimensions." label="Quantité / dimensions" value={draft.quantity} onChangeText={(quantity) => setDraft({ ...draft, quantity })} placeholder="Ex. 12 portes, 30 m² de carrelage..." />
+      <Field required hint="Precisez si la ressource est neuve, reutilisable, a verifier ou a deposer." label="État général" value={draft.condition} onChangeText={(condition) => setDraft({ ...draft, condition })} placeholder="Neuf, bon état, à vérifier..." />
+      <Field required hint="TVF doit savoir ou se trouvent les materiaux avant toute orientation." label="Lieu de stockage" value={draft.address} onChangeText={(address) => setDraft({ ...draft, address })} placeholder="Adresse ou commune" />
       <LocationCapture draft={draft} setDraft={setDraft} />
       <Field label="Date limite de disponibilité" value={draft.availability} onChangeText={(availability) => setDraft({ ...draft, availability })} placeholder="Ex. disponible jusqu'au..." />
       <MediaCapture draft={draft} setDraft={setDraft} label="Ajouter des photos des matériaux" />
@@ -643,10 +651,10 @@ function PropertyScreen({ draft, setDraft, submit, missing, submitting }) {
       </ScreenTitle>
       <FlowGuide flow="property" />
       <PillPicker items={propertyTypes} selected={draft.category} onSelect={(category) => setDraft({ ...draft, category })} />
-      <Field label="Adresse du bien" value={draft.address} onChangeText={(address) => setDraft({ ...draft, address })} placeholder="Adresse, commune..." />
+      <Field required hint="Adresse utile pour rattacher la proposition au territoire et preparer la pre-etude." label="Adresse du bien" value={draft.address} onChangeText={(address) => setDraft({ ...draft, address })} placeholder="Adresse, commune..." />
       <LocationCapture draft={draft} setDraft={setDraft} />
-      <Field label="État général" value={draft.condition} onChangeText={(condition) => setDraft({ ...draft, condition })} placeholder="Vacant, à rénover, inutilisé..." />
-      <Field label="Objectif recherché" value={draft.objective} onChangeText={(objective) => setDraft({ ...draft, objective })} placeholder="Rendez-vous, étude, orientation..." multiline />
+      <Field required hint="Indiquez etat visible, niveau usage et limites connues." label="État général" value={draft.condition} onChangeText={(condition) => setDraft({ ...draft, condition })} placeholder="Vacant, à rénover, inutilisé..." />
+      <Field required hint="Expliquez votre attente : rendez-vous, orientation, pre-etude ou mise en relation." label="Objectif recherché" value={draft.objective} onChangeText={(objective) => setDraft({ ...draft, objective })} placeholder="Rendez-vous, étude, orientation..." multiline />
       <MediaCapture draft={draft} setDraft={setDraft} label="Ajouter des photos du bien" />
       <ContactFields draft={draft} setDraft={setDraft} required />
       <Notice>TVF peut demander la liste des pièces à fournir avant toute suite opérationnelle.</Notice>
@@ -666,10 +674,10 @@ function VolunteerScreen({ draft, setDraft, submit, missing, submitting }) {
         TVF pourra recontacter les personnes selon les besoins terrain et administratifs.
       </ScreenTitle>
       <FlowGuide flow="volunteer" />
-      <Field label="Nom et prénom" value={draft.contactName} onChangeText={(contactName) => setDraft({ ...draft, contactName })} placeholder="Votre identité" />
-      <Field label="E-mail" value={draft.email} onChangeText={(email) => setDraft({ ...draft, email })} placeholder="exemple@mail.fr" keyboardType="email-address" autoCapitalize="none" />
+      <Field required label="Nom et prénom" value={draft.contactName} onChangeText={(contactName) => setDraft({ ...draft, contactName })} placeholder="Votre identité" />
+      <Field required label="E-mail" value={draft.email} onChangeText={(email) => setDraft({ ...draft, email })} placeholder="exemple@mail.fr" keyboardType="email-address" autoCapitalize="none" />
       <Field label="Téléphone" value={draft.phone} onChangeText={(phone) => setDraft({ ...draft, phone })} placeholder="Votre numéro" keyboardType="phone-pad" />
-      <Field label="Compétences / disponibilités" value={draft.skills} onChangeText={(skills) => setDraft({ ...draft, skills })} placeholder="Repérage, logistique, administration, communication..." multiline />
+      <Field required hint="Indiquez vos disponibilites, competences ou le type aide possible." label="Compétences / disponibilités" value={draft.skills} onChangeText={(skills) => setDraft({ ...draft, skills })} placeholder="Repérage, logistique, administration, communication..." multiline />
       <Checklist flow="volunteer" />
       <CompletionMeter flow="volunteer" draft={draft} />
       <ErrorBox missing={missing} />
@@ -1408,7 +1416,9 @@ const styles = StyleSheet.create({
   cardSubtitle: { color: colors.muted, fontSize: 12.5, lineHeight: 17, fontWeight: "600" },
   cardSubtitlePrimary: { color: "rgba(255,255,255,0.84)" },
   fieldGroup: { marginBottom: 12 },
-  label: { color: colors.green, fontWeight: "800", marginBottom: 6, fontSize: 13 },
+  labelRow: { flexDirection: "row", alignItems: "center", justifyContent: "space-between", gap: 10, marginBottom: 6 },
+  label: { flex: 1, color: colors.green, fontWeight: "800", fontSize: 13 },
+  requiredTag: { color: colors.danger, backgroundColor: "#FFF1EF", borderRadius: 999, paddingHorizontal: 8, paddingVertical: 3, fontSize: 10.5, fontWeight: "900", textTransform: "uppercase" },
   input: {
     backgroundColor: colors.white,
     borderWidth: 1,
@@ -1422,6 +1432,7 @@ const styles = StyleSheet.create({
     fontSize: 14.5
   },
   textArea: { minHeight: 96, textAlignVertical: "top" },
+  fieldHint: { color: colors.muted, fontSize: 12, fontWeight: "600", lineHeight: 17, marginTop: 6 },
   pillGrid: { flexDirection: "row", flexWrap: "wrap", gap: 10, marginBottom: 14 },
   pill: {
     flexDirection: "row",
@@ -1460,7 +1471,8 @@ const styles = StyleSheet.create({
   },
   guideNumberText: { color: colors.white, fontSize: 12, fontWeight: "800" },
   guideText: { color: colors.blue, fontSize: 12.5, fontWeight: "800" },
-  mediaWrap: { marginBottom: 2 },  photoBox: {
+  mediaWrap: { marginBottom: 2 },
+  photoBox: {
     minHeight: 132,
     backgroundColor: colors.white,
     borderWidth: 1.2,
@@ -1553,7 +1565,12 @@ const styles = StyleSheet.create({
     marginBottom: 14
   },
   previewTitle: { color: colors.gold, fontWeight: "800", fontSize: 13.5, marginBottom: 6, textTransform: "uppercase", letterSpacing: 0.4 },
-  previewLine: { color: colors.blue, fontWeight: "600", lineHeight: 21, fontSize: 13 },  notice: {
+  previewLine: { color: colors.blue, fontWeight: "600", lineHeight: 21, fontSize: 13 },
+  errorHeader: { flexDirection: "row", alignItems: "center", gap: 8, marginBottom: 8 },
+  errorTitle: { color: colors.danger, fontWeight: "900", fontSize: 14 },
+  errorRow: { flexDirection: "row", alignItems: "center", gap: 8, paddingVertical: 2 },
+  errorDot: { width: 6, height: 6, borderRadius: 99, backgroundColor: colors.danger },
+  notice: {
     flexDirection: "row",
     gap: 10,
     backgroundColor: colors.soft,
