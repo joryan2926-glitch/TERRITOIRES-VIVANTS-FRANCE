@@ -72,7 +72,7 @@ export async function submitMobileRequest(payload) {
     return {
       ok: true,
       mode: "local-preview",
-      message: "Demande preparee localement. Relancez Expo avec la configuration Supabase pour l'enregistrement reel."
+      message: "Demande preparee sur ce telephone. Activez l'envoi TVF OS pour la transmettre."
     };
   }
 
@@ -101,16 +101,16 @@ export async function submitMobileRequest(payload) {
       ok: true,
       mode: "supabase",
       message: upload.warning
-        ? "Demande enregistree dans Supabase. Photo non transmise : elle pourra etre ajoutee depuis TVF OS."
+        ? "Demande transmise vers TVF OS. Photo non transmise : elle pourra etre ajoutee ensuite."
         : upload.path
-          ? "Demande et photo enregistrees dans Supabase."
-          : "Demande enregistree dans Supabase."
+          ? "Demande et photo transmises vers TVF OS."
+          : "Demande transmise vers TVF OS."
     };
   } catch (error) {
     return {
       ok: false,
       mode: "supabase-error",
-      message: error.message || "Erreur d'enregistrement Supabase."
+      message: error.message || "Erreur de transmission vers TVF OS."
     };
   }
 }

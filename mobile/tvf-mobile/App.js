@@ -693,7 +693,7 @@ function RequestsScreen({ submissionHistory = [], goTracking, openRequest }) {
   const shareReference = async (item) => {
     const message = `Demande TVF ${item.reference}
 Type : ${item.label || "Demande TVF"}
-Transmission : ${item.syncMode === "supabase" ? "transmise" : "à vérifier"}`;
+Transmission : ${item.syncMode === "supabase" ? "transmise" : "à finaliser"}`;
     try {
       await Share.share({ message });
     } catch {
@@ -709,7 +709,7 @@ Transmission : ${item.syncMode === "supabase" ? "transmise" : "à vérifier"}`;
       <View style={styles.quickStats}>
         <View style={styles.statMini}><Text style={styles.statMiniValue}>{submissionHistory.length}</Text><Text style={styles.statMiniLabel}>demandes</Text></View>
         <View style={styles.statMini}><Text style={styles.statMiniValue}>{sentCount}</Text><Text style={styles.statMiniLabel}>transmises</Text></View>
-        <View style={styles.statMini}><Text style={styles.statMiniValue}>{pendingCount}</Text><Text style={styles.statMiniLabel}>à vérifier</Text></View>
+        <View style={styles.statMini}><Text style={styles.statMiniValue}>{pendingCount}</Text><Text style={styles.statMiniLabel}>à finaliser</Text></View>
       </View>
       {submissionHistory.length ? (
         <View style={styles.stack}>
@@ -724,7 +724,7 @@ Transmission : ${item.syncMode === "supabase" ? "transmise" : "à vérifier"}`;
                   <Text style={styles.requestReference}>{item.reference}</Text>
                   <Text style={styles.requestLabel}>{item.label || "Demande TVF"}</Text>
                   <Text style={styles.requestMeta}>{item.categoryLabel || item.category || "Catégorie non renseignée"} · {item.address || "Localisation non renseignée"}</Text>
-                  <Text style={[styles.requestSync, isSent && styles.requestSyncReady]}>{isSent ? "Transmise dans TVF OS" : "Transmission à vérifier"}</Text>
+                  <Text style={[styles.requestSync, isSent && styles.requestSyncReady]}>{isSent ? "Transmise dans TVF OS" : "Transmission à finaliser"}</Text>
                   <View style={styles.requestActionsRow}>
                     <TouchableOpacity style={styles.requestShareButton} onPress={() => openRequest(item)} activeOpacity={0.82}>
                       <Ionicons name="eye-outline" size={16} color={colors.green} />
@@ -793,7 +793,7 @@ function RequestDetailScreen({ request, goBack, goTracking }) {
       </ScreenTitle>
       <View style={[styles.syncBadge, isSent && styles.syncBadgeReady, !isSent && styles.syncBadgeError]}>
         <Ionicons name={isSent ? "cloud-done-outline" : "warning-outline"} size={16} color={colors.white} />
-        <Text style={styles.syncBadgeTextReady}>{isSent ? "Transmise dans TVF OS" : "Transmission à vérifier"}</Text>
+        <Text style={styles.syncBadgeTextReady}>{isSent ? "Transmise dans TVF OS" : "Transmission à finaliser"}</Text>
       </View>
       <View style={styles.summaryCard}>
         <Text style={styles.summaryTitle}>Informations principales</Text>
@@ -810,7 +810,7 @@ function RequestDetailScreen({ request, goBack, goTracking }) {
       </View>
       <View style={styles.summaryCard}>
         <Text style={styles.summaryTitle}>Message de transmission</Text>
-        <Text style={styles.summaryLine}>{request.syncMessage || "Aucun message technique enregistré."}</Text>
+        <Text style={styles.summaryLine}>{request.syncMessage || "Aucun message complémentaire enregistré."}</Text>
       </View>
       <RequestActionPlan request={request} />
       <PrimaryButton secondary icon="share-social-outline" onPress={() => Share.share({ message: `Demande TVF ${request.reference}` })}>Partager la référence</PrimaryButton>
@@ -843,7 +843,7 @@ function TrackingScreen({ lastSubmission, submissionHistory = [], openRequest })
           <Text style={styles.trackingTitle}>Dernière demande sur ce téléphone</Text>
           <Text style={styles.summaryLine}>Numéro : {lastSubmission.reference}</Text>
           <Text style={styles.summaryLine}>Type : {lastSubmission.label}</Text>
-          <Text style={styles.summaryLine}>Transmission : {lastSubmission.syncMode === "supabase" ? "enregistrée dans Supabase" : "locale ou à vérifier"}</Text>
+          <Text style={styles.summaryLine}>Transmission : {lastSubmission.syncMode === "supabase" ? "transmise vers TVF OS" : "locale ou à finaliser"}</Text>
         </View>
       ) : null}
       {visibleHistory.length ? (
@@ -854,7 +854,7 @@ function TrackingScreen({ lastSubmission, submissionHistory = [], openRequest })
               <View style={styles.historyDot} />
               <View style={styles.historyText}>
                 <Text style={styles.historyReference}>{item.reference}</Text>
-                <Text style={styles.historyMeta}>{item.label || "Demande TVF"} · {item.syncMode === "supabase" ? "transmise" : "à vérifier"}</Text>
+                <Text style={styles.historyMeta}>{item.label || "Demande TVF"} · {item.syncMode === "supabase" ? "transmise" : "à finaliser"}</Text>
               </View>
             </View>
           ))}
@@ -1007,7 +1007,7 @@ function ContactScreen({ go }) {
 function TransmissionStatusCard({ data, isSent, isError }) {
   const rows = isSent
     ? [
-        "La demande est enregistrée dans Supabase.",
+        "La demande est transmise vers TVF OS.",
         "Elle peut être reprise dans TVF OS.",
         "Conservez la référence pour tout échange."
       ]
@@ -1044,8 +1044,8 @@ function ConfirmationScreen({ lastSubmission, goHome, goTracking }) {
   const subject = encodeURIComponent(`Demande TVF ${data.reference || ""}`.trim());
   const isSent = data.syncMode === "supabase";
   const isError = data.syncMode === "supabase-error";
-  const statusTitle = isSent ? "Demande transmise" : isError ? "Transmission à vérifier" : "Demande préparée";
-  const statusLabel = isSent ? "Supabase confirmé" : isError ? "Non transmis" : "Mode local";
+  const statusTitle = isSent ? "Demande transmise" : isError ? "Transmission à finaliser" : "Demande préparée";
+  const statusLabel = isSent ? "Envoi TVF OS confirmé" : isError ? "Non transmis" : "Mode local";
   const statusIcon = isSent ? "cloud-done-outline" : isError ? "warning-outline" : "phone-portrait-outline";
   return (
     <ScrollView contentContainerStyle={styles.content}>
@@ -1068,7 +1068,7 @@ function ConfirmationScreen({ lastSubmission, goHome, goTracking }) {
           <Text style={styles.summaryLine}>Localisation : {data.address || "À compléter"}</Text>
           <Text style={styles.summaryLine}>Photo : {data.hasPhoto ? "jointe" : "non jointe"}</Text>
           <Text style={styles.summaryLine}>GPS : {data.hasCoordinates ? "enregistré" : "non renseigné"}</Text>
-          <Text style={styles.summaryLine}>Transmission : {isSent ? "enregistrée dans Supabase" : isError ? "à renvoyer" : "locale uniquement"}</Text>
+          <Text style={styles.summaryLine}>Transmission : {isSent ? "transmise vers TVF OS" : isError ? "à renvoyer" : "locale uniquement"}</Text>
         </View>
         <NextStepsTimeline />
 

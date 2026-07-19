@@ -12,9 +12,10 @@ L'application permet de preparer les parcours suivants :
 - proposer des materiaux reutilisables ;
 - proposer un bien dormant ;
 - transmettre une candidature benevole ;
-- consulter les documents utiles ;
+- consulter les documents utiles et les pieces a preparer ;
 - contacter TVF par les canaux officiels ;
-- preparer le suivi d'une demande rattachee a TVF OS.
+- preparer le suivi d'une demande rattachee a TVF OS ;
+- partager une reference de demande par e-mail, message ou WhatsApp selon le telephone.
 
 ## Parcours disponibles
 
@@ -38,7 +39,8 @@ Cette version est une preversion terrain compatible Expo SDK 57 et Expo Go SDK 5
 - recapitulatif de demande ;
 - prise de photo via Expo Image Picker ;
 - geolocalisation via Expo Location ;
-- connexion Supabase preparee avec fallback local si les variables publiques ne sont pas renseignees ;
+- connexion Supabase active lorsque les variables publiques Expo sont renseignees ;
+- fallback local lisible : une demande non transmise reste identifiable avec sa reference ;
 - upload photo prepare vers Supabase Storage ;
 - aucune cle `service_role` dans l'application mobile.
 
@@ -133,7 +135,9 @@ supabase/verify-tvf-mobile-requests.sql
 - stockage latitude/longitude dans le dossier de demande ;
 - notification e-mail vers TVF ;
 - accuse de reception vers l'utilisateur ;
-- suivi du statut depuis TVF OS.
+- suivi du statut depuis TVF OS ;
+- orientation depuis l'ecran Contact vers le bon parcours de demande ;
+- bibliotheque Documents plus complete et organisee par besoin.
 
 ## Points a valider avant publication native
 
