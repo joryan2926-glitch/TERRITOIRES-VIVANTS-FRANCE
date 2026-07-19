@@ -515,16 +515,30 @@ function ConfigBanner() {
   );
 }
 function HomeScreen({ go, draftRestored, dismissDraft }) {
+  const fieldActions = homeActions.filter((action) => ["signal", "materials", "property", "volunteer"].includes(action.key));
+  const supportActions = homeActions.filter((action) => ["requests", "tracking"].includes(action.key));
+
+  const renderAction = (action) => (
+    <Card
+      key={action.key}
+      icon={action.icon}
+      title={action.title}
+      subtitle={action.subtitle}
+      primary={action.primary}
+      onPress={() => go(action.key, { resetDraft: ["signal", "materials", "property", "volunteer"].includes(action.key) })}
+    />
+  );
+
   return (
     <ScrollView contentContainerStyle={styles.content}>
-      <ScreenTitle eyebrow="Préversion terrain" title="Une application terrain simple pour TVF">
-        Signaler un lieu, proposer des matériaux ou déposer une première demande en quelques étapes.
+      <ScreenTitle eyebrow="Préversion terrain" title="Signaler, localiser, transmettre à TVF">
+        TVF Mobile sert à créer une première demande exploitable : lieu vacant, matériaux disponibles, bien proposé ou candidature bénévole.
       </ScreenTitle>
       <View style={styles.logoPanel}>
         <Image source={logo} style={styles.logoLarge} />
         <View style={styles.logoCopy}>
           <Text style={styles.logoPanelTitle}>Pensée pour le terrain</Text>
-          <Text style={styles.logoPanelText}>Chaque saisie doit pouvoir devenir une demande exploitable dans TVF OS.</Text>
+          <Text style={styles.logoPanelText}>Chaque saisie crée une référence, conserve une trace locale et peut remonter dans TVF OS.</Text>
         </View>
       </View>
       <ConfigBanner />
@@ -547,26 +561,33 @@ function HomeScreen({ go, draftRestored, dismissDraft }) {
         </View>
       ) : null}
       <View style={styles.quickStats}>
-        <View style={styles.statMini}><Text style={styles.statMiniValue}>4</Text><Text style={styles.statMiniLabel}>parcours clés</Text></View>
-        <View style={styles.statMini}><Text style={styles.statMiniValue}>1</Text><Text style={styles.statMiniLabel}>suivi TVF OS</Text></View>
-        <View style={styles.statMini}><Text style={styles.statMiniValue}>0</Text><Text style={styles.statMiniLabel}>donnée fictive</Text></View>
+        <View style={styles.statMini}><Text style={styles.statMiniValue}>1</Text><Text style={styles.statMiniLabel}>référence TVF</Text></View>
+        <View style={styles.statMini}><Text style={styles.statMiniValue}>3</Text><Text style={styles.statMiniLabel}>preuves utiles</Text></View>
+        <View style={styles.statMini}><Text style={styles.statMiniValue}>OS</Text><Text style={styles.statMiniLabel}>suivi interne</Text></View>
       </View>
-      <View style={styles.stack}>
-        {homeActions.map((action) => (
-          <Card
-            key={action.key}
-            icon={action.icon}
-            title={action.title}
-            subtitle={action.subtitle}
-            primary={action.primary}
-            onPress={() => go(action.key, { resetDraft: ["signal", "materials", "property", "volunteer"].includes(action.key) })}
-          />
-        ))}
+      <View style={styles.homeFlowCard}>
+        <View style={styles.homeFlowStep}><Text style={styles.homeFlowNumber}>1</Text><Text style={styles.homeFlowText}>Choisir le bon parcours</Text></View>
+        <View style={styles.homeFlowStep}><Text style={styles.homeFlowNumber}>2</Text><Text style={styles.homeFlowText}>Ajouter adresse, photo et contact</Text></View>
+        <View style={styles.homeFlowStep}><Text style={styles.homeFlowNumber}>3</Text><Text style={styles.homeFlowText}>Transmettre vers TVF OS</Text></View>
+      </View>
+      <View style={styles.actionSection}>
+        <View style={styles.actionSectionHeader}>
+          <Text style={styles.actionSectionTitle}>Agir sur le terrain</Text>
+          <Text style={styles.actionSectionSubtitle}>Créer une demande nouvelle.</Text>
+        </View>
+        <View style={styles.stack}>{fieldActions.map(renderAction)}</View>
+      </View>
+      <View style={styles.actionSection}>
+        <View style={styles.actionSectionHeader}>
+          <Text style={styles.actionSectionTitle}>Suivre et préparer</Text>
+          <Text style={styles.actionSectionSubtitle}>Retrouver une référence ou préparer les pièces utiles.</Text>
+        </View>
+        <View style={styles.stack}>{supportActions.map(renderAction)}</View>
+        <Card icon="document-text-outline" title="Documents utiles" subtitle="Listes de pièces et supports de préparation." onPress={() => go("documents")} />
       </View>
     </ScrollView>
   );
 }
-
 function SignalScreen({ draft, setDraft, submit, missing, submitting }) {
   return (
     <ScrollView contentContainerStyle={styles.content}>
@@ -1253,6 +1274,30 @@ const styles = StyleSheet.create({
   },
   statMiniValue: { color: colors.green, fontSize: 20, fontWeight: "800" },
   statMiniLabel: { color: colors.muted, fontSize: 11.5, fontWeight: "700", marginTop: 2 },
+  homeFlowCard: {
+    backgroundColor: colors.green,
+    borderRadius: radius.lg,
+    padding: 14,
+    marginBottom: 16,
+    gap: 10,
+    ...shadow
+  },
+  homeFlowStep: { flexDirection: "row", alignItems: "center", gap: 10 },
+  homeFlowNumber: {
+    width: 28,
+    height: 28,
+    borderRadius: 99,
+    backgroundColor: colors.white,
+    color: colors.green,
+    fontWeight: "900",
+    textAlign: "center",
+    lineHeight: 28
+  },
+  homeFlowText: { flex: 1, color: colors.white, fontWeight: "700", fontSize: 13.2, lineHeight: 18 },
+  actionSection: { marginTop: 4, marginBottom: 18 },
+  actionSectionHeader: { marginBottom: 10 },
+  actionSectionTitle: { color: colors.blue, fontSize: 18, fontWeight: "900" },
+  actionSectionSubtitle: { color: colors.muted, fontSize: 12.8, fontWeight: "600", marginTop: 2 },
   stack: { gap: 12 },
   card: {
     backgroundColor: colors.white,
