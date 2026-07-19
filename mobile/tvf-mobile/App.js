@@ -1241,6 +1241,8 @@ function AppShell() {
         return <RequestsScreen submissionHistory={submissionHistory} goTracking={() => go("tracking")} openRequest={openRequest} />;
       case "tracking":
         return <TrackingScreen lastSubmission={lastSubmission} submissionHistory={submissionHistory} openRequest={openRequest} />;
+      case "request-detail":
+        return <RequestDetailScreen request={selectedRequest} goBack={() => go("requests")} goTracking={() => go("tracking")} />;
       case "documents":
         return <DocumentsScreen />;
       case "contact":
@@ -1391,7 +1393,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.soft,
     marginLeft: 53
   },
-  draftClearText: { color: colors.muted, fontWeight: "800", fontSize: 12.5 },'
+  draftClearText: { color: colors.muted, fontWeight: "800", fontSize: 12.5 },
   draftBannerIcon: {
     width: 42,
     height: 42,

@@ -1,5 +1,6 @@
 const fs = require("fs");
 const path = require("path");
+const babel = require("@babel/core");
 
 const root = path.resolve(__dirname, "..");
 const repoRoot = path.resolve(root, "..", "..");
@@ -60,7 +61,19 @@ for (const dependency of [
   }
 }
 
-const appSource = fs.readFileSync(path.join(root, "App.js"), "utf8");
+const appPath = path.join(root, "App.js");
+const appSource = fs.readFileSync(appPath, "utf8");
+try {
+  babel.transformSync(appSource, {
+    filename: appPath,
+    presets: ["babel-preset-expo"],
+    babelrc: false,
+    configFile: false
+  });
+} catch (error) {
+  console.error(`INVALID App.js syntax ${error.message}`);
+  ok = false;
+}
 for (const token of [
   "buildRequestPayload",
   "submitMobileRequest",
