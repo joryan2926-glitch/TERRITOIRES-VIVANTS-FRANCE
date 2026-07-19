@@ -74,19 +74,23 @@ export const propertyTypes = [
 export const documents = [
   {
     title: "Pièces à fournir - particuliers",
-    subtitle: "Checklist pour préparer un dossier propriétaire."
+    subtitle: "Checklist pour préparer un dossier propriétaire.",
+    url: "https://www.territoiresvivantsfrance.fr/documents.html"
   },
   {
     title: "Brochure propriétaires",
-    subtitle: "Biens dormants, usages possibles et conventions."
+    subtitle: "Biens dormants, usages possibles et conventions.",
+    url: "https://www.territoiresvivantsfrance.fr/documents.html"
   },
   {
     title: "Brochure matériaux",
-    subtitle: "Critères, ressources et procédure de qualification."
+    subtitle: "Critères, ressources et procédure de qualification.",
+    url: "https://www.territoiresvivantsfrance.fr/documents.html"
   },
   {
     title: "Fiche contact TVF",
-    subtitle: "Coordonnées officielles et premiers échanges."
+    subtitle: "Coordonnées officielles et premiers échanges.",
+    url: "https://www.territoiresvivantsfrance.fr/contact.html"
   }
 ];
 

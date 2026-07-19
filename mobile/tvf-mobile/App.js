@@ -156,6 +156,20 @@ function isValidPhone(value) {
   const digits = text.replace(/\D/g, "");
   return digits.length >= 10;
 }
+function buildMapsUrl(request) {
+  const payloadLocation = request?.payload?.location || {};
+  const latitude = request?.latitude || payloadLocation.latitude;
+  const longitude = request?.longitude || payloadLocation.longitude;
+  if (latitude && longitude) return `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
+
+  const address = request?.address || payloadLocation.rawAddress;
+  if (address) return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`;
+  return null;
+}
+
+function requestCanBeRetried(request) {
+  return Boolean(request?.payload && request?.syncMode !== "supabase");
+}
 
 function validateDraft(flow, draft) {
   const required = requiredFieldsByFlow[flow] || [];
@@ -701,7 +715,7 @@ function VolunteerScreen({ draft, setDraft, submit, missing, submitting }) {
   );
 }
 
-function RequestsScreen({ submissionHistory = [], goTracking, openRequest }) {
+function RequestsScreen({ submissionHistory = [], goTracking, openRequest, retryRequest, retryingReference }) {
   const sentCount = submissionHistory.filter((item) => item.syncMode === "supabase").length;
   const pendingCount = submissionHistory.length - sentCount;
 
@@ -749,6 +763,12 @@ Transmission : ${item.syncMode === "supabase" ? "transmise" : "à finaliser"}`;
                       <Ionicons name="share-social-outline" size={16} color={colors.green} />
                       <Text style={styles.requestShareText}>Partager la référence</Text>
                     </TouchableOpacity>
+                    {!isSent ? (
+                      <TouchableOpacity style={styles.requestShareButton} onPress={() => retryRequest(item)} activeOpacity={0.82}>
+                        <Ionicons name="cloud-upload-outline" size={16} color={colors.green} />
+                        <Text style={styles.requestShareText}>{retryingReference === item.reference ? "Envoi..." : "Renvoyer"}</Text>
+                      </TouchableOpacity>
+                    ) : null}
                   </View>
                 </View>
               </View>
@@ -788,7 +808,7 @@ function RequestActionPlan({ request }) {
   );
 }
 
-function RequestDetailScreen({ request, goBack, goTracking }) {
+function RequestDetailScreen({ request, goBack, goTracking, retryRequest, retryingReference }) {
   if (!request) {
     return (
       <ScrollView contentContainerStyle={styles.content}>
@@ -801,6 +821,7 @@ function RequestDetailScreen({ request, goBack, goTracking }) {
   }
   const isSent = request.syncMode === "supabase";
   const subject = encodeURIComponent(`Demande TVF ${request.reference || ""}`.trim());
+  const mapsUrl = buildMapsUrl(request);
   return (
     <ScrollView contentContainerStyle={styles.content}>
       <ScreenTitle eyebrow="Fiche demande" title={request.reference || "Demande TVF"}>
@@ -828,6 +849,12 @@ function RequestDetailScreen({ request, goBack, goTracking }) {
         <Text style={styles.summaryLine}>{request.syncMessage || "Aucun message complémentaire enregistré."}</Text>
       </View>
       <RequestActionPlan request={request} />
+      {requestCanBeRetried(request) ? (
+        <PrimaryButton icon="cloud-upload-outline" loading={retryingReference === request.reference} onPress={() => retryRequest(request)}>
+          {retryingReference === request.reference ? "Renvoi en cours..." : "Renvoyer vers TVF OS"}
+        </PrimaryButton>
+      ) : null}
+      {mapsUrl ? <PrimaryButton secondary icon="map-outline" onPress={() => Linking.openURL(mapsUrl)}>Ouvrir la localisation</PrimaryButton> : null}
       <PrimaryButton secondary icon="share-social-outline" onPress={() => Share.share({ message: `Demande TVF ${request.reference}` })}>Partager la référence</PrimaryButton>
       <PrimaryButton secondary icon="mail-outline" onPress={() => Linking.openURL(`mailto:contact@territoiresvivantsfrance.fr?subject=${subject}`)}>Contacter TVF</PrimaryButton>
       <PrimaryButton secondary icon="search-outline" onPress={goTracking}>Ouvrir le suivi</PrimaryButton>
@@ -962,13 +989,15 @@ function DocumentsScreen() {
           </View>
         ))}
         {documents.map((doc) => (
-          <View key={doc.title} style={styles.documentCard}>
+          <TouchableOpacity key={doc.title} style={styles.documentCard} activeOpacity={0.84} onPress={() => doc.url ? Linking.openURL(doc.url) : undefined}>
             <Ionicons name="document-text-outline" size={25} color={colors.green} />
             <View style={styles.documentText}>
               <Text style={styles.documentTitle}>{doc.title}</Text>
               <Text style={styles.documentSubtitle}>{doc.subtitle}</Text>
+              {doc.url ? <Text style={styles.documentLink}>Ouvrir le document</Text> : null}
             </View>
-          </View>
+            {doc.url ? <Ionicons name="open-outline" size={18} color={colors.green} /> : null}
+          </TouchableOpacity>
         ))}
       </View>
       <Notice>Les documents préparent l'échange. Ils ne valent pas acceptation d'un projet, d'un bien ou d'une collecte.</Notice>
@@ -1054,7 +1083,7 @@ function TransmissionStatusCard({ data, isSent, isError }) {
   );
 }
 
-function ConfirmationScreen({ lastSubmission, goHome, goTracking }) {
+function ConfirmationScreen({ lastSubmission, goHome, goTracking, retryRequest, retryingReference }) {
   const data = lastSubmission || {};
   const subject = encodeURIComponent(`Demande TVF ${data.reference || ""}`.trim());
   const isSent = data.syncMode === "supabase";
@@ -1086,7 +1115,11 @@ function ConfirmationScreen({ lastSubmission, goHome, goTracking }) {
           <Text style={styles.summaryLine}>Transmission : {isSent ? "transmise vers TVF OS" : isError ? "à renvoyer" : "locale uniquement"}</Text>
         </View>
         <NextStepsTimeline />
-
+        {requestCanBeRetried(data) ? (
+          <PrimaryButton icon="cloud-upload-outline" loading={retryingReference === data.reference} onPress={() => retryRequest(data)}>
+            {retryingReference === data.reference ? "Renvoi en cours..." : "Renvoyer vers TVF OS"}
+          </PrimaryButton>
+        ) : null}
         <PrimaryButton secondary icon="share-social-outline" onPress={() => Share.share({ message: `Demande TVF ${data.reference || ""}` })}>Partager la référence</PrimaryButton>
         <PrimaryButton secondary icon="mail-outline" onPress={() => Linking.openURL(`mailto:contact@territoiresvivantsfrance.fr?subject=${subject}`)}>Contacter TVF avec ce numéro</PrimaryButton>
         <PrimaryButton secondary icon="search-outline" onPress={goTracking}>Voir le suivi</PrimaryButton>
@@ -1128,6 +1161,7 @@ function AppShell() {
   const [selectedRequest, setSelectedRequest] = useState(null);
   const [missing, setMissing] = useState([]);
   const [submitting, setSubmitting] = useState(false);
+  const [retryingReference, setRetryingReference] = useState(null);
   const [draftReady, setDraftReady] = useState(false);
   const [draftRestored, setDraftRestored] = useState(false);
 
@@ -1197,6 +1231,29 @@ function AppShell() {
     });
   };
 
+  const retryRequest = async (request) => {
+    if (!request?.payload || retryingReference) return;
+    setRetryingReference(request.reference);
+    try {
+      const result = await submitMobileRequest(request.payload);
+      const updated = {
+        ...request,
+        syncMode: result.mode,
+        syncMessage: result.message,
+        updatedAt: new Date().toISOString()
+      };
+      setLastSubmission((current) => current?.reference === request.reference ? updated : current);
+      setSelectedRequest((current) => current?.reference === request.reference ? updated : current);
+      setSubmissionHistory((items) => {
+        const next = items.map((item) => item.reference === request.reference ? updated : item);
+        saveSubmissionHistory(next);
+        return next;
+      });
+      Alert.alert(result.ok ? "Renvoi effectué" : "Renvoi non finalisé", result.message || "La demande reste enregistrée sur ce téléphone.");
+    } finally {
+      setRetryingReference(null);
+    }
+  };
   const submit = async (flow) => {
     if (submitting) return;
     const missingFields = validateDraft(flow, draft);
@@ -1253,22 +1310,22 @@ function AppShell() {
       case "volunteer":
         return <VolunteerScreen draft={draft} setDraft={setDraft} submit={submit} missing={missing} submitting={submitting} />;
       case "requests":
-        return <RequestsScreen submissionHistory={submissionHistory} goTracking={() => go("tracking")} openRequest={openRequest} />;
+        return <RequestsScreen submissionHistory={submissionHistory} goTracking={() => go("tracking")} openRequest={openRequest} retryRequest={retryRequest} retryingReference={retryingReference} />;
       case "tracking":
         return <TrackingScreen lastSubmission={lastSubmission} submissionHistory={submissionHistory} openRequest={openRequest} />;
       case "request-detail":
-        return <RequestDetailScreen request={selectedRequest} goBack={() => go("requests")} goTracking={() => go("tracking")} />;
+        return <RequestDetailScreen request={selectedRequest} goBack={() => go("requests")} goTracking={() => go("tracking")} retryRequest={retryRequest} retryingReference={retryingReference} />;
       case "documents":
         return <DocumentsScreen />;
       case "contact":
         return <ContactScreen go={go} />;
       case "confirmation":
-        return <ConfirmationScreen lastSubmission={lastSubmission} goHome={() => go("home")} goTracking={() => go("tracking")} />;
+        return <ConfirmationScreen lastSubmission={lastSubmission} goHome={() => go("home")} goTracking={() => go("tracking")} retryRequest={retryRequest} retryingReference={retryingReference} />;
       case "home":
       default:
         return <HomeScreen go={go} draftRestored={draftRestored} dismissDraft={dismissDraft} />;
     }
-  }, [screen, draft, lastSubmission, submissionHistory, selectedRequest, missing, submitting, draftReady, draftRestored]);
+  }, [screen, draft, lastSubmission, submissionHistory, selectedRequest, missing, submitting, retryingReference, draftReady, draftRestored]);
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -1822,6 +1879,7 @@ const styles = StyleSheet.create({
   documentText: { flex: 1 },
   documentTitle: { color: colors.blue, fontWeight: "800", fontSize: 15 },
   documentSubtitle: { color: colors.muted, fontWeight: "600", lineHeight: 18, marginTop: 3 },
+  documentLink: { color: colors.green, fontWeight: "900", fontSize: 12.2, marginTop: 5 },
   confirmation: { minHeight: 520, justifyContent: "center", gap: 14 },
   confirmIcon: {
     width: 86,
