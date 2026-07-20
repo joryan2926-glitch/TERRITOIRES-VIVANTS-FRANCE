@@ -198,6 +198,8 @@ Les demandes techniques dont l'objet commence par `[TEST` doivent etre passees e
 | `documents/tableau-suivi-demandes-operationnelles.md` | Tableau de pilotage manuel pour suivre les dossiers et les relances |
 | `documents/checklist-brevo-dns-rgpd-formulaires.md` | Points de controle e-mail, DNS, Brevo, delivrabilite et donnees personnelles |
 | `documents/plan-nettoyage-tests-supabase.md` | Methode prudente pour identifier et nettoyer les donnees de test |
+| documents/procedure-reporting-mensuel-tvf-os.md | Procedure de reporting mensuel pour exporter, analyser et presenter les demandes, dossiers, documents et relances |
+| documents/modele-synthese-mensuelle-tvf-os.md | Modele de synthese mensuelle pret a remplir apres les exports TVF OS |
 
 ## 17. Recette avant usage reel
 

@@ -5,24 +5,18 @@ const root = process.cwd();
 
 function read(file) {
   const fullPath = path.join(root, file);
-  if (!fs.existsSync(fullPath)) {
-    throw new Error(`Fichier manquant : ${file}`);
-  }
+  if (!fs.existsSync(fullPath)) throw new Error(`Fichier manquant : ${file}`);
   return fs.readFileSync(fullPath, "utf8");
+}
+
+function assertFile(file) {
+  if (!fs.existsSync(path.join(root, file))) throw new Error(`Fichier manquant : ${file}`);
 }
 
 function assertIncludes(file, tokens) {
   const content = read(file);
   const missing = tokens.filter((token) => !content.includes(token));
-  if (missing.length) {
-    throw new Error(`${file} ne contient pas : ${missing.join(", ")}`);
-  }
-}
-
-function assertFile(file) {
-  if (!fs.existsSync(path.join(root, file))) {
-    throw new Error(`Fichier manquant : ${file}`);
-  }
+  if (missing.length) throw new Error(`${file} ne contient pas : ${missing.join(", ")}`);
 }
 
 const requiredFiles = [
@@ -47,52 +41,23 @@ const requiredFiles = [
   "lib/api/admin-documents.js",
   "scripts/test-mobile-tvf-os-real.js",
   "SUIVI_OPERATIONNEL_FORMULAIRES.md",
+  "documents/procedure-reporting-mensuel-tvf-os.md",
+  "documents/modele-synthese-mensuelle-tvf-os.md",
 ];
 
 requiredFiles.forEach(assertFile);
 
-assertIncludes("admin-demandes.js", [
-  "mobile-import-case",
-  "Transformer en dossier",
-  "data-create-case",
-  "Voir le dossier",
-  "Repondre par e-mail",
-  "Bibliotheque",
-]);
+const checks = [
+  ["admin-demandes.js", ["mobile-import-case", "Transformer en dossier", "data-create-case", "Voir le dossier", "Repondre par e-mail", "Bibliotheque"]],
+  ["admin-emails.js", ["Convertir en demande", "Ouvrir la reponse", "Copier le brouillon", "data-convert-email"]],
+  ["admin-documents.js", ["Bibliotheque interne TVF", "Liste des pieces par demande", "Convention valorisation de materiaux", "Courriers types prets a envoyer"]],
+  ["admin-dossiers.js", ["case_number", "status", "priority"]],
+  ["scripts/test-mobile-tvf-os-real.js", ["mobile_requests", "mobile-import-case", "cleanup(created)", "TVF_MOBILE_TO_OS_OK"]],
+  ["SUIVI_OPERATIONNEL_FORMULAIRES.md", ["Formulaire public", "TVF Mobile", "dossier d'instruction", "Documents", "type courte", "procedure-reporting-mensuel-tvf-os.md", "modele-synthese-mensuelle-tvf-os.md"]],
+  ["documents/procedure-reporting-mensuel-tvf-os.md", ["reporting mensuel", "Demandes recues", "Dossiers", "Documents", "Regles de prudence"]],
+  ["documents/modele-synthese-mensuelle-tvf-os.md", ["Synthese mensuelle TVF OS", "Indicateurs du mois", "Dossiers a suivre", "Pieces manquantes", "Regles de diffusion"]],
+];
 
-assertIncludes("admin-emails.js", [
-  "Convertir en demande",
-  "Ouvrir la reponse",
-  "Copier le brouillon",
-  "data-convert-email",
-]);
+checks.forEach(([file, tokens]) => assertIncludes(file, tokens));
 
-assertIncludes("admin-documents.js", [
-  "Bibliotheque interne TVF",
-  "Liste des pieces par demande",
-  "Convention valorisation de materiaux",
-  "Courriers types prets a envoyer",
-]);
-
-assertIncludes("admin-dossiers.js", [
-  "case_number",
-  "status",
-  "priority",
-]);
-
-assertIncludes("scripts/test-mobile-tvf-os-real.js", [
-  "mobile_requests",
-  "mobile-import-case",
-  "cleanup(created)",
-  "TVF_MOBILE_TO_OS_OK",
-]);
-
-assertIncludes("SUIVI_OPERATIONNEL_FORMULAIRES.md", [
-  "Formulaire public",
-  "TVF Mobile",
-  "dossier d'instruction",
-  "Documents",
-  "type courte",
-]);
-
-console.log("TVF_OS_OPERATIONAL_FLOW_OK modules=7 parcours=demande-contact-dossier-documents-reponse");
+console.log("TVF_OS_OPERATIONAL_FLOW_OK modules=9 parcours=demande-contact-dossier-documents-reponse-reporting");
