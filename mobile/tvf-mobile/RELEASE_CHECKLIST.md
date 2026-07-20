@@ -88,6 +88,7 @@ A verifier sur telephone :
 Avant une version Play Store ou App Store, prevoir :
 
 - politique de confidentialite mobile publiee ;
+- cadrage interne disponible dans `PRIVACY_MOBILE.md` ;
 - conditions d'utilisation si necessaire ;
 - captures officielles Android et iOS ;
 - compte developpeur Google Play ;
