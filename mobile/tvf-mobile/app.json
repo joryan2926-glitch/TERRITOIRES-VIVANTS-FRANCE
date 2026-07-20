@@ -44,6 +44,9 @@
         }
       ]
     ],
-    "backgroundColor": "#F7FAF4"
+    "backgroundColor": "#F7FAF4",
+    "scheme": "tvfmobile",
+    "description": "Application terrain de Territoires Vivants France pour signaler, localiser et transmettre des demandes vers TVF OS.",
+    "primaryColor": "#2E7D32"
   }
 }

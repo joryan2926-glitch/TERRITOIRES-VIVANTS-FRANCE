@@ -246,3 +246,20 @@ export const fieldTestPlan = [
     items: ["Saisir identité et e-mail", "Indiquer compétences", "Transmettre", "Retrouver la référence"]
   }
 ];
+export const releaseReadiness = [
+  {
+    title: "Prêt pour recette",
+    icon: "shield-checkmark-outline",
+    items: ["Expo SDK 57", "Formulaires reliés à TVF OS", "Photos multiples", "Historique local", "Renvoi des demandes"]
+  },
+  {
+    title: "À vérifier sur téléphone",
+    icon: "phone-portrait-outline",
+    items: ["GPS en extérieur", "Sélection 4 photos", "Renvoi après échec", "Ouverture des liens documents", "Lisibilité mobile"]
+  },
+  {
+    title: "Avant publication officielle",
+    icon: "rocket-outline",
+    items: ["Politique de confidentialité mobile", "Compte développeur", "Build EAS Android/iOS", "Tests magasin", "Captures d'écran officielles"]
+  }
+];
