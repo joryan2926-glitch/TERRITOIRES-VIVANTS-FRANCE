@@ -173,6 +173,34 @@ function requestCanBeRetried(request) {
   return Boolean(request?.payload && request?.syncMode !== "supabase");
 }
 
+function formatShortDate(value) {
+  if (!value) return "Date non renseignée";
+  try {
+    return new Intl.DateTimeFormat("fr-FR", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit"
+    }).format(new Date(value));
+  } catch {
+    return "Date non renseignée";
+  }
+}
+
+function getPriorityLabel(priority) {
+  const normalized = String(priority || "normale").toLowerCase();
+  if (normalized === "haute") return "Priorité haute";
+  if (normalized === "basse") return "Priorité basse";
+  return "Priorité normale";
+}
+
+function getLocalStatusLabel(request) {
+  if (request?.syncMode === "supabase") return "Reçue dans TVF OS";
+  if (request?.syncMode === "supabase-error") return "À renvoyer";
+  return "Enregistrée localement";
+}
+
 function validateDraft(flow, draft) {
   const required = requiredFieldsByFlow[flow] || [];
   const missing = required.filter((field) => !String(draft[field] || "").trim());
@@ -791,7 +819,11 @@ Transmission : ${item.syncMode === "supabase" ? "transmise" : "à finaliser"}`;
                   <Text style={styles.requestReference}>{item.reference}</Text>
                   <Text style={styles.requestLabel}>{item.label || "Demande TVF"}</Text>
                   <Text style={styles.requestMeta}>{item.categoryLabel || item.category || "Catégorie non renseignée"} · {item.address || "Localisation non renseignée"}</Text>
-                  <Text style={[styles.requestSync, isSent && styles.requestSyncReady]}>{isSent ? "Transmise dans TVF OS" : "Transmission à finaliser"}</Text>
+                  <View style={styles.requestBadgeRow}>
+                    <Text style={[styles.requestBadge, isSent && styles.requestBadgeReady]}>{getLocalStatusLabel(item)}</Text>
+                    <Text style={[styles.requestBadge, item.priority === "haute" && styles.requestBadgeHigh]}>{getPriorityLabel(item.priority)}</Text>
+                  </View>
+                  <Text style={styles.requestSync}>{formatShortDate(item.createdAt || item.updatedAt)}</Text>
                   <View style={styles.requestActionsRow}>
                     <TouchableOpacity style={styles.requestShareButton} onPress={() => openRequest(item)} activeOpacity={0.82}>
                       <Ionicons name="eye-outline" size={16} color={colors.green} />
@@ -874,6 +906,9 @@ function RequestDetailScreen({ request, goBack, goTracking, retryRequest, retryi
         <Text style={styles.summaryLine}>Type : {request.label || "Non renseigné"}</Text>
         <Text style={styles.summaryLine}>Catégorie : {request.categoryLabel || request.category || "Non renseignée"}</Text>
         <Text style={styles.summaryLine}>Localisation : {request.address || "À compléter"}</Text>
+        <Text style={styles.summaryLine}>Statut : {getLocalStatusLabel(request)}</Text>
+        <Text style={styles.summaryLine}>Priorité : {getPriorityLabel(request.priority)}</Text>
+        <Text style={styles.summaryLine}>Date : {formatShortDate(request.createdAt || request.updatedAt)}</Text>
         <Text style={styles.summaryLine}>Photos : {request.photoCount ? `${request.photoCount} jointe(s)` : request.hasPhoto ? "1 jointe" : "non jointes"}</Text>
         <Text style={styles.summaryLine}>GPS : {request.hasCoordinates ? "enregistré" : "non renseigné"}</Text>
       </View>
@@ -923,6 +958,8 @@ function TrackingScreen({ lastSubmission, submissionHistory = [], openRequest })
           <Text style={styles.trackingTitle}>Dernière demande sur ce téléphone</Text>
           <Text style={styles.summaryLine}>Numéro : {lastSubmission.reference}</Text>
           <Text style={styles.summaryLine}>Type : {lastSubmission.label}</Text>
+          <Text style={styles.summaryLine}>Statut : {getLocalStatusLabel(lastSubmission)}</Text>
+          <Text style={styles.summaryLine}>Date : {formatShortDate(lastSubmission.createdAt || lastSubmission.updatedAt)}</Text>
           <Text style={styles.summaryLine}>Transmission : {lastSubmission.syncMode === "supabase" ? "transmise vers TVF OS" : "locale ou à finaliser"}</Text>
         </View>
       ) : null}
@@ -934,7 +971,7 @@ function TrackingScreen({ lastSubmission, submissionHistory = [], openRequest })
               <View style={styles.historyDot} />
               <View style={styles.historyText}>
                 <Text style={styles.historyReference}>{item.reference}</Text>
-                <Text style={styles.historyMeta}>{item.label || "Demande TVF"} · {item.syncMode === "supabase" ? "transmise" : "à finaliser"}</Text>
+                <Text style={styles.historyMeta}>{item.label || "Demande TVF"} · {getLocalStatusLabel(item)} · {formatShortDate(item.createdAt || item.updatedAt)}</Text>
               </View>
             </View>
           ))}
@@ -1182,6 +1219,9 @@ function ConfirmationScreen({ lastSubmission, goHome, goTracking, retryRequest, 
           <Text style={styles.summaryLine}>Type : {data.label || "Non renseigné"}</Text>
           <Text style={styles.summaryLine}>Catégorie : {data.categoryLabel || data.category || "Non renseignée"}</Text>
           <Text style={styles.summaryLine}>Localisation : {data.address || "À compléter"}</Text>
+          <Text style={styles.summaryLine}>Statut : {getLocalStatusLabel(data)}</Text>
+          <Text style={styles.summaryLine}>Priorité : {getPriorityLabel(data.priority)}</Text>
+          <Text style={styles.summaryLine}>Date : {formatShortDate(data.createdAt || data.updatedAt)}</Text>
           <Text style={styles.summaryLine}>Photos : {data.photoCount ? `${data.photoCount} jointe(s)` : data.hasPhoto ? "1 jointe" : "non jointes"}</Text>
           <Text style={styles.summaryLine}>GPS : {data.hasCoordinates ? "enregistré" : "non renseigné"}</Text>
           <Text style={styles.summaryLine}>Transmission : {isSent ? "transmise vers TVF OS" : isError ? "à renvoyer" : "locale uniquement"}</Text>
@@ -1356,6 +1396,8 @@ function AppShell() {
         hasCoordinates: Boolean(draft.latitude && draft.longitude),
         syncMode: result.mode,
         syncMessage: result.message,
+        priority: payload.summary?.priority || "normale",
+        createdAt: new Date().toISOString(),
         payload
       };
       setLastSubmission(submission);
@@ -1882,6 +1924,19 @@ const styles = StyleSheet.create({
   requestMeta: { color: colors.muted, fontSize: 12.5, lineHeight: 18, fontWeight: "600" },
   requestSync: { color: colors.gold, fontSize: 12.5, fontWeight: "800", marginTop: 7 },
   requestSyncReady: { color: colors.green },
+  requestBadgeRow: { flexDirection: "row", flexWrap: "wrap", gap: 7, marginTop: 8 },
+  requestBadge: {
+    alignSelf: "flex-start",
+    color: colors.gold,
+    backgroundColor: "#FFF7E4",
+    borderRadius: 999,
+    paddingHorizontal: 9,
+    paddingVertical: 4,
+    fontSize: 11.4,
+    fontWeight: "900"
+  },
+  requestBadgeReady: { color: colors.green, backgroundColor: "#EDF7EC" },
+  requestBadgeHigh: { color: colors.danger, backgroundColor: "#FFF1EF" },
   requestActionsRow: { flexDirection: "row", flexWrap: "wrap", gap: 8, marginTop: 10 },
   requestShareButton: {
     alignSelf: "flex-start",
