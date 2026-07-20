@@ -200,6 +200,7 @@ Les demandes techniques dont l'objet commence par `[TEST` doivent etre passees e
 | `documents/plan-nettoyage-tests-supabase.md` | Methode prudente pour identifier et nettoyer les donnees de test |
 | documents/procedure-reporting-mensuel-tvf-os.md | Procedure de reporting mensuel pour exporter, analyser et presenter les demandes, dossiers, documents et relances |
 | documents/modele-synthese-mensuelle-tvf-os.md | Modele de synthese mensuelle pret a remplir apres les exports TVF OS |
+| documents/tableau-pilotage-quotidien-tvf-os.md | Tableau quotidien pour traiter les demandes, dossiers, relances et decisions du jour |
 
 ## 17. Recette avant usage reel
 

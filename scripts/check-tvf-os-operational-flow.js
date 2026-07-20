@@ -43,6 +43,7 @@ const requiredFiles = [
   "SUIVI_OPERATIONNEL_FORMULAIRES.md",
   "documents/procedure-reporting-mensuel-tvf-os.md",
   "documents/modele-synthese-mensuelle-tvf-os.md",
+  "documents/tableau-pilotage-quotidien-tvf-os.md",
 ];
 
 requiredFiles.forEach(assertFile);
@@ -53,11 +54,12 @@ const checks = [
   ["admin-documents.js", ["Bibliotheque interne TVF", "Liste des pieces par demande", "Convention valorisation de materiaux", "Courriers types prets a envoyer"]],
   ["admin-dossiers.js", ["case_number", "status", "priority"]],
   ["scripts/test-mobile-tvf-os-real.js", ["mobile_requests", "mobile-import-case", "cleanup(created)", "TVF_MOBILE_TO_OS_OK"]],
-  ["SUIVI_OPERATIONNEL_FORMULAIRES.md", ["Formulaire public", "TVF Mobile", "dossier d'instruction", "Documents", "type courte", "procedure-reporting-mensuel-tvf-os.md", "modele-synthese-mensuelle-tvf-os.md"]],
+  ["SUIVI_OPERATIONNEL_FORMULAIRES.md", ["Formulaire public", "TVF Mobile", "dossier d'instruction", "Documents", "type courte", "procedure-reporting-mensuel-tvf-os.md", "modele-synthese-mensuelle-tvf-os.md", "tableau-pilotage-quotidien-tvf-os.md"]],
   ["documents/procedure-reporting-mensuel-tvf-os.md", ["reporting mensuel", "Demandes recues", "Dossiers", "Documents", "Regles de prudence"]],
   ["documents/modele-synthese-mensuelle-tvf-os.md", ["Synthese mensuelle TVF OS", "Indicateurs du mois", "Dossiers a suivre", "Pieces manquantes", "Regles de diffusion"]],
+  ["documents/tableau-pilotage-quotidien-tvf-os.md", ["Tableau de pilotage quotidien TVF OS", "Routine du matin", "Tableau du jour", "Relances a envoyer", "Fin de journee"]],
 ];
 
 checks.forEach(([file, tokens]) => assertIncludes(file, tokens));
 
-console.log("TVF_OS_OPERATIONAL_FLOW_OK modules=9 parcours=demande-contact-dossier-documents-reponse-reporting");
+console.log("TVF_OS_OPERATIONAL_FLOW_OK modules=10 parcours=demande-contact-dossier-documents-reponse-reporting-quotidien");
