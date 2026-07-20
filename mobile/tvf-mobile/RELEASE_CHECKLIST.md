@@ -91,6 +91,7 @@ Avant une version Play Store ou App Store, prevoir :
 - cadrage interne disponible dans `PRIVACY_MOBILE.md` ;
 - conditions d'utilisation si necessaire ;
 - captures officielles Android et iOS ;
+- textes de fiche application prepares dans `STORE_LISTING.md` ;
 - compte developpeur Google Play ;
 - compte Apple Developer si diffusion iOS ;
 - configuration EAS Build ;

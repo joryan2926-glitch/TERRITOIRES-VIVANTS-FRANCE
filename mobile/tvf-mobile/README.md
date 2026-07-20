@@ -55,6 +55,7 @@ Cette version est une preversion terrain compatible Expo SDK 57 et Expo Go SDK 5
 
 La procedure de verification avant diffusion est detaillee dans [`RELEASE_CHECKLIST.md`](./RELEASE_CHECKLIST.md).
 Le cadrage confidentialite mobile est prepare dans [`PRIVACY_MOBILE.md`](./PRIVACY_MOBILE.md).
+Les textes de fiche application sont prepares dans [`STORE_LISTING.md`](./STORE_LISTING.md).
 ## Prerequis
 
 - Node.js 20 LTS recommande.
