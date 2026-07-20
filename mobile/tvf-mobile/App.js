@@ -201,6 +201,38 @@ function getLocalStatusLabel(request) {
   return "Enregistrée localement";
 }
 
+function getRequestFlow(request) {
+  return request?.flow || request?.payload?.flow || "signal";
+}
+
+function getFlowNextAction(flow) {
+  const actions = {
+    signal: "Vérifier la localisation et qualifier la situation observée.",
+    materials: "Contrôler la nature, la quantité et les conditions de récupération.",
+    property: "Préparer une pré-étude du bien et les pièces propriétaire.",
+    volunteer: "Qualifier le profil et rattacher la personne aux besoins TVF."
+  };
+  return actions[flow] || actions.signal;
+}
+
+function getActionPlanItems(request) {
+  const flow = getRequestFlow(request);
+  const common = ["Conserver le numéro TVF et le communiquer dans chaque échange."];
+  const media = request?.hasPhoto
+    ? "Vérifier que les photos illustrent clairement la situation."
+    : "Ajouter une photo si elle peut être prise légalement.";
+  const location = request?.hasCoordinates
+    ? "La position GPS est disponible pour faciliter la localisation."
+    : "Compléter l'adresse avec un repère précis si besoin.";
+  const byFlow = {
+    signal: [media, location, "Décrire uniquement des faits observables avant qualification TVF."],
+    materials: [media, "Préciser quantité, état, dimensions et délai de disponibilité.", "Préparer les conditions de retrait ou de visite du stock."],
+    property: [media, location, "Préparer titre de propriété, situation d'occupation et objectif recherché."],
+    volunteer: ["Préciser disponibilités, compétences et zone d'intervention.", "Indiquer le canal préféré pour être recontacté.", "Rattacher le profil aux besoins terrain ou administratifs."]
+  };
+  return [...common, ...(byFlow[flow] || byFlow.signal), getFlowNextAction(flow)];
+}
+
 function validateDraft(flow, draft) {
   const required = requiredFieldsByFlow[flow] || [];
   const missing = required.filter((field) => !String(draft[field] || "").trim());
@@ -856,17 +888,16 @@ Transmission : ${item.syncMode === "supabase" ? "transmise" : "à finaliser"}`;
   );
 }
 function RequestActionPlan({ request }) {
-  const items = [
-    "Conserver le numéro TVF et le communiquer dans chaque échange.",
-    request?.hasPhoto ? "Vérifier que les photos illustrent clairement la situation." : "Ajouter une photo si elle peut être prise légalement.",
-    request?.hasCoordinates ? "La position GPS est disponible pour faciliter la localisation." : "Compléter l'adresse avec un repère précis si besoin.",
-    "Préparer les pièces ou informations complémentaires demandées par TVF."
-  ];
+  const items = getActionPlanItems(request);
+  const flow = getRequestFlow(request);
   return (
     <View style={styles.actionPlanCard}>
       <View style={styles.actionPlanHeader}>
         <Ionicons name="clipboard-outline" size={20} color={colors.green} />
-        <Text style={styles.actionPlanTitle}>À préparer pour TVF</Text>
+        <View style={styles.actionPlanHeaderText}>
+          <Text style={styles.actionPlanTitle}>À préparer pour TVF</Text>
+          <Text style={styles.actionPlanSubtitle}>{flowLabels[flow] || "Demande TVF"}</Text>
+        </View>
       </View>
       {items.map((item) => (
         <View key={item} style={styles.actionPlanRow}>
@@ -904,6 +935,7 @@ function RequestDetailScreen({ request, goBack, goTracking, retryRequest, retryi
       <View style={styles.summaryCard}>
         <Text style={styles.summaryTitle}>Informations principales</Text>
         <Text style={styles.summaryLine}>Type : {request.label || "Non renseigné"}</Text>
+        <Text style={styles.summaryLine}>Parcours : {flowLabels[getRequestFlow(request)] || "Demande TVF"}</Text>
         <Text style={styles.summaryLine}>Catégorie : {request.categoryLabel || request.category || "Non renseignée"}</Text>
         <Text style={styles.summaryLine}>Localisation : {request.address || "À compléter"}</Text>
         <Text style={styles.summaryLine}>Statut : {getLocalStatusLabel(request)}</Text>
@@ -1385,6 +1417,7 @@ function AppShell() {
       }
       const submission = {
         reference,
+        flow,
         label: flowLabels[flow],
         category: draft.category,
         categoryLabel,
@@ -1882,7 +1915,9 @@ const styles = StyleSheet.create({
     marginBottom: 14
   },
   actionPlanHeader: { flexDirection: "row", alignItems: "center", gap: 8, marginBottom: 10 },
+  actionPlanHeaderText: { flex: 1 },
   actionPlanTitle: { color: colors.green, fontWeight: "900", fontSize: 15.5 },
+  actionPlanSubtitle: { color: colors.muted, fontWeight: "700", fontSize: 12.3, marginTop: 2 },
   actionPlanRow: { flexDirection: "row", alignItems: "flex-start", gap: 9, paddingVertical: 4 },
   actionPlanText: { flex: 1, color: colors.blue, fontWeight: "600", fontSize: 12.8, lineHeight: 18 },
   foundRequestCard: {
