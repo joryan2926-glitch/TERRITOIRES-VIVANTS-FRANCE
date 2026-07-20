@@ -51,6 +51,9 @@ Cette version est une preversion terrain compatible Expo SDK 57 et Expo Go SDK 5
 - Bundle iOS / package Android : `fr.territoiresvivants.tvfmobile`.
 - Icone et ecran de lancement : `assets/tvf-mobile-logo.png`.
 - Style : portrait, interface claire, fond TVF blanc casse.
+## Recette et publication
+
+La procedure de verification avant diffusion est detaillee dans [`RELEASE_CHECKLIST.md`](./RELEASE_CHECKLIST.md).
 ## Prerequis
 
 - Node.js 20 LTS recommande.
