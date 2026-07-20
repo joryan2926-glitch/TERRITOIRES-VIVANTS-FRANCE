@@ -10,7 +10,7 @@ Chaque formulaire envoye depuis le site suit trois chemins :
 2. Notification interne envoyee a l'adresse configuree dans Vercel (`TVF_NOTIFICATION_EMAIL`).
 3. Accuse de reception envoye automatiquement au demandeur si son e-mail est renseigne.
 
-Adresse officielle de reception pour la phase de lancement : `contact@territoiresvivantsfrance.fr`.
+Adresse officielle de reception : `contact@territoiresvivantsfrance.fr`.
 
 ## 2. Sources de reception
 
@@ -77,7 +77,7 @@ A reception, verifier :
 Quand une demande arrive depuis TVF Mobile :
 
 1. Ouvrir `Demandes`.
-2. Repérer le bloc `TVF Mobile`.
+2. Reperer le bloc `TVF Mobile`.
 3. Cliquer sur `Importer + dossier`.
 4. Verifier que la demande apparait dans la liste.
 5. Ouvrir la fiche demande et controler le bloc `Origine TVF Mobile`.
@@ -211,3 +211,20 @@ Les demandes techniques dont l'objet commence par `[TEST` doivent etre passees e
 8. Archiver les tests dans Supabase avant les premiers usages publics.
 9. Verifier DKIM et DMARC pour ameliorer la delivrabilite.
 10. Utiliser les modeles de reponse pour traiter les premieres demandes reelles.
+
+## 18. Recette operationnelle rapide
+
+Avant d'utiliser TVF OS sur des demandes reelles, effectuer ce parcours complet :
+
+| Etape | Module | Resultat attendu |
+|---|---|---|
+| 1 | Site public ou TVF Mobile | Une demande est creee avec coordonnees, motif et territoire. |
+| 2 | Demandes | La demande apparait dans la liste, avec source, categorie et priorite. |
+| 3 | Demandes | La demande peut etre transformee en dossier d'instruction. |
+| 4 | Dossiers | Le numero de dossier, le statut, la priorite et le contact sont conserves. |
+| 5 | Documents | Les pieces utiles sont rattachees ou identifiees comme manquantes. |
+| 6 | E-mails | Une reponse peut etre preparee, copiee ou ouverte dans la messagerie. |
+| 7 | Journal | Les actions importantes restent tracables. |
+| 8 | Archivage | Les tests sont classes ou supprimes uniquement apres verification. |
+
+Regle interne : aucune demande ne doit etre presentee comme acceptee tant que le dossier, les pieces, le cadre de responsabilite et la prochaine action ne sont pas renseignes.
