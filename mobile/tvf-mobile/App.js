@@ -1038,21 +1038,27 @@ function TrackingScreen({ lastSubmission, submissionHistory = [], openRequest })
   );
 }
 
-function DocumentsScreen() {
+function DocumentsScreen({ go }) {
   const preparationTracks = [
     {
       title: "Propriétaire ou bien vacant",
       icon: "home-outline",
+      target: "property",
+      action: "Préparer une proposition de bien",
       items: ["Adresse précise du bien", "Photos extérieures et intérieures si autorisées", "Situation d'occupation", "Objectif recherché"]
     },
     {
       title: "Matériaux ou équipements",
       icon: "cube-outline",
+      target: "materials",
+      action: "Créer une proposition de matériaux",
       items: ["Nature des matériaux", "Quantité ou dimensions", "État général", "Lieu et délai de disponibilité"]
     },
     {
       title: "Signalement de terrain",
       icon: "location-outline",
+      target: "signal",
+      action: "Signaler un lieu",
       items: ["Adresse ou repère fiable", "Type de situation", "Description factuelle", "Photo prise légalement"]
     }
   ];
@@ -1071,10 +1077,14 @@ function DocumentsScreen() {
       </View>
       <View style={styles.stack}>
         {preparationTracks.map((track) => (
-          <View key={track.title} style={styles.preparationCard}>
+          <TouchableOpacity key={track.title} style={styles.preparationCard} activeOpacity={0.86} onPress={() => go(track.target, { resetDraft: true })}>
             <View style={styles.preparationHead}>
               <View style={styles.preparationIcon}><Ionicons name={track.icon} size={20} color={colors.white} /></View>
-              <Text style={styles.preparationTitle}>{track.title}</Text>
+              <View style={styles.preparationTitleWrap}>
+                <Text style={styles.preparationTitle}>{track.title}</Text>
+                <Text style={styles.preparationAction}>{track.action}</Text>
+              </View>
+              <Ionicons name="chevron-forward" size={18} color={colors.green} />
             </View>
             {track.items.map((item) => (
               <View key={item} style={styles.preparationRow}>
@@ -1082,7 +1092,7 @@ function DocumentsScreen() {
                 <Text style={styles.preparationText}>{item}</Text>
               </View>
             ))}
-          </View>
+          </TouchableOpacity>
         ))}
         <View style={styles.groupCard}>
           <Text style={styles.groupTitle}>Recette terrain Expo Go</Text>
@@ -1464,7 +1474,7 @@ function AppShell() {
       case "request-detail":
         return <RequestDetailScreen request={selectedRequest} goBack={() => go("requests")} goTracking={() => go("tracking")} retryRequest={retryRequest} retryingReference={retryingReference} />;
       case "documents":
-        return <DocumentsScreen />;
+        return <DocumentsScreen go={go} />;
       case "contact":
         return <ContactScreen go={go} />;
       case "confirmation":
@@ -2020,7 +2030,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center"
   },
-  preparationTitle: { flex: 1, color: colors.blue, fontWeight: "900", fontSize: 15.2 },
+  preparationTitleWrap: { flex: 1 },
+  preparationTitle: { color: colors.blue, fontWeight: "900", fontSize: 15.2 },
+  preparationAction: { color: colors.green, fontWeight: "800", fontSize: 12.1, marginTop: 2 },
   preparationRow: { flexDirection: "row", alignItems: "flex-start", gap: 8, paddingVertical: 4 },
   preparationText: { flex: 1, color: colors.blue, fontWeight: "600", fontSize: 12.8, lineHeight: 18 },
   groupCard: {
