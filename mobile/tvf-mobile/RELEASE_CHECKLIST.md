@@ -97,7 +97,7 @@ Avant une version Play Store ou App Store, prevoir :
 - configuration EAS Build dans `eas.json` ;
 - nom, icone, description courte et description longue ;
 - tests internes ;
-- validation RGPD des donnees collecte es ;
+- validation RGPD des donnees collectees ;
 - procedure de suppression ou demande d'acces aux donnees.
 
 ## 6. Commandes utiles
@@ -115,8 +115,16 @@ npm run build:ios:production
 
 ## 7. Statut actuel
 
-- Expo SDK 57 : pret pour recette.
-- Connexion Supabase : active si variables presentes.
-- Envoi vers TVF OS : teste par script.
-- Photos multiples : implementees, a verifier sur telephone.
-- Publication store : non lancee, a preparer en phase dediee.
+- Expo SDK 57 : pret pour recette terrain.
+- Connexion Supabase : active si variables publiques presentes.
+- Envoi vers TVF OS : teste par script et operationnel.
+- Photos multiples : implementees, a verifier sur telephone avec camera et galerie.
+- Historique local : operationnel avec fiches cliquables et renvoi possible.
+- Documents : actionnables et relies aux bons parcours.
+- Publication store : non lancee, a traiter apres recette terrain et captures officielles.
+
+## 8. Decision de fin de chantier mobile
+
+TVF Mobile peut etre considere comme termine pour la phase preversion terrain.
+
+La prochaine etape n'est plus du developpement fonctionnel : c'est une recette reelle sur telephone, puis un build EAS preview si la recette est validee.

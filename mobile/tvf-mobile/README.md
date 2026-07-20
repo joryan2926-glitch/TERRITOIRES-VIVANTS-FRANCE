@@ -139,24 +139,57 @@ supabase/tvf-mobile-requests.sql
 supabase/verify-tvf-mobile-requests.sql
 ```
 
-## Suite fonctionnelle prevue
+## Statut de fin de preversion terrain
 
-- creation d'une demande dans Supabase ;
-- generation d'un numero de dossier TVF OS ;
-- upload photo dans Supabase Storage ;
-- stockage latitude/longitude dans le dossier de demande ;
-- notification e-mail vers TVF ;
-- accuse de reception vers l'utilisateur ;
-- suivi du statut depuis TVF OS ;
-- orientation depuis l'ecran Contact vers le bon parcours de demande ;
-- bibliotheque Documents plus complete et organisee par besoin.
+TVF Mobile est pret pour une recette terrain avec Expo Go SDK 57.
 
-## Points a valider avant publication native
+Fonctionnel actuellement :
 
-- libelles definitifs des formulaires ;
-- categories de signalement ;
-- categories de materiaux ;
-- documents affiches ;
-- niveau de detail demande a l'utilisateur ;
-- regles de confidentialite ;
-- integration complete avec les processus internes TVF OS.
+- creation d'une demande avec reference TVF locale ;
+- parcours signalement, materiaux, bien propose et benevolat ;
+- controles de champs obligatoires ;
+- validation simple e-mail et telephone ;
+- ajout de 1 a 4 photos ;
+- geolocalisation et adresse manuelle ;
+- envoi reel vers Supabase lorsque les variables publiques sont configurees ;
+- upload photo vers Supabase Storage ;
+- historique local des demandes ;
+- renvoi d'une demande non transmise ;
+- fiche detaillee avec statut, priorite, date, localisation et plan d'action ;
+- raccourcis Documents vers les bons formulaires ;
+- canaux officiels de contact TVF ;
+- test automatise de passage mobile vers TVF OS.
+
+Ce qui reste hors application pour une publication officielle :
+
+- realiser une recette sur telephone avec photo et GPS en conditions reelles ;
+- produire les captures officielles Android/iOS ;
+- publier ou rattacher la politique de confidentialite mobile ;
+- ouvrir/configurer les comptes developpeur Google Play et Apple si besoin ;
+- lancer un build EAS preview puis production ;
+- valider les textes store avant diffusion publique.
+
+## Verification finale recommandee
+
+Depuis `mobile/tvf-mobile` :
+
+```bash
+npm run check
+npm run test:supabase
+npm run start:lan
+```
+
+Depuis la racine du depot :
+
+```bash
+npm run test:mobile-os
+```
+
+Ensuite, tester sur Expo Go :
+
+1. Envoyer un signalement avec photo et GPS.
+2. Envoyer une proposition de materiaux avec plusieurs photos.
+3. Envoyer une proposition de bien.
+4. Envoyer une candidature benevole.
+5. Verifier que chaque demande apparait dans TVF OS.
+6. Ouvrir l'historique mobile et la fiche detaillee.
