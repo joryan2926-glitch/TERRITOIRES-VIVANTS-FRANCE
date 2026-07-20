@@ -94,7 +94,7 @@ Avant une version Play Store ou App Store, prevoir :
 - textes de fiche application prepares dans `STORE_LISTING.md` ;
 - compte developpeur Google Play ;
 - compte Apple Developer si diffusion iOS ;
-- configuration EAS Build ;
+- configuration EAS Build dans `eas.json` ;
 - nom, icone, description courte et description longue ;
 - tests internes ;
 - validation RGPD des donnees collecte es ;
@@ -108,6 +108,9 @@ npm run test:supabase
 npm run test:mobile-os
 npm run start:lan
 npm run start:tunnel
+npm run build:android:preview
+npm run build:android:production
+npm run build:ios:production
 ```
 
 ## 7. Statut actuel

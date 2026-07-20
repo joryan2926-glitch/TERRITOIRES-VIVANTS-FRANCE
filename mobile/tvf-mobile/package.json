@@ -12,7 +12,10 @@
     "start:clear": "expo start --clear",
     "start:lan": "expo start --clear --lan",
     "start:tunnel": "expo start --clear --tunnel",
-    "test:supabase": "node scripts/test-mobile-supabase.js"
+    "test:supabase": "node scripts/test-mobile-supabase.js",
+    "build:android:preview": "eas build --platform android --profile preview",
+    "build:android:production": "eas build --platform android --profile production",
+    "build:ios:production": "eas build --platform ios --profile production"
   },
   "dependencies": {
     "@expo/metro-runtime": "~57.0.6",
