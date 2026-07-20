@@ -32,7 +32,10 @@
       }
     },
     "extra": {
-      "projectPhase": "version-terrain-tvf-os-sdk-57"
+      "projectPhase": "version-terrain-tvf-os-sdk-57",
+      "eas": {
+        "projectId": "b2ab9bd8-f0c8-4f8a-97d1-0fd0ada4def0"
+      }
     },
     "plugins": [
       [
