@@ -120,7 +120,8 @@ for (const token of [
   "retryRequest",
   "photoCount",
   "releaseReadiness",
-  "fieldTestPlan"
+  "fieldTestPlan",
+  "trackingCardHead"
 ]) {
   if (!appSource.includes(token)) {
     console.error(`MISSING App.js token ${token}`);

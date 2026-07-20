@@ -986,26 +986,30 @@ function TrackingScreen({ lastSubmission, submissionHistory = [], openRequest })
       <Field label="E-mail, téléphone ou numéro TVF" value={query} onChangeText={setQuery} placeholder="TVF-SIG-000001" />
       <PrimaryButton secondary icon="refresh-outline" onPress={() => setSearched(true)}>Rechercher</PrimaryButton>
       {lastSubmission ? (
-        <View style={styles.trackingCard}>
-          <Text style={styles.trackingTitle}>Dernière demande sur ce téléphone</Text>
+        <TouchableOpacity style={styles.trackingCard} activeOpacity={0.86} onPress={() => openRequest?.(lastSubmission)}>
+          <View style={styles.trackingCardHead}>
+            <Text style={styles.trackingTitle}>Dernière demande sur ce téléphone</Text>
+            <Ionicons name="chevron-forward" size={18} color={colors.green} />
+          </View>
           <Text style={styles.summaryLine}>Numéro : {lastSubmission.reference}</Text>
           <Text style={styles.summaryLine}>Type : {lastSubmission.label}</Text>
           <Text style={styles.summaryLine}>Statut : {getLocalStatusLabel(lastSubmission)}</Text>
           <Text style={styles.summaryLine}>Date : {formatShortDate(lastSubmission.createdAt || lastSubmission.updatedAt)}</Text>
           <Text style={styles.summaryLine}>Transmission : {lastSubmission.syncMode === "supabase" ? "transmise vers TVF OS" : "locale ou à finaliser"}</Text>
-        </View>
+        </TouchableOpacity>
       ) : null}
       {visibleHistory.length ? (
         <View style={styles.trackingCard}>
           <Text style={styles.trackingTitle}>Historique de session</Text>
           {visibleHistory.map((item) => (
-            <View key={item.reference} style={styles.historyRow}>
+            <TouchableOpacity key={item.reference} style={styles.historyRow} activeOpacity={0.84} onPress={() => openRequest?.(item)}>
               <View style={styles.historyDot} />
               <View style={styles.historyText}>
                 <Text style={styles.historyReference}>{item.reference}</Text>
                 <Text style={styles.historyMeta}>{item.label || "Demande TVF"} · {getLocalStatusLabel(item)} · {formatShortDate(item.createdAt || item.updatedAt)}</Text>
               </View>
-            </View>
+              <Ionicons name="chevron-forward" size={16} color={colors.green} />
+            </TouchableOpacity>
           ))}
         </View>
       ) : null}
@@ -1911,6 +1915,7 @@ const styles = StyleSheet.create({
     ...shadow
   },
   trackingTitle: { color: colors.blue, fontWeight: "800", fontSize: 16, marginBottom: 12 },
+  trackingCardHead: { flexDirection: "row", alignItems: "center", justifyContent: "space-between", gap: 12 },
   historyRow: { flexDirection: "row", gap: 10, alignItems: "flex-start", paddingVertical: 8, borderTopWidth: 1, borderTopColor: colors.line },
   historyDot: { width: 10, height: 10, borderRadius: 99, backgroundColor: colors.green, marginTop: 5 },
   historyText: { flex: 1 },
