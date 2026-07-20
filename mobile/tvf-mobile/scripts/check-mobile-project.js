@@ -164,6 +164,31 @@ for (const token of ["supabase.storage.from", "mobile_requests", "photo_bucket",
   }
 }
 
+const textFilesToCheck = [
+  "App.js",
+  "src/data.js",
+  "src/theme.js",
+  "src/services/requestPayload.js",
+  "src/services/requestRepository.js",
+  "src/services/supabaseClient.js",
+  "README.md",
+  "FIELD_TEST_REPORT.md",
+  "RELEASE_CHECKLIST.md",
+  "PRIVACY_MOBILE.md",
+  "STORE_LISTING.md",
+  "SUPABASE_ACTIVATION.md",
+  "BUILD_PREVIEW_GUIDE.md"
+];
+
+const mojibakePattern = new RegExp("[\\u00c3\\u00c2\\ufffd]");
+for (const file of textFilesToCheck) {
+  const content = fs.readFileSync(path.join(root, file), "utf8");
+  if (mojibakePattern.test(content)) {
+    console.error(`MOBILE_ENCODING_MOJIBAKE ${file}`);
+    ok = false;
+  }
+}
+
 for (const sqlFile of ["supabase/tvf-mobile-requests.sql", "supabase/verify-tvf-mobile-requests.sql"]) {
   const fullPath = path.join(repoRoot, sqlFile);
   if (!fs.existsSync(fullPath)) {
