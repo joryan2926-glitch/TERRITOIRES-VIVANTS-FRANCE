@@ -14,6 +14,7 @@ const required = [
   "SUPABASE_ACTIVATION.md",
   "RELEASE_CHECKLIST.md",
   "FIELD_TEST_REPORT.md",
+  "BUILD_PREVIEW_GUIDE.md",
   "PRIVACY_MOBILE.md",
   "STORE_LISTING.md",
   "eas.json",

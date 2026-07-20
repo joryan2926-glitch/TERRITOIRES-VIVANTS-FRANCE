@@ -57,6 +57,7 @@ La procedure de verification avant diffusion est detaillee dans [`RELEASE_CHECKL
 Le rapport de recette terrain a remplir est disponible dans [`FIELD_TEST_REPORT.md`](./FIELD_TEST_REPORT.md).
 Le cadrage confidentialite mobile est prepare dans [`PRIVACY_MOBILE.md`](./PRIVACY_MOBILE.md).
 Les textes de fiche application sont prepares dans [`STORE_LISTING.md`](./STORE_LISTING.md).
+Le guide de build APK preview est disponible dans [`BUILD_PREVIEW_GUIDE.md`](./BUILD_PREVIEW_GUIDE.md).
 ## Prerequis
 
 - Node.js 20 LTS recommande.
