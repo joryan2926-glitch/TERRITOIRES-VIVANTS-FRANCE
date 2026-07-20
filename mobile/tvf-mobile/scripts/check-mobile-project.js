@@ -84,7 +84,8 @@ for (const dependency of [
   "react-native-url-polyfill",
   "@opentelemetry/api",
   "@expo/ngrok",
-  "@react-native-async-storage/async-storage"
+  "@react-native-async-storage/async-storage",
+  "eas-cli"
 ]) {
   if (!dependencies[dependency]) {
     console.error(`MISSING dependency ${dependency}`);

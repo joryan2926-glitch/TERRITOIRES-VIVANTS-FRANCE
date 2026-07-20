@@ -27,6 +27,14 @@ A utiliser uniquement lorsque :
 
 Important : ne jamais integrer de cle `service_role` dans l'application mobile.
 
+
+Statut actuel :
+
+- `eas-cli` est installe comme dependance de developpement du projet ;
+- `npx eas whoami` fonctionne mais indique `Not logged in` tant que le compte Expo n'est pas connecte ;
+- l'audit npm signale des alertes sur des dependances de l'ecosysteme Expo/EAS ;
+- ne pas lancer `npm audit fix --force`, car la correction proposee est destructive et incompatible avec la stabilite SDK 57.
+
 ## 3. Controle avant build
 
 Depuis `mobile/tvf-mobile` :
