@@ -13,6 +13,7 @@ const required = [
   ".nvmrc",
   "SUPABASE_ACTIVATION.md",
   "RELEASE_CHECKLIST.md",
+  "FIELD_TEST_REPORT.md",
   "PRIVACY_MOBILE.md",
   "STORE_LISTING.md",
   "eas.json",
