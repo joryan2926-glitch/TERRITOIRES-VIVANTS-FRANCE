@@ -1673,8 +1673,8 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-  safeArea: { flex: 1, backgroundColor: colors.cream },
-  app: { flex: 1, backgroundColor: colors.cream },
+  safeArea: { flex: 1, backgroundColor: colors.white },
+  app: { flex: 1, backgroundColor: colors.white },
   header: {
     paddingHorizontal: 18,
     paddingTop: 8,

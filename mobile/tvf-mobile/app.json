@@ -28,7 +28,7 @@
       ],
       "adaptiveIcon": {
         "foregroundImage": "./assets/tvf-mobile-logo.png",
-        "backgroundColor": "#F7FAF4"
+        "backgroundColor": "#FFFFFF"
       }
     },
     "extra": {
@@ -43,11 +43,11 @@
         {
           "image": "./assets/tvf-mobile-logo.png",
           "resizeMode": "contain",
-          "backgroundColor": "#F7FAF4"
+          "backgroundColor": "#FFFFFF"
         }
       ]
     ],
-    "backgroundColor": "#F7FAF4",
+    "backgroundColor": "#FFFFFF",
     "scheme": "tvfmobile",
     "description": "Application terrain de Territoires Vivants France pour signaler, localiser et transmettre des demandes vers TVF OS.",
     "primaryColor": "#2E7D32"
