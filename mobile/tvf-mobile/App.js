@@ -921,6 +921,48 @@ Transmission : ${item.syncMode === "supabase" ? "transmise" : "à finaliser"}`;
     </ScrollView>
   );
 }
+function FollowUpTicket({ request }) {
+  if (!request?.reference) return null;
+  const flow = getRequestFlow(request);
+  const isSent = request.syncMode === "supabase";
+  const hasContact = Boolean(request.email || request.phone || request?.payload?.contact?.email || request?.payload?.contact?.phone);
+  const nextAction = isSent
+    ? "Attendre la qualification TVF ou préparer les pièces utiles."
+    : "Renvoyer la demande ou contacter TVF avec cette référence.";
+  const contactHint = hasContact ? "TVF dispose d'un contact pour la suite." : "Ajoutez un e-mail ou téléphone si TVF doit vous recontacter.";
+
+  return (
+    <View style={styles.followTicket}>
+      <View style={styles.followTicketHead}>
+        <View style={styles.followTicketIcon}>
+          <Ionicons name="receipt-outline" size={20} color={colors.white} />
+        </View>
+        <View style={styles.followTicketTitleWrap}>
+          <Text style={styles.followTicketTitle}>Ticket de suivi</Text>
+          <Text style={styles.followTicketRef}>{request.reference}</Text>
+        </View>
+      </View>
+      <View style={styles.followTicketGrid}>
+        <View style={styles.followTicketCell}>
+          <Text style={styles.followTicketLabel}>Parcours</Text>
+          <Text style={styles.followTicketValue}>{flowLabels[flow] || "Demande TVF"}</Text>
+        </View>
+        <View style={styles.followTicketCell}>
+          <Text style={styles.followTicketLabel}>État</Text>
+          <Text style={styles.followTicketValue}>{getLocalStatusLabel(request)}</Text>
+        </View>
+      </View>
+      <View style={styles.followTicketNoteRow}>
+        <Ionicons name="arrow-forward-circle-outline" size={18} color={colors.green} />
+        <Text style={styles.followTicketNote}>{nextAction}</Text>
+      </View>
+      <View style={styles.followTicketNoteRow}>
+        <Ionicons name="person-circle-outline" size={18} color={colors.green} />
+        <Text style={styles.followTicketNote}>{contactHint}</Text>
+      </View>
+    </View>
+  );
+}
 function RequestActionPlan({ request }) {
   const items = getActionPlanItems(request);
   const flow = getRequestFlow(request);
@@ -987,7 +1029,7 @@ function RequestDetailScreen({ request, goBack, goTracking, retryRequest, retryi
         <Text style={styles.summaryTitle}>Message de transmission</Text>
         <Text style={styles.summaryLine}>{request.syncMessage || "Aucun message complémentaire enregistré."}</Text>
       </View>
-      <RequestActionPlan request={request} />
+      <FollowUpTicket request={request} />
       {requestCanBeRetried(request) ? (
         <PrimaryButton icon="cloud-upload-outline" loading={retryingReference === request.reference} onPress={() => retryRequest(request)}>
           {retryingReference === request.reference ? "Renvoi en cours..." : "Renvoyer vers TVF OS"}
@@ -1294,6 +1336,7 @@ function ConfirmationScreen({ lastSubmission, goHome, goTracking, retryRequest, 
         <Text style={styles.reference}>{data.reference}</Text>
         <Text style={styles.confirmText}>{isSent ? "Votre demande est prête à être traitée par TVF." : "Votre demande est conservée sur ce téléphone avec sa référence."}</Text>
         <TransmissionStatusCard data={data} isSent={isSent} isError={isError} />
+        <FollowUpTicket request={data} />
         <View style={styles.summaryCard}>
           <Text style={styles.summaryTitle}>Récapitulatif</Text>
           <Text style={styles.summaryLine}>Type : {data.label || "Non renseigné"}</Text>
