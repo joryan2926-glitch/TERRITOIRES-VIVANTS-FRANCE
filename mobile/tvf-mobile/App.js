@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+﻿import React, { useEffect, useMemo, useState } from "react";
 import {
   ActivityIndicator,
   Alert,
@@ -320,6 +320,57 @@ function Card({ icon, title, subtitle, onPress, primary }) {
       </View>
       <Ionicons name="chevron-forward" size={19} color={primary ? colors.white : colors.muted} />
     </TouchableOpacity>
+  );
+}
+
+
+function WelcomeScreen({ enter }) {
+  const highlights = [
+    ["alert-circle-outline", "Signaler", "Lieu vacant, friche ou depot observe"],
+    ["cube-outline", "Proposer", "Materiaux, bien ou aide terrain"],
+    ["file-tray-full-outline", "Suivre", "Reference TVF conservee sur le telephone"]
+  ];
+  const steps = ["Je localise", "Je decris", "TVF qualifie"];
+  return (
+    <ScrollView contentContainerStyle={styles.welcomeScreen} showsVerticalScrollIndicator={false}>
+      <View style={styles.welcomeCircleOne} />
+      <View style={styles.welcomeCircleTwo} />
+      <View style={styles.welcomeHeaderBlock}>
+        <View style={styles.welcomeLogoCard}>
+          <Image source={logo} style={styles.welcomeLogo} />
+        </View>
+        <Text style={styles.welcomeKicker}>TERRITOIRES VIVANTS FRANCE</Text>
+        <Text style={styles.welcomeTitle}>TVF Mobile</Text>
+        <Text style={styles.welcomeLead}>
+          L'application terrain pour signaler un lieu, proposer des ressources et transmettre une demande exploitable a TVF.
+        </Text>
+      </View>
+      <View style={styles.welcomeStepRow}>
+        {steps.map((item, index) => (
+          <View key={item} style={styles.welcomeStepPill}>
+            <Text style={styles.welcomeStepNumber}>{index + 1}</Text>
+            <Text style={styles.welcomeStepText}>{item}</Text>
+          </View>
+        ))}
+      </View>
+      <View style={styles.welcomeCards}>
+        {highlights.map(([icon, title, subtitle]) => (
+          <View key={title} style={styles.welcomeCard}>
+            <View style={styles.welcomeCardIcon}>
+              <Ionicons name={icon} size={20} color={colors.green} />
+            </View>
+            <View style={styles.welcomeCardText}>
+              <Text style={styles.welcomeCardTitle}>{title}</Text>
+              <Text style={styles.welcomeCardSubtitle}>{subtitle}</Text>
+            </View>
+          </View>
+        ))}
+      </View>
+      <View style={styles.welcomeActionWrap}>
+        <PrimaryButton onPress={enter} icon="arrow-forward-outline">Entrer dans TVF Mobile</PrimaryButton>
+        <Text style={styles.welcomeFootnote}>Signaler. Localiser. Agir.</Text>
+      </View>
+    </View>
   );
 }
 
@@ -1437,8 +1488,8 @@ function BottomNav({ screen, go }) {
 }
 
 function AppShell() {
-  const [screen, setScreen] = useState("home");
-  const [history, setHistory] = useState(["home"]);
+  const [screen, setScreen] = useState("welcome");
+  const [history, setHistory] = useState(["welcome"]);
   const [draft, setDraft] = useState(initialDraft);
   const [lastSubmission, setLastSubmission] = useState(null);
   const [submissionHistory, setSubmissionHistory] = useState([]);
@@ -1589,6 +1640,8 @@ function AppShell() {
   };
   const content = useMemo(() => {
     switch (screen) {
+      case "welcome":
+        return <WelcomeScreen enter={() => go("home")} />;
       case "signal":
         return <SignalScreen draft={draft} setDraft={setDraft} submit={submit} missing={missing} submitting={submitting} />;
       case "materials":
@@ -1615,13 +1668,15 @@ function AppShell() {
     }
   }, [screen, draft, lastSubmission, submissionHistory, selectedRequest, missing, submitting, retryingReference, draftReady, draftRestored]);
 
+  const isOpening = screen === "welcome";
+
   return (
     <SafeAreaView style={styles.safeArea}>
       <StatusBar style="dark" />
       <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : undefined} style={styles.app}>
-        <AppHeader screen={screen} onBack={back} onContact={() => go("contact")} />
-        <View style={styles.main}>{content}</View>
-        <BottomNav screen={screen} go={go} />
+        {!isOpening ? <AppHeader screen={screen} onBack={back} onContact={() => go("contact")} /> : null}
+        <View style={[styles.main, isOpening && styles.mainOpening]}>{content}</View>
+        {!isOpening ? <BottomNav screen={screen} go={go} /> : null}
       </KeyboardAvoidingView>
     </SafeAreaView>
   );
@@ -1663,6 +1718,110 @@ const styles = StyleSheet.create({
   },
   headerButtonMuted: { opacity: 0.75 },
   main: { flex: 1 },
+  mainOpening: { backgroundColor: colors.white },
+  welcomeScreen: {
+    flex: 1,
+    backgroundColor: colors.white,
+    paddingHorizontal: 22,
+    paddingTop: 28,
+    paddingBottom: 24,
+    justifyContent: "space-between",
+    overflow: "hidden"
+  },
+  welcomeCircleOne: {
+    position: "absolute",
+    width: 260,
+    height: 260,
+    borderRadius: 130,
+    backgroundColor: "#EAF3EA",
+    top: -82,
+    right: -96
+  },
+  welcomeCircleTwo: {
+    position: "absolute",
+    width: 180,
+    height: 180,
+    borderRadius: 90,
+    backgroundColor: "rgba(178,132,24,0.11)",
+    bottom: -56,
+    left: -72
+  },
+  welcomeHeaderBlock: { alignItems: "center", paddingTop: 14 },
+  welcomeLogoCard: {
+    width: 142,
+    height: 142,
+    borderRadius: 42,
+    backgroundColor: colors.white,
+    alignItems: "center",
+    justifyContent: "center",
+    borderWidth: 1,
+    borderColor: colors.line,
+    marginBottom: 18,
+    ...shadow
+  },
+  welcomeLogo: { width: 118, height: 118, borderRadius: 34 },
+  welcomeKicker: {
+    color: colors.gold,
+    fontSize: 12,
+    fontWeight: "900",
+    letterSpacing: 1.2,
+    textAlign: "center"
+  },
+  welcomeTitle: {
+    color: colors.blue,
+    fontSize: 40,
+    lineHeight: 46,
+    fontWeight: "900",
+    textAlign: "center",
+    marginTop: 8
+  },
+  welcomeLead: {
+    color: colors.muted,
+    fontSize: 15.5,
+    lineHeight: 23,
+    fontWeight: "650",
+    textAlign: "center",
+    marginTop: 12,
+    maxWidth: 340
+  },
+  welcomeStepRow: { flexDirection: "row", gap: 8, marginTop: 10 },
+  welcomeStepPill: {
+    flex: 1,
+    backgroundColor: colors.soft,
+    borderRadius: 999,
+    borderWidth: 1,
+    borderColor: colors.line,
+    paddingVertical: 9,
+    paddingHorizontal: 8,
+    alignItems: "center"
+  },
+  welcomeStepNumber: { color: colors.green, fontSize: 13, fontWeight: "900" },
+  welcomeStepText: { color: colors.blue, fontSize: 11.5, fontWeight: "800", marginTop: 2, textAlign: "center" },
+  welcomeCards: { gap: 10, marginTop: 18 },
+  welcomeCard: {
+    backgroundColor: colors.white,
+    borderRadius: radius.lg,
+    borderWidth: 1,
+    borderColor: colors.line,
+    padding: 13,
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 12,
+    ...shadow
+  },
+  welcomeCardIcon: {
+    width: 44,
+    height: 44,
+    borderRadius: 16,
+    backgroundColor: colors.soft,
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  welcomeCardText: { flex: 1 },
+  welcomeCardTitle: { color: colors.blue, fontSize: 15.5, fontWeight: "900" },
+  welcomeCardSubtitle: { color: colors.muted, fontSize: 12.5, fontWeight: "650", lineHeight: 18, marginTop: 2 },
+  welcomeActionWrap: { gap: 10, marginTop: 18 },
+  welcomeFootnote: { color: colors.green, textAlign: "center", fontSize: 12.5, fontWeight: "900", letterSpacing: 0.8 },
   content: { padding: 18, paddingBottom: 30 },
   screenTitle: { marginBottom: 16 },
   eyebrow: {
