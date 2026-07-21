@@ -48,9 +48,9 @@
 
       <section class="admin-kpi-strip" data-admin-kpis aria-label="Indicateurs demandes">
         <article><span>Total affiche</span><strong>0</strong><small>Demandes selon filtres</small></article>
-        <article data-tone="warning"><span>A qualifier</span><strong>0</strong><small>Priorite de traitement</small></article>
-        <article data-tone="urgent"><span>En retard</span><strong>0</strong><small>Echeance depassee</small></article>
-        <article><span>Rendez-vous</span><strong>0</strong><small>Demandes a planifier</small></article>
+        <article data-tone="warning"><span>A qualifier</span><strong>0</strong><small>Priorité de traitement</small></article>
+        <article data-tone="urgent"><span>En retard</span><strong>0</strong><small>Échéance dépassée</small></article>
+        <article><span>Rendez-vous</span><strong>0</strong><small>Demandes à planifier</small></article>
         <article><span>Score moyen</span><strong>0%</strong><small>Qualification dossier</small></article>
       </section>
 
@@ -81,7 +81,7 @@
             <option value="archive">Archive</option>
           </select>
         </label>
-        <label>Priorite
+        <label>Priorité
           <select name="priority">
             <option value="all">Toutes</option>
             <option value="normale">Normale</option>
@@ -89,17 +89,17 @@
             <option value="urgente">Urgente</option>
           </select>
         </label>
-        <label>Categorie
+        <label>Catégorie
           <select name="category">
             <option value="all">Toutes</option>
-            <option value="collectivite-territoire">Collectivite</option>
+            <option value="collectivite-territoire">Collectivité</option>
             <option value="bien-vacant-proprietaire">Bien vacant</option>
-            <option value="materiaux-reemploi">Materiaux</option>
+            <option value="materiaux-reemploi">Matériaux</option>
             <option value="entreprise-partenariat">Entreprise / contribution</option>
-            <option value="benevolat-insertion">Benevolat / insertion</option>
+            <option value="benevolat-insertion">Bénévolat / insertion</option>
             <option value="financement-mecenat">Financement</option>
             <option value="presse-institutionnel">Presse</option>
-            <option value="demande-generale">Generale</option>
+            <option value="demande-generale">Générale</option>
           </select>
         </label>
       </form>
@@ -123,13 +123,13 @@
         <aside class="admin-detail" data-admin-detail aria-label="Detail de la demande">
           <div class="admin-detail-empty">
             <p class="section-kicker">Detail</p>
-            <h3>Selectionnez une demande</h3>
+            <h3>Sélectionnez une demande</h3>
           </div>
         </aside>
       </div>
     </section>
 
-    <section class="admin-modal" data-admin-create-modal hidden aria-label="Creation manuelle d'une demande">
+    <section class="admin-modal" data-admin-create-modal hidden aria-label="Création manuelle d'une demande">
       <div class="admin-modal-panel">
         <div class="admin-modal-head">
           <div>
@@ -141,7 +141,7 @@
         <form class="admin-create-form" data-admin-create-form>
           <label>Canal
             <select name="channel">
-              <option value="telephone">Telephone</option>
+              <option value="telephone">Téléphone</option>
               <option value="email">E-mail</option>
               <option value="whatsapp">WhatsApp</option>
               <option value="rendez_vous">Rendez-vous</option>
@@ -158,22 +158,22 @@
             <input name="subject" type="text" placeholder="Ex. Bien vacant a qualifier">
           </label>
           <label class="admin-create-wide">Message
-            <textarea name="message" rows="7" placeholder="Resume de l'appel, de l'e-mail, du WhatsApp ou du rendez-vous"></textarea>
+            <textarea name="message" rows="7" placeholder="Résumé de l'appel, de l'e-mail, du WhatsApp ou du rendez-vous"></textarea>
           </label>
-          <label>Categorie
+          <label>Catégorie
             <select name="category">
               <option value="">IA propose automatiquement</option>
-              <option value="collectivite-territoire">Collectivite</option>
+              <option value="collectivite-territoire">Collectivité</option>
               <option value="bien-vacant-proprietaire">Bien vacant</option>
-              <option value="materiaux-reemploi">Materiaux</option>
+              <option value="materiaux-reemploi">Matériaux</option>
               <option value="entreprise-partenariat">Entreprise / contribution</option>
-              <option value="benevolat-insertion">Benevolat / insertion</option>
+              <option value="benevolat-insertion">Bénévolat / insertion</option>
               <option value="financement-mecenat">Financement</option>
               <option value="presse-institutionnel">Presse</option>
-              <option value="demande-generale">Generale</option>
+              <option value="demande-generale">Générale</option>
             </select>
           </label>
-          <label>Priorite
+          <label>Priorité
             <select name="priority">
               <option value="">IA propose automatiquement</option>
               <option value="normale">P3 - Normale</option>
