@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "check": "npm run check:encoding && npm run check:js && npm run check:documents && npm run test:admin && npm run test:user-flow && npm run test:tvf-os-flow",
+    "check": "npm run check:encoding && npm run check:js && npm run check:documents && npm run test:admin && npm run test:user-flow && npm run test:tvf-os-flow && npm run check:mobile:production",
     "check:js": "node scripts/check-js.js",
     "check:documents": "node scripts/check-document-downloads.js",
     "test:admin": "node scripts/run-admin-api-tests.js",
@@ -13,6 +13,7 @@
     "check:encoding": "node scripts/check-encoding.js",
     "test:user-flow": "node tests/user-flow-tvf-os.test.js",
     "test:mobile-os": "node scripts/test-mobile-tvf-os-real.js",
-    "test:tvf-os-flow": "node scripts/check-tvf-os-operational-flow.js"
+    "test:tvf-os-flow": "node scripts/check-tvf-os-operational-flow.js",
+    "check:mobile:production": "npm --prefix mobile/tvf-mobile run check:production"
   }
 }

@@ -15,7 +15,8 @@
     "test:supabase": "node scripts/test-mobile-supabase.js",
     "build:android:preview": "eas build --platform android --profile preview",
     "build:android:production": "eas build --platform android --profile production",
-    "build:ios:production": "eas build --platform ios --profile production"
+    "build:ios:production": "eas build --platform ios --profile production",
+    "check:production": "node scripts/check-production-readiness.js"
   },
   "dependencies": {
     "@expo/metro-runtime": "~57.0.6",
