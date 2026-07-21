@@ -18,7 +18,11 @@
   </header>
   <main id="work-main" class="admin-shell work-shell">
     <section class="admin-app work-app" data-work-app hidden>
-      <div class="admin-toolbar"><div><p class="section-kicker">Pilotage quotidien</p><h2>Voir ce qui est a faire, quand, et par qui</h2><p data-work-count>Chargement du planning...</p></div><div class="admin-toolbar-actions"><button class="btn primary" type="button" data-work-create>Nouvel element</button><button class="btn secondary" type="button" data-work-refresh>Actualiser</button><button class="btn secondary" type="button" data-work-export>Exporter CSV</button><button class="btn ghost" type="button" data-work-logout>Deconnexion</button></div></div>
+      <div class="admin-toolbar"><div><p class="section-kicker">Pilotage quotidien</p><h2>Voir ce qui est a faire, quand, et par qui</h2><p data-work-count>Chargement du planning...</p><div class="admin-workflow-compact" aria-label="Parcours taches"><span>1 Prioriser</span><span>2 Affecter</span><span>3 Faire</span><span>4 Tracer</span><span>5 Cloturer</span></div></div><div class="admin-toolbar-actions"><button class="btn primary" type="button" data-work-create>Nouvel element</button><button class="btn secondary" type="button" data-work-refresh>Actualiser</button><button class="btn secondary" type="button" data-work-export>Exporter CSV</button><button class="btn ghost" type="button" data-work-logout>Deconnexion</button></div></div>
+      <section class="admin-operator-strip work-operator-strip" aria-label="Mode operatoire taches">
+        <div class="admin-panel-head"><div><p class="section-kicker">Mode operatoire</p><h3>Une tache doit avoir un responsable, une echeance et un resultat attendu</h3></div></div>
+        <div class="admin-operator-steps"><article><strong>Priorite</strong><span>Identifier retards, P1 et actions sans responsable.</span></article><article><strong>Execution</strong><span>Demarrer, reporter, terminer ou rattacher au dossier concerne.</span></article><article><strong>Trace</strong><span>Conserver la suite prevue pour retrouver l'information.</span></article></div>
+      </section>
       <section class="work-kpis" data-work-kpis></section>
       <section class="work-queue-panel" data-work-queue aria-label="File de travail quotidienne"></section>
       <section class="work-briefing-panel" data-work-briefing aria-label="Brief operationnel du jour"></section>
