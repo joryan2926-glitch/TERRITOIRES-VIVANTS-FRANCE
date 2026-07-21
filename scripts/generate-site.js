@@ -1,4 +1,4 @@
-﻿const fs = require("fs");
+const fs = require("fs");
 const path = require("path");
 
 const site = {
@@ -209,6 +209,7 @@ const pages = [
       ),
       homeClaritySection(),
       homeTrustSection(),
+      tvfOsTrackingSection(),
       launchNeedsSection(),
       tableSection("Ce que vous pouvez faire dès maintenant", "L'accueil doit orienter vite vers le bon parcours, sans perdre le visiteur dans tout le site.", [
         ["Votre situation", "Action utile", "Page à consulter"],
@@ -664,6 +665,7 @@ const pages = [
         ["Je souhaite financer", "Soutenir un projet avec un cadre de suivi et de transparence.", "financeurs-mecenes.html"],
       ]),
       fastJourneySection(),
+      tvfOsTrackingSection(),
       launchNeedsSection(),
       tableSection("Parcours d'entrée", "Chaque demande doit être orientée vers une suite lisible.", [
         ["Profil", "Ce que vous pouvez proposer", "Première étape", "Suite possible"],
@@ -1480,6 +1482,7 @@ const pages = [
       contactDetailsSection(),
       socialContactSection(),
       contactSection(),
+      tvfOsTrackingSection(),
       firstMeetingSection(),
       tableSection("Informations utiles à transmettre", "Ces éléments facilitent un premier tri sans créer d'engagement automatique.", [
         ["Type de demande", "Informations à préparer", "Document conseillé"],
@@ -1966,6 +1969,9 @@ function partnerPreparationSection() {
   return `<section class="section soft partner-prep" ${sectionAttrs("Pièces à préparer avant étude", "pieces-a-preparer")}><div class="container"><div class="section-head"><p class="section-kicker">Pré-instruction</p><h2>Pièces à préparer avant étude de la demande</h2><p class="section-lead">Ces listes ne créent aucun engagement. Elles servent uniquement à vérifier si la demande peut être étudiée, orientée ou transformée ensuite en dossier complet.</p></div><div class="prep-grid">${groups.map(([id, title, items]) => `<article id="${id}" class="prep-card"><h3>${title}</h3><ul>${items.map((item) => `<li>${item}</li>`).join("")}</ul><a class="text-link" href="${hrefFor("contact.html")}">Transmettre ces éléments</a></article>`).join("")}</div></div></section>`;
 }
 
+function tvfOsTrackingSection() {
+  return `<section class="section soft" ${sectionAttrs("Comment votre demande est suivie", "suivi-demande-tvf-os")}><div class="container"><div class="section-head"><p class="section-kicker">Suivi TVF OS</p><h2>Votre demande entre dans un parcours clair.</h2><p class="section-lead">TVF OS est l'outil interne qui permet à Territoires Vivants France de centraliser les demandes, d'éviter les pertes d'information et de suivre chaque sujet jusqu'à sa réponse ou son orientation.</p></div><div class="feature-grid"><article><span class="card-icon" aria-hidden="true">1</span><h3>Réception</h3><p>La demande peut arriver depuis le formulaire du site, un e-mail, TVF Mobile, WhatsApp ou un rendez-vous. Elle est enregistrée avec sa source et son objet.</p></article><article><span class="card-icon" aria-hidden="true">2</span><h3>Numéro de dossier</h3><p>Lorsque la situation peut être instruite, TVF crée une référence interne afin de rattacher les échanges, pièces, photos, décisions et prochaines étapes.</p></article><article><span class="card-icon" aria-hidden="true">3</span><h3>Statut lisible</h3><p>Le dossier peut être classé en réception, à compléter, en instruction, en attente, orienté, accepté, refusé ou clôturé selon l'avancement réel.</p></article><article><span class="card-icon" aria-hidden="true">4</span><h3>Pièces et historique</h3><p>Les documents utiles, commentaires, demandes complémentaires et décisions sont rattachés au dossier pour conserver une trace claire du traitement.</p></article></div><div class="compact-note"><strong>À retenir :</strong> envoyer une demande ne vaut pas acceptation automatique. TVF OS sert à qualifier, prioriser, documenter et répondre avec un cadre plus professionnel.</div></div></section>`;
+}
 function cards(title, intro, items) {
   return `<section class="section soft" ${sectionAttrs(title)}><div class="container"><div class="section-head"><p class="section-kicker">Repères</p><h2>${title}</h2><p class="section-lead">${intro}</p></div><div class="card-grid">${items
     .map(([h, p, href]) => `<article class="card"><span class="card-icon" aria-hidden="true">${iconFor(h)}</span><h3>${h}</h3><p>${p}</p>${href ? smartCardLink(h, href) : ""}</article>`)
