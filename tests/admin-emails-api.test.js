@@ -1,4 +1,4 @@
-﻿const assert = require("assert");
+const assert = require("assert");
 const handler = require("../lib/api/admin-emails");
 const { normalizeSupabaseRestUrl, inferCategory, inferPriority, analyzeEmail, emailPayload, taskPayload } = handler._private;
 
@@ -42,6 +42,44 @@ async function testDashboardAndCreate() {
     assert.strictEqual(created.json.email.category, "local_authority");
     assert.ok(created.json.suggestion.payload.draft_response);
   } finally { global.fetch = originalFetch; }
+}async function testWebhookEmailToRequest() {
+  process.env.TVF_ADMIN_TOKEN = "secret";
+  process.env.TVF_EMAIL_WEBHOOK_SECRET = "mail-secret";
+  process.env.SUPABASE_URL = "https://demo.supabase.co";
+  process.env.SUPABASE_SERVICE_ROLE_KEY = "sb_secret_demo";
+  const originalFetch = global.fetch;
+  const calls = [];
+  global.fetch = async (url, options = {}) => {
+    const u = String(url);
+    const method = options.method || "GET";
+    const body = options.body ? JSON.parse(options.body) : null;
+    if (u.includes("/email_messages?select=*") && method === "POST") {
+      calls.push("email_messages");
+      assert.strictEqual(body.to_email, "contact@territoiresvivantsfrance.fr");
+      return mockResponse([{ id: "00000000-0000-0000-0000-00000000e001", ...body }], 201);
+    }
+    if (u.includes("/email_workflow_events?select=*") && method === "POST") return mockResponse([{ id: "00000000-0000-0000-0000-00000000e002", ...body }], 201);
+    if (u.includes("/email_ai_suggestions?select=*") && method === "POST") return mockResponse([{ id: "00000000-0000-0000-0000-00000000e003", ...body }], 201);
+    if (u.includes("/email_tasks?select=*") && method === "POST") return mockResponse([{ id: "00000000-0000-0000-0000-00000000e004", ...body }], 201);
+    if (u.includes("/email_messages?select=*") && method === "GET") return mockResponse([{ id: "00000000-0000-0000-0000-00000000e001", from_email: "mairie@example.fr", from_name: "Mairie", to_email: "contact@territoiresvivantsfrance.fr", subject: "Local vacant", body_text: "Bonjour, la commune souhaite echanger sur un local vacant.", status: "analyzed", priority: "P2", category: "local_authority", pole: "Collectivites & Territoires", missing_pieces: ["territoire concerne"], next_action: "Qualifier", next_action_due_at: "2026-07-07T10:00:00.000Z" }]);
+    if (u.includes("/contacts?select=*") && method === "POST") {
+      calls.push("contacts");
+      assert.strictEqual(body.channel, "email");
+      assert.strictEqual(body.category, "collectivite-territoire");
+      return mockResponse([{ id: "00000000-0000-0000-0000-00000000c001", ...body }], 201);
+    }
+    if (u.includes("/email_messages?") && method === "PATCH") return mockResponse([{ id: "00000000-0000-0000-0000-00000000e001", status: "converted", contact_id: "00000000-0000-0000-0000-00000000c001" }]);
+    throw new Error("Unexpected webhook URL " + method + " " + u);
+  };
+  try {
+    const result = await runHandler({ method: "POST", url: "/api/admin-emails?webhook_secret=mail-secret", token: "", body: { type: "email_to_request", from_email: "mairie@example.fr", from_name: "Mairie", subject: "Local vacant", body_text: "Bonjour, la commune souhaite echanger sur un local vacant." } });
+    assert.strictEqual(result.statusCode, 201);
+    assert.strictEqual(result.json.contact.category, "collectivite-territoire");
+    assert.deepStrictEqual(calls, ["email_messages", "contacts"]);
+  } finally {
+    global.fetch = originalFetch;
+    delete process.env.TVF_EMAIL_WEBHOOK_SECRET;
+  }
 }
-async function main() { testRules(); await testUnauthorized(); await testDashboardAndCreate(); console.log("Emails API tests passed"); }
+async function main() { testRules(); await testUnauthorized(); await testDashboardAndCreate(); await testWebhookEmailToRequest(); console.log("Emails API tests passed"); }
 main().catch((error) => { console.error(error); process.exit(1); });

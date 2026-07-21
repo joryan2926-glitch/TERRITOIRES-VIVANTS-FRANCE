@@ -515,6 +515,38 @@ async function testPatchEndpointWithSupabaseMock() {
   }
 }
 
+async function testOperationalResetWithSupabaseMock() {
+  process.env.NODE_ENV = "test";
+  process.env.TVF_ADMIN_TOKEN = "secret";
+  process.env.SUPABASE_URL = "https://demo.supabase.co";
+  process.env.SUPABASE_SERVICE_ROLE_KEY = "sb_secret_demo";
+
+  const calls = [];
+  const originalFetch = global.fetch;
+  global.fetch = async (url, options = {}) => {
+    const method = options.method || "GET";
+    const match = String(url).match(/\/rest\/v1\/([^?]+)/);
+    const table = match?.[1];
+    if (method === "DELETE") {
+      calls.push(table);
+      assert.ok(["email_workflow_events", "email_tasks", "email_ai_suggestions", "email_attachments", "email_messages", "mobile_requests", "contacts"].includes(table));
+      return { ok: true, status: 204, async text() { return ""; } };
+    }
+    if (table === "admin_audit_logs" && method === "POST") {
+      return { ok: true, status: 201, async text() { return "[]"; } };
+    }
+    throw new Error(`Unexpected reset call ${method} ${url}`);
+  };
+
+  try {
+    const result = await runHandler({ method: "POST", body: { type: "operational-reset" } });
+    assert.strictEqual(result.statusCode, 200);
+    assert.strictEqual(result.json.ok, true);
+    assert.deepStrictEqual(calls, ["email_workflow_events", "email_tasks", "email_ai_suggestions", "email_attachments", "email_messages", "mobile_requests", "contacts"]);
+  } finally {
+    global.fetch = originalFetch;
+  }
+}
 async function main() {
   testAssistantRules();
   testPayloadValidation();
@@ -526,6 +558,7 @@ async function main() {
   await testMobileImportWithSupabaseMock();
   await testMobileImportCaseWithSupabaseMock();
   await testPatchEndpointWithSupabaseMock();
+  await testOperationalResetWithSupabaseMock();
   console.log("Demandes entrantes API tests passed");
 }
 

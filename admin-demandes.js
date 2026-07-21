@@ -63,6 +63,7 @@ const countEl = document.querySelector("[data-admin-count]");
 const emptyEl = document.querySelector("[data-admin-empty]");
 const refreshButton = document.querySelector("[data-admin-refresh]");
 const exportButton = document.querySelector("[data-admin-export]");
+const resetButton = document.querySelector("[data-admin-reset]");
 const logoutButton = document.querySelector("[data-admin-logout]");
 const createButton = document.querySelector("[data-admin-create]");
 const createModal = document.querySelector("[data-admin-create-modal]");
@@ -624,6 +625,25 @@ function csvCell(value) {
   return `"${text.replace(/"/g, '""')}"`;
 }
 
+
+async function resetOperationalInbox() {
+  const first = window.confirm("Remettre a zero les demandes, e-mails et imports mobile affiches dans TVF OS ?");
+  if (!first) return;
+  const second = window.prompt("Tapez RESET pour confirmer la remise a zero.");
+  if (second !== "RESET") {
+    notify("Remise a zero annulee.", "info");
+    return;
+  }
+  await api("/api/admin-contacts", {
+    method: "POST",
+    body: JSON.stringify({ type: "operational-reset", reason: "Remise a zero demandee depuis TVF OS" }),
+  });
+  contacts = [];
+  mobileRequests = [];
+  selectedId = null;
+  notify("Boite de reception remise a zero.", "success");
+  await loadAll();
+}
 function exportContactsCsv() {
   const exportRows = visibleContacts();
   if (!exportRows.length) {
@@ -1082,6 +1102,7 @@ function bindEvents() {
   filtersForm?.addEventListener("change", () => loadContacts().catch((error) => notifyError(error)));
   refreshButton?.addEventListener("click", () => loadContacts().catch((error) => notifyError(error)));
   exportButton?.addEventListener("click", () => { if (exportContactsCsv()) notify("Export CSV prepare avec les filtres actifs.", "success"); });
+  resetButton?.addEventListener("click", () => resetOperationalInbox().catch((error) => notifyError(error, "Remise a zero impossible.")));
   logoutButton?.addEventListener("click", () => { setToken(""); window.location.href = "admin-login"; });
   createButton?.addEventListener("click", openCreateModal);
   createForm?.addEventListener("submit", createContactFromForm);
