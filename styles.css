@@ -1,4 +1,4 @@
-:root {
+﻿:root {
   --green-900: #183f22;
   --green-800: #245c2b;
   --green-700: #2a6c30;
@@ -9380,25 +9380,6 @@ td {
   }
 }
 /* TVF OS - praticite d'usage */
-.admin-workflow-compact {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 12px;
-}
-.admin-workflow-compact span {
-  display: inline-flex;
-  align-items: center;
-  min-height: 28px;
-  padding: 5px 10px;
-  border: 1px solid rgba(46, 125, 50, 0.14);
-  border-radius: 999px;
-  background: #f5fbf3;
-  color: var(--green-900);
-  font-size: 0.76rem;
-  font-weight: 820;
-  white-space: nowrap;
-}
 .admin-os-quicklink.is-neutral {
   background: rgba(255,255,255,0.075);
 }
@@ -9414,44 +9395,7 @@ td {
 }
 
 
-/* TVF OS - mode operatoire compact */
-.admin-operator-strip {
-  display: grid;
-  gap: 14px;
-  margin: 16px 0;
-  padding: 16px;
-  border: 1px solid rgba(14, 45, 69, 0.12);
-  border-radius: 12px;
-  background: linear-gradient(135deg, #ffffff 0%, #f6faf3 100%);
-}
-.admin-operator-strip .admin-panel-head {
-  margin: 0;
-}
-.admin-operator-steps {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 10px;
-}
-.admin-operator-steps article {
-  display: grid;
-  gap: 4px;
-  min-height: 88px;
-  padding: 13px;
-  border: 1px solid rgba(14, 45, 69, 0.1);
-  border-radius: 10px;
-  background: rgba(255,255,255,0.92);
-}
-.admin-operator-steps strong {
-  color: var(--green-800);
-  font-size: .92rem;
-}
-.admin-operator-steps span {
-  color: var(--muted);
-  font-size: .84rem;
-  line-height: 1.35;
-  font-weight: 640;
-}
-@media (max-width: 760px) {
-  .admin-operator-steps { grid-template-columns: 1fr; }
-  .admin-operator-steps article { min-height: auto; }
-}
+
+
+/* Notes explicatives masquees sur le site public */
+.table-scroll-hint { display: none !important; }
