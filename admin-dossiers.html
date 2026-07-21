@@ -53,7 +53,7 @@
       </nav>
       <form class="admin-filters cases-filters" data-cases-filters>
         <label>Recherche
-          <input name="q" type="search" placeholder="Numero, titre, territoire, responsable">
+          <input name="q" type="search" placeholder="Numéro, titre, territoire, responsable">
         </label>
         <label>Type
           <select name="case_type">
@@ -71,7 +71,7 @@
             <option value="autre">Autre</option>
           </select>
         </label>
-        <label>Priorite
+        <label>Priorité
           <select name="priority">
             <option value="all">Toutes</option>
             <option value="normale">Normale</option>
@@ -89,12 +89,12 @@
         <aside class="admin-detail cases-detail" data-cases-detail aria-label="Detail dossier">
           <div class="admin-detail-empty">
             <p class="section-kicker">Detail</p>
-            <h3>Selectionnez un dossier</h3>
+            <h3>Sélectionnez un dossier</h3>
           </div>
         </aside>
       </div>
     </section>
-    <section class="admin-modal" data-cases-modal hidden aria-label="Creation dossier">
+    <section class="admin-modal" data-cases-modal hidden aria-label="Création dossier">
       <div class="admin-modal-panel cases-modal-panel">
         <div class="admin-modal-head">
           <div><p class="section-kicker">Dossier client</p><h2>Nouveau dossier client</h2></div>
@@ -108,7 +108,7 @@
               <label>Origine du dossier<select name="intake_origin"><option value="saisie interne">Saisie interne</option><option value="appel telephone">Appel telephone</option><option value="rendez-vous">Rendez-vous</option><option value="visite terrain">Visite terrain</option><option value="courrier papier">Courrier papier</option><option value="whatsapp">WhatsApp</option><option value="autre">Autre</option></select></label>
               <label>Nom / structure<input name="client_name" required placeholder="Nom, structure ou organisme" /></label>
               <label>E-mail<input name="client_email" type="email" placeholder="contact@exemple.fr" /></label>
-              <label>Telephone<input name="client_phone" type="tel" placeholder="Téléphone" /></label>
+              <label>Téléphone<input name="client_phone" type="tel" placeholder="Téléphone" /></label>
               <label class="admin-create-wide">Adresse / commune<input name="client_address" placeholder="Adresse, commune, quartier" /></label>
             </div>
           </fieldset>
@@ -118,7 +118,7 @@
             <div class="cases-manual-grid">
               <label>Type de dossier<select name="case_type"><option value="bien_vacant">Bien vacant</option><option value="commerce_inoccupe">Commerce inoccupe</option><option value="materiaux">Materiaux</option><option value="friche_terrain">Friche / terrain</option><option value="collectivite">Collectivite</option><option value="entreprise">Entreprise</option><option value="benevole">Benevole / insertion</option><option value="financeur">Financement</option><option value="signalement">Signalement</option><option value="autre">Autre</option></select></label>
               <label>Thematique<select name="request_theme"><option value="proposer un bien">Proposer un bien</option><option value="proposer des materiaux">Proposer des materiaux</option><option value="demande de cooperation">Demande de cooperation</option><option value="demande de local ou stockage">Local / stockage</option><option value="transport et logistique">Transport / logistique</option><option value="chantier insertion">Chantier / insertion</option><option value="financement">Financement</option><option value="diagnostic territorial">Diagnostic territorial</option><option value="autre">Autre</option></select></label>
-              <label>Priorite<select name="priority"><option value="normale">Normale</option><option value="haute">Haute</option><option value="urgente">Urgente</option></select></label>
+              <label>Priorité<select name="priority"><option value="normale">Normale</option><option value="haute">Haute</option><option value="urgente">Urgente</option></select></label>
               <label>Statut initial<select name="status"><option value="qualification">Qualification</option><option value="instruction">Instruction</option><option value="attente_pieces">Attente pieces</option><option value="visite">Visite a prevoir</option><option value="ouvert">Ouvert</option></select></label>
               <label>Territoire<input name="territory" placeholder="Saint-Etienne, quartier, departement" /></label>
               <label>Responsable TVF<input name="assigned_to" placeholder="Referent TVF" /></label>

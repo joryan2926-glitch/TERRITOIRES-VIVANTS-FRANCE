@@ -24,7 +24,7 @@
       <a class="btn secondary" href="dashboard">Tableau de bord</a>
       <a class="btn secondary" href="admin-demandes">Demandes</a>
       <a class="btn secondary" href="admin-dossiers">Dossiers</a>
-      <a class="btn secondary" href="admin-work">Taches</a>
+      <a class="btn secondary" href="admin-work">Tâches</a>
       <a class="btn secondary" href="contact">Retour au site</a>
     </div>
   </header>
@@ -94,7 +94,7 @@
 
       <form class="admin-filters documents-filters" data-documents-filters>
         <label>Recherche
-          <input name="q" type="search" placeholder="Numero, titre, resume, classement">
+          <input name="q" type="search" placeholder="Numéro, titre, résumé, classement">
         </label>
         <label>Type document
           <select name="document_type">
@@ -143,12 +143,12 @@
       <div class="admin-layout documents-layout">
         <section class="admin-list documents-list" aria-label="Liste documents">
           <div data-documents-list class="admin-request-list"></div>
-          <p class="form-note" data-documents-empty hidden>Aucun element ne correspond aux filtres.</p>
+          <p class="form-note" data-documents-empty hidden>Aucun élément ne correspond aux filtres.</p>
         </section>
         <aside class="admin-detail documents-detail" data-documents-detail aria-label="Detail document">
           <div class="admin-detail-empty">
             <p class="section-kicker">Detail</p>
-            <h3>Selectionnez un document</h3>
+            <h3>Sélectionnez un document</h3>
           </div>
         </aside>
       </div>
@@ -168,14 +168,14 @@
           <label>Rattachement<select name="related_object_type"><option value="none">Aucun</option><option value="case">Dossier</option><option value="request">Demande</option><option value="contact">Contact</option><option value="organization">Organisation</option><option value="project">Projet</option></select></label>
           <label>ID rattache<input name="related_object_id" placeholder="UUID si connu"></label>
           <label class="admin-create-wide">Fichier<input name="file" type="file" accept=".pdf,.docx,.xlsx,.pptx,.txt,.md,.csv,.jpg,.jpeg,.png,.webp,application/pdf,image/*"></label>
-          <label class="admin-create-wide">Resume / classement<textarea name="summary" rows="4" placeholder="Contexte, pieces sensibles, dossier concerne"></textarea></label>
+          <label class="admin-create-wide">Résumé / classement<textarea name="summary" rows="4" placeholder="Contexte, pièces sensibles, dossier concerné"></textarea></label>
           <div class="admin-detail-actions admin-create-wide"><button class="btn primary" type="submit">Deposer</button><button class="btn secondary" type="button" data-documents-close-modal>Annuler</button></div>
           <p class="form-note admin-create-wide" data-documents-modal-status hidden></p>
         </form>
       </div>
     </section>
 
-    <section class="admin-modal" data-templates-modal hidden aria-label="Creation modele">
+    <section class="admin-modal" data-templates-modal hidden aria-label="Création modèle">
       <div class="admin-modal-panel documents-modal-panel">
         <div class="admin-modal-head">
           <div><p class="section-kicker">Modele</p><h2>Nouveau modele</h2></div>

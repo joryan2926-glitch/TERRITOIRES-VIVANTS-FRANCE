@@ -47,7 +47,7 @@
       <section class="crm-kpis knowledge-kpis" data-knowledge-kpis aria-label="Indicateurs connaissance"></section>
 
       <section class="admin-ai-panel knowledge-question-panel">
-        <div class="admin-panel-head"><div><p class="section-kicker">Question TVF</p><h3>Reponse avec sources</h3></div></div>
+        <div class="admin-panel-head"><div><p class="section-kicker">Question TVF</p><h3>Réponse avec sources</h3></div></div>
         <form data-knowledge-question-form class="knowledge-question-form">
           <input name="question" placeholder="Ex. Quelles pieces demander pour un bien vacant ?">
           <button class="btn secondary" type="submit">Demander</button>
@@ -97,19 +97,19 @@
       <div class="admin-layout knowledge-layout">
         <section class="admin-list knowledge-list" aria-label="Liste connaissance">
           <div data-knowledge-list class="admin-request-list"></div>
-          <p class="form-note" data-knowledge-empty hidden>Aucun element ne correspond aux filtres.</p>
+          <p class="form-note" data-knowledge-empty hidden>Aucun élément ne correspond aux filtres.</p>
         </section>
         <aside class="admin-detail knowledge-detail" data-knowledge-detail aria-label="Detail connaissance">
           <div class="admin-detail-empty">
             <p class="section-kicker">Detail</p>
-            <h3>Selectionnez un article</h3>
+            <h3>Sélectionnez un article</h3>
             <p>Chaque connaissance doit etre sourcee, revisee et validee avant usage par les equipes.</p>
           </div>
         </aside>
       </div>
     </section>
 
-    <section class="admin-modal" data-knowledge-modal hidden aria-label="Creation article">
+    <section class="admin-modal" data-knowledge-modal hidden aria-label="Création article">
       <div class="admin-modal-panel knowledge-modal-panel">
         <div class="admin-modal-head"><div><p class="section-kicker">Connaissance</p><h2>Nouvel article</h2></div><button class="btn ghost" type="button" data-knowledge-close-modal>Fermer</button></div>
         <form class="admin-create-form knowledge-create-form" data-knowledge-form>
@@ -118,8 +118,8 @@
           <label>Statut<select name="status"><option value="brouillon">Brouillon</option><option value="a_valider">A valider</option><option value="valide">Valide</option></select></label>
           <label>Confidentialite<select name="confidentiality_level"><option value="interne">Interne</option><option value="confidentiel">Confidentiel</option><option value="sensible">Sensible</option><option value="public">Public</option></select></label>
           <label class="admin-create-wide">Tags<input name="tags" placeholder="bien vacant, pieces, instruction"></label>
-          <label class="admin-create-wide">Resume<input name="summary" placeholder="Synthese courte utilisable par l'assistant"></label>
-          <label class="admin-create-wide">Contenu<textarea name="content" rows="7" placeholder="Reponse, methode, limites, sources a citer"></textarea></label>
+          <label class="admin-create-wide">Résumé<input name="summary" placeholder="Synthèse courte utilisable par l'assistant"></label>
+          <label class="admin-create-wide">Contenu<textarea name="content" rows="7" placeholder="Réponse, méthode, limites, sources à citer"></textarea></label>
           <div class="admin-detail-actions admin-create-wide"><button class="btn primary" type="submit">Creer</button><button class="btn secondary" type="button" data-knowledge-close-modal>Annuler</button></div>
           <p class="form-note admin-create-wide" data-knowledge-modal-status hidden></p>
         </form>

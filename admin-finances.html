@@ -78,19 +78,19 @@
       <div class="finances-layout admin-layout">
         <section class="admin-list finances-list" aria-label="Liste finances">
           <div data-finances-list class="admin-request-list"></div>
-          <p class="form-note" data-finances-empty hidden>Aucun element ne correspond aux filtres.</p>
+          <p class="form-note" data-finances-empty hidden>Aucun élément ne correspond aux filtres.</p>
         </section>
         <aside class="admin-detail finances-detail" data-finances-detail aria-label="Detail finances">
           <div class="admin-detail-empty">
             <p class="section-kicker">Detail</p>
-            <h3>Selectionnez un element</h3>
+            <h3>Sélectionnez un élément</h3>
             <p>Controlez budget, depenses, justificatifs, obligations et reporting.</p>
           </div>
         </aside>
       </div>
     </section>
 
-    <section class="admin-modal" data-finances-modal hidden aria-label="Creation finances">
+    <section class="admin-modal" data-finances-modal hidden aria-label="Création finances">
       <div class="admin-modal-panel finances-modal-panel">
         <div class="admin-modal-head">
           <div>
@@ -112,11 +112,11 @@
           <label class="finances-field-funder">Type financeur<select name="funder_type"><option value="public">Public</option><option value="foundation">Fondation</option><option value="corporate">Entreprise</option><option value="private">Prive</option><option value="individual">Particulier</option><option value="institution">Institution</option><option value="other">Autre</option></select></label>
           <label class="finances-field-funder">Email<input name="contact_email" type="email" placeholder="contact@..."></label>
           <label class="finances-field-opportunity">Type financement<select name="opportunity_type"><option value="grant">Subvention</option><option value="call_for_projects">Appel a projets</option><option value="sponsorship">Mecenat</option><option value="donation">Don</option><option value="public_subsidy">Aide publique</option><option value="loan">Pret</option><option value="other">Autre</option></select></label>
-          <label class="finances-field-opportunity">Echeance<input name="deadline_at" type="date"></label>
+          <label class="finances-field-opportunity">Échéance<input name="deadline_at" type="date"></label>
           <label class="finances-field-application">Montant demande<input name="requested_amount" inputmode="decimal" placeholder="0"></label>
           <label class="finances-field-payment">Statut paiement<select name="payment_status"><option value="pending">En attente</option><option value="succeeded">Reussi</option><option value="failed">Echoue</option><option value="refunded">Rembourse</option></select></label>
           <label class="finances-field-report">Type reporting<select name="report_type"><option value="funder_report">Financeur</option><option value="budget_review">Revue budget</option><option value="expense_summary">Depenses</option><option value="grant_report">Subvention</option></select></label>
-          <label class="finances-field-report">Echeance reporting<input name="due_at" type="date"></label>
+          <label class="finances-field-report">Échéance reporting<input name="due_at" type="date"></label>
           <label class="admin-create-wide">Notes / synthese<textarea name="summary" rows="5" placeholder="Restrictions, obligations, justificatifs, contexte"></textarea></label>
           <div class="admin-detail-actions admin-create-wide">
             <button class="btn primary" type="submit">Creer</button>
