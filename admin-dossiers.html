@@ -33,6 +33,13 @@
           <p class="section-kicker">Instruction</p>
           <h2>Suivre chaque dossier jusqu'a decision ou cloture</h2>
           <p data-cases-count>Chargement des dossiers...</p>
+          <div class="admin-workflow-compact" aria-label="Parcours dossier">
+            <span>1 Fichier client</span>
+            <span>2 Pieces</span>
+            <span>3 Instruction</span>
+            <span>4 Decision</span>
+            <span>5 Suivi</span>
+          </div>
         </div>
         <div class="admin-toolbar-actions">
           <button class="btn primary" type="button" data-cases-create>Nouveau dossier</button>
@@ -43,6 +50,19 @@
       </div>
       <section class="crm-kpis cases-kpis" data-cases-kpis aria-label="Indicateurs dossiers"></section>
       <section class="cases-priority-panel" data-cases-priority-panel aria-label="Synthese operationnelle des dossiers"></section>
+      <section class="admin-operator-strip cases-operator-strip" aria-label="Mode operatoire dossiers">
+        <div class="admin-panel-head">
+          <div>
+            <p class="section-kicker">Mode operatoire</p>
+            <h3>Un dossier = un contact, un besoin, des pieces, une prochaine action</h3>
+          </div>
+        </div>
+        <div class="admin-operator-steps">
+          <article><strong>Contact</strong><span>Coordonnees et structure rattachees au dossier.</span></article>
+          <article><strong>Besoin</strong><span>Type, thematique, territoire et objectif clairement poses.</span></article>
+          <article><strong>Instruction</strong><span>Pieces, vigilance, taches et decision tracees au meme endroit.</span></article>
+        </div>
+      </section>
       <nav class="admin-status-tabs cases-tabs" aria-label="Vues dossiers">
         <button type="button" data-case-status="all" class="is-active">Tous</button>
         <button type="button" data-case-status="qualification">Qualification</button>

@@ -9412,3 +9412,46 @@ td {
   .admin-module-groups { gap: 10px; }
   .admin-module-links a { min-height: 39px; padding-block: 7px; }
 }
+
+
+/* TVF OS - mode operatoire compact */
+.admin-operator-strip {
+  display: grid;
+  gap: 14px;
+  margin: 16px 0;
+  padding: 16px;
+  border: 1px solid rgba(14, 45, 69, 0.12);
+  border-radius: 12px;
+  background: linear-gradient(135deg, #ffffff 0%, #f6faf3 100%);
+}
+.admin-operator-strip .admin-panel-head {
+  margin: 0;
+}
+.admin-operator-steps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+.admin-operator-steps article {
+  display: grid;
+  gap: 4px;
+  min-height: 88px;
+  padding: 13px;
+  border: 1px solid rgba(14, 45, 69, 0.1);
+  border-radius: 10px;
+  background: rgba(255,255,255,0.92);
+}
+.admin-operator-steps strong {
+  color: var(--green-800);
+  font-size: .92rem;
+}
+.admin-operator-steps span {
+  color: var(--muted);
+  font-size: .84rem;
+  line-height: 1.35;
+  font-weight: 640;
+}
+@media (max-width: 760px) {
+  .admin-operator-steps { grid-template-columns: 1fr; }
+  .admin-operator-steps article { min-height: auto; }
+}
