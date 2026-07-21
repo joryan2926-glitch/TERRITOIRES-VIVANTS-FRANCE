@@ -13,6 +13,7 @@
     "check:encoding": "node scripts/check-encoding.js",
     "test:user-flow": "node tests/user-flow-tvf-os.test.js",
     "test:mobile-os": "node scripts/test-mobile-tvf-os-real.js",
+    "test:email-webhook": "node scripts/test-email-webhook-tvf-os.js",
     "test:tvf-os-flow": "node scripts/check-tvf-os-operational-flow.js",
     "check:mobile:production": "npm --prefix mobile/tvf-mobile run check:production"
   }

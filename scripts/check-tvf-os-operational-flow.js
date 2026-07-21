@@ -40,10 +40,12 @@ const requiredFiles = [
   "lib/api/admin-cases.js",
   "lib/api/admin-documents.js",
   "scripts/test-mobile-tvf-os-real.js",
+  "scripts/test-email-webhook-tvf-os.js",
   "SUIVI_OPERATIONNEL_FORMULAIRES.md",
   "documents/procedure-reporting-mensuel-tvf-os.md",
   "documents/modele-synthese-mensuelle-tvf-os.md",
   "documents/tableau-pilotage-quotidien-tvf-os.md",
+  "documents/procedure-connexion-email-officiel-tvf-os.md",
 ];
 
 requiredFiles.forEach(assertFile);
@@ -54,10 +56,12 @@ const checks = [
   ["admin-documents.js", ["Bibliotheque interne TVF", "Liste des pieces par demande", "Convention valorisation de materiaux", "Courriers types prets a envoyer"]],
   ["admin-dossiers.js", ["case_number", "status", "priority"]],
   ["scripts/test-mobile-tvf-os-real.js", ["mobile_requests", "mobile-import-case", "cleanup(created)", "TVF_MOBILE_TO_OS_OK"]],
+  ["scripts/test-email-webhook-tvf-os.js", ["TVF_EMAIL_WEBHOOK_SECRET", "email_to_request", "TVF_EMAIL_WEBHOOK_TO_REQUEST_OK"]],
   ["SUIVI_OPERATIONNEL_FORMULAIRES.md", ["Formulaire public", "TVF Mobile", "dossier d'instruction", "Documents", "type courte", "procedure-reporting-mensuel-tvf-os.md", "modele-synthese-mensuelle-tvf-os.md", "tableau-pilotage-quotidien-tvf-os.md"]],
   ["documents/procedure-reporting-mensuel-tvf-os.md", ["reporting mensuel", "Demandes recues", "Dossiers", "Documents", "Regles de prudence"]],
   ["documents/modele-synthese-mensuelle-tvf-os.md", ["Synthese mensuelle TVF OS", "Indicateurs du mois", "Dossiers a suivre", "Pieces manquantes", "Regles de diffusion"]],
   ["documents/tableau-pilotage-quotidien-tvf-os.md", ["Tableau de pilotage quotidien TVF OS", "Routine du matin", "Tableau du jour", "Relances a envoyer", "Fin de journee"]],
+  ["documents/procedure-connexion-email-officiel-tvf-os.md", ["contact@territoiresvivantsfrance.fr", "TVF_EMAIL_WEBHOOK_SECRET", "npm run test:email-webhook"]],
 ];
 
 checks.forEach(([file, tokens]) => assertIncludes(file, tokens));
