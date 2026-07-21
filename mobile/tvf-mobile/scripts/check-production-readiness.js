@@ -122,5 +122,15 @@ for (const token of ["Donnees collectees selon l'usage", "Donnees non collectees
   requireIncludes(dataSafety, token, "DATA_SAFETY_MOBILE.md");
 }
 
+const releaseNotes = requireFile("RELEASE_NOTES.md");
+for (const token of ["0.1.0 - Production candidate terrain", "Fonctionnalites disponibles", "Limites connues", "Decision recommandee"]) {
+  requireIncludes(releaseNotes, token, "RELEASE_NOTES.md");
+}
+
+const distributionPlan = requireFile("INTERNAL_DISTRIBUTION_PLAN.md");
+for (const token of ["Plan de diffusion interne", "Regles de diffusion", "Go / No-Go apres diffusion interne", "Message court a envoyer aux testeurs"]) {
+  requireIncludes(distributionPlan, token, "INTERNAL_DISTRIBUTION_PLAN.md");
+}
+
 if (!ok) process.exit(1);
 console.log("TVF_MOBILE_PRODUCTION_READINESS_OK");
