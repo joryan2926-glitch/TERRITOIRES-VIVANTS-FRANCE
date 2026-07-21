@@ -1143,6 +1143,33 @@ function DocumentsScreen({ go }) {
     }
   ];
 
+  const readinessFiles = [
+    {
+      title: "Propriétaire / bien dormant",
+      icon: "home-outline",
+      required: ["Identité et moyen de contact", "Adresse complète du bien", "Description de l'état général", "Objectif recherché"],
+      useful: ["Photos autorisées", "Éléments de propriété", "Contraintes connues", "Disponibilités pour échange"]
+    },
+    {
+      title: "Matériaux / équipements",
+      icon: "cube-outline",
+      required: ["Nature des matériaux", "Quantité ou dimensions", "État général", "Lieu de stockage"],
+      useful: ["Photos du lot", "Date limite de disponibilité", "Conditions d'accès", "Contact opérationnel"]
+    },
+    {
+      title: "Signalement terrain",
+      icon: "location-outline",
+      required: ["Adresse ou repère fiable", "Type de situation", "Description factuelle"],
+      useful: ["Photo prise légalement", "Coordonnées si suivi souhaité", "Indication d'urgence visible"]
+    },
+    {
+      title: "Bénévolat / compétences",
+      icon: "people-outline",
+      required: ["Nom et prénom", "E-mail", "Compétences ou disponibilités"],
+      useful: ["Zone d'intervention", "Téléphone", "Expérience utile", "Créneaux possibles"]
+    }
+  ];
+
   return (
     <ScrollView contentContainerStyle={styles.content}>
       <ScreenTitle eyebrow="Documents" title="Préparer une demande solide">
@@ -1174,8 +1201,35 @@ function DocumentsScreen({ go }) {
             ))}
           </TouchableOpacity>
         ))}
+        <View style={styles.readinessSection}>
+          <Text style={styles.readinessSectionTitle}>Pièces à préparer selon le besoin</Text>
+          <Text style={styles.readinessSectionText}>Ces éléments permettent à TVF de qualifier la demande plus vite. Ils ne remplacent pas l'instruction du dossier.</Text>
+          {readinessFiles.map((file) => (
+            <View key={file.title} style={styles.readinessCard}>
+              <View style={styles.readinessHead}>
+                <View style={styles.readinessIcon}><Ionicons name={file.icon} size={18} color={colors.white} /></View>
+                <Text style={styles.readinessTitle}>{file.title}</Text>
+              </View>
+              <Text style={styles.readinessLabel}>Indispensable</Text>
+              {file.required.map((item) => (
+                <View key={item} style={styles.readinessRow}>
+                  <Ionicons name="checkmark-circle-outline" size={16} color={colors.green2} />
+                  <Text style={styles.readinessText}>{item}</Text>
+                </View>
+              ))}
+              <Text style={styles.readinessLabel}>Utile si disponible</Text>
+              {file.useful.map((item) => (
+                <View key={item} style={styles.readinessRow}>
+                  <Ionicons name="add-circle-outline" size={16} color={colors.gold} />
+                  <Text style={styles.readinessText}>{item}</Text>
+                </View>
+              ))}
+            </View>
+          ))}
+        </View>
+
         <View style={styles.groupCard}>
-          <Text style={styles.groupTitle}>Recette terrain Expo Go</Text>
+          <Text style={styles.groupTitle}>Contrôle interne Expo Go</Text>
           {fieldTestPlan.map((track) => (
             <View key={track.title} style={styles.testTrackCard}>
               <View style={styles.testTrackHead}>
