@@ -87,7 +87,7 @@ A verifier sur telephone :
 
 Avant une version Play Store ou App Store, prevoir :
 
-- politique de confidentialite mobile publiee ;
+- politique de confidentialite mobile publiee : https://www.territoiresvivantsfrance.fr/confidentialite-mobile ;
 - cadrage interne disponible dans `PRIVACY_MOBILE.md` ;
 - conditions d'utilisation si necessaire ;
 - captures officielles Android et iOS ;
@@ -138,7 +138,21 @@ Points encore manuels avant publication publique :
 
 - build EAS preview ou production a lancer manuellement si necessaire ;
 - captures officielles stores ;
-- URL publique de confidentialite mobile ;
+- URL publique de confidentialite mobile : https://www.territoiresvivantsfrance.fr/confidentialite-mobile ;
 - questionnaire securite des donnees ;
 - validation compte Google Play / Apple Developer ;
 - validation RGPD finale.
+
+## 10. Checklist store finale
+
+| Element | Statut | Action restante |
+| --- | --- | --- |
+| Application Expo SDK 57 | Pret | Continuer les tests sur telephone reel avant publication |
+| Connexion Supabase | Pret si variables presentes | Refaire un test avant build production |
+| Remontee TVF OS | Operationnelle | Verifier une demande mobile juste avant diffusion |
+| Politique confidentialite mobile | Prete | Utiliser l'URL publique dans les stores |
+| Textes store | Prets | Relire avant depot officiel |
+| Questionnaire securite des donnees | Prepare | Copier les reponses dans Google Play Console |
+| Captures officielles | A produire | Generer depuis un build preview propre |
+| Build EAS production | Manuel | Lancer depuis un terminal connecte au compte Expo |
+| Publication store | Manuelle | Deposer dans Google Play Console / App Store Connect |

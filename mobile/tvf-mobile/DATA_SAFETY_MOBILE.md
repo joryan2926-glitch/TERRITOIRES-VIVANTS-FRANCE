@@ -76,7 +76,7 @@ Demandes possibles :
 | Question | Reponse preparee |
 | --- | --- |
 | L'application collecte-t-elle des donnees ? | Oui |
-| Les donnees sont-elles chiffrees en transit ? | A confirmer selon configuration Supabase / HTTPS |
+| Les donnees sont-elles chiffrees en transit ? | Oui, transmission via HTTPS/Supabase ; a revalider dans le formulaire store final |
 | Les donnees peuvent-elles etre supprimees ? | Oui, via demande a TVF |
 | Les donnees sont-elles partagees avec des tiers ? | Non a des fins commerciales ; stockage technique Supabase |
 | L'application utilise-t-elle la localisation ? | Oui, uniquement si autorisee et pour localiser une demande |
@@ -94,3 +94,15 @@ Avant publication officielle :
 - sous-traitants techniques ;
 - procedure de suppression ;
 - mentions compatibles avec le site TVF.
+## 9. Matrice permissions mobile
+
+| Permission | Utilisation TVF Mobile | Obligatoire ? | Alternative sans permission |
+| --- | --- | --- | --- |
+| Camera | Prendre une photo de terrain pour documenter une demande | Non | Choisir une photo existante ou envoyer sans photo |
+| Photos / galerie | Ajouter une photo deja presente sur le telephone | Non | Envoyer la demande sans photo |
+| Localisation precise | Positionner un lieu, un bien ou un stock de materiaux | Non | Saisir une adresse ou une commune manuellement |
+| Localisation approximative | Aider a situer la commune ou le secteur | Non | Saisie manuelle |
+
+## 10. Formulation store recommandee
+
+TVF Mobile utilise les permissions uniquement lorsque l'utilisateur choisit une action qui en a besoin : ajouter une photo ou localiser une demande. L'application ne collecte pas la localisation en arriere-plan et n'accede pas aux contacts, SMS, appels ou donnees de paiement du telephone.

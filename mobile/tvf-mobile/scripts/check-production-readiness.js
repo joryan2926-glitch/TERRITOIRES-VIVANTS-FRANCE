@@ -132,6 +132,10 @@ for (const token of ["Plan de diffusion interne", "Regles de diffusion", "Go / N
   requireIncludes(distributionPlan, token, "INTERNAL_DISTRIBUTION_PLAN.md");
 }
 
+const storePack = requireFile("STORE_PUBLICATION_PACK.md");
+for (const token of ["Pack de publication store", "Confidentialite", "Description longue prete a l'emploi", "Permissions a declarer"]) {
+  requireIncludes(storePack, token, "STORE_PUBLICATION_PACK.md");
+}
 const publicPrivacy = requireFile("../../confidentialite-mobile.html");
 for (const token of ["Confidentialité de TVF Mobile", "Photos et localisation", "Droits des personnes", "contact@territoiresvivantsfrance.fr"]) {
   requireIncludes(publicPrivacy, token, "confidentialite-mobile.html");

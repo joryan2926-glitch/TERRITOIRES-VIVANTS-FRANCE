@@ -65,3 +65,23 @@ Territoires Vivants France, TVF, revitalisation, logement vacant, commerce ferme
 - Valider les captures d'ecran sur Android et iOS.
 - Tester les permissions camera, photos et localisation.
 - Tester une demande complete jusqu'a TVF OS.
+## Informations de publication a copier
+
+| Champ store | Contenu recommande |
+| --- | --- |
+| Nom court | TVF Mobile |
+| Nom complet | TVF Mobile - Signaler, localiser, agir |
+| Categorie | Outils / Productivite / Vie locale, selon le store |
+| Site web | https://www.territoiresvivantsfrance.fr |
+| URL de confidentialite publique | https://www.territoiresvivantsfrance.fr/confidentialite-mobile |
+| Contact support | contact@territoiresvivantsfrance.fr |
+| Telephone officiel | 04 65 81 54 69 |
+| Public vise | Citoyens, proprietaires, entreprises, benevoles et equipes TVF |
+
+## Positionnement a afficher sobrement
+
+TVF Mobile est un outil de terrain pour transmettre une demande a Territoires Vivants France. L'application ne remplace pas une instruction administrative, une expertise technique ou une decision de renovation. Elle facilite la collecte d'informations utiles pour qu'une demande puisse etre qualifiee, orientee puis, si elle est recevable, rattachee a un dossier dans TVF OS.
+
+## Message de confiance recommande
+
+Les informations transmises depuis TVF Mobile sont utilisees uniquement pour qualifier la demande et permettre un traitement interne par Territoires Vivants France. Les photos et la localisation restent volontaires. Aucune donnee de paiement, aucun contact du telephone et aucune localisation en arriere-plan ne sont collectes.
