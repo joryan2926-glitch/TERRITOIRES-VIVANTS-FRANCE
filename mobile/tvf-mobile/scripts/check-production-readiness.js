@@ -136,9 +136,24 @@ const storePack = requireFile("STORE_PUBLICATION_PACK.md");
 for (const token of ["Pack de publication store", "Confidentialite", "Description longue prete a l'emploi", "Permissions a declarer"]) {
   requireIncludes(storePack, token, "STORE_PUBLICATION_PACK.md");
 }
+const captureReadme = requireFile("store-assets/README.md");
+for (const token of ["TVF Mobile - Dossier captures officielles", "Regle de nommage", "01-accueil-parcours.png", "08-contact-tvf.png"]) {
+  requireIncludes(captureReadme, token, "store-assets/README.md");
+}
+
+const captureChecklist = requireFile("store-assets/CAPTURE_CHECKLIST.md");
+for (const token of ["Checklist de prise de captures", "Sequence officielle", "Controle final"]) {
+  requireIncludes(captureChecklist, token, "store-assets/CAPTURE_CHECKLIST.md");
+}
+
+const screenshotCopy = requireFile("store-assets/SCREENSHOT_COPY.md");
+for (const token of ["Textes associes aux captures", "Choisir un parcours", "Contacter TVF"]) {
+  requireIncludes(screenshotCopy, token, "store-assets/SCREENSHOT_COPY.md");
+}
 const publicPrivacy = requireFile("../../confidentialite-mobile.html");
 for (const token of ["Confidentialité de TVF Mobile", "Photos et localisation", "Droits des personnes", "contact@territoiresvivantsfrance.fr"]) {
   requireIncludes(publicPrivacy, token, "confidentialite-mobile.html");
 }
 if (!ok) process.exit(1);
 console.log("TVF_MOBILE_PRODUCTION_READINESS_OK");
+
