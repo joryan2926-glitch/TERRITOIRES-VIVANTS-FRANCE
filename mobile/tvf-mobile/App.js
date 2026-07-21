@@ -374,6 +374,22 @@ function WelcomeScreen({ enter }) {
   );
 }
 
+
+function HomeActionTile({ icon, title, subtitle, onPress, primary }) {
+  return (
+    <TouchableOpacity style={[styles.homeTile, primary && styles.homeTilePrimary]} onPress={onPress} activeOpacity={0.86}>
+      <View style={[styles.homeTileIcon, primary && styles.homeTileIconPrimary]}>
+        <Ionicons name={icon} size={22} color={primary ? colors.green : colors.green} />
+      </View>
+      <Text style={[styles.homeTileTitle, primary && styles.homeTileTitlePrimary]}>{title}</Text>
+      <Text style={[styles.homeTileSubtitle, primary && styles.homeTileSubtitlePrimary]}>{subtitle}</Text>
+      <View style={[styles.homeTileArrow, primary && styles.homeTileArrowPrimary]}>
+        <Ionicons name="arrow-forward" size={14} color={primary ? colors.green : colors.white} />
+      </View>
+    </TouchableOpacity>
+  );
+}
+
 function Field({ label, value = "", onChangeText = () => {}, placeholder, multiline, keyboardType, autoCapitalize = "sentences", required, hint }) {
   return (
     <View style={styles.fieldGroup}>
@@ -736,6 +752,8 @@ function HomeScreen({ go, draftRestored, dismissDraft }) {
   const fieldActions = homeActions.filter((action) => ["signal", "materials", "property", "volunteer"].includes(action.key));
   const supportActions = homeActions.filter((action) => ["requests", "tracking"].includes(action.key));
 
+  const openAction = (action) => go(action.key, { resetDraft: ["signal", "materials", "property", "volunteer"].includes(action.key) });
+
   const renderAction = (action) => (
     <Card
       key={action.key}
@@ -743,7 +761,18 @@ function HomeScreen({ go, draftRestored, dismissDraft }) {
       title={action.title}
       subtitle={action.subtitle}
       primary={action.primary}
-      onPress={() => go(action.key, { resetDraft: ["signal", "materials", "property", "volunteer"].includes(action.key) })}
+      onPress={() => openAction(action)}
+    />
+  );
+
+  const renderTile = (action) => (
+    <HomeActionTile
+      key={action.key}
+      icon={action.icon}
+      title={action.title}
+      subtitle={action.subtitle}
+      primary={action.primary}
+      onPress={() => openAction(action)}
     />
   );
 
@@ -793,7 +822,7 @@ function HomeScreen({ go, draftRestored, dismissDraft }) {
           <Text style={styles.actionSectionTitle}>Agir sur le terrain</Text>
           <Text style={styles.actionSectionSubtitle}>Créer une demande nouvelle.</Text>
         </View>
-        <View style={styles.stack}>{fieldActions.map(renderAction)}</View>
+        <View style={styles.homeTileGrid}>{fieldActions.map(renderTile)}</View>
       </View>
       <View style={styles.actionSection}>
         <View style={styles.actionSectionHeader}>
@@ -1720,7 +1749,7 @@ const styles = StyleSheet.create({
   main: { flex: 1 },
   mainOpening: { backgroundColor: colors.white },
   welcomeScreen: {
-    flex: 1,
+    flexGrow: 1,
     backgroundColor: colors.white,
     paddingHorizontal: 22,
     paddingTop: 28,
@@ -1967,6 +1996,49 @@ const styles = StyleSheet.create({
   actionSectionTitle: { color: colors.blue, fontSize: 18, fontWeight: "900" },
   actionSectionSubtitle: { color: colors.muted, fontSize: 12.8, fontWeight: "600", marginTop: 2 },
   stack: { gap: 12 },
+  homeTileGrid: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    gap: 10
+  },
+  homeTile: {
+    width: "48%",
+    minHeight: 164,
+    backgroundColor: colors.white,
+    borderRadius: radius.lg,
+    borderWidth: 1,
+    borderColor: colors.line,
+    padding: 13,
+    position: "relative",
+    ...shadow
+  },
+  homeTilePrimary: { backgroundColor: colors.green, borderColor: colors.green },
+  homeTileIcon: {
+    width: 43,
+    height: 43,
+    borderRadius: 16,
+    backgroundColor: colors.soft,
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 12
+  },
+  homeTileIconPrimary: { backgroundColor: colors.white },
+  homeTileTitle: { color: colors.blue, fontSize: 15.5, lineHeight: 19, fontWeight: "900", marginBottom: 6 },
+  homeTileTitlePrimary: { color: colors.white },
+  homeTileSubtitle: { color: colors.muted, fontSize: 12, lineHeight: 16.5, fontWeight: "650", paddingRight: 4 },
+  homeTileSubtitlePrimary: { color: "rgba(255,255,255,0.86)" },
+  homeTileArrow: {
+    position: "absolute",
+    right: 12,
+    bottom: 12,
+    width: 27,
+    height: 27,
+    borderRadius: 999,
+    backgroundColor: colors.green,
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  homeTileArrowPrimary: { backgroundColor: colors.white },
   card: {
     backgroundColor: colors.white,
     borderRadius: radius.md,
