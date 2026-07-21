@@ -571,6 +571,40 @@ function CompletionMeter({ flow, draft }) {
     </View>
   );
 }
+function RequestQualityCard({ flow, draft }) {
+  const completion = completionForFlow(flow, draft);
+  const hasPhoto = Boolean(draft.photoUri || (Array.isArray(draft.photos) && draft.photos.length));
+  const hasLocation = Boolean(String(draft.address || "").trim() || (draft.latitude && draft.longitude));
+  const hasContact = Boolean(String(draft.email || "").trim() || String(draft.phone || "").trim());
+
+  const ready = completion.percent >= 100;
+  const strong = completion.percent >= 80 && (flow === "volunteer" || (hasLocation && (hasPhoto || hasContact)));
+  const level = ready ? "ready" : strong ? "strong" : "progress";
+  const label = ready ? "Dossier prêt à transmettre" : strong ? "Dossier exploitable" : "Dossier à compléter";
+  const icon = ready ? "shield-checkmark-outline" : strong ? "checkmark-circle-outline" : "create-outline";
+
+  const adviceByFlow = {
+    signal: hasPhoto
+      ? "La photo et la localisation faciliteront la qualification dans TVF OS."
+      : "Une photo prise depuis l'espace public rendra le signalement plus facile à vérifier.",
+    materials: "Indiquez l'état, la quantité et le lieu de stockage pour permettre une première orientation.",
+    property: "TVF pourra ouvrir une pré-étude si l'adresse, l'état du bien, l'objectif et le contact sont clairs.",
+    volunteer: "Une disponibilité précise permet de rattacher plus vite le profil aux besoins terrain ou administratifs."
+  };
+
+  return (
+    <View style={[styles.qualityCard, styles[`qualityCard_${level}`]]}>
+      <View style={styles.qualityIcon}>
+        <Ionicons name={icon} size={20} color={colors.green} />
+      </View>
+      <View style={styles.qualityTextWrap}>
+        <Text style={styles.qualityTitle}>{label}</Text>
+        <Text style={styles.qualityText}>{adviceByFlow[flow] || adviceByFlow.signal}</Text>
+      </View>
+      <Text style={styles.qualityPercent}>{completion.percent}%</Text>
+    </View>
+  );
+}
 
 function Checklist({ flow }) {
   const items = checklistByFlow[flow] || [];
@@ -739,7 +773,7 @@ function SignalScreen({ draft, setDraft, submit, missing, submitting }) {
       <Notice>Ne prenez pas de photo en entrant dans une propriété privée sans autorisation.</Notice>
       <Checklist flow="signal" />
       <CompletionMeter flow="signal" draft={draft} />
-      <RequestPreview flow="signal" draft={draft} />
+      <RequestQualityCard flow="signal" draft={draft} />
       <ErrorBox missing={missing} />
       <PrimaryButton loading={submitting} onPress={() => submit("signal")}>{submitting ? "Transmission..." : "Envoyer à TVF"}</PrimaryButton>
     </ScrollView>
@@ -763,7 +797,7 @@ function MaterialsScreen({ draft, setDraft, submit, missing, submitting }) {
       <ContactFields draft={draft} setDraft={setDraft} required />
       <Checklist flow="materials" />
       <CompletionMeter flow="materials" draft={draft} />
-      <RequestPreview flow="materials" draft={draft} />
+      <RequestQualityCard flow="materials" draft={draft} />
       <ErrorBox missing={missing} />
       <PrimaryButton loading={submitting} onPress={() => submit("materials")}>{submitting ? "Transmission..." : "Proposer à TVF"}</PrimaryButton>
     </ScrollView>
@@ -787,7 +821,7 @@ function PropertyScreen({ draft, setDraft, submit, missing, submitting }) {
       <Notice>TVF peut demander la liste des pièces à fournir avant toute suite opérationnelle.</Notice>
       <Checklist flow="property" />
       <CompletionMeter flow="property" draft={draft} />
-      <RequestPreview flow="property" draft={draft} />
+      <RequestQualityCard flow="property" draft={draft} />
       <ErrorBox missing={missing} />
       <PrimaryButton loading={submitting} onPress={() => submit("property")}>{submitting ? "Transmission..." : "Demander une étude"}</PrimaryButton>
     </ScrollView>
@@ -807,7 +841,7 @@ function VolunteerScreen({ draft, setDraft, submit, missing, submitting }) {
       <Field required hint="Indiquez vos disponibilites, competences ou le type aide possible." label="Compétences / disponibilités" value={draft.skills} onChangeText={(skills) => setDraft({ ...draft, skills })} placeholder="Repérage, logistique, administration, communication..." multiline />
       <Checklist flow="volunteer" />
       <CompletionMeter flow="volunteer" draft={draft} />
-      <ErrorBox missing={missing} />
+      <RequestQualityCard flow="volunteer" draft={draft} />
       <PrimaryButton loading={submitting} onPress={() => submit("volunteer")}>{submitting ? "Transmission..." : "Transmettre à TVF"}</PrimaryButton>
     </ScrollView>
   );
@@ -1843,6 +1877,32 @@ const styles = StyleSheet.create({
     borderRadius: 99,
     backgroundColor: colors.green2
   },
+  qualityCard: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 11,
+    backgroundColor: colors.white,
+    borderRadius: radius.md,
+    borderWidth: 1,
+    borderColor: "#CFE0D1",
+    padding: 13,
+    marginBottom: 14
+  },
+  qualityCard_ready: { borderColor: "#8FBE95", backgroundColor: "#F7FBF6" },
+  qualityCard_strong: { borderColor: "#CFE0D1", backgroundColor: "#FAFCF8" },
+  qualityCard_progress: { borderColor: "#E7D8B8", backgroundColor: "#FFFCF4" },
+  qualityIcon: {
+    width: 38,
+    height: 38,
+    borderRadius: 14,
+    backgroundColor: colors.soft,
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  qualityTextWrap: { flex: 1 },
+  qualityTitle: { color: colors.blue, fontWeight: "900", fontSize: 13.8 },
+  qualityText: { color: colors.muted, fontWeight: "600", fontSize: 12.4, lineHeight: 17, marginTop: 2 },
+  qualityPercent: { color: colors.green, fontWeight: "900", fontSize: 16 },
   checklistCard: {
     backgroundColor: colors.soft,
     borderRadius: radius.md,
