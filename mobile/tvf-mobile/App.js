@@ -28,13 +28,11 @@ import {
   documentGroups,
   documents,
   fieldLabels,
-  fieldTestPlan,
   flowGuides,
   flowLabels,
   homeActions,
   materialCategories,
   nextSteps,
-  releaseReadiness,
   propertyTypes,
   requiredFieldsByFlow,
   signalCategories,
@@ -1222,41 +1220,6 @@ function DocumentsScreen({ go }) {
                 <View key={item} style={styles.readinessRow}>
                   <Ionicons name="add-circle-outline" size={16} color={colors.gold} />
                   <Text style={styles.readinessText}>{item}</Text>
-                </View>
-              ))}
-            </View>
-          ))}
-        </View>
-
-        <View style={styles.groupCard}>
-          <Text style={styles.groupTitle}>Contrôle interne Expo Go</Text>
-          {fieldTestPlan.map((track) => (
-            <View key={track.title} style={styles.testTrackCard}>
-              <View style={styles.testTrackHead}>
-                <Ionicons name={track.icon} size={17} color={colors.green} />
-                <Text style={styles.testTrackTitle}>{track.title}</Text>
-              </View>
-              {track.items.map((item) => (
-                <View key={item} style={styles.groupItemRow}>
-                  <Ionicons name="checkmark-circle-outline" size={16} color={colors.green2} />
-                  <Text style={styles.groupItem}>{item}</Text>
-                </View>
-              ))}
-            </View>
-          ))}
-        </View>
-        <View style={styles.groupCard}>
-          <Text style={styles.groupTitle}>Préparation publication</Text>
-          {releaseReadiness.map((track) => (
-            <View key={track.title} style={styles.testTrackCard}>
-              <View style={styles.testTrackHead}>
-                <Ionicons name={track.icon} size={17} color={colors.green} />
-                <Text style={styles.testTrackTitle}>{track.title}</Text>
-              </View>
-              {track.items.map((item) => (
-                <View key={item} style={styles.groupItemRow}>
-                  <Ionicons name="ellipse-outline" size={14} color={colors.green2} />
-                  <Text style={styles.groupItem}>{item}</Text>
                 </View>
               ))}
             </View>
