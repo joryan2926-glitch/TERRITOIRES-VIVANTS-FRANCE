@@ -1292,19 +1292,51 @@ function DocumentsScreen({ go }) {
 
 function ContactScreen({ go }) {
   const orientationCards = [
-    { title: "J'ai vu un lieu vacant", subtitle: "Créer un signalement terrain.", icon: "alert-circle-outline", target: "signal" },
-    { title: "J'ai des matériaux", subtitle: "Proposer une ressource réutilisable.", icon: "cube-outline", target: "materials" },
-    { title: "Je possède un bien", subtitle: "Présenter un logement, local ou terrain.", icon: "home-outline", target: "property" },
-    { title: "Je veux aider", subtitle: "Proposer du temps ou une compétence.", icon: "people-outline", target: "volunteer" }
+    { title: "J'ai vu un lieu vacant", subtitle: "Créer un signalement terrain avec adresse, photo et description.", icon: "alert-circle-outline", target: "signal" },
+    { title: "J'ai des matériaux", subtitle: "Décrire un lot, son état, sa quantité et son lieu de stockage.", icon: "cube-outline", target: "materials" },
+    { title: "Je possède un bien", subtitle: "Présenter un logement, local, commerce, bâtiment ou terrain.", icon: "home-outline", target: "property" },
+    { title: "Je veux aider", subtitle: "Proposer du temps, une compétence ou une aide terrain.", icon: "people-outline", target: "volunteer" }
   ];
+  const phoneChannel = contactChannels.find((channel) => channel.icon === "call-outline");
+  const whatsappChannel = contactChannels.find((channel) => channel.icon === "logo-whatsapp");
+  const emailChannel = contactChannels.find((channel) => channel.icon === "mail-outline");
   return (
     <ScrollView contentContainerStyle={styles.content}>
       <ScreenTitle eyebrow="Contact" title="Joindre Territoires Vivants France">
         Choisissez un canal direct ou le parcours le plus adapté pour que votre demande soit exploitable dans TVF OS.
       </ScreenTitle>
+      <View style={styles.contactFastCard}>
+        <View style={styles.contactFastHead}>
+          <View style={styles.contactFastIcon}><Ionicons name="flash-outline" size={19} color={colors.white} /></View>
+          <View style={styles.contactFastTextWrap}>
+            <Text style={styles.contactFastTitle}>Besoin d'un échange direct ?</Text>
+            <Text style={styles.contactFastText}>Pour une question rapide, utilisez le canal le plus adapté. Pour transmettre un dossier, privilégiez un parcours guidé.</Text>
+          </View>
+        </View>
+        <View style={styles.contactFastActions}>
+          {phoneChannel ? (
+            <TouchableOpacity style={styles.contactFastButton} onPress={() => Linking.openURL(phoneChannel.url)} activeOpacity={0.84}>
+              <Ionicons name="call-outline" size={17} color={colors.green} />
+              <Text style={styles.contactFastButtonText}>Appeler</Text>
+            </TouchableOpacity>
+          ) : null}
+          {whatsappChannel ? (
+            <TouchableOpacity style={styles.contactFastButton} onPress={() => Linking.openURL(whatsappChannel.url)} activeOpacity={0.84}>
+              <Ionicons name="logo-whatsapp" size={17} color={colors.green} />
+              <Text style={styles.contactFastButtonText}>WhatsApp</Text>
+            </TouchableOpacity>
+          ) : null}
+          {emailChannel ? (
+            <TouchableOpacity style={styles.contactFastButton} onPress={() => Linking.openURL(emailChannel.url)} activeOpacity={0.84}>
+              <Ionicons name="mail-outline" size={17} color={colors.green} />
+              <Text style={styles.contactFastButtonText}>E-mail</Text>
+            </TouchableOpacity>
+          ) : null}
+        </View>
+      </View>
       <View style={styles.contactChoiceCard}>
-        <Text style={styles.contactChoiceTitle}>Quel est votre besoin ?</Text>
-        <Text style={styles.contactChoiceText}>Le bon parcours permet de créer une demande plus claire dès le premier échange.</Text>
+        <Text style={styles.contactChoiceTitle}>Créer la bonne demande</Text>
+        <Text style={styles.contactChoiceText}>Le bon parcours permet de créer une demande claire et exploitable dans TVF OS dès le premier échange.</Text>
         <View style={styles.contactChoiceGrid}>
           {orientationCards.map((item) => (
             <TouchableOpacity key={item.target} style={styles.contactChoiceItem} onPress={() => go(item.target, { resetDraft: true })} activeOpacity={0.84}>
