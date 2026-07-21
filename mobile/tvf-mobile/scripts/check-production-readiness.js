@@ -112,5 +112,15 @@ for (const token of ["Go / No-Go", "Build production Android", "Publication Play
   requireIncludes(productionGuide, token, "PRODUCTION_RELEASE_GUIDE.md");
 }
 
+const screenshots = requireFile("STORE_SCREENSHOTS_PLAN.md");
+for (const token of ["Captures Android recommandees", "Donnees de demonstration", "Controle final des captures"]) {
+  requireIncludes(screenshots, token, "STORE_SCREENSHOTS_PLAN.md");
+}
+
+const dataSafety = requireFile("DATA_SAFETY_MOBILE.md");
+for (const token of ["Donnees collectees selon l'usage", "Donnees non collectees", "Reponses indicatives pour Google Play", "Points a valider juridiquement"]) {
+  requireIncludes(dataSafety, token, "DATA_SAFETY_MOBILE.md");
+}
+
 if (!ok) process.exit(1);
 console.log("TVF_MOBILE_PRODUCTION_READINESS_OK");
