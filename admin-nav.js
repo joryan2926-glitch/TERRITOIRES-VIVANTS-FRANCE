@@ -5,70 +5,72 @@ const TVF_ADMIN_LOGIN_ROUTE = "admin-login";
 
 const TVF_ADMIN_GROUPS = [
   {
-    label: "General",
-    description: "Vue globale",
+    label: "Demarrer",
+    description: "Vue du jour",
     modules: [
-      { href: "admin", label: "Tableau de bord", icon: "&#8962;", badge: "" },
-      { href: "dashboard", label: "Statistiques", icon: "&#9638;", badge: "" },
+      { href: "admin", label: "Accueil TVF OS", icon: "&#8962;", badge: "" },
+      { href: "admin-demandes", label: "A traiter", icon: "&#9993;", badge: "" },
+      { href: "dashboard", label: "Vue chiffres", icon: "&#9638;", badge: "" },
     ],
   },
   {
-    label: "Demandes",
-    description: "Reception",
+    label: "Receptionner",
+    description: "Demandes et contacts",
     modules: [
-      { href: "admin-demandes", label: "Demandes recues", icon: "&#9993;", badge: "" },
-      { href: "admin-emails", label: "Messages", icon: "@", badge: "" },
-      { href: "admin-crm", label: "CRM contacts", icon: "&#9678;", badge: "" },
+      { href: "admin-demandes", label: "Boite de reception", icon: "&#9993;", badge: "" },
+      { href: "admin-emails", label: "E-mails entrants", icon: "@", badge: "" },
+      { href: "admin-crm", label: "Contacts", icon: "&#9678;", badge: "" },
     ],
   },
   {
-    label: "Dossiers",
-    description: "Instruction",
+    label: "Instruire",
+    description: "Dossiers et actions",
     modules: [
-      { href: "admin-dossiers", label: "Dossiers en instruction", icon: "&#9635;", badge: "" },
-      { href: "admin-dossiers?create=client", label: "Creer un dossier", icon: "+", badge: "" },
-      { href: "admin-work", label: "Calendrier & taches", icon: "&#10003;", badge: "" },
+      { href: "admin-dossiers", label: "Dossiers", icon: "&#9635;", badge: "" },
+      { href: "admin-dossiers?create=client", label: "Nouveau dossier", icon: "+", badge: "" },
+      { href: "admin-work", label: "Taches et echeances", icon: "&#10003;", badge: "" },
     ],
   },
   {
-    label: "Poles",
-    description: "Metiers TVF",
+    label: "Terrains",
+    description: "Sujets TVF",
     modules: [
-      { href: "admin-dossiers?case_type=bien_vacant", label: "Patrimoine", icon: "&#8962;", badge: "" },
-      { href: "admin-documents#bibliotheque-interne-tvf", label: "Materiotheque", icon: "&#9636;", badge: "" },
-      { href: "admin-dossiers?case_type=commerce_inoccupe", label: "Commerce Vivant", icon: "&#9637;", badge: "" },
-      { href: "admin-map", label: "Friches", icon: "&#8982;", badge: "" },
-      { href: "admin-dossiers?case_type=benevole", label: "Solidarite", icon: "&#9673;", badge: "" },
+      { href: "admin-dossiers?case_type=bien_vacant", label: "Biens et patrimoine", icon: "&#8962;", badge: "" },
+      { href: "admin-dossiers?case_type=commerce_inoccupe", label: "Commerces", icon: "&#9637;", badge: "" },
+      { href: "admin-documents#bibliotheque-interne-tvf", label: "Materiaux", icon: "&#9636;", badge: "" },
+      { href: "admin-map", label: "Carte et friches", icon: "&#8982;", badge: "" },
+      { href: "admin-dossiers?case_type=benevole", label: "Benevoles", icon: "&#9673;", badge: "" },
     ],
   },
   {
-    label: "Ressources",
-    description: "Documents",
+    label: "Produire",
+    description: "Documents et reponses",
     modules: [
-      { href: "admin-documents", label: "Documents", icon: "&#9633;", badge: "" },
+      { href: "admin-documents", label: "Bibliotheque", icon: "&#9633;", badge: "" },
       { href: "admin-procedures", label: "Procedures", icon: "&#167;", badge: "" },
+      { href: "admin-ai", label: "Aide a la reponse", icon: "&#10022;", badge: "" },
       { href: "admin-knowledge", label: "Base interne", icon: "i", badge: "" },
-      { href: "admin-ai", label: "Assistant", icon: "&#10022;", badge: "" },
     ],
   },
   {
-    label: "Pilotage",
-    description: "Reporting",
+    label: "Piloter",
+    description: "Suivi interne",
     modules: [
       { href: "admin-impact", label: "Rapports", icon: "&#9679;", badge: "" },
       { href: "admin-finances", label: "Finances", icon: "&#8364;", badge: "" },
       { href: "admin-observatoire", label: "Observatoire", icon: "&#9676;", badge: "" },
       { href: "admin-activity", label: "Journal", icon: "&#8635;", badge: "" },
       { href: "admin-users", label: "Utilisateurs", icon: "&#9677;", badge: "" },
-      { href: "admin-settings", label: "Parametres", icon: "&#9881;", badge: "" },
+      { href: "admin-settings", label: "Reglages", icon: "&#9881;", badge: "" },
     ],
   },
 ];
 const TVF_ADMIN_MODULES = TVF_ADMIN_GROUPS.flatMap((group) => group.modules);
 const TVF_ADMIN_QUICK_ACTIONS = [
-  { href: "admin-demandes", label: "Traiter une demande", tone: "primary" },
-  { href: "admin-dossiers?create=client", label: "Nouveau dossier", tone: "strong" },
-  { href: "admin-documents#bibliotheque-interne-tvf", label: "Documents", tone: "neutral" },
+  { href: "admin-demandes", label: "Ouvrir la boite", tone: "primary" },
+  { href: "admin-dossiers?create=client", label: "Creer un dossier", tone: "strong" },
+  { href: "admin-emails", label: "Lire les e-mails", tone: "neutral" },
+  { href: "admin-documents#bibliotheque-interne-tvf", label: "Trouver un document", tone: "neutral" },
 ];
 
 function readSessionToken() {

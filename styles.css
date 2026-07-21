@@ -9379,3 +9379,36 @@ td {
     padding: 16px;
   }
 }
+/* TVF OS - praticite d'usage */
+.admin-workflow-compact {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+.admin-workflow-compact span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 5px 10px;
+  border: 1px solid rgba(46, 125, 50, 0.14);
+  border-radius: 999px;
+  background: #f5fbf3;
+  color: var(--green-900);
+  font-size: 0.76rem;
+  font-weight: 820;
+  white-space: nowrap;
+}
+.admin-os-quicklink.is-neutral {
+  background: rgba(255,255,255,0.075);
+}
+.admin-module-links a span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+@media (min-width: 1181px) {
+  .admin-module-shell { gap: 12px; }
+  .admin-module-groups { gap: 10px; }
+  .admin-module-links a { min-height: 39px; padding-block: 7px; }
+}
