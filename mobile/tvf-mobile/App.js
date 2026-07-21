@@ -846,7 +846,7 @@ function SignalScreen({ draft, setDraft, submit, missing, submitting }) {
       <MediaCapture draft={draft} setDraft={setDraft} />
       <LocationCapture draft={draft} setDraft={setDraft} />
       <Field required hint="Indiquez une adresse complete ou un repere assez precis pour localiser le lieu." label="Adresse ou repère" value={draft.address} onChangeText={(address) => setDraft({ ...draft, address })} placeholder="Rue, commune, quartier..." />
-      <Field required hint="Decrivez uniquement des faits observables : etat, acces visible, risque eventuel." label="Description courte" value={draft.description} onChangeText={(description) => setDraft({ ...draft, description })} placeholder="Que faut-il savoir ?" multiline />
+      <Field required hint="Décrivez uniquement des faits observables : état, accès visible, risque éventuel." label="Description courte" value={draft.description} onChangeText={(description) => setDraft({ ...draft, description })} placeholder="Que faut-il savoir ?" multiline />
       <ContactFields draft={draft} setDraft={setDraft} />
       <Notice>Ne prenez pas de photo en entrant dans une propriété privée sans autorisation.</Notice>
       <Checklist flow="signal" />
@@ -867,8 +867,8 @@ function MaterialsScreen({ draft, setDraft, submit, missing, submitting }) {
       <FlowGuide flow="materials" />
       <PillPicker items={materialCategories} selected={draft.category} onSelect={(category) => setDraft({ ...draft, category })} />
       <Field required hint="Donnez une estimation simple : nombre, surface, volume ou dimensions." label="Quantité / dimensions" value={draft.quantity} onChangeText={(quantity) => setDraft({ ...draft, quantity })} placeholder="Ex. 12 portes, 30 m² de carrelage..." />
-      <Field required hint="Precisez si la ressource est neuve, reutilisable, a verifier ou a deposer." label="État général" value={draft.condition} onChangeText={(condition) => setDraft({ ...draft, condition })} placeholder="Neuf, bon état, à vérifier..." />
-      <Field required hint="TVF doit savoir ou se trouvent les materiaux avant toute orientation." label="Lieu de stockage" value={draft.address} onChangeText={(address) => setDraft({ ...draft, address })} placeholder="Adresse ou commune" />
+      <Field required hint="Précisez si la ressource est neuve, réutilisable, à vérifier ou à déposer." label="État général" value={draft.condition} onChangeText={(condition) => setDraft({ ...draft, condition })} placeholder="Neuf, bon état, à vérifier..." />
+      <Field required hint="TVF doit savoir où se trouvent les matériaux avant toute orientation." label="Lieu de stockage" value={draft.address} onChangeText={(address) => setDraft({ ...draft, address })} placeholder="Adresse ou commune" />
       <LocationCapture draft={draft} setDraft={setDraft} />
       <Field label="Date limite de disponibilité" value={draft.availability} onChangeText={(availability) => setDraft({ ...draft, availability })} placeholder="Ex. disponible jusqu'au..." />
       <MediaCapture draft={draft} setDraft={setDraft} label="Ajouter des photos des matériaux" />
@@ -890,10 +890,10 @@ function PropertyScreen({ draft, setDraft, submit, missing, submitting }) {
       </ScreenTitle>
       <FlowGuide flow="property" />
       <PillPicker items={propertyTypes} selected={draft.category} onSelect={(category) => setDraft({ ...draft, category })} />
-      <Field required hint="Adresse utile pour rattacher la proposition au territoire et preparer la pre-etude." label="Adresse du bien" value={draft.address} onChangeText={(address) => setDraft({ ...draft, address })} placeholder="Adresse, commune..." />
+      <Field required hint="Adresse utile pour rattacher la proposition au territoire et préparer la pré-étude." label="Adresse du bien" value={draft.address} onChangeText={(address) => setDraft({ ...draft, address })} placeholder="Adresse, commune..." />
       <LocationCapture draft={draft} setDraft={setDraft} />
-      <Field required hint="Indiquez etat visible, niveau usage et limites connues." label="État général" value={draft.condition} onChangeText={(condition) => setDraft({ ...draft, condition })} placeholder="Vacant, à rénover, inutilisé..." />
-      <Field required hint="Expliquez votre attente : rendez-vous, orientation, pre-etude ou mise en relation." label="Objectif recherché" value={draft.objective} onChangeText={(objective) => setDraft({ ...draft, objective })} placeholder="Rendez-vous, étude, orientation..." multiline />
+      <Field required hint="Indiquez l’état visible, le niveau d’usage et les limites connues." label="État général" value={draft.condition} onChangeText={(condition) => setDraft({ ...draft, condition })} placeholder="Vacant, à rénover, inutilisé..." />
+      <Field required hint="Expliquez votre attente : rendez-vous, orientation, pré-étude ou mise en relation." label="Objectif recherché" value={draft.objective} onChangeText={(objective) => setDraft({ ...draft, objective })} placeholder="Rendez-vous, étude, orientation..." multiline />
       <MediaCapture draft={draft} setDraft={setDraft} label="Ajouter des photos du bien" />
       <ContactFields draft={draft} setDraft={setDraft} required />
       <Notice>TVF peut demander la liste des pièces à fournir avant toute suite opérationnelle.</Notice>
@@ -916,7 +916,7 @@ function VolunteerScreen({ draft, setDraft, submit, missing, submitting }) {
       <Field required label="Nom et prénom" value={draft.contactName} onChangeText={(contactName) => setDraft({ ...draft, contactName })} placeholder="Votre identité" />
       <Field required label="E-mail" value={draft.email} onChangeText={(email) => setDraft({ ...draft, email })} placeholder="exemple@mail.fr" keyboardType="email-address" autoCapitalize="none" />
       <Field label="Téléphone" value={draft.phone} onChangeText={(phone) => setDraft({ ...draft, phone })} placeholder="Votre numéro" keyboardType="phone-pad" />
-      <Field required hint="Indiquez vos disponibilites, competences ou le type aide possible." label="Compétences / disponibilités" value={draft.skills} onChangeText={(skills) => setDraft({ ...draft, skills })} placeholder="Repérage, logistique, administration, communication..." multiline />
+      <Field required hint="Indiquez vos disponibilités, compétences ou le type d’aide possible." label="Compétences / disponibilités" value={draft.skills} onChangeText={(skills) => setDraft({ ...draft, skills })} placeholder="Repérage, logistique, administration, communication..." multiline />
       <Checklist flow="volunteer" />
       <CompletionMeter flow="volunteer" draft={draft} />
       <RequestQualityCard flow="volunteer" draft={draft} />
