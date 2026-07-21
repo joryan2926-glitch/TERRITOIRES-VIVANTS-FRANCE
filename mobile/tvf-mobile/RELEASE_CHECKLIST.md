@@ -118,13 +118,27 @@ npm run build:ios:production
 - Expo SDK 57 : pret pour recette terrain.
 - Connexion Supabase : active si variables publiques presentes.
 - Envoi vers TVF OS : teste par script et operationnel.
-- Photos multiples : implementees, a verifier sur telephone avec camera et galerie.
+- Photos multiples : validees sur telephone par retour utilisateur.
 - Historique local : operationnel avec fiches cliquables et renvoi possible.
 - Documents : actionnables et relies aux bons parcours.
-- Publication store : non lancee, a traiter apres recette terrain et captures officielles.
+- Publication store : non lancee, a traiter apres captures officielles, politique publique et validation comptes stores.
 
 ## 8. Decision de fin de chantier mobile
 
-TVF Mobile peut etre considere comme termine pour la phase preversion terrain.
+TVF Mobile peut etre considere comme valide pour la phase production candidate.
 
-La prochaine etape n'est plus du developpement fonctionnel : c'est une recette reelle sur telephone, puis un build EAS preview si la recette est validee.
+La recette reelle sur telephone a ete confirmee par retour utilisateur le 21/07/2026. La prochaine etape est la finalisation des elements stores : captures officielles, politique de confidentialite publique, comptes developpeur et build de distribution.
+## 9. Validation utilisateur du 21/07/2026
+
+Retour utilisateur : tous les parcours testes fonctionnent.
+
+Statut : production candidate.
+
+Points encore manuels avant publication publique :
+
+- build EAS preview ou production a lancer manuellement si necessaire ;
+- captures officielles stores ;
+- URL publique de confidentialite mobile ;
+- questionnaire securite des donnees ;
+- validation compte Google Play / Apple Developer ;
+- validation RGPD finale.

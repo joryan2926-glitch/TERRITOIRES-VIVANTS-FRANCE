@@ -138,6 +138,11 @@ Avant diffusion publique, publier ou confirmer :
 
 | Date | Version | Plateforme | Profil | Resultat | Lien EAS | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
-|  | 0.1.0 | Android | preview |  |  |  |
+| 21/07/2026 | 0.1.0 | Android | preview / app installee | Valide utilisateur |  | Production candidate |
 |  | 0.1.0 | Android | production |  |  |  |
 |  | 0.1.0 | iOS | production |  |  |  |
+## 12. Statut production candidate
+
+Au 21/07/2026, l'application est confirmee fonctionnelle par retour utilisateur sur telephone.
+
+La version peut avancer vers la preparation de publication, sous reserve des actions manuelles suivantes : captures officielles, politique de confidentialite publique, validation des comptes stores, questionnaire securite des donnees et decision de diffusion.

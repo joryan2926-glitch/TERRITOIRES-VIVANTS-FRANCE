@@ -118,4 +118,25 @@ Commentaire general :
 Decision :  
 Responsable validation :  
 Date :  
-Signature :  
+Signature :
+## 10. Validation utilisateur du 21/07/2026
+
+Retour utilisateur : "tout fonctionne".
+
+Etat de recette consolide :
+
+| Parcours | Statut | Observation |
+| --- | --- | --- |
+| Signalement de lieu | Valide utilisateur | Envoi et suivi confirmes en usage reel |
+| Proposition de materiaux | Valide utilisateur | Parcours fonctionnel |
+| Proposition de bien | Valide utilisateur | Parcours fonctionnel |
+| Candidature benevole | Valide utilisateur | Parcours fonctionnel |
+| Photos | Valide utilisateur | Ajout photo fonctionnel |
+| Localisation / GPS | Valide utilisateur | Localisation fonctionnelle |
+| Transmission TVF OS | Valide utilisateur | Remontee confirmee cote usage |
+| Ticket de suivi | Valide utilisateur | Reference et suivi exploitables |
+
+Decision : TVF Mobile est valide pour passer en phase APK preview / production candidate, sous reserve des validations manuelles store, RGPD et captures officielles.
+
+Responsable validation : validation utilisateur projet TVF.
+Date : 21/07/2026.
