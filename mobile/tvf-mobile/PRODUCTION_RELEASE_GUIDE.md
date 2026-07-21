@@ -15,7 +15,7 @@ La version production doit etre stable, lisible sur telephone, reliee a Supabase
 | Application | Expo SDK 57 installe et controle OK | `npm run check` OK |
 | Donnees | Insertion Supabase testee | `npm run test:supabase` OK |
 | TVF OS | Demande mobile recuperable dans TVF OS | Test manuel OK |
-| Confidentialite | Politique mobile relue et publiee | URL publique a fournir au store |
+| Confidentialite | Politique mobile relue et publiee | https://www.territoiresvivantsfrance.fr/confidentialite-mobile |
 | Android | Compte Google Play Console | A valider manuellement |
 | iOS | Compte Apple Developer | A valider si publication iPhone |
 | Identite | Logo, nom, package et bundle coherents | Controle production OK |
@@ -119,6 +119,7 @@ Aucune cle `service_role` Supabase ne doit etre embarquee dans l'application mob
 Avant diffusion publique, publier ou confirmer :
 
 - politique de confidentialite mobile ;
+- URL publique de confidentialite mobile : https://www.territoiresvivantsfrance.fr/confidentialite-mobile ;
 - durees de conservation ;
 - procedure d'acces, rectification et suppression ;
 - contact officiel : contact@territoiresvivantsfrance.fr.
@@ -145,4 +146,4 @@ Avant diffusion publique, publier ou confirmer :
 
 Au 21/07/2026, l'application est confirmee fonctionnelle par retour utilisateur sur telephone.
 
-La version peut avancer vers la preparation de publication, sous reserve des actions manuelles suivantes : captures officielles, politique de confidentialite publique, validation des comptes stores, questionnaire securite des donnees et decision de diffusion.
+La version peut avancer vers la preparation de publication, sous reserve des actions manuelles suivantes : captures officielles, validation des comptes stores, questionnaire securite des donnees et decision de diffusion.

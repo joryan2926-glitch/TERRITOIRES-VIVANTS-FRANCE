@@ -132,5 +132,9 @@ for (const token of ["Plan de diffusion interne", "Regles de diffusion", "Go / N
   requireIncludes(distributionPlan, token, "INTERNAL_DISTRIBUTION_PLAN.md");
 }
 
+const publicPrivacy = requireFile("../../confidentialite-mobile.html");
+for (const token of ["Confidentialité de TVF Mobile", "Photos et localisation", "Droits des personnes", "contact@territoiresvivantsfrance.fr"]) {
+  requireIncludes(publicPrivacy, token, "confidentialite-mobile.html");
+}
 if (!ok) process.exit(1);
 console.log("TVF_MOBILE_PRODUCTION_READINESS_OK");
