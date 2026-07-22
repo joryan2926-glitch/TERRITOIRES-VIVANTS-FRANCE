@@ -40,7 +40,7 @@
           <button class="btn secondary" type="button" data-lessons-create>Retour d'experience</button>
           <button class="btn secondary" type="button" data-knowledge-refresh>Actualiser</button>
           <button class="btn secondary" type="button" data-knowledge-export>Exporter CSV</button>
-          <button class="btn ghost" type="button" data-knowledge-logout>Deconnexion</button>
+          <button class="btn ghost" type="button" data-knowledge-logout>Déconnexion</button>
         </div>
       </div>
 
@@ -79,7 +79,7 @@
             <option value="cas_usage">Cas d'usage</option>
             <option value="source_territoriale">Source territoriale</option>
             <option value="lecon_apprise">Lecon apprise</option>
-            <option value="procedure">Procedure</option>
+            <option value="procédure">Procédure</option>
             <option value="modele">Modele</option>
           </select>
         </label>
@@ -114,13 +114,13 @@
         <div class="admin-modal-head"><div><p class="section-kicker">Connaissance</p><h2>Nouvel article</h2></div><button class="btn ghost" type="button" data-knowledge-close-modal>Fermer</button></div>
         <form class="admin-create-form knowledge-create-form" data-knowledge-form>
           <label>Titre<input name="title" required placeholder="Ex. Pieces a demander pour un bien vacant"></label>
-          <label>Type<select name="article_type"><option value="article">Article</option><option value="faq">FAQ</option><option value="retour_experience">Retour d'experience</option><option value="erreur_a_eviter">Erreur a eviter</option><option value="cas_usage">Cas d'usage</option><option value="procedure">Procedure</option><option value="modele">Modele</option></select></label>
+          <label>Type<select name="article_type"><option value="article">Article</option><option value="faq">FAQ</option><option value="retour_experience">Retour d'experience</option><option value="erreur_a_eviter">Erreur a eviter</option><option value="cas_usage">Cas d'usage</option><option value="procédure">Procédure</option><option value="modele">Modele</option></select></label>
           <label>Statut<select name="status"><option value="brouillon">Brouillon</option><option value="a_valider">A valider</option><option value="valide">Valide</option></select></label>
           <label>Confidentialite<select name="confidentiality_level"><option value="interne">Interne</option><option value="confidentiel">Confidentiel</option><option value="sensible">Sensible</option><option value="public">Public</option></select></label>
           <label class="admin-create-wide">Tags<input name="tags" placeholder="bien vacant, pieces, instruction"></label>
           <label class="admin-create-wide">Résumé<input name="summary" placeholder="Synthèse courte utilisable par l'assistant"></label>
           <label class="admin-create-wide">Contenu<textarea name="content" rows="7" placeholder="Réponse, méthode, limites, sources à citer"></textarea></label>
-          <div class="admin-detail-actions admin-create-wide"><button class="btn primary" type="submit">Creer</button><button class="btn secondary" type="button" data-knowledge-close-modal>Annuler</button></div>
+          <div class="admin-detail-actions admin-create-wide"><button class="btn primary" type="submit">Créer</button><button class="btn secondary" type="button" data-knowledge-close-modal>Annuler</button></div>
           <p class="form-note admin-create-wide" data-knowledge-modal-status hidden></p>
         </form>
       </div>
