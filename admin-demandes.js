@@ -17,7 +17,7 @@ const priorityLabels = {
 const channelLabels = {
   site_web: "Site web",
   email: "E-mail",
-  telephone: "Telephone",
+  telephone: "Téléphone",
   whatsapp: "WhatsApp",
   rendez_vous: "Rendez-vous",
   import: "Import manuel",
@@ -40,16 +40,16 @@ const categoryLabels = {
 };
 const responseTemplates = {
   auto: "Modele adapte a la categorie",
-  "collectivite-territoire": "Reponse collectivite",
-  "bien-vacant-proprietaire": "Reponse proprietaire",
-  "materiaux-reemploi": "Reponse materiaux",
-  "entreprise-partenariat": "Reponse entreprise / contribution",
-  "benevolat-insertion": "Reponse benevole / association",
-  "financement-mecenat": "Reponse financeur / mecene",
-  "presse-institutionnel": "Reponse presse / institution",
+  "collectivite-territoire": "Réponse collectivité",
+  "bien-vacant-proprietaire": "Réponse propriétaire",
+  "materiaux-reemploi": "Réponse matériaux",
+  "entreprise-partenariat": "Réponse entreprise / contribution",
+  "benevolat-insertion": "Réponse bénévole / association",
+  "financement-mecenat": "Réponse financeur / mécène",
+  "presse-institutionnel": "Réponse presse / institution",
   pieces: "Demande de pieces complementaires",
   rendezvous: "Proposer un rendez-vous",
-  refus: "Reponse non compatible",
+  refus: "Réponse non compatible",
 };
 
 const loginSection = document.querySelector("[data-admin-login]");
@@ -188,7 +188,7 @@ function renderMobileSource(contact) {
   if (!info) return "";
   const rows = [
     ["Reference", info.ref],
-    ["Telephone", info.phone],
+    ["Téléphone", info.phone],
     ["Photo", info.photo],
     ["Dossier", info.dossier],
   ].filter(([, value]) => value);
@@ -436,9 +436,9 @@ function renderTriagePanel() {
 
   const cards = [
     ["A traiter", dueToday.length, "Aujourd'hui", "today"],
-    ["En retard", overdue.length, "Echeance depassee", "today", "urgent"],
+    ["En retard", overdue.length, "Échéance dépassée", "today", "urgent"],
     ["Sans responsable", unassigned.length, "A affecter", "all"],
-    ["Priorite haute", highPriority.length, "P1 / P2", "all", "warning"],
+    ["Priorité haute", highPriority.length, "P1 / P2", "all", "warning"],
     ["Prets dossier", ready.length, "Conversion possible", "all"],
     ["Pieces attendues", missing.length, "Demandes incompletes", "all"],
   ];
@@ -590,7 +590,7 @@ function renderList() {
   if (!listEl) return;
   const rows = visibleContacts();
   const header = `<div class="admin-requests-table-head" role="row">
-    <span>Numero</span><span>Date</span><span>Contact / objet</span><span>Categorie</span><span>Statut</span><span>Priorite</span><span>Source</span><span>Responsable</span><span>Actions</span>
+    <span>Numéro</span><span>Date</span><span>Contact / objet</span><span>Catégorie</span><span>Statut</span><span>Priorité</span><span>Source</span><span>Responsable</span><span>Actions</span>
   </div>`;
   const body = rows
     .map((contact) => {
@@ -651,18 +651,18 @@ function exportContactsCsv() {
     return false;
   }
   const headers = [
-    "Numero",
+    "Numéro",
     "Date",
     "Statut",
-    "Priorite",
-    "Categorie",
+    "Priorité",
+    "Catégorie",
     "Pole",
     "Canal",
     "Nom",
     "Email",
     "Sujet",
     "Prochaine action",
-    "Echeance",
+    "Échéance",
     "Score qualification",
     "Pieces manquantes",
     "Charge du suivi",
@@ -757,7 +757,7 @@ function renderOperationalPath(contact) {
     },
     {
       step: "04",
-      title: "Reponse / suivi",
+      title: "Réponse / suivi",
       detail: "Envoyer une reponse, creer une tache et fixer une prochaine echeance.",
       done: hasResponse || Boolean(contact?.next_action_due_at),
       action: `<button class="text-link" type="button" data-create-task>Creer une tache</button>`,
@@ -796,15 +796,15 @@ function renderAssistant(contact) {
       <strong>${escapeHtml(String(contact.qualification_score || assistant.qualification_score || 0))}%</strong>
     </div>
     <div class="admin-ai-grid">
-      <div><span>Categorie</span><strong>${escapeHtml(label(categoryLabels, assistant.suggested_category || contact.category))}</strong></div>
+      <div><span>Catégorie</span><strong>${escapeHtml(label(categoryLabels, assistant.suggested_category || contact.category))}</strong></div>
       <div><span>Pole</span><strong>${escapeHtml(assistant.suggested_pole || contact.pole || "Accueil & orientation")}</strong></div>
-      <div><span>Priorite</span><strong>${escapeHtml(label(priorityLabels, assistant.suggested_priority || contact.priority))}</strong></div>
-      <div><span>Echeance</span><strong>${escapeHtml(formatDate(assistant.next_action_due_at || contact.next_action_due_at))}</strong></div>
+      <div><span>Priorité</span><strong>${escapeHtml(label(priorityLabels, assistant.suggested_priority || contact.priority))}</strong></div>
+      <div><span>Échéance</span><strong>${escapeHtml(formatDate(assistant.next_action_due_at || contact.next_action_due_at))}</strong></div>
     </div>
     <p>${escapeHtml(assistant.ai_summary || contact.ai_summary || "Analyse automatique indisponible.")}</p>
     <div class="admin-missing-pieces">
       <span>Pieces manquantes</span>
-      ${pieces.length ? `<ul>${pieces.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>` : "<p>Aucune piece bloquante detectee.</p>"}
+      ${pieces.length ? `<ul>${pieces.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>` : "<p>Aucune pièce bloquante détectée.</p>"}
     </div>
   </section>`;
 }
@@ -813,7 +813,7 @@ function renderDetail() {
   if (!detailEl) return;
   const contact = selectedContact();
   if (!contact) {
-    detailEl.innerHTML = `<div class="admin-detail-empty"><p class="section-kicker">Detail</p><h3>Selectionnez une demande</h3><p>Aucune demande disponible avec ces filtres.</p></div>`;
+    detailEl.innerHTML = `<div class="admin-detail-empty"><p class="section-kicker">Detail</p><h3>Sélectionnez une demande</h3><p>Aucune demande disponible avec ces filtres.</p></div>`;
     return;
   }
 
@@ -843,9 +843,9 @@ function renderDetail() {
 
     <ol class="admin-case-flow" aria-label="Parcours de transformation en dossier client">
       <li class="${contact.status ? "is-done" : ""}"><span>1</span><strong>Coordonnees</strong><small>Contact et structure</small></li>
-      <li class="${contact.category ? "is-done" : ""}"><span>2</span><strong>Categorie</strong><small>Profil et besoin</small></li>
+      <li class="${contact.category ? "is-done" : ""}"><span>2</span><strong>Catégorie</strong><small>Profil et besoin</small></li>
       <li class="${["a_qualifier", "en_cours", "rendez_vous", "en_attente", "accepte", "refuse", "archive"].includes(contact.status) ? "is-done" : ""}"><span>3</span><strong>Statut</strong><small>Suite a donner</small></li>
-      <li class="${String(contact.next_action || "").toLowerCase().includes("dossier cree") || contact.status === "accepte" ? "is-done" : ""}"><span>4</span><strong>Numero dossier</strong><small>Numero de suivi</small></li>
+      <li class="${String(contact.next_action || "").toLowerCase().includes("dossier cree") || contact.status === "accepte" ? "is-done" : ""}"><span>4</span><strong>Numéro dossier</strong><small>Numéro de suivi</small></li>
       <li class="${String(contact.next_action || "").toLowerCase().includes("dossier cree") ? "is-done" : ""}"><span>5</span><strong>Fichier client</strong><small>Notes et historique</small></li>
       <li class="${["en_attente", "accepte", "archive"].includes(contact.status) ? "is-done" : ""}"><span>6</span><strong>Documents</strong><small>Pieces rattachees</small></li>
       <li class="${["accepte", "archive"].includes(contact.status) ? "is-done" : ""}"><span>7</span><strong>Instruction</strong><small>Decision et suivi</small></li>
@@ -883,13 +883,13 @@ function renderDetail() {
       </select>
     </label>
 
-    <label>Priorite
+    <label>Priorité
       <select name="priority">
         ${selectOptions(priorityLabels, contact.priority)}
       </select>
     </label>
 
-    <label>Categorie
+    <label>Catégorie
       <select name="category">
         ${selectOptions(categoryLabels, contact.category)}
       </select>
@@ -913,7 +913,7 @@ function renderDetail() {
       <input name="next_action" type="text" value="${escapeHtml(contact.next_action || "")}" placeholder="Ex. Relancer pour les photos">
     </label>
 
-    <label>Echeance prochaine action
+    <label>Échéance prochaine action
       <input name="next_action_due_at" type="datetime-local" value="${escapeHtml(toDateTimeLocal(contact.next_action_due_at))}">
     </label>
 
@@ -930,7 +930,7 @@ function renderDetail() {
     </label>
 
     <details class="admin-response-panel admin-response-panel-compact" aria-label="Modele de reponse">
-      <summary><span>Reponse externe</span><strong>Preparer le message</strong></summary>
+      <summary><span>Réponse externe</span><strong>Préparer le message</strong></summary>
       <div class="admin-response-head">
         <div>
           <p class="section-kicker">Brouillon</p>
@@ -1030,7 +1030,7 @@ async function copyText(text, button, doneLabel) {
       window.setTimeout(() => { button.textContent = initial; }, 1600);
       notify("Texte copie.", "success");
     } else {
-      notify("Copie automatique impossible. Selectionnez le texte manuellement dans la fiche.", "warning");
+      notify("Copie automatique impossible. Sélectionnez le texte manuellement dans la fiche.", "warning");
     }
   }
 }
@@ -1053,7 +1053,7 @@ async function createContactFromForm(event) {
   const data = Object.fromEntries(new FormData(createForm));
   if (createStatus) {
     createStatus.hidden = false;
-    createStatus.textContent = "Creation de la demande...";
+    createStatus.textContent = "Création de la demande...";
   }
   try {
     const result = await api("/api/admin-contacts", {
@@ -1238,7 +1238,7 @@ function bindEvents() {
         });
         await updateSelected({ status: "en_cours", next_action: "Tache de relance creee dans TVF OS", next_action_due_at: new Date(Date.now() + 48 * 60 * 60 * 1000).toISOString() });
       } catch (error) {
-        notifyError(error, "Creation de la tache impossible.");
+        notifyError(error, "Création de la tâche impossible.");
       }
       return;
     }
@@ -1253,7 +1253,7 @@ function bindEvents() {
         await updateSelected({ status: "accepte", next_action: `Dossier cree : ${result.case?.case_number || result.case?.title || "module Dossiers"}` });
         notify("Dossier cree ou retrouve. Le module Dossiers est accessible depuis le menu TVF OS.", "success");
       } catch (error) {
-        notifyError(error, "Creation du dossier impossible.");
+        notifyError(error, "Création du dossier impossible.");
       }
       return;
     }
@@ -1268,7 +1268,7 @@ function bindEvents() {
     const copyResponse = event.target.closest("[data-admin-copy-response]");
     if (copyResponse) {
       const textarea = detailEl.querySelector("[data-response-body]");
-      await copyText(textarea?.value || "", copyResponse, "Reponse copiee");
+      await copyText(textarea?.value || "", copyResponse, "Réponse copiée");
       return;
     }
 

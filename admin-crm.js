@@ -329,7 +329,7 @@ function renderControlPanel() {
     <div class="admin-panel-head">
       <div>
         <p class="section-kicker">A traiter</p>
-        <h3>Priorite CRM</h3>
+        <h3>Priorité CRM</h3>
         <p>${escapeHtml(nextDecision)}. Utilisez ensuite la fiche pour creer un dossier, une tache ou une note.</p>
       </div>
       <strong>${escapeHtml(status)}</strong>
@@ -399,13 +399,13 @@ function assistantPanel(item, type) {
   const missing = assistant.missing_fields || [];
   return `<section class="admin-ai-panel crm-ai-panel">
     <div class="admin-panel-head">
-      <div><p class="section-kicker">Assistant IA</p><h4>Synthese relationnelle</h4></div>
+      <div><p class="section-kicker">Assistant IA</p><h4>Synthèse relationnelle</h4></div>
       <strong>${escapeHtml(String(missing.length ? "A faire" : "OK"))}</strong>
     </div>
-    <p>${escapeHtml(assistant.summary || item.ai_summary || "Synthese indisponible.")}</p>
+    <p>${escapeHtml(assistant.summary || item.ai_summary || "Synthèse indisponible.")}</p>
     <div class="admin-ai-grid">
       <div><span>Prochaine action</span><strong>${escapeHtml(item.next_action || assistant.next_action || "A definir")}</strong></div>
-      <div><span>Echeance</span><strong>${escapeHtml(formatDate(item.next_action_due_at || assistant.next_action_due_at))}</strong></div>
+      <div><span>Échéance</span><strong>${escapeHtml(formatDate(item.next_action_due_at || assistant.next_action_due_at))}</strong></div>
       <div><span>Cle doublon</span><strong>${escapeHtml(item.duplicate_key || assistant.duplicate_key || "Non calculee")}</strong></div>
       <div><span>Type</span><strong>${escapeHtml(type === "contact" ? label(contactTypeLabels, item.contact_type) : label(organizationTypeLabels, item.organization_type))}</strong></div>
     </div>
@@ -498,7 +498,7 @@ async function renderDetail() {
   if (!detailEl) return;
   const item = selectedItem();
   if (!item) {
-    detailEl.innerHTML = `<div class="admin-detail-empty"><p class="section-kicker">Detail</p><h3>Selectionnez une fiche</h3><p>Aucun element disponible.</p></div>`;
+    detailEl.innerHTML = `<div class="admin-detail-empty"><p class="section-kicker">Detail</p><h3>Sélectionnez une fiche</h3><p>Aucun élément disponible.</p></div>`;
     return;
   }
   if (currentView === "duplicates") {
@@ -519,7 +519,7 @@ function renderContactDetail(item, historyItems) {
   detailEl.innerHTML = `<form class="admin-detail-form crm-detail-form" data-crm-detail-form data-type="contact">
     <input type="hidden" name="id" value="${escapeHtml(item.id)}">
     <div class="admin-detail-title"><p class="section-kicker">Fiche contact</p><h3>${escapeHtml(item.display_name)}</h3><p>${escapeHtml(item.email || item.phone || "Coordonnees a completer")}</p></div>
-    <div class="admin-meta-grid"><div><span>E-mail</span><a href="mailto:${escapeHtml(item.email || "")}">${escapeHtml(item.email || "Non renseigne")}</a></div><div><span>Telephone</span><strong>${escapeHtml(item.phone || item.mobile || "Non renseigne")}</strong></div><div><span>Type</span><strong>${escapeHtml(label(contactTypeLabels, item.contact_type))}</strong></div><div><span>Dernier echange</span><strong>${escapeHtml(formatDate(item.last_interaction_at))}</strong></div></div>
+    <div class="admin-meta-grid"><div><span>E-mail</span><a href="mailto:${escapeHtml(item.email || "")}">${escapeHtml(item.email || "Non renseigne")}</a></div><div><span>Téléphone</span><strong>${escapeHtml(item.phone || item.mobile || "Non renseigne")}</strong></div><div><span>Type</span><strong>${escapeHtml(label(contactTypeLabels, item.contact_type))}</strong></div><div><span>Dernier echange</span><strong>${escapeHtml(formatDate(item.last_interaction_at))}</strong></div></div>
     ${assistantPanel(item, "contact")}
     ${instructionSummaryPanel(item, "contact")}
     ${relationPathPanel(item, "contact")}
@@ -530,10 +530,10 @@ function renderContactDetail(item, historyItems) {
 
     <label>Niveau confidentialite<select name="confidentiality_level">${options(confidentialityLabels, item.confidentiality_level)}</select></label>
     <label>E-mail<input name="email" type="email" value="${escapeHtml(item.email || "")}"></label>
-    <label>Telephone<input name="phone" value="${escapeHtml(item.phone || "")}"></label>
+    <label>Téléphone<input name="phone" value="${escapeHtml(item.phone || "")}"></label>
     <label>Mobile<input name="mobile" value="${escapeHtml(item.mobile || "")}"></label>
     <label>Prochaine action<input name="next_action" value="${escapeHtml(item.next_action || "")}"></label>
-    <label>Echeance<input name="next_action_due_at" type="datetime-local" value="${escapeHtml(toDateTimeLocal(item.next_action_due_at))}"></label>
+    <label>Échéance<input name="next_action_due_at" type="datetime-local" value="${escapeHtml(toDateTimeLocal(item.next_action_due_at))}"></label>
     <label class="crm-wide-field">Tags<textarea name="tags" rows="3">${escapeHtml((item.tags || []).join("\n"))}</textarea></label>
     <label class="crm-wide-field">Notes internes<textarea name="notes" rows="5">${escapeHtml(item.notes || "")}</textarea></label>
     <section class="crm-relations"><p class="section-kicker">Organisations rattachees</p>${orgs.length ? orgs.map((link) => `<article><strong>${escapeHtml(link.organizations?.name || "Organisation")}</strong><span>${escapeHtml(link.role_label || "Role non renseigne")}${link.is_primary ? " - principal" : ""}</span></article>`).join("") : "<p>Aucune organisation rattachee.</p>"}</section>
@@ -549,7 +549,7 @@ function renderOrganizationDetail(item, historyItems) {
   detailEl.innerHTML = `<form class="admin-detail-form crm-detail-form" data-crm-detail-form data-type="organization">
     <input type="hidden" name="id" value="${escapeHtml(item.id)}">
     <div class="admin-detail-title"><p class="section-kicker">Fiche organisation</p><h3>${escapeHtml(item.name)}</h3><p>${escapeHtml(label(organizationTypeLabels, item.organization_type))} - ${escapeHtml(label(relationLabels, item.relation_status))}</p></div>
-    <div class="admin-meta-grid"><div><span>E-mail</span><a href="mailto:${escapeHtml(item.email || "")}">${escapeHtml(item.email || "Non renseigne")}</a></div><div><span>Telephone</span><strong>${escapeHtml(item.phone || "Non renseigne")}</strong></div><div><span>Territoire</span><strong>${escapeHtml(item.city || item.department || item.region || "Non renseigne")}</strong></div><div><span>Dernier echange</span><strong>${escapeHtml(formatDate(item.last_interaction_at))}</strong></div></div>
+    <div class="admin-meta-grid"><div><span>E-mail</span><a href="mailto:${escapeHtml(item.email || "")}">${escapeHtml(item.email || "Non renseigne")}</a></div><div><span>Téléphone</span><strong>${escapeHtml(item.phone || "Non renseigne")}</strong></div><div><span>Territoire</span><strong>${escapeHtml(item.city || item.department || item.region || "Non renseigne")}</strong></div><div><span>Dernier echange</span><strong>${escapeHtml(formatDate(item.last_interaction_at))}</strong></div></div>
     ${assistantPanel(item, "organization")}
     ${instructionSummaryPanel(item, "organization")}
     ${relationPathPanel(item, "organization")}
@@ -562,12 +562,12 @@ function renderOrganizationDetail(item, historyItems) {
     <label>SIRET<input name="siret" value="${escapeHtml(item.siret || "")}"></label>
     <label>Site web<input name="website" value="${escapeHtml(item.website || "")}"></label>
     <label>E-mail<input name="email" type="email" value="${escapeHtml(item.email || "")}"></label>
-    <label>Telephone<input name="phone" value="${escapeHtml(item.phone || "")}"></label>
+    <label>Téléphone<input name="phone" value="${escapeHtml(item.phone || "")}"></label>
     <label>Ville<input name="city" value="${escapeHtml(item.city || "")}"></label>
     <label>Departement<input name="department" value="${escapeHtml(item.department || "")}"></label>
     <label>Region<input name="region" value="${escapeHtml(item.region || "")}"></label>
     <label>Prochaine action<input name="next_action" value="${escapeHtml(item.next_action || "")}"></label>
-    <label>Echeance<input name="next_action_due_at" type="datetime-local" value="${escapeHtml(toDateTimeLocal(item.next_action_due_at))}"></label>
+    <label>Échéance<input name="next_action_due_at" type="datetime-local" value="${escapeHtml(toDateTimeLocal(item.next_action_due_at))}"></label>
     <label class="crm-wide-field">Contributions possibles<textarea name="contribution_potential" rows="4">${escapeHtml(item.contribution_potential || "")}</textarea></label>
     <label class="crm-wide-field">Tags<textarea name="tags" rows="3">${escapeHtml((item.tags || []).join("\n"))}</textarea></label>
     <label class="crm-wide-field">Notes internes<textarea name="notes" rows="5">${escapeHtml(item.notes || "")}</textarea></label>
@@ -591,7 +591,7 @@ function csvCell(value) {
 function exportCsv() {
   const items = currentItems();
   if (!items.length) return notify("Aucune donnee a exporter.", "warning");
-  const headers = currentView === "organizations" ? ["Nom", "Type", "Relation", "Email", "Telephone", "Ville", "Prochaine action"] : ["Nom", "Type", "Email", "Telephone", "Prochaine action"];
+  const headers = currentView === "organizations" ? ["Nom", "Type", "Relation", "Email", "Téléphone", "Ville", "Prochaine action"] : ["Nom", "Type", "Email", "Téléphone", "Prochaine action"];
   const rows = currentView === "organizations"
     ? organizations.map((item) => [item.name, label(organizationTypeLabels, item.organization_type), label(relationLabels, item.relation_status), item.email, item.phone, item.city, item.next_action])
     : contacts.map((item) => [item.display_name, label(contactTypeLabels, item.contact_type), item.email, item.phone || item.mobile, item.next_action]);
@@ -627,7 +627,7 @@ function closeModal() {
 function contactForm(defaults = {}) {
   return `<label>Nom affiche<input name="display_name" value="${escapeHtml(defaults.display_name || "")}" required></label>
     <label>E-mail<input name="email" type="email" value="${escapeHtml(defaults.email || "")}"></label>
-    <label>Telephone<input name="phone" value="${escapeHtml(defaults.phone || "")}"></label>
+    <label>Téléphone<input name="phone" value="${escapeHtml(defaults.phone || "")}"></label>
     <label>Type contact<select name="contact_type">${options(contactTypeLabels, defaults.contact_type || "autre")}</select></label>
 
     <label>Confidentialite<select name="confidentiality_level">${options(confidentialityLabels, defaults.confidentiality_level || "standard")}</select></label>
@@ -641,7 +641,7 @@ function organizationForm() {
     <label>Niveau relation<select name="relation_status">${options(relationLabels, "prospect")}</select></label>
     <label>Confidentialite<select name="confidentiality_level">${options(confidentialityLabels, "standard")}</select></label>
     <label>E-mail<input name="email" type="email"></label>
-    <label>Telephone<input name="phone"></label>
+    <label>Téléphone<input name="phone"></label>
     <label>Ville<input name="city"></label>
     <label>Departement<input name="department"></label>
     <label class="admin-create-wide">Contributions possibles<textarea name="contribution_potential" rows="4"></textarea></label>
@@ -653,7 +653,7 @@ function historyForm(defaults = {}) {
   return `<input type="hidden" name="${defaults.type === "organization" ? "organization_id" : "contact_id"}" value="${escapeHtml(defaults.id || "")}">
     <label>Type<select name="interaction_type">${options(historyLabels, "note")}</select></label>
     <label>Sujet<input name="subject" required placeholder="Ex. Appel de qualification"></label>
-    <label class="admin-create-wide">Resume<textarea name="summary" rows="5" required></textarea></label>
+    <label class="admin-create-wide">Résumé<textarea name="summary" rows="5" required></textarea></label>
     <div class="admin-detail-actions admin-create-wide"><button class="btn primary" type="submit">Ajouter</button><button class="btn secondary" type="button" data-crm-close-modal>Annuler</button></div><p class="form-note admin-create-wide" data-crm-modal-status hidden></p>`;
 }
 
