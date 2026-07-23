@@ -1,3 +1,17 @@
+
+function insertSiteWorkNotice() {
+  const header = document.querySelector(".site-header");
+  if (!header || document.querySelector(".tvf-site-work-notice")) return;
+
+  const notice = document.createElement("div");
+  notice.className = "tvf-site-work-notice";
+  notice.setAttribute("role", "status");
+  notice.innerHTML = '<div class="container"><span>Site en cours de construction</span><small>Certaines informations peuvent encore être complétées.</small></div>';
+  header.insertAdjacentElement("afterend", notice);
+}
+
+insertSiteWorkNotice();
+
 const menuButton = document.querySelector(".menu-toggle");
 const nav = document.querySelector(".main-nav");
 

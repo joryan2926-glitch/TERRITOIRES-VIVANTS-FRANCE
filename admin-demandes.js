@@ -369,6 +369,12 @@ function isDueToday(contact) {
 
 function visibleContacts() {
   if (currentView === "today") return contacts.filter(isDueToday);
+  if (currentView === "overdue") return contacts.filter(isOverdue);
+  if (currentView === "urgent") return contacts.filter((contact) => contact.priority === "urgente");
+  if (currentView === "highPriority") return contacts.filter((contact) => ["haute", "urgente"].includes(contact.priority));
+  if (currentView === "unassigned") return contacts.filter((contact) => isOpenRequest(contact) && !hasOwner(contact));
+  if (currentView === "missing") return contacts.filter((contact) => isOpenRequest(contact) && hasMissingPieces(contact));
+  if (currentView === "mobile") return contacts.filter((contact) => contact.source_page === "tvf-mobile" || Boolean(mobileSourceInfo(contact)));
   return contacts;
 }
 
@@ -437,10 +443,10 @@ function renderTriagePanel() {
   const cards = [
     ["A traiter", dueToday.length, "Aujourd'hui", "today"],
     ["En retard", overdue.length, "Échéance dépassée", "today", "urgent"],
-    ["Sans responsable", unassigned.length, "A affecter", "all"],
+    ["Sans responsable", unassigned.length, "A affecter", "unassigned"],
     ["Priorité haute", highPriority.length, "P1 / P2", "all", "warning"],
     ["Prets dossier", ready.length, "Conversion possible", "all"],
-    ["Pieces attendues", missing.length, "Demandes incompletes", "all"],
+    ["Pieces attendues", missing.length, "Demandes incompletes", "missing"],
   ];
 
   triageEl.innerHTML = `<div class="admin-panel-head">
@@ -1116,6 +1122,7 @@ function bindEvents() {
       const statusSelect = filtersForm?.elements.status;
       const prioritySelect = filtersForm?.elements.priority;
       if (!statusSelect) return;
+      currentView = "all";
       statusSelect.value = button.dataset.statusShortcut || "all";
       if (prioritySelect) prioritySelect.value = "all";
       loadContacts().catch((error) => notifyError(error));

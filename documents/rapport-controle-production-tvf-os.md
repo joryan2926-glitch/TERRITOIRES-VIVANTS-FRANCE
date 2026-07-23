@@ -1,6 +1,6 @@
 # Controle production TVF OS
 
-Date : 2026-07-18
+Date : 2026-07-23
 
 ## Synthese
 
@@ -15,23 +15,23 @@ Date : 2026-07-18
 
 | Module | URL testee | Statut | Temps | Observation |
 |---|---|---:|---:|---|
-| Session admin | `/api/admin-session` | OK | 2 ms | Lecture valide |
-| Tableau de bord | `/api/dashboard?range=30&status=all&priority=all&category=all` | OK | 675 ms | Lecture valide |
-| Demandes entrantes | `/api/admin-contacts?limit=5` | OK | 103 ms | Lecture valide |
-| Contacts | `/api/admin-crm?entity=dashboard` | OK | 143 ms | Lecture valide |
-| Boite mail | `/api/admin-emails?entity=dashboard` | OK | 121 ms | Lecture valide |
-| Dossiers | `/api/admin-cases?entity=dashboard` | OK | 85 ms | Lecture valide |
-| Taches | `/api/admin-work?entity=dashboard` | OK | 86 ms | Lecture valide |
-| Documents | `/api/admin-documents?entity=dashboard` | OK | 170 ms | Lecture valide |
-| Procedures | `/api/admin-procedures?entity=dashboard` | OK | 134 ms | Lecture valide |
-| Cartographie | `/api/admin-map?entity=dashboard` | OK | 166 ms | Lecture valide |
-| Observatoire | `/api/admin-observatoire?entity=dashboard` | OK | 85 ms | Lecture valide |
-| Resultats | `/api/admin-impact?entity=dashboard` | OK | 76 ms | Lecture valide |
-| Finances | `/api/admin-finances?entity=dashboard` | OK | 133 ms | Lecture valide |
-| Utilisateurs / roles | `/api/admin-users?entity=dashboard` | OK | 152 ms | Lecture valide |
-| Reglages | `/api/admin-settings?entity=dashboard` | OK | 104 ms | Lecture valide |
-| Base interne | `/api/admin-knowledge?entity=dashboard` | OK | 165 ms | Lecture valide |
-| Assistant | `/api/admin-ai?entity=dashboard` | OK | 186 ms | Lecture valide |
+| Session admin | `/api/admin-session` | OK | 339 ms | Lecture valide |
+| Tableau de bord | `/api/dashboard?range=30&status=all&priority=all&category=all` | OK | 7400 ms | Lecture valide |
+| Demandes entrantes | `/api/admin-contacts?limit=5` | OK | 140 ms | Lecture valide |
+| Contacts | `/api/admin-crm?entity=dashboard` | OK | 229 ms | Lecture valide |
+| Boite mail | `/api/admin-emails?entity=dashboard` | OK | 87 ms | Lecture valide |
+| Dossiers | `/api/admin-cases?entity=dashboard` | OK | 634 ms | Lecture valide |
+| Taches | `/api/admin-work?entity=dashboard` | OK | 155 ms | Lecture valide |
+| Documents | `/api/admin-documents?entity=dashboard` | OK | 184 ms | Lecture valide |
+| Procedures | `/api/admin-procedures?entity=dashboard` | OK | 150 ms | Lecture valide |
+| Cartographie | `/api/admin-map?entity=dashboard` | OK | 165 ms | Lecture valide |
+| Observatoire | `/api/admin-observatoire?entity=dashboard` | OK | 132 ms | Lecture valide |
+| Resultats | `/api/admin-impact?entity=dashboard` | OK | 133 ms | Lecture valide |
+| Finances | `/api/admin-finances?entity=dashboard` | OK | 154 ms | Lecture valide |
+| Utilisateurs / roles | `/api/admin-users?entity=dashboard` | OK | 203 ms | Lecture valide |
+| Reglages | `/api/admin-settings?entity=dashboard` | OK | 114 ms | Lecture valide |
+| Base interne | `/api/admin-knowledge?entity=dashboard` | OK | 169 ms | Lecture valide |
+| Assistant | `/api/admin-ai?entity=dashboard` | OK | 195 ms | Lecture valide |
 
 ## Lecture operationnelle
 

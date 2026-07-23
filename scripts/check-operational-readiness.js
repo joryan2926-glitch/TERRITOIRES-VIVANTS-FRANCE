@@ -19,6 +19,7 @@ const requiredFiles = [
   "scripts/check-tvf-os-production.js",
   "scripts/test-mobile-tvf-os-real.js",
   "scripts/test-email-webhook-tvf-os.js",
+  "scripts/test-site-form-real.js",
   "documents/procedure-traitement-formulaires-tvf.md",
   "documents/procedure-connexion-email-officiel-tvf-os.md",
   "documents/checklist-brevo-dns-rgpd-formulaires.md",
@@ -53,6 +54,7 @@ const requiredPackageScripts = [
   "test:tvf-os-flow",
   "check:tvf-os:production",
   "test:mobile-os",
+  "test:site-form",
   "check:mobile:production"
 ];
 
