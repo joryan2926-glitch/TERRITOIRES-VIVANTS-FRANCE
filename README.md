@@ -261,3 +261,13 @@ Configuration obligatoire dans Vercel :
 
 La page est en `noindex` et bloquee dans `robots.txt`, mais elle doit rester protegee par le token. Ne jamais partager le token dans un document public.
 
+
+## Mise en service operationnelle
+
+- `npm run check:operational` : verification locale des fichiers indispensables a la mise en service operationnelle du site, de TVF OS, des formulaires, des documents, de Supabase et de TVF Mobile.
+- `documents/checklist-mise-en-service-operationnelle-tvf.md` : parcours de validation terrain avant reception de demandes reelles.
+
+Documents internes de lancement :
+
+- `documents/procedure-jour-j-lancement-operationnel-tvf.md` : procedure jour J pour verifier les premiers flux reels.
+- `documents/registre-incidents-exploitation-tvf-os.md` : registre de suivi des incidents d'exploitation.

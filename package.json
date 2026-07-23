@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "check": "npm run check:encoding && npm run check:js && npm run check:documents && npm run test:admin && npm run test:user-flow && npm run test:tvf-os-flow && npm run check:mobile:production",
+    "check": "npm run check:encoding && npm run check:js && npm run check:documents && npm run check:operational && npm run test:admin && npm run test:user-flow && npm run test:tvf-os-flow && npm run check:mobile:production",
     "check:js": "node scripts/check-js.js",
     "check:documents": "node scripts/check-document-downloads.js",
+    "check:operational": "node scripts/check-operational-readiness.js",
     "test:admin": "node scripts/run-admin-api-tests.js",
     "test:production": "node tests/dashboard-real-env.test.js",
     "audit:tvf-os": "node scripts/audit-tvf-os-operationnel.js",
