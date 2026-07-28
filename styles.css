@@ -9425,3 +9425,220 @@ td {
 
 /* Notes explicatives masquees sur le site public */
 .table-scroll-hint { display: none !important; }
+
+
+/* Finition sobriete notes explicatives site public */
+body:not(.admin-body) .tvf-site-work-notice {
+  background: rgba(255, 255, 255, 0.72);
+  border-bottom-color: rgba(24, 63, 34, 0.05);
+  color: rgba(14, 45, 69, 0.62);
+  font-size: 0.68rem;
+}
+
+body:not(.admin-body) .tvf-site-work-notice .container {
+  min-height: 24px;
+  gap: 6px;
+}
+
+body:not(.admin-body) .tvf-site-work-notice span {
+  font-weight: 600;
+  color: rgba(24, 63, 34, 0.72);
+}
+
+body:not(.admin-body) .tvf-site-work-notice small {
+  display: none;
+}
+
+body:not(.admin-body) .form-note,
+body:not(.admin-body) .compact-note,
+body:not(.admin-body) .archive-guidance,
+body:not(.admin-body) .doc-empty {
+  margin-top: 6px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border-color: rgba(14, 45, 69, 0.08);
+  background: rgba(248, 251, 247, 0.58);
+  color: rgba(14, 45, 69, 0.68);
+  font-size: 0.78rem;
+  line-height: 1.45;
+  font-weight: 500;
+  box-shadow: none;
+}
+
+body:not(.admin-body) .form-summary {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border-color: rgba(14, 45, 69, 0.1);
+  background: rgba(255, 255, 255, 0.82);
+  box-shadow: none;
+}
+
+body:not(.admin-body) .section-head .section-lead,
+body:not(.admin-body) .intro-grid .section-lead,
+body:not(.admin-body) .split .section-lead {
+  color: rgba(14, 45, 69, 0.72);
+}
+
+body:not(.admin-body) .page-nav-inner span {
+  color: rgba(14, 45, 69, 0.56);
+  font-weight: 600;
+}
+
+body:not(.admin-body) .table-scroll-hint {
+  display: none !important;
+}
+
+@media (max-width: 760px) {
+  body:not(.admin-body) .tvf-site-work-notice {
+    font-size: 0.64rem;
+  }
+
+  body:not(.admin-body) .tvf-site-work-notice .container {
+    min-height: 20px;
+  }
+
+  body:not(.admin-body) .form-note,
+  body:not(.admin-body) .compact-note,
+  body:not(.admin-body) .archive-guidance,
+  body:not(.admin-body) .doc-empty {
+    padding: 7px 9px;
+    font-size: 0.74rem;
+  }
+}
+
+
+/* Finition agence immobiliere premium et CTA rationalises */
+body:not(.admin-body) .hero-actions {
+  gap: 14px 20px;
+  align-items: center;
+}
+
+body:not(.admin-body) .hero-action-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  color: rgba(255, 255, 255, 0.92);
+  font-weight: 600;
+  font-size: 0.92rem;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.46);
+  transition: color .22s ease, border-color .22s ease, transform .22s ease;
+}
+
+body:not(.admin-body) .hero-action-link:hover,
+body:not(.admin-body) .hero-action-link:focus-visible {
+  color: #fff;
+  border-color: #fff;
+  transform: translateY(-1px);
+}
+
+body:not(.admin-body) .btn.secondary {
+  background: transparent;
+  border-color: rgba(14, 45, 69, 0.18);
+  color: var(--blue-900);
+  box-shadow: none;
+}
+
+body:not(.admin-body) .btn.secondary:hover,
+body:not(.admin-body) .btn.secondary:focus-visible {
+  background: rgba(248, 251, 247, 0.82);
+  border-color: rgba(46, 125, 50, 0.28);
+  color: var(--green-900);
+  box-shadow: 0 8px 18px rgba(14, 45, 69, 0.06);
+}
+
+body:not(.admin-body) .card .text-link,
+body:not(.admin-body) .journey-card small,
+body:not(.admin-body) .quick-brief a {
+  font-weight: 600;
+}
+
+body:not(.admin-body) .card .text-link {
+  color: rgba(24, 63, 34, 0.82);
+  border-bottom: 1px solid rgba(46, 125, 50, 0.18);
+  padding-bottom: 2px;
+}
+
+body:not(.admin-body) .card .text-link:hover,
+body:not(.admin-body) .card .text-link:focus-visible {
+  color: var(--green-900);
+  border-bottom-color: var(--green-700);
+}
+
+body:not(.admin-body) .download-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+  color: var(--green-900);
+  font-size: 0.84rem;
+  font-weight: 700;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(46, 125, 50, 0.24);
+}
+
+body:not(.admin-body) .download-action::after {
+  content: "?";
+  font-size: 0.82em;
+}
+
+body:not(.admin-body) .download-action.is-primary {
+  padding: 8px 12px;
+  border: 1px solid rgba(46, 125, 50, 0.22);
+  border-radius: 999px;
+  background: rgba(248, 251, 247, 0.9);
+  box-shadow: 0 8px 18px rgba(14, 45, 69, 0.05);
+}
+
+body:not(.admin-body) .doc-download-card .btn {
+  display: inline-flex;
+  min-height: auto;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--green-900);
+  box-shadow: none;
+}
+
+body:not(.admin-body) .card,
+body:not(.admin-body) .mini-list article,
+body:not(.admin-body) .timeline article,
+body:not(.admin-body) .journey-card {
+  box-shadow: 0 10px 28px rgba(14, 45, 69, 0.055);
+}
+
+body:not(.admin-body) .card:hover,
+body:not(.admin-body) .journey-card:hover,
+body:not(.admin-body) .mini-list article:hover {
+  box-shadow: 0 16px 34px rgba(14, 45, 69, 0.08);
+}
+
+body:not(.admin-body) .cta-band {
+  background: linear-gradient(135deg, rgba(246, 249, 244, 0.96), rgba(255, 255, 255, 0.92));
+  border-top: 1px solid rgba(14, 45, 69, 0.06);
+  border-bottom: 1px solid rgba(14, 45, 69, 0.06);
+}
+
+body:not(.admin-body) .cta-band-inner {
+  border-radius: 18px;
+}
+
+body:not(.admin-body) .institutional-narrative,
+body:not(.admin-body) .quick-brief {
+  background: #f8fbf7;
+}
+
+body:not(.admin-body) .section-kicker {
+  letter-spacing: 0.055em;
+}
+
+@media (max-width: 760px) {
+  body:not(.admin-body) .hero-actions {
+    align-items: flex-start;
+  }
+  body:not(.admin-body) .hero-action-link {
+    min-height: 32px;
+    font-size: 0.88rem;
+  }
+}

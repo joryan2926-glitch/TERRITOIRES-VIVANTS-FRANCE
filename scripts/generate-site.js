@@ -129,12 +129,12 @@ function downloadLink(label, href, variant = "text-link") {
 
 function documentDownloadCards(title, intro, items, id) {
   return `<section class="section soft document-library" ${sectionAttrs(title, id)}><div class="container"><div class="section-head"><p class="section-kicker">Telechargements</p><h2>${title}</h2><p class="section-lead">${intro}</p></div><div class="card-grid">${items
-    .map(([h, publicLabel, purpose, href]) => `<article class="card doc-download-card"><span class="card-icon" aria-hidden="true">${iconFor(h)}</span><h3>${h}</h3><p><strong>Public :</strong> ${publicLabel}</p><p>${purpose}</p>${downloadLink(h, href, "btn secondary")}</article>`)
+    .map(([h, publicLabel, purpose, href]) => `<article class="card doc-download-card"><span class="card-icon" aria-hidden="true">${iconFor(h)}</span><h3>${h}</h3><p><strong>Public :</strong> ${publicLabel}</p><p>${purpose}</p>${downloadLink(h, href, "download-action")}</article>`)
     .join("")}</div></div></section>`;
 }
 
 function documentOperationalKitSection() {
-  return `<section class="section" ${sectionAttrs("Kit operationnel complet", "kit-operationnel-complet")}><div class="container intro-grid"><div><p class="section-kicker">Kit complet</p><h2>Tout telecharger en une seule fois.</h2><p class="section-lead">Le kit rassemble les formulaires, conventions types, courriers et listes de pieces. Il sert de base commune pour ouvrir un dossier, le qualifier, demander les pieces, formaliser une convention et archiver la suite.</p><div class="hero-actions"><a class="btn primary" href="${operationalKitDocs.zip[1]}" download>Telecharger le ZIP complet</a><a class="btn secondary" href="${operationalKitDocs.index[1]}" download>Telecharger l'index</a></div></div><div class="mini-list"><article><strong>21 fichiers Word</strong><span>Modeles modifiables, prets a remplir, avec entete TVF, numero de dossier, clauses et signatures.</span></article><article><strong>Classement par besoin</strong><span>Contact, collectivite, proprietaire, materiaux, entreprise, local, transport, benevole, financeur, signalement.</span></article><article><strong>Usage interne</strong><span>Adapter chaque document au dossier, verifier les pieces puis faire valider avant signature.</span></article></div></div></section>`;
+  return `<section class="section" ${sectionAttrs("Kit operationnel complet", "kit-operationnel-complet")}><div class="container intro-grid"><div><p class="section-kicker">Kit complet</p><h2>Tout telecharger en une seule fois.</h2><p class="section-lead">Le kit rassemble les formulaires, conventions types, courriers et listes de pieces. Il sert de base commune pour ouvrir un dossier, le qualifier, demander les pieces, formaliser une convention et archiver la suite.</p><div class="hero-actions"><a class="btn primary" href="${operationalKitDocs.zip[1]}" download>Telecharger le ZIP complet</a><a class="download-action" href="${operationalKitDocs.index[1]}" download>Telecharger l'index</a></div></div><div class="mini-list"><article><strong>21 fichiers Word</strong><span>Modeles modifiables, prets a remplir, avec entete TVF, numero de dossier, clauses et signatures.</span></article><article><strong>Classement par besoin</strong><span>Contact, collectivite, proprietaire, materiaux, entreprise, local, transport, benevole, financeur, signalement.</span></article><article><strong>Usage interne</strong><span>Adapter chaque document au dossier, verifier les pieces puis faire valider avant signature.</span></article></div></div></section>`;
 }
 
 function documentOrientationTableSection() {
@@ -159,7 +159,7 @@ function documentFormsBySubjectSection() {
 }
 
 function documentPiecesBySubjectSection() {
-  return `<section class="section" ${sectionAttrs("Pieces a fournir par sujet", "pieces-a-fournir-par-sujet")}><div class="container"><div class="section-head"><p class="section-kicker">Recevabilite</p><h2>Pieces a fournir par sujet</h2><p class="section-lead">Une seule checklist regroupe les pieces utiles selon le type de demande. Elle sert avant rendez-vous, instruction, visite ou convention.</p></div><div class="decision-list"><article><strong>Document principal</strong><p>Liste des pieces a fournir selon le type de demande : proprietaire, collectivite, entreprise, association, benevole, financeur, signalement.</p>${downloadLink(operationalKitDocs.pieces[0], operationalKitDocs.pieces[1], "btn primary")}</article><article><strong>Regle de travail</strong><p>Un dossier incomplet peut rester en brouillon, mais il ne doit pas etre presente comme retenu tant que les pieces essentielles ne sont pas fournies.</p></article><article><strong>Classement conseille</strong><p>Ranger chaque piece dans le dossier client : identite, sujet, pieces, convention, decision, preuve, suivi.</p></article></div></div></section>`;
+  return `<section class="section" ${sectionAttrs("Pieces a fournir par sujet", "pieces-a-fournir-par-sujet")}><div class="container"><div class="section-head"><p class="section-kicker">Recevabilite</p><h2>Pieces a fournir par sujet</h2><p class="section-lead">Une seule checklist regroupe les pieces utiles selon le type de demande. Elle sert avant rendez-vous, instruction, visite ou convention.</p></div><div class="decision-list"><article><strong>Document principal</strong><p>Liste des pieces a fournir selon le type de demande : proprietaire, collectivite, entreprise, association, benevole, financeur, signalement.</p>${downloadLink(operationalKitDocs.pieces[0], operationalKitDocs.pieces[1], "download-action is-primary")}</article><article><strong>Regle de travail</strong><p>Un dossier incomplet peut rester en brouillon, mais il ne doit pas etre presente comme retenu tant que les pieces essentielles ne sont pas fournies.</p></article><article><strong>Classement conseille</strong><p>Ranger chaque piece dans le dossier client : identite, sujet, pieces, convention, decision, preuve, suivi.</p></article></div></div></section>`;
 }
 
 function documentConventionsTypesSection() {
@@ -167,7 +167,7 @@ function documentConventionsTypesSection() {
 }
 
 function documentLettersAndUseSection() {
-  return `<section class="section soft" ${sectionAttrs("Courriers et supports de travail", "courriers-et-supports")}><div class="container"><div class="section-head"><p class="section-kicker">Courriers</p><h2>Courriers prets a remplir</h2><p class="section-lead">Le kit courrier sert a contacter une collectivite, une entreprise, un proprietaire, un financeur, une structure d'insertion, ou a relancer des pieces manquantes.</p></div><div class="card-grid"><article class="card"><span class="card-icon" aria-hidden="true">C</span><h3>Kit courriers</h3><p>Modeles prets a remplir avec objet, introduction, demande, pieces jointes et signature TVF.</p>${downloadLink(operationalKitDocs.courriers[0], operationalKitDocs.courriers[1], "btn secondary")}</article><article class="card"><span class="card-icon" aria-hidden="true">I</span><h3>Index du kit</h3><p>Repertoire general pour retrouver rapidement chaque formulaire, convention et liste de pieces.</p>${downloadLink(operationalKitDocs.index[0], operationalKitDocs.index[1], "btn secondary")}</article><article class="card"><span class="card-icon" aria-hidden="true">Z</span><h3>Archive complete</h3><p>Telecharger tout le kit en une seule fois pour le modifier, l'imprimer ou le ranger en interne.</p>${downloadLink(operationalKitDocs.zip[0], operationalKitDocs.zip[1], "btn primary")}</article></div></div></section>`;
+  return `<section class="section soft" ${sectionAttrs("Courriers et supports de travail", "courriers-et-supports")}><div class="container"><div class="section-head"><p class="section-kicker">Courriers</p><h2>Courriers prets a remplir</h2><p class="section-lead">Le kit courrier sert a contacter une collectivite, une entreprise, un proprietaire, un financeur, une structure d'insertion, ou a relancer des pieces manquantes.</p></div><div class="card-grid"><article class="card"><span class="card-icon" aria-hidden="true">C</span><h3>Kit courriers</h3><p>Modeles prets a remplir avec objet, introduction, demande, pieces jointes et signature TVF.</p>${downloadLink(operationalKitDocs.courriers[0], operationalKitDocs.courriers[1], "download-action")}</article><article class="card"><span class="card-icon" aria-hidden="true">I</span><h3>Index du kit</h3><p>Repertoire general pour retrouver rapidement chaque formulaire, convention et liste de pieces.</p>${downloadLink(operationalKitDocs.index[0], operationalKitDocs.index[1], "download-action")}</article><article class="card"><span class="card-icon" aria-hidden="true">Z</span><h3>Archive complete</h3><p>Telecharger tout le kit en une seule fois pour le modifier, l'imprimer ou le ranger en interne.</p>${downloadLink(operationalKitDocs.zip[0], operationalKitDocs.zip[1], "download-action is-primary")}</article></div></div></section>`;
 }
 
 function documentWorkflowSection() {
@@ -192,11 +192,7 @@ const pages = [
     h1: "Redonner vie aux lieux utiles aux habitants.",
     intro:
       "Territoires Vivants France structure une méthode de coopération pour repérer les ressources inutilisées, mobiliser les bons acteurs, préparer les conventions et accompagner des projets utiles aux territoires.",
-    ctas: [
-      ["Comprendre TVF", "qui-sommes-nous.html"],
-      ["Agir avec nous", "agir-avec-nous.html"],
-      ["Nous contacter", "contact.html"],
-    ],
+    ctas: [["\u00c9tudier une situation", "contact.html"], ["Comprendre la m\u00e9thode", "notre-methode.html"]],
     sections: [
       sectionIntro(
         "Une agence territoriale lisible",
@@ -323,7 +319,7 @@ const pages = [
       ]),
       faqSection([
         ["TVF est-elle déjà déployée nationalement ?", "TVF pose les fondations d'une organisation nationale : méthode, outils, parcours, documents et règles de preuve. Le déploiement opérationnel s'appuiera ensuite sur des actions documentées territoire par territoire."],
-        ["Pourquoi parler de plateforme de coopération ?", "Parce que la valeur de TVF n'est pas de faire seule, mais de relier les bons acteurs autour d'un dossier clair : bien, usage, ressources, responsabilités, financement et impact."],
+        ["Pourquoi parler de valorisation immobili\u00e8re territoriale ?", "Parce que TVF part d'un bien, d'un usage et d'un propri\u00e9taire, puis construit un cadre lisible : qualification, ressources, professionnels comp\u00e9tents, convention possible, financement et suivi."],
         ["Pourquoi ne pas afficher de partenaires partout ?", "Un partenaire ne doit être affiché que lorsqu'un accord réel existe. Cette règle évite toute confusion et renforce la confiance des collectivités, entreprises et financeurs."],
       ]),
     ],
@@ -3163,7 +3159,7 @@ ${breadcrumbNav(page)}
         <p class="eyebrow">${page.eyebrow}</p>
         <h1>${page.h1}</h1>
         <p>${page.intro}</p>
-        <div class="hero-actions">${page.ctas.map(([label, href], i) => `<a class="btn ${i === 0 ? "primary" : "secondary"}" href="${hrefFor(href)}">${label}</a>`).join("")}</div>
+        <div class="hero-actions">${page.ctas.map(([label, href], i) => i === 0 ? `<a class="btn primary" href="${hrefFor(href)}">${label}</a>` : `<a class="hero-action-link" href="${hrefFor(href)}">${label}</a>`).join("")}</div>
       </div>
     </section>
     ${pageMiniNav(page)}
