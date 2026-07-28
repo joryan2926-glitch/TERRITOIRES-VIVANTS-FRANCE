@@ -129,6 +129,11 @@ async function main() {
     assert.strictEqual(row.email, "contact@territoiresvivantsfrance.fr");
     assert.ok(["nouveau", "new", null, undefined].includes(row.status) || row.status);
 
+    if (result.email?.configured !== false) {
+      assert.strictEqual(result.email?.internal, "sent", "la notification interne doit etre envoyee");
+      assert.strictEqual(result.email?.confirmation, "sent", "la confirmation demandeur doit etre envoyee");
+    }
+
     console.log(`TVF_SITE_FORM_REAL_OK marker=${marker} contact=${row.id} email_internal=${result.email?.internal || "unknown"} email_confirmation=${result.email?.confirmation || "unknown"}`);
   } finally {
     await cleanup(created.id);

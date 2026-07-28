@@ -18,5 +18,8 @@
     "test:tvf-os-flow": "node scripts/check-tvf-os-operational-flow.js",
     "check:mobile:production": "npm --prefix mobile/tvf-mobile run check:production",
     "test:site-form": "node scripts/test-site-form-real.js"
+  },
+  "dependencies": {
+    "@getbrevo/brevo": "^6.0.2"
   }
 }

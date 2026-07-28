@@ -199,7 +199,7 @@ const pages = [
     ],
     sections: [
       sectionIntro(
-        "Une mission lisible",
+        "Une agence territoriale lisible",
         "TVF part d'un constat simple : des logements restent vacants, des commerces ferment, des friches demeurent inutilisées et des matériaux encore utiles sortent des circuits de projet. L'association veut transformer ces situations en opportunités locales, avec un cadre clair et traçable.",
         [
           ["Observer", "Identifier les lieux, besoins et ressources à partir de signalements, visites et données vérifiables."],
@@ -251,12 +251,12 @@ const pages = [
     file: "qui-sommes-nous.html",
     title: "Qui sommes-nous ?",
     meta:
-      "Découvrez Territoires Vivants France, association en développement territorial basée à Saint-Étienne.",
+      "D\u00e9couvrez Territoires Vivants France, agence territoriale de revitalisation immobili\u00e8re en structuration \u00e0 Saint-\u00c9tienne.",
     heroImage: "assets/photos/france-saint-etienne-chateaucreux.jpg",
     eyebrow: "L'association",
-    h1: "Une plateforme de coopération territoriale.",
+    h1: "Une agence territoriale de revitalisation immobili\u00e8re.",
     intro:
-      "TVF rassemble les acteurs capables de transformer un bien inutilisé en ressource pour les habitants : propriétaires, collectivités, entreprises, associations, bénévoles, financeurs et citoyens.",
+      "TVF accompagne les propri\u00e9taires, collectivit\u00e9s, entreprises et acteurs locaux dans la remise en usage de biens vacants, d\u00e9grad\u00e9s ou sous-utilis\u00e9s, afin de transformer le patrimoine dormant en usages utiles.",
     ctas: [["Notre méthode", "notre-methode.html"], ["Transparence", "transparence.html"]],
     sections: [
       textBlock(
@@ -268,6 +268,16 @@ const pages = [
         "Les statuts signés à Saint-Étienne le 22 juin 2026 donnent à TVF un objet large : participer à la revitalisation, la réhabilitation et la valorisation des territoires urbains, ruraux et ultramarins. Cet objet couvre notamment le logement, l'habitat, la vacance immobilière, la réhabilitation de bâtiments dégradés, la revitalisation commerciale, le réemploi des matériaux, les friches, l'insertion, la solidarité, l'environnement, l'économie circulaire, la formation et l'accompagnement des collectivités, entreprises et habitants."
       ),
       nationalDataSection("Pourquoi une association comme TVF est utile"),
+      sectionIntro(
+        "Le service immobilier TVF",
+        "TVF organise un parcours de valorisation immobili\u00e8re \u00e0 impact : rep\u00e9rer un bien dormant, qualifier son \u00e9tat, comprendre l'objectif du propri\u00e9taire, construire un sc\u00e9nario d'usage utile, pr\u00e9parer le cadre de convention et suivre la remise en usage. Les activit\u00e9s relevant de la gestion immobili\u00e8re r\u00e9glement\u00e9e seront exerc\u00e9es uniquement apr\u00e8s obtention des autorisations n\u00e9cessaires ou avec des partenaires habilit\u00e9s.",
+        [
+          ["Rep\u00e9rer", "Identifier logements vacants, locaux commerciaux ferm\u00e9s, b\u00e2timents inutilis\u00e9s, terrains ou friches."],
+          ["Qualifier", "R\u00e9unir adresse, photos, \u00e9tat apparent, pi\u00e8ces disponibles, contraintes et potentiel d'usage."],
+          ["Valoriser", "Proposer un sc\u00e9nario : logement, commerce, local associatif, atelier, stockage, formation ou occupation transitoire."],
+          ["S\u00e9curiser", "Pr\u00e9parer mandat, convention, orientation professionnelle, assurance, responsabilit\u00e9s et suivi."],
+        ]
+      ),
       associationNeedMatrixSection(),
       associationProofSection(),
       sectionIntro(
@@ -1268,7 +1278,7 @@ const pages = [
       impactPublicationRulesSection(),
       textBlock(
         "Pourquoi cette prudence ?",
-        "La crédibilité d'une association nationale repose sur la preuve. Un chiffre non vérifié peut fragiliser la confiance des collectivités, propriétaires, financeurs et habitants. TVF préfère publier moins, mais publier juste."
+        "La crédibilité d'une association ? vocation nationale repose sur la preuve. Un chiffre non vérifié peut fragiliser la confiance des collectivités, propriétaires, financeurs et habitants. TVF préfère publier moins, mais publier juste."
       ),
       faqSection([
         ["Pourquoi ne pas afficher de compteurs dès maintenant ?", "Parce qu'un compteur sans données vérifiées donnerait une impression artificielle. TVF prépare les indicateurs avant de publier des résultats."],
@@ -2836,13 +2846,13 @@ function institutionalNarrativeFor(page) {
   const narratives = {
     "index.html": [
       "Une méthode territoriale en construction",
-      "Territoires Vivants France se positionne comme un outil d'intérêt général destiné à relier des situations aujourd'hui dispersées : biens vacants, ressources inutilisées, besoins locaux, compétences techniques et capacités de financement. Le site doit être lu comme une porte d'entrée vers une méthode de travail, pas comme une simple vitrine associative.",
+      "Territoires Vivants France se positionne comme une agence territoriale de revitalisation immobili\u00e8re en structuration. Sa vocation est d'aider \u00e0 remettre en usage des biens vacants, d\u00e9grad\u00e9s ou sous-utilis\u00e9s en reliant propri\u00e9taires, collectivit\u00e9s, entreprises, ressources locales, comp\u00e9tences techniques et capacit\u00e9s de financement.",
       "La démarche proposée repose sur une exigence constante : qualifier avant d'annoncer, conventionner avant d'agir et documenter avant de publier un impact. Cette posture permet de dialoguer avec les collectivités, les propriétaires, les entreprises et les financeurs dans un cadre sérieux, compréhensible et vérifiable."
     ],
     "qui-sommes-nous.html": [
-      "Une association nationale en structuration",
-      "TVF porte une ambition nationale tout en assumant une étape de construction progressive. Son rôle n'est pas de se substituer aux politiques publiques, mais de créer les conditions opérationnelles d'une coopération entre acteurs qui, trop souvent, ne disposent pas du même langage, du même calendrier ou des mêmes outils.",
-      "L'association doit donc avancer avec une double exigence : une vision forte pour la revitalisation des territoires et une méthode prudente, documentée, compatible avec les responsabilités publiques, privées et associatives."
+      "Une agence territoriale en structuration",
+      "TVF porte une ambition de d\u00e9ploiement territorial tout en assumant une \u00e9tape de structuration progressive. Son r\u00f4le est de cr\u00e9er les conditions op\u00e9rationnelles de la valorisation immobili\u00e8re : qualifier les biens, s\u00e9curiser les informations, pr\u00e9parer les usages, conventionner et orienter vers les professionnels comp\u00e9tents lorsque la mission est r\u00e9glement\u00e9e.",
+      "L'association doit donc avancer avec une double exigence : une offre immobili\u00e8re utile aux territoires et une m\u00e9thode prudente, document\u00e9e, compatible avec les responsabilit\u00e9s publiques, priv\u00e9es, associatives et r\u00e9glementaires."
     ],
     "nos-actions.html": [
       "Des actions conçues pour produire des décisions",

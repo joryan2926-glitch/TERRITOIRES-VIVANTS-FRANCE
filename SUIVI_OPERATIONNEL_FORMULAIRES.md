@@ -231,3 +231,19 @@ Avant d'utiliser TVF OS sur des demandes reelles, effectuer ce parcours complet 
 | 8 | Archivage | Les tests sont classes ou supprimes uniquement apres verification. |
 
 Regle interne : aucune demande ne doit etre presentee comme acceptee tant que le dossier, les pieces, le cadre de responsabilite et la prochaine action ne sont pas renseignes.
+
+## 11. Recette production
+
+Avant de considérer les formulaires comme totalement opérationnels, vérifier ces points :
+
+| Controle | Resultat attendu |
+|---|---|
+| Formulaire public | Demande creee dans Supabase et visible dans TVF OS |
+| Notification interne | E-mail recu sur `contact@territoiresvivantsfrance.fr` |
+| Confirmation demandeur | Accuse de reception envoye si l'e-mail est renseigne |
+| TVF Mobile | Demande mobile transformable en dossier TVF OS |
+| E-mail entrant | Webhook protege par `TVF_EMAIL_WEBHOOK_SECRET` et demande creee |
+
+Variables indispensables en production : `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `BREVO_API_KEY`, `EMAIL_PROVIDER`, `TVF_EMAIL_FROM`, `TVF_NOTIFICATION_EMAIL`, `TVF_EMAIL_WEBHOOK_SECRET`.
+
+Si Brevo repond `Key not found`, remplacer `BREVO_API_KEY` dans `.env` et dans Vercel par une cle SMTP/API valide issue du compte Brevo actif, puis redeployer.
