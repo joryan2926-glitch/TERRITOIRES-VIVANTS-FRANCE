@@ -52,13 +52,13 @@ const statutes = {
 
 const nav = [
   ["Accueil", "index.html"],
-  ["L'association", "qui-sommes-nous.html"],
-  ["Nos actions", "nos-actions.html"],
-  ["Nos pôles", "nos-poles.html"],
-  ["Observatoire", "observatoire.html"],
+  ["L'agence", "qui-sommes-nous.html"],
+  ["Services", "nos-actions.html"],
+  ["Domaines", "nos-poles.html"],
+  ["Propriétaires", "proprietaires.html"],
+  ["Collectivités", "collectivites.html"],
+  ["Entreprises", "entreprises.html"],
   ["Saint-Étienne", "saint-etienne.html"],
-  ["Agir", "agir-avec-nous.html"],
-  ["Partenaires", "partenaires.html"],
   ["Contact", "contact.html"],
 ];
 
@@ -189,13 +189,13 @@ const pages = [
       "Territoires Vivants France coordonne propriétaires, collectivités, entreprises, associations et citoyens pour redonner vie aux biens et ressources inutilisés.",
     heroImage: "assets/photos/france-saint-etienne-chateaucreux.jpg",
     eyebrow: "Association en développement territorial",
-    h1: "Redonner vie aux lieux utiles aux habitants.",
+    h1: "Valoriser les biens vacants. R\u00e9activer les lieux.",
     intro:
       "Territoires Vivants France structure une méthode de coopération pour repérer les ressources inutilisées, mobiliser les bons acteurs, préparer les conventions et accompagner des projets utiles aux territoires.",
     ctas: [["\u00c9tudier une situation", "contact.html"], ["Comprendre la m\u00e9thode", "notre-methode.html"]],
     sections: [
       sectionIntro(
-        "Une agence territoriale lisible",
+        "Une agence pens\u00e9e pour remettre les biens en mouvement",
         "TVF part d'un constat simple : des logements restent vacants, des commerces ferment, des friches demeurent inutilisées et des matériaux encore utiles sortent des circuits de projet. L'association veut transformer ces situations en opportunités locales, avec un cadre clair et traçable.",
         [
           ["Observer", "Identifier les lieux, besoins et ressources à partir de signalements, visites et données vérifiables."],
@@ -245,11 +245,11 @@ const pages = [
   },
   {
     file: "qui-sommes-nous.html",
-    title: "Qui sommes-nous ?",
+    title: "L'agence",
     meta:
       "D\u00e9couvrez Territoires Vivants France, agence territoriale de revitalisation immobili\u00e8re en structuration \u00e0 Saint-\u00c9tienne.",
     heroImage: "assets/photos/france-saint-etienne-chateaucreux.jpg",
-    eyebrow: "L'association",
+    eyebrow: "Agence territoriale",
     h1: "Une agence territoriale de revitalisation immobili\u00e8re.",
     intro:
       "TVF accompagne les propri\u00e9taires, collectivit\u00e9s, entreprises et acteurs locaux dans la remise en usage de biens vacants, d\u00e9grad\u00e9s ou sous-utilis\u00e9s, afin de transformer le patrimoine dormant en usages utiles.",
@@ -326,15 +326,15 @@ const pages = [
   },
   {
     file: "nos-actions.html",
-    title: "Nos actions",
+    title: "Services",
     meta:
-      "Les actions de TVF : logements vacants, commerces inoccupés, matériaux de réemploi, friches, insertion et coordination territoriale.",
+      "Les services de TVF : valorisation de biens vacants, locaux commerciaux, friches, mat\u00e9riaux de r\u00e9emploi et accompagnement territorial.",
     heroImage: "assets/photos/centre-ville-nantes.jpg",
-    eyebrow: "Actions",
-    h1: "Transformer les lieux inutilisés en solutions concrètes.",
+    eyebrow: "Services",
+    h1: "Transformer les lieux inutilis\u00e9s en solutions concr\u00e8tes.",
     intro:
-      "TVF agit sur les logements vacants, commerces fermés, friches, terrains, matériaux et besoins locaux en construisant des parcours simples : repérer, qualifier, mobiliser, conventionner, réaliser et suivre.",
-    ctas: [["Agir avec nous", "agir-avec-nous.html"], ["Voir les pôles", "nos-poles.html"]],
+      "Les services TVF transforment une situation immobili\u00e8re bloqu\u00e9e en dossier exploitable : pr\u00e9qualification, \u00e9tude d’usage, pi\u00e8ces \u00e0 r\u00e9unir, ressources mobilisables, convention possible et orientation vers les professionnels habilit\u00e9s.",
+    ctas: [["D\u00e9poser une demande", "contact.html"], ["Voir les domaines", "nos-poles.html"]],
     sections: [
       sectionIntro(
         "Une action TVF commence toujours par un besoin réel",
@@ -345,7 +345,7 @@ const pages = [
           ["Un usage", "Logement, activité économique, lieu associatif, espace vert, atelier, formation ou service local."],
         ]
       ),
-      cards("Huit leviers opérationnels", "Chaque action correspond à un besoin lisible pour les habitants, les propriétaires, les entreprises et les collectivités.", [
+      cards("Services op\u00e9rationnels", "Chaque service correspond \u00e0 un besoin lisible pour les propri\u00e9taires, les entreprises, les collectivit\u00e9s et les habitants.", [
         ["Logements vacants", "Pr\u00e9qualifier un bien, accompagner le propri\u00e9taire, construire un sc\u00e9nario d'usage et orienter vers le bon cadre.", "proprietaires.html"],
         ["Commerces inoccupés", "Étudier les cellules fermées et préparer des usages réalistes : commerce, atelier, association, service ou activité temporaire.", "nos-poles.html#commerce-vivant"],
         ["Matériaux de réemploi", "Repérer, trier et affecter des matériaux encore utiles à des projets validés, sans distribution automatique.", "nos-actions.html#la-banque-de-materiaux-est-un-outil-de-projet"],
@@ -353,7 +353,7 @@ const pages = [
         ["Solidarité et insertion", "Construire des missions encadrées pour bénévoles, habitants, publics en insertion et partenaires associatifs.", "benevoles-citoyens.html"],
         ["Territoires partenaires", "Aider une commune ou un EPCI à cadrer un diagnostic, une expérimentation ou une coopération locale.", "collectivites.html"],
         ["Financer les projets", "Préparer des budgets, cofinancements et dossiers lisibles pour mécènes, fondations et financeurs.", "financeurs-mecenes.html"],
-        ["Observatoire", "Organiser les signalements, données, sources et priorités pour décider où agir en premier.", "observatoire.html"],
+        ["Diagnostic interne", "Qualifier les situations, classer les pi\u00e8ces et prioriser les dossiers sans publier de donn\u00e9es sensibles.", "notre-methode.html"],
       ]),
       nationalDataSection("Données publiques qui justifient ces actions"),
       tableSection("Ce que chaque action produit", "TVF doit toujours produire un livrable clair, même lorsque le projet n'est pas encore lancé.", [
@@ -1815,7 +1815,7 @@ function pageMiniNav(page) {
 }
 
 function journeySection(page) {
-  const skipJourney = new Set(["contact.html", "mentions-legales.html", "politique-confidentialite.html", "kit-media.html"]);
+  const skipJourney = new Set(["index.html", "contact.html", "documents.html", "mentions-legales.html", "politique-confidentialite.html", "kit-media.html", "gouvernance.html", "transparence.html", "impact.html", "observatoire.html"]);
   if (skipJourney.has(page.file)) return "";
   const links = {
     "index.html": [
@@ -2850,7 +2850,7 @@ function jsonLd(page) {
 }
 
 function ctaBandFor(page) {
-  const skipCta = new Set(["contact.html", "mentions-legales.html", "politique-confidentialite.html"]);
+  const skipCta = new Set(["index.html", "contact.html", "documents.html", "mentions-legales.html", "politique-confidentialite.html", "gouvernance.html", "kit-media.html", "transparence.html", "impact.html", "observatoire.html"]);
   if (skipCta.has(page.file)) return "";
   const map = {
     "index.html": ["Première étape", "Vous voulez savoir par où commencer ?", "Choisissez votre profil et préparez une première demande lisible en quelques minutes.", [["Choisir mon parcours", "agir-avec-nous.html"], ["Demander un échange", "contact.html"]]],
@@ -3174,7 +3174,7 @@ ${breadcrumbNav(page)}
       <div><span class="footer-logo-box"><img src="assets/logo-territoires-vivants-france-web.png" width="583" height="181" alt="Territoires Vivants France" class="footer-logo" loading="lazy" decoding="async"></span><p>Association en développement, basée à Saint-Étienne, pour redonner vie aux biens, lieux et ressources inutilisés.</p></div>
       <div><h3>Navigation</h3>${nav.slice(0, 7).map(([label, href]) => `<a href="${hrefFor(href)}">${label}</a>`).join("")}</div>
       <div><h3>Ressources</h3><a href="${hrefFor("faq.html")}">FAQ</a><a href="${hrefFor("kit-media.html")}">Kit média</a><a href="${hrefFor("gouvernance.html")}">Gouvernance</a><a href="${hrefFor("mentions-legales.html")}">Mentions légales</a><a href="${hrefFor("politique-confidentialite.html")}">Politique de confidentialité</a></div>
-      <div><h3>Siège</h3><p>25 rue Élise Gervais<br>42000 Saint-Étienne</p><p><a href="mailto:${contact.email}">${contact.email}</a><br><a href="tel:${contact.phoneHref}">${contact.phone}</a></p><div class="footer-social" aria-label="Réseaux et messagerie TVF"><a href="${socialLinks.whatsapp}" target="_blank" rel="noopener noreferrer" aria-label="Écrire à TVF sur WhatsApp"><span aria-hidden="true">WA</span><span>WhatsApp</span></a><a href="${socialLinks.facebook}" target="_blank" rel="noopener noreferrer" aria-label="Suivre TVF sur Facebook"><span aria-hidden="true">FB</span><span>Facebook</span></a><a href="${socialLinks.instagram}" target="_blank" rel="noopener noreferrer" aria-label="Suivre TVF sur Instagram"><span aria-hidden="true">IG</span><span>Instagram</span></a></div><a class="btn secondary" href="${hrefFor("contact.html")}">Contacter TVF</a></div>
+      <div><h3>Siège</h3><p>25 rue Élise Gervais<br>42000 Saint-Étienne</p><p><a href="mailto:${contact.email}">${contact.email}</a><br><a href="tel:${contact.phoneHref}">${contact.phone}</a></p><div class="footer-social" aria-label="Réseaux et messagerie TVF"><a href="${socialLinks.whatsapp}" target="_blank" rel="noopener noreferrer" aria-label="Écrire à TVF sur WhatsApp"><span aria-hidden="true">WA</span><span>WhatsApp</span></a><a href="${socialLinks.facebook}" target="_blank" rel="noopener noreferrer" aria-label="Suivre TVF sur Facebook"><span aria-hidden="true">FB</span><span>Facebook</span></a><a href="${socialLinks.instagram}" target="_blank" rel="noopener noreferrer" aria-label="Suivre TVF sur Instagram"><span aria-hidden="true">IG</span><span>Instagram</span></a></div><a class="footer-contact-link" href="${hrefFor("contact.html")}">Prendre contact</a></div>
     </div>
     <div class="container footer-bottom"><span>© 2026 Territoires Vivants France - Tous droits réservés.</span><a class="footer-admin-link" href="${hrefFor("admin-demandes.html")}" rel="nofollow">Accès administrateur</a></div>
   </footer>
