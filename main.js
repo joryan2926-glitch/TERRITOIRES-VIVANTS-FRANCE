@@ -666,3 +666,21 @@ if (!reduceMotion && "IntersectionObserver" in window) {
   style.textContent = `.is-visible{opacity:1!important;transform:none!important}`;
   document.head.appendChild(style);
 }
+
+// Orientation rapide de la page Contact vers le bon motif.
+document.querySelectorAll(".contact-route-card[data-contact-profile]").forEach((card) => {
+  card.addEventListener("click", () => {
+    const form = document.querySelector("#contact-form");
+    if (!form) return;
+    const profil = form.querySelector("[name='profil']");
+    const categorie = form.querySelector("[name='categorie']");
+    if (profil && card.dataset.contactProfile) {
+      profil.value = card.dataset.contactProfile;
+      profil.dispatchEvent(new Event("input", { bubbles: true }));
+    }
+    if (categorie && card.dataset.contactCategory) {
+      categorie.value = card.dataset.contactCategory;
+      categorie.dispatchEvent(new Event("input", { bubbles: true }));
+    }
+  });
+});
