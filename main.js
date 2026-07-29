@@ -10,7 +10,7 @@ function insertSiteWorkNotice() {
   header.insertAdjacentElement("afterend", notice);
 }
 
-insertSiteWorkNotice();
+if (document.body?.dataset?.siteNotice === "true") insertSiteWorkNotice();
 
 const menuButton = document.querySelector(".menu-toggle");
 const nav = document.querySelector(".main-nav");

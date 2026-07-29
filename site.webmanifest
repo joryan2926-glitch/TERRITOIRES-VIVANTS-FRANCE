@@ -3,17 +3,12 @@
   "short_name": "TVF",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#f6f3ec",
-  "theme_color": "#245c2b",
+  "background_color": "#fbfaf4",
+  "theme_color": "#062518",
   "icons": [
     {
       "src": "assets/icon-512.png",
       "sizes": "512x512",
-      "type": "image/png"
-    },
-    {
-      "src": "assets/apple-touch-icon.png",
-      "sizes": "180x180",
       "type": "image/png"
     }
   ]
