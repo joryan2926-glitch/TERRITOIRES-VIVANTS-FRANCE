@@ -1,6 +1,6 @@
 # Checklist de mise en service opérationnelle TVF
 
-Document interne de contrôle avant lancement terrain. Il sert à vérifier que le site public, TVF OS, les formulaires, Supabase, Brevo, TVF Mobile et les documents internes sont cohérents avant réception de demandes réelles.
+Document interne de contrôle avant lancement terrain. Il sert à vérifier que le site public, TVF OS, les formulaires, Supabase, Resend, TVF Mobile et les documents internes sont cohérents avant réception de demandes réelles.
 
 ## 1. Décision de mise en service
 
@@ -12,7 +12,7 @@ Document interne de contrôle avant lancement terrain. Il sert à vérifier que 
 | TVF Mobile | Prêt terrain | Une demande mobile arrive dans le même flux que les demandes du site. |
 | Documents internes | Prêt interne | Les modèles sont rangés dans TVF OS et utilisables sans publication publique. |
 | Supabase | À contrôler en production | Tables, RLS, migrations et Storage doivent être vérifiés dans le tableau de bord Supabase. |
-| Brevo | À contrôler en production | Expéditeur, domaine, DKIM/SPF et accusés de réception doivent rester actifs. |
+| Resend | À contrôler en production | Expéditeur, domaine, DKIM/SPF et accusés de réception doivent rester actifs. |
 
 ## 2. Variables indispensables
 
@@ -20,10 +20,10 @@ Document interne de contrôle avant lancement terrain. Il sert à vérifier que 
 |---|---|---|
 | `SUPABASE_URL` | Connexion base de données | Vercel et environnement local sécurisé |
 | `SUPABASE_SERVICE_ROLE_KEY` | Lecture/écriture serveur | Vercel uniquement |
-| `BREVO_API_KEY` | Notifications e-mail | Vercel uniquement |
+| `RESEND_API_KEY` | Notifications e-mail | Vercel uniquement |
 | `TVF_NOTIFICATION_EMAIL` | Réception interne | `contact@territoiresvivantsfrance.fr` |
 | `TVF_EMAIL_REPLY_TO` | Adresse de réponse | `contact@territoiresvivantsfrance.fr` |
-| `TVF_EMAIL_FROM` | Expéditeur vérifié | Domaine TVF validé dans Brevo |
+| `TVF_EMAIL_FROM` | Expéditeur vérifié | Domaine TVF validé dans Resend |
 | `TVF_ADMIN_TOKEN` | Accès TVF OS | Vercel uniquement, non partagé |
 
 ## 3. Parcours utilisateur à tester
@@ -105,7 +105,7 @@ La première commande vérifie que les fichiers, scripts, guides, migrations et 
 | Validation juridique des conventions | Nécessite une relecture par une personne compétente. |
 | Mentions légales définitives | Dépendent des informations administratives finales. |
 | Politique RGPD finale | Dépend des traitements réellement retenus et de leur durée de conservation. |
-| DNS e-mail | Se vérifie dans Brevo, le registrar et Vercel. |
+| DNS e-mail | Se vérifie dans Resend, le registrar et Vercel. |
 | Données réelles | Ne doivent pas être inventées ; elles arrivent avec les premières demandes. |
 | Rôles multi-utilisateurs avancés | À ouvrir quand plusieurs personnes utiliseront TVF OS. |
 
@@ -128,7 +128,7 @@ Chaque semaine au démarrage :
 | Action | Responsable | Trace attendue |
 |---|---|---|
 | Vérifier les demandes non traitées | TVF | Liste des dossiers à relancer |
-| Vérifier les e-mails envoyés | TVF | Journal ou historique Brevo |
+| Vérifier les e-mails envoyés | TVF | Journal ou historique Resend |
 | Vérifier les erreurs Vercel | TVF | Logs sans erreur récurrente |
 | Contrôler les dossiers incomplets | TVF | Pièces manquantes identifiées |
 | Mettre à jour les documents | TVF | Version datée et archivée |

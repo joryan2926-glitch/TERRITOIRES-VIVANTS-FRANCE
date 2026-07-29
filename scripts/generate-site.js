@@ -6,7 +6,7 @@ const site = {
   url: "https://www.territoiresvivantsfrance.fr",
   lastModified: "2026-07-04",
   description:
-    "Association en développement pour remettre en usage les logements, commerces, bâtiments, terrains et matériaux inutilisés.",
+    "Agence territoriale de revitalisation immobilière portée par une association loi 1901 pour accompagner la remise en usage des biens vacants et ressources inutilisées.",
 };
 
 const contact = {
@@ -53,11 +53,12 @@ const statutes = {
 const nav = [
   ["Accueil", "index.html"],
   ["L'agence", "qui-sommes-nous.html"],
-  ["Services", "nos-actions.html"],
-  ["Propri\u00e9taires", "proprietaires.html"],
-  ["Partenaires", "partenaires.html"],
-  ["Saint-\u00c9tienne", "saint-etienne.html"],
-  ["Contact", "contact.html"],
+  ["Propriétaires", "proprietaires.html"],
+  ["Collectivités", "collectivites.html"],
+  ["Entreprises", "entreprises.html"],
+  ["Nos services", "nos-actions.html"],
+  ["Nos réalisations", "impact.html"],
+  ["Observatoire", "observatoire.html"],
 ];
 
 const imageSizes = {
@@ -184,57 +185,52 @@ const pages = [
     file: "index.html",
     title: "Accueil",
     meta:
-      "Territoires Vivants France coordonne propriétaires, collectivités, entreprises, associations et citoyens pour redonner vie aux biens et ressources inutilisés.",
+      "Territoires Vivants France est une agence territoriale de revitalisation immobilière portée par une association loi 1901, pour accompagner propriétaires, collectivités, entreprises et partenaires dans la remise en usage de biens vacants.",
     heroImage: "assets/photos/france-saint-etienne-chateaucreux.jpg",
-    eyebrow: "Association en développement territorial",
-    h1: "Valoriser les biens vacants. R\u00e9activer les lieux.",
+    eyebrow: "Agence territoriale de revitalisation immobilière",
+    h1: "Remettre en usage les biens vacants au service des territoires.",
     intro:
-      "Territoires Vivants France structure une méthode de coopération pour repérer les ressources inutilisées, mobiliser les bons acteurs, préparer les conventions et accompagner des projets utiles aux territoires.",
-    ctas: [["\u00c9tudier une situation", "contact.html"], ["Comprendre la m\u00e9thode", "notre-methode.html"]],
+      "Un service de Territoires Vivants France pour identifier, diagnostiquer, conventionner et valoriser les logements, commerces, bâtiments, terrains et ressources inutilisés.",
+    ctas: [["Découvrir notre mission", "qui-sommes-nous.html"], ["Proposer une situation", "contact.html"]],
     sections: [
-      sectionIntro(
-        "Une agence pens\u00e9e pour remettre les biens en mouvement",
-        "TVF part d'un constat simple : des logements restent vacants, des commerces ferment, des friches demeurent inutilisées et des matériaux encore utiles sortent des circuits de projet. L'association veut transformer ces situations en opportunités locales, avec un cadre clair et traçable.",
-        [
-          ["Observer", "Identifier les lieux, besoins et ressources à partir de signalements, visites et données vérifiables."],
-          ["Qualifier", "Analyser la faisabilité, les contraintes, les responsabilités et les usages possibles."],
-          ["Coordonner", "Réunir propriétaires, collectivités, entreprises, associations, financeurs, bénévoles et habitants."],
-        ]
-      ),
-      homeClaritySection(),
-      homeTrustSection(),
-      tvfOsTrackingSection(),
-      launchNeedsSection(),
-      tableSection("Ce que vous pouvez faire dès maintenant", "L'accueil doit orienter vite vers le bon parcours, sans perdre le visiteur dans tout le site.", [
-        ["Votre situation", "Action utile", "Page à consulter"],
-        ["Vous représentez une collectivité", "Préparer un périmètre pilote, un besoin public ou une coopération", "Collectivités"],
-        ["Vous possédez un bien vacant", "Décrire le bien, son état, les contraintes et les usages possibles", "Propriétaires"],
-        ["Vous êtes une entreprise", "Signaler des matériaux, compétences, locaux ou un soutien possible", "Entreprises"],
-        ["Vous souhaitez aider", "Proposer du temps, une compétence, un signalement ou une mission locale", "Agir avec nous"],
-        ["Vous voulez comprendre la méthode", "Lire les étapes, critères de décision et règles de preuve", "Notre méthode"],
+      cards("Choisissez votre parcours", "Le portail TVF s'organise autour de besoins concrets. Chaque public accède directement au bon cadre d'échange, sans se perdre dans des pages techniques.", [
+        ["Je suis propriétaire", "Valoriser un bien vacant, obtenir une première lecture du potentiel, préparer les pièces utiles et étudier une convention possible.", "proprietaires.html"],
+        ["Je suis une collectivité", "Qualifier la vacance, prioriser les lieux, structurer une expérimentation et disposer d'un interlocuteur de méthode.", "collectivites.html"],
+        ["Je représente une entreprise", "Valoriser matériaux, équipements, locaux, compétences ou mécénat dans un cadre traçable et territorial.", "entreprises.html"],
+        ["Je souhaite devenir partenaire", "Contribuer au lancement opérationnel par expertise, réseau, financement, logistique ou mise à disposition.", "partenaires.html"],
       ]),
-      cards(
-        "À chacun son entrée",
-        "Le site doit permettre à chaque public de savoir quoi faire en moins de deux minutes.",
+      sectionIntro(
+        "Une agence associative, structurée pour agir avec méthode",
+        "TVF reste une association loi 1901. Son positionnement d'agence territoriale signifie qu'elle organise un cadre de travail professionnel : réception des demandes, qualification, pièces à réunir, convention possible, orientation vers les acteurs compétents et suivi dans TVF OS.",
         [
-          ["Collectivité", "Préparer un diagnostic, une expérimentation ou une coopération territoriale.", "agir-avec-nous.html#collectivite"],
-          ["Propriétaire", "Présenter un logement, un commerce, un bâtiment ou un terrain inutilisé.", "agir-avec-nous.html#proprietaire"],
-          ["Entreprise", "Valoriser des matériaux, compétences, locaux ou mécénat dans un projet utile.", "agir-avec-nous.html#entreprise"],
-          ["Citoyen", "Signaler un lieu, participer à une action locale ou rejoindre une mission bénévole.", "agir-avec-nous.html#citoyen"],
+          ["Sécuriser", "Chaque dossier commence par une analyse du bien, de la demande, des responsabilités et des limites d'intervention."],
+          ["Valoriser", "Le patrimoine dormant peut devenir un logement, un local associatif, un commerce, un atelier, un lieu utile ou une ressource territoriale."],
+          ["Coordonner", "TVF relie propriétaires, collectivités, entreprises, artisans, associations, financeurs et citoyens autour d'un projet réaliste."],
         ]
       ),
-      timeline(
-        "Le parcours TVF",
-        [
-          ["1", "Repérage", "Un lieu, un besoin ou une ressource est identifié."],
-          ["2", "Diagnostic", "La situation est qualifiée avant toute annonce ou engagement."],
-          ["3", "Convention", "Les rôles, responsabilités, usages et limites sont formalisés."],
-          ["4", "Mise en usage", "Le projet est coordonné, documenté puis suivi dans le temps."],
-        ]
-      ),
+      cards("Des solutions concrètes pour revitaliser durablement les territoires", "Les anciens pôles deviennent des services lisibles, utilisables dans un dossier propriétaire, collectivité, entreprise ou partenaire.", [
+        ["Habitat vivant", "Identification, diagnostic et scénarios de remise en usage de logements vacants ou sous-utilisés.", "proprietaires.html"],
+        ["Commerce vivant", "Réactivation de locaux commerciaux, vitrines fermées et rez-de-chaussée inoccupés.", "nos-poles.html#commerce-vivant"],
+        ["Friches & terrains vivants", "Qualification de terrains délaissés et préparation d'usages verts, collectifs ou temporaires.", "nos-poles.html#friches-terrains-vivants"],
+        ["Matériauthèque solidaire", "Valorisation de matériaux, mobilier et équipements vers des projets validés, sans distribution automatique.", "entreprises.html"],
+        ["Solidarité & insertion", "Missions encadrées, bénévolat, chantiers participatifs et participation citoyenne.", "benevoles-citoyens.html"],
+      ]),
+      tableSection("À chaque public son parcours", "Le portail oriente le visiteur vers le bon dossier en quelques clics, avec moins de dispersion et une logique d'agence.", [
+        ["Public", "Besoin fréquent", "Réponse TVF", "Entrée"],
+        ["Propriétaire", "Bien vacant, local inutilisé, patrimoine dormant", "Diagnostic, scénarios, convention, valorisation", "Propriétaires"],
+        ["Collectivité", "Vacance, centre-ville, friches, besoins locaux", "Diagnostic territorial, méthode, priorisation", "Collectivités"],
+        ["Entreprise", "Stocks, matériaux, local, RSE, mécénat", "Valorisation, partenariat, traçabilité", "Entreprises"],
+        ["Partenaire", "Contribuer au lancement", "Mise en relation, dossier, convention", "Partenaires"],
+      ]),
+      timeline("Parcours propriétaire", [
+        ["1", "Déclarer", "Le propriétaire transmet l'adresse, l'état du bien, les photos et les premiers éléments disponibles."],
+        ["2", "Qualifier", "TVF analyse les contraintes, usages possibles, pièces manquantes et limites d'intervention."],
+        ["3", "Conventionner", "Si le dossier est recevable, les droits, durées, responsabilités et modalités sont formalisés."],
+        ["4", "Valoriser", "Le bien peut être orienté vers un usage utile : logement, activité, association, atelier ou projet territorial."],
+      ]),
       highlight(
         "Saint-Étienne comme territoire pilote",
-        "Le siège national est situé à Saint-Étienne. Le territoire pilote permet de tester la méthode TVF sur des enjeux concrets : habitat vacant, commerces fermés, friches, matériaux de réemploi et mobilisation citoyenne.",
+        "TVF est implantée à Saint-Étienne pour structurer une première méthode terrain : repérage de biens vacants, dialogue avec les propriétaires, recherche de locaux de stockage, mobilisation de matériaux réemployables et relations avec les acteurs publics, économiques et associatifs.",
         "Découvrir le pilote",
         "saint-etienne.html",
         "assets/photos/france-saint-etienne-jean-jaures.jpg"
@@ -1662,7 +1658,7 @@ const pages = [
         ["Numéro SIREN", `${official.siren}`, `Avis de situation SIRENE du ${official.sireneDate}`],
         ["Contact officiel", `${contact.email} - ${contact.phone}`, "Maintenir à jour les canaux publics de contact"],
         ["Hébergement", "Vercel Inc. - https://vercel.com", "Site hébergé et déployé via Vercel ; coordonnées complètes à vérifier depuis le compte contractuel"],
-        ["Prestataires techniques", "Vercel, Supabase, Brevo et GitHub selon les services activés", "Maintenir à jour les services réellement utilisés pour l'hébergement, les formulaires, les notifications et le déploiement"],
+        ["Prestataires techniques", "Vercel, Supabase, Resend et GitHub selon les services activés", "Maintenir à jour les services réellement utilisés pour l'hébergement, les formulaires, les notifications et le déploiement"],
       ]),
       tableSection("Procédure de mise à jour légale", "Les mentions légales doivent être actualisées dès qu'une information officielle change.", [
         ["Déclencheur", "Vérification à faire", "Pièce attendue"],
@@ -2651,7 +2647,7 @@ function contactSection() {
 }
 
 function legalSection() {
-  return `<section class="section" ${sectionAttrs("Mentions légales", "mentions-legales-detail")}><div class="container legal"><h2>Cadre légal du site</h2><h3>Éditeur du site</h3><p><strong>Territoires Vivants France</strong><br>Nom du site : Territoires Vivants France<br>Adresse du site : <a href="https://www.territoiresvivantsfrance.fr" rel="noopener">www.territoiresvivantsfrance.fr</a><br>${official.status}<br>RNA : ${official.rna}<br>SIREN : ${official.siren}<br>SIRET du siège : ${official.siret}<br>${contact.address}<br>E-mail : <a href="mailto:${contact.email}">${contact.email}</a><br>Téléphone : <a href="tel:${contact.phoneHref}">${contact.phone}</a></p><h3>Directeur de la publication</h3><p>Directeur de la publication : Edryan Rangoly, président fondateur de Territoires Vivants France.</p><h3>Responsables associatifs</h3><p>Président fondateur : Edryan Rangoly.<br>Secrétaire et trésorier : M. Lambeau Jordan.</p><h3>Références administratives</h3><p>${official.receiptLabel}. Déclaration en date du ${official.declarationDate}. Décision prise le ${official.decisionDate}. Récépissé délivré à ${official.receiptPlace} le ${official.receiptDate} par ${official.authority}. SIREN : ${official.siren}. SIRET du siège : ${official.siret}. Catégorie juridique : ${official.legalCategory}. Activité principale exercée (APE) : ${official.ape}. Appartenance au champ de l’ESS : ${official.ess}. Entreprise active depuis le ${official.activeSince}. Informations issues de l’avis de situation au répertoire SIRENE à la date du ${official.sireneDate}.</p><h3>Statuts</h3><p>Les statuts de Territoires Vivants France ont été établis à Saint-Étienne le 22 juin 2026. Ils prévoient notamment une durée indéterminée, un bureau composé d’un président, d’un secrétaire et d’un trésorier, des ressources autorisées par la loi et une attribution de l’actif net à un organisme d’intérêt général ou à objet similaire en cas de dissolution.</p><h3>Hébergement</h3><p>Le site territoiresvivantsfrance.fr est hébergé et déployé par <strong>Vercel Inc.</strong>, plateforme Vercel. Vercel fournit les services techniques d’hébergement, de déploiement et de diffusion du site. Site de l’hébergeur : <a href="https://vercel.com" rel="noopener">https://vercel.com</a>. Les coordonnées postales et téléphoniques de l’hébergeur doivent être vérifiées à partir des informations contractuelles du compte Vercel avant publication d’une version définitive des mentions.</p><h3>Prestataires techniques</h3><p>Le fonctionnement du site peut mobiliser plusieurs prestataires : Vercel pour l’hébergement et le déploiement, Supabase pour l’enregistrement technique des demandes issues des formulaires lorsque le service est activé, Brevo pour les notifications e-mail et accusés de réception lorsque le service est configuré, et GitHub pour la gestion du dépôt de code et le déclenchement du déploiement. Ces prestataires interviennent uniquement dans le cadre technique nécessaire au fonctionnement du site et au traitement des demandes.</p><h3>Données personnelles et RGPD</h3><p>TVF est responsable du traitement des données personnelles transmises via le site. Les formulaires et parcours présentés servent à préparer les informations utiles à une demande : contact, signalement, proposition de bien, proposition de matériaux, partenariat ou demande de rendez-vous. Les données doivent être traitées avec une finalité claire, une durée de conservation adaptée, un accès limité aux personnes habilitées et un droit de contact pour les personnes concernées. La page <a href="politique-confidentialite.html">Politique de confidentialité</a> précise les finalités, les données concernées, les destinataires, les durées de conservation indicatives et les droits des personnes.</p><h3>Délégué à la protection des données</h3><p>TVF n’a pas désigné de délégué à la protection des données à ce stade. Toute demande relative aux données personnelles peut être adressée à <a href="mailto:${contact.email}">${contact.email}</a>.</p><h3>Cookies et traceurs</h3><p>Le site ne prévoit pas, à ce stade, de cookies publicitaires ou de traceurs de mesure d’audience nécessitant un consentement préalable. Si un outil de mesure d’audience, de publicité, de suivi social ou de remarketing est activé ultérieurement, TVF devra mettre à jour cette information et, lorsque nécessaire, recueillir le consentement de l’utilisateur.</p><h3>Crédits et propriété intellectuelle</h3><p>Le logo, les textes, documents, visuels, gabarits et éléments graphiques associés à Territoires Vivants France sont protégés. Toute réutilisation, modification, reproduction ou diffusion doit faire l’objet d’une autorisation préalable. Les photographies et illustrations utilisées sur le site doivent provenir de sources autorisées : images fournies par TVF, images libres de droits, licences adaptées ou créations spécifiquement produites pour TVF.</p><h3>Responsabilité éditoriale</h3><p>Les contenus du site présentent une démarche associative, des méthodes et des documents de travail. Ils ne constituent pas un conseil juridique, technique, financier ou administratif personnalisé. Chaque projet doit être vérifié et adapté avec les interlocuteurs compétents, les propriétaires, les collectivités, les professionnels qualifiés et les autorités concernées lorsque nécessaire.</p><h3>Dons, fiscalité et reçus</h3><p>Les informations relatives aux dons, reçus fiscaux, avantages fiscaux ou dispositifs de mécénat seront précisées selon le cadre légal applicable à l’association et uniquement après vérification des conditions d’éligibilité. Aucune réduction fiscale ne doit être considérée comme acquise sans confirmation officielle.</p><h3>Signalement, rectification et contact</h3><p>Toute demande de correction, signalement de contenu, demande relative aux droits d’auteur, demande RGPD ou question sur les mentions légales peut être adressée à <a href="mailto:${contact.email}">${contact.email}</a>.</p><p><strong>Dernière mise à jour :</strong> juillet 2026.</p></div></section>`;
+  return `<section class="section" ${sectionAttrs("Mentions légales", "mentions-legales-detail")}><div class="container legal"><h2>Cadre légal du site</h2><h3>Éditeur du site</h3><p><strong>Territoires Vivants France</strong><br>Nom du site : Territoires Vivants France<br>Adresse du site : <a href="https://www.territoiresvivantsfrance.fr" rel="noopener">www.territoiresvivantsfrance.fr</a><br>${official.status}<br>RNA : ${official.rna}<br>SIREN : ${official.siren}<br>SIRET du siège : ${official.siret}<br>${contact.address}<br>E-mail : <a href="mailto:${contact.email}">${contact.email}</a><br>Téléphone : <a href="tel:${contact.phoneHref}">${contact.phone}</a></p><h3>Directeur de la publication</h3><p>Directeur de la publication : Edryan Rangoly, président fondateur de Territoires Vivants France.</p><h3>Responsables associatifs</h3><p>Président fondateur : Edryan Rangoly.<br>Secrétaire et trésorier : M. Lambeau Jordan.</p><h3>Références administratives</h3><p>${official.receiptLabel}. Déclaration en date du ${official.declarationDate}. Décision prise le ${official.decisionDate}. Récépissé délivré à ${official.receiptPlace} le ${official.receiptDate} par ${official.authority}. SIREN : ${official.siren}. SIRET du siège : ${official.siret}. Catégorie juridique : ${official.legalCategory}. Activité principale exercée (APE) : ${official.ape}. Appartenance au champ de l’ESS : ${official.ess}. Entreprise active depuis le ${official.activeSince}. Informations issues de l’avis de situation au répertoire SIRENE à la date du ${official.sireneDate}.</p><h3>Statuts</h3><p>Les statuts de Territoires Vivants France ont été établis à Saint-Étienne le 22 juin 2026. Ils prévoient notamment une durée indéterminée, un bureau composé d’un président, d’un secrétaire et d’un trésorier, des ressources autorisées par la loi et une attribution de l’actif net à un organisme d’intérêt général ou à objet similaire en cas de dissolution.</p><h3>Hébergement</h3><p>Le site territoiresvivantsfrance.fr est hébergé et déployé par <strong>Vercel Inc.</strong>, plateforme Vercel. Vercel fournit les services techniques d’hébergement, de déploiement et de diffusion du site. Site de l’hébergeur : <a href="https://vercel.com" rel="noopener">https://vercel.com</a>. Les coordonnées postales et téléphoniques de l’hébergeur doivent être vérifiées à partir des informations contractuelles du compte Vercel avant publication d’une version définitive des mentions.</p><h3>Prestataires techniques</h3><p>Le fonctionnement du site peut mobiliser plusieurs prestataires : Vercel pour l’hébergement et le déploiement, Supabase pour l’enregistrement technique des demandes issues des formulaires lorsque le service est activé, Resend pour les notifications e-mail et accusés de réception lorsque le service est configuré, et GitHub pour la gestion du dépôt de code et le déclenchement du déploiement. Ces prestataires interviennent uniquement dans le cadre technique nécessaire au fonctionnement du site et au traitement des demandes.</p><h3>Données personnelles et RGPD</h3><p>TVF est responsable du traitement des données personnelles transmises via le site. Les formulaires et parcours présentés servent à préparer les informations utiles à une demande : contact, signalement, proposition de bien, proposition de matériaux, partenariat ou demande de rendez-vous. Les données doivent être traitées avec une finalité claire, une durée de conservation adaptée, un accès limité aux personnes habilitées et un droit de contact pour les personnes concernées. La page <a href="politique-confidentialite.html">Politique de confidentialité</a> précise les finalités, les données concernées, les destinataires, les durées de conservation indicatives et les droits des personnes.</p><h3>Délégué à la protection des données</h3><p>TVF n’a pas désigné de délégué à la protection des données à ce stade. Toute demande relative aux données personnelles peut être adressée à <a href="mailto:${contact.email}">${contact.email}</a>.</p><h3>Cookies et traceurs</h3><p>Le site ne prévoit pas, à ce stade, de cookies publicitaires ou de traceurs de mesure d’audience nécessitant un consentement préalable. Si un outil de mesure d’audience, de publicité, de suivi social ou de remarketing est activé ultérieurement, TVF devra mettre à jour cette information et, lorsque nécessaire, recueillir le consentement de l’utilisateur.</p><h3>Crédits et propriété intellectuelle</h3><p>Le logo, les textes, documents, visuels, gabarits et éléments graphiques associés à Territoires Vivants France sont protégés. Toute réutilisation, modification, reproduction ou diffusion doit faire l’objet d’une autorisation préalable. Les photographies et illustrations utilisées sur le site doivent provenir de sources autorisées : images fournies par TVF, images libres de droits, licences adaptées ou créations spécifiquement produites pour TVF.</p><h3>Responsabilité éditoriale</h3><p>Les contenus du site présentent une démarche associative, des méthodes et des documents de travail. Ils ne constituent pas un conseil juridique, technique, financier ou administratif personnalisé. Chaque projet doit être vérifié et adapté avec les interlocuteurs compétents, les propriétaires, les collectivités, les professionnels qualifiés et les autorités concernées lorsque nécessaire.</p><h3>Dons, fiscalité et reçus</h3><p>Les informations relatives aux dons, reçus fiscaux, avantages fiscaux ou dispositifs de mécénat seront précisées selon le cadre légal applicable à l’association et uniquement après vérification des conditions d’éligibilité. Aucune réduction fiscale ne doit être considérée comme acquise sans confirmation officielle.</p><h3>Signalement, rectification et contact</h3><p>Toute demande de correction, signalement de contenu, demande relative aux droits d’auteur, demande RGPD ou question sur les mentions légales peut être adressée à <a href="mailto:${contact.email}">${contact.email}</a>.</p><p><strong>Dernière mise à jour :</strong> juillet 2026.</p></div></section>`;
 }
 
 function iconFor(text) {
@@ -3140,14 +3136,19 @@ ${socialImageSize}
 </head>
 <body>
   <a class="skip-link" href="#contenu">Aller au contenu</a>
-  <header class="site-header">
+  <header class="site-header agency-header">
+    <div class="container agency-topbar" aria-label="Coordonnées de Territoires Vivants France">
+      <span><strong>Téléphone</strong> <a href="tel:${contact.phoneHref}">${contact.phone}</a></span>
+      <span><strong>Email</strong> <a href="mailto:${contact.email}">${contact.email}</a></span>
+      <span><strong>Siège</strong> ${contact.address}</span>
+    </div>
     <div class="container header-inner">
       <a class="brand" href="${hrefFor("index.html")}" aria-label="Accueil Territoires Vivants France"><img src="assets/logo-territoires-vivants-france-web.png" width="583" height="181" alt="Territoires Vivants France" decoding="async"></a>
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav">Menu</button>
       <nav class="main-nav" id="main-nav" aria-label="Navigation principale">${nav
         .map(([label, href]) => `<a href="${hrefFor(href)}"${href === active ? ' aria-current="page"' : ""}>${label}</a>`)
         .join("")}</nav>
-      <a class="btn header-cta" href="${hrefFor("contact.html")}">Nous contacter</a>
+      <a class="btn header-cta os-cta" href="${hrefFor("admin-login.html")}" rel="nofollow">TVF OS</a>
     </div>
   </header>
   <main id="contenu">
@@ -3167,14 +3168,14 @@ ${breadcrumbNav(page)}
     ${journeySection(page)}
     ${ctaBandFor(page)}
   </main>
-  <footer class="site-footer">
+  <footer class="site-footer agency-footer">
     <div class="container footer-grid">
-      <div><span class="footer-logo-box"><img src="assets/logo-territoires-vivants-france-web.png" width="583" height="181" alt="Territoires Vivants France" class="footer-logo" loading="lazy" decoding="async"></span><p>Association en développement, basée à Saint-Étienne, pour redonner vie aux biens, lieux et ressources inutilisés.</p></div>
-      <div><h3>Navigation</h3>${nav.slice(0, 7).map(([label, href]) => `<a href="${hrefFor(href)}">${label}</a>`).join("")}</div>
-      <div><h3>Ressources</h3><a href="${hrefFor("faq.html")}">FAQ</a><a href="${hrefFor("kit-media.html")}">Kit média</a><a href="${hrefFor("gouvernance.html")}">Gouvernance</a><a href="${hrefFor("mentions-legales.html")}">Mentions légales</a><a href="${hrefFor("politique-confidentialite.html")}">Politique de confidentialité</a></div>
-      <div><h3>Siège</h3><p>25 rue Élise Gervais<br>42000 Saint-Étienne</p><p><a href="mailto:${contact.email}">${contact.email}</a><br><a href="tel:${contact.phoneHref}">${contact.phone}</a></p><div class="footer-social" aria-label="Réseaux et messagerie TVF"><a href="${socialLinks.whatsapp}" target="_blank" rel="noopener noreferrer" aria-label="Écrire à TVF sur WhatsApp"><span aria-hidden="true">WA</span><span>WhatsApp</span></a><a href="${socialLinks.facebook}" target="_blank" rel="noopener noreferrer" aria-label="Suivre TVF sur Facebook"><span aria-hidden="true">FB</span><span>Facebook</span></a><a href="${socialLinks.instagram}" target="_blank" rel="noopener noreferrer" aria-label="Suivre TVF sur Instagram"><span aria-hidden="true">IG</span><span>Instagram</span></a></div><a class="footer-contact-link" href="${hrefFor("contact.html")}">Prendre contact</a></div>
+      <div><span class="footer-logo-box"><img src="assets/logo-territoires-vivants-france-web.png" width="583" height="181" alt="Territoires Vivants France" class="footer-logo" loading="lazy" decoding="async"></span><p><strong>Agence Territoriale de Revitalisation Immobilière</strong><br>Un service de Territoires Vivants France pour remettre en usage les biens vacants et ressources inutilisées.</p><p class="footer-status">Association loi 1901 à but non lucratif.</p></div>
+      <div><h3>Liens rapides</h3>${nav.slice(0, 8).map(([label, href]) => `<a href="${hrefFor(href)}">${label}</a>`).join("")}</div>
+      <div><h3>Nos engagements</h3><p>Redonner vie aux lieux vacants.</p><p>Créer de la valeur locale.</p><p>Agir pour l'environnement.</p><p>Favoriser l'inclusion.</p><p>Construire des territoires durables.</p></div>
+      <div><h3>Coordonnées</h3><p>25 rue Élise Gervais<br>42000 Saint-Étienne</p><p><a href="mailto:${contact.email}">${contact.email}</a><br><a href="tel:${contact.phoneHref}">${contact.phone}</a></p><div class="footer-social" aria-label="Réseaux et messagerie TVF"><a href="${socialLinks.whatsapp}" target="_blank" rel="noopener noreferrer" aria-label="Écrire à TVF sur WhatsApp"><span aria-hidden="true">WA</span></a><a href="${socialLinks.facebook}" target="_blank" rel="noopener noreferrer" aria-label="Suivre TVF sur Facebook"><span aria-hidden="true">FB</span></a><a href="${socialLinks.instagram}" target="_blank" rel="noopener noreferrer" aria-label="Suivre TVF sur Instagram"><span aria-hidden="true">IG</span></a></div></div>
     </div>
-    <div class="container footer-bottom"><span>© 2026 Territoires Vivants France - Tous droits réservés.</span><a class="footer-admin-link" href="${hrefFor("admin-demandes.html")}" rel="nofollow">Accès administrateur</a></div>
+    <div class="container footer-bottom"><span>© 2026 Territoires Vivants France - Tous droits réservés.</span><span><a href="${hrefFor("mentions-legales.html")}">Mentions légales</a> ? <a href="${hrefFor("politique-confidentialite.html")}">Politique de confidentialité</a> ? <a class="footer-admin-link" href="${hrefFor("admin-login.html")}" rel="nofollow">Accès administrateur</a></span></div>
   </footer>
   <script src="main.js" defer></script>
 </body>

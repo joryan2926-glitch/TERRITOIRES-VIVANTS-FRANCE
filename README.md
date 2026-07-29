@@ -1,4 +1,4 @@
-﻿# Territoires Vivants France
+# Territoires Vivants France
 
 Nouvelle base propre du portail Territoires Vivants France.
 
@@ -194,9 +194,7 @@ Le formulaire conserve un secours par e-mail si l'enregistrement Supabase échou
 
 Notifications e-mail optionnelles :
 
-- `EMAIL_PROVIDER` : `brevo` ou `resend`. Optionnel si une seule clé est présente.
-- `BREVO_API_KEY` : clé API Brevo pour l'envoi transactionnel.
-- `RESEND_API_KEY` : clé API Resend pour l'envoi transactionnel.
+- `RESEND_API_KEY` : clé API Resend utilisée pour les notifications internes et les accusés de réception.
 - `TVF_EMAIL_FROM` : expéditeur vérifié, par exemple `Territoires Vivants France <contact@territoiresvivantsfrance.fr>`.
 - `TVF_EMAIL_REPLY_TO` : adresse de réponse. Par défaut : `contact@territoiresvivantsfrance.fr`.
 - `TVF_NOTIFICATION_EMAIL` : adresse qui reçoit les notifications internes. Par défaut : `contact@territoiresvivantsfrance.fr`.

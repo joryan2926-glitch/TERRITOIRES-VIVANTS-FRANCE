@@ -80,7 +80,7 @@ function newStore() {
     email_ai_suggestions: [],
     email_tasks: [],
     email_workflow_events: [],
-    brevoCalls: [],
+    resendCalls: [],
     storageUploads: [],
   };
 }
@@ -134,8 +134,8 @@ function installFetchMock(store) {
     const url = parseUrl(urlValue);
     const method = options.method || "GET";
 
-    if (url.hostname === "api.brevo.com") {
-      store.brevoCalls.push(JSON.parse(options.body || "{}"));
+    if (url.hostname === "api.resend.com") {
+      store.resendCalls.push(JSON.parse(options.body || "{}"));
       return textResponse("", 201);
     }
 
@@ -200,8 +200,7 @@ async function main() {
   process.env.SUPABASE_URL = "https://demo.supabase.co";
   process.env.SUPABASE_SERVICE_ROLE_KEY = "sb_secret_demo";
   process.env.SUPABASE_ANON_KEY = "sb_publishable_demo";
-  process.env.EMAIL_PROVIDER = "brevo";
-  process.env.BREVO_API_KEY = "brevo_test";
+  process.env.RESEND_API_KEY = "re_test";
   process.env.TVF_NOTIFICATION_EMAIL = "contact@territoiresvivantsfrance.fr";
   process.env.TVF_EMAIL_FROM = "Territoires Vivants France <contact@territoiresvivantsfrance.fr>";
   process.env.TVF_CONTACT_RATE_LIMIT = "20";
@@ -232,7 +231,7 @@ async function main() {
     });
     assert.strictEqual(publicSubmission.statusCode, 200);
     assert.strictEqual(store.contacts.length, 1, "le formulaire public doit creer une demande");
-    assert.strictEqual(store.brevoCalls.length, 2, "notification interne et confirmation usager attendues");
+    assert.strictEqual(store.resendCalls.length, 2, "notification interne et confirmation usager attendues");
 
     const demandes = await runHandler(adminContactsHandler, {
       method: "GET",

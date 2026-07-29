@@ -1,4 +1,4 @@
-﻿# Module Utilisateurs, roles et permissions - TVF OS
+# Module Utilisateurs, roles et permissions - TVF OS
 
 ## Statut
 
@@ -90,7 +90,7 @@ Le module calcule automatiquement :
 - actions recommandees ;
 - alertes dashboard sur profils non actifs, roles sensibles et revues a faire.
 
-Logique cible pour les phases suivantes : relier ces signaux aux notifications, aux revues periodiques, aux invitations Brevo et aux journaux d'audit centralises.
+Logique cible pour les phases suivantes : relier ces signaux aux notifications, aux revues periodiques, aux invitations Resend et aux journaux d'audit centralises.
 
 ## Donnees de test
 

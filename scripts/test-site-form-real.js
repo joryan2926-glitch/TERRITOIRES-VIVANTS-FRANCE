@@ -40,7 +40,7 @@ function assertEnv() {
   const missing = [];
   if (!restUrl) missing.push("SUPABASE_URL");
   if (!serviceKey) missing.push("SUPABASE_SERVICE_ROLE_KEY");
-  if (!process.env.BREVO_API_KEY && !process.env.RESEND_API_KEY) missing.push("BREVO_API_KEY ou RESEND_API_KEY");
+  if (!process.env.RESEND_API_KEY) missing.push("RESEND_API_KEY");
   if (missing.length) throw new Error(`Variables manquantes pour test formulaire site reel : ${missing.join(", ")}`);
 }
 

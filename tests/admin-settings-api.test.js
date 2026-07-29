@@ -9,7 +9,7 @@ function testRules() {
   assert.strictEqual(normalizeSupabaseRestUrl("https://demo.supabase.co"), "https://demo.supabase.co/rest/v1");
   assert.strictEqual(settingPayload({ setting_key: "platform_name", label: "Plateforme" }).status, "active");
   assert.deepStrictEqual(settingPayload({ setting_key: "json", label: "JSON", setting_value: "{\"value\":true}" }).setting_value, { value: true });
-  assert.strictEqual(integrationPayload({ provider_key: "brevo", provider_name: "Brevo", status: "configured" }).status, "configured");
+  assert.strictEqual(integrationPayload({ provider_key: "resend", provider_name: "Resend", status: "configured" }).status, "configured");
   assert.strictEqual(featurePayload({ module_key: "dashboard", module_name: "Dashboard", flag_key: "ready", is_enabled: "false" }).is_enabled, false);
   assert.strictEqual(automationPayload({ rule_key: "email_to_task", title: "E-mail vers tache" }).priority, "P2");
   assert.strictEqual(healthPayload({ check_key: "admin_token", check_name: "Token" }).status, "unknown");
@@ -52,7 +52,7 @@ async function testCreateSettingAndIntegration() {
     const setting = await runHandler({ method: "POST", body: { type: "setting", setting_key: "demo", label: "Demo" } });
     assert.strictEqual(setting.statusCode, 201);
     assert.strictEqual(setting.json.setting.setting_key, "demo");
-    const integration = await runHandler({ method: "POST", body: { type: "integration", provider_key: "brevo", provider_name: "Brevo", status: "configured" } });
+    const integration = await runHandler({ method: "POST", body: { type: "integration", provider_key: "resend", provider_name: "Resend", status: "configured" } });
     assert.strictEqual(integration.statusCode, 201);
     assert.strictEqual(integration.json.integration.status, "configured");
   } finally { global.fetch = originalFetch; }

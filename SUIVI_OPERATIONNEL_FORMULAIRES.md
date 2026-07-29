@@ -196,7 +196,7 @@ Les demandes techniques dont l'objet commence par `[TEST` doivent etre passees e
 | `documents/procedure-traitement-formulaires-tvf.md` | Procedure complete pour recevoir, qualifier, prioriser et archiver les demandes |
 | `documents/modeles-reponses-email-formulaires-tvf.md` | Modeles d'e-mails prets a adapter selon le profil du demandeur |
 | `documents/tableau-suivi-demandes-operationnelles.md` | Tableau de pilotage manuel pour suivre les dossiers et les relances |
-| `documents/checklist-brevo-dns-rgpd-formulaires.md` | Points de controle e-mail, DNS, Brevo, delivrabilite et donnees personnelles |
+| `documents/checklist-resend-dns-rgpd-formulaires.md` | Points de controle e-mail, DNS, Resend, delivrabilite et donnees personnelles |
 | `documents/plan-nettoyage-tests-supabase.md` | Methode prudente pour identifier et nettoyer les donnees de test |
 | documents/procedure-reporting-mensuel-tvf-os.md | Procedure de reporting mensuel pour exporter, analyser et presenter les demandes, dossiers, documents et relances |
 | documents/modele-synthese-mensuelle-tvf-os.md | Modele de synthese mensuelle pret a remplir apres les exports TVF OS |
@@ -244,6 +244,6 @@ Avant de considérer les formulaires comme totalement opérationnels, vérifier 
 | TVF Mobile | Demande mobile transformable en dossier TVF OS |
 | E-mail entrant | Webhook protege par `TVF_EMAIL_WEBHOOK_SECRET` et demande creee |
 
-Variables indispensables en production : `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `BREVO_API_KEY`, `EMAIL_PROVIDER`, `TVF_EMAIL_FROM`, `TVF_NOTIFICATION_EMAIL`, `TVF_EMAIL_WEBHOOK_SECRET`.
+Variables indispensables en production : `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `RESEND_API_KEY`, `EMAIL_PROVIDER`, `TVF_EMAIL_FROM`, `TVF_NOTIFICATION_EMAIL`, `TVF_EMAIL_WEBHOOK_SECRET`.
 
-Si Brevo repond `Key not found`, remplacer `BREVO_API_KEY` dans `.env` et dans Vercel par une cle SMTP/API valide issue du compte Brevo actif, puis redeployer.
+Si Resend repond `Key not found`, remplacer `RESEND_API_KEY` dans `.env` et dans Vercel par une cle SMTP/API valide issue du compte Resend actif, puis redeployer.

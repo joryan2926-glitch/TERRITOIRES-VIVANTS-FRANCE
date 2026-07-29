@@ -11,7 +11,7 @@ Couverture estimee : 100 % du perimetre module Parametres defini pour cette phas
 - Backend complet : API REST admin, authentification token/cookie, validation des payloads.
 - Base de donnees : 6 tables Supabase dediees.
 - RLS : lecture et gestion controlees par role TVF.
-- Integrations : Supabase, Brevo, OpenAI, Google Workspace, Stripe referencees.
+- Integrations : Supabase, Resend, OpenAI, Google Workspace, Stripe referencees.
 - IA : assistant de configuration, score, priorites et variables manquantes.
 - Securite : pas d exposition des secrets, seulement presence/absence des variables.
 - Documentation : dossier module et scripts de verification.
@@ -32,5 +32,5 @@ Couverture estimee : 100 % du perimetre module Parametres defini pour cette phas
 6. Verifier les onglets, les boutons visibles, la creation d un element et l export CSV.
 
 ## Risques residuels
-- Les controles de sante externes restent declaratifs tant que les connecteurs reels Brevo, Google, Stripe et IA ne sont pas branches a des tests live.
+- Les controles de sante externes restent declaratifs tant que les connecteurs reels Resend, Google, Stripe et IA ne sont pas branches a des tests live.
 - Les secrets doivent rester exclusivement dans Vercel/Supabase, jamais dans les tables.

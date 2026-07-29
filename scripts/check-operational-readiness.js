@@ -22,7 +22,7 @@ const requiredFiles = [
   "scripts/test-site-form-real.js",
   "documents/procedure-traitement-formulaires-tvf.md",
   "documents/procedure-connexion-email-officiel-tvf-os.md",
-  "documents/checklist-brevo-dns-rgpd-formulaires.md",
+  "documents/checklist-resend-dns-rgpd-formulaires.md",
   "documents/cahier-suivi-mise-operationnel-tvf-os.md",
   "documents/rapport-controle-production-tvf-os.md",
   "documents/registre-elements-officiels-en-attente.md",
@@ -61,7 +61,7 @@ const requiredPackageScripts = [
 const requiredEnvNames = [
   "SUPABASE_URL",
   "SUPABASE_SERVICE_ROLE_KEY",
-  "BREVO_API_KEY",
+  "RESEND_API_KEY",
   "TVF_NOTIFICATION_EMAIL",
   "TVF_EMAIL_REPLY_TO",
   "TVF_EMAIL_FROM",

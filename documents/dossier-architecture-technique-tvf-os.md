@@ -43,7 +43,7 @@ Architecture cible recommandee :
 - Services d'automatisation pour e-mails, IA, notifications et workflows ;
 - Stockage documentaire securise ;
 - Moteur IA connecte aux donnees autorisees et a une base de connaissances indexee ;
-- Integrations externes : Brevo, Google Workspace, Stripe, cartographie, stockage/export, outils IA ;
+- Integrations externes : Resend, Google Workspace, Stripe, cartographie, stockage/export, outils IA ;
 - Journal d'audit transversal ;
 - supervision, sauvegardes, monitoring et alertes.
 
@@ -63,7 +63,7 @@ Backend applicatif / API securisee
    |
 +----------------------+----------------------+----------------------+
 | Automatisations      | IA                   | Integrations         |
-| workflows, relances  | tri, synthese, RAG   | Brevo, Google, Stripe|
+| workflows, relances  | tri, synthese, RAG   | Resend, Google, Stripe|
 +----------------------+----------------------+----------------------+
    |
 Audit, logs, sauvegardes, monitoring, exports
@@ -1390,7 +1390,7 @@ Le backend doit gerer :
 | Type | Usage |
 |---|---|
 | API interne frontend | Operations TVF OS depuis interface |
-| API webhook | Brevo, Stripe, Google, autres services |
+| API webhook | Resend, Stripe, Google, autres services |
 | API automation | Taches planifiees et traitements serveur |
 | API IA | Classification, synthese, recherche, generation |
 | API export/import | CSV, PDF, documents, donnees |
@@ -1552,7 +1552,7 @@ Automatisations recommandees :
 
 ## 9. Integrations externes
 
-### 9.1 Brevo
+### 9.1 Resend
 
 Usages :
 
@@ -1565,7 +1565,7 @@ Usages :
 Architecture :
 
 - envoi uniquement cote serveur ;
-- modeles e-mail stockes dans TVF OS ou Brevo selon choix ;
+- modeles e-mail stockes dans TVF OS ou Resend selon choix ;
 - journalisation de chaque envoi dans `emails`;
 - webhooks pour statut : envoye, ouvert, rebond, spam si utile ;
 - jamais de cle API cote frontend.
@@ -2133,7 +2133,7 @@ Critere de sortie :
 
 - l'IA propose, l'humain valide, l'audit conserve.
 
-### Phase 5 - E-mails et integrations Brevo / Google
+### Phase 5 - E-mails et integrations Resend / Google
 
 Objectif : connecter les communications.
 
@@ -2142,7 +2142,7 @@ Modules :
 - emails ;
 - email attachments ;
 - drafts ;
-- Brevo ;
+- Resend ;
 - Gmail/Google Calendar si valide ;
 - relances.
 
@@ -2251,7 +2251,7 @@ Avant tout developpement, TVF doit valider :
 4. Les statuts officiels des demandes et dossiers.
 5. Les types de dossiers MVP.
 6. Les modules de phase 1 et phase 2.
-7. Le mode d'integration e-mail : Brevo, Gmail, ou combinaison.
+7. Le mode d'integration e-mail : Resend, Gmail, ou combinaison.
 8. Le perimetre IA autorise en MVP.
 9. La strategie Google Workspace.
 10. La place de Stripe dans la premiere version.

@@ -151,7 +151,7 @@ on conflict (setting_key) do update set label = excluded.label, setting_value = 
 
 insert into public.integration_configs (provider_key, provider_name, integration_type, environment, status, health_status, required_env_vars, notes, ai_summary) values
   ('supabase','Supabase','database','production','configured','unknown',array['SUPABASE_URL','SUPABASE_SERVICE_ROLE_KEY'],'Base de donnees, RLS et fichiers.','Verifier la cle service role et les migrations avant chaque module.'),
-  ('brevo','Brevo','email','production','not_configured','unknown',array['BREVO_API_KEY','BREVO_SENDER_EMAIL'],'E-mails transactionnels et campagnes.','Activer pour les notifications et reponses e-mail.'),
+  ('resend','Resend','email','production','not_configured','unknown',array['RESEND_API_KEY','TVF_EMAIL_FROM'],'E-mails transactionnels et campagnes.','Activer pour les notifications et reponses e-mail.'),
   ('openai','OpenAI','ai','production','not_configured','unknown',array['OPENAI_API_KEY'],'Assistant IA, syntheses et classement.','Activer uniquement avec garde-fous et journalisation.'),
   ('google_workspace','Google Workspace','workspace','production','not_configured','unknown',array['GOOGLE_CLIENT_ID','GOOGLE_CLIENT_SECRET'],'Agenda, Drive, Gmail si besoin.','Connecteur a activer progressivement par antenne.'),
   ('stripe','Stripe','payment','production','not_configured','unknown',array['STRIPE_SECRET_KEY','STRIPE_WEBHOOK_SECRET'],'Paiements, dons et abonnements.','Requis avant automatisation financiere publique.')

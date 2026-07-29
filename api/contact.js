@@ -408,13 +408,11 @@ function parseRecipients(value) {
 }
 
 function emailConfig() {
-  const provider = clean(process.env.EMAIL_PROVIDER, 40).toLowerCase() || (process.env.RESEND_API_KEY ? "resend" : process.env.BREVO_API_KEY ? "brevo" : "");
   const configuredNotifyTo = clean(process.env.TVF_NOTIFICATION_EMAIL || process.env.NOTIFICATION_EMAIL || "", 500);
   const notifyTo = Array.from(new Set([configuredNotifyTo, DEFAULT_NOTIFICATION_EMAIL].filter(Boolean))).join(";");
   return {
-    provider,
+    provider: process.env.RESEND_API_KEY ? "resend" : "",
     resendKey: process.env.RESEND_API_KEY || "",
-    brevoKey: process.env.BREVO_API_KEY || "",
     from: process.env.TVF_EMAIL_FROM || process.env.EMAIL_FROM || DEFAULT_FROM,
     replyTo: process.env.TVF_EMAIL_REPLY_TO || process.env.EMAIL_REPLY_TO || DEFAULT_NOTIFICATION_EMAIL,
     notifyTo,
@@ -510,31 +508,8 @@ async function sendWithResend(config, message) {
   if (!response.ok) throw new Error(`Resend ${response.status}: ${await response.text().catch(() => "")}`);
 }
 
-async function sendWithBrevo(config, message) {
-  if (!config.brevoKey) throw new Error("BREVO_API_KEY manquante.");
-  const sender = parseAddress(config.from);
-  const replyTo = parseAddress(message.replyTo || config.replyTo);
-  const response = await fetchWithTimeout("https://api.brevo.com/v3/smtp/email", {
-    method: "POST",
-    headers: {
-      "api-key": config.brevoKey,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      sender,
-      to: parseRecipients(message.to),
-      replyTo,
-      subject: message.subject,
-      htmlContent: message.html,
-      textContent: message.text,
-    }),
-  });
-  if (!response.ok) throw new Error(`Brevo ${response.status}: ${await response.text().catch(() => "")}`);
-}
-
 async function sendEmail(config, message) {
   if (config.provider === "resend") return sendWithResend(config, message);
-  if (config.provider === "brevo") return sendWithBrevo(config, message);
   throw new Error("Aucun fournisseur e-mail configure.");
 }
 

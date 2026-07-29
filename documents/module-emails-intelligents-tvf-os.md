@@ -49,7 +49,7 @@ Toute sortie externe doit rester validee par un humain.
 
 ## Integrations prevues
 
-- Brevo : reception webhook, tags, templates et envoi controle.
+- Resend : reception webhook, tags, templates et envoi controle.
 - Google Workspace : synchronisation future Gmail/Drive.
 - CRM et Demandes : conversion et rattachement.
 - Documents : pieces jointes indexables.

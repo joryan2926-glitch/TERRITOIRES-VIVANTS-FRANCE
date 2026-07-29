@@ -1,4 +1,4 @@
-﻿# Cahier de suivi - Mise a l'operationnel TVF OS
+# Cahier de suivi - Mise a l'operationnel TVF OS
 
 Version : 1.0  
 Statut : document interne de pilotage  
@@ -65,7 +65,7 @@ Un module TVF OS est considere operationnel uniquement si les elements suivants 
 | Gouvernance | Tracer decisions et validations | Socle prepare | Formaliser decisions engageantes et signatures |
 | Risques | Identifier points sensibles | Socle prepare | Ajouter seuils d'alerte et responsables |
 | Utilisateurs | Gerer acces et roles | Base fonctionnelle | Tester profils reels et permissions |
-| Parametres | Piloter integrations et configuration | Base fonctionnelle | Controler Vercel/Supabase/Brevo apres chaque changement |
+| Parametres | Piloter integrations et configuration | Base fonctionnelle | Controler Vercel/Supabase/Resend apres chaque changement |
 | Activite | Tracer les actions admin | Base fonctionnelle | Verifier journal apres actions reelles |
 | Connaissances | Capitaliser procedures, FAQ, retours | Socle prepare | Alimenter avec decisions et cas terrain |
 | Assistant IA | Aider au tri, synthese, reponse | Socle prepare | Garder validation humaine obligatoire |

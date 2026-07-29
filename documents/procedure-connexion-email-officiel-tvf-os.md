@@ -27,7 +27,7 @@ Centraliser les messages recus sur `contact@territoiresvivantsfrance.fr` dans TV
 ```json
 {
   "type": "email_to_request",
-  "provider": "brevo-ou-relais-mail",
+  "provider": "resend-ou-relais-mail",
   "from_email": "interlocuteur@example.fr",
   "from_name": "Nom de l'interlocuteur",
   "to_email": "contact@territoiresvivantsfrance.fr",

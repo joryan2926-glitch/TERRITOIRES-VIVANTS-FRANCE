@@ -9959,3 +9959,339 @@ body:not(.admin-body) .page-nav a {
     display: none !important;
   }
 }
+
+
+/* TVF - Direction agence territoriale v3 */
+body:not(.admin-body) {
+  --green-950: #062518;
+  --green-900: #0b3a23;
+  --green-800: #15562f;
+  --green-700: #236b37;
+  --gold-500: #d4a22f;
+  --cream-050: #fbfaf4;
+  --cream-100: #f5f7ee;
+  --agency-ink: #0d2234;
+  --agency-muted: #53616b;
+  --agency-line: rgba(13, 34, 52, 0.10);
+  background: var(--cream-050);
+  color: var(--agency-ink);
+}
+
+body:not(.admin-body) .site-header.agency-header {
+  position: sticky;
+  top: 0;
+  background: rgba(255, 255, 255, 0.97);
+  border-bottom: 1px solid rgba(13, 34, 52, 0.08);
+  box-shadow: 0 10px 35px rgba(13, 34, 52, 0.055);
+  backdrop-filter: blur(18px);
+}
+
+body:not(.admin-body) .agency-topbar {
+  min-height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: clamp(18px, 3vw, 42px);
+  color: var(--agency-ink);
+  font-size: 0.82rem;
+  border-bottom: 1px solid rgba(13, 34, 52, 0.06);
+}
+
+body:not(.admin-body) .agency-topbar span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  line-height: 1.25;
+}
+
+body:not(.admin-body) .agency-topbar strong {
+  color: var(--green-900);
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+body:not(.admin-body) .agency-topbar a {
+  text-decoration: none;
+  color: var(--agency-ink);
+}
+
+body:not(.admin-body) .header-inner {
+  min-height: 74px;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: clamp(18px, 2vw, 28px);
+}
+
+body:not(.admin-body) .brand img {
+  width: clamp(210px, 18vw, 286px);
+}
+
+body:not(.admin-body) .main-nav {
+  justify-content: center;
+  gap: clamp(4px, 0.7vw, 12px);
+}
+
+body:not(.admin-body) .main-nav a {
+  padding: 12px 8px 14px;
+  border-radius: 0;
+  color: #111f2b;
+  background: transparent !important;
+  font-size: clamp(0.82rem, 0.78vw, 0.95rem);
+  font-weight: 650;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+body:not(.admin-body) .main-nav a::after {
+  left: 8px;
+  right: 8px;
+  bottom: 6px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--green-800), var(--gold-500));
+  border-radius: 999px;
+}
+
+body:not(.admin-body) .main-nav a:hover,
+body:not(.admin-body) .main-nav a:focus-visible,
+body:not(.admin-body) .main-nav a[aria-current="page"] {
+  color: var(--green-900);
+}
+
+body:not(.admin-body) .header-cta.os-cta {
+  min-height: 38px;
+  padding: 9px 16px;
+  color: #fff;
+  background: linear-gradient(135deg, var(--green-950), var(--green-800));
+  box-shadow: 0 10px 24px rgba(6, 37, 24, 0.18);
+}
+
+body:not(.admin-body) .hero {
+  min-height: clamp(500px, 62vh, 690px);
+  align-items: center;
+  color: var(--agency-ink);
+  background-image:
+    linear-gradient(90deg, rgba(255,255,255,0.98) 0%, rgba(255,255,255,0.88) 34%, rgba(255,255,255,0.38) 62%, rgba(255,255,255,0.05) 100%),
+    var(--hero-image);
+  background-position: center;
+  border-bottom: 1px solid rgba(13, 34, 52, 0.08);
+}
+
+body:not(.admin-body) .hero-inner {
+  max-width: 620px;
+  padding-top: clamp(72px, 8vw, 104px);
+  padding-bottom: clamp(70px, 8vw, 110px);
+}
+
+body:not(.admin-body) .hero .eyebrow {
+  color: var(--green-800);
+}
+
+body:not(.admin-body) .hero h1 {
+  max-width: 9.8em;
+  color: var(--agency-ink);
+  font-size: clamp(2.55rem, 4.6vw, 4.65rem);
+  line-height: 0.98;
+}
+
+body:not(.admin-body) .hero p {
+  color: #21313f;
+  font-size: clamp(1.02rem, 1.2vw, 1.16rem);
+  line-height: 1.68;
+}
+
+body:not(.admin-body) .hero-action-link {
+  color: var(--green-900);
+  background: rgba(255,255,255,0.76);
+  border: 1px solid rgba(21, 86, 47, 0.18);
+  border-radius: 999px;
+  padding: 11px 17px;
+  text-decoration: none;
+  font-weight: 750;
+}
+
+body:not(.admin-body) .page-nav {
+  display: none;
+}
+
+body:not(.admin-body) .institutional-narrative,
+body:not(.admin-body) .quick-brief,
+body:not(.admin-body) .decision-panel {
+  display: none;
+}
+
+body:not(.admin-body) .section {
+  padding-top: clamp(46px, 5.5vw, 74px);
+  padding-bottom: clamp(46px, 5.5vw, 74px);
+}
+
+body:not(.admin-body) .section.soft {
+  background: linear-gradient(180deg, #f5f8ef 0%, #fbfaf4 100%);
+}
+
+body:not(.admin-body) .section-kicker {
+  color: var(--gold-500);
+  font-weight: 850;
+  letter-spacing: 0.055em;
+  text-transform: uppercase;
+}
+
+body:not(.admin-body) .section-head h2,
+body:not(.admin-body) .intro-grid h2,
+body:not(.admin-body) .feature h2,
+body:not(.admin-body) .split h2 {
+  color: var(--agency-ink);
+  font-size: clamp(1.85rem, 2.8vw, 3rem);
+  line-height: 1.08;
+}
+
+body:not(.admin-body) .card-grid {
+  gap: 18px;
+}
+
+body:not(.admin-body) .card {
+  border: 1px solid rgba(13, 34, 52, 0.09);
+  border-radius: 14px;
+  box-shadow: 0 12px 28px rgba(13, 34, 52, 0.075);
+  transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+}
+
+body:not(.admin-body) .card:hover {
+  border-color: rgba(35, 107, 55, 0.20);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 42px rgba(13, 34, 52, 0.11);
+}
+
+body:not(.admin-body) .card-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 25%, #2e7d32, var(--green-950));
+  color: #fff;
+  box-shadow: 0 10px 22px rgba(6, 37, 24, 0.20);
+}
+
+body:not(.admin-body) .card:nth-child(2n) .card-icon,
+body:not(.admin-body) .timeline article:nth-child(2n) span {
+  background: radial-gradient(circle at 30% 25%, #e2b341, #b77d13);
+}
+
+body:not(.admin-body) .text-link {
+  color: var(--green-900);
+  font-weight: 800;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+
+body:not(.admin-body) .timeline {
+  gap: 16px;
+}
+
+body:not(.admin-body) .timeline article {
+  border-radius: 14px;
+  border: 1px solid rgba(13, 34, 52, 0.09);
+  background: #fff;
+}
+
+body:not(.admin-body) .timeline article span {
+  background: radial-gradient(circle at 30% 25%, #2e7d32, var(--green-950));
+  color: #fff;
+}
+
+body:not(.admin-body) .feature-grid img,
+body:not(.admin-body) .split img {
+  max-height: 360px;
+  object-fit: cover;
+  border-radius: 18px;
+  box-shadow: 0 18px 42px rgba(13, 34, 52, 0.13);
+}
+
+body:not(.admin-body) .feature,
+body:not(.admin-body) .cta-band {
+  background: linear-gradient(135deg, rgba(245,248,239,0.95), rgba(255,255,255,0.98));
+}
+
+body:not(.admin-body) .agency-footer {
+  background: linear-gradient(135deg, #062518 0%, #0b3a23 100%);
+  padding-top: 44px;
+}
+
+body:not(.admin-body) .footer-grid {
+  grid-template-columns: 1.25fr 0.8fr 0.95fr 1fr;
+  gap: clamp(24px, 4vw, 52px);
+}
+
+body:not(.admin-body) .footer-logo-box {
+  width: min(100%, 260px);
+  background: rgba(255,255,255,0.97);
+}
+
+body:not(.admin-body) .footer-status {
+  color: rgba(255,255,255,0.62);
+  font-style: italic;
+}
+
+body:not(.admin-body) .footer-social {
+  display: flex;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+body:not(.admin-body) .footer-social a {
+  width: 38px;
+  height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.10);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 850;
+}
+
+body:not(.admin-body) .footer-bottom span:last-child {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: flex-end;
+}
+
+@media (max-width: 1280px) {
+  body:not(.admin-body) .agency-topbar {
+    justify-content: center;
+    flex-wrap: wrap;
+    min-height: 38px;
+    gap: 10px 20px;
+    padding-block: 7px;
+  }
+  body:not(.admin-body) .header-inner {
+    grid-template-columns: auto auto;
+  }
+  body:not(.admin-body) .main-nav {
+    grid-column: 1 / -1;
+    padding: 8px 0 16px;
+  }
+}
+
+@media (max-width: 760px) {
+  body:not(.admin-body) .agency-topbar {
+    display: none;
+  }
+  body:not(.admin-body) .brand img {
+    width: 210px;
+  }
+  body:not(.admin-body) .hero {
+    min-height: 500px;
+    background-image:
+      linear-gradient(180deg, rgba(255,255,255,0.96) 0%, rgba(255,255,255,0.86) 62%, rgba(255,255,255,0.60) 100%),
+      var(--hero-image);
+  }
+  body:not(.admin-body) .hero h1 {
+    font-size: clamp(2.15rem, 10vw, 3.1rem);
+  }
+  body:not(.admin-body) .footer-grid,
+  body:not(.admin-body) .footer-bottom {
+    text-align: left;
+  }
+}

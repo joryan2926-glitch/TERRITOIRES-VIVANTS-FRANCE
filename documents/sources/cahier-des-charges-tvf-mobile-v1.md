@@ -160,7 +160,7 @@ TVF Mobile doit s'appuyer sur l'écosystème déjà en place :
 
 - **Supabase** : base de données, authentification, stockage photos ;
 - **TVF OS** : traitement interne des demandes ;
-- **Brevo** : e-mails de confirmation et notifications ;
+- **Resend** : e-mails de confirmation et notifications ;
 - **Site TVF** : documentation publique et liens utiles ;
 - **WhatsApp TVF** : contact rapide si besoin.
 
