@@ -1,9 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /admin
+Disallow: /api
 Disallow: /documents
-Disallow: /documents/
-Disallow: /output/
-Disallow: /tmp/
-Disallow: /admin-demandes
-Disallow: /admin-demandes.html
 Sitemap: https://www.territoiresvivantsfrance.fr/sitemap.xml
