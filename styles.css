@@ -9858,3 +9858,104 @@ body:not(.admin-body) .footer-contact-link {
     left: 16px;
   }
 }
+
+/* Correctifs audit agence immobiliere - navigation et lisibilite */
+body:not(.admin-body) .header-inner {
+  gap: clamp(14px, 1.8vw, 22px);
+}
+
+body:not(.admin-body) .brand img {
+  width: clamp(188px, 15vw, 236px);
+}
+
+body:not(.admin-body) .main-nav {
+  gap: clamp(4px, 0.75vw, 10px);
+  min-width: 0;
+}
+
+body:not(.admin-body) .main-nav a {
+  padding: 9px 10px;
+  font-size: clamp(0.88rem, 0.76vw, 0.96rem);
+  line-height: 1.12;
+}
+
+body:not(.admin-body) .header-cta {
+  padding-inline: 15px;
+  min-height: 40px;
+  white-space: nowrap;
+}
+
+body:not(.admin-body) .card .text-link {
+  display: inline-flex;
+  width: fit-content;
+  margin-top: 8px;
+  font-size: 0.86rem;
+}
+
+body:not(.admin-body) .card-grid {
+  align-items: stretch;
+}
+
+body:not(.admin-body) .card {
+  min-width: 0;
+}
+
+body:not(.admin-body) .card h3,
+body:not(.admin-body) .card p,
+body:not(.admin-body) .mini-list strong,
+body:not(.admin-body) .mini-list span {
+  overflow-wrap: anywhere;
+}
+
+body:not(.admin-body) .breadcrumbs a,
+body:not(.admin-body) .breadcrumbs span,
+body:not(.admin-body) .page-nav a {
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 1280px) {
+  body:not(.admin-body) .header-inner {
+    grid-template-columns: auto auto;
+  }
+
+  body:not(.admin-body) .menu-toggle {
+    display: inline-flex;
+    justify-self: end;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--white);
+    padding: 10px 14px;
+    font-weight: 800;
+  }
+
+  body:not(.admin-body) .main-nav {
+    grid-column: 1 / -1;
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 8px 0 16px;
+    white-space: normal;
+  }
+
+  body:not(.admin-body) .main-nav.is-open {
+    display: flex;
+  }
+
+  body:not(.admin-body) .main-nav a {
+    border-top: 1px solid var(--line);
+    border-radius: 0;
+    padding: 12px 2px;
+    font-size: 0.98rem;
+  }
+
+  body:not(.admin-body) .header-cta {
+    display: none;
+  }
+}
+
+@media (min-width: 1281px) {
+  body:not(.admin-body) .menu-toggle {
+    display: none !important;
+  }
+}

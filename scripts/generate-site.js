@@ -54,11 +54,9 @@ const nav = [
   ["Accueil", "index.html"],
   ["L'agence", "qui-sommes-nous.html"],
   ["Services", "nos-actions.html"],
-  ["Domaines", "nos-poles.html"],
-  ["Propriétaires", "proprietaires.html"],
-  ["Collectivités", "collectivites.html"],
-  ["Entreprises", "entreprises.html"],
-  ["Saint-Étienne", "saint-etienne.html"],
+  ["Propri\u00e9taires", "proprietaires.html"],
+  ["Partenaires", "partenaires.html"],
+  ["Saint-\u00c9tienne", "saint-etienne.html"],
   ["Contact", "contact.html"],
 ];
 
@@ -405,15 +403,15 @@ const pages = [
   },
   {
     file: "nos-poles.html",
-    title: "Nos 5 pôles",
+    title: "Domaines d\u2019intervention",
     meta:
       "Les cinq pôles de Territoires Vivants France : Habitat Vivant, Matériauthèque Solidaire, Commerce Vivant, Friches & Terrains Vivants, Solidarité & Insertion.",
     heroImage: "assets/photos/chantier-renovation-lyon.jpg",
-    eyebrow: "Organisation",
-    h1: "Cinq pôles pour couvrir tout le cycle de revitalisation.",
+    eyebrow: "Domaines",
+    h1: "Cinq domaines pour traiter le bien, l\u2019usage et les ressources.",
     intro:
       "Les pôles structurent l'action de TVF : repérer un lieu ou une ressource, comprendre le besoin, mobiliser les bons acteurs, préparer un cadre écrit et suivre le retour à l'usage.",
-    ctas: [["Nos actions", "nos-actions.html"], ["Devenir partenaire", "partenaires.html"]],
+    ctas: [["Voir les services", "nos-actions.html"], ["Contact", "contact.html"]],
     sections: [
       sectionIntro(
         "Une organisation lisible pour passer de l'idée au terrain",
@@ -497,12 +495,12 @@ const pages = [
   },
   {
     file: "observatoire.html",
-    title: "Observatoire",
+    title: "Diagnostic foncier",
     meta:
       "Observatoire TVF : reperer, qualifier et prioriser les logements vacants, commerces fermes, friches, terrains et ressources inutilisees avec des donnees tracables.",
     heroImage: "assets/photos/friche-industrielle-ronchamp.jpg",
-    eyebrow: "Observatoire",
-    h1: "Voir, comprendre, prioriser.",
+    eyebrow: "Analyse fonci\u00e8re",
+    h1: "Qualifier les biens avant toute d\u00e9cision.",
     intro:
       "L'observatoire doit aider les territoires à mieux identifier les ressources inutilisées avant de décider où agir.",
     ctas: [["Signaler un lieu", "agir-avec-nous.html#signalement"], ["Saint-Étienne", "saint-etienne.html"]],
@@ -2681,14 +2679,14 @@ function breadcrumbTrail(page) {
   if (page.file === "index.html") return [];
 
   const parents = {
-    "notre-methode.html": [["Nos actions", "nos-actions.html"]],
+    "notre-methode.html": [["Services", "nos-actions.html"]],
     "collectivites.html": [["Agir", "agir-avec-nous.html"]],
     "proprietaires.html": [["Agir", "agir-avec-nous.html"]],
     "entreprises.html": [["Agir", "agir-avec-nous.html"]],
     "benevoles-citoyens.html": [["Agir", "agir-avec-nous.html"]],
     "financeurs-mecenes.html": [["Agir", "agir-avec-nous.html"]],
-    "saint-etienne.html": [["Observatoire", "observatoire.html"]],
-    "impact.html": [["Observatoire", "observatoire.html"]],
+    "saint-etienne.html": [["Services", "nos-actions.html"]],
+    "impact.html": [["Transparence", "transparence.html"]],
     "kit-media.html": [["Documents", "documents.html"]],
     "mentions-legales.html": [["Transparence", "transparence.html"]],
     "politique-confidentialite.html": [["Mentions légales", "mentions-legales.html"]],
@@ -2850,7 +2848,7 @@ function jsonLd(page) {
 }
 
 function ctaBandFor(page) {
-  const skipCta = new Set(["index.html", "contact.html", "documents.html", "mentions-legales.html", "politique-confidentialite.html", "gouvernance.html", "kit-media.html", "transparence.html", "impact.html", "observatoire.html"]);
+  const skipCta = new Set(["index.html", "contact.html", "documents.html", "mentions-legales.html", "politique-confidentialite.html", "gouvernance.html", "kit-media.html", "transparence.html", "impact.html", "observatoire.html", "nos-actions.html", "partenaires.html", "agir-avec-nous.html"]);
   if (skipCta.has(page.file)) return "";
   const map = {
     "index.html": ["Première étape", "Vous voulez savoir par où commencer ?", "Choisissez votre profil et préparez une première demande lisible en quelques minutes.", [["Choisir mon parcours", "agir-avec-nous.html"], ["Demander un échange", "contact.html"]]],
