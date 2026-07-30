@@ -10390,3 +10390,19 @@ body:not(.admin-body) .footer-bottom span:last-child {
 @media (max-width: 1050px) { .contact-hero-grid, .contact-main-grid, .contact-treatment-grid, .contact-location-grid { grid-template-columns: 1fr; } .contact-side-card { position: static; } .contact-treatment ol { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 780px) { .contact-hero { padding-top: 46px; } .contact-hero figure, .contact-hero img { min-height: 300px; } .contact-motive-grid, .contact-form-pro .agency-form-grid, .contact-treatment ol { grid-template-columns: 1fr; } .contact-route-card { min-height: auto; } .contact-main { padding: 48px 0; } .contact-form-pro fieldset { padding: 16px; } .contact-treatment li { min-height: auto; } .contact-final .agency-actions, .contact-submit-actions { align-items: stretch; } .contact-final .agency-btn, .contact-submit-actions .agency-btn { width: 100%; } }
 /* Fin page Contact */
+/* Pages secondaires et legales harmonisees */
+.secondary-hero { padding: 72px 0 54px; background: linear-gradient(115deg, #f8faf5, #fff 56%, rgba(196,145,41,.12)); }
+.secondary-hero-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(300px, .82fr); gap: clamp(26px, 5vw, 58px); align-items: center; }
+.secondary-hero h1 { max-width: 780px; margin: 0 0 18px; color: var(--blue-900); font-size: clamp(2.35rem, 4.6vw, 4rem); line-height: 1; }
+.secondary-hero p { max-width: 760px; color: var(--text); font-size: 1.07rem; line-height: 1.72; }
+.secondary-hero figure { margin: 0; min-height: 320px; border-radius: 24px; overflow: hidden; box-shadow: 0 24px 60px rgba(14,45,69,.12); }
+.secondary-hero img { width: 100%; height: 100%; min-height: 320px; object-fit: cover; display: block; }
+.orientation-grid, .legal-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+.orientation-grid article, .legal-grid article { padding: 28px; border-radius: 20px; background: #fff; border: 1px solid rgba(14,45,69,.10); box-shadow: 0 18px 44px rgba(14,45,69,.08); }
+.orientation-grid h2, .legal-grid h2 { margin-top: 0; color: var(--blue-900); font-size: clamp(1.35rem, 2.5vw, 1.9rem); }
+.orientation-grid p, .legal-grid p { color: var(--muted); line-height: 1.68; }
+.legal-hero { background: #f8faf5; }
+.legal-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.legal-grid article:nth-child(4) { grid-column: span 3; }
+@media (max-width: 920px) { .secondary-hero-grid, .orientation-grid, .legal-grid { grid-template-columns: 1fr; } .legal-grid article:nth-child(4) { grid-column: auto; } }
+/* Fin pages secondaires */
