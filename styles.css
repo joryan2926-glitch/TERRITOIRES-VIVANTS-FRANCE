@@ -10488,3 +10488,33 @@ body:not(.admin-body) .footer-bottom span:last-child {
 @media (max-width: 1320px) { .agency-contact { gap: 8px; } .agency-contact-item { padding-inline: 9px; } .agency-contact-address { max-width: 220px; } }
 @media (max-width: 1200px) { .agency-contact .agency-contact-item span { display: inline-flex; } .agency-contact-address { display: none !important; } }
 @media (max-width: 860px) { .agency-contact { flex-wrap: wrap; justify-content: flex-start; white-space: normal; } .agency-contact-item { min-height: 34px; } }
+
+/* Contact form premium compact refinement */
+.contact-main { padding: clamp(48px, 5vw, 68px) 0; background: linear-gradient(180deg, #f8faf5, #f3f0e8); }
+.contact-main .agency-shell { width: min(1060px, calc(100% - 48px)); }
+.contact-main-grid { grid-template-columns: minmax(0, 1fr) 320px; gap: 22px; }
+.contact-form-card { padding: clamp(18px, 2.2vw, 26px); border-radius: 20px; box-shadow: 0 18px 42px rgba(14,45,69,.075); }
+.contact-form-head { display: grid; gap: 6px; margin-bottom: 16px; padding-bottom: 14px; border-bottom: 1px solid rgba(14,45,69,.08); }
+.contact-form-head h2 { margin: 0; font-size: clamp(1.45rem, 2.2vw, 2rem); line-height: 1.12; }
+.contact-form-head p { max-width: 620px; margin: 0; color: var(--muted); font-size: .94rem; line-height: 1.55; }
+.contact-form-steps { gap: 12px; }
+.contact-form-pro fieldset { padding: 16px; border-radius: 15px; background: linear-gradient(180deg, #fff, #fbfdf9); border-color: rgba(14,45,69,.09); box-shadow: inset 0 1px 0 rgba(255,255,255,.85); }
+.contact-form-pro legend { padding: 0 6px; font-size: .82rem; letter-spacing: .03em; text-transform: uppercase; }
+.contact-form-pro .agency-form-grid { gap: 10px 12px; }
+.contact-form-pro label { gap: 5px; margin-bottom: 9px; font-size: .84rem; font-weight: 800; }
+.contact-form-pro input, .contact-form-pro select, .contact-form-pro textarea { min-height: 41px; padding: 9px 11px; border-radius: 10px; font-size: .92rem; line-height: 1.35; }
+.contact-form-pro textarea { min-height: 108px; }
+.contact-upload-note { margin-top: 10px; padding: 13px; border-radius: 13px; background: #f7f2e7; }
+.contact-upload-note p { font-size: .88rem; line-height: 1.48; }
+.contact-upload-note textarea { min-height: 74px; }
+.contact-form-pro .agency-consent { margin: 10px 0 0; font-size: .82rem !important; line-height: 1.42; }
+.contact-submit-actions { margin-top: 14px; gap: 8px; }
+.contact-submit-actions .agency-btn { min-height: 38px; padding: 8px 14px; font-size: .86rem; }
+.contact-form-note { margin-top: 10px; font-size: .84rem; line-height: 1.45; }
+.contact-side-card { top: 104px; padding: 22px; border-radius: 20px; box-shadow: 0 18px 42px rgba(7,53,31,.14); }
+.contact-side-card h2 { font-size: 1.25rem; line-height: 1.16; }
+.contact-side-card h3 { margin-bottom: 6px; font-size: .98rem; }
+.contact-side-card p { font-size: .9rem; line-height: 1.55; }
+.contact-side-card hr { margin: 18px 0; }
+@media (max-width: 960px) { .contact-main-grid { grid-template-columns: 1fr; } .contact-side-card { position: static; } }
+@media (max-width: 700px) { .contact-main .agency-shell { width: min(100% - 30px, 1060px); } .contact-form-card { padding: 16px; border-radius: 18px; } .contact-form-pro .agency-form-grid { grid-template-columns: 1fr; } .contact-form-pro fieldset { padding: 14px; } }
