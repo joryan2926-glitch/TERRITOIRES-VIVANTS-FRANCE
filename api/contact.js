@@ -3,6 +3,7 @@ const MAX_BODY_SIZE = 32 * 1024;
 const CONTACT_TABLE = process.env.SUPABASE_CONTACTS_TABLE || "contacts";
 const DEFAULT_CONTACT_EMAIL = "contact@territoiresvivantsfrance.fr";
 const DEFAULT_NOTIFICATION_EMAIL = "contact@territoiresvivantsfrance.fr";
+const FALLBACK_NOTIFICATION_EMAIL = "territoiresvivantsfrance@gmail.com";
 const DEFAULT_FROM = "Territoires Vivants France <contact@territoiresvivantsfrance.fr>";
 const OUTBOUND_TIMEOUT_MS = Number(process.env.TVF_OUTBOUND_TIMEOUT_MS || 9000);
 
@@ -407,15 +408,27 @@ function parseRecipients(value) {
     .filter((item) => validEmail(item.email));
 }
 
+function uniqueEmails(items) {
+  return Array.from(new Set(items.filter(Boolean).map((item) => String(item).trim().toLowerCase())));
+}
+
+function configuredRecipients(...values) {
+  return uniqueEmails(values.flatMap((value) => parseRecipients(value).map((item) => item.email)));
+}
+
 function emailConfig() {
-  const configuredNotifyTo = clean(process.env.TVF_NOTIFICATION_EMAIL || process.env.NOTIFICATION_EMAIL || "", 500);
-  const notifyTo = Array.from(new Set([configuredNotifyTo, DEFAULT_NOTIFICATION_EMAIL].filter(Boolean))).join(";");
+  const notificationRecipients = configuredRecipients(
+    process.env.TVF_NOTIFICATION_EMAIL || process.env.NOTIFICATION_EMAIL || DEFAULT_NOTIFICATION_EMAIL,
+    process.env.TVF_NOTIFICATION_BACKUP_EMAIL || process.env.NOTIFICATION_BACKUP_EMAIL || FALLBACK_NOTIFICATION_EMAIL,
+    DEFAULT_NOTIFICATION_EMAIL
+  );
+
   return {
     provider: process.env.RESEND_API_KEY ? "resend" : "",
     resendKey: process.env.RESEND_API_KEY || "",
     from: process.env.TVF_EMAIL_FROM || process.env.EMAIL_FROM || DEFAULT_FROM,
     replyTo: process.env.TVF_EMAIL_REPLY_TO || process.env.EMAIL_REPLY_TO || DEFAULT_NOTIFICATION_EMAIL,
-    notifyTo,
+    notifyTo: notificationRecipients,
   };
 }
 
@@ -523,7 +536,7 @@ async function notifyByEmail(submission) {
   const internal = internalEmail(submission);
   try {
     await sendEmail(config, {
-      to: parseRecipients(config.notifyTo).map((item) => item.email),
+      to: config.notifyTo,
       replyTo: submission.email || config.replyTo,
       ...internal,
     });
