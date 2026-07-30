@@ -10524,3 +10524,10 @@ body:not(.admin-body) .footer-bottom span:last-child {
 .contact-form-pro > .agency-consent + .agency-consent { margin-top: 4px; }
 .contact-form-pro > .agency-consent input { margin-top: 3px; margin-right: 6px; }
 .contact-form-pro .contact-submit-actions { margin-top: 12px; }
+
+/* Contact form smaller field controls */
+.contact-form-pro input, .contact-form-pro select, .contact-form-pro textarea { min-height: 36px; padding: 7px 10px; border-radius: 8px; font-size: .88rem; }
+.contact-form-pro textarea { min-height: 92px; }
+.contact-upload-note textarea { min-height: 62px; }
+.contact-form-pro label { font-size: .8rem; gap: 4px; margin-bottom: 7px; }
+.contact-form-pro .agency-form-grid { gap: 8px 10px; }
