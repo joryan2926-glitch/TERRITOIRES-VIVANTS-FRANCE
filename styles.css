@@ -11128,3 +11128,93 @@ body:not(.admin-body) .footer-bottom span:last-child {
   .observatory-type-grid img { height: 165px; }
   .qualification-grid article { min-height: auto; }
 }
+
+/* TVF OS - remise au propre derniere ligne directrice */
+.admin-module-nav-simple .admin-module-group,
+.admin-module-nav-simple .admin-module-group.is-open,
+.admin-module-nav-simple .admin-module-group.is-active {
+  display: grid;
+  gap: 5px;
+}
+
+.admin-module-nav-simple .admin-module-group-head {
+  pointer-events: none;
+  cursor: default;
+  padding: 8px 10px 2px;
+  min-height: auto;
+  border: 0;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.admin-module-nav-simple .admin-module-group-head::after {
+  display: none !important;
+}
+
+.admin-module-nav-simple .admin-module-group-head small {
+  display: none !important;
+}
+
+.admin-module-nav-simple .admin-module-links {
+  display: grid !important;
+  position: static !important;
+  opacity: 1 !important;
+  transform: none !important;
+  pointer-events: auto !important;
+}
+
+.admin-module-nav-simple .admin-module-links a {
+  min-height: 40px;
+}
+
+.admin-module-nav-simple .admin-module-links a i {
+  font-size: .66rem;
+  letter-spacing: .01em;
+}
+
+.admin-module-nav-simple .admin-os-quicklinks {
+  grid-template-columns: 1fr;
+}
+
+.admin-module-nav-simple .admin-os-quicklink {
+  min-height: 40px;
+  justify-content: center;
+}
+
+.admin-home-body .admin-home-actions .btn:not(:first-child),
+.admin-home-body .tvf-os-ai-widget .btn,
+.admin-home-body .admin-home-control.tvf-os-guided-workflow,
+.admin-home-body .admin-home-control.tvf-os-operations-board,
+.admin-home-body .admin-erp-map.tvf-os-spaces {
+  display: none !important;
+}
+
+.admin-home-body .tvf-os-command-center {
+  grid-template-columns: minmax(0, 1fr) minmax(280px, .36fr);
+}
+
+.admin-home-body .admin-home-header-actions {
+  justify-content: flex-start;
+  gap: 10px;
+}
+
+.admin-home-body .tvf-os-priority-panel .admin-today-columns article {
+  border-radius: 18px;
+}
+
+@media(max-width:1180px){
+  .admin-module-nav-simple {
+    position: sticky;
+    width: auto;
+  }
+  .admin-module-nav-simple .admin-module-groups {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media(max-width:760px){
+  .admin-module-nav-simple .admin-module-groups,
+  .admin-home-body .tvf-os-command-center {
+    grid-template-columns: 1fr;
+  }
+}
