@@ -11633,3 +11633,237 @@ body:not(.admin-body) .agency-copy span:last-child {
 /* end TVF footer institutional details */
 
 /* end TVF compact premium footer pass */
+
+
+/* TVF OS DESIGN RESET - awaiting new direction */
+body.admin-body,
+body.dashboard-body {
+  background: #ffffff !important;
+  color: #17212b !important;
+}
+body.admin-body::before,
+body.admin-body::after,
+body.dashboard-body::before,
+body.dashboard-body::after {
+  display: none !important;
+  content: none !important;
+}
+body.admin-body .admin-shell,
+body.dashboard-body .dashboard-shell {
+  width: min(1180px, calc(100% - 32px)) !important;
+  margin: 18px auto 44px !important;
+}
+body.admin-body .admin-sidebar,
+body.admin-body .admin-side,
+body.admin-body .admin-rail,
+body.admin-body .admin-left,
+body.admin-body [data-admin-sidebar],
+body.dashboard-body .admin-sidebar,
+body.dashboard-body .admin-side,
+body.dashboard-body .admin-rail,
+body.dashboard-body [data-admin-sidebar] {
+  display: none !important;
+}
+body.admin-body .admin-layout,
+body.dashboard-body .admin-layout,
+body.admin-body .dashboard-app,
+body.dashboard-body .dashboard-app {
+  display: block !important;
+  grid-template-columns: 1fr !important;
+}
+body.admin-body .admin-topbar,
+body.admin-body .admin-header,
+body.admin-body .admin-module-header,
+body.dashboard-body .dashboard-topbar,
+body.dashboard-body .dashboard-toolbar {
+  position: static !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 14px !important;
+  min-height: auto !important;
+  padding: 16px 0 !important;
+  margin: 0 0 18px !important;
+  background: #ffffff !important;
+  border: 0 !important;
+  border-bottom: 1px solid #e5e7eb !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
+body.admin-body .admin-logo,
+body.admin-body .admin-brand,
+body.dashboard-body .admin-brand,
+body.dashboard-body .dashboard-brand {
+  gap: 10px !important;
+}
+body.admin-body .admin-logo img,
+body.admin-body .admin-brand img,
+body.dashboard-body .admin-brand img,
+body.dashboard-body .dashboard-brand img {
+  max-width: 132px !important;
+  height: auto !important;
+}
+body.admin-body .admin-nav,
+body.admin-body .admin-tabs,
+body.admin-body .admin-module-nav,
+body.dashboard-body .admin-nav,
+body.dashboard-body .dashboard-tabs {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 8px !important;
+  margin: 0 0 18px !important;
+  padding: 0 0 12px !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-bottom: 1px solid #e5e7eb !important;
+  box-shadow: none !important;
+  overflow: visible !important;
+}
+body.admin-body .admin-nav a,
+body.admin-body .admin-tabs a,
+body.admin-body .admin-module-nav a,
+body.admin-body .admin-nav button,
+body.admin-body .admin-tabs button,
+body.admin-body .admin-module-nav button,
+body.dashboard-body .admin-nav a,
+body.dashboard-body .dashboard-tabs a,
+body.dashboard-body .dashboard-tabs button {
+  min-height: 36px !important;
+  padding: 8px 10px !important;
+  border: 1px solid #dfe4df !important;
+  border-radius: 8px !important;
+  background: #ffffff !important;
+  color: #17212b !important;
+  box-shadow: none !important;
+  text-decoration: none !important;
+  font-size: 0.86rem !important;
+  font-weight: 650 !important;
+}
+body.admin-body .admin-card,
+body.admin-body .admin-panel,
+body.admin-body .admin-section,
+body.admin-body .admin-widget,
+body.admin-body .admin-stat,
+body.admin-body .admin-kpi,
+body.admin-body .admin-table-card,
+body.dashboard-body .dashboard-panel,
+body.dashboard-body .dashboard-kpi,
+body.dashboard-body .dashboard-toolbar,
+body.dashboard-body .dashboard-alert,
+body.dashboard-body .dashboard-insight,
+body.dashboard-body .dashboard-table-wrap {
+  background: #ffffff !important;
+  border: 1px solid #e5e7eb !important;
+  border-radius: 10px !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
+body.admin-body .admin-card,
+body.admin-body .admin-panel,
+body.admin-body .admin-section,
+body.admin-body .admin-widget,
+body.dashboard-body .dashboard-panel,
+body.dashboard-body .dashboard-kpi {
+  padding: 18px !important;
+}
+body.admin-body .admin-grid,
+body.admin-body .admin-cards,
+body.admin-body .admin-stats,
+body.admin-body .admin-kpis,
+body.dashboard-body .dashboard-grid,
+body.dashboard-body .dashboard-kpis {
+  gap: 14px !important;
+}
+body.admin-body h1,
+body.admin-body h2,
+body.admin-body h3,
+body.dashboard-body h1,
+body.dashboard-body h2,
+body.dashboard-body h3 {
+  color: #17212b !important;
+  letter-spacing: 0 !important;
+}
+body.admin-body p,
+body.admin-body li,
+body.admin-body small,
+body.dashboard-body p,
+body.dashboard-body li,
+body.dashboard-body small {
+  color: #4b5563 !important;
+}
+body.admin-body .section-kicker,
+body.admin-body .admin-kicker,
+body.dashboard-body .section-kicker,
+body.dashboard-body .admin-kicker {
+  color: #4b5563 !important;
+  letter-spacing: 0.04em !important;
+}
+body.admin-body .btn,
+body.admin-body button,
+body.dashboard-body .btn,
+body.dashboard-body button {
+  border-radius: 8px !important;
+  box-shadow: none !important;
+  text-transform: none !important;
+}
+body.admin-body .btn:not(.ghost):not(.secondary),
+body.dashboard-body .btn:not(.ghost):not(.secondary) {
+  background: #07351f !important;
+  color: #ffffff !important;
+  border-color: #07351f !important;
+}
+body.admin-body .btn.secondary,
+body.admin-body .btn.ghost,
+body.dashboard-body .btn.secondary,
+body.dashboard-body .btn.ghost {
+  background: #ffffff !important;
+  color: #17212b !important;
+  border-color: #dfe4df !important;
+}
+body.admin-body input,
+body.admin-body select,
+body.admin-body textarea,
+body.dashboard-body input,
+body.dashboard-body select,
+body.dashboard-body textarea {
+  border-radius: 8px !important;
+  border: 1px solid #dfe4df !important;
+  background: #ffffff !important;
+  box-shadow: none !important;
+}
+body.admin-body table,
+body.dashboard-body table {
+  border-collapse: collapse !important;
+  background: #ffffff !important;
+}
+body.admin-body th,
+body.admin-body td,
+body.dashboard-body th,
+body.dashboard-body td {
+  border-bottom: 1px solid #edf0ed !important;
+  background: #ffffff !important;
+}
+body.admin-body .glass,
+body.admin-body .gradient,
+body.admin-body .premium,
+body.admin-body .hero,
+body.dashboard-body .glass,
+body.dashboard-body .gradient,
+body.dashboard-body .premium,
+body.dashboard-body .hero {
+  background: #ffffff !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
+@media (max-width: 760px) {
+  body.admin-body .admin-topbar,
+  body.admin-body .admin-header,
+  body.admin-body .admin-module-header,
+  body.dashboard-body .dashboard-topbar,
+  body.dashboard-body .dashboard-toolbar {
+    display: grid !important;
+    justify-content: stretch !important;
+  }
+}
+/* end TVF OS DESIGN RESET */

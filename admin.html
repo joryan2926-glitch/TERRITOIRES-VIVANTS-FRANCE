@@ -11,131 +11,43 @@
 </head>
 <body class="admin-body admin-home-body admin-erp-new-body tvf-os-v2-body" data-admin-page="portal">
   <a class="skip-link" href="#admin-home-main">Aller au contenu</a>
-  <header class="admin-topbar admin-home-topbar tvf-os-v2-topbar">
+  <header class="admin-topbar admin-home-topbar">
     <a class="admin-brand" href="index" aria-label="Retour au site Territoires Vivants France">
       <img src="assets/logo-territoires-vivants-france-web.png" alt="Territoires Vivants France" width="320" height="132">
     </a>
-    <div class="tvf-os-topbar-copy">
+    <div>
       <p class="admin-kicker">TVF OS</p>
-      <h1>Systeme territorial de revitalisation</h1>
-      <p>Observer, qualifier, instruire et remettre en usage les biens vacants depuis un seul poste de pilotage.</p>
+      <h1>Base de travail</h1>
+      <p>Interface remise a zero. Les fonctions restent conservees en attendant la nouvelle direction.</p>
     </div>
-    <nav class="admin-home-actions" aria-label="Actions TVF OS"><a class="btn secondary" href="contact">Retour au site</a></nav>
+    <nav class="admin-home-actions" aria-label="Actions TVF OS">
+      <a class="btn secondary" href="contact">Retour au site</a>
+      <button class="btn ghost" type="button" data-admin-home-logout>Deconnexion</button>
+    </nav>
   </header>
 
-  <main id="admin-home-main" class="admin-shell admin-home-shell tvf-os-v2-shell">
-    <section class="admin-home-app tvf-os-v2-app" data-admin-home-app hidden>
-      <section class="tvf-os-command-center" aria-label="Tableau de bord territorial TVF OS">
-        <div class="tvf-os-command-copy">
-          <p class="section-kicker">Tableau de bord territorial</p>
-          <h2>Piloter la chaine de revitalisation d'un bien.</h2>
-          <p>TVF OS relie le signalement, la carte, le propriétaire, le dossier, les documents, les partenaires, les taches et la remise en usage. La prochaine action doit toujours etre visible.</p>
-          <div class="admin-home-header-actions"><a class="btn primary" href="admin-demandes">Ouvrir la réception</a><a class="btn secondary" href="admin-dossiers?create=client">Créer un dossier</a><button class="btn ghost" type="button" data-admin-home-logout>Déconnexion</button></div>
-        </div>
-        <aside class="tvf-os-ai-widget" aria-label="Assistant TVF IA">
-          <span>TVF IA</span>
-          <strong>Assistant disponible</strong>
-          <p>Preparer un courrier, resumer un dossier, organiser une visite ou produire une note de suivi.</p>
-          <a class="btn secondary" href="admin-ai">Ouvrir l'assistant</a>
-        </aside>
+  <main id="admin-home-main" class="admin-shell admin-home-shell">
+    <section class="admin-home-app" data-admin-home-app hidden>
+      <section class="admin-panel admin-reset-intro" aria-label="TVF OS remis a zero">
+        <p class="section-kicker">Remise a zero design</p>
+        <h2>Les modules sont conserves. Le design sera reconstruit ensuite.</h2>
+        <p>Cette page sert uniquement de base neutre. Elle garde les grands besoins fonctionnels de TVF OS sans appliquer d ancienne disposition graphique.</p>
       </section>
 
-      <section class="tvf-os-control-grid" data-admin-today-panel aria-label="Pilotage operationnel du jour">
-        <div class="tvf-os-map-panel">
-          <div class="admin-panel-head">
-            <div>
-              <p class="section-kicker">Carte vivante</p>
-              <h3>Saint-Etienne, territoire pilote</h3>
-              <p>Les points representent les catégories suivies par TVF OS. La carte detaillee reste accessible dans le module cartographie.</p>
-            </div>
-            <strong data-admin-today-status>Lecture en cours</strong>
-          </div>
-          <div class="tvf-os-territory-map" aria-hidden="true">
-            <span class="tvf-map-dot is-habitat" style="left:24%;top:38%">H</span>
-            <span class="tvf-map-dot is-commerce" style="left:48%;top:29%">C</span>
-            <span class="tvf-map-dot is-friche" style="left:64%;top:54%">F</span>
-            <span class="tvf-map-dot is-terrain" style="left:35%;top:66%">T</span>
-            <span class="tvf-map-dot is-materiaux" style="left:74%;top:33%">M</span>
-            <span class="tvf-map-dot is-solidarite" style="left:55%;top:72%">S</span>
-            <div class="tvf-map-card"><b>Dossier prioritaire</b><small>Qualification à poursuivre</small></div>
-          </div>
-          <div class="tvf-os-map-legend" aria-label="Legende des statuts">
-            <span><i class="is-blue"></i>Signale</span>
-            <span><i class="is-orange"></i>En cours</span>
-            <span><i class="is-red"></i>Prioritaire</span>
-            <span><i class="is-green"></i>Remis en usage</span>
-            <span><i class="is-gray"></i>Clos</span>
-          </div>
-        </div>
-
-        <aside class="tvf-os-side-widgets">
-          <div class="admin-today-kpis tvf-os-kpis" data-admin-today-kpis>
-            <article><span>Signalements</span><strong>-</strong><small>A qualifier</small></article>
-            <article><span>Dossiers</span><strong>-</strong><small>Actifs</small></article>
-            <article><span>Actions</span><strong>-</strong><small>Ouvertes</small></article>
-            <article><span>Alertes</span><strong>-</strong><small>Retards</small></article>
-          </div>
-          <article class="tvf-os-widget-card"><h4>Prochaine action</h4><p>Partir d'une demande reçue, qualifier la situation, puis ouvrir un dossier uniquement si l'accompagnement est justifié.</p><a href="admin-demandes">Voir la réception</a></article>
-        </aside>
+      <section class="admin-grid admin-reset-modules" aria-label="Grands besoins TVF OS">
+        <article class="admin-card"><h3>Reception des demandes</h3><p>Formulaires du site, e-mails, mobile, appels et demandes manuelles.</p><a class="btn secondary" href="admin-demandes">Ouvrir</a></article>
+        <article class="admin-card"><h3>Dossiers</h3><p>Creation, qualification, instruction, suivi et cloture des dossiers.</p><a class="btn secondary" href="admin-dossiers">Ouvrir</a></article>
+        <article class="admin-card"><h3>Contacts et CRM</h3><p>Proprietaires, collectivites, entreprises, partenaires et interlocuteurs.</p><a class="btn secondary" href="admin-crm">Ouvrir</a></article>
+        <article class="admin-card"><h3>Documents</h3><p>Bibliotheque interne, pieces a fournir, modeles et documents de dossier.</p><a class="btn secondary" href="admin-documents">Ouvrir</a></article>
+        <article class="admin-card"><h3>Observatoire et carte</h3><p>Signalements, qualification territoriale, cartographie et indicateurs.</p><a class="btn secondary" href="admin-observatoire">Observatoire</a><a class="btn ghost" href="admin-map">Carte</a></article>
+        <article class="admin-card"><h3>Travail et calendrier</h3><p>Taches, rendez-vous, relances, suivis et priorites operationnelles.</p><a class="btn secondary" href="admin-work">Ouvrir</a></article>
+        <article class="admin-card"><h3>E-mails</h3><p>Boite de reception, conversion en demande et reponses depuis TVF OS.</p><a class="btn secondary" href="admin-emails">Ouvrir</a></article>
+        <article class="admin-card"><h3>Parametres</h3><p>Utilisateurs, integrations, securite et configuration interne.</p><a class="btn secondary" href="admin-settings">Ouvrir</a></article>
       </section>
-
-      <section class="admin-home-control admin-today-panel tvf-os-priority-panel" aria-label="A traiter aujourd'hui dans TVF OS">
-        <div class="admin-panel-head">
-          <div>
-            <p class="section-kicker">A traiter aujourd'hui</p>
-            <h3>Priorites opérationnelles</h3>
-            <p>Demandes, dossiers et actions sont classes pour avancer naturellement dans le parcours metier.</p>
-          </div>
-          <a class="btn secondary" href="admin-work">Voir l'agenda</a>
-        </div>
-        <div class="admin-today-columns">
-          <article>
-            <h4>Nouveaux signalements</h4>
-            <div data-admin-today-requests><p class="form-note">Chargement...</p></div>
-            <a class="text-link" href="admin-demandes">Ouvrir les signalements</a>
-          </article>
-          <article>
-            <h4>Dossiers de revitalisation</h4>
-            <div data-admin-today-cases><p class="form-note">Chargement...</p></div>
-            <a class="text-link" href="admin-dossiers">Ouvrir les dossiers</a>
-          </article>
-          <article>
-            <h4>Prochaines actions</h4>
-            <div data-admin-today-tasks><p class="form-note">Chargement...</p></div>
-            <a class="text-link" href="admin-work">Ouvrir les taches</a>
-          </article>
-        </div>
-      </section>
-
-      <section class="admin-home-control admin-client-file-schema tvf-os-cycle-panel" aria-label="Cycle de vie d'un dossier TVF OS">
-        <div class="admin-panel-head">
-          <div>
-            <p class="section-kicker">Parcours metier</p>
-            <h3>Le cycle de vie d'un bien</h3>
-            <p>Chaque dossier avance de manière guidee, depuis le reperage jusqu'à la remise en usage ou la clôture.</p>
-          </div>
-          <strong>Dossier central</strong>
-        </div>
-        <ol class="admin-erp-timeline admin-client-file-steps tvf-os-lifecycle">
-          <li class="is-done"><span>1</span><strong>Reperer</strong><small>Signalement, e-mail, terrain ou mobile.</small></li>
-          <li class="is-done"><span>2</span><strong>Qualifier</strong><small>Adresse, catégorie, urgence et source.</small></li>
-          <li><span>3</span><strong>Contacter</strong><small>Propriétaire, collectivité ou partenaire.</small></li>
-          <li><span>4</span><strong>Visiter</strong><small>Photos, notes et contraintes.</small></li>
-          <li><span>5</span><strong>Etudier</strong><small>Solutions, aides, risques et documents.</small></li>
-          <li><span>6</span><strong>Mobiliser</strong><small>Partenaires, entreprises et ressources.</small></li>
-          <li><span>7</span><strong>Remettre en usage</strong><small>Suivi, decision, preuve et clôture.</small></li>
-        </ol>
-        <div class="admin-detail-actions">
-          <a class="btn primary" href="admin-demandes">Qualifier une demande</a>
-          <a class="btn secondary" href="admin-dossiers?create=client">Créer un dossier manuel</a>
-          <a class="btn secondary" href="admin-documents#bibliotheque-interne-tvf">Trouver un document</a>
-        </div>
-      </section>
-
     </section>
   </main>
 
-  <script src="admin-nav.js" defer></script>
+<script src="admin-nav.js" defer></script>
   <script src="admin.js" defer></script>
 </body>
 </html>
