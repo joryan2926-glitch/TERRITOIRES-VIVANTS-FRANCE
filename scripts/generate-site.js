@@ -47,8 +47,8 @@ const photos = {
   hero: "assets/photos/france-saint-etienne-jean-jaures.jpg",
   habitat: "assets/photos/pole-habitat-vivant.png",
   commerce: "assets/photos/pole-commerce-vivant.png",
-  friches: "assets/photos/pole-friches-terrains-vivants.png",
-  materiaux: "assets/photos/pole-materiatheque-solidaire.png",
+  friches: "assets/photos/pole-materiatheque-solidaire.png",
+  materiaux: "assets/photos/pole-friches-terrains-vivants.png",
   solidarite: "assets/photos/pole-solidarite-insertion.png",
   ville: "assets/photos/saint-etienne-panorama.jpg",
   ressources: "assets/photos/materiaux-renovation-outils.jpg"
