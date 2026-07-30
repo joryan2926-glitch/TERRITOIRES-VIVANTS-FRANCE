@@ -95,7 +95,7 @@ Chaque etape doit pouvoir contenir notes, documents, photos et decisions.
 - Fond blanc casse et vert foret dominant.
 - Cartes arrondies de 16 a 24 px.
 - Ombres legeres.
-- Ic?nes fines et coherentes.
+- Icones fines et coherentes.
 - Carte territoriale au centre de l'experience.
 - Menus clairs et orientes metier.
 - Responsive terrain pour usage mobile.
@@ -193,3 +193,45 @@ Chaque utilisateur doit voir les notifications utiles a son role : nouvelle dema
 ## Fil d'activite dossier
 
 Chaque dossier conserve une chronologie lisible : signalement recu, dossier cree, charge de mission affecte, premier contact, visite programmee, rapport depose, courrier envoye, convention signee, bien remis en usage.
+
+
+## TVF Mobile - application terrain de TVF OS
+
+TVF Mobile fait partie du meme ecosysteme que TVF OS. Ce n'est pas une application autonome : elle sert a capter l'information sur le terrain et a l'envoyer vers le centre de pilotage.
+
+Architecture fonctionnelle :
+
+Citoyens / proprietaires / collectivites / entreprises / charges de mission -> TVF Mobile -> TVF OS -> Observatoire, dossiers, cartographie, IA et statistiques.
+
+### Principes
+
+- Une saisie mobile doit creer une demande exploitable dans TVF OS.
+- La meme base de donnees doit porter les signalements, photos, coordonnees, documents et statuts.
+- Chaque demande mobile doit recevoir une reference conservee sur le telephone et transmise a TVF OS.
+- Les ajouts mobiles doivent alimenter la chronologie du dossier.
+- Les profils doivent voir uniquement les fonctions utiles a leur role.
+- TVF Mobile sert au terrain ; TVF OS reste le centre de validation, d'instruction et de pilotage.
+
+### Parcours signalement
+
+1. L'utilisateur signale un bien depuis TVF Mobile avec photo, adresse ou geolocalisation, categorie et commentaire.
+2. TVF OS recoit une notification Nouveau signalement.
+3. L'accueil choisit : accepter l'analyse, demander des informations complementaires ou classer sans suite.
+4. Si la demande est acceptee, TVF OS cree une reference de dossier, un point cartographique et un statut A qualifier.
+5. Le responsable affecte le dossier.
+6. Le charge de mission utilise TVF Mobile pour ajouter photos, notes, localisation, etat du batiment et compte rendu de visite.
+7. Toutes les informations alimentent la fiche, l'Observatoire et la chronologie.
+
+### Profils mobiles
+
+| Profil | Usage principal |
+| --- | --- |
+| Citoyen | Signaler une situation et suivre une reference |
+| Proprietaire | Presenter un bien, transmettre des documents et demander un rendez-vous |
+| Collectivite | Transmettre un secteur, deposer une etude et suivre les dossiers autorises |
+| Entreprise / partenaire | Proposer des materiaux, envoyer un devis ou declarer une intervention |
+| Charge de mission TVF | Faire des visites, ajouter photos, comptes rendus, taches et statuts |
+
+### Regle IA
+
+L'IA peut aider a resumer, preparer un courrier, reperer des pieces manquantes ou proposer une prochaine etape. Elle n'a pas de pouvoir de decision : les validations restent effectuees par l'equipe TVF.

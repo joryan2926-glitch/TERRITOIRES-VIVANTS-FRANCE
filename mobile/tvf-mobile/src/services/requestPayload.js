@@ -97,6 +97,37 @@ function calculateCompleteness(flow, draft) {
   return Math.round((completed / fields.length) * 100);
 }
 
+function buildWorkflow(flow, config, routing) {
+  const labels = {
+    signal: "Nouveau signalement",
+    materials: "Ressource a qualifier",
+    property: "Bien a pre-etudier",
+    volunteer: "Contact a orienter"
+  };
+  return {
+    ecosystem: "tvf-os-terrain",
+    realtimeExpected: true,
+    sourceApp: "TVF Mobile",
+    targetModules: ["Demandes recues", "Observatoire", "Cartographie", "Dossiers"],
+    initialOsStatus: labels[flow] || labels.signal,
+    acceptedActions: ["Accepter l analyse", "Demander des informations complementaires", "Classer sans suite"],
+    nextStepAfterAcceptance: routing.canCreateCase ? "Creer ou rattacher un dossier TVF OS" : "Completer la demande avant dossier",
+    recommendedCaseType: config.caseType
+  };
+}
+
+function buildInitialTimeline(config) {
+  return [
+    {
+      code: "mobile_submission",
+      label: config.typeLabel + " recu depuis TVF Mobile",
+      source: "TVF Mobile",
+      target: "TVF OS",
+      status: "received_mobile",
+      at: new Date().toISOString()
+    }
+  ];
+}
 function buildRouting(flow, draft) {
   const config = getConfig(flow);
   const hasContact = Boolean(clean(draft.email) || clean(draft.phone));
@@ -179,6 +210,8 @@ export function buildRequestPayload({ flow, draft, reference, categoryLabel }) {
       preparedFor: "TVF OS",
       version: "0.1.0"
     },
-    nextSystemTarget: "tvf-os-demandes"
+    nextSystemTarget: "tvf-os-demandes",
+    osSync: buildWorkflow(flow, config, routing),
+    timeline: buildInitialTimeline(config)
   };
 }

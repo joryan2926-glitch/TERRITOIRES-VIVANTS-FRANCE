@@ -10854,3 +10854,66 @@ body:not(.admin-body) .footer-bottom span:last-child {
   .tvf-os-role-automation-grid { grid-template-columns: 1fr; }
   .tvf-os-process-grid article { min-height: auto; }
 }
+
+
+/* TVF OS - boite de reception centrale */
+.admin-inbox-layout {
+  display: grid;
+  grid-template-columns: 248px minmax(0, 1.35fr) minmax(360px, 0.82fr);
+  gap: 0;
+}
+.admin-inbox-sidebar {
+  border-right: 1px solid var(--os-line);
+  background: linear-gradient(180deg, rgba(255,255,255,0.92), rgba(246,250,244,0.88));
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.admin-inbox-title {
+  padding: 8px 4px 12px;
+}
+.admin-inbox-title h3 {
+  margin: 4px 0 0;
+  color: var(--blue-900);
+  font-size: 1rem;
+}
+.admin-inbox-sidebar button {
+  width: 100%;
+  border: 1px solid transparent;
+  border-radius: 14px;
+  background: transparent;
+  color: var(--blue-900);
+  font-weight: 800;
+  text-align: left;
+  padding: 10px 11px;
+  cursor: pointer;
+}
+.admin-inbox-sidebar button:hover,
+.admin-inbox-sidebar button.is-active {
+  background: #fff;
+  border-color: var(--os-line);
+  box-shadow: var(--os-shadow-sm);
+}
+.admin-inbox-sidebar hr {
+  width: 100%;
+  border: 0;
+  border-top: 1px solid var(--os-line);
+  margin: 8px 0;
+}
+.admin-inbox-layout .admin-request-list {
+  min-width: 920px;
+}
+@media (max-width: 1320px) {
+  .admin-inbox-layout { grid-template-columns: 1fr; }
+  .admin-inbox-sidebar {
+    border-right: 0;
+    border-bottom: 1px solid var(--os-line);
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .admin-inbox-title, .admin-inbox-sidebar hr { grid-column: 1 / -1; }
+}
+@media (max-width: 760px) {
+  .admin-inbox-sidebar { grid-template-columns: 1fr; }
+}

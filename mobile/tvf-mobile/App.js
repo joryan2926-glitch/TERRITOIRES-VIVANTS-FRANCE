@@ -36,7 +36,8 @@ import {
   propertyTypes,
   requiredFieldsByFlow,
   signalCategories,
-  statusSteps
+  statusSteps,
+  profileModes
 } from "./src/data";
 import { buildRequestPayload } from "./src/services/requestPayload";
 import { submitMobileRequest } from "./src/services/requestRepository";
@@ -272,7 +273,7 @@ function AppHeader({ screen, onBack, onContact }) {
         <Image source={logo} style={styles.headerLogo} />
         <View>
           <Text style={styles.headerTitle}>TVF Mobile</Text>
-          <Text style={styles.headerSubtitle}>Signaler. Localiser. Agir.</Text>
+          <Text style={styles.headerSubtitle}>Terrain de TVF OS</Text>
         </View>
       </View>
       <TouchableOpacity style={styles.headerButton} onPress={onContact} accessibilityLabel="Contacter TVF">
@@ -326,11 +327,11 @@ function Card({ icon, title, subtitle, onPress, primary }) {
 
 function WelcomeScreen({ enter }) {
   const highlights = [
-    ["alert-circle-outline", "Signaler", "Lieu vacant, friche ou depot observe"],
-    ["cube-outline", "Proposer", "Materiaux, bien ou aide terrain"],
-    ["file-tray-full-outline", "Suivre", "Reference TVF conservee sur le telephone"]
+    ["alert-circle-outline", "Signaler", "Lieu vacant, friche ou dépôt observé"],
+    ["sync-outline", "Synchroniser", "Transmission vers TVF OS en temps réel"],
+    ["file-tray-full-outline", "Suivre", "Référence TVF conservée sur le téléphone"]
   ];
-  const steps = ["Je localise", "Je decris", "TVF qualifie"];
+  const steps = ["Je repère", "Je transmets", "TVF OS traite"];
   return (
     <ScrollView contentContainerStyle={styles.welcomeScreen} showsVerticalScrollIndicator={false}>
       <View style={styles.welcomeCircleOne} />
@@ -342,7 +343,7 @@ function WelcomeScreen({ enter }) {
         <Text style={styles.welcomeKicker}>TERRITOIRES VIVANTS FRANCE</Text>
         <Text style={styles.welcomeTitle}>TVF Mobile</Text>
         <Text style={styles.welcomeLead}>
-          L'application terrain pour signaler un lieu, proposer des ressources et transmettre une demande exploitable a TVF.
+          L'application terrain de TVF OS : signaler, localiser, transmettre des photos et alimenter les dossiers en temps réel.
         </Text>
       </View>
       <View style={styles.welcomeStepRow}>
@@ -366,9 +367,23 @@ function WelcomeScreen({ enter }) {
           </View>
         ))}
       </View>
+      <View style={styles.mobileProfilesBlock}>
+        <Text style={styles.mobileProfilesTitle}>Un accès adapté à chaque rôle</Text>
+        <View style={styles.mobileProfilesGrid}>
+          {profileModes.map((profile) => (
+            <View key={profile.title} style={styles.mobileProfilePill}>
+              <Ionicons name={profile.icon} size={16} color={colors.green} />
+              <View style={styles.mobileProfileText}>
+                <Text style={styles.mobileProfileTitle}>{profile.title}</Text>
+                <Text style={styles.mobileProfileSubtitle}>{profile.subtitle}</Text>
+              </View>
+            </View>
+          ))}
+        </View>
+      </View>
       <View style={styles.welcomeActionWrap}>
         <PrimaryButton onPress={enter} icon="arrow-forward-outline">Entrer dans TVF Mobile</PrimaryButton>
-        <Text style={styles.welcomeFootnote}>Signaler. Localiser. Agir.</Text>
+        <Text style={styles.welcomeFootnote}>Terrain de TVF OS</Text>
       </View>
     </View>
   );
@@ -779,13 +794,13 @@ function HomeScreen({ go, draftRestored, dismissDraft }) {
   return (
     <ScrollView contentContainerStyle={styles.content}>
       <ScreenTitle eyebrow="Préversion terrain" title="Signaler, localiser, transmettre à TVF">
-        TVF Mobile sert à créer une première demande exploitable : lieu vacant, matériaux disponibles, bien proposé ou candidature bénévole.
+        TVF Mobile est l’application terrain de TVF OS : chaque signalement, photo, localisation ou proposition devient une demande exploitable dans le centre de pilotage.
       </ScreenTitle>
       <View style={styles.logoPanel}>
         <Image source={logo} style={styles.logoLarge} />
         <View style={styles.logoCopy}>
           <Text style={styles.logoPanelTitle}>Pensée pour le terrain</Text>
-          <Text style={styles.logoPanelText}>Chaque saisie crée une référence, conserve une trace locale et peut remonter dans TVF OS.</Text>
+          <Text style={styles.logoPanelText}>Chaque saisie crée une référence, conserve une trace locale et alimente TVF OS dès que la synchronisation Supabase est disponible.</Text>
         </View>
       </View>
       <ConfigBanner />
@@ -810,12 +825,12 @@ function HomeScreen({ go, draftRestored, dismissDraft }) {
       <View style={styles.quickStats}>
         <View style={styles.statMini}><Text style={styles.statMiniValue}>1</Text><Text style={styles.statMiniLabel}>référence TVF</Text></View>
         <View style={styles.statMini}><Text style={styles.statMiniValue}>3</Text><Text style={styles.statMiniLabel}>preuves utiles</Text></View>
-        <View style={styles.statMini}><Text style={styles.statMiniValue}>OS</Text><Text style={styles.statMiniLabel}>suivi interne</Text></View>
+        <View style={styles.statMini}><Text style={styles.statMiniValue}>OS</Text><Text style={styles.statMiniLabel}>pilotage temps réel</Text></View>
       </View>
       <View style={styles.homeFlowCard}>
         <View style={styles.homeFlowStep}><Text style={styles.homeFlowNumber}>1</Text><Text style={styles.homeFlowText}>Choisir le bon parcours</Text></View>
         <View style={styles.homeFlowStep}><Text style={styles.homeFlowNumber}>2</Text><Text style={styles.homeFlowText}>Ajouter adresse, photo et contact</Text></View>
-        <View style={styles.homeFlowStep}><Text style={styles.homeFlowNumber}>3</Text><Text style={styles.homeFlowText}>Transmettre vers TVF OS</Text></View>
+        <View style={styles.homeFlowStep}><Text style={styles.homeFlowNumber}>3</Text><Text style={styles.homeFlowText}>Faire apparaître la demande dans TVF OS</Text></View>
       </View>
       <View style={styles.actionSection}>
         <View style={styles.actionSectionHeader}>

@@ -80,3 +80,32 @@ Une demande mobile doit etre examinee dans TVF OS avant toute suite :
 - verifier les lignes Supabase ;
 - verifier la lecture dans TVF OS ;
 - verifier le renvoi en cas d'echec reseau.
+
+## Architecture cible Mobile vers OS
+
+TVF Mobile est l'application de terrain de TVF OS. Elle ne doit pas etre exploitee comme une application independante. Les demandes saisies sur mobile sont destinees a alimenter le meme cycle operationnel que les demandes issues du site, des e-mails, des appels ou de l'accueil.
+
+Flux cible :
+
+1. citoyen, proprietaire, collectivite, entreprise ou charge de mission saisit une information dans TVF Mobile ;
+2. la demande est enregistree dans Supabase via `mobile_requests` ;
+3. TVF OS affiche la demande dans le module Demandes recues ;
+4. l'accueil peut accepter l'analyse, demander un complement ou classer sans suite ;
+5. en cas d'acceptation, la demande est rattachee a l'Observatoire, a la cartographie et a un dossier d'instruction ;
+6. chaque ajout mobile ulterieur doit creer un evenement dans la chronologie du dossier.
+
+## Profils fonctionnels Mobile
+
+| Profil | Fonctions mobiles | Effet attendu dans TVF OS |
+|---|---|---|
+| Citoyen | Signaler, localiser, joindre une photo, suivre une reference | Nouveau signalement a qualifier |
+| Proprietaire | Presenter un bien, deposer des documents, demander un rendez-vous | Pre-dossier proprietaire ou dossier a instruire |
+| Collectivite | Transmettre un secteur, une observation ou un document | Signalement territorial ou element d'Observatoire |
+| Entreprise / partenaire | Proposer des materiaux, une expertise, un devis ou une intervention | Ressource, contribution ou action partenaire |
+| Charge de mission TVF | Ajouter photos, commentaires, localisation, compte rendu de visite | Enrichissement direct du dossier et de sa chronologie |
+
+## Chronologie automatique attendue
+
+Chaque ligne issue de TVF Mobile doit pouvoir produire au minimum un evenement : signalement recu, photo ajoutee, localisation transmise, dossier cree, charge affecte, visite realisee, rapport depose, convention envoyee, dossier cloture ou bien remis en usage.
+
+L'IA TVF peut proposer des syntheses, controles de pieces et prochaines actions, mais la decision reste toujours humaine.

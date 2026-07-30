@@ -1,13 +1,13 @@
 const ADMIN_TOKEN_KEY = "tvfAdminToken";
 const statusLabels = {
-  nouveau: "Nouveau",
+  nouveau: "Nouvelle",
   a_qualifier: "A qualifier",
-  en_cours: "En cours",
-  rendez_vous: "Rendez-vous",
-  en_attente: "En attente",
-  accepte: "Accepte pour etude",
-  refuse: "Refuse",
-  archive: "Archive",
+  en_cours: "En cours de traitement",
+  rendez_vous: "Rendez-vous / rappel",
+  en_attente: "En attente du demandeur",
+  accepte: "Transformee en dossier",
+  refuse: "Classee sans suite",
+  archive: "Cloturee",
 };
 const priorityLabels = {
   normale: "P3 - Normale",
@@ -15,12 +15,12 @@ const priorityLabels = {
   urgente: "P1 - Urgente",
 };
 const channelLabels = {
-  site_web: "Site web",
-  email: "E-mail",
-  telephone: "Téléphone",
+  site_web: "Formulaire du site",
+  email: "E-mail direct",
+  telephone: "Appel telephonique",
   whatsapp: "WhatsApp",
-  rendez_vous: "Rendez-vous",
-  import: "Import manuel",
+  rendez_vous: "Accueil / rendez-vous",
+  import: "Courrier papier / import",
 };
 const mobileFlowLabels = {
   signal: "Signalement terrain",
@@ -76,11 +76,12 @@ const viewShortcuts = document.querySelectorAll("[data-view-shortcut]");
 const kpiEl = document.querySelector("[data-admin-kpis]");
 const triageEl = document.querySelector("[data-admin-triage]");
 const mobilePanelEl = document.querySelector("[data-admin-mobile]");
+const initialViewParam = new URLSearchParams(window.location.search).get("view");
 
 let contacts = [];
 let mobileRequests = [];
 let selectedId = null;
-let currentView = "all";
+let currentView = initialViewParam || "all";
 let debounceTimer;
 
 function token() {
@@ -168,6 +169,10 @@ function label(map, value) {
 
 function contactChannelLabel(contact) {
   if (contact?.source_page === "tvf-mobile") return "TVF Mobile";
+  const source = String(contact?.source_page || "");
+  if (/courrier|papier/i.test(source) || /courrier|papier/i.test(String(contact?.internal_notes || ""))) return "Courrier papier";
+  if (/email/i.test(source) && contact?.channel === "import") return "E-mail direct";
+  if (/telephone|appel|accueil/i.test(source) && contact?.channel === "import") return "Appel / accueil";
   return label(channelLabels, contact?.channel);
 }
 
@@ -310,7 +315,7 @@ function responseTemplate(contact, key = "auto") {
 function filtersParams() {
   const data = new FormData(filtersForm);
   const params = new URLSearchParams();
-  ["q", "status", "priority", "category"].forEach((name) => {
+  ["q", "status", "priority", "category", "channel"].forEach((name) => {
     const value = String(data.get(name) || "").trim();
     if (value) params.set(name, value);
   });
@@ -374,7 +379,15 @@ function visibleContacts() {
   if (currentView === "highPriority") return contacts.filter((contact) => ["haute", "urgente"].includes(contact.priority));
   if (currentView === "unassigned") return contacts.filter((contact) => isOpenRequest(contact) && !hasOwner(contact));
   if (currentView === "missing") return contacts.filter((contact) => isOpenRequest(contact) && hasMissingPieces(contact));
+  if (currentView === "forms") return contacts.filter((contact) => contact.channel === "site_web");
+  if (currentView === "emails") return contacts.filter((contact) => contact.channel === "email" || (/email/i.test(String(contact.source_page || "")) && contact.channel === "import"));
   if (currentView === "mobile") return contacts.filter((contact) => contact.source_page === "tvf-mobile" || Boolean(mobileSourceInfo(contact)));
+  if (currentView === "calls") return contacts.filter((contact) => ["telephone", "whatsapp", "rendez_vous"].includes(contact.channel) || /telephone|appel|accueil|whatsapp/i.test(String(contact.source_page || "")));
+  if (currentView === "paper") return contacts.filter((contact) => /courrier|papier/i.test(String(contact.source_page || "") + " " + String(contact.internal_notes || "")));
+  if (currentView === "pending") return contacts.filter((contact) => isOpenRequest(contact) && (["nouveau", "a_qualifier", "en_attente"].includes(contact.status) || !hasOwner(contact)));
+  if (currentView === "assigned") return contacts.filter((contact) => isOpenRequest(contact) && hasOwner(contact));
+  if (currentView === "treated") return contacts.filter((contact) => ["accepte", "refuse", "archive"].includes(contact.status));
+  if (currentView === "spam") return contacts.filter((contact) => contact.status === "refuse" && /indesirable|spam|abus|hors sujet/i.test(String(contact.closure_reason || "") + " " + String(contact.internal_notes || "")));
   return contacts;
 }
 
@@ -390,8 +403,8 @@ function updateKpis() {
     contacts.length,
     contacts.filter((contact) => ["nouveau", "a_qualifier"].includes(contact.status)).length,
     contacts.filter(isOverdue).length,
-    contacts.filter((contact) => contact.status === "rendez_vous").length,
-    `${averageScore()}%`,
+    contacts.filter((contact) => isOpenRequest(contact) && hasOwner(contact)).length,
+    contacts.filter((contact) => ["accepte", "archive"].includes(contact.status)).length,
   ];
   kpiEl.querySelectorAll("strong").forEach((node, index) => { node.textContent = values[index] ?? 0; });
 }
@@ -440,13 +453,19 @@ function renderTriagePanel() {
     .sort((a, b) => triageScore(b) - triageScore(a))
     .slice(0, 5);
 
+  const sourceStats = [
+    ["Formulaires", contacts.filter((contact) => contact.channel === "site_web").length, "Site", "forms"],
+    ["E-mails", contacts.filter((contact) => contact.channel === "email" || /email/i.test(String(contact.source_page || ""))).length, "Direct", "emails"],
+    ["TVF Mobile", contacts.filter((contact) => contact.source_page === "tvf-mobile" || Boolean(mobileSourceInfo(contact))).length, "Terrain", "mobile"],
+  ];
   const cards = [
     ["A traiter", dueToday.length, "Aujourd'hui", "today"],
-    ["En retard", overdue.length, "Échéance dépassée", "today", "urgent"],
+    ["En retard", overdue.length, "Echeance depassee", "overdue", "urgent"],
     ["Sans responsable", unassigned.length, "A affecter", "unassigned"],
-    ["Priorité haute", highPriority.length, "P1 / P2", "all", "warning"],
-    ["Prets dossier", ready.length, "Conversion possible", "all"],
+    ["Priorite haute", highPriority.length, "P1 / P2", "highPriority", "warning"],
+    ["Prets dossier", ready.length, "Conversion possible", "treated"],
     ["Pieces attendues", missing.length, "Demandes incompletes", "missing"],
+    ...sourceStats,
   ];
 
   triageEl.innerHTML = `<div class="admin-panel-head">

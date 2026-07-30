@@ -4,10 +4,16 @@ const TVF_ADMIN_COOKIE_CHECK_KEY = "tvfAdminCookieHydrated";
 const TVF_ADMIN_LOGIN_ROUTE = "admin-login";
 
 const TVF_ADMIN_GROUPS = [
+  { label: "Reception", description: "Demandes entrantes", modules: [
+    { href: "admin-demandes", label: "Reception des demandes", icon: "IN", badge: "" },
+    { href: "admin-demandes?view=forms", label: "Formulaires du site", icon: "F", badge: "" },
+    { href: "admin-demandes?view=emails", label: "E-mails recus", icon: "@", badge: "" },
+    { href: "admin-demandes?view=mobile", label: "Signalements TVF Mobile", icon: "M", badge: "" },
+    { href: "admin-demandes?view=pending", label: "En attente de traitement", icon: "!", badge: "" },
+  ] },
   { label: "Piloter", description: "Vue territoriale", modules: [
-    { href: "admin", label: "Tableau de bord", icon: "?", badge: "" },
-    { href: "admin-map", label: "Carte territoriale", icon: "?", badge: "" },
-    { href: "admin-demandes", label: "Signalements", icon: "?", badge: "" },
+    { href: "admin", label: "Tableau de bord", icon: "TB", badge: "" },
+    { href: "admin-map", label: "Carte territoriale", icon: "CT", badge: "" },
   ] },
   { label: "Observer", description: "Biens et donnees", modules: [
     { href: "admin-observatoire", label: "Observatoire", icon: "?", badge: "" },
@@ -42,7 +48,7 @@ const TVF_ADMIN_GROUPS = [
 ];
 const TVF_ADMIN_MODULES = TVF_ADMIN_GROUPS.flatMap((group) => group.modules);
 const TVF_ADMIN_QUICK_ACTIONS = [
-  { href: "admin-demandes", label: "Nouveau signalement", tone: "primary" },
+  { href: "admin-demandes", label: "Ouvrir la reception", tone: "primary" },
   { href: "admin-dossiers?create=client", label: "Creer un dossier", tone: "strong" },
   { href: "admin-map", label: "Ouvrir la carte", tone: "neutral" },
   { href: "admin-ai", label: "TVF IA", tone: "neutral" },

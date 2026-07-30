@@ -2,20 +2,20 @@ export const homeActions = [
   {
     key: "signal",
     title: "Signaler un lieu",
-    subtitle: "Logement vacant, commerce fermé, friche ou bâtiment inutilisé.",
+    subtitle: "Logement vacant, commerce fermé, friche ou bâtiment inutilisé à transmettre à TVF OS.",
     icon: "alert-circle-outline",
     primary: true
   },
   {
     key: "materials",
     title: "Proposer des matériaux",
-    subtitle: "Bois, fenêtres, portes, mobilier, sanitaires ou équipements.",
+    subtitle: "Bois, fenêtres, portes, mobilier, sanitaires ou équipements réemployables.",
     icon: "cube-outline"
   },
   {
     key: "property",
     title: "Proposer un bien",
-    subtitle: "Logement, local, commerce, bâtiment, terrain ou friche.",
+    subtitle: "Logement, local, commerce, bâtiment, terrain ou friche à pré-étudier.",
     icon: "home-outline"
   },
   {
@@ -33,7 +33,7 @@ export const homeActions = [
   {
     key: "tracking",
     title: "Suivre ma demande",
-    subtitle: "Retrouver le numéro créé sur ce téléphone.",
+    subtitle: "Retrouver le numéro créé sur ce téléphone et son état de transmission.",
     icon: "search-outline"
   }
 ];
@@ -71,6 +71,14 @@ export const propertyTypes = [
   { key: "friche", label: "Friche", icon: "leaf-outline" }
 ];
 
+export const profileModes = [
+  { title: "Citoyen", subtitle: "Signaler et suivre une référence.", icon: "person-outline" },
+  { title: "Propriétaire", subtitle: "Présenter un bien et déposer les éléments utiles.", icon: "home-outline" },
+  { title: "Collectivité", subtitle: "Transmettre un secteur ou un document territorial.", icon: "business-outline" },
+  { title: "Entreprise", subtitle: "Proposer matériaux, expertise ou intervention.", icon: "construct-outline" },
+  { title: "Équipe TVF", subtitle: "Préparer une visite et enrichir un dossier terrain.", icon: "map-outline" }
+];
+
 export const documents = [
   {
     title: "Pièces à fournir - particuliers",
@@ -104,7 +112,7 @@ export const statusSteps = [
 ];
 
 export const flowGuides = {
-  signal: ["Identifier", "Localiser", "Transmettre"],
+  signal: ["Repérer", "Localiser", "Synchroniser"],
   materials: ["Décrire", "Qualifier", "Orienter"],
   property: ["Présenter", "Pré-étudier", "Constituer"],
   volunteer: ["Se présenter", "Préciser", "Être recontacté"],
@@ -224,6 +232,7 @@ export const documentGroups = [
     items: ["Fiche contact TVF", "Courrier de premier contact", "Présentation synthétique"]
   }
 ];
+
 export const fieldTestPlan = [
   {
     title: "Signalement",
@@ -246,6 +255,7 @@ export const fieldTestPlan = [
     items: ["Saisir identité et e-mail", "Indiquer compétences", "Transmettre", "Retrouver la référence"]
   }
 ];
+
 export const releaseReadiness = [
   {
     title: "Prêt pour recette",

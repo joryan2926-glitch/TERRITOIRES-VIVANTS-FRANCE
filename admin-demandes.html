@@ -16,8 +16,8 @@
       <img src="assets/logo-territoires-vivants-france-web.png" alt="Territoires Vivants France" width="320" height="132">
     </a>
     <div>
-      <p class="admin-kicker">TVF OS - Reception</p>
-      <h1>Boite de reception TVF</h1>
+      <p class="admin-kicker">TVF OS - Reception multicanale</p>
+      <h1>Boite de reception centrale TVF</h1>
     </div>
     <div class="admin-top-actions">
       <a class="btn secondary" href="admin">Accueil TVF OS</a>
@@ -33,7 +33,7 @@
       <div class="admin-toolbar">
         <div>
           <p class="section-kicker">Point d entree unique</p>
-          <h2>Qualifier chaque demande avant de la transformer en dossier</h2>
+          <h2>Unifier formulaires, e-mails, TVF Mobile, appels et courriers</h2>
           <p data-admin-count>Chargement des demandes...</p>
 
         </div>
@@ -47,11 +47,11 @@
       </div>
 
       <section class="admin-kpi-strip" data-admin-kpis aria-label="Indicateurs demandes">
-        <article><span>Total affiche</span><strong>0</strong><small>Demandes selon filtres</small></article>
+        <article><span>Total affiche</span><strong>0</strong><small>Boite courante</small></article>
         <article data-tone="warning"><span>A qualifier</span><strong>0</strong><small>Priorité de traitement</small></article>
         <article data-tone="urgent"><span>En retard</span><strong>0</strong><small>Échéance dépassée</small></article>
         <article><span>Rendez-vous</span><strong>0</strong><small>Demandes à planifier</small></article>
-        <article><span>Score moyen</span><strong>0%</strong><small>Qualification dossier</small></article>
+        <article><span>Convertibles</span><strong>0%</strong><small>Vers dossier</small></article>
       </section>
 
       <section class="admin-triage-panel" data-admin-triage aria-label="Pilotage operationnel des demandes">
@@ -89,6 +89,17 @@
             <option value="urgente">Urgente</option>
           </select>
         </label>
+        <label>Canal
+          <select name="channel">
+            <option value="all">Tous</option>
+            <option value="site_web">Formulaire du site</option>
+            <option value="email">E-mail direct</option>
+            <option value="telephone">Téléphone</option>
+            <option value="whatsapp">WhatsApp</option>
+            <option value="rendez_vous">Accueil / rendez-vous</option>
+            <option value="import">Courrier papier / import</option>
+          </select>
+        </label>
         <label>Catégorie
           <select name="category">
             <option value="all">Toutes</option>
@@ -106,12 +117,20 @@
 
       <nav class="admin-status-tabs" aria-label="Vues rapides demandes">
         <button type="button" data-status-shortcut="all">Toutes</button>
+        <button type="button" data-view-shortcut="forms">Formulaires site</button>
+        <button type="button" data-view-shortcut="emails">E-mails recus</button>
+        <button type="button" data-view-shortcut="mobile">TVF Mobile</button>
+        <button type="button" data-view-shortcut="calls">Appels / accueil</button>
+        <button type="button" data-view-shortcut="paper">Courriers papier</button>
+        <button type="button" data-view-shortcut="pending">En attente</button>
         <button type="button" data-view-shortcut="today">A traiter aujourd'hui</button>
         <button type="button" data-view-shortcut="overdue">En retard</button>
         <button type="button" data-view-shortcut="urgent">Urgentes</button>
         <button type="button" data-view-shortcut="unassigned">Sans responsable</button>
         <button type="button" data-view-shortcut="missing">Pieces manquantes</button>
-        <button type="button" data-view-shortcut="mobile">TVF Mobile</button>
+        <button type="button" data-view-shortcut="assigned">Affectees</button>
+        <button type="button" data-view-shortcut="treated">Traitees</button>
+        <button type="button" data-view-shortcut="spam">Indesirables</button>
         <button type="button" data-status-shortcut="nouveau">Nouvelles</button>
         <button type="button" data-status-shortcut="a_qualifier">A qualifier</button>
         <button type="button" data-status-shortcut="en_cours">En cours</button>
@@ -119,7 +138,24 @@
         <button type="button" data-status-shortcut="archive">Archivees</button>
       </nav>
 
-      <div class="admin-layout">
+      <div class="admin-layout admin-inbox-layout">
+        <aside class="admin-inbox-sidebar" aria-label="Categories de reception TVF">
+          <div class="admin-inbox-title">
+            <p class="section-kicker">Boite TVF</p>
+            <h3>Sources et files</h3>
+          </div>
+          <button type="button" data-status-shortcut="all">Toutes les demandes</button>
+          <button type="button" data-view-shortcut="forms">Formulaires du site</button>
+          <button type="button" data-view-shortcut="emails">E-mails recus</button>
+          <button type="button" data-view-shortcut="mobile">Signalements TVF Mobile</button>
+          <button type="button" data-view-shortcut="calls">Appels et accueils</button>
+          <button type="button" data-view-shortcut="paper">Courriers papier</button>
+          <hr>
+          <button type="button" data-view-shortcut="pending">En attente de traitement</button>
+          <button type="button" data-view-shortcut="assigned">Affectees</button>
+          <button type="button" data-view-shortcut="treated">Traitees</button>
+          <button type="button" data-view-shortcut="spam">Indesirables</button>
+        </aside>
         <section class="admin-list" aria-label="Liste des demandes">
           <div data-admin-list class="admin-request-list"></div>
           <p class="form-note" data-admin-empty hidden>Aucune demande ne correspond aux filtres.</p>
@@ -150,7 +186,16 @@
               <option value="email">E-mail</option>
               <option value="whatsapp">WhatsApp</option>
               <option value="rendez_vous">Rendez-vous</option>
-              <option value="import">Import manuel</option>
+              <option value="import">Courrier papier / import</option>
+            </select>
+          </label>
+          <label>Origine precise
+            <select name="source_page">
+              <option value="admin-demandes-telephone">Appel / accueil</option>
+              <option value="admin-demandes-email">E-mail direct</option>
+              <option value="admin-demandes-courrier_papier">Courrier papier numerise</option>
+              <option value="admin-demandes-whatsapp">WhatsApp</option>
+              <option value="admin-demandes-manuel">Creation manuelle</option>
             </select>
           </label>
           <label>Nom / structure
