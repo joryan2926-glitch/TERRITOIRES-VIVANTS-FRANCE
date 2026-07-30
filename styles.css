@@ -11607,4 +11607,29 @@ body:not(.admin-body) .agency-copy {
     gap: 8px;
   }
 }
+
+/* TVF footer institutional details */
+body:not(.admin-body) .agency-footer .footer-seat {
+  color: #fff;
+}
+body:not(.admin-body) .agency-footer .footer-seat strong {
+  display: inline-block;
+  margin-bottom: 2px;
+  color: #fff;
+  font-weight: 850;
+}
+body:not(.admin-body) .agency-copy span:last-child {
+  display: inline-flex;
+  justify-content: flex-end;
+  gap: 14px;
+  white-space: nowrap;
+}
+@media (max-width: 640px) {
+  body:not(.admin-body) .agency-copy span:last-child {
+    justify-content: flex-start;
+    white-space: normal;
+  }
+}
+/* end TVF footer institutional details */
+
 /* end TVF compact premium footer pass */
