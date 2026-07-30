@@ -10406,3 +10406,59 @@ body:not(.admin-body) .footer-bottom span:last-child {
 .legal-grid article:nth-child(4) { grid-column: span 3; }
 @media (max-width: 920px) { .secondary-hero-grid, .orientation-grid, .legal-grid { grid-template-columns: 1fr; } .legal-grid article:nth-child(4) { grid-column: auto; } }
 /* Fin pages secondaires */
+/* Pages informationnelles renforcees */
+.info-hero { padding: 72px 0 56px; background: linear-gradient(115deg, #f8faf5, #fff 52%, rgba(47,125,50,.08)); }
+.info-hero-grid { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(300px, .95fr); gap: clamp(28px, 5vw, 62px); align-items: center; }
+.info-hero h1 { max-width: 820px; margin: 0 0 18px; color: var(--blue-900); font-size: clamp(2.45rem, 4.8vw, 4.15rem); line-height: 1; }
+.info-hero p { color: var(--text); font-size: 1.08rem; line-height: 1.72; }
+.info-hero figure { margin: 0; border-radius: 26px; min-height: 360px; overflow: hidden; box-shadow: 0 24px 70px rgba(14,45,69,.14); }
+.info-hero img { width: 100%; height: 100%; min-height: 360px; object-fit: cover; display: block; }
+.info-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
+.info-grid article, .info-card-grid article, .impact-metric-grid article { padding: 26px; border-radius: 20px; background: #fff; border: 1px solid rgba(14,45,69,.10); box-shadow: 0 18px 44px rgba(14,45,69,.08); }
+.info-grid h2, .info-card-grid h3, .impact-metric-grid span { margin-top: 0; color: var(--blue-900); }
+.info-grid p, .info-grid li, .info-card-grid p, .info-card-grid li, .impact-metric-grid p { color: var(--muted); line-height: 1.66; }
+.info-card-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+.info-card-grid article a { color: var(--green-800); font-weight: 900; text-decoration: none; }
+.impact-metric-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+.impact-metric-grid strong { display: inline-flex; margin-bottom: 18px; padding: 8px 12px; border-radius: 999px; background: #f3efe3; color: #7a591c; font-size: .78rem; text-transform: uppercase; letter-spacing: .04em; }
+.impact-metric-grid span { display: block; font-size: 1.25rem; font-weight: 900; }
+.soft { background: #f7f4ec; }
+.owner-legal-frame { padding: 64px 0; background: #f8faf5; }
+@media (max-width: 980px) { .info-hero-grid, .info-grid, .info-card-grid, .impact-metric-grid { grid-template-columns: 1fr; } }
+/* Fin pages informationnelles renforcees */
+/* Passe design premium globale */
+.agency-hero-premium { position: relative; overflow: hidden; }
+.agency-hero-premium::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(199,154,45,.55), transparent); }
+.home-trust-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
+.home-trust-row span { display: inline-flex; align-items: center; min-height: 34px; padding: 7px 12px; border-radius: 999px; border: 1px solid rgba(7,53,31,.12); background: rgba(255,255,255,.78); color: var(--forest); font-size: .82rem; font-weight: 850; }
+.home-proof { padding: 26px 0 0; background: var(--paper); }
+.home-proof-grid { display: grid; grid-template-columns: 1.35fr repeat(4, minmax(0, .6fr)); gap: 12px; align-items: stretch; }
+.home-proof-grid article { padding: 22px; border-radius: 20px; background: #fff; border: 1px solid rgba(7,53,31,.10); box-shadow: 0 16px 38px rgba(16,28,42,.075); }
+.home-proof-grid article:first-child { background: linear-gradient(135deg, #fff, #f2f6ee); }
+.home-proof-grid h2 { margin: 0 0 8px; color: var(--ink); font-size: clamp(1.2rem, 2vw, 1.75rem); line-height: 1.12; }
+.home-proof-grid p { margin: 0; color: var(--muted); }
+.home-proof-grid strong { display: block; color: var(--forest); font-size: 2rem; line-height: 1; }
+.home-proof-grid span { display: block; margin-top: 8px; color: var(--muted); font-weight: 800; }
+.home-services { padding-top: clamp(60px, 7vw, 96px); }
+.secondary-hero-premium figure, .info-hero figure { position: relative; }
+.secondary-hero-premium figure::after, .info-hero figure::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(7,53,31,0), rgba(7,53,31,.10)); pointer-events: none; }
+.secondary-hero-premium h1, .info-hero h1 { letter-spacing: -.025em; }
+.orientation-grid article, .info-grid article, .info-card-grid article, .impact-metric-grid article { transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease; }
+.orientation-grid article:hover, .info-grid article:hover, .info-card-grid article:hover, .impact-metric-grid article:hover { transform: translateY(-2px); border-color: rgba(47,125,50,.25); box-shadow: 0 24px 58px rgba(16,28,42,.11); }
+.tvf-os-public-hero { background: radial-gradient(circle at 84% 18%, rgba(46,122,62,.16), transparent 28%), linear-gradient(115deg, #f8faf5, #fff 52%, rgba(7,53,31,.08)); }
+.tvf-os-mockup { min-height: 390px; border-radius: 28px; padding: 18px; background: rgba(255,255,255,.72); border: 1px solid rgba(7,53,31,.13); box-shadow: 0 28px 80px rgba(14,45,69,.16); backdrop-filter: blur(14px); }
+.mockup-top { display: flex; align-items: center; gap: 10px; min-height: 46px; padding: 0 10px 14px; border-bottom: 1px solid rgba(14,45,69,.10); }
+.mockup-top span { margin-right: auto; color: var(--forest); font-weight: 950; }
+.mockup-top b { padding: 8px 10px; border-radius: 999px; background: #f2f6ee; color: var(--text); font-size: .76rem; }
+.mockup-body { display: grid; grid-template-columns: 72px minmax(0, 1fr) 190px; gap: 14px; padding-top: 16px; }
+.mockup-body aside, .mockup-body main, .mockup-body section { border-radius: 18px; background: #fff; border: 1px solid rgba(14,45,69,.08); box-shadow: 0 12px 28px rgba(14,45,69,.06); }
+.mockup-body aside { display: grid; gap: 10px; padding: 12px; align-content: start; }
+.mockup-body aside i { height: 34px; border-radius: 12px; background: linear-gradient(135deg, var(--forest), var(--green)); opacity: .9; }
+.mockup-body main { display: grid; gap: 12px; padding: 14px; }
+.mockup-body main div { min-height: 52px; border-radius: 14px; background: linear-gradient(90deg, #f8faf5, #fff); border: 1px solid rgba(14,45,69,.08); }
+.mockup-body section { display: grid; gap: 10px; align-content: start; padding: 16px; }
+.mockup-body section strong { color: var(--ink); }
+.mockup-body section span { padding: 10px; border-radius: 12px; background: #f7f4ec; color: var(--muted); font-weight: 800; }
+@media (max-width: 980px) { .home-proof-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .home-proof-grid article:first-child { grid-column: 1 / -1; } .mockup-body { grid-template-columns: 1fr; } .mockup-body aside { grid-template-columns: repeat(4, 1fr); } }
+@media (max-width: 640px) { .home-proof-grid { grid-template-columns: 1fr; } .tvf-os-mockup { min-height: auto; padding: 14px; } .mockup-top { flex-wrap: wrap; } .mockup-body section { display: none; } }
+/* Fin passe design premium globale */
