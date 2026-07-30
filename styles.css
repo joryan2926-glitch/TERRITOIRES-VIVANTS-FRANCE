@@ -11528,3 +11528,83 @@ body:not(.admin-body) .agency-contact-actions .agency-os {
     margin-top: 8px;
   }
 }
+
+/* TVF compact premium footer pass */
+body:not(.admin-body) .final-cta {
+  padding: clamp(52px, 6vw, 68px) 0;
+}
+body:not(.admin-body) .final-cta h2 {
+  max-width: 760px;
+  font-size: clamp(1.65rem, 2.6vw, 2.55rem);
+}
+body:not(.admin-body) .final-cta p {
+  max-width: 680px;
+  font-size: .98rem;
+}
+body:not(.admin-body) .final-cta .agency-actions {
+  margin-top: 20px;
+  gap: 10px;
+}
+body:not(.admin-body) .agency-footer {
+  padding: 30px 0 14px;
+  background: linear-gradient(135deg, #062518 0%, #0a321f 62%, #0d3f29 100%);
+}
+body:not(.admin-body) .agency-footer-grid {
+  grid-template-columns: minmax(220px, 1.25fr) minmax(135px, .72fr) minmax(210px, .95fr) minmax(130px, .65fr);
+  gap: clamp(18px, 3vw, 30px);
+  align-items: start;
+}
+body:not(.admin-body) .agency-footer-grid > div {
+  min-width: 0;
+}
+body:not(.admin-body) .agency-footer img {
+  width: clamp(150px, 14vw, 185px);
+  padding: 7px 10px;
+  border-radius: 10px;
+}
+body:not(.admin-body) .agency-footer p {
+  max-width: 310px;
+  margin: 8px 0 0;
+  font-size: .86rem;
+  line-height: 1.5;
+}
+body:not(.admin-body) .agency-footer h2 {
+  margin: 0 0 9px;
+  font-size: .76rem;
+  letter-spacing: .08em;
+}
+body:not(.admin-body) .agency-footer a {
+  margin: 4px 0;
+  font-size: .86rem;
+  line-height: 1.38;
+}
+body:not(.admin-body) .agency-copy {
+  margin-top: 20px;
+  padding-top: 12px;
+  font-size: .76rem;
+  line-height: 1.45;
+}
+@media (max-width: 960px) {
+  body:not(.admin-body) .agency-footer-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 640px) {
+  body:not(.admin-body) .final-cta {
+    padding: 44px 0;
+  }
+  body:not(.admin-body) .agency-footer {
+    padding-top: 24px;
+  }
+  body:not(.admin-body) .agency-footer-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  body:not(.admin-body) .agency-footer p {
+    max-width: none;
+  }
+  body:not(.admin-body) .agency-copy {
+    gap: 8px;
+  }
+}
+/* end TVF compact premium footer pass */
