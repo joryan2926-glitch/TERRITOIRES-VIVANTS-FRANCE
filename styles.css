@@ -10477,3 +10477,14 @@ body:not(.admin-body) .footer-bottom span:last-child {
 .impact-band span { display: block; color: rgba(255,255,255,.76); font-size: .86rem; line-height: 1.35; }
 @media (max-width: 1100px) { .impact-band .impact-panel { grid-template-columns: repeat(2, minmax(0, 1fr)); } .impact-band .impact-panel > *:last-child { justify-self: start; } }
 @media (max-width: 640px) { .impact-band .impact-panel { grid-template-columns: 1fr; padding: 12px; border-radius: 22px; } .impact-band .impact-panel > * { padding: 18px; } .impact-band .impact-panel > *:last-child { width: 100%; justify-self: stretch; } }
+
+/* Premium header contact refinement */
+.agency-contact { gap: 10px; font-size: .8rem; }
+.agency-contact-item { display: inline-flex; align-items: center; gap: 8px; min-height: 36px; padding: 7px 10px; border: 1px solid rgba(7,53,31,.12); border-radius: 999px; background: rgba(247,248,243,.82); color: #142433; font-weight: 760; text-decoration: none; box-shadow: 0 8px 18px rgba(16,28,42,.045); transition: transform .18s ease, border-color .18s ease, background .18s ease; }
+.agency-contact-item:hover { transform: translateY(-1px); border-color: rgba(7,53,31,.28); background: #fff; }
+.contact-dot { flex: 0 0 auto; width: 24px; height: 24px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; background: rgba(7,53,31,.1); color: var(--forest); font-size: .68rem; font-weight: 900; line-height: 1; }
+.agency-contact-address { max-width: 270px; white-space: normal; line-height: 1.22; }
+.agency-contact-address .contact-dot { align-self: flex-start; margin-top: 1px; }
+@media (max-width: 1320px) { .agency-contact { gap: 8px; } .agency-contact-item { padding-inline: 9px; } .agency-contact-address { max-width: 220px; } }
+@media (max-width: 1200px) { .agency-contact .agency-contact-item span { display: inline-flex; } .agency-contact-address { display: none !important; } }
+@media (max-width: 860px) { .agency-contact { flex-wrap: wrap; justify-content: flex-start; white-space: normal; } .agency-contact-item { min-height: 34px; } }
