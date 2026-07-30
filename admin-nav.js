@@ -4,75 +4,49 @@ const TVF_ADMIN_COOKIE_CHECK_KEY = "tvfAdminCookieHydrated";
 const TVF_ADMIN_LOGIN_ROUTE = "admin-login";
 
 const TVF_ADMIN_GROUPS = [
-  {
-    label: "Demarrer",
-    description: "Vue du jour",
-    modules: [
-      { href: "admin", label: "Accueil TVF OS", icon: "&#8962;", badge: "" },
-      { href: "admin-demandes", label: "A traiter", icon: "&#9993;", badge: "" },
-      { href: "dashboard", label: "Vue chiffres", icon: "&#9638;", badge: "" },
-    ],
-  },
-  {
-    label: "Receptionner",
-    description: "Demandes et contacts",
-    modules: [
-      { href: "admin-demandes", label: "Boite de reception", icon: "&#9993;", badge: "" },
-      { href: "admin-emails", label: "E-mails entrants", icon: "@", badge: "" },
-      { href: "admin-crm", label: "Contacts", icon: "&#9678;", badge: "" },
-    ],
-  },
-  {
-    label: "Instruire",
-    description: "Dossiers et actions",
-    modules: [
-      { href: "admin-dossiers", label: "Dossiers", icon: "&#9635;", badge: "" },
-      { href: "admin-dossiers?create=client", label: "Nouveau dossier", icon: "+", badge: "" },
-      { href: "admin-work", label: "Taches et echeances", icon: "&#10003;", badge: "" },
-    ],
-  },
-  {
-    label: "Terrains",
-    description: "Sujets TVF",
-    modules: [
-      { href: "admin-dossiers?case_type=bien_vacant", label: "Biens et patrimoine", icon: "&#8962;", badge: "" },
-      { href: "admin-dossiers?case_type=commerce_inoccupe", label: "Commerces", icon: "&#9637;", badge: "" },
-      { href: "admin-documents#bibliotheque-interne-tvf", label: "Materiaux", icon: "&#9636;", badge: "" },
-      { href: "admin-map", label: "Carte et friches", icon: "&#8982;", badge: "" },
-      { href: "admin-dossiers?case_type=benevole", label: "Benevoles", icon: "&#9673;", badge: "" },
-    ],
-  },
-  {
-    label: "Produire",
-    description: "Documents et reponses",
-    modules: [
-      { href: "admin-documents", label: "Bibliotheque", icon: "&#9633;", badge: "" },
-      { href: "admin-procedures", label: "Procedures", icon: "&#167;", badge: "" },
-      { href: "admin-ai", label: "Aide a la reponse", icon: "&#10022;", badge: "" },
-      { href: "admin-knowledge", label: "Base interne", icon: "i", badge: "" },
-    ],
-  },
-  {
-    label: "Piloter",
-    description: "Suivi interne",
-    modules: [
-      { href: "admin-impact", label: "Rapports", icon: "&#9679;", badge: "" },
-      { href: "admin-finances", label: "Finances", icon: "&#8364;", badge: "" },
-      { href: "admin-observatoire", label: "Observatoire", icon: "&#9676;", badge: "" },
-      { href: "admin-activity", label: "Journal", icon: "&#8635;", badge: "" },
-      { href: "admin-users", label: "Utilisateurs", icon: "&#9677;", badge: "" },
-      { href: "admin-settings", label: "Reglages", icon: "&#9881;", badge: "" },
-    ],
-  },
+  { label: "Piloter", description: "Vue territoriale", modules: [
+    { href: "admin", label: "Tableau de bord", icon: "?", badge: "" },
+    { href: "admin-map", label: "Carte territoriale", icon: "?", badge: "" },
+    { href: "admin-demandes", label: "Signalements", icon: "?", badge: "" },
+  ] },
+  { label: "Observer", description: "Biens et donnees", modules: [
+    { href: "admin-observatoire", label: "Observatoire", icon: "?", badge: "" },
+    { href: "admin-dossiers?case_type=bien_vacant", label: "Habitat", icon: "?", badge: "" },
+    { href: "admin-dossiers?case_type=commerce_inoccupe", label: "Commerce", icon: "?", badge: "" },
+    { href: "admin-map", label: "Friches et terrains", icon: "?", badge: "" },
+  ] },
+  { label: "Instruire", description: "Dossiers actifs", modules: [
+    { href: "admin-dossiers", label: "Dossiers", icon: "?", badge: "" },
+    { href: "admin-dossiers?create=client", label: "Creer un dossier", icon: "+", badge: "" },
+    { href: "admin-work", label: "Agenda et taches", icon: "?", badge: "" },
+  ] },
+  { label: "Acteurs", description: "Reseau territorial", modules: [
+    { href: "admin-crm", label: "Proprietaires", icon: "?", badge: "" },
+    { href: "admin-crm?profile=collectivite", label: "Collectivites", icon: "?", badge: "" },
+    { href: "admin-crm?profile=entreprise", label: "Entreprises", icon: "?", badge: "" },
+    { href: "admin-crm?profile=partenaire", label: "Partenaires", icon: "?", badge: "" },
+  ] },
+  { label: "Ressources", description: "Documents et materiaux", modules: [
+    { href: "admin-documents#bibliotheque-interne-tvf", label: "Materiatheque", icon: "?", badge: "" },
+    { href: "admin-documents", label: "Documents", icon: "?", badge: "" },
+    { href: "admin-emails", label: "Courriers et e-mails", icon: "@", badge: "" },
+    { href: "admin-procedures", label: "Modeles et procedures", icon: "?", badge: "" },
+  ] },
+  { label: "Analyser", description: "Impact et IA", modules: [
+    { href: "dashboard", label: "Statistiques", icon: "?", badge: "" },
+    { href: "admin-impact", label: "Rapports", icon: "?", badge: "" },
+    { href: "admin-ai", label: "TVF IA", icon: "?", badge: "" },
+    { href: "admin-users", label: "Utilisateurs", icon: "?", badge: "" },
+    { href: "admin-settings", label: "Parametres", icon: "?", badge: "" },
+  ] },
 ];
 const TVF_ADMIN_MODULES = TVF_ADMIN_GROUPS.flatMap((group) => group.modules);
 const TVF_ADMIN_QUICK_ACTIONS = [
-  { href: "admin-demandes", label: "Ouvrir la boite", tone: "primary" },
+  { href: "admin-demandes", label: "Nouveau signalement", tone: "primary" },
   { href: "admin-dossiers?create=client", label: "Creer un dossier", tone: "strong" },
-  { href: "admin-emails", label: "Lire les e-mails", tone: "neutral" },
-  { href: "admin-documents#bibliotheque-interne-tvf", label: "Trouver un document", tone: "neutral" },
+  { href: "admin-map", label: "Ouvrir la carte", tone: "neutral" },
+  { href: "admin-ai", label: "TVF IA", tone: "neutral" },
 ];
-
 function readSessionToken() {
   try { return sessionStorage.getItem(TVF_ADMIN_TOKEN_KEY) || ""; } catch { return ""; }
 }
@@ -219,14 +193,14 @@ function createAdminModuleNav() {
   nav.setAttribute("aria-label", "Navigation TVF OS");
   nav.innerHTML = `
     <div class="admin-module-shell">
-      <div class="admin-module-title"><img src="assets/logo-territoires-vivants-france-web.png" alt="TVF" width="220" height="68"><span>TVF OS</span><strong>Centre operationnel</strong></div>
+      <div class="admin-module-title"><img src="assets/logo-territoires-vivants-france-web.png" alt="TVF" width="220" height="68"><span>TVF OS</span><strong>Systeme territorial</strong></div>
       <div class="admin-os-quickbar" aria-label="Actions rapides TVF OS">
         <div class="admin-os-quicklinks">
           ${TVF_ADMIN_QUICK_ACTIONS.map((action) => `<a class="admin-os-quicklink is-${action.tone}" href="${action.href}">${action.label}</a>`).join("")}
         </div>
         <form class="admin-os-search" data-admin-global-search>
           <label class="sr-only" for="admin-global-search">Recherche TVF OS</label>
-          <input id="admin-global-search" name="q" type="search" placeholder="Rechercher un dossier, contact, commune...">
+          <input id="admin-global-search" name="q" type="search" placeholder="Rechercher un bien, dossier, proprietaire, commune...">
           <button type="submit">Rechercher</button>
         </form>
       </div>

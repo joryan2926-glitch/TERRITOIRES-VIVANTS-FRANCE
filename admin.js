@@ -168,14 +168,14 @@ async function loadAdminHomeOps() {
 
     if (todayKpisEl) {
       todayKpisEl.innerHTML = [
-        ["Demandes", activeRequests.length, "A qualifier"],
+        ["Signalements", activeRequests.length, "A qualifier"],
         ["Dossiers", activeCases.length, "Actifs"],
-        ["Taches", openTasks.length, "Ouvertes"],
+        ["Actions", openTasks.length, "Ouvertes"],
         ["Alertes", lateCount, "Retards"],
       ].map(([label, value, detail]) => `<article><span>${label}</span><strong>${value}</strong><small>${detail}</small></article>`).join("");
     }
 
-    renderTodayList(todayRequestsEl, activeRequests.slice(0, 4).map((item) => itemCard({ href: `admin-demandes?q=${encodeURIComponent(item.request_number || item.full_name || item.subject || "")}`, title: item.subject || item.full_name || item.request_number || "Demande TVF", meta: `${item.full_name || "Interlocuteur"} - ${item.status || "a qualifier"}`, tag: item.priority || "normale" })), "Aucune demande prioritaire." );
+    renderTodayList(todayRequestsEl, activeRequests.slice(0, 4).map((item) => itemCard({ href: `admin-demandes?q=${encodeURIComponent(item.request_number || item.full_name || item.subject || "")}`, title: item.subject || item.full_name || item.request_number || "Demande TVF", meta: `${item.full_name || "Interlocuteur"} - ${item.status || "a qualifier"}`, tag: item.priority || "normale" })), "Aucun signalement prioritaire." );
     renderTodayList(todayCasesEl, activeCases.slice(0, 4).map((item) => itemCard({ href: `admin-dossiers?q=${encodeURIComponent(item.case_number || item.title || "")}`, title: item.case_number || item.title || "Dossier TVF", meta: item.next_action || item.status || "Suite a definir", tag: shortDate(item.next_action_due_at) })), "Aucun dossier actif prioritaire." );
     renderTodayList(todayTasksEl, openTasks.slice(0, 4).map((item) => itemCard({ href: `admin-work?q=${encodeURIComponent(item.title || "")}`, title: item.title || "Tache TVF", meta: item.assigned_to || item.status || "A traiter", tag: shortDate(item.due_at) })), "Aucune tache ouverte prioritaire." );
     if (todayStatusEl) todayStatusEl.textContent = "A jour";

@@ -3,115 +3,241 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>TVF OS ERP | Territoires Vivants France</title>
+  <title>TVF OS | Systeme territorial de revitalisation</title>
   <meta name="robots" content="noindex, nofollow, noarchive">
   <meta name="theme-color" content="#183f22">
   <link rel="icon" href="assets/favicon-32.png">
   <link rel="stylesheet" href="styles.css">
 </head>
-<body class="admin-body admin-home-body admin-erp-new-body" data-admin-page="portal">
+<body class="admin-body admin-home-body admin-erp-new-body tvf-os-v2-body" data-admin-page="portal">
   <a class="skip-link" href="#admin-home-main">Aller au contenu</a>
-  <header class="admin-topbar admin-home-topbar">
+  <header class="admin-topbar admin-home-topbar tvf-os-v2-topbar">
     <a class="admin-brand" href="index" aria-label="Retour au site Territoires Vivants France">
       <img src="assets/logo-territoires-vivants-france-web.png" alt="Territoires Vivants France" width="320" height="132">
     </a>
-    <div>
-      <p class="admin-kicker">TVF OS ERP</p>
-      <h1>Centre de pilotage interne</h1>
-      <p>Une entree unique pour traiter les demandes, ouvrir les dossiers, suivre les pieces et garder la trace des decisions.</p>
+    <div class="tvf-os-topbar-copy">
+      <p class="admin-kicker">TVF OS</p>
+      <h1>Systeme territorial de revitalisation</h1>
+      <p>Observer, qualifier, instruire et remettre en usage les biens vacants depuis un seul poste de pilotage.</p>
     </div>
-    <nav class="admin-home-actions" aria-label="Actions admin">
-      <a class="btn secondary" href="admin-dossiers">Dossiers</a>
+    <nav class="admin-home-actions" aria-label="Actions TVF OS">
+      <a class="btn secondary" href="admin-map">Carte</a>
+      <a class="btn secondary" href="admin-ai">TVF IA</a>
       <a class="btn secondary" href="contact">Retour au site</a>
     </nav>
   </header>
 
-  <main id="admin-home-main" class="admin-shell admin-home-shell">
-    <section class="admin-home-app" data-admin-home-app hidden>
-      <div class="admin-home-command admin-erp-hero">
-        <div class="admin-home-command-copy">
-          <p class="section-kicker">Poste de travail TVF</p>
-          <h2>Traiter vite, classer proprement, instruire sans perdre d'information.</h2>
-          <p>Le fonctionnement reste volontairement simple : une demande arrive, TVF la qualifie, cree ou rattache un dossier, prepare les documents utiles puis suit la reponse et les prochaines actions.</p>
+  <main id="admin-home-main" class="admin-shell admin-home-shell tvf-os-v2-shell">
+    <section class="admin-home-app tvf-os-v2-app" data-admin-home-app hidden>
+      <section class="tvf-os-command-center" aria-label="Tableau de bord territorial TVF OS">
+        <div class="tvf-os-command-copy">
+          <p class="section-kicker">Tableau de bord territorial</p>
+          <h2>Piloter la chaine de revitalisation d'un bien.</h2>
+          <p>TVF OS relie le signalement, la carte, le proprietaire, le dossier, les documents, les partenaires, les taches et la remise en usage. La prochaine action doit toujours etre visible.</p>
+          <div class="admin-home-header-actions">
+            <a class="btn primary" href="admin-demandes">Qualifier un signalement</a>
+            <a class="btn secondary" href="admin-dossiers?create=client">Creer un dossier</a>
+            <a class="btn secondary" href="admin-map">Ouvrir la carte</a>
+            <button class="btn ghost" type="button" data-admin-home-logout>Deconnexion</button>
+          </div>
         </div>
-        <div class="admin-home-header-actions">
-          <a class="btn primary" href="admin-demandes">Traiter une demande</a>
-          <a class="btn secondary" href="admin-dossiers?create=client">Créer un dossier</a>
-          <a class="btn secondary" href="admin-documents#bibliotheque-interne-tvf">Documents</a>
-          <button class="btn ghost" type="button" data-admin-home-logout>Déconnexion</button>
-        </div>
-      </div>
+        <aside class="tvf-os-ai-widget" aria-label="Assistant TVF IA">
+          <span>TVF IA</span>
+          <strong>Assistant disponible</strong>
+          <p>Preparer un courrier, resumer un dossier, organiser une visite ou produire une note de suivi.</p>
+          <a class="btn secondary" href="admin-ai">Ouvrir l'assistant</a>
+        </aside>
+      </section>
 
-      <section class="admin-home-control admin-today-panel" data-admin-today-panel aria-label="A traiter aujourd'hui dans TVF OS">
+      <section class="tvf-os-control-grid" data-admin-today-panel aria-label="Pilotage operationnel du jour">
+        <div class="tvf-os-map-panel">
+          <div class="admin-panel-head">
+            <div>
+              <p class="section-kicker">Carte vivante</p>
+              <h3>Saint-Etienne, territoire pilote</h3>
+              <p>Les points representent les categories suivies par TVF OS. La carte detaillee reste accessible dans le module cartographie.</p>
+            </div>
+            <strong data-admin-today-status>Lecture en cours</strong>
+          </div>
+          <div class="tvf-os-territory-map" aria-hidden="true">
+            <span class="tvf-map-dot is-habitat" style="left:24%;top:38%">H</span>
+            <span class="tvf-map-dot is-commerce" style="left:48%;top:29%">C</span>
+            <span class="tvf-map-dot is-friche" style="left:64%;top:54%">F</span>
+            <span class="tvf-map-dot is-terrain" style="left:35%;top:66%">T</span>
+            <span class="tvf-map-dot is-materiaux" style="left:74%;top:33%">M</span>
+            <span class="tvf-map-dot is-solidarite" style="left:55%;top:72%">S</span>
+            <div class="tvf-map-card"><b>Dossier prioritaire</b><small>Qualification a poursuivre</small></div>
+          </div>
+          <div class="tvf-os-map-legend" aria-label="Legende des statuts">
+            <span><i class="is-blue"></i>Signale</span>
+            <span><i class="is-orange"></i>En cours</span>
+            <span><i class="is-red"></i>Prioritaire</span>
+            <span><i class="is-green"></i>Remis en usage</span>
+            <span><i class="is-gray"></i>Clos</span>
+          </div>
+        </div>
+
+        <aside class="tvf-os-side-widgets">
+          <div class="admin-today-kpis tvf-os-kpis" data-admin-today-kpis>
+            <article><span>Signalements</span><strong>-</strong><small>A qualifier</small></article>
+            <article><span>Dossiers</span><strong>-</strong><small>Actifs</small></article>
+            <article><span>Actions</span><strong>-</strong><small>Ouvertes</small></article>
+            <article><span>Alertes</span><strong>-</strong><small>Retards</small></article>
+          </div>
+          <article class="tvf-os-widget-card">
+            <h4>Actions rapides</h4>
+            <a href="admin-emails">Repondre a un e-mail</a>
+            <a href="admin-documents#bibliotheque-interne-tvf">Trouver un modele</a>
+            <a href="admin-work">Programmer une visite</a>
+          </article>
+        </aside>
+      </section>
+
+      <section class="admin-home-control admin-today-panel tvf-os-priority-panel" aria-label="A traiter aujourd'hui dans TVF OS">
         <div class="admin-panel-head">
           <div>
             <p class="section-kicker">A traiter aujourd'hui</p>
-            <h3>Le poste de travail quotidien</h3>
-            <p>Demandes, dossiers et taches sont regroupes ici pour savoir quoi faire en premier.</p>
+            <h3>Priorites operationnelles</h3>
+            <p>Demandes, dossiers et actions sont classes pour avancer naturellement dans le parcours metier.</p>
           </div>
-          <strong data-admin-today-status>Lecture en cours</strong>
-        </div>
-        <div class="admin-today-kpis" data-admin-today-kpis>
-          <article><span>Demandes</span><strong>-</strong><small>A qualifier</small></article>
-          <article><span>Dossiers</span><strong>-</strong><small>Actifs</small></article>
-          <article><span>Tâches</span><strong>-</strong><small>Ouvertes</small></article>
-          <article><span>Alertes</span><strong>-</strong><small>Retards</small></article>
+          <a class="btn secondary" href="admin-work">Voir l'agenda</a>
         </div>
         <div class="admin-today-columns">
           <article>
-            <h4>Demandes a qualifier</h4>
+            <h4>Nouveaux signalements</h4>
             <div data-admin-today-requests><p class="form-note">Chargement...</p></div>
-            <a class="text-link" href="admin-demandes">Ouvrir les demandes</a>
+            <a class="text-link" href="admin-demandes">Ouvrir les signalements</a>
           </article>
           <article>
-            <h4>Dossiers a suivre</h4>
+            <h4>Dossiers de revitalisation</h4>
             <div data-admin-today-cases><p class="form-note">Chargement...</p></div>
             <a class="text-link" href="admin-dossiers">Ouvrir les dossiers</a>
           </article>
           <article>
-            <h4>Tâches ouvertes</h4>
+            <h4>Prochaines actions</h4>
             <div data-admin-today-tasks><p class="form-note">Chargement...</p></div>
             <a class="text-link" href="admin-work">Ouvrir les taches</a>
           </article>
         </div>
       </section>
 
-      <section class="admin-home-control admin-client-file-schema" aria-label="Schema de constitution d'un dossier client TVF OS">
+      <section class="admin-home-control admin-client-file-schema tvf-os-cycle-panel" aria-label="Cycle de vie d'un dossier TVF OS">
         <div class="admin-panel-head">
           <div>
-            <p class="section-kicker">Parcours unique</p>
-            <h3>De la demande entrante au dossier suivi</h3>
-            <p>Chaque dossier doit contenir les coordonnees, le besoin, les pieces, l'instruction, la decision et la prochaine action.</p>
+            <p class="section-kicker">Parcours metier</p>
+            <h3>Le cycle de vie d'un bien</h3>
+            <p>Chaque dossier avance de maniere guidee, depuis le reperage jusqu'a la remise en usage ou la cloture.</p>
           </div>
           <strong>Dossier central</strong>
         </div>
-        <ol class="admin-erp-timeline admin-client-file-steps">
-          <li><span>1</span><strong>Demande</strong><small>Formulaire, e-mail, application mobile, appel ou WhatsApp.</small></li>
-          <li><span>2</span><strong>Contact</strong><small>Interlocuteur et structure.</small></li>
-          <li><span>3</span><strong>Dossier</strong><small>Numéro, catégorie et statut.</small></li>
-          <li><span>4</span><strong>Pieces</strong><small>Documents utiles et manquants.</small></li>
-          <li><span>5</span><strong>Instruction</strong><small>Analyse, taches et vigilance.</small></li>
-          <li><span>6</span><strong>Decision</strong><small>Suite validee et tracee.</small></li>
+        <ol class="admin-erp-timeline admin-client-file-steps tvf-os-lifecycle">
+          <li class="is-done"><span>1</span><strong>Reperer</strong><small>Signalement, e-mail, terrain ou mobile.</small></li>
+          <li class="is-done"><span>2</span><strong>Qualifier</strong><small>Adresse, categorie, urgence et source.</small></li>
+          <li><span>3</span><strong>Contacter</strong><small>Proprietaire, collectivite ou partenaire.</small></li>
+          <li><span>4</span><strong>Visiter</strong><small>Photos, notes et contraintes.</small></li>
+          <li><span>5</span><strong>Etudier</strong><small>Solutions, aides, risques et documents.</small></li>
+          <li><span>6</span><strong>Mobiliser</strong><small>Partenaires, entreprises et ressources.</small></li>
+          <li><span>7</span><strong>Remettre en usage</strong><small>Suivi, decision, preuve et cloture.</small></li>
         </ol>
         <div class="admin-detail-actions">
           <a class="btn primary" href="admin-demandes">Qualifier une demande</a>
-          <a class="btn secondary" href="admin-dossiers?create=client">Créer un dossier manuel</a>
+          <a class="btn secondary" href="admin-dossiers?create=client">Creer un dossier manuel</a>
           <a class="btn secondary" href="admin-documents#bibliotheque-interne-tvf">Trouver un document</a>
         </div>
       </section>
 
-      <section class="admin-erp-map" aria-label="Espaces principaux TVF OS">
-        <div>
-          <p class="section-kicker">Espaces principaux</p>
-          <h3>Une place pour chaque information</h3>
-          <p>Le travail quotidien commence par ces cinq espaces. Les autres modules servent surtout a completer, verifier ou produire les elements du dossier.</p>
+
+      <section class="admin-home-control tvf-os-guided-workflow" aria-label="Processus guides TVF OS">
+        <div class="admin-panel-head">
+          <div>
+            <p class="section-kicker">Processus guides</p>
+            <h3>TVF OS indique toujours la prochaine etape.</h3>
+            <p>Chaque action importante est reliee au dossier, tracee dans la chronologie et visible par les personnes autorisees.</p>
+          </div>
+          <a class="btn secondary" href="admin-dossiers">Ouvrir les dossiers</a>
         </div>
-        <div class="admin-erp-module-grid admin-erp-module-grid-compact">
-          <a href="admin-demandes"><strong>Demandes</strong><span>Site, e-mail, mobile : recevoir, qualifier, transformer.</span></a>
-          <a href="admin-dossiers"><strong>Dossiers</strong><span>Instruire, suivre, decider.</span></a>
-          <a href="admin-documents#bibliotheque-interne-tvf"><strong>Documents</strong><span>Modeles, pieces, conventions.</span></a>
-          <a href="admin-work"><strong>Tâches</strong><span>Relances, échéances, actions.</span></a>
-          <a href="admin-impact"><strong>Suivi</strong><span>Preuves, resultats, reporting.</span></a>
+        <div class="tvf-os-process-grid">
+          <article><span>1</span><strong>Signalement</strong><p>Reception, reference automatique, carte, verification, priorite et ouverture du dossier.</p></article>
+          <article><span>2</span><strong>Qualification</strong><p>Questions guidees : type de bien, etat apparent, photos, proprietaire et documents.</p></article>
+          <article><span>3</span><strong>Contact</strong><p>Appel, e-mail, courrier, rendez-vous ou visite, avec trace automatique.</p></article>
+          <article><span>4</span><strong>Visite</strong><p>Photos, geolocalisation, commentaires, points de vigilance et rapport terrain.</p></article>
+          <article><span>5</span><strong>Analyse</strong><p>Potentiel, contraintes, partenaires, pistes de reutilisation et synthese decisionnelle.</p></article>
+          <article><span>6</span><strong>Mobilisation</strong><p>Collectivite, entreprise, artisan, architecte, notaire, association ou partenaire.</p></article>
+          <article><span>7</span><strong>Mise en oeuvre</strong><p>Convention, travaux, recherche d'usage, comptes rendus, photos et suivi.</p></article>
+          <article><span>8</span><strong>Cloture</strong><p>Documents complets, bilan, archivage et indicateurs de l'Observatoire.</p></article>
+        </div>
+      </section>
+
+      <section class="admin-home-control tvf-os-operations-board" aria-label="Statuts, roles et automatisations TVF OS">
+        <div class="tvf-os-status-board">
+          <div>
+            <p class="section-kicker">Statuts standards</p>
+            <h3>Un langage commun pour tous les dossiers.</h3>
+          </div>
+          <div class="tvf-os-status-list" aria-label="Statuts de dossier">
+            <span class="is-blue">Nouveau signalement</span>
+            <span class="is-yellow">En qualification</span>
+            <span class="is-orange">En contact</span>
+            <span class="is-cyan">Visite realisee</span>
+            <span class="is-purple">Etude en cours</span>
+            <span class="is-brown">Partenaires mobilises</span>
+            <span class="is-green">Projet engage</span>
+            <span class="is-success">Bien remis en usage</span>
+            <span class="is-dark">Dossier cloture</span>
+          </div>
+        </div>
+        <div class="tvf-os-role-automation-grid">
+          <article>
+            <p class="section-kicker">Roles</p>
+            <h4>Chaque utilisateur voit ce qui le concerne.</h4>
+            <ul>
+              <li>Accueil : demandes et premiers contacts.</li>
+              <li>Charge de mission : qualification, visites, suivi.</li>
+              <li>Responsable : repartition, decisions, indicateurs.</li>
+              <li>Direction : pilotage et statistiques.</li>
+              <li>Collectivite, proprietaire, partenaire : acces limites.</li>
+            </ul>
+          </article>
+          <article>
+            <p class="section-kicker">Automatisations</p>
+            <h4>Moins de saisie, plus de suivi.</h4>
+            <ul>
+              <li>Numero de dossier et courriers generes.</li>
+              <li>Rappels de rendez-vous et relances.</li>
+              <li>Alertes sur dossiers inactifs.</li>
+              <li>Comptes rendus et indicateurs consolides.</li>
+              <li>Archivage des dossiers clotures.</li>
+            </ul>
+          </article>
+          <article>
+            <p class="section-kicker">Fil d'activite</p>
+            <h4>Une chronologie complete par dossier.</h4>
+            <ol class="tvf-os-activity-sample">
+              <li><b>08:32</b><span>Signalement recu</span></li>
+              <li><b>09:10</b><span>Dossier cree</span></li>
+              <li><b>11:20</b><span>Premier contact</span></li>
+              <li><b>J+3</b><span>Courrier envoye</span></li>
+              <li><b>J+45</b><span>Remise en usage ou cloture</span></li>
+            </ol>
+          </article>
+        </div>
+      </section>
+
+      <section class="admin-erp-map tvf-os-spaces" aria-label="Huit espaces TVF OS">
+        <div>
+          <p class="section-kicker">Systeme d'exploitation TVF</p>
+          <h3>Huit espaces pour coordonner l'Agence.</h3>
+          <p>Chaque espace reste relie au meme dossier : bien, acteur, territoire, document, action et historique.</p>
+        </div>
+        <div class="admin-erp-module-grid admin-erp-module-grid-compact tvf-os-space-grid">
+          <a href="admin"><strong>Tableau de bord</strong><span>Vision direction, priorites et alertes.</span></a>
+          <a href="admin-observatoire"><strong>Observatoire</strong><span>Repere, qualifie et cartographie.</span></a>
+          <a href="admin-dossiers"><strong>Dossiers</strong><span>Centralise bien, proprietaire et instruction.</span></a>
+          <a href="admin-work"><strong>Parcours</strong><span>Prochaine etape, rendez-vous et taches.</span></a>
+          <a href="admin-crm"><strong>Reseau territorial</strong><span>Proprietaires, collectivites et partenaires.</span></a>
+          <a href="admin-documents#bibliotheque-interne-tvf"><strong>Materiatheque</strong><span>Ressources, stocks et tracabilite.</span></a>
+          <a href="admin-emails"><strong>Gestion interne</strong><span>Courriers, e-mails et modeles.</span></a>
+          <a href="admin-ai"><strong>TVF IA</strong><span>Courriers, syntheses, aides et comptes rendus.</span></a>
         </div>
       </section>
     </section>
