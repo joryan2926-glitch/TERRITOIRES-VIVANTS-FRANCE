@@ -13,7 +13,7 @@ const brokenPatterns = [
   { name: "emoji mojibake", regex: /\u00f0\u0178/ },
   { name: "Saint-Etienne question mark", regex: /Saint-\?tienne/ },
   { name: "Elise question mark", regex: /\?lise/ },
-  { name: "common French question marks", regex: /R\?f\?rences|T\?l\?phone|Pr\?sentation|Mat\?riauth\?que|Pr\?sident|Si\?ge/ }
+  { name: "common French question marks", regex: /R\?f\?rences|T\?l\?phone|Pr\?sentation|Mat\?riauth\?que|Pr\?sident|Si\?ge|Acc\?s|Propri\?taires|Collectivit\?s|Coordonn\?es|r\?serv\?s|Mentions l\?gales|b\?n\?voles|cat\?gorie|cat\?gories|priorit\?s|cl\?ture|d\?cision|pi\?ces|mat\?riaux|b\?timent|b\?timents|donn\?es|tra\?abilit\?|cr\?\?|adapt\?es|re\?us|n\?cessaire|mani\?re/ }
 ];
 
 function walk(dir, out = []) {
