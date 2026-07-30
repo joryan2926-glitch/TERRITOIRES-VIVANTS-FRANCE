@@ -11515,16 +11515,6 @@ body:not(.admin-body) .agency-contact-actions .agency-os {
   white-space: nowrap;
 }
 
-body:not(.admin-body) .agency-contact-cta {
-  background: #fff;
-  color: var(--forest) !important;
-  border-color: rgba(7, 53, 31, 0.22);
-  box-shadow: 0 10px 24px rgba(16, 28, 42, 0.07);
-}
-
-body:not(.admin-body) .agency-contact-cta:hover {
-  background: #f8faf6;
-}
 
 @media (max-width: 960px) {
   body:not(.admin-body) .agency-contact-actions {
