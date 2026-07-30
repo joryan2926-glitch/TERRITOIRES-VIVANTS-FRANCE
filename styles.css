@@ -11218,3 +11218,20 @@ body:not(.admin-body) .footer-bottom span:last-child {
     grid-template-columns: 1fr;
   }
 }
+
+/* TVF OS - retrait de la barre laterale gauche */
+.admin-body .admin-module-nav {
+  display: none !important;
+}
+
+.admin-body .admin-topbar,
+.admin-body .admin-shell {
+  margin-left: 24px !important;
+}
+
+@media (max-width: 760px) {
+  .admin-body .admin-topbar,
+  .admin-body .admin-shell {
+    margin-left: 12px !important;
+  }
+}
