@@ -1,4 +1,4 @@
-:root {
+﻿:root {
   --green-900: #183f22;
   --green-800: #245c2b;
   --green-700: #2a6c30;
@@ -5051,7 +5051,7 @@ tr:nth-child(even) td {
 @media (max-width: 1120px) { .admin-home-command, .admin-home-control-grid, .admin-home-flow, .admin-home-grid, .admin-home-priority, .admin-home-flow ol, .admin-home-group-large .admin-home-module-list { grid-template-columns: 1fr; } .admin-home-header-actions { justify-content: flex-start; } .admin-top-actions, .dashboard-top-actions { max-width: none; justify-content: flex-start; } }
 @media (max-width: 760px) { .admin-home-actions, .admin-home-header-actions { display: grid; grid-template-columns: 1fr; } .admin-home-actions .btn, .admin-home-header-actions .btn { width: 100%; } .admin-home-command, .admin-home-flow, .admin-home-group { padding: 16px; } .admin-home-priority a { min-height: 74px; } }
 
-/* Module Gestion des antennes TVF OS */
+/* Module territorial TVF OS */
 .branches-body { background: #f4f7f3; }
 .branches-shell { max-width: 1480px; }
 .branches-kpis { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; }
@@ -12136,3 +12136,54 @@ body.admin-body.admin-session-active .cases-property-panel::before {
   body.admin-body.admin-session-active .cases-phase-path { grid-template-columns: 1fr; }
 }
 /* end TVF OS phase 4/5 dossier operationnel */
+
+
+/* TVF OS phase 6 cartographie et observatoire */
+body.admin-body.admin-session-active .map-phase-panel,
+body.admin-body.admin-session-active .observatoire-phase-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, .9fr);
+  gap: 18px;
+  align-items: center;
+  margin: 16px 0;
+  padding: 20px;
+  border: 1px solid var(--tvf-os-line, #dfe7e1);
+  border-radius: 18px;
+  background: linear-gradient(135deg, #ffffff, #f3f8f4);
+  box-shadow: 0 18px 40px rgba(15, 42, 31, .07);
+}
+body.admin-body.admin-session-active .map-phase-steps,
+body.admin-body.admin-session-active .observatoire-phase-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+body.admin-body.admin-session-active .map-phase-steps span,
+body.admin-body.admin-session-active .observatoire-phase-grid article {
+  min-height: 70px;
+  padding: 12px;
+  border: 1px solid rgba(31, 90, 64, .18);
+  border-radius: 14px;
+  background: #fff;
+  color: var(--tvf-os-green, #123b2a);
+  font-weight: 850;
+}
+body.admin-body.admin-session-active .observatoire-phase-grid span,
+body.admin-body.admin-session-active .observatoire-phase-grid small {
+  display: block;
+  color: var(--tvf-os-muted, #667085);
+  font-size: .82rem;
+}
+body.admin-body.admin-session-active .observatoire-phase-grid strong {
+  display: block;
+  margin: 4px 0;
+  color: var(--tvf-os-ink, #17212b);
+}
+@media (max-width: 820px) {
+  body.admin-body.admin-session-active .map-phase-panel,
+  body.admin-body.admin-session-active .observatoire-phase-panel,
+  body.admin-body.admin-session-active .map-phase-steps,
+  body.admin-body.admin-session-active .observatoire-phase-grid { grid-template-columns: 1fr; }
+}
+/* end TVF OS phase 6 cartographie et observatoire */
+
