@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Boite de reception TVF OS | Territoires Vivants France</title>
+  <title>Boîte de réception TVF OS | Territoires Vivants France</title>
   <meta name="robots" content="noindex, nofollow, noarchive">
   <meta name="theme-color" content="#183f22">
   <link rel="icon" href="assets/favicon-32.png">
@@ -16,8 +16,8 @@
       <img src="assets/logo-territoires-vivants-france-web.png" alt="Territoires Vivants France" width="320" height="132">
     </a>
     <div>
-      <p class="admin-kicker">TVF OS - Reception multicanale</p>
-      <h1>Boite de reception centrale TVF</h1>
+      <p class="admin-kicker">TVF OS - Réception multicanale</p>
+      <h1>Boîte de réception centrale TVF</h1>
     </div>
     <div class="admin-top-actions">
       <a class="btn secondary" href="admin">Accueil TVF OS</a>
@@ -32,8 +32,8 @@
     <section class="admin-app" data-admin-app hidden>
       <div class="admin-toolbar">
         <div>
-          <p class="section-kicker">Point d entrée unique</p>
-          <h2>Unifier formulaires, e-mails, TVF Mobile, appels et courriers</h2>
+          <p class="section-kicker">Point d'entrée unique</p>
+          <h2>Centraliser toutes les demandes avant qualification</h2>
           <p data-admin-count>Chargement des demandes...</p>
 
         </div>
@@ -47,8 +47,8 @@
       </div>
 
       <section class="admin-kpi-strip" data-admin-kpis aria-label="Indicateurs demandes">
-        <article><span>Total affiche</span><strong>0</strong><small>Boite courante</small></article>
-        <article data-tone="warning"><span>A qualifier</span><strong>0</strong><small>Priorité de traitement</small></article>
+        <article><span>Total affiché</span><strong>0</strong><small>Boîte courante</small></article>
+        <article data-tone="warning"><span>À qualifier</span><strong>0</strong><small>Priorité de traitement</small></article>
         <article data-tone="urgent"><span>En retard</span><strong>0</strong><small>Échéance dépassée</small></article>
         <article><span>Rendez-vous</span><strong>0</strong><small>Demandes à planifier</small></article>
         <article><span>Convertibles</span><strong>0%</strong><small>Vers dossier</small></article>
@@ -63,13 +63,13 @@
           <select name="status">
             <option value="all">Tous</option>
             <option value="nouveau">Nouveau</option>
-            <option value="a_qualifier">A qualifier</option>
+            <option value="a_qualifier">À qualifier</option>
             <option value="en_cours">En cours</option>
             <option value="rendez_vous">Rendez-vous</option>
             <option value="en_attente">En attente</option>
-            <option value="accepte">Accepte</option>
-            <option value="refuse">Refuse</option>
-            <option value="archive">Archive</option>
+            <option value="accepte">Acceptée</option>
+            <option value="refuse">Refusée</option>
+            <option value="archive">Archivée</option>
           </select>
         </label>
         <label>Priorité
@@ -114,19 +114,19 @@
         <button type="button" data-view-shortcut="calls">Appels / accueil</button>
         <button type="button" data-view-shortcut="paper">Courriers papier</button>
         <button type="button" data-view-shortcut="pending">En attente</button>
-        <button type="button" data-view-shortcut="today">A traiter aujourd'hui</button>
+        <button type="button" data-view-shortcut="today">À traiter aujourd'hui</button>
         <button type="button" data-view-shortcut="overdue">En retard</button>
         <button type="button" data-view-shortcut="urgent">Urgentes</button>
         <button type="button" data-view-shortcut="unassigned">Sans responsable</button>
         <button type="button" data-view-shortcut="missing">Pièces manquantes</button>
-        <button type="button" data-view-shortcut="assigned">Affectees</button>
-        <button type="button" data-view-shortcut="treated">Traitees</button>
-        <button type="button" data-view-shortcut="spam">Indesirables</button>
+        <button type="button" data-view-shortcut="assigned">Affectées</button>
+        <button type="button" data-view-shortcut="treated">Traitées</button>
+        <button type="button" data-view-shortcut="spam">Indésirables</button>
         <button type="button" data-status-shortcut="nouveau">Nouvelles</button>
-        <button type="button" data-status-shortcut="a_qualifier">A qualifier</button>
+        <button type="button" data-status-shortcut="a_qualifier">À qualifier</button>
         <button type="button" data-status-shortcut="en_cours">En cours</button>
         <button type="button" data-status-shortcut="rendez_vous">Rendez-vous</button>
-        <button type="button" data-status-shortcut="archive">Archivees</button>
+        <button type="button" data-status-shortcut="archive">Archivées</button>
       </nav>
 
       <div class="admin-layout admin-inbox-layout">
@@ -143,9 +143,9 @@
           <button type="button" data-view-shortcut="paper">Courriers papier</button>
           <hr>
           <button type="button" data-view-shortcut="pending">En attente de traitement</button>
-          <button type="button" data-view-shortcut="assigned">Affectees</button>
-          <button type="button" data-view-shortcut="treated">Traitees</button>
-          <button type="button" data-view-shortcut="spam">Indesirables</button>
+          <button type="button" data-view-shortcut="assigned">Affectées</button>
+          <button type="button" data-view-shortcut="treated">Traitées</button>
+          <button type="button" data-view-shortcut="spam">Indésirables</button>
         </aside>
         <section class="admin-list" aria-label="Liste des demandes">
           <div data-admin-list class="admin-request-list"></div>
@@ -186,7 +186,7 @@
               <option value="admin-demandes-email">E-mail direct</option>
               <option value="admin-demandes-courrier_papier">Courrier papier numerise</option>
               <option value="admin-demandes-whatsapp">WhatsApp</option>
-              <option value="admin-demandes-manuel">Creation manuelle</option>
+              <option value="admin-demandes-manuel">Création manuelle</option>
             </select>
           </label>
           <label>Nom / structure
@@ -242,3 +242,5 @@
   <script src="admin-demandes.js" defer></script>
 </body>
 </html>
+
+

@@ -3,13 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>TVF OS | Systeme territorial de revitalisation</title>
+  <title>TVF OS | Système opérationnel de revitalisation</title>
   <meta name="robots" content="noindex, nofollow, noarchive">
   <meta name="theme-color" content="#183f22">
   <link rel="icon" href="assets/favicon-32.png">
   <link rel="stylesheet" href="styles.css">
 </head>
-<body class="admin-body admin-home-body admin-erp-new-body tvf-os-v2-body" data-admin-page="portal">
+<body class="admin-body admin-home-body tvf-os-phase-body" data-admin-page="portal">
   <a class="skip-link" href="#admin-home-main">Aller au contenu</a>
   <header class="admin-topbar admin-home-topbar">
     <a class="admin-brand" href="index" aria-label="Retour au site Territoires Vivants France">
@@ -17,37 +17,77 @@
     </a>
     <div>
       <p class="admin-kicker">TVF OS</p>
-      <h1>Base de travail</h1>
-      <p>Interface remise a zero. Les fonctions restent conservees en attendant la nouvelle direction.</p>
+      <h1>Système opérationnel de revitalisation immobilière et territoriale</h1>
+      <p>Recevoir, qualifier, instruire et suivre chaque situation depuis la première information jusqu'à la remise en usage.</p>
     </div>
     <nav class="admin-home-actions" aria-label="Actions TVF OS">
       <a class="btn secondary" href="contact">Retour au site</a>
-      <button class="btn ghost" type="button" data-admin-home-logout>Deconnexion</button>
+      <button class="btn ghost" type="button" data-admin-home-logout>Déconnexion</button>
     </nav>
   </header>
 
   <main id="admin-home-main" class="admin-shell admin-home-shell">
     <section class="admin-home-app" data-admin-home-app hidden>
-      <section class="admin-panel admin-reset-intro" aria-label="TVF OS remis a zero">
-        <p class="section-kicker">Remise a zero design</p>
-        <h2>Les modules sont conserves. Le design sera reconstruit ensuite.</h2>
-        <p>Cette page sert uniquement de base neutre. Elle garde les grands besoins fonctionnels de TVF OS sans appliquer d ancienne disposition graphique.</p>
+      <section class="admin-panel tvf-os-hero" aria-label="Tableau de bord territorial">
+        <div>
+          <p class="section-kicker">Tableau de bord territorial</p>
+          <h2>Piloter le parcours complet d'un bien ou d'une demande</h2>
+          <p>TVF OS distingue les demandes, les signalements, les biens, les propriétaires, les dossiers, les interventions, les partenaires, les financements et les documents. Chaque information doit pouvoir être retrouvée, qualifiée et suivie sans confusion.</p>
+          <div class="admin-home-actions">
+            <a class="btn primary" href="admin-demandes">Ouvrir la réception</a>
+            <a class="btn secondary" href="admin-dossiers">Voir les dossiers</a>
+          </div>
+        </div>
+        <div class="tvf-os-flow-card" aria-label="Parcours opérationnel TVF OS">
+          <span>Réception</span>
+          <span>Qualification</span>
+          <span>Dossier</span>
+          <span>Instruction</span>
+          <span>Partenaires</span>
+          <span>Remise en usage</span>
+        </div>
       </section>
 
-      <section class="admin-grid admin-reset-modules" aria-label="Grands besoins TVF OS">
-        <article class="admin-card"><h3>Reception des demandes</h3><p>Formulaires du site, e-mails, mobile, appels et demandes manuelles.</p><a class="btn secondary" href="admin-demandes">Ouvrir</a></article>
-        <article class="admin-card"><h3>Dossiers</h3><p>Creation, qualification, instruction, suivi et cloture des dossiers.</p><a class="btn secondary" href="admin-dossiers">Ouvrir</a></article>
-        <article class="admin-card"><h3>Contacts et CRM</h3><p>Proprietaires, collectivites, entreprises, partenaires et interlocuteurs.</p><a class="btn secondary" href="admin-crm">Ouvrir</a></article>
-        <article class="admin-card"><h3>Documents</h3><p>Bibliotheque interne, pieces a fournir, modeles et documents de dossier.</p><a class="btn secondary" href="admin-documents">Ouvrir</a></article>
-        <article class="admin-card"><h3>Observatoire et carte</h3><p>Signalements, qualification territoriale, cartographie et indicateurs.</p><a class="btn secondary" href="admin-observatoire">Observatoire</a><a class="btn ghost" href="admin-map">Carte</a></article>
-        <article class="admin-card"><h3>Travail et calendrier</h3><p>Taches, rendez-vous, relances, suivis et priorites operationnelles.</p><a class="btn secondary" href="admin-work">Ouvrir</a></article>
-        <article class="admin-card"><h3>E-mails</h3><p>Boite de reception, conversion en demande et reponses depuis TVF OS.</p><a class="btn secondary" href="admin-emails">Ouvrir</a></article>
-        <article class="admin-card"><h3>Parametres</h3><p>Utilisateurs, integrations, securite et configuration interne.</p><a class="btn secondary" href="admin-settings">Ouvrir</a></article>
+      <section class="admin-panel admin-today-panel" data-admin-today-panel aria-label="Synthèse opérationnelle">
+        <div class="admin-panel-head">
+          <div>
+            <p class="section-kicker">Activité réelle</p>
+            <h2>Priorités du jour</h2>
+            <p>Les indicateurs affichés ci-dessous sont lus depuis les modules existants lorsque la connexion est disponible.</p>
+          </div>
+          <strong data-admin-today-status>Lecture en attente</strong>
+        </div>
+        <div class="admin-kpi-strip" data-admin-today-kpis aria-label="Indicateurs opérationnels"></div>
+        <div class="tvf-os-dashboard-columns">
+          <article class="admin-card">
+            <h3>Demandes à qualifier</h3>
+            <div data-admin-today-requests><p class="form-note">Chargement...</p></div>
+          </article>
+          <article class="admin-card">
+            <h3>Dossiers actifs</h3>
+            <div data-admin-today-cases><p class="form-note">Chargement...</p></div>
+          </article>
+          <article class="admin-card">
+            <h3>Actions et relances</h3>
+            <div data-admin-today-tasks><p class="form-note">Chargement...</p></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="admin-grid admin-reset-modules" aria-label="Modules TVF OS phase 2 et 3">
+        <article class="admin-card"><span class="tvf-os-module-tag">Phase 3</span><h3>Réception</h3><p>Formulaires du site, e-mails, TVF Mobile, appels, courriers et demandes manuelles dans une entrée unique.</p><a class="btn secondary" href="admin-demandes">Ouvrir</a></article>
+        <article class="admin-card"><span class="tvf-os-module-tag">Phase 3</span><h3>Demandes</h3><p>Qualification, affectation, réponse, demande de pièces, transformation en dossier ou classement.</p><a class="btn secondary" href="admin-demandes?view=pending">Traiter</a></article>
+        <article class="admin-card"><span class="tvf-os-module-tag">Phase 4</span><h3>Dossiers</h3><p>Instruction, étapes, visites, documents, tâches, partenaires, financements, conventions et clôture.</p><a class="btn secondary" href="admin-dossiers">Ouvrir</a></article>
+        <article class="admin-card"><span class="tvf-os-module-tag">Socle</span><h3>Biens et propriétaires</h3><p>Fiches immobilières, propriétaires, contacts, doublons et historique relationnel.</p><a class="btn secondary" href="admin-crm?view=proprietaires">Consulter</a></article>
+        <article class="admin-card"><span class="tvf-os-module-tag">Socle</span><h3>Documents</h3><p>Bibliothèque interne, pièces à fournir, modèles, versions et rattachements aux dossiers.</p><a class="btn secondary" href="admin-documents">Ouvrir</a></article>
+        <article class="admin-card"><span class="tvf-os-module-tag">Socle</span><h3>Observatoire</h3><p>Signalements, carte, indicateurs territoriaux et données publiées uniquement après consolidation.</p><a class="btn secondary" href="admin-observatoire">Observer</a></article>
+        <article class="admin-card"><span class="tvf-os-module-tag">Socle</span><h3>Agenda</h3><p>Tâches, visites, relances, rendez-vous, échéances et suivi opérationnel.</p><a class="btn secondary" href="admin-work">Ouvrir</a></article>
+        <article class="admin-card"><span class="tvf-os-module-tag">Socle</span><h3>Administration</h3><p>Profils, rôles, permissions, intégrations, sécurité et configuration interne.</p><a class="btn secondary" href="admin-settings">Paramétrer</a></article>
       </section>
     </section>
   </main>
 
-<script src="admin-nav.js" defer></script>
+  <script src="admin-nav.js" defer></script>
   <script src="admin.js" defer></script>
 </body>
 </html>

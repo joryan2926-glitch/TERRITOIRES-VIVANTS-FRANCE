@@ -56,7 +56,7 @@ La page `admin.html` a été remise à zéro graphiquement. Elle sert actuelleme
 
 Les modules fonctionnels n'ont pas été supprimés. Le design précédent a été neutralisé, mais plusieurs pages secondaires conservent encore des structures, menus, textes ou styles anciens.
 
-Point important : des caractères cassés sont encore visibles dans certains fichiers admin, par exemple dans `admin-nav.js` et `admin-demandes.html` (`RÃ©ception`, `ParamÃ¨tres`, etc.). Cela doit être corrigé dans la phase de socle avant la nouvelle UI.
+Point important : des caracteres casses etaient visibles dans certains fichiers admin, notamment dans des libelles de reception, de parametres et de navigation. Ces libelles doivent rester corriges dans la phase de socle avant la nouvelle UI.
 
 ### 2.3 API actuelle
 
@@ -838,3 +838,4 @@ La première vraie phase de code doit être limitée au socle suivant :
 8. ne pas ajouter d'indicateurs fictifs.
 
 Cette approche évite de recréer un grand logiciel en apparence seulement. Elle transforme progressivement les briques existantes en véritable système opérationnel de revitalisation immobilière et territoriale.
+

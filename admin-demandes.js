@@ -470,9 +470,9 @@ function renderTriagePanel() {
 
   triageEl.innerHTML = `<div class="admin-panel-head">
     <div>
-      <p class="section-kicker">Pilotage demandes</p>
-      <h3>Prioriser, qualifier et transformer</h3>
-      <p>Une lecture operationnelle pour passer d'une demande recue a une action suivie : CRM, dossier, pieces ou tache.</p>
+      <p class="section-kicker">Reception TVF</p>
+      <h3>Qualifier et orienter</h3>
+      <p>Une entree unique pour lire, affecter, repondre, demander des pieces ou transformer une demande en dossier.</p>
     </div>
     <a class="text-link" href="dashboard">Voir le dashboard</a>
   </div>
