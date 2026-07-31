@@ -109,3 +109,14 @@ Flux cible :
 Chaque ligne issue de TVF Mobile doit pouvoir produire au minimum un evenement : signalement recu, photo ajoutee, localisation transmise, dossier cree, charge affecte, visite realisee, rapport depose, convention envoyee, dossier cloture ou bien remis en usage.
 
 L'IA TVF peut proposer des syntheses, controles de pieces et prochaines actions, mais la decision reste toujours humaine.
+## Phase 8 - portails externes
+
+TVF Mobile alimente TVF OS, mais les accès externes doivent rester séparés du cœur interne. Une demande mobile peut être visible plus tard dans un espace propriétaire, collectivité ou entreprise uniquement si TVF a qualifié la demande, créé les rattachements nécessaires et ouvert les droits correspondants.
+
+Règles verrouillées :
+
+- le propriétaire ne voit que ses propres biens, documents, rendez-vous et messages ;
+- la collectivité ne voit que les dossiers autorisés sur son périmètre ;
+- l'entreprise ou le prestataire ne voit que les missions qui lui sont attribuées ;
+- l'équipe terrain TVF peut ajouter photos, notes et comptes rendus depuis mobile ;
+- chaque synchronisation doit rester traçable dans TVF OS.

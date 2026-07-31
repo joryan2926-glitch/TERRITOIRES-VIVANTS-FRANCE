@@ -6,10 +6,10 @@ const TVF_ADMIN_ROLE_KEY = "tvfAdminRole";
 const TVF_ADMIN_DEFAULT_ROLE = "direction";
 
 const TVF_ADMIN_ROLES = {
-  direction: { label: "Direction", territory: "Tous territoires", permissions: ["dashboard", "reception", "requests", "reports", "cases", "properties", "owners", "instruction", "partners", "programs", "materials", "interventions", "observatory", "agenda", "messages", "documents", "analytics", "ai", "settings"] },
-  responsable: { label: "Responsable de pôle", territory: "Territoire affecté", permissions: ["dashboard", "reception", "requests", "reports", "cases", "properties", "owners", "instruction", "partners", "programs", "materials", "interventions", "observatory", "agenda", "messages", "documents", "analytics", "ai"] },
-  mission: { label: "Chargé de mission", territory: "Portefeuille affecté", permissions: ["dashboard", "reception", "requests", "reports", "cases", "properties", "owners", "instruction", "partners", "materials", "interventions", "observatory", "agenda", "messages", "documents", "ai"] },
-  accueil: { label: "Accueil et réception", territory: "Réception TVF", permissions: ["dashboard", "reception", "requests", "reports", "cases", "owners", "agenda", "messages", "documents"] },
+  direction: { label: "Direction", territory: "Tous territoires", permissions: ["dashboard", "reception", "requests", "reports", "cases", "properties", "owners", "instruction", "partners", "programs", "materials", "interventions", "observatory", "agenda", "messages", "documents", "analytics", "ai", "portals", "settings"] },
+  responsable: { label: "Responsable de pôle", territory: "Territoire affecté", permissions: ["dashboard", "reception", "requests", "reports", "cases", "properties", "owners", "instruction", "partners", "programs", "materials", "interventions", "observatory", "agenda", "messages", "documents", "analytics", "ai", "portals"] },
+  mission: { label: "Chargé de mission", territory: "Portefeuille affecté", permissions: ["dashboard", "reception", "requests", "reports", "cases", "properties", "owners", "instruction", "partners", "materials", "interventions", "observatory", "agenda", "messages", "documents", "ai", "portals"] },
+  accueil: { label: "Accueil et réception", territory: "Réception TVF", permissions: ["dashboard", "reception", "requests", "reports", "cases", "owners", "agenda", "messages", "documents", "portals"] },
   terrain: { label: "Terrain", territory: "Missions affectées", permissions: ["dashboard", "requests", "reports", "cases", "properties", "instruction", "agenda", "documents"] },
 };
 
@@ -42,6 +42,7 @@ const TVF_ADMIN_GROUPS = [
     { href: "admin-emails", label: "Messagerie", icon: "ME", key: "messages" },
     { href: "admin-documents", label: "Documents", icon: "DOC", key: "documents" },
     { href: "admin-ai", label: "TVF IA", icon: "IA", key: "ai" },
+    { href: "admin-portails", label: "Portails externes", icon: "PX", key: "portals" },
     { href: "admin-settings", label: "Administration", icon: "AD", key: "settings" },
   ] },
 ];

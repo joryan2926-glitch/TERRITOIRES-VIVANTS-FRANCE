@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Portails externes | TVF OS</title>
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="theme-color" content="#183f22">
+  <link rel="icon" href="assets/favicon-32.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="admin-body portals-body">
+  <a class="skip-link" href="#portals-main">Aller au contenu</a>
+  <header class="admin-topbar portals-topbar">
+    <a class="admin-brand" href="index" aria-label="Retour au site Territoires Vivants France">
+      <img src="assets/logo-territoires-vivants-france-web.png" alt="Territoires Vivants France" width="320" height="132">
+    </a>
+    <div>
+      <p class="admin-kicker">TVF OS</p>
+      <h1>Portails externes et TVF Mobile</h1>
+      <p>Préparer les accès propriétaires, collectivités, entreprises, prestataires et terrain sans exposer les données internes.</p>
+    </div>
+    <div class="admin-top-actions">
+      <a class="btn secondary" href="admin">Accueil TVF OS</a>
+      <a class="btn secondary" href="admin-demandes?view=mobile#demandes-mobile">Signalements mobile</a>
+    </div>
+  </header>
+
+  <main id="portals-main" class="admin-shell portals-shell">
+    <section class="admin-app portals-app" data-portals-app hidden>
+      <section class="portals-phase-hero">
+        <div>
+          <p class="section-kicker">Phase 8 — Portails externes</p>
+          <h2>Ouvrir TVF OS aux bons acteurs, avec les bons droits</h2>
+          <p>TVF OS reste le centre de pilotage. Les portails externes doivent seulement afficher ce qui concerne chaque acteur : son dossier, ses documents, ses rendez-vous, ses messages et les actions qu'il peut réellement effectuer.</p>
+          <div class="admin-detail-actions">
+            <a class="btn primary" href="admin-demandes">Voir la réception</a>
+            <a class="btn secondary" href="admin-dossiers">Voir les dossiers</a>
+          </div>
+        </div>
+        <ol class="portals-sync-flow" aria-label="Flux de synchronisation phase 8">
+          <li><span>01</span><strong>TVF Mobile</strong><small>Signalement, photo, localisation ou note terrain.</small></li>
+          <li><span>02</span><strong>Réception TVF OS</strong><small>Création d'une demande avec source et référence.</small></li>
+          <li><span>03</span><strong>Dossier</strong><small>Transformation après qualification humaine.</small></li>
+          <li><span>04</span><strong>Portail limité</strong><small>Suivi visible selon le rôle et les autorisations.</small></li>
+        </ol>
+      </section>
+
+      <section class="portals-grid" aria-label="Espaces externes prévus">
+        <article>
+          <span class="tvf-os-module-tag">Propriétaire</span>
+          <h3>Espace propriétaire</h3>
+          <p>Suivre son dossier, transmettre les pièces demandées, consulter les rendez-vous, télécharger les courriers et échanger avec le chargé de mission.</p>
+          <ul>
+            <li>Accès limité à ses propres biens et dossiers.</li>
+            <li>Aucun accès aux notes internes ni aux autres propriétaires.</li>
+            <li>Dépôt documentaire tracé dans TVF OS.</li>
+          </ul>
+        </article>
+        <article>
+          <span class="tvf-os-module-tag">Collectivité</span>
+          <h3>Espace collectivité</h3>
+          <p>Consulter les dossiers autorisés sur son territoire, transmettre des informations, déposer des documents et suivre les indicateurs partagés.</p>
+          <ul>
+            <li>Accès par territoire et convention.</li>
+            <li>Cartographie publique ou restreinte selon les droits.</li>
+            <li>Export uniquement si autorisé.</li>
+          </ul>
+        </article>
+        <article>
+          <span class="tvf-os-module-tag">Entreprise</span>
+          <h3>Espace entreprise et prestataire</h3>
+          <p>Répondre à une sollicitation, déposer un devis, transmettre des photos d'intervention, signaler l'avancement ou proposer des matériaux.</p>
+          <ul>
+            <li>Accès limité aux missions attribuées.</li>
+            <li>Documents rattachés au dossier concerné.</li>
+            <li>Validation finale conservée côté TVF.</li>
+          </ul>
+        </article>
+        <article>
+          <span class="tvf-os-module-tag">Terrain</span>
+          <h3>TVF Mobile terrain</h3>
+          <p>L'application mobile reste l'outil terrain de TVF OS : signaler, prendre des photos, créer une note de visite et synchroniser les informations.</p>
+          <ul>
+            <li>Source officielle : table <code>mobile_requests</code>.</li>
+            <li>Import contrôlé vers demande ou dossier.</li>
+            <li>Contrat mobile vérifié par les tests de production.</li>
+          </ul>
+        </article>
+      </section>
+
+      <section class="portals-rights-panel">
+        <div>
+          <p class="section-kicker">Règle d'accès</p>
+          <h2>Voir uniquement ce qui est nécessaire</h2>
+          <p>Chaque portail doit respecter le principe du besoin d'en connaître. Les boutons visibles ne suffisent pas : les permissions devront aussi être contrôlées côté API, base de données et stockage documentaire.</p>
+        </div>
+        <div class="portals-rights-grid">
+          <article><strong>Propriétaire</strong><small>Ses biens, ses documents, ses rendez-vous.</small></article>
+          <article><strong>Collectivité</strong><small>Dossiers et indicateurs validés sur son périmètre.</small></article>
+          <article><strong>Entreprise</strong><small>Missions, devis, documents et photos liés à son intervention.</small></article>
+          <article><strong>Terrain TVF</strong><small>Missions attribuées, visites, photos, notes et synchronisation.</small></article>
+        </div>
+      </section>
+
+      <section class="portals-launch-panel">
+        <div class="admin-panel-head">
+          <div>
+            <p class="section-kicker">Statut de lancement</p>
+            <h2>Phase préparée, accès publics non ouverts</h2>
+            <p>Cette étape structure les portails et le lien TVF Mobile. Les accès externes réels devront être activés progressivement après validation des rôles, des RLS Supabase, des modèles de notifications et des écrans de dépôt documentaire.</p>
+          </div>
+          <strong>Socle prêt</strong>
+        </div>
+        <div class="portals-checklist">
+          <span>Contrat mobile vers TVF OS vérifié</span>
+          <span>Parcours propriétaires défini</span>
+          <span>Parcours collectivités défini</span>
+          <span>Parcours entreprises et prestataires défini</span>
+          <span>Synchronisation à poursuivre avec authentification externe</span>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <script src="admin-nav.js" defer></script>
+</body>
+</html>

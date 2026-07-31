@@ -34,6 +34,7 @@ const requiredFiles = [
   "admin-emails.js",
   "admin-activity.html",
   "admin-activity.js",
+  "admin-portails.html",
   "admin-nav.js",
   "lib/api/admin-contacts.js",
   "lib/api/admin-emails.js",
@@ -41,6 +42,7 @@ const requiredFiles = [
   "lib/api/admin-documents.js",
   "scripts/test-mobile-tvf-os-real.js",
   "scripts/test-email-webhook-tvf-os.js",
+  "mobile/tvf-mobile/TVF_OS_SYNC_CONTRACT.md",
   "SUIVI_OPERATIONNEL_FORMULAIRES.md",
   "documents/procedure-reporting-mensuel-tvf-os.md",
   "documents/modele-synthese-mensuelle-tvf-os.md",
@@ -51,6 +53,8 @@ const requiredFiles = [
 requiredFiles.forEach(assertFile);
 
 const checks = [
+  ["admin-portails.html", ["Phase 8", "Espace propriétaire", "Espace collectivité", "TVF Mobile terrain", "mobile_requests"]],
+  ["mobile/tvf-mobile/TVF_OS_SYNC_CONTRACT.md", ["Phase 8", "portails externes", "propriétaire", "collectivité", "prestataire"]],
   ["admin-demandes.js", ["mobile-import-case", "Transformer en dossier", "data-create-case", "Voir le dossier", "Repondre par e-mail", "Bibliotheque"]],
   ["admin-emails.js", ["Convertir en demande", "Ouvrir la réponse", "Copier le brouillon", "data-convert-email"]],
   ["admin-documents.js", ["Bibliotheque interne TVF", "Liste des pieces par demande", "Convention valorisation de materiaux", "Courriers types prets a envoyer"]],
@@ -66,4 +70,4 @@ const checks = [
 
 checks.forEach(([file, tokens]) => assertIncludes(file, tokens));
 
-console.log("TVF_OS_OPERATIONAL_FLOW_OK modules=10 parcours=demande-contact-dossier-documents-reponse-reporting-quotidien");
+console.log("TVF_OS_OPERATIONAL_FLOW_OK modules=11 parcours=demande-contact-dossier-documents-reponse-reporting-portails-mobile");

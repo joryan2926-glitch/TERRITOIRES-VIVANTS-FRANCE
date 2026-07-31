@@ -775,11 +775,15 @@ Statut de construction : socle consolidé dans TVF OS.
 
 ### Phase 8 — Portails externes et TVF Mobile
 
-- portail propriétaire ;
-- portail collectivité ;
-- portail prestataire ;
-- application terrain ;
-- synchronisation.
+Statut de construction : socle fonctionnel préparé dans TVF OS.
+
+- module `admin-portails` ajouté pour cadrer les accès externes ;
+- portail propriétaire défini : dossier, documents, rendez-vous et échanges limités ;
+- portail collectivité défini : périmètre territorial, dossiers autorisés et indicateurs partagés ;
+- portail entreprise / prestataire défini : missions, devis, photos, avancement et justificatifs ;
+- TVF Mobile confirmé comme application terrain de TVF OS ;
+- synchronisation mobile maintenue via `mobile_requests`, import vers demande ou dossier et contrat de production ;
+- accès publics externes à ouvrir plus tard après validation authentification, RLS, stockage et notifications.
 
 ## 18. Tests attendus à chaque phase
 
