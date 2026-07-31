@@ -783,7 +783,10 @@ Statut de construction : socle fonctionnel préparé dans TVF OS.
 - portail entreprise / prestataire défini : missions, devis, photos, avancement et justificatifs ;
 - TVF Mobile confirmé comme application terrain de TVF OS ;
 - synchronisation mobile maintenue via `mobile_requests`, import vers demande ou dossier et contrat de production ;
-- accès publics externes à ouvrir plus tard après validation authentification, RLS, stockage et notifications.
+- tables Supabase préparées pour les portails : `portal_accesses`, `portal_threads`, `portal_messages`, `portal_document_requests`, `portal_appointments`, `portal_activity_log` ;
+- scripts à exécuter : `supabase/tvf-os-portails.sql`, puis `supabase/tvf-os-portails-verification.sql` ;
+- règles RLS préparées pour séparer les accès internes TVF des accès externes limités ;
+- écran `admin-portails` enrichi avec parcours documents, messages, rendez-vous et matrice de visibilité ;- accès publics externes à ouvrir plus tard après validation authentification, RLS, stockage et notifications.
 
 ## 18. Tests attendus à chaque phase
 

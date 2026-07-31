@@ -103,6 +103,72 @@
         </div>
       </section>
 
+      <section class="portals-operational-panel">
+        <div class="admin-panel-head">
+          <div>
+            <p class="section-kicker">Socle exploitable</p>
+            <h2>Accès, documents, messages et rendez-vous</h2>
+            <p>La suite à activer repose sur des tables dédiées : <code>portal_accesses</code>, <code>portal_document_requests</code>, <code>portal_messages</code> et <code>portal_appointments</code>. Les portails affichent uniquement les informations liées à l'accès autorisé.</p>
+          </div>
+          <strong>RLS préparées</strong>
+        </div>
+        <div class="portals-workflow-grid">
+          <article>
+            <span>01</span>
+            <h3>Inviter un acteur externe</h3>
+            <p>TVF crée un accès limité par profil : propriétaire, collectivité, entreprise, prestataire ou agent terrain. L'accès est rattaché à un dossier, un bien ou un territoire.</p>
+          </article>
+          <article>
+            <span>02</span>
+            <h3>Demander une pièce</h3>
+            <p>Une demande documentaire est créée dans <code>portal_document_requests</code>. Le portail montre le document attendu, son statut, la date limite et les consignes.</p>
+          </article>
+          <article>
+            <span>03</span>
+            <h3>Centraliser les messages</h3>
+            <p>Les échanges passent par <code>portal_threads</code> et <code>portal_messages</code>. TVF conserve la chronologie sans exposer les notes internes.</p>
+          </article>
+          <article>
+            <span>04</span>
+            <h3>Programmer un rendez-vous</h3>
+            <p>Les appels, visites, rendez-vous ou visioconférences sont suivis dans <code>portal_appointments</code>, avec un statut visible par l'acteur concerné.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="portals-security-panel">
+        <div>
+          <p class="section-kicker">Installation Supabase</p>
+          <h2>Scripts à exécuter avant ouverture réelle</h2>
+          <p>Exécuter dans Supabase : <code>supabase/tvf-os-portails.sql</code>, puis vérifier avec <code>supabase/tvf-os-portails-verification.sql</code>. Aucun accès public ne doit être ouvert avant validation des droits et des tests.</p>
+        </div>
+        <table class="portals-security-table">
+          <thead>
+            <tr>
+              <th>Profil</th>
+              <th>Visible</th>
+              <th>Masqué</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Propriétaire</td>
+              <td>Son dossier, ses demandes de pièces, ses rendez-vous, ses courriers validés.</td>
+              <td>Notes internes, autres propriétaires, arbitrages, données partenaires.</td>
+            </tr>
+            <tr>
+              <td>Collectivité</td>
+              <td>Dossiers et indicateurs autorisés sur son périmètre.</td>
+              <td>Données nominatives non autorisées, dossiers hors territoire.</td>
+            </tr>
+            <tr>
+              <td>Entreprise</td>
+              <td>Missions attribuées, devis, photos d'intervention, messages opérationnels.</td>
+              <td>Dossiers non confiés, données financières internes, notes TVF.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
       <section class="portals-launch-panel">
         <div class="admin-panel-head">
           <div>

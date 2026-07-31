@@ -48,12 +48,14 @@ const requiredFiles = [
   "documents/modele-synthese-mensuelle-tvf-os.md",
   "documents/tableau-pilotage-quotidien-tvf-os.md",
   "documents/procedure-connexion-email-officiel-tvf-os.md",
+  "supabase/tvf-os-portails.sql",
+  "supabase/tvf-os-portails-verification.sql",
 ];
 
 requiredFiles.forEach(assertFile);
 
 const checks = [
-  ["admin-portails.html", ["Phase 8", "Espace propriétaire", "Espace collectivité", "TVF Mobile terrain", "mobile_requests"]],
+  ["admin-portails.html", ["Phase 8", "Espace propriétaire", "Espace collectivité", "TVF Mobile terrain", "mobile_requests", "portal_accesses", "portal_document_requests", "portal_messages", "portal_appointments", "tvf-os-portails.sql"]],
   ["mobile/tvf-mobile/TVF_OS_SYNC_CONTRACT.md", ["Phase 8", "portails externes", "propriétaire", "collectivité", "prestataire"]],
   ["admin-demandes.js", ["mobile-import-case", "Transformer en dossier", "data-create-case", "Voir le dossier", "Repondre par e-mail", "Bibliotheque"]],
   ["admin-emails.js", ["Convertir en demande", "Ouvrir la réponse", "Copier le brouillon", "data-convert-email"]],
@@ -66,7 +68,8 @@ const checks = [
   ["documents/modele-synthese-mensuelle-tvf-os.md", ["Synthese mensuelle TVF OS", "Indicateurs du mois", "Dossiers a suivre", "Pieces manquantes", "Regles de diffusion"]],
   ["documents/tableau-pilotage-quotidien-tvf-os.md", ["Tableau de pilotage quotidien TVF OS", "Routine du matin", "Tableau du jour", "Relances a envoyer", "Fin de journee"]],
   ["documents/procedure-connexion-email-officiel-tvf-os.md", ["contact@territoiresvivantsfrance.fr", "TVF_EMAIL_WEBHOOK_SECRET", "npm run test:email-webhook"]],
-];
+  ["supabase/tvf-os-portails.sql", ["portal_accesses", "portal_document_requests", "portal_messages", "portal_appointments", "enable row level security"]],
+  ["supabase/tvf-os-portails-verification.sql", ["portal_tables", "portal_rls_enabled", "portal_policies", "portal_no_demo_data"]],];
 
 checks.forEach(([file, tokens]) => assertIncludes(file, tokens));
 
