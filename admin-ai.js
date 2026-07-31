@@ -1,6 +1,6 @@
 const AI_TOKEN_KEY = "tvfAdminToken";
 const suggestionStatusLabels = { proposed: "A valider", accepted: "Acceptee", modified: "Modifiee", rejected: "Refusee", ignored: "Ignoree", applied: "Appliquee" };
-const suggestionTypeLabels = { classification: "Classification", priority: "Priorité", pole: "Pole", responsible: "Responsable", next_action: "Prochaine action", draft_response: "Brouillon", missing_pieces: "Pièces manquantes", checklist: "Checklist", procedure: "Procédure", risk: "Risque", knowledge: "Connaissance", email_triage: "Tri e-mail", other: "Autre" };
+const suggestionTypeLabels = { classification: "Classification", priority: "Priorité", pole: "Pole", responsible: "Responsable", next_action: "Prochaine action", draft_response: "Brouillon", missing_pieces: "Pièces manquantes", checklist: "Checklist", procedure: "Procédure", risk: "Vigilance", knowledge: "Connaissance", email_triage: "Tri e-mail", other: "Autre" };
 
 const loginSection = document.querySelector("[data-ai-login]");
 const appSection = document.querySelector("[data-ai-app]");

@@ -52,7 +52,7 @@ requiredFiles.forEach(assertFile);
 
 const checks = [
   ["admin-demandes.js", ["mobile-import-case", "Transformer en dossier", "data-create-case", "Voir le dossier", "Repondre par e-mail", "Bibliotheque"]],
-  ["admin-emails.js", ["Convertir en demande", "Ouvrir la reponse", "Copier le brouillon", "data-convert-email"]],
+  ["admin-emails.js", ["Convertir en demande", "Ouvrir la réponse", "Copier le brouillon", "data-convert-email"]],
   ["admin-documents.js", ["Bibliotheque interne TVF", "Liste des pieces par demande", "Convention valorisation de materiaux", "Courriers types prets a envoyer"]],
   ["admin-dossiers.js", ["case_number", "status", "priority"]],
   ["scripts/test-mobile-tvf-os-real.js", ["mobile_requests", "mobile-import-case", "cleanup(created)", "TVF_MOBILE_TO_OS_OK"]],

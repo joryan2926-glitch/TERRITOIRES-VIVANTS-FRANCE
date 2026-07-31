@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="fr">
 <head>
   <meta charset="utf-8">
@@ -44,6 +44,19 @@
 
       <section class="crm-kpis ai-kpis" data-ai-kpis aria-label="Indicateurs assistant IA"></section>
 
+      <section class="ai-validation-panel">
+        <div>
+          <p class="section-kicker">Étape 7 — TVF IA encadrée</p>
+          <h2>Un assistant opérationnel, jamais décisionnaire</h2>
+          <p>TVF IA peut résumer, proposer une catégorie, préparer un courrier, détecter les pièces manquantes ou suggérer une prochaine action. Chaque proposition reste une suggestion à vérifier et valider par un utilisateur TVF.</p>
+        </div>
+        <div class="ai-validation-grid">
+          <article><span>Suggestion</span><strong>À vérifier</strong><small>L'IA affiche une piste de travail, pas une décision.</small></article>
+          <article><span>Sources</span><strong>À contrôler</strong><small>Les réponses doivent s'appuyer sur le contexte interne disponible.</small></article>
+          <article><span>Validation</span><strong>Humaine</strong><small>Acceptation, modification, refus ou application sont tracés.</small></article>
+        </div>
+      </section>
+
       <nav class="admin-status-tabs ai-tabs" aria-label="Vues assistant IA">
         <button type="button" data-ai-view="conversation" class="is-active">Conversation</button>
         <button type="button" data-ai-view="email">E-mail</button>
@@ -63,7 +76,7 @@
                 <option value="request">Demande</option>
                 <option value="case">Dossier</option>
                 <option value="document">Document</option>
-                <option value="procédure">Procédure</option>
+                <option value="procedure">Procédure</option>
                 <option value="knowledge">Connaissance</option>
                 <option value="email">E-mail</option>
               </select>
@@ -74,7 +87,7 @@
             <label class="ai-wide-field">Question
               <textarea name="prompt" rows="5" required placeholder="Ex. Quelle suite proposer pour une demande de proprietaire avec un bien vacant ?"></textarea>
             </label>
-            <div class="admin-detail-actions ai-wide-field"><button class="btn primary" type="submit">Demander ? l'IA</button></div>
+            <div class="admin-detail-actions ai-wide-field"><button class="btn primary" type="submit">Demander à l'IA</button></div>
           </form>
         </section>
         <section class="ai-answer" data-ai-answer hidden></section>
@@ -99,7 +112,7 @@
             <select name="status"><option value="all">Tous</option><option value="proposed">A valider</option><option value="accepted">Acceptees</option><option value="rejected">Refusees</option><option value="applied">Appliquees</option></select>
           </label>
           <label>Type
-            <select name="suggestion_type"><option value="all">Tous</option><option value="email_triage">Tri e-mail</option><option value="classification">Classification</option><option value="next_action">Prochaine action</option><option value="draft_response">Brouillon</option><option value="risk">Risque</option><option value="procédure">Procédure</option></select>
+            <select name="suggestion_type"><option value="all">Tous</option><option value="email_triage">Tri e-mail</option><option value="classification">Classification</option><option value="next_action">Prochaine action</option><option value="draft_response">Brouillon</option><option value="risk">Vigilance</option><option value="procedure">Procédure</option></select>
           </label>
         </form>
         <div class="admin-layout ai-layout">

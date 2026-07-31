@@ -1,4 +1,4 @@
-﻿# Cadrage de refonte TVF OS
+# Cadrage de refonte TVF OS
 
 **Document de travail interne**  
 **Projet :** TVF OS — Système opérationnel de revitalisation immobilière et territoriale  
@@ -763,12 +763,15 @@ Chaque modification importante doit enregistrer : utilisateur, date, ancienne va
 
 ### Phase 7 — Messagerie, automatisations et IA
 
-- réception Gmail ;
-- envoi Resend ;
-- modèles ;
-- automatisations ;
-- TVF IA ;
-- notifications.
+Statut de construction : socle consolidé dans TVF OS.
+
+- réception e-mail centralisée dans le module E-mails intelligents ;
+- préparation du flux Gmail / Google Workspace sans modification DNS ;
+- envoi applicatif prévu via Resend pour notifications et accusés ;
+- modèles de réponse visibles côté traitement e-mail ;
+- automatisations consultables et traçables ;
+- suggestions TVF IA validables par humain ;
+- notifications et tâches rattachées au suivi opérationnel.
 
 ### Phase 8 — Portails externes et TVF Mobile
 

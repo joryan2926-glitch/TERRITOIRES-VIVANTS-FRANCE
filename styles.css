@@ -1,4 +1,4 @@
-﻿:root {
+:root {
   --green-900: #183f22;
   --green-800: #245c2b;
   --green-700: #2a6c30;
@@ -12187,3 +12187,75 @@ body.admin-body.admin-session-active .observatoire-phase-grid strong {
 }
 /* end TVF OS phase 6 cartographie et observatoire */
 
+
+/* TVF OS phase 7 messagerie, automatisations et IA */
+body.admin-body.admin-session-active .emails-phase-panel,
+body.admin-body.admin-session-active .ai-validation-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, .95fr);
+  gap: 18px;
+  align-items: center;
+  margin: 16px 0;
+  padding: 20px;
+  border: 1px solid var(--tvf-os-line, #dfe7e1);
+  border-radius: 18px;
+  background: linear-gradient(135deg, #ffffff, #f4f9f5);
+  box-shadow: 0 18px 40px rgba(15, 42, 31, .07);
+}
+body.admin-body.admin-session-active .emails-phase-panel h2,
+body.admin-body.admin-session-active .ai-validation-panel h2 {
+  margin: 4px 0 8px;
+  color: var(--tvf-os-ink, #17212b);
+}
+body.admin-body.admin-session-active .emails-phase-panel p,
+body.admin-body.admin-session-active .ai-validation-panel p {
+  margin: 0;
+  color: var(--tvf-os-muted, #667085);
+  line-height: 1.65;
+}
+body.admin-body.admin-session-active .emails-phase-grid,
+body.admin-body.admin-session-active .ai-validation-grid,
+body.admin-body.admin-session-active .emails-template-grid {
+  display: grid;
+  gap: 10px;
+}
+body.admin-body.admin-session-active .emails-phase-grid,
+body.admin-body.admin-session-active .ai-validation-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+body.admin-body.admin-session-active .emails-phase-grid article,
+body.admin-body.admin-session-active .ai-validation-grid article,
+body.admin-body.admin-session-active .emails-template-grid article {
+  padding: 13px;
+  border: 1px solid rgba(31, 90, 64, .16);
+  border-radius: 14px;
+  background: #fff;
+}
+body.admin-body.admin-session-active .emails-phase-grid span,
+body.admin-body.admin-session-active .ai-validation-grid span,
+body.admin-body.admin-session-active .emails-template-grid small {
+  display: block;
+  color: var(--tvf-os-muted, #667085);
+  font-size: .82rem;
+  font-weight: 700;
+}
+body.admin-body.admin-session-active .emails-phase-grid strong,
+body.admin-body.admin-session-active .ai-validation-grid strong,
+body.admin-body.admin-session-active .emails-template-grid strong {
+  display: block;
+  margin: 4px 0;
+  color: var(--tvf-os-green, #123b2a);
+  line-height: 1.25;
+}
+body.admin-body.admin-session-active .emails-template-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 12px 0;
+}
+@media (max-width: 820px) {
+  body.admin-body.admin-session-active .emails-phase-panel,
+  body.admin-body.admin-session-active .ai-validation-panel,
+  body.admin-body.admin-session-active .emails-phase-grid,
+  body.admin-body.admin-session-active .ai-validation-grid,
+  body.admin-body.admin-session-active .emails-template-grid { grid-template-columns: 1fr; }
+}
+/* end TVF OS phase 7 messagerie, automatisations et IA */
