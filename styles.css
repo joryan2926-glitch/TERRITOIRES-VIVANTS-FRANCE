@@ -12635,3 +12635,70 @@ body.admin-body.admin-session-active .admin-module-links a {
     left: 0 !important;
   }
 }
+/* TVF OS - socle navigation utilisable sans panneau superpose */
+body.admin-body.admin-session-active .admin-module-nav.tvf-os-shell-nav {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 40 !important;
+  overflow: visible !important;
+}
+
+body.admin-body.admin-session-active .admin-module-nav.tvf-os-shell-nav .admin-module-shell {
+  grid-template-columns: minmax(190px, 250px) minmax(280px, 1fr);
+  align-items: start;
+}
+
+body.admin-body.admin-session-active .admin-module-nav.tvf-os-shell-nav .admin-module-user {
+  grid-column: 1 / -1;
+  display: none !important;
+}
+
+body.admin-body.admin-session-active .admin-module-nav.tvf-os-shell-nav .admin-module-groups {
+  grid-column: 1 / -1;
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 8px;
+  justify-content: stretch;
+  width: 100%;
+}
+
+body.admin-body.admin-session-active .admin-module-nav.tvf-os-shell-nav .admin-module-group {
+  min-width: 0 !important;
+}
+
+body.admin-body.admin-session-active .admin-module-nav.tvf-os-shell-nav .admin-module-group-head {
+  width: 100%;
+  justify-content: space-between;
+}
+
+body.admin-body.admin-session-active .admin-module-nav.tvf-os-shell-nav .admin-module-links {
+  position: static !important;
+  inset: auto !important;
+  width: 100% !important;
+  max-width: none !important;
+  margin-top: 6px !important;
+  padding: 8px !important;
+  box-shadow: none !important;
+  border-radius: 14px !important;
+  transform: none !important;
+}
+
+body.admin-body.admin-session-active .admin-module-nav.tvf-os-shell-nav .admin-module-group:hover .admin-module-links,
+body.admin-body.admin-session-active .admin-module-nav.tvf-os-shell-nav .admin-module-group:not(.is-open):hover .admin-module-links {
+  display: none !important;
+}
+
+body.admin-body.admin-session-active .admin-module-nav.tvf-os-shell-nav .admin-module-group.is-open .admin-module-links,
+body.admin-body.admin-session-active .admin-module-nav.tvf-os-shell-nav .admin-module-group:focus-within .admin-module-links {
+  display: grid !important;
+}
+
+@media (max-width: 860px) {
+  body.admin-body.admin-session-active .admin-module-nav.tvf-os-shell-nav .admin-module-shell {
+    grid-template-columns: 1fr;
+  }
+
+  body.admin-body.admin-session-active .admin-module-nav.tvf-os-shell-nav .admin-module-groups {
+    grid-template-columns: 1fr;
+  }
+}
