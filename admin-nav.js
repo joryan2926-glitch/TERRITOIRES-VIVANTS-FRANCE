@@ -28,7 +28,7 @@ const TVF_ADMIN_GROUPS = [
   { label: "Instruction", description: "Dossiers", modules: [
     { href: "admin-dossiers", label: "Dossiers", icon: "DO", key: "cases" },
     { href: "admin-dossiers?view=biens", label: "Biens immobiliers", icon: "BI", key: "properties" },
-    { href: "admin-crm?view=proprietaires", label: "Propriétaires", icon: "PR", key: "owners" },
+    { href: "admin-crm?view=propriétaires", label: "propriétaires", icon: "PR", key: "owners" },
     { href: "admin-dossiers?view=instruction", label: "Instruction et suivi", icon: "IS", key: "instruction" },
   ] },
   { label: "Écosystème", description: "Partenaires", modules: [
@@ -95,7 +95,7 @@ function createAdminModuleNav() {
         </form>
         <div class="admin-os-quicklinks">${TVF_ADMIN_QUICK_ACTIONS.map((action) => `<a class="admin-os-quicklink is-${action.tone}" href="${action.href}">${action.label}</a>`).join("")}</div>
       </div>
-      <div class="admin-module-groups">${TVF_ADMIN_GROUPS.map((group) => { const modules = group.modules.filter(userCan); if (!modules.length) return ""; const activeGroup = groupIsActive(current, { ...group, modules }); return `<section class="admin-module-group${activeGroup ? " is-active is-open" : ""}"><button class="admin-module-group-head" type="button" aria-expanded="${activeGroup ? "true" : "false"}"><span>${group.label}</span><small>${group.description}</small></button><div class="admin-module-links">${modules.map((module) => { const active = moduleIsActive(current, module.href); return `<a href="${module.href}"${active ? ' aria-current="page" class="is-active"' : ""}><i>${module.icon}</i><span>${module.label}</span>${module.badge ? `<b>${module.badge}</b>` : ""}</a>`; }).join("")}</div></section>`; }).join("")}</div>
+      <div class="admin-module-groups">${TVF_ADMIN_GROUPS.map((group) => { const modules = group.modules.filter(userCan); if (!modules.length) return ""; const activeGroup = groupIsActive(current, { ...group, modules }); return `<section class="admin-module-group${activeGroup ? " is-active" : ""}"><button class="admin-module-group-head" type="button" aria-expanded="false"><span>${group.label}</span><small>${group.description}</small></button><div class="admin-module-links">${modules.map((module) => { const active = moduleIsActive(current, module.href); return `<a href="${module.href}"${active ? ' aria-current="page" class="is-active"' : ""}><i>${module.icon}</i><span>${module.label}</span>${module.badge ? `<b>${module.badge}</b>` : ""}</a>`; }).join("")}</div></section>`; }).join("")}</div>
       <div class="admin-module-user" aria-label="Profil TVF OS"><span>${role.label}</span><strong>${role.territory}</strong><a href="admin-settings">Paramètres du profil</a></div>
     </div>`;
   topbar.insertAdjacentElement("afterend", nav);
@@ -104,6 +104,7 @@ function createAdminModuleNav() {
   function closeGroups(except = null) { groups.forEach((group) => { if (group !== except) setGroupOpen(group, false); }); }
   nav.addEventListener("click", (event) => { const link = event.target.closest(".admin-module-links a, .admin-os-quicklink"); if (link) { closeGroups(); return; } const button = event.target.closest(".admin-module-group-head"); if (!button) return; const group = button.closest(".admin-module-group"); const open = !group.classList.contains("is-open"); closeGroups(group); setGroupOpen(group, open); });
   document.addEventListener("keydown", (event) => { if (event.key === "Escape") closeGroups(); });
+  document.addEventListener("click", (event) => { if (!nav.contains(event.target)) closeGroups(); });
   nav.addEventListener("submit", (event) => { const form = event.target?.closest?.("[data-admin-global-search]"); if (!form) return; event.preventDefault(); const query = String(new FormData(form).get("q") || "").trim(); window.location.href = query ? `admin-demandes?q=${encodeURIComponent(query)}` : "admin-demandes"; });
 }
 

@@ -12608,7 +12608,7 @@ body.admin-body.admin-session-active .admin-module-group:focus-within .admin-mod
   gap: 6px;
 }
 
-body.admin-body.admin-session-active .admin-module-group:hover .admin-module-links {
+body.admin-body.admin-session-active .admin-module-group:not(.is-open):hover .admin-module-links {
   display: none !important;
 }
 
