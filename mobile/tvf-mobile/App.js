@@ -1,4 +1,4 @@
-﻿import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import {
   ActivityIndicator,
   Alert,
@@ -27,6 +27,7 @@ import {
   contactChannels,
   documentGroups,
   documents,
+  fieldTestPlan,
   fieldLabels,
   flowGuides,
   flowLabels,
@@ -34,6 +35,7 @@ import {
   materialCategories,
   nextSteps,
   propertyTypes,
+  releaseReadiness,
   requiredFieldsByFlow,
   signalCategories,
   statusSteps,
@@ -385,7 +387,7 @@ function WelcomeScreen({ enter }) {
         <PrimaryButton onPress={enter} icon="arrow-forward-outline">Entrer dans TVF Mobile</PrimaryButton>
         <Text style={styles.welcomeFootnote}>Terrain de TVF OS</Text>
       </View>
-    </View>
+    </ScrollView>
   );
 }
 
@@ -1342,6 +1344,40 @@ function DocumentsScreen({ go }) {
             {doc.url ? <Ionicons name="open-outline" size={18} color={colors.green} /> : null}
           </TouchableOpacity>
         ))}
+        <View style={styles.groupCard}>
+          <Text style={styles.groupTitle}>Recette terrain</Text>
+          {fieldTestPlan.map((track) => (
+            <View key={track.title} style={styles.testTrackCard}>
+              <View style={styles.testTrackHead}>
+                <Ionicons name={track.icon} size={17} color={colors.green} />
+                <Text style={styles.testTrackTitle}>{track.title}</Text>
+              </View>
+              {track.items.map((item) => (
+                <View key={item} style={styles.groupItemRow}>
+                  <Ionicons name="checkmark-circle-outline" size={15} color={colors.green2} />
+                  <Text style={styles.groupItem}>{item}</Text>
+                </View>
+              ))}
+            </View>
+          ))}
+        </View>
+        <View style={styles.groupCard}>
+          <Text style={styles.groupTitle}>Préparation publication</Text>
+          {releaseReadiness.map((track) => (
+            <View key={track.title} style={styles.testTrackCard}>
+              <View style={styles.testTrackHead}>
+                <Ionicons name={track.icon} size={17} color={colors.green} />
+                <Text style={styles.testTrackTitle}>{track.title}</Text>
+              </View>
+              {track.items.map((item) => (
+                <View key={item} style={styles.groupItemRow}>
+                  <Ionicons name="ellipse-outline" size={13} color={colors.gold} />
+                  <Text style={styles.groupItem}>{item}</Text>
+                </View>
+              ))}
+            </View>
+          ))}
+        </View>
       </View>
       <Notice>Les documents préparent l'échange. Ils ne valent pas acceptation d'un projet, d'un bien ou d'une collecte.</Notice>
     </ScrollView>
