@@ -1,4 +1,4 @@
-﻿const assert = require("assert");
+const assert = require("assert");
 const { Readable } = require("stream");
 const contactHandler = require("../api/contact");
 const { _store } = require("../lib/api/rate-limit");
@@ -27,6 +27,9 @@ async function main() {
   process.env.NODE_ENV = "test";
   process.env.SUPABASE_URL = "https://demo.supabase.co";
   process.env.SUPABASE_SERVICE_ROLE_KEY = "sb_secret_demo";
+  delete process.env.GMAIL_SMTP_USER;
+  delete process.env.GMAIL_SMTP_APP_PASSWORD;
+  delete process.env.TVF_EMAIL_DRY_RUN;
   process.env.RESEND_API_KEY = "re_test";
   process.env.TVF_NOTIFICATION_EMAIL = "contact@territoiresvivantsfrance.fr"; // ancienne valeur Vercel : doit etre routee vers Gmail
   process.env.TVF_EMAIL_FROM = "Territoires Vivants France <contact@territoiresvivantsfrance.fr>";
@@ -52,6 +55,9 @@ async function main() {
         message: "Nous souhaitons qualifier un besoin territorial avec TVF.",
         consent: "true",
       },
+      attachments: [
+        { filename: "photo-test.png", contentType: "image/png", content: "iVBORw0KGgo=" }
+      ],
     });
     assert.strictEqual(accepted.statusCode, 200);
     assert.strictEqual(accepted.json.ok, true);
@@ -63,7 +69,37 @@ async function main() {
     const internalEmailPayload = JSON.parse(calls.find((call) => call.url.includes("api.resend.com")).body);
     assert.deepStrictEqual(internalEmailPayload.to, ["territoiresvivantsfrance@gmail.com"]);
     assert.strictEqual(internalEmailPayload.reply_to, "contact@example.fr");
+    assert.ok(Array.isArray(internalEmailPayload.attachments));
+    assert.strictEqual(internalEmailPayload.attachments.length, 2);
+    assert.strictEqual(internalEmailPayload.attachments[0].contentType, "application/pdf");
+    assert.ok(internalEmailPayload.attachments[0].content.startsWith("JVBER"));
+    assert.strictEqual(internalEmailPayload.attachments[1].filename, "photo-test.png");
 
+
+    delete process.env.RESEND_API_KEY;
+    process.env.GMAIL_SMTP_USER = "territoiresvivantsfrance@gmail.com";
+    process.env.GMAIL_SMTP_APP_PASSWORD = "app_password_test";
+    process.env.TVF_EMAIL_DRY_RUN = "1";
+    global.__TVF_EMAIL_DRY_RUN__ = [];
+    calls.length = 0;
+    const gmailAccepted = await runHandler({
+      formKind: "contact",
+      submittedAfterMs: 2500,
+      fields: {
+        profil: "proprietaire",
+        nom: "Proprietaire test",
+        email: "proprietaire@example.fr",
+        territoire: "Saint-Etienne",
+        objet: "Bien vacant",
+        message: "Je souhaite transmettre une situation de bien vacant.",
+        consent: "true",
+      },
+    }, "198.51.100.23");
+    assert.strictEqual(gmailAccepted.statusCode, 200);
+    assert.strictEqual(gmailAccepted.json.email.internal, "sent");
+    assert.strictEqual(global.__TVF_EMAIL_DRY_RUN__[0].provider, "gmail");
+    assert.ok(global.__TVF_EMAIL_DRY_RUN__[0].message.attachments[0].content.startsWith("JVBER"));
+    assert.strictEqual(calls.filter((call) => call.url.includes("api.resend.com")).length, 0);
     const withoutConsent = await runHandler({ fields: { objet: "Test", message: "Message suffisamment detaille." } }, "198.51.100.21");
     assert.strictEqual(withoutConsent.statusCode, 400);
     assert.strictEqual(withoutConsent.json.code, "CONSENT_REQUIRED");
