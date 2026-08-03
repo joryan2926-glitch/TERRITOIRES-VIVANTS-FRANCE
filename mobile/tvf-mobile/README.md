@@ -1,4 +1,4 @@
-# TVF Mobile - Prototype terrain SDK 57
+﻿# TVF Mobile - Prototype terrain SDK 57
 
 Prototype Expo / React Native de l'application mobile Territoires Vivants France.
 
@@ -126,16 +126,18 @@ Pour activer l'enregistrement reel :
 ```bash
 EXPO_PUBLIC_SUPABASE_URL=https://votre-projet.supabase.co
 EXPO_PUBLIC_SUPABASE_ANON_KEY=votre-cle-anon-publique
+EXPO_PUBLIC_TVF_CONTACT_API_URL=https://www.territoiresvivantsfrance.fr/api/contact
 ```
 
 3. Ne jamais mettre la cle `service_role` dans l'application mobile.
-4. Executer le fichier SQL suivant dans Supabase SQL Editor :
+4. `EXPO_PUBLIC_TVF_CONTACT_API_URL` permet de declencher la notification e-mail officielle via l'API du site, sans exposer la cle Resend dans l'application.
+5. Executer le fichier SQL suivant dans Supabase SQL Editor :
 
 ```text
 supabase/tvf-mobile-requests.sql
 ```
 
-5. Verifier avec :
+6. Verifier avec :
 
 ```text
 supabase/verify-tvf-mobile-requests.sql
@@ -195,3 +197,5 @@ Ensuite, tester sur Expo Go :
 4. Envoyer une candidature benevole.
 5. Verifier que chaque demande apparait dans TVF OS.
 6. Ouvrir l'historique mobile et la fiche detaillee.
+
+

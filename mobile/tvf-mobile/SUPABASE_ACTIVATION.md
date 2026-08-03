@@ -1,4 +1,4 @@
-# Activation Supabase - TVF Mobile
+﻿# Activation Supabase - TVF Mobile
 
 Ce fichier sert de procedure courte pour activer l'enregistrement reel des demandes terrain depuis l'application mobile TVF.
 
@@ -19,9 +19,12 @@ Dans `mobile/tvf-mobile/.env`, renseigner uniquement les variables publiques Exp
 ```env
 EXPO_PUBLIC_SUPABASE_URL=https://votre-projet.supabase.co
 EXPO_PUBLIC_SUPABASE_ANON_KEY=votre-cle-anon-publique
+EXPO_PUBLIC_TVF_CONTACT_API_URL=https://www.territoiresvivantsfrance.fr/api/contact
 ```
 
 La cle `SUPABASE_SERVICE_ROLE_KEY` ne doit jamais etre ajoutee dans l'application mobile. Elle peut rester uniquement dans l'environnement serveur ou dans le `.env` local racine pour les scripts de controle internes.
+
+La variable `EXPO_PUBLIC_TVF_CONTACT_API_URL` ne contient aucune cle secrete. Elle indique seulement a TVF Mobile quelle API publique du site doit recevoir la copie de notification. Cette API conserve l'adresse officielle `contact@territoiresvivantsfrance.fr` et route les notifications internes vers Gmail selon la configuration serveur.
 
 ## Etape 1 - Executer le schema mobile
 

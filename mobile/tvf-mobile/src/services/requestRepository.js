@@ -1,5 +1,74 @@
-import { hasSupabaseConfig, supabase } from "./supabaseClient";
+﻿import { hasSupabaseConfig, supabase } from "./supabaseClient";
 
+const contactApiUrl = process.env.EXPO_PUBLIC_TVF_CONTACT_API_URL;
+
+function mobileProfileForFlow(flow) {
+  return {
+    signal: "Habitant",
+    materials: "Entreprise",
+    property: "Proprietaire particulier",
+    volunteer: "Benevole"
+  }[flow] || "Utilisateur TVF Mobile";
+}
+
+function mobileSubjectForFlow(flow) {
+  return {
+    signal: "Signalement TVF Mobile",
+    materials: "Proposition de materiaux TVF Mobile",
+    property: "Presentation d'un bien TVF Mobile",
+    volunteer: "Candidature benevole TVF Mobile"
+  }[flow] || "Demande TVF Mobile";
+}
+
+function buildContactNotificationPayload(payload) {
+  const address = payload.location?.rawAddress || "Adresse non renseignee";
+  const description = payload.details?.description || payload.summary?.shortDescription || "Demande transmise depuis TVF Mobile.";
+  const photos = payload.media?.photoCount ? `${payload.media.photoCount} photo(s) jointe(s) ou referencee(s).` : "Aucune photo indiquee.";
+  const coordinates = payload.location?.latitude && payload.location?.longitude
+    ? `Coordonnees GPS : ${payload.location.latitude}, ${payload.location.longitude}.`
+    : "Coordonnees GPS non renseignees.";
+
+  return {
+    formKind: "tvf-mobile",
+    submittedAfterMs: 2500,
+    page: "tvf-mobile",
+    fields: {
+      profil: mobileProfileForFlow(payload.flow),
+      nom: payload.contact?.name || "Utilisateur TVF Mobile",
+      email: payload.contact?.email || "",
+      telephone: payload.contact?.phone || "",
+      territoire: address,
+      objet: `${mobileSubjectForFlow(payload.flow)} - ${payload.reference}`,
+      message: [
+        `Reference mobile : ${payload.reference}`,
+        `Type : ${payload.summary?.typeLabel || mobileSubjectForFlow(payload.flow)}`,
+        `Categorie : ${payload.categoryLabel || payload.category || "Non renseignee"}`,
+        `Adresse : ${address}`,
+        coordinates,
+        `Description : ${description}`,
+        photos,
+        `File TVF OS recommandee : ${payload.summary?.recommendedQueue || "Demandes recues"}`,
+        "Cette notification provient de TVF Mobile. L'adresse officielle reste contact@territoiresvivantsfrance.fr."
+      ].join("\n"),
+      consent: "true"
+    }
+  };
+}
+
+async function notifyContactApi(payload) {
+  if (!contactApiUrl) return { sent: false, skipped: true };
+  try {
+    const response = await fetch(contactApiUrl, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(buildContactNotificationPayload(payload))
+    });
+    if (!response.ok) throw new Error(`Notification contact ${response.status}`);
+    return { sent: true, skipped: false };
+  } catch (error) {
+    return { sent: false, skipped: false, warning: error?.message || "Notification e-mail non transmise." };
+  }
+}
 function bucketForFlow(flow) {
   return flow === "materials" ? "materiaux" : "signalements";
 }
@@ -104,14 +173,18 @@ export async function submitMobileRequest(payload) {
 
     if (error) throw error;
 
+    const notification = await notifyContactApi(finalPayload);
+    const notificationWarning = notification.warning ? " Notification e-mail a verifier." : "";
+
     return {
       ok: true,
       mode: "supabase",
+      notification,
       message: upload.warning
-        ? "Demande transmise vers TVF OS. Certaines photos pourront etre ajoutees ensuite."
+        ? `Demande transmise vers TVF OS. Certaines photos pourront etre ajoutees ensuite.${notificationWarning}`
         : upload.paths?.length
-          ? `Demande et ${upload.paths.length} photo(s) transmises vers TVF OS.`
-          : "Demande transmise vers TVF OS."
+          ? `Demande et ${upload.paths.length} photo(s) transmises vers TVF OS.${notificationWarning}`
+          : `Demande transmise vers TVF OS.${notificationWarning}`
     };
   } catch (error) {
     return {
@@ -121,3 +194,4 @@ export async function submitMobileRequest(payload) {
     };
   }
 }
+

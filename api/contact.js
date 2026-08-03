@@ -2,8 +2,8 @@
 const MAX_BODY_SIZE = 32 * 1024;
 const CONTACT_TABLE = process.env.SUPABASE_CONTACTS_TABLE || "contacts";
 const DEFAULT_CONTACT_EMAIL = "contact@territoiresvivantsfrance.fr";
-const DEFAULT_NOTIFICATION_EMAIL = "territoirevivantsfrance@gmail.com";
-const FALLBACK_NOTIFICATION_EMAIL = "territoirevivantsfrance@gmail.com";
+const DEFAULT_NOTIFICATION_EMAIL = "territoiresvivantsfrance@gmail.com";
+const FALLBACK_NOTIFICATION_EMAIL = "territoiresvivantsfrance@gmail.com";
 const DEFAULT_FROM = "Territoires Vivants France <notifications@territoiresvivantsfrance.fr>";
 const OUTBOUND_TIMEOUT_MS = Number(process.env.TVF_OUTBOUND_TIMEOUT_MS || 9000);
 
@@ -616,5 +616,6 @@ module.exports = async function handler(req, res) {
     });
   }
 };
+
 
 

@@ -61,7 +61,7 @@ async function main() {
     assert.strictEqual(calls.filter((call) => call.url.includes("supabase.co/rest/v1/contacts")).length, 1);
         assert.strictEqual(calls.filter((call) => call.url.includes("api.resend.com")).length, 2);
     const internalEmailPayload = JSON.parse(calls.find((call) => call.url.includes("api.resend.com")).body);
-    assert.deepStrictEqual(internalEmailPayload.to, ["territoirevivantsfrance@gmail.com"]);
+    assert.deepStrictEqual(internalEmailPayload.to, ["territoiresvivantsfrance@gmail.com"]);
     assert.strictEqual(internalEmailPayload.reply_to, "contact@example.fr");
 
     const withoutConsent = await runHandler({ fields: { objet: "Test", message: "Message suffisamment detaille." } }, "198.51.100.21");
@@ -79,3 +79,4 @@ async function main() {
 }
 
 main().catch((error) => { console.error(error); process.exit(1); });
+
