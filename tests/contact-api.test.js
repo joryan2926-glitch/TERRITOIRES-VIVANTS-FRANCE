@@ -1,4 +1,4 @@
-const assert = require("assert");
+﻿const assert = require("assert");
 const { Readable } = require("stream");
 const contactHandler = require("../api/contact");
 const { _store } = require("../lib/api/rate-limit");
@@ -28,14 +28,14 @@ async function main() {
   process.env.SUPABASE_URL = "https://demo.supabase.co";
   process.env.SUPABASE_SERVICE_ROLE_KEY = "sb_secret_demo";
   process.env.RESEND_API_KEY = "re_test";
-  process.env.TVF_NOTIFICATION_EMAIL = "contact@territoiresvivantsfrance.fr";
+  process.env.TVF_NOTIFICATION_EMAIL = "contact@territoiresvivantsfrance.fr"; // ancienne valeur Vercel : doit etre routee vers Gmail
   process.env.TVF_EMAIL_FROM = "Territoires Vivants France <contact@territoiresvivantsfrance.fr>";
   _store.clear();
 
   const calls = [];
   const originalFetch = global.fetch;
   global.fetch = async (url, options = {}) => {
-    calls.push({ url: String(url), method: options.method || "GET" });
+    calls.push({ url: String(url), method: options.method || "GET", body: options.body || "" });
     return { ok: true, status: 201, async text() { return ""; } };
   };
 
@@ -59,7 +59,10 @@ async function main() {
     assert.strictEqual(accepted.json.email.internal, "sent");
     assert.strictEqual(accepted.json.email.confirmation, "sent");
     assert.strictEqual(calls.filter((call) => call.url.includes("supabase.co/rest/v1/contacts")).length, 1);
-    assert.strictEqual(calls.filter((call) => call.url.includes("api.resend.com")).length, 2);
+        assert.strictEqual(calls.filter((call) => call.url.includes("api.resend.com")).length, 2);
+    const internalEmailPayload = JSON.parse(calls.find((call) => call.url.includes("api.resend.com")).body);
+    assert.deepStrictEqual(internalEmailPayload.to, ["territoirevivantsfrance@gmail.com"]);
+    assert.strictEqual(internalEmailPayload.reply_to, "contact@example.fr");
 
     const withoutConsent = await runHandler({ fields: { objet: "Test", message: "Message suffisamment detaille." } }, "198.51.100.21");
     assert.strictEqual(withoutConsent.statusCode, 400);

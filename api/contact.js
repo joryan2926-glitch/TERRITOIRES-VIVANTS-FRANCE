@@ -1,9 +1,9 @@
-const { consumeRateLimit } = require("../lib/api/rate-limit");
+﻿const { consumeRateLimit } = require("../lib/api/rate-limit");
 const MAX_BODY_SIZE = 32 * 1024;
 const CONTACT_TABLE = process.env.SUPABASE_CONTACTS_TABLE || "contacts";
 const DEFAULT_CONTACT_EMAIL = "contact@territoiresvivantsfrance.fr";
-const DEFAULT_NOTIFICATION_EMAIL = "contact@territoiresvivantsfrance.fr";
-const FALLBACK_NOTIFICATION_EMAIL = "territoiresvivantsfrance@gmail.com";
+const DEFAULT_NOTIFICATION_EMAIL = "territoirevivantsfrance@gmail.com";
+const FALLBACK_NOTIFICATION_EMAIL = "territoirevivantsfrance@gmail.com";
 const DEFAULT_FROM = "Territoires Vivants France <notifications@territoiresvivantsfrance.fr>";
 const OUTBOUND_TIMEOUT_MS = Number(process.env.TVF_OUTBOUND_TIMEOUT_MS || 9000);
 
@@ -412,8 +412,16 @@ function uniqueEmails(items) {
   return Array.from(new Set(items.filter(Boolean).map((item) => String(item).trim().toLowerCase())));
 }
 
+function routeInternalNotificationEmail(email) {
+  const normalized = String(email || "").trim().toLowerCase();
+  if (!normalized) return "";
+  // L'adresse contact@ reste l'adresse publique/reply-to. Les notifications internes vont vers Gmail.
+  if (normalized === DEFAULT_CONTACT_EMAIL) return DEFAULT_NOTIFICATION_EMAIL;
+  return normalized;
+}
+
 function configuredRecipients(...values) {
-  return uniqueEmails(values.flatMap((value) => parseRecipients(value).map((item) => item.email)));
+  return uniqueEmails(values.flatMap((value) => parseRecipients(value).map((item) => routeInternalNotificationEmail(item.email))));
 }
 
 function normalizedEmailFrom(value) {
@@ -434,7 +442,7 @@ function emailConfig() {
     provider: process.env.RESEND_API_KEY ? "resend" : "",
     resendKey: process.env.RESEND_API_KEY || "",
     from: normalizedEmailFrom(process.env.TVF_EMAIL_FROM || process.env.EMAIL_FROM || DEFAULT_FROM),
-    replyTo: process.env.TVF_EMAIL_REPLY_TO || process.env.EMAIL_REPLY_TO || DEFAULT_NOTIFICATION_EMAIL,
+    replyTo: process.env.TVF_EMAIL_REPLY_TO || process.env.EMAIL_REPLY_TO || DEFAULT_CONTACT_EMAIL,
     notifyTo: notificationRecipients,
   };
 }
@@ -608,3 +616,5 @@ module.exports = async function handler(req, res) {
     });
   }
 };
+
+
