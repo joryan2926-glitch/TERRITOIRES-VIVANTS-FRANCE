@@ -545,14 +545,16 @@ function emailConfig() {
     DEFAULT_NOTIFICATION_EMAIL
   );
 
+  const appsScriptUrl = cleanEnvUrl(process.env.GOOGLE_APPS_SCRIPT_WEBHOOK_URL || process.env.TVF_GOOGLE_APPS_SCRIPT_WEBHOOK_URL || "");
   const gmailUser = cleanEnvToken(process.env.GMAIL_SMTP_USER || process.env.GMAIL_USER || "", 320);
   const gmailPassword = cleanEnvToken(process.env.GMAIL_SMTP_APP_PASSWORD || process.env.GMAIL_APP_PASSWORD || "", 320);
-  const provider = gmailUser && gmailPassword ? "gmail" : process.env.RESEND_API_KEY ? "resend" : "";
+  const provider = appsScriptUrl ? "apps-script" : gmailUser && gmailPassword ? "gmail" : process.env.RESEND_API_KEY ? "resend" : "";
   const configuredFrom = process.env.TVF_EMAIL_FROM || process.env.EMAIL_FROM || DEFAULT_FROM;
 
   return {
     provider,
     resendKey: process.env.RESEND_API_KEY || "",
+    appsScriptUrl,
     gmailUser,
     gmailPassword,
     gmailHost: process.env.GMAIL_SMTP_HOST || "smtp.gmail.com",
@@ -776,6 +778,44 @@ async function sendEmail(config, message) {
   throw new Error("Aucun fournisseur e-mail configure.");
 }
 
+function appsScriptPayload(submission) {
+  return {
+    formKind: submission.formKind,
+    page: submission.page,
+    section: submission.section,
+    consent: submission.consent,
+    submittedAfterMs: submission.submittedAfterMs,
+    summary: submission.summary,
+    category: submission.category,
+    priority: submission.priority,
+    status: submission.status,
+    fields: {
+      profil: submission.profile,
+      nom: submission.name,
+      email: submission.email,
+      telephone: submission.phone,
+      territoire: submission.territory,
+      objet: submission.subject,
+      message: submission.message || submission.summary,
+    },
+    attachments: submission.attachments || [],
+  };
+}
+
+async function sendWithAppsScript(config, submission) {
+  if (!config.appsScriptUrl) throw new Error("Google Apps Script webhook non configure.");
+  const response = await fetchWithTimeout(config.appsScriptUrl, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(appsScriptPayload(submission)),
+  });
+  const text = await response.text().catch(() => "");
+  if (!response.ok) throw new Error(`Apps Script ${response.status}: ${text}`);
+  if (text) {
+    const payload = JSON.parse(text);
+    if (payload && payload.ok === false) throw new Error(`Apps Script: ${payload.error || "erreur inconnue"}`);
+  }
+}
 async function notifyByEmail(submission) {
   const config = emailConfig();
   if (!config.provider) {
@@ -783,6 +823,17 @@ async function notifyByEmail(submission) {
   }
 
   const results = { configured: true, internal: "skipped", confirmation: submission.email ? "skipped" : "no_email" };
+
+  if (config.provider === "apps-script") {
+    try {
+      await sendWithAppsScript(config, submission);
+      return { configured: true, provider: "apps-script", internal: "sent", confirmation: submission.email ? "sent" : "no_email" };
+    } catch (error) {
+      console.error("TVF Apps Script email failed", error.message);
+      return { configured: true, provider: "apps-script", internal: "failed", confirmation: submission.email ? "failed" : "no_email" };
+    }
+  }
+
   const internal = internalEmail(submission);
   try {
     await sendEmail(config, {

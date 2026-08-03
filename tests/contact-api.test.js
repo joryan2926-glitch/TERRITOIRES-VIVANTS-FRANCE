@@ -30,6 +30,7 @@ async function main() {
   delete process.env.GMAIL_SMTP_USER;
   delete process.env.GMAIL_SMTP_APP_PASSWORD;
   delete process.env.TVF_EMAIL_DRY_RUN;
+  delete process.env.GOOGLE_APPS_SCRIPT_WEBHOOK_URL;
   process.env.RESEND_API_KEY = "re_test";
   process.env.TVF_NOTIFICATION_EMAIL = "contact@territoiresvivantsfrance.fr"; // ancienne valeur Vercel : doit etre routee vers Gmail
   process.env.TVF_EMAIL_FROM = "Territoires Vivants France <contact@territoiresvivantsfrance.fr>";
@@ -100,6 +101,35 @@ async function main() {
     assert.strictEqual(global.__TVF_EMAIL_DRY_RUN__[0].provider, "gmail");
     assert.ok(global.__TVF_EMAIL_DRY_RUN__[0].message.attachments[0].content.startsWith("JVBER"));
     assert.strictEqual(calls.filter((call) => call.url.includes("api.resend.com")).length, 0);
+    delete process.env.RESEND_API_KEY;
+    delete process.env.GMAIL_SMTP_USER;
+    delete process.env.GMAIL_SMTP_APP_PASSWORD;
+    delete process.env.TVF_EMAIL_DRY_RUN;
+    process.env.GOOGLE_APPS_SCRIPT_WEBHOOK_URL = "https://script.google.com/macros/s/test/exec";
+    calls.length = 0;
+    const appsScriptAccepted = await runHandler({
+      formKind: "contact",
+      submittedAfterMs: 2500,
+      fields: {
+        profil: "entreprise",
+        nom: "Entreprise test",
+        email: "entreprise@example.fr",
+        territoire: "Saint-Etienne",
+        objet: "Materiaux disponibles",
+        message: "Nous souhaitons proposer des materiaux disponibles.",
+        consent: "true",
+      },
+    }, "198.51.100.24");
+    assert.strictEqual(appsScriptAccepted.statusCode, 200);
+    assert.strictEqual(appsScriptAccepted.json.email.provider, "apps-script");
+    assert.strictEqual(appsScriptAccepted.json.email.internal, "sent");
+    const appsScriptCall = calls.find((call) => call.url.includes("script.google.com/macros/s/test/exec"));
+    assert.ok(appsScriptCall, "le webhook Google Apps Script doit etre appele");
+    const appsScriptBody = JSON.parse(appsScriptCall.body);
+    assert.strictEqual(appsScriptBody.fields.email, "entreprise@example.fr");
+    assert.strictEqual(appsScriptBody.fields.objet, "Materiaux disponibles");
+    assert.strictEqual(calls.filter((call) => call.url.includes("api.resend.com")).length, 0);
+
     const withoutConsent = await runHandler({ fields: { objet: "Test", message: "Message suffisamment detaille." } }, "198.51.100.21");
     assert.strictEqual(withoutConsent.statusCode, 400);
     assert.strictEqual(withoutConsent.json.code, "CONSENT_REQUIRED");
