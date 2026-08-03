@@ -84,6 +84,13 @@ if (!eas.build?.preview || !eas.build?.production) {
   ok = false;
 }
 
+for (const profile of ["development", "preview", "production"]) {
+  if (!eas.build?.[profile]?.env?.EXPO_PUBLIC_TVF_CONTACT_API_URL) {
+    console.error(`MOBILE_PRODUCTION_CONTACT_API_URL_MISSING ${profile}`);
+    ok = false;
+  }
+}
+
 for (const asset of ["assets/tvf-mobile-logo.png"]) {
   const fullPath = path.join(root, asset);
   if (!fs.existsSync(fullPath) || fs.statSync(fullPath).size < 10000) {
@@ -123,7 +130,7 @@ for (const token of ["Donnees collectees selon l'usage", "Donnees non collectees
 }
 
 const releaseNotes = requireFile("RELEASE_NOTES.md");
-for (const token of ["0.1.0 - Production candidate terrain", "Fonctionnalites disponibles", "Limites connues", "Decision recommandee"]) {
+for (const token of ["0.1.1 - Raccordement notifications TVF", "0.1.0 - Production candidate terrain", "Fonctionnalites disponibles", "Limites connues", "Decision recommandee"]) {
   requireIncludes(releaseNotes, token, "RELEASE_NOTES.md");
 }
 
@@ -161,4 +168,3 @@ for (const token of ["Confidentialité TVF Mobile", "Photos et localisation", "D
 }
 if (!ok) process.exit(1);
 console.log("TVF_MOBILE_PRODUCTION_READINESS_OK");
-

@@ -2,7 +2,7 @@
   "expo": {
     "name": "TVF Mobile",
     "slug": "tvf-mobile",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "orientation": "portrait",
     "icon": "./assets/tvf-mobile-logo.png",
     "userInterfaceStyle": "light",
@@ -32,7 +32,7 @@
       }
     },
     "extra": {
-      "projectPhase": "version-terrain-tvf-os-sdk-57",
+      "projectPhase": "version-terrain-tvf-os-sdk-57-notifications",
       "eas": {
         "projectId": "b2ab9bd8-f0c8-4f8a-97d1-0fd0ada4def0"
       }
