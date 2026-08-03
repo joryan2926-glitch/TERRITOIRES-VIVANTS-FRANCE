@@ -40,7 +40,7 @@ function assertEnv() {
   const missing = [];
   if (!restUrl) missing.push("SUPABASE_URL");
   if (!serviceKey) missing.push("SUPABASE_SERVICE_ROLE_KEY");
-  if (!process.env.RESEND_API_KEY) missing.push("RESEND_API_KEY");
+  if (!((process.env.GMAIL_SMTP_USER || process.env.GMAIL_USER) && (process.env.GMAIL_SMTP_APP_PASSWORD || process.env.GMAIL_APP_PASSWORD)) && !process.env.RESEND_API_KEY) missing.push("GMAIL_SMTP_USER + GMAIL_SMTP_APP_PASSWORD ou RESEND_API_KEY");
   if (missing.length) throw new Error(`Variables manquantes pour test formulaire site reel : ${missing.join(", ")}`);
 }
 
