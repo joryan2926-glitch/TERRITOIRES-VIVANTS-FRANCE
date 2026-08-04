@@ -1,6 +1,7 @@
 ﻿import { hasSupabaseConfig, supabase } from "./supabaseClient";
 
-const contactApiUrl = process.env.EXPO_PUBLIC_TVF_CONTACT_API_URL;
+const DEFAULT_CONTACT_API_URL = "https://www.territoiresvivantsfrance.fr/api/contact";
+const contactApiUrl = process.env.EXPO_PUBLIC_TVF_CONTACT_API_URL || DEFAULT_CONTACT_API_URL;
 
 function mobileProfileForFlow(flow) {
   return {
@@ -63,8 +64,15 @@ async function notifyContactApi(payload) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(buildContactNotificationPayload(payload))
     });
+    let result = null;
+    try {
+      result = await response.json();
+    } catch {
+      result = null;
+    }
     if (!response.ok) throw new Error(`Notification contact ${response.status}`);
-    return { sent: true, skipped: false };
+    if (result?.email?.internal === "failed") throw new Error("Notification Gmail non transmise.");
+    return { sent: true, skipped: false, provider: result?.email?.provider || "contact-api" };
   } catch (error) {
     return { sent: false, skipped: false, warning: error?.message || "Notification e-mail non transmise." };
   }
@@ -145,10 +153,15 @@ async function uploadPhotoIfNeeded(payload) {
 
 export async function submitMobileRequest(payload) {
   if (!hasSupabaseConfig() || !supabase) {
+    const notification = await notifyContactApi(payload);
+    const notificationWarning = notification.warning ? " La notification Gmail n'a pas pu etre confirmee." : "";
     return {
-      ok: true,
-      mode: "local-preview",
-      message: "Demande preparee sur ce telephone. Activez l'envoi TVF OS pour la transmettre."
+      ok: notification.sent,
+      mode: notification.sent ? "contact-api" : "local-preview",
+      notification,
+      message: notification.sent
+        ? "Demande transmise a TVF par notification e-mail. Elle reste aussi conservee sur ce telephone."
+        : `Demande preparee sur ce telephone.${notificationWarning}`
     };
   }
 
