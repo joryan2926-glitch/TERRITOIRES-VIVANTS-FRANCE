@@ -1,6 +1,7 @@
-﻿import { hasSupabaseConfig, supabase } from "./supabaseClient";
+import { hasSupabaseConfig, supabase } from "./supabaseClient";
 
 const DEFAULT_CONTACT_API_URL = "https://www.territoiresvivantsfrance.fr/api/contact";
+const MAX_MOBILE_ATTACHMENT_BYTES = 1.5 * 1024 * 1024;
 const contactApiUrl = process.env.EXPO_PUBLIC_TVF_CONTACT_API_URL || DEFAULT_CONTACT_API_URL;
 
 function mobileProfileForFlow(flow) {
@@ -21,13 +22,63 @@ function mobileSubjectForFlow(flow) {
   }[flow] || "Demande TVF Mobile";
 }
 
-function buildContactNotificationPayload(payload) {
+function guessPhotoContentType(photo) {
+  const value = `${photo?.fileName || ""} ${photo?.uri || ""}`.toLowerCase();
+  if (value.includes(".png")) return "image/png";
+  if (value.includes(".webp")) return "image/webp";
+  return "image/jpeg";
+}
+
+function blobToBase64(blob) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onloadend = () => resolve(String(reader.result || "").replace(/^data:[^;]+;base64,/, ""));
+    reader.onerror = () => reject(new Error("Photo illisible."));
+    reader.readAsDataURL(blob);
+  });
+}
+
+function mobilePhotos(payload) {
+  if (Array.isArray(payload.media?.photos) && payload.media.photos.length) return payload.media.photos;
+  if (payload.media?.photoUri) return [{ uri: payload.media.photoUri, fileName: payload.media.photoFileName, rank: 1 }];
+  return [];
+}
+
+async function buildMobileAttachments(payload) {
+  const attachments = [];
+  const photos = mobilePhotos(payload).slice(0, 4);
+
+  for (const [index, photo] of photos.entries()) {
+    if (!photo?.uri) continue;
+    try {
+      const response = await fetch(photo.uri);
+      const blob = await response.blob();
+      if (!blob?.size || blob.size > MAX_MOBILE_ATTACHMENT_BYTES) continue;
+      const content = await blobToBase64(blob);
+      if (!content) continue;
+      attachments.push({
+        name: photo.fileName || `photo-tvf-mobile-${index + 1}.jpg`,
+        filename: photo.fileName || `photo-tvf-mobile-${index + 1}.jpg`,
+        contentType: blob.type || guessPhotoContentType(photo),
+        content
+      });
+    } catch {
+      // La demande reste envoyee meme si une photo locale ne peut pas etre jointe.
+    }
+  }
+
+  return attachments;
+}
+
+async function buildContactNotificationPayload(payload) {
   const address = payload.location?.rawAddress || "Adresse non renseignee";
   const description = payload.details?.description || payload.summary?.shortDescription || "Demande transmise depuis TVF Mobile.";
   const photos = payload.media?.photoCount ? `${payload.media.photoCount} photo(s) jointe(s) ou referencee(s).` : "Aucune photo indiquee.";
   const coordinates = payload.location?.latitude && payload.location?.longitude
     ? `Coordonnees GPS : ${payload.location.latitude}, ${payload.location.longitude}.`
     : "Coordonnees GPS non renseignees.";
+
+  const attachments = await buildMobileAttachments(payload);
 
   return {
     formKind: "tvf-mobile",
@@ -52,7 +103,8 @@ function buildContactNotificationPayload(payload) {
         "Cette notification provient de TVF Mobile. L'adresse officielle reste contact@territoiresvivantsfrance.fr."
       ].join("\n"),
       consent: "true"
-    }
+    },
+    attachments
   };
 }
 
@@ -62,7 +114,7 @@ async function notifyContactApi(payload) {
     const response = await fetch(contactApiUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(buildContactNotificationPayload(payload))
+      body: JSON.stringify(await buildContactNotificationPayload(payload))
     });
     let result = null;
     try {
@@ -186,7 +238,17 @@ export async function submitMobileRequest(payload) {
 
     if (error) throw error;
 
-    const notification = await notifyContactApi(finalPayload);
+    const notificationPayload = {
+      ...finalPayload,
+      media: {
+        ...finalPayload.media,
+        photoUri: payload.media?.photoUri || finalPayload.media?.photoUri,
+        photoFileName: payload.media?.photoFileName || finalPayload.media?.photoFileName,
+        photos: payload.media?.photos || finalPayload.media?.photos,
+        photoCount: payload.media?.photoCount || finalPayload.media?.photoCount
+      }
+    };
+    const notification = await notifyContactApi(notificationPayload);
     const notificationWarning = notification.warning ? " Notification e-mail a verifier." : "";
 
     return {
@@ -207,4 +269,3 @@ export async function submitMobileRequest(payload) {
     };
   }
 }
-
